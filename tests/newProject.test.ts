@@ -136,7 +136,7 @@ describe("createProject", () => {
     });
     expect(manuscriptSceneIds(project.tree)).toHaveLength(13);
     const sorts = project.tree.filter((node) => node.kind === "sort").map((node) => node.title);
-    expect(sorts.slice(-2)).toEqual(["Ledtrådar", "Trådar"]);
+    expect(sorts.slice(-3)).toEqual(["Ledtrådar", "Trådar", "Guide"]);
     expect(project.fields).toMatchObject({ totalGoal: 90_000 });
     expect((project.fields["labels"] as { name: string }[]).map((label) => label.name)).toContain(
       "Falskt spår",
@@ -158,7 +158,7 @@ describe("createProject", () => {
     const project = await readProjectFile(files, created.dir, []);
     expect(manuscriptSceneIds(project.tree)).toHaveLength(1);
     const sorts = project.tree.filter((node) => node.kind === "sort").map((node) => node.title);
-    expect(sorts.slice(-2)).toEqual(["Ledtrådar", "Det som skrämmer"]);
+    expect(sorts.slice(-3)).toEqual(["Ledtrådar", "Det som skrämmer", "Guide"]);
     expect(project.fields).toMatchObject({ totalGoal: 95_000 });
     const notes = project.tree.find((node) => node.id === "anteckningar")?.children ?? [];
     const steps = await files.readText(`${created.dir}/scenes/${notes[1]?.id ?? ""}.md`);

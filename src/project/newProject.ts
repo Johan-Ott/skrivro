@@ -9,7 +9,7 @@ import { writeProjectFile } from "./projectFile.js";
 import type { Narration } from "../manuscript/narration.js";
 import { manuscriptSceneIds, NOTES_ID, withSpecialFolders, type TreeNode } from "./tree.js";
 import { CHARACTERS_ID } from "./sorts.js";
-import { packNotesTree, packsFor } from "./packs.js";
+import { joinSorts, packNotesTree, packsFor } from "./packs.js";
 import { readOwnTemplates, OWN_PREFIX } from "./ownTemplates.js";
 import { composeTemplate, structures, templateBook, type BookTemplate } from "./templates.js";
 import { t } from "../i18n/i18n.js";
@@ -199,7 +199,7 @@ export async function createProject(
   const fromTemplate = templateParts(template);
   const chosen = [details.structure, details.genre ?? "", ...details.pieces];
   const notes = await startingNotes({ fileSystem, dir }, isPlanned ? null : template, chosen);
-  const all = withSpecialFolders([...tree, ...fromTemplate.sorts, ...notes.sorts]);
+  const all = withSpecialFolders([...tree, ...joinSorts([...fromTemplate.sorts, ...notes.sorts])]);
   const goal = details.totalGoal ? { totalGoal: details.totalGoal } : {};
   const fields = {
     ...bookFields(details),

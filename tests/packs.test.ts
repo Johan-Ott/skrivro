@@ -61,6 +61,21 @@ describe("genre packs", () => {
     expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(3);
   });
 
+  it("put a crime pack's clue templates in the piece's own Ledtrådar, not in a second one", async () => {
+    const files = createMemoryFileSystem({});
+
+    const created = await createProject(files, "/Skrivro", {
+      ...details,
+      structure: "deckare",
+      genre: "deckare",
+    });
+
+    const { tree } = await readProjectFile(files, created.dir, []);
+    expect(tree.filter((node) => node.title === "Ledtrådar")).toHaveLength(1);
+    expect(childrenOf(tree, (node) => node.title === "Ledtrådar")).toHaveLength(2);
+    expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(4);
+  });
+
   it("start a book of the basics with no pack notes", async () => {
     const files = createMemoryFileSystem({});
 

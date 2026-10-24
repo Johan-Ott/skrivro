@@ -118,3 +118,14 @@ export async function packNotesTree(fileSystem: FileSystem, dir: string, from: P
   }));
   return { own, characters };
 }
+
+/** Sorts of the same name made one, as a piece's Ledtrådar and a pack's notes for it. */
+export function joinSorts(sorts: TreeNode[]): TreeNode[] {
+  const byTitle = new Map<string, TreeNode>();
+  for (const sort of sorts) {
+    const same = byTitle.get(sort.title ?? "");
+    if (same) same.children = [...(same.children ?? []), ...(sort.children ?? [])];
+    else byTitle.set(sort.title ?? "", { ...sort, children: [...(sort.children ?? [])] });
+  }
+  return [...byTitle.values()];
+}
