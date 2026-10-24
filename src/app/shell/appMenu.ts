@@ -1,3 +1,4 @@
+import { openPacks } from "../packs/PackList.js";
 import type { MenuItem } from "@llkit/Menu.js";
 import { checkForUpdates } from "@llkit/updates.js";
 import { restartGuide } from "../guide/guide.js";
@@ -99,6 +100,7 @@ export function programMenu(actions: AppMenuActions): MenuItem[] {
       onSelect: actions.openSettings,
     },
     ...bookItem(actions, "showBackups"),
+    { label: t("Genrepaket…"), onSelect: openPacks },
     ...helpItems(help, actions.sendFeedback).map((item, index) => ({
       ...item,
       separatorBefore: index === 0,
@@ -110,6 +112,7 @@ export function programMenu(actions: AppMenuActions): MenuItem[] {
 export const phoneShelfMenu = (actions: AppMenuActions): MenuItem[] => [
   ...(actions.showBackups ? [{ label: t("Säkerhetskopior…"), onSelect: actions.showBackups }] : []),
   { label: t("Inställningar"), onSelect: actions.openSettings },
+  { label: t("Genrepaket…"), onSelect: openPacks },
   { label: t("Hjälp"), onSelect: actions.openShortcuts },
   { label: t("Skicka feedback…"), onSelect: actions.sendFeedback },
   ...updateItem,

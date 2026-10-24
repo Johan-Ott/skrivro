@@ -7,7 +7,8 @@ import { libraryOf } from "../journey/journeyFile.js";
 import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
 import type { ProjectChange } from "../labels/LabelsDialog.js";
-import { addToBook, additionsOf } from "./addPieces.js";
+import { addPackToBook, addToBook, additionsOf } from "./addPieces.js";
+import { PackList } from "../packs/PackList.js";
 import { PieceToggles } from "./TemplateChoices.js";
 import { importTemplateFile, shareTemplateFile, useOwnTemplates } from "./templateFiles.js";
 import { t } from "../../i18n/i18n.js";
@@ -130,6 +131,12 @@ export function TemplatesDialog(props: DialogProps) {
   return (
     <Dialog label={t("Mallar och bitar")} className="templates-dialog" onClose={props.onClose}>
       <AddPieces {...props} />
+      <section className="templates-section">
+        <span className="field-label">{t("Genrepaket")}</span>
+        <PackList
+          onAdd={async (pack) => props.onUpdate(await addPackToBook(props.project, pack))}
+        />
+      </section>
       <SaveAsTemplate {...props} />
       <button className="link-button quiet" onClick={importOne}>
         {t("Importera mall…")}

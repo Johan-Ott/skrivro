@@ -1,3 +1,4 @@
+import { PacksLayer } from "./packs/PackList.js";
 import type { AppState } from "./App.js";
 import { signInToAccount } from "./googleAccount.js";
 import { useFeedbackDialog } from "@llkit/feedback/FeedbackDialog.js";
@@ -63,6 +64,7 @@ function useShelfMenu(app: App, onNewProject: () => void, isPhone: boolean) {
       {backups.layer}
       {feedback.layer}
       <SettingsLayer {...app.startup} {...app.writingMode} dialog={settings} book={null} />
+      <PacksLayer />
     </>
   );
   return { openers: { onMenu: menu.open, onProgramMenu: program.open }, layers };

@@ -1501,5 +1501,18 @@
   "Språket kunde inte hämtas. Försök igen när du har nät.": "The language could not be fetched. Try again when you are online.",
   "{pack}-paketet": "{pack} pack",
   "Ur paketen": "From the packs",
-  "Guider och mallar från {packs}": "Guides and templates from {packs}"
+  "Guider och mallar från {packs}": "Guides and templates from {packs}",
+  "1 struktur": "1 structure",
+  "{count} strukturer": "{count} structures",
+  "1 guide eller mall": "1 guide or template",
+  "{count} guider och mallar": "{count} guides and templates",
+  "1 etikett": "1 label",
+  "{count} etiketter": "{count} labels",
+  "Ingår under betan": "Included during the beta",
+  "Köps en gång": "Bought once",
+  "Tillagt": "Added",
+  "Lägg till i boken": "Add to the book",
+  "Grunderna är gratis. En genre kommer som ett paket med struktur, guider och mallar, och köps en gång. Under betan ingår alla.": "The basics are free. A genre comes as a pack with a structure, guides and templates, bought once. During the beta, all are included.",
+  "Genrepaket": "Genre packs",
+  "Genrepaket…": "Genre packs\u2026"
 }

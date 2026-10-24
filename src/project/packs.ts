@@ -45,9 +45,9 @@ const NOTES = import.meta.glob<string>("../packs/*/notes/*/*.md", {
 
 // "---\nsort: Guide\n---\n# Title\n\nThe text."
 function noteOf(text: string): PackNote {
-  const [, sort = "", rest = ""] =
-    /^---\nsort: (.*)\n---\n([\s\S]*)$/.exec(text.replace(/\r\n/g, "\n")) ?? [];
-  const [heading = "", ...body] = rest.split("\n");
+  const normal = text.replace(/\r\n/g, "\n");
+  const [, sort = "", rest = ""] = /^---\nsort: (.*)\n---\n([\s\S]*)$/.exec(normal) ?? [];
+  const [heading = "", ...body] = rest.trimStart().split("\n");
   return { sort: sort.trim(), title: heading.replace(/^#\s*/, ""), body: body.join("\n").trim() };
 }
 
@@ -119,13 +119,15 @@ export async function packNotesTree(fileSystem: FileSystem, dir: string, from: P
   return { own, characters };
 }
 
-/** Sorts of the same name made one, as a piece's Ledtrådar and a pack's notes for it. */
+/** Sorts of the same name made one, as a piece's Ledtrådar and a pack's notes for it. Personer
+ * and the other fixed sorts keep no name in the book, so they are known by their id. */
 export function joinSorts(sorts: TreeNode[]): TreeNode[] {
-  const byTitle = new Map<string, TreeNode>();
+  const joined = new Map<string, TreeNode>();
   for (const sort of sorts) {
-    const same = byTitle.get(sort.title ?? "");
+    const key = sort.title ? `name:${sort.title}` : `id:${sort.id}`;
+    const same = joined.get(key);
     if (same) same.children = [...(same.children ?? []), ...(sort.children ?? [])];
-    else byTitle.set(sort.title ?? "", { ...sort, children: [...(sort.children ?? [])] });
+    else joined.set(key, { ...sort, children: [...(sort.children ?? [])] });
   }
-  return [...byTitle.values()];
+  return [...joined.values()];
 }

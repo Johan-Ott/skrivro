@@ -1,3 +1,4 @@
+import { PacksLayer } from "../packs/PackList.js";
 import { ProfileButton } from "../profile/ProfileLayer.js";
 import type { MouseEvent } from "react";
 import type { AppState } from "../App.js";
@@ -155,6 +156,7 @@ function Floating({ app, project }: ScreenProps) {
         />
       )}
       <Overlays app={app} />
+      <PacksLayer />
     </>
   );
 }

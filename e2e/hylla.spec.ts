@@ -35,3 +35,15 @@ test("a cover's colours are chosen from Omslag in the book's menu", async ({ pag
 
   await expect(book.locator(".book-cover")).toHaveClass(/cover-plommon/);
 });
+
+test("the genre packs are found in the logo's menu, each saying what it holds", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "Skrivro", exact: true }).click();
+  await page.getByRole("menuitem", { name: "Genrepaket…" }).click();
+
+  const dialog = page.getByRole("dialog", { name: "Genrepaket" });
+  const romantasy = dialog.locator(".pack-card").filter({ hasText: "Romantasy" });
+  await expect(romantasy).toContainText("9 guider och mallar");
+  await expect(romantasy).toContainText("Ingår under betan");
+});

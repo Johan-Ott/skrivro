@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { setUiLanguage } from "../src/i18n/i18n";
 import { createProject } from "../src/project/newProject";
-import { packOf, packs } from "../src/project/packs";
+import { joinSorts, packOf, packs } from "../src/project/packs";
 import { readProjectFile } from "../src/project/projectFile";
 import { CHARACTERS_ID } from "../src/project/sorts";
 import { structures, templatePieces } from "../src/project/templates";
@@ -85,4 +85,26 @@ describe("genre packs", () => {
     expect(tree.some((node) => node.title === "Guide")).toBe(false);
     expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(0);
   });
+});
+
+describe("joinSorts", () => {
+  it("joins sorts of the same name, and keeps fixed sorts without a name apart", () => {
+    const joined = joinSorts([
+      { id: "karaktarer", kind: "sort", children: [{ id: "A", kind: "scene" }] },
+      { id: "saker", kind: "sort", children: [{ id: "B", kind: "scene" }] },
+      { id: "x1", kind: "sort", title: "Ledtrådar", children: [] },
+      { id: "x2", kind: "sort", title: "Ledtrådar", children: [{ id: "C", kind: "scene" }] },
+    ]);
+
+    expect(joined.map((sort) => [sort.id, sort.children?.length])).toEqual([
+      ["karaktarer", 1],
+      ["saker", 1],
+      ["x1", 1],
+    ]);
+  });
+});
+
+it("gives every pack note a title", () => {
+  const untitled = packs().flatMap((pack) => pack.notes.filter((note) => !note.title));
+  expect(untitled).toEqual([]);
 });

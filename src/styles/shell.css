@@ -3509,7 +3509,9 @@
 /* Mallar och bitar: adding pieces to a book, saving it as a template, importing one. */
 
 .templates-dialog {
-  width: min(560px, calc(100vw - 48px));
+  width: min(600px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
   gap: 18px;
 }
 
@@ -3518,6 +3520,46 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+}
+
+.pack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.pack-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+}
+
+.pack-card-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pack-card-name {
+  font-weight: 600;
+}
+
+.pack-card-holds {
+  margin-left: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.pack-card > .button,
+.pack-card > .pack-tag {
+  flex-shrink: 0;
+  margin-left: 0;
 }
 
 .templates-section .settings-text {
