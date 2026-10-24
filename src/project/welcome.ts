@@ -25,7 +25,7 @@ const text = () =>
     t("När du inte behöver den här längre tar du bort den längst ner."),
   ].join("\n\n");
 
-async function writeNote(fileSystem: FileSystem, dir: string, title: string, body: string) {
+export async function writeNote(fileSystem: FileSystem, dir: string, title: string, body: string) {
   const id = newSceneId();
   const head = withField(newSceneText(id, title), "link", "false");
   await writeAtomic(fileSystem, scenePath(dir, id), `${head}\n${body}\n`);

@@ -3890,3 +3890,17 @@ html.welcome-shown body {
   flex-wrap: wrap;
   gap: 8px 20px;
 }
+
+/* Beside a structure from a genre pack: which pack it comes in. */
+.pack-tag {
+  display: inline-block;
+  white-space: nowrap;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  vertical-align: 2px;
+}

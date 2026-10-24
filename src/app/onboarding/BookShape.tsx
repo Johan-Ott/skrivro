@@ -6,6 +6,7 @@ import {
   type BookTemplate,
 } from "../../project/templates.js";
 import { ImportLink, PieceToggles, StructureList } from "../templates/TemplateChoices.js";
+import { packsFor, type Pack } from "../../project/packs.js";
 import { Dropdown } from "@llkit/controls.js";
 import { defaultLabels } from "../../project/labels.js";
 import { useOwnTemplates } from "../templates/templateFiles.js";
@@ -65,8 +66,25 @@ const addedLabels = (book: BookTemplate) => {
   return book.labels.map(([name = ""]) => name).filter((name) => !standard.includes(name));
 };
 
+// The genre packs the book takes its guides and templates from.
+function FromPacks({ packs }: { packs: Pack[] }) {
+  if (packs.length === 0) return null;
+  const names = packs.map((pack) => pack.name).join(", ");
+  return (
+    <>
+      <dt>{t("Ur paketen")}</dt>
+      <dd>{t("Guider och mallar från {packs}", { packs: names })}</dd>
+    </>
+  );
+}
+
 // What the choices give the book, so that each one shows what it does.
-function WhatItGets(props: { book: BookTemplate; isPlanned: boolean; onSwap: () => void }) {
+function WhatItGets(props: {
+  book: BookTemplate;
+  isPlanned: boolean;
+  packs: Pack[];
+  onSwap: () => void;
+}) {
   const { book } = props;
   const added = addedLabels(book);
   const count = props.isPlanned ? chapterCount(book) : Math.min(1, chapterCount(book));
@@ -83,6 +101,7 @@ function WhatItGets(props: { book: BookTemplate; isPlanned: boolean; onSwap: () 
       {book.sorts.length > 0 && <dd>{book.sorts.join(", ")}</dd>}
       {added.length > 0 && <dt>{t("Etiketter")}</dt>}
       {added.length > 0 && <dd>{added.join(", ")}</dd>}
+      <FromPacks packs={props.packs} />
     </dl>
   );
 }
@@ -140,6 +159,9 @@ export function BookShape(
       <WhatItGets
         book={composeTemplate(structure, [details.genre ?? "", ...details.pieces])}
         isPlanned={details.isPlanned !== false}
+        packs={packsFor([details.structure, details.genre ?? "", ...details.pieces]).filter(
+          (pack) => pack.notes.length > 0,
+        )}
         onSwap={() => setSwapping(true)}
       />
     </>

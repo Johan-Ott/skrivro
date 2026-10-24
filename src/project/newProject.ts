@@ -8,6 +8,8 @@ import { BOOK_SUFFIX, parentOf, withoutBookSuffix } from "./libraryFolders.js";
 import { writeProjectFile } from "./projectFile.js";
 import type { Narration } from "../manuscript/narration.js";
 import { manuscriptSceneIds, NOTES_ID, withSpecialFolders, type TreeNode } from "./tree.js";
+import { CHARACTERS_ID } from "./sorts.js";
+import { packNotesTree, packsFor } from "./packs.js";
 import { readOwnTemplates, OWN_PREFIX } from "./ownTemplates.js";
 import { composeTemplate, structures, templateBook, type BookTemplate } from "./templates.js";
 import { t } from "../i18n/i18n.js";
@@ -149,18 +151,33 @@ const firstChapterOf = (template: BookTemplate): BookTemplate =>
     : template;
 
 // The welcome, and the structure's steps for one who writes without them, lead the notes.
-const withNotesFirst = (tree: TreeNode[], ids: string[]) =>
+// Notes first in a sort: the welcome in Övrigt, a pack's character templates in Personer.
+const withNotesFirst = (tree: TreeNode[], sortId: string, notes: TreeNode[]) =>
   tree.map((node) =>
-    node.id === NOTES_ID
-      ? {
-          ...node,
-          children: [
-            ...ids.map((id) => ({ id, kind: "scene" as const })),
-            ...(node.children ?? []),
-          ],
-        }
-      : node,
+    node.id === sortId ? { ...node, children: [...notes, ...(node.children ?? [])] } : node,
   );
+
+const asNotes = (ids: string[]): TreeNode[] => ids.map((id) => ({ id, kind: "scene" }));
+
+// The notes a new book starts with: the welcome, the structure's steps when the chapters are
+// not made, and the notes of the packs its structure, genre and pieces come from.
+async function startingNotes(
+  making: { fileSystem: FileSystem; dir: string },
+  steps: BookTemplate | null,
+  chosen: string[],
+) {
+  const { fileSystem, dir } = making;
+  const welcome = await writeWelcome(fileSystem, dir);
+  const stepsNote = steps ? [await writeStepsNote(fileSystem, dir, steps)] : [];
+  const pack = await packNotesTree(fileSystem, dir, packsFor(chosen));
+  const place = (tree: TreeNode[]) =>
+    withNotesFirst(
+      withNotesFirst(tree, NOTES_ID, asNotes([welcome, ...stepsNote])),
+      CHARACTERS_ID,
+      pack.characters,
+    );
+  return { welcome, sorts: pack.own, place };
+}
 
 /** An imported book, or the template's, with the welcome note under Övrigt. */
 export async function createProject(
@@ -179,16 +196,20 @@ export async function createProject(
   const book =
     imported ?? templateBook(isPlanned ? template : firstChapterOf(template), t("Scen 1"));
   const tree = await writeBook(fileSystem, dir, book);
-  const sceneId = manuscriptSceneIds(tree)[0] ?? null;
   const fromTemplate = templateParts(template);
-  const welcome = await writeWelcome(fileSystem, dir);
-  const steps = isPlanned ? [] : [await writeStepsNote(fileSystem, dir, template)];
-  const all = withSpecialFolders([...tree, ...fromTemplate.sorts]);
+  const chosen = [details.structure, details.genre ?? "", ...details.pieces];
+  const notes = await startingNotes({ fileSystem, dir }, isPlanned ? null : template, chosen);
+  const all = withSpecialFolders([...tree, ...fromTemplate.sorts, ...notes.sorts]);
   const goal = details.totalGoal ? { totalGoal: details.totalGoal } : {};
-  const fields = { ...bookFields(details), ...fromTemplate.fields, ...goal, welcome };
-  await writeProjectFile(fileSystem, dir, fields, withNotesFirst(all, [welcome, ...steps]));
+  const fields = {
+    ...bookFields(details),
+    ...fromTemplate.fields,
+    ...goal,
+    welcome: notes.welcome,
+  };
+  await writeProjectFile(fileSystem, dir, fields, notes.place(all));
   await fileSystem.rename(dir, finalDir);
-  return { dir: finalDir, sceneId: sceneId ?? welcome };
+  return { dir: finalDir, sceneId: manuscriptSceneIds(tree)[0] ?? notes.welcome };
 }
 
 // The example is copied once: asked for again, the copy already on the shelf opens. Its files go

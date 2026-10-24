@@ -1498,5 +1498,8 @@
   "Plommon": "Plum",
   "Automatiskt": "Automatic",
   "Hämtar språket…": "Fetching the language\u2026",
-  "Språket kunde inte hämtas. Försök igen när du har nät.": "The language could not be fetched. Try again when you are online."
+  "Språket kunde inte hämtas. Försök igen när du har nät.": "The language could not be fetched. Try again when you are online.",
+  "{pack}-paketet": "{pack} pack",
+  "Ur paketen": "From the packs",
+  "Guider och mallar från {packs}": "Guides and templates from {packs}"
 }
