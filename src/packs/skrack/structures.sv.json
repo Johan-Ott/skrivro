@@ -1,0 +1,36 @@
+[
+  {
+    "id": "skrack",
+    "name": "Skräckens trappa",
+    "hint": "Det vardagliga spricker, steg för steg, tills inget är tryggt.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Det vardagliga",
+        "chapters": [
+          ["Platsen", "Där allt ska hända, innan något har hänt."],
+          ["Det första konstiga", "En liten sak som inte stämmer."],
+          ["Förklaringar", "Alla förklarar bort det."]
+        ]
+      },
+      {
+        "title": "Det växer",
+        "chapters": [
+          ["Närmare", "Det som skrämmer kommer närmare."],
+          ["Ingen tror en", "Huvudpersonen är ensam med det."],
+          ["Sanningen", "Vad det är, och vad det vill."]
+        ]
+      },
+      {
+        "title": "Det värsta",
+        "chapters": [
+          ["Fast", "Det finns ingen väg ut."],
+          ["Konfrontationen", "Ansikte mot ansikte med rädslan."],
+          ["Efterklangen", "Det som stannar kvar, kanske för alltid."]
+        ]
+      }
+    ]
+  }
+]

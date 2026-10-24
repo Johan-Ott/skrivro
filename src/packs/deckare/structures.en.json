@@ -1,0 +1,53 @@
+[
+  {
+    "id": "deckare",
+    "name": "The mystery in four parts",
+    "hint": "The crime, the investigation, the turn and the solution.",
+    "totalGoal": 90000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The crime",
+        "chapters": [
+          [
+            "The crime",
+            "The crime is found in the first chapter, or within the first tenth of the book."
+          ],
+          ["The investigator", "Who investigates, and why it is them."],
+          [
+            "The first leads",
+            "The scene, the witnesses and the suspects. The culprit is already among them."
+          ]
+        ]
+      },
+      {
+        "title": "The investigation",
+        "chapters": [
+          ["The first suspect", "An obvious suspect who is not the answer."],
+          ["The red herring", "A clue that points the wrong way, and the reader follows."],
+          ["A second crime", "The stakes rise and time runs short."],
+          ["It gets personal", "The case comes close to the investigator."]
+        ]
+      },
+      {
+        "title": "The turn",
+        "chapters": [
+          [
+            "The decisive clue",
+            "A detail the reader has seen all along: the solution must be possible to work out."
+          ],
+          ["The investigator in danger", "The culprit realises the truth is close."],
+          ["The confrontation", "The investigator and the culprit meet."]
+        ]
+      },
+      {
+        "title": "The solution",
+        "chapters": [
+          ["The reveal", "How it was done, and why."],
+          ["Afterwards", "What the case cost, and what lies ahead."]
+        ]
+      }
+    ]
+  }
+]

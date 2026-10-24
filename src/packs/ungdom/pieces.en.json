@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ungdom",
+    "name": "Young adult",
+    "hint": "Friends, school and first times.",
+    "sorts": ["Friends", "School"],
+    "labels": [["First time", "#c9508f"]],
+    "chapters": []
+  },
+  {
+    "id": "barnbok",
+    "name": "Children's book",
+    "hint": "The pictures and the words for the reader.",
+    "sorts": ["Pictures"],
+    "labels": [["Picture here", "#2f86c9"]],
+    "chapters": []
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "id": "romans",
+    "name": "Romans",
+    "hint": "En kärlekshistoria genom handlingen, med ett lyckligt slut.",
+    "sorts": ["Relationen"],
+    "labels": [
+      ["Romans", "#c9508f"],
+      ["Spänning", "#d4483b"]
+    ],
+    "chapters": []
+  },
+  {
+    "id": "feelgood",
+    "name": "Feelgood",
+    "hint": "Gemenskapen och det som värmer.",
+    "sorts": ["Gemenskapen"],
+    "labels": [["Värme", "#e0a21e"]],
+    "chapters": []
+  }
+]

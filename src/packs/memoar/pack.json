@@ -1,0 +1,12 @@
+{
+  "id": "memoar",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Memoar och fackbok",
+    "en": "Memoir and non-fiction"
+  },
+  "hint": {
+    "sv": "Ditt eget liv, eller kunskap du vill dela.",
+    "en": "Your own life, or knowledge you want to share."
+  }
+}

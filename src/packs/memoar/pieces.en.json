@@ -1,0 +1,13 @@
+[
+  {
+    "id": "memoar",
+    "name": "Memoir",
+    "hint": "Memories, letters and documents from a life.",
+    "sorts": ["Memories", "Letters and documents"],
+    "labels": [
+      ["Memory", "#8a6d3b"],
+      ["Check facts", "#e08a1e"]
+    ],
+    "chapters": []
+  }
+]

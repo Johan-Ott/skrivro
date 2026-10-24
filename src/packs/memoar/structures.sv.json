@@ -1,0 +1,56 @@
+[
+  {
+    "id": "memoar",
+    "name": "Memoar",
+    "hint": "Ett liv berättat kring en fråga: vad hände, och vad betydde det.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Varifrån",
+        "chapters": [
+          ["Ögonblicket", "En scen som visar vad boken handlar om."],
+          ["Uppväxten", "Platsen, människorna och det som formade dig."]
+        ]
+      },
+      {
+        "title": "Det som hände",
+        "chapters": [
+          ["Vändpunkten", "Det som förändrade allt."],
+          ["Kampen", "Det svåra, och hur du tog dig igenom det."],
+          ["Människorna", "De som betydde mest, på gott och ont."]
+        ]
+      },
+      {
+        "title": "Vad det betydde",
+        "chapters": [
+          ["Förståelsen", "Det du ser nu som du inte såg då."],
+          ["Nu", "Var du står i dag."]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fackbok",
+    "name": "Fackbok",
+    "hint": "En fråga, kunskapen som svarar på den och vad läsaren kan göra med den.",
+    "totalGoal": 60000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "",
+        "chapters": [
+          ["Inledning", "Frågan boken svarar på, och varför den spelar roll."],
+          ["Bakgrund", "Det läsaren behöver veta först."],
+          ["Första delen", "Den första stora idén, med exempel."],
+          ["Andra delen", "Nästa idé, som bygger på den första."],
+          ["Tredje delen", "Det svåraste, eller det mest överraskande."],
+          ["Så gör du", "Hur läsaren använder det i sitt eget liv."],
+          ["Avslutning", "Det viktigaste i korthet."]
+        ]
+      }
+    ]
+  }
+]

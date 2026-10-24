@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ungdom",
+    "name": "Young adult",
+    "hint": "Finding yourself: friends, first times and a choice that changes everything.",
+    "totalGoal": 60000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Before",
+        "chapters": [
+          ["Who I think I am", "The main character, the family and the friends."],
+          ["The new", "A new school, a new friend or a secret."]
+        ]
+      },
+      {
+        "title": "In the middle",
+        "chapters": [
+          ["The first time", "Something happens for the first time."],
+          ["The group", "Belonging, or not."],
+          ["The lie", "Something the main character hides grows."]
+        ]
+      },
+      {
+        "title": "After",
+        "chapters": [
+          ["Everything breaks", "The lie comes out."],
+          ["The choice", "Choosing who to be."],
+          ["Someone new", "Who the main character became."]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "barnbok",
+    "name": "Chapter book for children",
+    "hint": "Short chapters of a few pages, a clear question, an adventure and a safe ending. The child solves it.",
+    "totalGoal": 8000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "",
+        "chapters": [
+          ["At home", "The main character and what they wish for."],
+          ["Something happens", "A surprise sets everything going."],
+          ["The adventure", "Out into the unknown, with a friend."],
+          ["The hard part", "A problem that seems too big."],
+          ["The courage", "The main character solves it, in their own way."],
+          ["Home again", "Safe, but not quite as before."]
+        ]
+      }
+    ]
+  }
+]

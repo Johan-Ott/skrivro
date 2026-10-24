@@ -1,0 +1,13 @@
+[
+  {
+    "id": "memoar",
+    "name": "Memoar",
+    "hint": "Minnen, brev och dokument från livet.",
+    "sorts": ["Minnen", "Brev och dokument"],
+    "labels": [
+      ["Minne", "#8a6d3b"],
+      ["Kolla fakta", "#e08a1e"]
+    ],
+    "chapters": []
+  }
+]

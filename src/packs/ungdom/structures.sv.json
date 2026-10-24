@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ungdom",
+    "name": "Ungdomsroman",
+    "hint": "Att hitta sig själv: vänner, första gången och ett val som förändrar allt.",
+    "totalGoal": 60000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Före",
+        "chapters": [
+          ["Vem jag tror att jag är", "Huvudpersonen, familjen och vännerna."],
+          ["Det nya", "En ny skola, en ny vän eller en hemlighet."]
+        ]
+      },
+      {
+        "title": "Mitt i",
+        "chapters": [
+          ["Första gången", "Något händer för första gången."],
+          ["Gruppen", "Att höra till, eller inte."],
+          ["Lögnen", "Något huvudpersonen döljer växer."]
+        ]
+      },
+      {
+        "title": "Efter",
+        "chapters": [
+          ["Allt brister", "Lögnen kommer fram."],
+          ["Valet", "Att välja vem man vill vara."],
+          ["Någon ny", "Den huvudpersonen blev."]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "barnbok",
+    "name": "Kapitelbok för barn",
+    "hint": "Korta kapitel på några sidor, en tydlig fråga, ett äventyr och ett tryggt slut. Barnet löser det själv.",
+    "totalGoal": 8000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "",
+        "chapters": [
+          ["Hemma", "Huvudpersonen och det hen önskar sig."],
+          ["Något händer", "En överraskning sätter igång allt."],
+          ["Äventyret", "Ut i det okända, med en vän."],
+          ["Det svåra", "Ett problem som verkar för stort."],
+          ["Modet", "Huvudpersonen löser det, på sitt eget sätt."],
+          ["Hem igen", "Tryggt, men inte riktigt som förut."]
+        ]
+      }
+    ]
+  }
+]

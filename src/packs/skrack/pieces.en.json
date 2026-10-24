@@ -1,0 +1,13 @@
+[
+  {
+    "id": "skrack",
+    "name": "Horror",
+    "hint": "What frightens and the rules of the supernatural.",
+    "sorts": ["What frightens"],
+    "labels": [
+      ["Fear", "#6b2c8f"],
+      ["Omen", "#7d7d7d"]
+    ],
+    "chapters": []
+  }
+]

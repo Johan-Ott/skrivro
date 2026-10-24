@@ -1,0 +1,45 @@
+[
+  {
+    "id": "romantasy",
+    "name": "Romantasy",
+    "hint": "The romance's four phases braided with a fantasy plot: the world makes the obstacles, and love decides the battle.",
+    "totalGoal": 110000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Two worlds",
+        "chapters": [
+          ["The first world", "The main character, the burden and what they are willing to do."],
+          ["The meeting", "The two meet, and the friction sparks."],
+          ["The second voice", "A secret and a world of their own."],
+          ["The bargain", "A quest, a pact or a bond ties them together."]
+        ]
+      },
+      {
+        "title": "Drawn closer",
+        "chapters": [
+          ["The magic wakes", "A power or a heritage begins to show, and it has a price."],
+          ["The powers around them", "Politics, loyalties and dangers."],
+          ["Almost", "A moment that almost becomes more."],
+          ["The midpoint", "The first kiss, as the fantasy plot turns."]
+        ]
+      },
+      {
+        "title": "Betrayal and choice",
+        "chapters": [
+          ["The betrayal", "A secret comes out and everything falls apart."],
+          ["Apart", "They go separate ways when all seems lost."],
+          ["The choice", "Love or duty."]
+        ]
+      },
+      {
+        "title": "What remains",
+        "chapters": [
+          ["The battle", "The grand gesture is part of the deciding battle."],
+          ["The bond", "A happy ending, or a promise that holds until the next book."]
+        ]
+      }
+    ]
+  }
+]

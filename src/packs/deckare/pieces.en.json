@@ -1,0 +1,16 @@
+[
+  {
+    "id": "deckare",
+    "name": "Mystery",
+    "hint": "The clues and the suspects, so the solution can be worked out. The timeline follows When on the chapters.",
+    "sorts": ["Clues"],
+    "labels": [
+      ["Suspect", "#7a5cc9"],
+      ["Clue", "#2f86c9"],
+      ["Red herring", "#e08a1e"],
+      ["Reveal", "#d4483b"],
+      ["Alibi", "#7d7d7d"]
+    ],
+    "chapters": []
+  }
+]

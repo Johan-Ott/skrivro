@@ -1,0 +1,12 @@
+{
+  "id": "fantasy",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Fantasy",
+    "en": "Fantasy"
+  },
+  "hint": {
+    "sv": "Magisystem, riken och varelser, också för urban fantasy.",
+    "en": "Magic systems, realms and creatures, urban fantasy too."
+  }
+}

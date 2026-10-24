@@ -1,0 +1,12 @@
+{
+  "id": "skrack",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Skräck",
+    "en": "Horror"
+  },
+  "hint": {
+    "sv": "Det obehagliga som trappas upp, steg för steg.",
+    "en": "The unsettling, raised step by step."
+  }
+}

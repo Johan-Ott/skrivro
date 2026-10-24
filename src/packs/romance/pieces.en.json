@@ -1,0 +1,21 @@
+[
+  {
+    "id": "romans",
+    "name": "Romance",
+    "hint": "A love story through the plot, with a happy ending.",
+    "sorts": ["The relationship"],
+    "labels": [
+      ["Romance", "#c9508f"],
+      ["Tension", "#d4483b"]
+    ],
+    "chapters": []
+  },
+  {
+    "id": "feelgood",
+    "name": "Feel-good",
+    "hint": "The community and what warms.",
+    "sorts": ["The community"],
+    "labels": [["Warmth", "#e0a21e"]],
+    "chapters": []
+  }
+]

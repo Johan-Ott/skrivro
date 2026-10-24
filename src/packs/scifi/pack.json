@@ -1,0 +1,12 @@
+{
+  "id": "scifi",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Science fiction",
+    "en": "Science fiction"
+  },
+  "hint": {
+    "sv": "Teknik, framtider och världar som följer sina egna regler.",
+    "en": "Technology, futures and worlds that follow their own rules."
+  }
+}

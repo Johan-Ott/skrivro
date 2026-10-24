@@ -1,0 +1,53 @@
+[
+  {
+    "id": "deckare",
+    "name": "Deckarens fyra delar",
+    "hint": "Brottet, utredningen, vändningen och upplösningen.",
+    "totalGoal": 90000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Brottet",
+        "chapters": [
+          [
+            "Brottet",
+            "Brottet upptäcks i första kapitlet, eller senast efter en tiondel av boken."
+          ],
+          ["Utredaren", "Vem som utreder, och varför just hen."],
+          [
+            "De första spåren",
+            "Platsen, vittnena och de misstänkta. Den skyldige finns redan bland dem."
+          ]
+        ]
+      },
+      {
+        "title": "Utredningen",
+        "chapters": [
+          ["Den första misstänkta", "En tydlig misstänkt, som inte är svaret."],
+          ["Det falska spåret", "En ledtråd som pekar fel, och läsaren följer med."],
+          ["Ett andra brott", "Insatserna höjs och tiden blir knapp."],
+          ["Det personliga", "Fallet kommer nära utredaren."]
+        ]
+      },
+      {
+        "title": "Vändningen",
+        "chapters": [
+          [
+            "Den avgörande ledtråden",
+            "En detalj som läsaren har sett hela tiden: lösningen ska gå att räkna ut."
+          ],
+          ["Utredaren i fara", "Den skyldige förstår att sanningen är nära."],
+          ["Konfrontationen", "Utredaren och den skyldige möts."]
+        ]
+      },
+      {
+        "title": "Upplösningen",
+        "chapters": [
+          ["Avslöjandet", "Hur det gick till, och varför."],
+          ["Efteråt", "Vad fallet kostade, och vad som väntar."]
+        ]
+      }
+    ]
+  }
+]

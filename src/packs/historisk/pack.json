@@ -1,0 +1,12 @@
+{
+  "id": "historisk",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Historisk roman",
+    "en": "Historical novel"
+  },
+  "hint": {
+    "sv": "En annan tid, med källor och miljöer som stämmer.",
+    "en": "Another time, with sources and settings that are right."
+  }
+}

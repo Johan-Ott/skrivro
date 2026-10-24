@@ -1,0 +1,13 @@
+[
+  {
+    "id": "thriller",
+    "name": "Thriller",
+    "hint": "The villain's plan, the deadlines and the twists.",
+    "sorts": ["The villain's plan", "The threat"],
+    "labels": [
+      ["Twist", "#d4483b"],
+      ["Time pressure", "#e08a1e"]
+    ],
+    "chapters": []
+  }
+]

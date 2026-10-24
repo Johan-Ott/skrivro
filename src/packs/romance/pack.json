@@ -1,0 +1,12 @@
+{
+  "id": "romance",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Romance och feelgood",
+    "en": "Romance and feel-good"
+  },
+  "hint": {
+    "sv": "Kärlekshistorier och romantisk komedi, med lyckligt slut.",
+    "en": "Love stories and romantic comedy, with a happy ending."
+  }
+}

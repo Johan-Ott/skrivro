@@ -1,0 +1,10 @@
+[
+  {
+    "id": "scifi",
+    "name": "Science fiction",
+    "hint": "The technology, the worlds and the society of the future.",
+    "sorts": ["Technology", "Worlds", "Society"],
+    "labels": [["Technology", "#2f86c9"]],
+    "chapters": []
+  }
+]

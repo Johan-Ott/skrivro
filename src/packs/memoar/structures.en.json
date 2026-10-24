@@ -1,0 +1,56 @@
+[
+  {
+    "id": "memoar",
+    "name": "Memoir",
+    "hint": "A life told around one question: what happened, and what did it mean.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Where from",
+        "chapters": [
+          ["The moment", "A scene that shows what the book is about."],
+          ["Growing up", "The place, the people and what shaped you."]
+        ]
+      },
+      {
+        "title": "What happened",
+        "chapters": [
+          ["The turning point", "What changed everything."],
+          ["The struggle", "The hard part, and how you got through it."],
+          ["The people", "Those who mattered most, for better or worse."]
+        ]
+      },
+      {
+        "title": "What it meant",
+        "chapters": [
+          ["The understanding", "What you see now that you did not see then."],
+          ["Now", "Where you stand today."]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fackbok",
+    "name": "Non-fiction",
+    "hint": "A question, the knowledge that answers it and what the reader can do with it.",
+    "totalGoal": 60000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "",
+        "chapters": [
+          ["Introduction", "The question the book answers, and why it matters."],
+          ["Background", "What the reader needs to know first."],
+          ["First part", "The first big idea, with examples."],
+          ["Second part", "The next idea, built on the first."],
+          ["Third part", "The hardest, or the most surprising."],
+          ["How to", "How the reader uses it in their own life."],
+          ["Conclusion", "The essentials in brief."]
+        ]
+      }
+    ]
+  }
+]

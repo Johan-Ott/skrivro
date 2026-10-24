@@ -1,0 +1,12 @@
+{
+  "id": "ungdom",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Ungdom och barnbok",
+    "en": "Young adult and children's"
+  },
+  "hint": {
+    "sv": "Böcker för unga läsare, från kapitelbok till ungdomsroman.",
+    "en": "Books for young readers, from chapter books to young adult."
+  }
+}

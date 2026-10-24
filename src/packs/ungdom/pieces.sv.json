@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ungdom",
+    "name": "Ungdom",
+    "hint": "Vänner, skolan och första gången.",
+    "sorts": ["Vänner", "Skolan"],
+    "labels": [["Första gången", "#c9508f"]],
+    "chapters": []
+  },
+  {
+    "id": "barnbok",
+    "name": "Barnbok",
+    "hint": "Bilderna och orden för läsaren.",
+    "sorts": ["Bilder"],
+    "labels": [["Bild här", "#2f86c9"]],
+    "chapters": []
+  }
+]

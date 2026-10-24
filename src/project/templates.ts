@@ -3,6 +3,7 @@ import { isSwedish } from "../i18n/i18n.js";
 import { defaultLabels } from "./labels.js";
 import english from "./templates.en.json";
 import swedish from "./templates.sv.json";
+import { packs } from "./packs.js";
 
 // A new book starts from one structure, its chapters named for the steps of the story, and any
 // pieces: notes, labels and chapters for a genre. The texts live in templates.sv.json and .en.json.
@@ -34,8 +35,15 @@ export interface TemplatePiece {
 
 const texts = () => (isSwedish() ? swedish : english);
 
-export const structures = (): BookTemplate[] => texts().structures;
-export const templatePieces = (): TemplatePiece[] => texts().pieces;
+/** The free basics first, then those of each genre pack (src/packs). */
+export const structures = (): BookTemplate[] => [
+  ...texts().structures,
+  ...packs().flatMap((pack) => pack.structures),
+];
+export const templatePieces = (): TemplatePiece[] => [
+  ...texts().pieces,
+  ...packs().flatMap((pack) => pack.pieces),
+];
 
 // The pieces that are a genre of their own. A novel's genre decides its structure, and the
 // other pieces blend into it with their notes and labels.
@@ -97,7 +105,9 @@ function labelsWith(pieces: TemplatePiece[], own: string[][]) {
 
 /** The structure with the chosen pieces' notes, labels and closing chapters added. */
 export function composeTemplate(structure: BookTemplate, pieceIds: string[]): BookTemplate {
-  const pieces = templatePieces().filter((piece) => pieceIds.includes(piece.id));
+  // In the order chosen, the genre first, whatever order the lists keep them in.
+  const all = templatePieces();
+  const pieces = pieceIds.flatMap((id) => all.filter((piece) => piece.id === id));
   const closing = pieces.flatMap((piece) => piece.chapters);
   return {
     ...structure,

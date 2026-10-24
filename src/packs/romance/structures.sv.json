@@ -1,0 +1,94 @@
+[
+  {
+    "id": "romans",
+    "name": "Romansens fyra faser",
+    "hint": "Två som möts, faller, drar sig undan och kämpar för kärleken. Slutet är lyckligt.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Mötet",
+        "chapters": [
+          ["Den första", "Hen, såret och det som saknas i livet."],
+          ["Den andra", "Hen, såret och varför kärlek inte står på kartan."],
+          ["Mötet", "De möts, och något skaver eller gnistrar."],
+          ["Aldrig i livet", "Varför det här inte kan bli något."],
+          ["Bundna", "Något tvingar dem att fortsätta ses."]
+        ]
+      },
+      {
+        "title": "Förälskelsen",
+        "chapters": [
+          ["Ett första tecken", "En blick eller ett ögonblick som inte går att glömma."],
+          ["Det växer", "De ser varandra som de är."],
+          ["Kanske ändå", "Det kanske kan fungera."],
+          ["Mittpunkten", "Kyssen, natten eller löftet. Det ser ut att hålla."]
+        ]
+      },
+      {
+        "title": "Reträtten",
+        "chapters": [
+          ["Tvivlet", "Det gamla såret gör sig påmint."],
+          ["Muren", "Den ena drar sig undan för att skydda sig."],
+          ["Brytningen", "Det tar slut, av ett skäl som bottnar i såret."]
+        ]
+      },
+      {
+        "title": "Kampen för kärleken",
+        "chapters": [
+          ["Den mörka natten", "Livet utan den andra, och vad det kostar."],
+          ["Insikten", "Vad som måste ändras, inuti."],
+          ["Den stora gesten", "Någon vågar allt."],
+          ["Lyckligt slut", "Hur kärleken ser ut när den håller."]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "feelgood",
+    "name": "Feelgood och romantisk komedi",
+    "hint": "En ny början, ett möte som skaver, värme, ett bakslag och ett varmt slut.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Den nya början",
+        "chapters": [
+          ["Ett liv i gungning", "Något tar slut och något nytt måste börja."],
+          ["Platsen", "En ort, en butik eller ett hus att landa i."],
+          ["Mötet", "Två som inte alls borde passa ihop."]
+        ]
+      },
+      {
+        "title": "Värmen",
+        "chapters": [
+          ["Gemenskapen", "Människorna runt omkring blir viktiga."],
+          ["Närmare", "Det skaver mindre och mindre."],
+          ["Det goda ögonblicket", "Allt känns möjligt."]
+        ]
+      },
+      {
+        "title": "Bakslaget",
+        "chapters": [
+          [
+            "Hotet",
+            "Det nya livet står på spel: platsen kan försvinna, eller det gamla kommer tillbaka."
+          ],
+          ["Isär", "Det ser ut att vara över."]
+        ]
+      },
+      {
+        "title": "Hem",
+        "chapters": [
+          [
+            "Gemenskapen sluter upp",
+            "Människorna runt omkring ställer upp, och någon vågar säga det som behöver sägas."
+          ],
+          ["Det varma slutet", "Livet som det blev, bättre än planen, och med hopp."]
+        ]
+      }
+    ]
+  }
+]

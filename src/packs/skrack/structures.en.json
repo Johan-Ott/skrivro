@@ -1,0 +1,36 @@
+[
+  {
+    "id": "skrack",
+    "name": "The staircase of horror",
+    "hint": "The everyday cracks, step by step, until nothing is safe.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The everyday",
+        "chapters": [
+          ["The place", "Where it will all happen, before anything has."],
+          ["The first strange thing", "A small thing that does not add up."],
+          ["Explanations", "Everyone explains it away."]
+        ]
+      },
+      {
+        "title": "It grows",
+        "chapters": [
+          ["Closer", "What frightens comes closer."],
+          ["No one believes", "The main character is alone with it."],
+          ["The truth", "What it is, and what it wants."]
+        ]
+      },
+      {
+        "title": "The worst",
+        "chapters": [
+          ["Trapped", "There is no way out."],
+          ["The confrontation", "Face to face with the fear."],
+          ["The echo", "What stays, perhaps for good."]
+        ]
+      }
+    ]
+  }
+]

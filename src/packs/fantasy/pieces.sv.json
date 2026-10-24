@@ -1,0 +1,18 @@
+[
+  {
+    "id": "magi",
+    "name": "Fantasy och magi",
+    "hint": "Ett magisystem med regler, kostnader och gränser, riken och varelser.",
+    "sorts": ["Magisystem", "Riken", "Varelser"],
+    "labels": [["Magi", "#7a5cc9"]],
+    "chapters": []
+  },
+  {
+    "id": "urban",
+    "name": "Urban fantasy",
+    "hint": "En stad som vi känner, med en dold värld under.",
+    "sorts": ["Den dolda världen"],
+    "labels": [],
+    "chapters": []
+  }
+]

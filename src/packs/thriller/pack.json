@@ -1,0 +1,12 @@
+{
+  "id": "thriller",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Thriller",
+    "en": "Thriller"
+  },
+  "hint": {
+    "sv": "Ett hot som hela tiden växer, och en klocka som tickar.",
+    "en": "A threat that keeps growing, and a ticking clock."
+  }
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "id": "romantasy",
+    "name": "Romantasy",
+    "hint": "Romansens fyra faser flätade med en fantasyhandling: världen skapar hindren, och kärleken avgör slaget.",
+    "totalGoal": 110000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Två världar",
+        "chapters": [
+          ["Den första världen", "Huvudpersonen, bördan och vad hen är beredd att göra."],
+          ["Mötet", "De två möts, och det gnistrar av motstånd."],
+          ["Den andra rösten", "En hemlighet och en egen värld."],
+          ["Pakten", "Ett uppdrag, ett avtal eller ett tvång binder dem samman."]
+        ]
+      },
+      {
+        "title": "Dras närmare",
+        "chapters": [
+          ["Magin vaknar", "En kraft eller ett arv börjar visa sig, och har ett pris."],
+          ["Makten runt dem", "Politik, lojaliteter och faror."],
+          ["Nästan", "Ett ögonblick som nästan blir mer."],
+          ["Mittpunkten", "Första kyssen, samtidigt som fantasyhandlingen vänder."]
+        ]
+      },
+      {
+        "title": "Svek och val",
+        "chapters": [
+          ["Sveket", "En hemlighet kommer fram och allt rasar."],
+          ["Isär", "De går skilda vägar när allt verkar förlorat."],
+          ["Valet", "Kärleken eller plikten."]
+        ]
+      },
+      {
+        "title": "Det som återstår",
+        "chapters": [
+          ["Slaget", "Den stora gesten är en del av det avgörande slaget."],
+          ["Bandet", "Lyckligt slut, eller ett löfte som håller till nästa bok."]
+        ]
+      }
+    ]
+  }
+]

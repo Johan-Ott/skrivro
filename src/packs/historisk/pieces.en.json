@@ -1,0 +1,14 @@
+[
+  {
+    "id": "historisk",
+    "name": "Historical novel",
+    "hint": "The era, the sources, what really happened and where you took liberties.",
+    "sorts": ["The era", "Sources"],
+    "labels": [
+      ["Historical fact", "#8a6d3b"],
+      ["Check facts", "#e08a1e"],
+      ["Liberty taken", "#7a5cc9"]
+    ],
+    "chapters": []
+  }
+]

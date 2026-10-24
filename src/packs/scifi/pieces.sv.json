@@ -1,0 +1,10 @@
+[
+  {
+    "id": "scifi",
+    "name": "Science fiction",
+    "hint": "Tekniken, världarna och samhället i framtiden.",
+    "sorts": ["Teknik", "Världar", "Samhället"],
+    "labels": [["Teknik", "#2f86c9"]],
+    "chapters": []
+  }
+]

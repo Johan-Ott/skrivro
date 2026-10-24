@@ -1,0 +1,43 @@
+[
+  {
+    "id": "thriller",
+    "name": "The thriller in four parts",
+    "hint": "A threat, a chase, a twist and a reckoning against the clock.",
+    "totalGoal": 85000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The threat",
+        "chapters": [
+          ["Ordinary life", "The main character and what they stand to lose."],
+          ["The first sign", "Something is wrong, and no one else sees it."],
+          ["Drawn in", "There is no turning back."]
+        ]
+      },
+      {
+        "title": "The chase",
+        "chapters": [
+          ["The trail", "The first clue leads on."],
+          ["The opponent", "The threat gets a face, or a plan."],
+          ["The clock ticks", "A deadline makes everything urgent."]
+        ]
+      },
+      {
+        "title": "The twist",
+        "chapters": [
+          ["Everything was wrong", "A truth turns everything upside down."],
+          ["Alone", "Help fails; the main character stands alone."],
+          ["The plan", "A last chance takes shape."]
+        ]
+      },
+      {
+        "title": "The reckoning",
+        "chapters": [
+          ["Against the clock", "Everything is decided in little time."],
+          ["After", "What has changed, and what it cost."]
+        ]
+      }
+    ]
+  }
+]

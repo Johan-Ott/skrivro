@@ -1,0 +1,43 @@
+[
+  {
+    "id": "thriller",
+    "name": "Thrillerns fyra delar",
+    "hint": "Ett hot, en jakt, en vändning och en uppgörelse mot klockan.",
+    "totalGoal": 85000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Hotet",
+        "chapters": [
+          ["Det vanliga livet", "Huvudpersonen och det hen har att förlora."],
+          ["Det första tecknet", "Något är fel, och ingen annan ser det."],
+          ["Indragen", "Det går inte längre att vända om."]
+        ]
+      },
+      {
+        "title": "Jakten",
+        "chapters": [
+          ["Spåret", "Den första ledtråden leder vidare."],
+          ["Motståndaren", "Hotet får ett ansikte, eller en plan."],
+          ["Klockan tickar", "En tidsgräns gör allt brådskande."]
+        ]
+      },
+      {
+        "title": "Vändningen",
+        "chapters": [
+          ["Allt var fel", "En sanning vänder upp och ned på allt."],
+          ["Ensam", "Hjälpen sviker; huvudpersonen står själv."],
+          ["Planen", "En sista chans tar form."]
+        ]
+      },
+      {
+        "title": "Uppgörelsen",
+        "chapters": [
+          ["Mot klockan", "Allt avgörs på kort tid."],
+          ["Efteråt", "Vad som är förändrat och vad det kostade."]
+        ]
+      }
+    ]
+  }
+]

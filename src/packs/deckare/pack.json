@@ -1,0 +1,12 @@
+{
+  "id": "deckare",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Deckare",
+    "en": "Crime"
+  },
+  "hint": {
+    "sv": "Brottet, utredningen och upplösningen, med misstänkta, ledtrådar och falska spår.",
+    "en": "The crime, the investigation and the solution, with suspects, clues and red herrings."
+  }
+}

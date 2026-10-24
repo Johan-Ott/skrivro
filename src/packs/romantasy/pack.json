@@ -1,0 +1,12 @@
+{
+  "id": "romantasy",
+  "version": "1.0.0",
+  "name": {
+    "sv": "Romantasy",
+    "en": "Romantasy"
+  },
+  "hint": {
+    "sv": "En kärlekshistoria och en fantasyhandling som bär varandra, med guider, karaktärsmallar och världsbygge.",
+    "en": "A love story and a fantasy plot that carry each other, with guides, character templates and worldbuilding."
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "magi",
+    "name": "Fantasy and magic",
+    "hint": "A magic system with rules, costs and limits, realms and creatures.",
+    "sorts": ["Magic system", "Realms", "Creatures"],
+    "labels": [["Magic", "#7a5cc9"]],
+    "chapters": []
+  },
+  {
+    "id": "urban",
+    "name": "Urban fantasy",
+    "hint": "A city we know, with a hidden world beneath.",
+    "sorts": ["The hidden world"],
+    "labels": [],
+    "chapters": []
+  }
+]

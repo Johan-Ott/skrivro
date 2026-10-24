@@ -37,9 +37,13 @@ describe("genre packs", () => {
     setUiLanguage("en");
     const english = packs();
 
-    expect(english.map((pack) => [pack.id, pack.notes.length])).toEqual(
-      swedish.map((pack) => [pack.id, pack.notes.length]),
-    );
+    const shape = (all: typeof swedish) =>
+      all.map((pack) => [
+        pack.id,
+        pack.notes.length,
+        [...pack.structures, ...pack.pieces].map((template) => template.id),
+      ]);
+    expect(shape(english)).toEqual(shape(swedish));
     const withTemplates = swedish.filter((pack) =>
       [...known].some((id) => packOf(id)?.id === pack.id),
     );

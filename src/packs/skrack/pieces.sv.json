@@ -1,0 +1,13 @@
+[
+  {
+    "id": "skrack",
+    "name": "Skräck",
+    "hint": "Det som skrämmer och reglerna för det övernaturliga.",
+    "sorts": ["Det som skrämmer"],
+    "labels": [
+      ["Rädsla", "#6b2c8f"],
+      ["Varsel", "#7d7d7d"]
+    ],
+    "chapters": []
+  }
+]

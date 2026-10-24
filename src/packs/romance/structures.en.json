@@ -1,0 +1,94 @@
+[
+  {
+    "id": "romans",
+    "name": "The romance in four phases",
+    "hint": "Two who meet, fall, pull back and fight for love. The ending is happy.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The meeting",
+        "chapters": [
+          ["The first", "Them, their wound and what is missing in their life."],
+          ["The second", "Them, their wound and why love is not on the map."],
+          ["The meeting", "They meet, and something grates or sparks."],
+          ["Not a chance", "Why this cannot become anything."],
+          ["Bound together", "Something forces them to keep meeting."]
+        ]
+      },
+      {
+        "title": "Falling in love",
+        "chapters": [
+          ["A first sign", "A look or a moment that will not be forgotten."],
+          ["It grows", "They see each other as they are."],
+          ["Maybe after all", "This might work."],
+          ["The midpoint", "The kiss, the night or the promise. It seems to hold."]
+        ]
+      },
+      {
+        "title": "The retreat",
+        "chapters": [
+          ["The doubt", "The old wound makes itself felt."],
+          ["The wall", "One pulls back to stay safe."],
+          ["The break-up", "It ends, for a reason rooted in the wound."]
+        ]
+      },
+      {
+        "title": "Fighting for love",
+        "chapters": [
+          ["The dark night", "Life without the other, and what it costs."],
+          ["The realisation", "What has to change, inside."],
+          ["The grand gesture", "Someone risks everything."],
+          ["Happy ending", "What love looks like when it holds."]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "feelgood",
+    "name": "Feel-good and romantic comedy",
+    "hint": "A new start, a meeting that grates, warmth, a setback and a warm ending.",
+    "totalGoal": 80000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The new start",
+        "chapters": [
+          ["A life in flux", "Something ends and something new must begin."],
+          ["The place", "A town, a shop or a house to land in."],
+          ["The meeting", "Two who should not fit together at all."]
+        ]
+      },
+      {
+        "title": "The warmth",
+        "chapters": [
+          ["The community", "The people around them begin to matter."],
+          ["Closer", "It grates less and less."],
+          ["The good moment", "Everything seems possible."]
+        ]
+      },
+      {
+        "title": "The setback",
+        "chapters": [
+          [
+            "The threat",
+            "The new life is at stake: the place may be lost, or the past comes back."
+          ],
+          ["Apart", "It looks like it is over."]
+        ]
+      },
+      {
+        "title": "Home",
+        "chapters": [
+          [
+            "The community rallies",
+            "The people around step up, and someone dares to say what needs saying."
+          ],
+          ["The warm ending", "Life as it turned out, better than the plan, and hopeful."]
+        ]
+      }
+    ]
+  }
+]
