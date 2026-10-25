@@ -28,6 +28,7 @@ const actions: TreeMenuActions = {
   focus: noop,
   otherSorts: () => [],
   moveInto: noop,
+  saveAsTemplate: null,
 };
 const labels = (items: ReturnType<typeof rowMenu>) =>
   items.map((item) => (item.separatorBefore ? `| ${item.label}` : item.label));

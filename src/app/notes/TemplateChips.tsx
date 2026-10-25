@@ -1,7 +1,21 @@
+import { createStore } from "@llkit/store.js";
+import { useEffect } from "react";
+import {
+  readNoteTemplates,
+  saveNoteTemplate,
+  type OwnNoteTemplate,
+} from "../../project/ownNoteTemplates.js";
 import { noteTemplates, type NoteTemplate } from "../../project/packs.js";
-import { CHARACTERS_ID, findNode } from "../../project/tree.js";
+import { splitSceneFile } from "../../manuscript/sceneFile.js";
+import { isSpecial } from "../../project/sorts.js";
+import { findNode, type TreeNode } from "../../project/tree.js";
+import { scenePath } from "../../storage/sceneId.js";
+import { libraryOf } from "../journey/journeyFile.js";
+import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
+
+// The templates a new note can start from: the book's packs' and the writer's own.
 
 type Form = {
   sortId: string;
@@ -10,14 +24,40 @@ type Form = {
   setTemplate: (template: NoteTemplate | null) => void;
 };
 
-// Personer is known by its id, a sort of the writer's or a pack's by its name.
-const sortKey = (project: Project, sortId: string) =>
-  sortId === CHARACTERS_ID ? sortId : (findNode(project.tree, sortId)?.node.title ?? "");
+const own = createStore<OwnNoteTemplate[]>([]);
 
-/** The book's packs' templates for the chosen sort, or nothing when it has none. */
-export function TemplateChips({ form, project }: { form: Form; project: Project }) {
-  const templates =
-    form.newSort === null ? noteTemplates(project.fields, sortKey(project, form.sortId)) : [];
+// Without a chosen Skrivro folder, the one in Dokument, as the book templates use.
+const loadOwn = async (libraryDir: string | null) =>
+  own.set(
+    await readNoteTemplates(platform.fileSystem, await libraryOf(libraryDir)).catch(() => []),
+  );
+
+// Personer and the other fixed sorts are known by their id, a sort of the writer's by its name.
+const keyOf = (sort: TreeNode) => (isSpecial(sort.id) ? sort.id : (sort.title ?? ""));
+
+/** Spara som mall: the note's text, under its name, for new notes in its sort in every book. */
+export async function saveNoteAsTemplate(project: Project, libraryDir: string | null, id: string) {
+  const parent = findNode(project.tree, id)?.parent;
+  if (parent?.kind !== "sort") return;
+  const text = await platform.fileSystem.readText(scenePath(project.dir, id));
+  const name = project.summaries[id]?.title ?? t("Mall");
+  const template = { name, sort: keyOf(parent), body: splitSceneFile(text).body };
+  await saveNoteTemplate(platform.fileSystem, await libraryOf(libraryDir), template);
+  await loadOwn(libraryDir);
+}
+
+function templatesFor(project: Project, form: Form, mine: OwnNoteTemplate[]) {
+  const sort = form.newSort === null ? findNode(project.tree, form.sortId)?.node : undefined;
+  if (!sort) return [];
+  const key = keyOf(sort);
+  return [...noteTemplates(project.fields, key), ...mine.filter((each) => each.sort === key)];
+}
+
+/** The templates for the chosen sort, or nothing when it has none. */
+export function TemplateChips(props: { form: Form; project: Project; libraryDir: string | null }) {
+  const { form } = props;
+  useEffect(() => void loadOwn(props.libraryDir), [props.libraryDir]);
+  const templates = templatesFor(props.project, form, own.use());
   if (templates.length === 0) return null;
   const chip = (label: string, template: NoteTemplate | null) => (
     <button

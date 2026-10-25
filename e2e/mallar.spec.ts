@@ -52,3 +52,19 @@ test("a genre pack is added from Mallar och bitar, and its templates start new n
   await expect(page.locator(".ProseMirror")).toContainText("Roll och mandat");
   await page.screenshot({ path: `${process.env["TMP"]}/mall-anteckning.png` });
 });
+
+test("a note saved as a template starts the next note in its sort", async ({ page }) => {
+  const sidebar = page.locator(".sidebar");
+  await sidebar.getByText("Personer", { exact: true }).click();
+  await sidebar.getByText("Elin", { exact: true }).click({ button: "right" });
+  await page.getByRole("menuitem", { name: "Spara som mall" }).click();
+
+  await page.getByRole("button", { name: "+ Ny anteckning" }).click();
+  const note = page.getByRole("dialog", { name: "Ny anteckning" });
+  await note.getByRole("textbox", { name: "Namn" }).fill("Elins syster");
+  await note.getByRole("radio", { name: "Elin" }).click();
+  await note.getByRole("button", { name: "Skapa" }).click();
+
+  await expect(page.locator(".ProseMirror")).not.toBeEmpty();
+  await page.screenshot({ path: `${process.env["TMP"]}/egen-mall.png` });
+});

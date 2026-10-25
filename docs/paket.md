@@ -42,3 +42,9 @@ gånger skribenten vill. Mallens första stycke om att byta namn och "(mall)" i 
 
 `isPackOwned` i `src/project/packs.ts` säger om ett paket är köpt. Under betan är alla köpta.
 Inför 1.0 flyttar betalpaketen till ett privat repo och hämtas efter köp.
+
+## Egna mallar
+
+Spara som mall i en antecknings meny sparar den som en fil i Skrivro-mappens `mallar/anteckningar/`,
+i samma form som paketens mallar. Den erbjuds sedan under Mall i Ny anteckning för samma sort, i
+alla böcker.

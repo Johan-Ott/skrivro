@@ -15,6 +15,8 @@ import { t } from "../../i18n/i18n.js";
 
 interface NewNoteDialogProps {
   project: Project;
+  /** Where the writer's own note templates are kept. */
+  libraryDir: string | null;
   /** The note goes to the series unless the writer keeps it to the book. */
   series: Project | null;
   sortId: string | null;
@@ -95,7 +97,8 @@ function LinkRow({ form }: { form: Form }) {
   );
 }
 
-function NoteFields({ form, project }: { form: Form; project: Project }) {
+function NoteFields(props: { form: Form; project: Project; libraryDir: string | null }) {
+  const { form, project } = props;
   return (
     <>
       <label className="field">
@@ -119,7 +122,7 @@ function NoteFields({ form, project }: { form: Form; project: Project }) {
         <span className="field-label">{t("Sort")}</span>
         <SortChips project={project} {...form} onPick={form.pick} onNewSort={form.setNewSort} />
       </div>
-      <TemplateChips form={form} project={project} />
+      <TemplateChips form={form} project={project} libraryDir={props.libraryDir} />
       <LinkRow form={form} />
     </>
   );
@@ -210,7 +213,7 @@ export function NewNoteDialog(props: NewNoteDialogProps) {
         {props.series && (
           <HomeChoice series={props.series} isInSeries={isInSeries} onChange={changeHome} />
         )}
-        <NoteFields form={form} project={home} />
+        <NoteFields form={form} project={home} libraryDir={props.libraryDir} />
         <DialogActions isReady={form.isReady} onClose={props.onClose} />
       </form>
     </div>

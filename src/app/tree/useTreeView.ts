@@ -46,6 +46,8 @@ export interface TreeViewProps {
   canMergeOpenScene?: boolean;
   onMergeWithNext?: () => void;
   onShowDrafts?: (chapterId: string) => void;
+  /** Spara som mall in a note's menu. */
+  onSaveAsTemplate?: (noteId: string) => void;
   /** The tree and project.json's fields changed together, as labels do. */
   onUpdateProject?: (change: ProjectChange) => void;
 }

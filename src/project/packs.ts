@@ -55,7 +55,7 @@ const NOTES = import.meta.glob<string>("../packs/*/notes/*/*.md", {
 });
 
 // "---\nsort: Guide\n---\n# Title\n\nThe text."
-function noteOf(text: string): PackNote {
+export function noteOf(text: string): PackNote {
   const normal = text.replace(/\r\n/g, "\n");
   const [, sort = "", rest = ""] = /^---\nsort: (.*)\n---\n([\s\S]*)$/.exec(normal) ?? [];
   const [heading = "", ...body] = rest.trimStart().split("\n");

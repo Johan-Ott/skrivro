@@ -41,6 +41,8 @@ export interface TreeMenuActions {
   /** The sorts a note can be moved to, with their names, and the move. */
   otherSorts: (node: TreeNode) => { id: string; name: string }[];
   moveInto: (node: TreeNode, parentId: string) => void;
+  /** Keeps the note as a template for new notes; null where notes are not the book's own. */
+  saveAsTemplate: ((node: TreeNode) => void) | null;
 }
 
 export function foldMenu(view: { foldAll: () => void; unfoldAll: () => void }): MenuItem[] {
@@ -114,7 +116,7 @@ function sortMoves(node: TreeNode, actions: TreeMenuActions): MenuItem[] {
 function noteItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] | null {
   const isLinked = actions.linkOf(node);
   if (isLinked === null) return null;
-  const { moveToSeries } = actions;
+  const { moveToSeries, saveAsTemplate } = actions;
   return [
     {
       label: t("Koppla namnet i texten"),
@@ -125,6 +127,9 @@ function noteItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] | null 
     ...sortMoves(node, actions),
     ...(moveToSeries
       ? [{ label: t("Flytta till serien"), onSelect: () => moveToSeries(node) }]
+      : []),
+    ...(saveAsTemplate
+      ? [{ label: t("Spara som mall"), onSelect: () => saveAsTemplate(node) }]
       : []),
   ];
 }

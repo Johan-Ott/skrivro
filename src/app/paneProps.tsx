@@ -1,3 +1,4 @@
+import { saveNoteAsTemplate } from "./notes/TemplateChips.js";
 import { selectionBarOf } from "./selectionBarOf.js";
 import { PersonSecrets, SecretPanel } from "./notes/SecretPanel.js";
 import type { ProjectChange } from "./labels/LabelsDialog.js";
@@ -139,8 +140,14 @@ export function sidebarProps(app: AppState, project: Project) {
     canMergeOpenScene: app.sceneSplit.canMerge,
     onMergeWithNext: app.sceneSplit.merge,
     ...seriesChoiceProps(app),
+    ...templateProps(app, project),
   };
 }
+
+const templateProps = (app: AppState, project: Project) => ({
+  onSaveAsTemplate: (id: string) =>
+    void saveNoteAsTemplate(project, app.startup.preferences.libraryDir, id),
+});
 
 function seriesChoiceProps(app: AppState) {
   const choice = app.seriesChoice;

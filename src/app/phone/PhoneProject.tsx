@@ -36,6 +36,7 @@ function Floating({ app, project }: Props) {
       {app.newNoteSort !== false && (
         <NewNoteDialog
           project={project}
+          libraryDir={app.startup.preferences.libraryDir}
           series={app.series}
           sortId={app.newNoteSort}
           onCreate={(note, isInSeries) => void notes(isInSeries).newNote(note)}
