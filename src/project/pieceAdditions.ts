@@ -46,6 +46,18 @@ function withNewLabels(fields: Record<string, unknown>, wanted: string[][]) {
 const sortTitles = (tree: TreeNode[]) =>
   new Set(tree.filter((node) => node.kind === "sort").map((node) => node.title ?? ""));
 
+const chapterTitles = (nodes: TreeNode[]): string[] =>
+  nodes.flatMap((node) => [
+    ...(node.kind === "chapter" ? [node.title ?? ""] : []),
+    ...chapterTitles(node.children ?? []),
+  ]);
+
+/** The additions without the closing chapters the book already ends with, as after a second add. */
+export const withoutChaptersIn = (tree: TreeNode[], additions: Additions): Additions => {
+  const have = new Set(chapterTitles(tree));
+  return { ...additions, chapters: additions.chapters.filter(([title = ""]) => !have.has(title)) };
+};
+
 /** The additions the book lacks; each closing chapter gets the scene the caller made for it. */
 export function withAdditions(book: BookParts, additions: Additions, chapterSceneIds: string[]) {
   const have = sortTitles(book.tree);

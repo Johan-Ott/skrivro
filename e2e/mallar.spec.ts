@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await openExample(page);
 });
 
-test("pieces are added to a book that exists: its notes, labels and closing chapter", async ({
+test("pieces are added to a book that exists once: its notes, labels and closing chapter", async ({
   page,
 }) => {
   await page.locator(".book-title-menu:not(.contents)").click();
@@ -19,6 +19,13 @@ test("pieces are added to a book that exists: its notes, labels and closing chap
   const sidebar = page.locator(".sidebar");
   await expect(sidebar.getByText("Teman", { exact: true })).toBeVisible();
   await expect(sidebar.getByText("Kroken")).toBeVisible();
+
+  await page.locator(".book-title-menu:not(.contents)").click();
+  await page.getByRole("menuitem", { name: "Mallar och bitar…" }).click();
+  await dialog.getByRole("button", { name: "Serie" }).click();
+  await dialog.getByRole("button", { name: "Lägg till", exact: true }).click();
+  await expect(sidebar.getByText("Kroken")).toHaveCount(1);
+  await expect(sidebar.getByText("Teman", { exact: true })).toHaveCount(1);
 });
 
 test("a genre pack is added to the book from Mallar och bitar, with its guides and clue notes", async ({

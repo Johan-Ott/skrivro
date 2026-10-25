@@ -1,4 +1,4 @@
-import { withAdditions, type Additions } from "../../project/pieceAdditions.js";
+import { withAdditions, withoutChaptersIn, type Additions } from "../../project/pieceAdditions.js";
 import {
   isPackInBook,
   joinSorts,
@@ -17,7 +17,8 @@ import { t } from "../../i18n/i18n.js";
 export { additionsOf } from "../../project/pieceAdditions.js";
 
 /** The book's tree and fields with the additions it does not have yet. */
-export async function addToBook(project: Project, additions: Additions) {
+export async function addToBook(project: Project, wanted: Additions) {
+  const additions = withoutChaptersIn(project.tree, wanted);
   const newScene = () => createScene(platform.fileSystem, project.dir, t("Scen 1"));
   const sceneIds = await Promise.all(additions.chapters.map(newScene));
   return withAdditions(project, additions, sceneIds);
@@ -25,9 +26,18 @@ export async function addToBook(project: Project, additions: Additions) {
 
 const isSort = (node: TreeNode) => node.kind === "sort" || node.id === CHARACTERS_ID;
 
+// The pack's notes the book has no note of the same name for, so nothing comes twice, also in a
+// book from before the book noted its packs.
+function notesMissingIn(project: Project, pack: Pack) {
+  const titles = new Set(Object.values(project.summaries).map((summary) => summary.title));
+  return pack.notes.filter((note) => !titles.has(note.title));
+}
+
 /** The book's packs for Genrepaket: which it has, and adding one. */
 export const packsOfBook = (project: Project, save: (change: ProjectChange) => void) => ({
-  has: (pack: Pack) => isPackInBook(project.fields, pack),
+  has: (pack: Pack) =>
+    isPackInBook(project.fields, pack) ||
+    (pack.notes.length > 0 && notesMissingIn(project, pack).length === 0),
   add: async (pack: Pack) => save(await addPackToBook(project, pack)),
 });
 
@@ -40,7 +50,8 @@ export async function addPackToBook(project: Project, pack: Pack) {
     labels: pack.pieces.flatMap((piece) => piece.labels),
     chapters: [],
   });
-  const notes = await packNotesTree(platform.fileSystem, project.dir, [pack]);
+  const missing = { ...pack, notes: notesMissingIn(project, pack) };
+  const notes = await packNotesTree(platform.fileSystem, project.dir, [missing]);
   const people = withPieces.tree.find((node) => node.id === CHARACTERS_ID);
   const characters = {
     ...(people ?? { id: CHARACTERS_ID, kind: "sort" as const }),

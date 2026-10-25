@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { labelsOf } from "../src/project/labels";
-import { additionsOf, pieceIdsFrom, withAdditions } from "../src/project/pieceAdditions";
+import {
+  additionsOf,
+  pieceIdsFrom,
+  withAdditions,
+  withoutChaptersIn,
+} from "../src/project/pieceAdditions";
 import { sortsOf, type TreeNode } from "../src/project/tree";
 
 const chapter: TreeNode = { id: "kap1", kind: "chapter", title: "Kroppen", children: [] };
@@ -25,6 +30,14 @@ describe("withAdditions", () => {
 
     const closing = added.tree.find((node) => node.title === additions.chapters[0]?.[0]);
     expect(closing?.children).toEqual([{ id: "scen1", kind: "scene" }]);
+  });
+
+  it("leaves out a closing chapter the book already has, when a piece is added again", () => {
+    const additions = additionsOf(["serie"], null);
+    const added = withAdditions(book(), additions, ["scen1"]);
+
+    expect(withoutChaptersIn(added.tree, additions).chapters).toEqual([]);
+    expect(withoutChaptersIn(book().tree, additions).chapters).toEqual(additions.chapters);
   });
 });
 
