@@ -1,12 +1,13 @@
 {
   "id": "deckare",
   "version": "1.0.0",
+  "look": "deckare",
   "name": {
     "sv": "Deckare",
     "en": "Crime"
   },
   "hint": {
-    "sv": "Brottet, utredningen och upplösningen, med misstänkta, ledtrådar och falska spår.",
-    "en": "The crime, the investigation and the solution, with suspects, clues and red herrings."
+    "sv": "En gåta som läsaren kan lösa: struktur, ärligt spel, misstänkta, ledtrådslista och den hemliga tidslinjen.",
+    "en": "A puzzle your reader can solve: structure, fair play, suspects, a clue list and the secret timeline."
   }
 }

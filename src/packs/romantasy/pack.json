@@ -1,12 +1,13 @@
 {
   "id": "romantasy",
   "version": "1.0.0",
+  "look": "urban",
   "name": {
     "sv": "Romantasy",
     "en": "Romantasy"
   },
   "hint": {
-    "sv": "En kärlekshistoria och en fantasyhandling som bär varandra, med guider, karaktärsmallar och världsbygge.",
-    "en": "A love story and a fantasy plot that carry each other, with guides, character templates and worldbuilding."
+    "sv": "Kärlek och magi i samma båge: 15 kapitel, guider för långsam glöd och mallar för par, magi och riken.",
+    "en": "Love and magic in one arc: 15 chapters, slow-burn guides and templates for the couple, magic and realms."
   }
 }

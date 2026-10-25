@@ -2,17 +2,29 @@
   {
     "id": "ungdom",
     "name": "Ungdom",
-    "hint": "Vänner, skolan och första gången.",
-    "sorts": ["Vänner", "Skolan"],
-    "labels": [["Första gången", "#c9508f"]],
+    "hint": "Kompisgänget och vardagen i läsarens ålder, och etiketter för krokar, hemligheter och svåra teman.",
+    "sorts": ["Vänner", "Vardagen"],
+    "labels": [
+      ["Krok", "#d4483b"],
+      ["Första gången", "#c9508f"],
+      ["Vänskap", "#3f9c5a"],
+      ["Hemlighet", "#7a5cc9"],
+      ["Eget val", "#2f86c9"],
+      ["Svårt tema", "#e08a1e"]
+    ],
     "chapters": []
   },
   {
     "id": "barnbok",
     "name": "Barnbok",
-    "hint": "Bilderna och orden för läsaren.",
+    "hint": "Bilderna och orden för den unga läsaren, med etiketter för var bilden ska ligga och vad som ska läsas högt.",
     "sorts": ["Bilder"],
-    "labels": [["Bild här", "#2f86c9"]],
+    "labels": [
+      ["Bild här", "#2f86c9"],
+      ["Humor", "#e0b31e"],
+      ["Läs högt", "#3f9c5a"],
+      ["Svårt ord", "#7d7d7d"]
+    ],
     "chapters": []
   }
 ]

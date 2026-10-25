@@ -2,31 +2,82 @@
   {
     "id": "memoar",
     "name": "Memoar",
-    "hint": "Ett liv berättat kring en fråga: vad hände, och vad betydde det.",
-    "totalGoal": 80000,
+    "hint": "Ett livskapitel kring en enda fråga: då-jaget upplever det som händer, nu-jaget förstår vad det betydde.",
+    "totalGoal": 75000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
-        "title": "Varifrån",
+        "title": "Före",
         "chapters": [
-          ["Ögonblicket", "En scen som visar vad boken handlar om."],
-          ["Uppväxten", "Platsen, människorna och det som formade dig."]
+          [
+            "Ögonblicket",
+            "Öppna i en scen ur bokens mest laddade stund, utan förklaring, så att läsaren känner frågan boken bär."
+          ],
+          [
+            "Frågan",
+            "Låt nu-jaget kliva fram kort: vad du försöker förstå, och varför du skriver om det just nu."
+          ],
+          [
+            "Livet innan",
+            "Platsen, människorna och vad då-jaget trodde och ville, i konkreta scener, inte som bakgrund."
+          ],
+          [
+            "Det första tecknet",
+            "En liten händelse som i efterhand pekade framåt, skriven som då-jaget upplevde den."
+          ]
         ]
       },
       {
         "title": "Det som hände",
         "chapters": [
-          ["Vändpunkten", "Det som förändrade allt."],
-          ["Kampen", "Det svåra, och hur du tog dig igenom det."],
-          ["Människorna", "De som betydde mest, på gott och ont."]
+          [
+            "Vändpunkten",
+            "Händelsen som delar livet i ett före och ett efter, som en hel scen med sinnen och repliker."
+          ],
+          [
+            "Nya villkor",
+            "Hur vardagen förändrades: sammanfatta veckorna, men stanna i scen där något står på spel."
+          ],
+          [
+            "Människorna runt dig",
+            "De som hjälpte, svek eller bara fanns där, var och en visad genom något hen gjorde."
+          ],
+          [
+            "Det du inte sa",
+            "Det du dolde för andra eller för dig själv, och vad det började kosta."
+          ]
+        ]
+      },
+      {
+        "title": "Uppgörelsen",
+        "chapters": [
+          [
+            "Det svåraste",
+            "Det lägsta läget, skrivet utan att skona dig själv och utan att nu-jaget tröstar."
+          ],
+          [
+            "Sanningen",
+            "Ett samtal, ett brev eller en upptäckt som gör det omöjligt att fortsätta som förut."
+          ],
+          ["Valet", "Vad du gjorde, och hur då-jaget förstod det i stunden, innan facit fanns."]
         ]
       },
       {
         "title": "Vad det betydde",
         "chapters": [
-          ["Förståelsen", "Det du ser nu som du inte såg då."],
-          ["Nu", "Var du står i dag."]
+          [
+            "Efteråt",
+            "Följderna, med samma ärlighet om det som inte blev bra som om det som blev det."
+          ],
+          [
+            "Förståelsen",
+            "Nu-jaget ser tillbaka: det du förstår i dag som du inte kunde se då, och det som är olöst."
+          ],
+          [
+            "Tillbaka till ögonblicket",
+            "Återvänd till öppningsscenen eller platsen och visa vad som har förändrats i dig."
+          ]
         ]
       }
     ]
@@ -34,21 +85,75 @@
   {
     "id": "fackbok",
     "name": "Fackbok",
-    "hint": "En fråga, kunskapen som svarar på den och vad läsaren kan göra med den.",
+    "hint": "Läsarens problem, ett tydligt löfte och en idé per kapitel, med belägg och exempel, tills läsaren kan använda det.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
-        "title": "",
+        "title": "Löftet",
         "chapters": [
-          ["Inledning", "Frågan boken svarar på, och varför den spelar roll."],
-          ["Bakgrund", "Det läsaren behöver veta först."],
-          ["Första delen", "Den första stora idén, med exempel."],
-          ["Andra delen", "Nästa idé, som bygger på den första."],
-          ["Tredje delen", "Det svåraste, eller det mest överraskande."],
-          ["Så gör du", "Hur läsaren använder det i sitt eget liv."],
-          ["Avslutning", "Det viktigaste i korthet."]
+          [
+            "Läsarens problem",
+            "Öppna med en konkret situation där läsaren känner igen sitt eget problem."
+          ],
+          [
+            "Löftet",
+            "Säg vad läsaren kan, vet eller förstår efter boken, och hur boken är upplagd för att ta hen dit."
+          ],
+          [
+            "Varför det är svårt",
+            "Visa varför de vanliga svaren inte räcker. Här vinner du läsarens förtroende."
+          ]
+        ]
+      },
+      {
+        "title": "Grunden",
+        "chapters": [
+          [
+            "Det du behöver veta först",
+            "Begreppen och fakta som resten av boken bygger på, och inte mer än så."
+          ],
+          [
+            "Den första idén",
+            "Ett påstående i klartext, med belägg, ett exempel och vad det betyder för läsaren."
+          ],
+          [
+            "Den andra idén",
+            "Nästa påstående, som bygger på det första. Visa kopplingen redan i första stycket."
+          ],
+          [
+            "Ett exempel på djupet",
+            "Ett fall, en person eller ett försök som visar idéerna i verkligheten, från början till slut."
+          ]
+        ]
+      },
+      {
+        "title": "Fördjupningen",
+        "chapters": [
+          [
+            "Den tredje idén",
+            "Det mest överraskande eller svåraste, nu när läsaren har grunden för att ta emot det."
+          ],
+          [
+            "Det som talar emot",
+            "Motargumenten och var kunskapen tar slut. Ärligheten gör resten av boken starkare."
+          ],
+          [
+            "Vanliga misstag",
+            "Hur det brukar gå fel, och hur läsaren känner igen tecknen hos sig själv."
+          ]
+        ]
+      },
+      {
+        "title": "Använd det",
+        "chapters": [
+          ["Så gör du", "Konkreta steg i ordning, som läsaren kan ta redan i morgon."],
+          ["När det inte går som tänkt", "De vanligaste hindren på vägen, och vad läsaren gör då."],
+          [
+            "Avslutning",
+            "Knyt ihop med löftet från början: det viktigaste i korthet, och vägen vidare."
+          ]
         ]
       }
     ]

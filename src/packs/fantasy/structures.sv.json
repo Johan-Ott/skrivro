@@ -1,0 +1,85 @@
+[
+  {
+    "id": "fantasy",
+    "name": "Fantasyns fyra delar",
+    "hint": "Hemmet, den vida världen, mörkret och återkomsten, med en magi som kostar hela vägen.",
+    "totalGoal": 110000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Hemmet",
+        "chapters": [
+          [
+            "Vardagen med en spricka",
+            "Huvudpersonen i handling i en konkret vardag, och ett första tecken på att något är fel. Grunda läsaren innan du förklarar."
+          ],
+          [
+            "Kallelsen",
+            "Något drar ut hen ur vardagen, och det hänger ihop med bokens stora tänk om."
+          ],
+          [
+            "Den första magin",
+            "Läsaren ser magin på nära håll och ser vad den kostar, så att reglerna sätts i handling och inte i en föreläsning."
+          ],
+          ["Avfärden", "Hen väljer att ge sig av, eller tvingas, och dörren hem stängs bakom hen."]
+        ]
+      },
+      {
+        "title": "Den vida världen",
+        "chapters": [
+          [
+            "Ny mark",
+            "Ett nytt rike eller folk ger förundran, men också seder och regler som hen bryter mot."
+          ],
+          [
+            "Följeslagare och fiender",
+            "Allianser bildas mellan personer med egna mål, som skaver mot huvudpersonens."
+          ],
+          [
+            "Prövningen",
+            "Hen försöker lösa något med magi eller förmåga och misslyckas, eller betalar för mycket. Gränserna blir tydliga."
+          ],
+          [
+            "Mittpunkten",
+            "En sanning om världen, magin eller fienden vänder uppdraget, och hen går från att reagera till att agera."
+          ]
+        ]
+      },
+      {
+        "title": "Mörkret",
+        "chapters": [
+          [
+            "Fienden slår till",
+            "Antagonistens plan visar sig större än någon trott, och det kostar förluster."
+          ],
+          [
+            "Priset betalas",
+            "Någon eller något betalar magins pris fullt ut: en följeslagare, ett minne, en del av hen själv."
+          ],
+          [
+            "Den mörkaste stunden",
+            "Allt verkar förlorat, och hen ser vad hen har valt bort längs vägen."
+          ],
+          [
+            "Insikten",
+            "Lösningen finns i något läsaren redan känner: en regel, ett pris eller ett löfte från tidigare i boken."
+          ]
+        ]
+      },
+      {
+        "title": "Återkomsten",
+        "chapters": [
+          [
+            "Slutstriden",
+            "Konflikten avgörs med regler läsaren redan kan och med huvudpersonens eget val. Inga nya krafter i sista stund."
+          ],
+          [
+            "Det som förändrats",
+            "Vad segern kostade, och hur både världen och hen har förändrats. Hemmet är inte som förut."
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -2,9 +2,15 @@
   {
     "id": "scifi",
     "name": "Science fiction",
-    "hint": "The technology, the worlds and the society of the future.",
+    "hint": "The new thing and its consequences, the worlds where they show and the society they have shaped.",
     "sorts": ["Technology", "Worlds", "Society"],
-    "labels": [["Technology", "#2f86c9"]],
+    "labels": [
+      ["Novum", "#2f86c9"],
+      ["Consequence", "#e08a1e"],
+      ["Wonder", "#3aa17e"],
+      ["The world", "#7a5cc9"],
+      ["Reveal", "#d4483b"]
+    ],
     "chapters": []
   }
 ]

@@ -2,14 +2,15 @@
   {
     "id": "deckare",
     "name": "Deckare",
-    "hint": "Ledtrådarna och de misstänkta, så att lösningen går att räkna ut. Tidslinjen följer När på kapitlen.",
+    "hint": "Märk scenerna med ledtrådar, falska spår och förhör, och håll sanningen i Ledtrådar. Tidslinjen följer När på kapitlen.",
     "sorts": ["Ledtrådar"],
     "labels": [
-      ["Misstänkt", "#7a5cc9"],
       ["Ledtråd", "#2f86c9"],
       ["Falskt spår", "#e08a1e"],
-      ["Avslöjande", "#d4483b"],
-      ["Alibi", "#7d7d7d"]
+      ["Misstänkt", "#7a5cc9"],
+      ["Förhör", "#3a9e6e"],
+      ["Alibi", "#7d7d7d"],
+      ["Avslöjande", "#d4483b"]
     ],
     "chapters": []
   }

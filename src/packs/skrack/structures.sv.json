@@ -2,7 +2,7 @@
   {
     "id": "skrack",
     "name": "Skräckens trappa",
-    "hint": "Det vardagliga spricker, steg för steg, tills inget är tryggt.",
+    "hint": "Det vardagliga spricker, steg för steg, tills inget är tryggt och rädslan visar vad den egentligen handlar om.",
     "totalGoal": 80000,
     "sorts": [],
     "labels": [],
@@ -10,25 +10,73 @@
       {
         "title": "Det vardagliga",
         "chapters": [
-          ["Platsen", "Där allt ska hända, innan något har hänt."],
-          ["Det första konstiga", "En liten sak som inte stämmer."],
-          ["Förklaringar", "Alla förklarar bort det."]
+          [
+            "Platsen och människorna",
+            "Visa vardagen, vad huvudpersonen har att förlora och hens privata rädsla, med ett första varsel redan på första sidan."
+          ],
+          [
+            "Det första konstiga",
+            "En liten sak som inte stämmer och som går att bortförklara: läsaren ska ana mer än huvudpersonen."
+          ],
+          [
+            "Förklaringarna",
+            "Alla, även huvudpersonen, hittar rimliga förklaringar. Ett skäl att stanna på platsen gör att flykten inte är enkel."
+          ]
         ]
       },
       {
         "title": "Det växer",
         "chapters": [
-          ["Närmare", "Det som skrämmer kommer närmare."],
-          ["Ingen tror en", "Huvudpersonen är ensam med det."],
-          ["Sanningen", "Vad det är, och vad det vill."]
+          [
+            "Mönstret",
+            "Händelserna upprepas och följer något som liknar regler. Visa en regel i handling, utan att förklara den."
+          ],
+          [
+            "Närmare",
+            "Hotet kommer in i det som borde vara tryggt: hemmet, sängen, kroppen eller en nära person."
+          ],
+          [
+            "Ingen tror en",
+            "Huvudpersonen söker hjälp och blir avfärdad. Ensamheten blir ett hot i sig."
+          ],
+          [
+            "Det första priset",
+            "Någon skadas, försvinner eller dör. Från och med nu vet läsaren att vem som helst kan drabbas."
+          ]
+        ]
+      },
+      {
+        "title": "Sanningen",
+        "chapters": [
+          [
+            "Det som hände här",
+            "Huvudpersonen tar reda på varifrån hotet kommer och vad det vill. Sanningen ska göra saken värre, inte lättare."
+          ],
+          [
+            "Flykten som misslyckas",
+            "Ett försök att komma undan eller stoppa hotet slår fel, och visar en regel man inte kände till."
+          ],
+          [
+            "Isolerad",
+            "Vägarna stängs: bilen, telefonen, vännerna. Huvudpersonen står ansikte mot ansikte med sin privata rädsla."
+          ]
         ]
       },
       {
         "title": "Det värsta",
         "chapters": [
-          ["Fast", "Det finns ingen väg ut."],
-          ["Konfrontationen", "Ansikte mot ansikte med rädslan."],
-          ["Efterklangen", "Det som stannar kvar, kanske för alltid."]
+          [
+            "Nedstigningen",
+            "Huvudpersonen går frivilligt dit hen minst vill, källaren, skogen eller minnet, eftersom det är enda vägen."
+          ],
+          [
+            "Konfrontationen",
+            "Hotet möts på dess egna villkor och reglerna som har etablerats avgör utgången, inte tur."
+          ],
+          [
+            "Efterklangen",
+            "Vad som överlevde och vad som inte gjorde det. Lämna ett sista obehag som följer med läsaren ut ur boken."
+          ]
         ]
       }
     ]

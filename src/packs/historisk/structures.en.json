@@ -1,0 +1,88 @@
+[
+  {
+    "id": "historisk",
+    "name": "People in history",
+    "hint": "Invented people in a real age, where the great events break into their lives and force choices.",
+    "totalGoal": 100000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The world as it was",
+        "chapters": [
+          [
+            "Daily life",
+            "Show the age through an ordinary day in the main character's life, and what they want that the age makes hard."
+          ],
+          [
+            "The order",
+            "Who holds power, what is allowed and what it costs to break the rules. The reader learns them through a conflict."
+          ],
+          [
+            "The first sign",
+            "The historical events are heard from afar: a rumour, a letter, a rising price. Nobody yet knows what it means."
+          ]
+        ]
+      },
+      {
+        "title": "History breaks in",
+        "chapters": [
+          [
+            "What cannot be avoided",
+            "The real event reaches the characters' lives and shatters the everyday, so the main character has to choose."
+          ],
+          [
+            "The choice",
+            "The main character acts from the possibilities and mindset of their age, not those of a modern person."
+          ],
+          [
+            "New bonds, new enemies",
+            "The events put people on different sides. A relationship is made or broken by history."
+          ],
+          [
+            "The price",
+            "The choice has consequences by the age's own rules: shame, poverty, punishment or loss."
+          ]
+        ]
+      },
+      {
+        "title": "In the thick of it",
+        "chapters": [
+          [
+            "The great event",
+            "The historical moment seen through the main character's narrow view, not as a textbook overview."
+          ],
+          [
+            "The personal and the historical collide",
+            "What they want and what the age demands can no longer be reconciled."
+          ],
+          [
+            "All is lost",
+            "The lowest point. History takes its course and the main character cannot stop it."
+          ]
+        ]
+      },
+      {
+        "title": "After the storm",
+        "chapters": [
+          [
+            "The deciding choice",
+            "The historical outcome is fixed, but what the main character does with it is not. That is where the suspense lies."
+          ],
+          [
+            "The resolution",
+            "The invented people's fates are settled as the real events ebb away."
+          ],
+          [
+            "What remained",
+            "What the age left them with, and what the reader should understand about that time and their own."
+          ],
+          [
+            "The author's note",
+            "Written last: what is true, what you changed or invented, and why."
+          ]
+        ]
+      }
+    ]
+  }
+]

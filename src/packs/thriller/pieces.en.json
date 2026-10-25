@@ -2,11 +2,15 @@
   {
     "id": "thriller",
     "name": "Thriller",
-    "hint": "The villain's plan, the deadlines and the twists.",
+    "hint": "Tag scenes with twists, time pressure and the villain's moves, and keep the plan and the clock in notes of their own.",
     "sorts": ["The villain's plan", "The threat"],
     "labels": [
       ["Twist", "#d4483b"],
-      ["Time pressure", "#e08a1e"]
+      ["Time pressure", "#e08a1e"],
+      ["Villain's move", "#7a2f8f"],
+      ["Chase", "#2f86c9"],
+      ["Stakes rise", "#c9a12f"],
+      ["Breather", "#3a9e6e"]
     ],
     "chapters": []
   }

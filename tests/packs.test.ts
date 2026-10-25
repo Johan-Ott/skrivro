@@ -56,7 +56,7 @@ describe("genre packs", () => {
     const created = await createProject(files, "/Skrivro", details);
 
     const { tree } = await readProjectFile(files, created.dir, []);
-    expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(4);
+    expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(5);
     expect(childrenOf(tree, (node) => node.title === "Världen")).toHaveLength(2);
     expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(3);
   });

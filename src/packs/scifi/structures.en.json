@@ -1,0 +1,88 @@
+[
+  {
+    "id": "scifi",
+    "name": "Science fiction in four parts",
+    "hint": "The new thing, its consequences, the crisis and the new world: one idea followed to its end.",
+    "totalGoal": 100000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The new thing",
+        "chapters": [
+          [
+            "A world in motion",
+            "The main character in the middle of a concrete task in an unfamiliar everyday life. The details hint at the world without explaining it."
+          ],
+          [
+            "The novum",
+            "The new thing appears, or its first unexpected effect, and the reader understands that something has changed."
+          ],
+          [
+            "The personal stake",
+            "The new thing touches the main character directly, and we see what they stand to lose."
+          ],
+          [
+            "The way in",
+            "They make the decision that ties them to the question, and there is no way back."
+          ]
+        ]
+      },
+      {
+        "title": "The consequences",
+        "chapters": [
+          [
+            "The rules",
+            "They learn how the new thing works through trial and error, not through a lecture."
+          ],
+          [
+            "Ripples",
+            "Consequences at the second and third remove: who wins, who loses and what breaks."
+          ],
+          [
+            "Wonder",
+            "A scene of scale and wonder, where the reader sees what the new thing makes possible."
+          ],
+          [
+            "The midpoint",
+            "A reveal about what the new thing really is, or really costs, turns the whole question around."
+          ]
+        ]
+      },
+      {
+        "title": "The crisis",
+        "chapters": [
+          [
+            "The system strikes back",
+            "Those in power, institutions or the technology itself respond, and the stakes grow."
+          ],
+          [
+            "The logical consequence",
+            "The rules are followed to their uncomfortable conclusion: the worst that can happen, by the world's own logic."
+          ],
+          [
+            "The lowest point",
+            "They lose what they were holding on to, and the old solution no longer works."
+          ],
+          [
+            "The answer in the rules",
+            "They find the solution in something the reader already understands about the new thing. No new inventions."
+          ]
+        ]
+      },
+      {
+        "title": "The new world",
+        "chapters": [
+          [
+            "The decision",
+            "The main character acts and pays for it. A human choice decides, not just the technology."
+          ],
+          [
+            "Afterwards",
+            "The world and the person after the change. Answer the book's what if, or leave a question the reader carries with them."
+          ]
+        ]
+      }
+    ]
+  }
+]

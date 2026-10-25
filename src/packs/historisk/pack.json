@@ -1,12 +1,13 @@
 {
   "id": "historisk",
   "version": "1.0.0",
+  "look": "historisk",
   "name": {
     "sv": "Historisk roman",
     "en": "Historical novel"
   },
   "hint": {
-    "sv": "En annan tid, med källor och miljöer som stämmer.",
-    "en": "Another time, with sources and settings that are right."
+    "sv": "Gör en annan tid levande: epoken, miljön och källorna på plats, och ett efterord som skiljer fakta från fiktion.",
+    "en": "Bring another age to life: era, setting and sources in place, and an author's note that splits fact from fiction."
   }
 }

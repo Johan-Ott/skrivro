@@ -2,12 +2,14 @@
   {
     "id": "historisk",
     "name": "Historisk roman",
-    "hint": "Epoken, källorna, vad som verkligen hände och var du har tagit dig friheter.",
+    "hint": "Epoken, miljön och källorna, och etiketter som håller isär det som hände på riktigt och det du har hittat på.",
     "sorts": ["Epoken", "Källor"],
     "labels": [
-      ["Historiskt faktum", "#8a6d3b"],
+      ["Verklig händelse", "#8a6d3b"],
+      ["Tidsdetalj", "#2f86c9"],
       ["Kolla fakta", "#e08a1e"],
-      ["Fri tolkning", "#7a5cc9"]
+      ["Fri tolkning", "#7a5cc9"],
+      ["Till efterordet", "#4a8f6b"]
     ],
     "chapters": []
   }

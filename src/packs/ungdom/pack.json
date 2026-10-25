@@ -1,12 +1,13 @@
 {
   "id": "ungdom",
   "version": "1.0.0",
+  "look": "ungdom",
   "name": {
     "sv": "Ungdom och barnbok",
     "en": "Young adult and children's"
   },
   "hint": {
-    "sv": "Böcker för unga läsare, från kapitelbok till ungdomsroman.",
-    "en": "Books for young readers, from chapter books to young adult."
+    "sv": "Från kapitelbok till ungdomsroman: rätt röst och längd för varje ålder, korta kapitel med krokar och färdiga mallar.",
+    "en": "From chapter books to young adult: the right voice and length for each age, short chapters with hooks, ready templates."
   }
 }

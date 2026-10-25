@@ -2,12 +2,14 @@
   {
     "id": "historisk",
     "name": "Historical novel",
-    "hint": "The era, the sources, what really happened and where you took liberties.",
+    "hint": "The era, the setting and the sources, with labels that keep what really happened apart from what you invented.",
     "sorts": ["The era", "Sources"],
     "labels": [
-      ["Historical fact", "#8a6d3b"],
+      ["Real event", "#8a6d3b"],
+      ["Period detail", "#2f86c9"],
       ["Check facts", "#e08a1e"],
-      ["Liberty taken", "#7a5cc9"]
+      ["Liberty taken", "#7a5cc9"],
+      ["For the author's note", "#4a8f6b"]
     ],
     "chapters": []
   }

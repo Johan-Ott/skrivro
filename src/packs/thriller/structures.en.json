@@ -2,40 +2,86 @@
   {
     "id": "thriller",
     "name": "The thriller in four parts",
-    "hint": "A threat, a chase, a twist and a reckoning against the clock.",
-    "totalGoal": 85000,
+    "hint": "A threat, a chase, a twist and a reckoning against the clock, with the stakes rising in every part.",
+    "totalGoal": 90000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
         "title": "The threat",
         "chapters": [
-          ["Ordinary life", "The main character and what they stand to lose."],
-          ["The first sign", "Something is wrong, and no one else sees it."],
-          ["Drawn in", "There is no turning back."]
+          [
+            "Ordinary life",
+            "Show the main character, what they are good at and what they stand to lose, with a shadow of danger on page one."
+          ],
+          [
+            "The first sign",
+            "Something is wrong, and the main character is the only one who sees it. The inciting moment."
+          ],
+          [
+            "No one believes them",
+            "The attempt to get help fails, so they have to act on their own."
+          ],
+          [
+            "No way back",
+            "A choice or an event locks them into the chase. Going home is no longer possible."
+          ]
         ]
       },
       {
         "title": "The chase",
         "chapters": [
-          ["The trail", "The first clue leads on."],
-          ["The opponent", "The threat gets a face, or a plan."],
-          ["The clock ticks", "A deadline makes everything urgent."]
+          [
+            "The trail",
+            "The main character takes the initiative and gets closer, but every answer raises a new question."
+          ],
+          [
+            "The opponent strikes back",
+            "The villain answers with a move that shows how dangerous they are and how far they will go."
+          ],
+          [
+            "The clock starts",
+            "A concrete deadline makes everything urgent, and the reader knows exactly when it will be too late."
+          ],
+          [
+            "The midpoint",
+            "The main character goes from hunted to hunter, or wins a victory that turns out to be false."
+          ]
         ]
       },
       {
         "title": "The twist",
         "chapters": [
-          ["Everything was wrong", "A truth turns everything upside down."],
-          ["Alone", "Help fails; the main character stands alone."],
-          ["The plan", "A last chance takes shape."]
+          [
+            "Everything was wrong",
+            "A planted truth turns what the reader believed upside down, and the plan collapses."
+          ],
+          [
+            "It gets personal",
+            "The threat turns on what the main character loves most, and the stakes peak."
+          ],
+          ["Alone", "The ally betrays them or falls. The darkest point, with the least time left."],
+          [
+            "The last plan",
+            "The main character understands something about themselves or the villain and decides to strike."
+          ]
         ]
       },
       {
         "title": "The reckoning",
         "chapters": [
-          ["Against the clock", "Everything is decided in little time."],
-          ["After", "What has changed, and what it cost."]
+          [
+            "Against the clock",
+            "The plan goes into action and goes wrong. Everything is decided in little time, in short scenes."
+          ],
+          [
+            "Face to face",
+            "The main character confronts the villain and wins through their own skill and choice, not luck."
+          ],
+          [
+            "After",
+            "Briefly: what has changed, what it cost, and whether the threat is truly over."
+          ]
         ]
       }
     ]

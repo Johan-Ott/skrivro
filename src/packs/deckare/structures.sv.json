@@ -2,8 +2,8 @@
   {
     "id": "deckare",
     "name": "Deckarens fyra delar",
-    "hint": "Brottet, utredningen, vändningen och upplösningen.",
-    "totalGoal": 90000,
+    "hint": "Brottet, utredningen, vändningen och upplösningen, med ett andra brott i mitten och en lösning som går att räkna ut.",
+    "totalGoal": 85000,
     "sorts": [],
     "labels": [],
     "parts": [
@@ -12,40 +12,70 @@
         "chapters": [
           [
             "Brottet",
-            "Brottet upptäcks i första kapitlet, eller senast efter en tiondel av boken."
+            "Brottet upptäcks här, eller senast efter en tiondel av boken, så att frågan vem och varför är ställd direkt."
           ],
-          ["Utredaren", "Vem som utreder, och varför just hen."],
           [
-            "De första spåren",
-            "Platsen, vittnena och de misstänkta. Den skyldige finns redan bland dem."
+            "Utredaren",
+            "Visa vem som utreder, varför just hen, och vad hen bär med sig som fallet kommer att trycka på."
+          ],
+          [
+            "Brottsplatsen",
+            "Platsen, kroppen och de första fynden. Göm den avgörande ledtråden här, i förbigående."
+          ],
+          [
+            "Kretsen",
+            "De misstänkta presenteras, var och en med motiv, tillfälle och något att dölja. Den skyldige är redan med."
           ]
         ]
       },
       {
         "title": "Utredningen",
         "chapters": [
-          ["Den första misstänkta", "En tydlig misstänkt, som inte är svaret."],
-          ["Det falska spåret", "En ledtråd som pekar fel, och läsaren följer med."],
-          ["Ett andra brott", "Insatserna höjs och tiden blir knapp."],
-          ["Det personliga", "Fallet kommer nära utredaren."]
+          ["Förhören", "Alla ljuger om något. Låt utredaren avslöja en lögn och missa en annan."],
+          [
+            "Den första teorin",
+            "En tydlig misstänkt växer fram, så att läsaren tror att hen ligger steget före."
+          ],
+          [
+            "Det falska spåret",
+            "En sann detalj pekar fel, och både utredaren och läsaren följer med."
+          ],
+          [
+            "Ett andra brott",
+            "Mittpunkten: ett nytt brott eller fynd krossar den första teorin och höjer insatserna."
+          ]
         ]
       },
       {
         "title": "Vändningen",
         "chapters": [
           [
-            "Den avgörande ledtråden",
-            "En detalj som läsaren har sett hela tiden: lösningen ska gå att räkna ut."
+            "Det personliga",
+            "Fallet kommer nära utredaren och hotar en relation, karriären eller självbilden."
           ],
-          ["Utredaren i fara", "Den skyldige förstår att sanningen är nära."],
-          ["Konfrontationen", "Utredaren och den skyldige möts."]
+          [
+            "Den falska lösningen",
+            "Fel person grips eller utredningen läggs ned. Det ser klart ut, men en detalj skaver."
+          ],
+          ["Utredaren i fara", "Den skyldige förstår att sanningen är nära och slår tillbaka."],
+          [
+            "Den avgörande ledtråden",
+            "Något läsaren har sett hela tiden får en ny betydelse, och utredaren förstår."
+          ]
         ]
       },
       {
         "title": "Upplösningen",
         "chapters": [
-          ["Avslöjandet", "Hur det gick till, och varför."],
-          ["Efteråt", "Vad fallet kostade, och vad som väntar."]
+          [
+            "Konfrontationen",
+            "Utredaren och den skyldige möts med något på spel, och lösningen visas i scen."
+          ],
+          [
+            "Avslöjandet",
+            "Hur det gick till och varför, kort, med de sista bitarna som läsaren inte redan lagt."
+          ],
+          ["Efteråt", "Vad fallet kostade, vem utredaren är nu, och vad som väntar."]
         ]
       }
     ]

@@ -28,7 +28,7 @@ describe("structures and pieces", () => {
       "Trådar",
     ]);
     expect(book.labels.map(([name]) => name)).toEqual(
-      expect.arrayContaining(["Skriv om", "Ledtråd", "Romans", "Magi"]),
+      expect.arrayContaining(["Skriv om", "Ledtråd", "Gnista", "Magi"]),
     );
     expect(book.parts.at(-1)?.chapters).toEqual([
       ["Kroken", "Ett nytt hot eller en hemlighet som leder till nästa bok."],
@@ -42,18 +42,19 @@ describe("structures and pieces", () => {
     expect(suggestedStructure("roman", "magi", ["romans"])).toBe("romantasy");
     expect(suggestedStructure("roman", "deckare", ["romans", "magi"])).toBe("deckare");
     expect(suggestedStructure("roman", "romans", ["feelgood"])).toBe("romans");
-    expect(suggestedStructure("roman", "scifi", [])).toBe("tre-akter");
+    expect(suggestedStructure("roman", "scifi", [])).toBe("scifi");
+    expect(suggestedStructure("roman", "urban", [])).toBe("tre-akter");
     expect(suggestedStructure("roman", "", [])).toBe("tre-akter");
     expect(suggestedStructure("noveller", "deckare", [])).toBe("novell");
     expect(suggestedStructure("fackbok", "", ["memoar"])).toBe("memoar");
     expect(suggestedStructure("annat", "", [])).toBe("tom");
   });
 
-  it("keep Skrivro's standard labels to themselves when no piece adds any", () => {
+  it("keep Skrivro's standard labels to themselves when no piece is added", () => {
     const structure = mystery();
     if (!structure) throw new Error("no mystery structure");
 
-    expect(composeTemplate(structure, ["urban"]).labels).toEqual([]);
+    expect(composeTemplate(structure, []).labels).toEqual([]);
   });
 });
 

@@ -2,20 +2,28 @@
   {
     "id": "romans",
     "name": "Romance",
-    "hint": "A love story through the plot, with a happy ending.",
+    "hint": "The relationship as a sort of its own, and labels that show how the spark, the closeness and the wall shift.",
     "sorts": ["The relationship"],
     "labels": [
-      ["Romance", "#c9508f"],
-      ["Tension", "#d4483b"]
+      ["Spark", "#c9508f"],
+      ["Tension", "#d4483b"],
+      ["Closeness", "#8a5cc9"],
+      ["The wall", "#7d7d7d"],
+      ["Second POV", "#2fa39a"]
     ],
     "chapters": []
   },
   {
     "id": "feelgood",
     "name": "Feel-good",
-    "hint": "The community and what warms.",
+    "hint": "The place and its community as a sort of their own, and labels for the warmth, the laughs and the setbacks.",
     "sorts": ["The community"],
-    "labels": [["Warmth", "#e0a21e"]],
+    "labels": [
+      ["Warmth", "#e0a21e"],
+      ["Humour", "#2f86c9"],
+      ["The place", "#4f9a5a"],
+      ["Setback", "#e08a1e"]
+    ],
     "chapters": []
   }
 ]

@@ -1,12 +1,16 @@
 [
   {
     "id": "memoar",
-    "name": "Memoar",
-    "hint": "Minnen, brev och dokument från livet.",
-    "sorts": ["Minnen", "Brev och dokument"],
+    "name": "Memoar och fackbok",
+    "hint": "Minnen, människor och källor, och etiketter som visar var du visar, berättar och behöver kolla fakta.",
+    "sorts": ["Minnen", "Underlag"],
     "labels": [
-      ["Minne", "#8a6d3b"],
-      ["Kolla fakta", "#e08a1e"]
+      ["Scen", "#2f86c9"],
+      ["Sammanfattning", "#7d7d7d"],
+      ["Reflektion", "#8a6d3b"],
+      ["Exempel", "#3f9c5a"],
+      ["Kolla fakta", "#e08a1e"],
+      ["Känsligt", "#d4483b"]
     ],
     "chapters": []
   }

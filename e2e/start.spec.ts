@@ -42,8 +42,8 @@ test("a new book's genre gives its structure, and what it gets shows before it i
   await page.getByRole("radio", { name: /Jag skriver mig fram/ }).click();
   await expect(gets.first()).toContainText("1 kapitel");
   await page.getByRole("button", { name: "Fortsätt" }).click();
-  await expect(page.getByLabel("Bokens längd i ord")).toHaveValue(/90/);
-  await expect(page.getByText("Cirka 360 sidor")).toBeVisible();
+  await expect(page.getByLabel("Bokens längd i ord")).toHaveValue(/85/);
+  await expect(page.getByText("Cirka 340 sidor")).toBeVisible();
 });
 
 test("an empty book opens on its welcome, which goes to the trash on request", async ({ page }) => {

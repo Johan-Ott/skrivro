@@ -2,17 +2,29 @@
   {
     "id": "ungdom",
     "name": "Young adult",
-    "hint": "Friends, school and first times.",
-    "sorts": ["Friends", "School"],
-    "labels": [["First time", "#c9508f"]],
+    "hint": "The friend group and everyday life at the reader's age, with labels for hooks, secrets and difficult themes.",
+    "sorts": ["Friends", "Everyday life"],
+    "labels": [
+      ["Hook", "#d4483b"],
+      ["First time", "#c9508f"],
+      ["Friendship", "#3f9c5a"],
+      ["Secret", "#7a5cc9"],
+      ["Own choice", "#2f86c9"],
+      ["Difficult theme", "#e08a1e"]
+    ],
     "chapters": []
   },
   {
     "id": "barnbok",
     "name": "Children's book",
-    "hint": "The pictures and the words for the reader.",
+    "hint": "The pictures and the words for the young reader, with labels for where a picture goes and what to read aloud.",
     "sorts": ["Pictures"],
-    "labels": [["Picture here", "#2f86c9"]],
+    "labels": [
+      ["Picture here", "#2f86c9"],
+      ["Humour", "#e0b31e"],
+      ["Read aloud", "#3f9c5a"],
+      ["Tricky word", "#7d7d7d"]
+    ],
     "chapters": []
   }
 ]

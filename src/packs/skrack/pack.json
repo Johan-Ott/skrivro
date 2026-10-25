@@ -1,12 +1,13 @@
 {
   "id": "skrack",
   "version": "1.0.0",
+  "look": "skrack",
   "name": {
     "sv": "Skräck",
     "en": "Horror"
   },
   "hint": {
-    "sv": "Det obehagliga som trappas upp, steg för steg.",
-    "en": "The unsettling, raised step by step."
+    "sv": "Bygg krypande obehag: hotet och dess regler, den hemsökta platsen och en upptrappning som inte släpper.",
+    "en": "Build creeping dread: the threat and its rules, the haunted place and an escalation that never lets go."
   }
 }

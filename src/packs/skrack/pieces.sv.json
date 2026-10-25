@@ -2,11 +2,14 @@
   {
     "id": "skrack",
     "name": "Skräck",
-    "hint": "Det som skrämmer och reglerna för det övernaturliga.",
+    "hint": "Hotet, dess regler och platsen där det bor, och etiketter som visar var obehaget växer och var läsaren får andas.",
     "sorts": ["Det som skrämmer"],
     "labels": [
-      ["Rädsla", "#6b2c8f"],
-      ["Varsel", "#7d7d7d"]
+      ["Varsel", "#7d7d7d"],
+      ["Obehag", "#6b2c8f"],
+      ["Chock", "#d4483b"],
+      ["Regel", "#2f86c9"],
+      ["Andrum", "#4a8f6b"]
     ],
     "chapters": []
   }

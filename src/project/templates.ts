@@ -70,7 +70,9 @@ const GENRE_STRUCTURES: Record<string, string> = {
   feelgood: "feelgood",
   ungdom: "ungdom",
   barnbok: "barnbok",
-  magi: "hjaltens-resa",
+  magi: "fantasy",
+  scifi: "scifi",
+  historisk: "historisk",
 };
 
 // A love story in a fantasy world braids both, whichever of the two is the genre.

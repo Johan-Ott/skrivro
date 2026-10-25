@@ -10,37 +10,85 @@
       {
         "title": "The meeting",
         "chapters": [
-          ["The first", "Them, their wound and what is missing in their life."],
-          ["The second", "Them, their wound and why love is not on the map."],
-          ["The meeting", "They meet, and something grates or sparks."],
-          ["Not a chance", "Why this cannot become anything."],
-          ["Bound together", "Something forces them to keep meeting."]
+          [
+            "The first",
+            "One lead in their life: what they want, what is missing and the lie about love they live by. Give the reader a reason to like them at once."
+          ],
+          [
+            "The second",
+            "The other lead, with a goal of their own and a reason not to want to fall in love right now. In dual POV, this is their first chapter."
+          ],
+          [
+            "The meeting",
+            "They meet in a way that grates or sparks, and the reader knows at once that these two are the couple."
+          ],
+          [
+            "Not a chance",
+            "Both give concrete reasons why this can never become anything. The reasons must hold for half the book."
+          ],
+          [
+            "Bound together",
+            "Something outside forces them to keep meeting: a job, an inheritance, a bet, a fake relationship. Without it, they just go home."
+          ]
         ]
       },
       {
         "title": "Falling in love",
         "chapters": [
-          ["A first sign", "A look or a moment that will not be forgotten."],
-          ["It grows", "They see each other as they are."],
-          ["Maybe after all", "This might work."],
-          ["The midpoint", "The kiss, the night or the promise. It seems to hold."]
+          [
+            "A first sign",
+            "A look, a laugh or a favour that will not be forgotten. One of them admits to themselves that something has happened."
+          ],
+          [
+            "Beneath the surface",
+            "They see each other as they are: a vulnerability is shown and received. The outer obstacle starts to shrink."
+          ],
+          [
+            "Maybe after all",
+            "They let themselves hope. The first real closeness, with a clear yes from both."
+          ],
+          [
+            "The midpoint",
+            "The kiss, the night or the confession. It seems to hold, but the inner wound is still untouched."
+          ]
         ]
       },
       {
         "title": "The retreat",
         "chapters": [
-          ["The doubt", "The old wound makes itself felt."],
-          ["The wall", "One pulls back to stay safe."],
-          ["The break-up", "It ends, for a reason rooted in the wound."]
+          [
+            "The doubt",
+            "The old wound makes itself felt, often through something outside: an ex, an offer, a glimpse of a secret."
+          ],
+          [
+            "The wall",
+            "One pulls back to stay safe, and the other feels it. The lie about love takes over."
+          ],
+          [
+            "The break-up",
+            "It ends, for a reason rooted in both their wounds. The reader should understand both and still want to shake them."
+          ]
         ]
       },
       {
         "title": "Fighting for love",
         "chapters": [
-          ["The dark night", "Life without the other, and what it costs."],
-          ["The realisation", "What has to change, inside."],
-          ["The grand gesture", "Someone risks everything."],
-          ["Happy ending", "What love looks like when it holds."]
+          [
+            "The dark night",
+            "Life without the other, and what it costs. The side characters say what the leads do not want to hear."
+          ],
+          [
+            "The realisation",
+            "Each sees their lie and understands what has to change, inside and not just on the surface."
+          ],
+          [
+            "The grand gesture",
+            "Someone risks everything, in a way that heals exactly the wound the book showed at the start."
+          ],
+          [
+            "Happy ending",
+            "Love as it looks when it holds, shown in a scene. Ideally a final image that echoes the first chapter."
+          ]
         ]
       }
     ]
@@ -56,27 +104,53 @@
       {
         "title": "The new start",
         "chapters": [
-          ["A life in flux", "Something ends and something new must begin."],
-          ["The place", "A town, a shop or a house to land in."],
-          ["The meeting", "Two who should not fit together at all."]
+          [
+            "A life in flux",
+            "Something ends: a job, a relationship, a city. Show the humour and the voice from the first line."
+          ],
+          [
+            "The place",
+            "A town, a shop or a house to land in. Make it both charming and difficult, so there is something to win."
+          ],
+          [
+            "The meeting",
+            "Two who should not fit together at all collide, ideally in a funny way. The reader sees the couple before they do."
+          ]
         ]
       },
       {
         "title": "The warmth",
         "chapters": [
-          ["The community", "The people around them begin to matter."],
-          ["Closer", "It grates less and less."],
-          ["The good moment", "Everything seems possible."]
+          [
+            "The community",
+            "The people around them step forward, each with a quirk. The lead starts, reluctantly, to belong."
+          ],
+          [
+            "The project",
+            "A shared goal, saving the café or putting on the festival, forces the couple to work together."
+          ],
+          ["Closer", "It grates less and less. An honest talk, a shared laugh, a first kiss."],
+          [
+            "The good moment",
+            "Everything seems possible: the place thrives and love holds. The warmest chapter in the book."
+          ]
         ]
       },
       {
         "title": "The setback",
         "chapters": [
           [
-            "The threat",
-            "The new life is at stake: the place may be lost, or the past comes back."
+            "The past comes back",
+            "An ex, an offer from back home or a secret. The lead's old life pulls at them."
           ],
-          ["Apart", "It looks like it is over."]
+          [
+            "The threat",
+            "The place is at stake: it may be sold, closed or torn down. Love and the place are threatened by the same thing."
+          ],
+          [
+            "Apart",
+            "It looks like it is over, between them and for the place. The lead packs a bag."
+          ]
         ]
       },
       {
@@ -86,7 +160,14 @@
             "The community rallies",
             "The people around step up, and someone dares to say what needs saying."
           ],
-          ["The warm ending", "Life as it turned out, better than the plan, and hopeful."]
+          [
+            "The choice",
+            "The lead chooses the place and love, with a gesture that shows they have changed."
+          ],
+          [
+            "The warm ending",
+            "Life as it turned out, better than the plan. A celebration, a new season and hope for what comes next."
+          ]
         ]
       }
     ]

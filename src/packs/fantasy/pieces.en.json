@@ -2,17 +2,28 @@
   {
     "id": "magi",
     "name": "Fantasy and magic",
-    "hint": "A magic system with rules, costs and limits, realms and creatures.",
+    "hint": "A magic system with rules, costs and limits, realms with their own conflicts and creatures with a will.",
     "sorts": ["Magic system", "Realms", "Creatures"],
-    "labels": [["Magic", "#7a5cc9"]],
+    "labels": [
+      ["Magic", "#7a5cc9"],
+      ["The cost", "#d4483b"],
+      ["Worldbuilding", "#2f86c9"],
+      ["Battle", "#e08a1e"],
+      ["Wonder", "#3aa17e"]
+    ],
     "chapters": []
   },
   {
     "id": "urban",
     "name": "Urban fantasy",
-    "hint": "A city we know, with a hidden world beneath.",
+    "hint": "A city you recognise, a hidden world beneath it and the rules that keep the secret.",
     "sorts": ["The hidden world"],
-    "labels": [],
+    "labels": [
+      ["The everyday", "#7d7d7d"],
+      ["The hidden", "#7a5cc9"],
+      ["Worlds collide", "#e08a1e"],
+      ["Secret at risk", "#d4483b"]
+    ],
     "chapters": []
   }
 ]

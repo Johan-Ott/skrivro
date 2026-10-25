@@ -1,12 +1,13 @@
 {
   "id": "romance",
   "version": "1.0.0",
+  "look": "romans",
   "name": {
     "sv": "Romance och feelgood",
     "en": "Romance and feel-good"
   },
   "hint": {
-    "sv": "Kärlekshistorier och romantisk komedi, med lyckligt slut.",
-    "en": "Love stories and romantic comedy, with a happy ending."
+    "sv": "Från första gnistan till lyckligt slut: romansens och feelgoodens bågar, guider och mallar för paret och platsen.",
+    "en": "From first spark to happy ending: romance and feel-good arcs, craft guides and templates for the couple and the place."
   }
 }

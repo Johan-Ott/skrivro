@@ -2,11 +2,14 @@
   {
     "id": "skrack",
     "name": "Horror",
-    "hint": "What frightens and the rules of the supernatural.",
+    "hint": "The threat, its rules and the place where it lives, with labels that show where the dread builds and where the reader can breathe.",
     "sorts": ["What frightens"],
     "labels": [
-      ["Fear", "#6b2c8f"],
-      ["Omen", "#7d7d7d"]
+      ["Omen", "#7d7d7d"],
+      ["Dread", "#6b2c8f"],
+      ["Shock", "#d4483b"],
+      ["Rule", "#2f86c9"],
+      ["Respite", "#4a8f6b"]
     ],
     "chapters": []
   }

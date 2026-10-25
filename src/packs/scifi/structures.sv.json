@@ -1,0 +1,85 @@
+[
+  {
+    "id": "scifi",
+    "name": "Science fiction i fyra delar",
+    "hint": "Det nya, följderna, krisen och den nya världen: en idé som följs ända till slutet.",
+    "totalGoal": 100000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Det nya",
+        "chapters": [
+          [
+            "Världen i rörelse",
+            "Huvudpersonen mitt i en konkret uppgift i en främmande vardag. Detaljerna antyder världen utan att förklara den."
+          ],
+          [
+            "Novumet",
+            "Det nya visar sig, eller dess första oväntade effekt, och läsaren förstår att något har förändrats."
+          ],
+          [
+            "Det personliga",
+            "Det nya berör just huvudpersonen, och vi ser vad hen har att förlora."
+          ],
+          [
+            "Vägen in",
+            "Hen fattar beslutet som binder hen vid frågan, och det finns ingen väg tillbaka."
+          ]
+        ]
+      },
+      {
+        "title": "Följderna",
+        "chapters": [
+          [
+            "Reglerna",
+            "Hen lär sig hur det nya fungerar genom försök och misstag, inte genom en föreläsning."
+          ],
+          [
+            "Ringar på vattnet",
+            "Följder i andra och tredje led: vem vinner, vem förlorar och vad går sönder."
+          ],
+          ["Förundran", "En scen av skala och förundran, där läsaren ser vad det nya gör möjligt."],
+          [
+            "Mittpunkten",
+            "Ett avslöjande om vad det nya egentligen är eller kostar vänder hela frågan."
+          ]
+        ]
+      },
+      {
+        "title": "Krisen",
+        "chapters": [
+          [
+            "Systemet slår tillbaka",
+            "Makthavare, institutioner eller tekniken själv svarar, och insatserna växer."
+          ],
+          [
+            "Den logiska följden",
+            "Reglerna följs till sin obekväma slutsats: det värsta som kan hända, enligt världens egen logik."
+          ],
+          [
+            "Det mörkaste läget",
+            "Hen förlorar det hen höll fast vid, och den gamla lösningen fungerar inte längre."
+          ],
+          [
+            "Svaret i reglerna",
+            "Hen hittar lösningen i något läsaren redan har förstått om det nya. Inga nya uppfinningar."
+          ]
+        ]
+      },
+      {
+        "title": "Den nya världen",
+        "chapters": [
+          [
+            "Avgörandet",
+            "Huvudpersonen handlar och betalar för det. Ett mänskligt val avgör, inte bara tekniken."
+          ],
+          [
+            "Efteråt",
+            "Världen och människan efter förändringen. Svara på bokens tänk om, eller lämna en fråga som läsaren bär med sig."
+          ]
+        ]
+      }
+    ]
+  }
+]

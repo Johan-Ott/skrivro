@@ -1,8 +1,8 @@
 [
   {
     "id": "ungdom",
-    "name": "Young adult",
-    "hint": "Finding yourself: friends, first times and a choice that changes everything.",
+    "name": "Young adult novel",
+    "hint": "For ages 13 and up: a lie that grows, a friend group that cracks and a choice the protagonist makes entirely alone.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
@@ -10,24 +10,71 @@
       {
         "title": "Before",
         "chapters": [
-          ["Who I think I am", "The main character, the family and the friends."],
-          ["The new", "A new school, a new friend or a secret."]
+          [
+            "In the middle of everyday life",
+            "Open on a scene where the protagonist wants something and something already rubs, with no background lecture."
+          ],
+          [
+            "What upsets everything",
+            "An event they can't ignore: a new school, a secret, a broken promise."
+          ],
+          [
+            "The decision",
+            "They choose to get involved, for a reason the reader recognises from their own life."
+          ]
         ]
       },
       {
-        "title": "In the middle",
+        "title": "New rules",
         "chapters": [
-          ["The first time", "Something happens for the first time."],
-          ["The group", "Belonging, or not."],
-          ["The lie", "Something the main character hides grows."]
+          [
+            "New people",
+            "A new friend, a rival or a group that opens up another world and makes new demands."
+          ],
+          ["The first time", "Something happens for the first time, and they feel it everywhere."],
+          [
+            "Belonging",
+            "What they have to do or hide to be part of it, and what that costs someone else."
+          ],
+          [
+            "The lie grows",
+            "What they're hiding gets bigger and harder to back out of. End the chapter close to discovery."
+          ]
+        ]
+      },
+      {
+        "title": "Everything breaks",
+        "chapters": [
+          [
+            "The midpoint",
+            "A victory that turns out to be false, or a truth that changes the game."
+          ],
+          [
+            "The price",
+            "Friends, family or their sense of self pay for the protagonist's choices."
+          ],
+          [
+            "Found out",
+            "The lie comes out in front of the people who matter most, and the protagonist stands alone."
+          ],
+          [
+            "Rock bottom",
+            "They see their own part in what happened. No adult arrives to save the day."
+          ]
         ]
       },
       {
         "title": "After",
         "chapters": [
-          ["Everything breaks", "The lie comes out."],
-          ["The choice", "Choosing who to be."],
-          ["Someone new", "Who the main character became."]
+          ["The choice", "They decide who they want to be, and do something hard to prove it."],
+          [
+            "The deciding moment",
+            "The protagonist resolves the conflict by their own means, not by luck or a parent."
+          ],
+          [
+            "Someone new",
+            "An ending with hope: what has changed, and what is allowed to stay unresolved."
+          ]
         ]
       }
     ]
@@ -35,20 +82,45 @@
   {
     "id": "barnbok",
     "name": "Chapter book for children",
-    "hint": "Short chapters of a few pages, a clear question, an adventure and a safe ending. The child solves it.",
-    "totalGoal": 8000,
+    "hint": "For ages 6 to 9: ten short chapters with a hook in each, an adventure, and a problem the child solves on their own.",
+    "totalGoal": 9000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
         "title": "",
         "chapters": [
-          ["At home", "The main character and what they wish for."],
-          ["Something happens", "A surprise sets everything going."],
-          ["The adventure", "Out into the unknown, with a friend."],
-          ["The hard part", "A problem that seems too big."],
-          ["The courage", "The main character solves it, in their own way."],
-          ["Home again", "Safe, but not quite as before."]
+          [
+            "At home",
+            "The protagonist, what they wish for, and something funny or strange on the very first page."
+          ],
+          [
+            "Something happens",
+            "A surprise sets everything going. End the chapter on a question the reader wants answered."
+          ],
+          [
+            "The plan",
+            "The protagonist makes up their mind and makes a plan, ideally with a friend."
+          ],
+          ["Into the unknown", "The adventure begins, and at first it goes better than expected."],
+          [
+            "The first obstacle",
+            "Something goes wrong. Solve it halfway and let a new problem appear."
+          ],
+          [
+            "The falling-out",
+            "The friends quarrel or the plan falls apart. End so the child simply has to know what happens."
+          ],
+          ["The hard part", "The problem seems too big, and there's no adult around."],
+          [
+            "The courage",
+            "The protagonist works out the solution alone, using something they learned earlier in the book."
+          ],
+          ["The solution", "The plan is carried out, with one last surprise or a laugh."],
+          [
+            "Home again",
+            "Safe, but not quite as before. Show what they've learned without saying it."
+          ]
         ]
       }
     ]

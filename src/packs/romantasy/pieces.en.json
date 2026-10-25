@@ -1,0 +1,17 @@
+[
+  {
+    "id": "romantasy",
+    "name": "Romantasy",
+    "hint": "The world and the relationship as sorts of their own, and labels that track the heat, the magic and the betrayal.",
+    "sorts": ["The world", "The relationship"],
+    "labels": [
+      ["Spark", "#c9508f"],
+      ["Magic", "#2f86c9"],
+      ["Power", "#7a5cc9"],
+      ["Secret", "#e08a1e"],
+      ["Betrayal", "#d4483b"],
+      ["Second POV", "#2fa39a"]
+    ],
+    "chapters": []
+  }
+]

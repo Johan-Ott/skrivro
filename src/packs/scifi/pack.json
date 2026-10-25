@@ -1,12 +1,13 @@
 {
   "id": "scifi",
   "version": "1.0.0",
+  "look": "scifi",
   "name": {
     "sv": "Science fiction",
     "en": "Science fiction"
   },
   "hint": {
-    "sv": "Teknik, framtider och världar som följer sina egna regler.",
-    "en": "Technology, futures and worlds that follow their own rules."
+    "sv": "Ett stort tänk om, följt hela vägen: tekniken, följderna, samhället och en färdig struktur.",
+    "en": "One big what if, followed all the way: the technology, its consequences, its society and a ready structure."
   }
 }

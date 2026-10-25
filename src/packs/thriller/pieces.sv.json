@@ -2,11 +2,15 @@
   {
     "id": "thriller",
     "name": "Thriller",
-    "hint": "Skurkens plan, tidsgränserna och vändningarna.",
+    "hint": "Märk scenerna med vändningar, tidspress och skurkens drag, och håll planen och klockan i egna anteckningar.",
     "sorts": ["Skurkens plan", "Hotet"],
     "labels": [
       ["Vändning", "#d4483b"],
-      ["Tidspress", "#e08a1e"]
+      ["Tidspress", "#e08a1e"],
+      ["Skurkens drag", "#7a2f8f"],
+      ["Jakt", "#2f86c9"],
+      ["Insatserna höjs", "#c9a12f"],
+      ["Andrum", "#3a9e6e"]
     ],
     "chapters": []
   }

@@ -1,0 +1,88 @@
+[
+  {
+    "id": "historisk",
+    "name": "Människan i historien",
+    "hint": "Påhittade människor i en verklig tid, där det stora skeendet bryter in i deras liv och tvingar fram val.",
+    "totalGoal": 100000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Världen som den var",
+        "chapters": [
+          [
+            "Vardagen",
+            "Visa tiden genom en vanlig dag i huvudpersonens liv, och vad hen vill som tiden försvårar."
+          ],
+          [
+            "Ordningen",
+            "Vem som har makt, vad som är tillåtet och vad det kostar att bryta mot det. Läsaren lär sig reglerna genom en konflikt."
+          ],
+          [
+            "Det första tecknet",
+            "Det historiska skeendet hörs på avstånd: ett rykte, ett brev, ett pris som stiger. Ingen förstår ännu vad det betyder."
+          ]
+        ]
+      },
+      {
+        "title": "Historien bryter in",
+        "chapters": [
+          [
+            "Det som inte går att undvika",
+            "Den verkliga händelsen når personernas liv och slår sönder vardagen, så att huvudpersonen måste välja."
+          ],
+          [
+            "Valet",
+            "Huvudpersonen handlar utifrån tidens möjligheter och tankesätt, inte utifrån en modern människas."
+          ],
+          [
+            "Nya band, nya fiender",
+            "Skeendet ställer människor på olika sidor. En relation knyts eller bryts av det historiska."
+          ],
+          [
+            "Priset",
+            "Valet får följder enligt tidens regler: skam, fattigdom, straff eller förlust."
+          ]
+        ]
+      },
+      {
+        "title": "Mitt i skeendet",
+        "chapters": [
+          [
+            "Den stora händelsen",
+            "Det historiska ögonblicket sett genom huvudpersonens begränsade blick, inte som en överblick ur en lärobok."
+          ],
+          [
+            "Det personliga och det historiska krockar",
+            "Det hen vill och det tiden kräver går inte längre att förena."
+          ],
+          [
+            "Allt går förlorat",
+            "Det lägsta läget. Historien går sin väg och huvudpersonen kan inte hindra den."
+          ]
+        ]
+      },
+      {
+        "title": "Efter stormen",
+        "chapters": [
+          [
+            "Det avgörande valet",
+            "Utgången i historien är given, men vad huvudpersonen gör med den är det inte. Här ligger spänningen."
+          ],
+          [
+            "Upplösningen",
+            "De påhittade människornas öden avgörs, i takt med att det verkliga skeendet ebbar ut."
+          ],
+          [
+            "Det som blev kvar",
+            "Vad tiden lämnade dem med, och vad läsaren ska förstå om den tiden och om sin egen."
+          ],
+          [
+            "Efterordet",
+            "Skrivs sist: vad som är sant, vad du har ändrat eller hittat på, och varför."
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -1,12 +1,13 @@
 {
   "id": "memoar",
   "version": "1.0.0",
+  "look": "litterar",
   "name": {
     "sv": "Memoar och fackbok",
     "en": "Memoir and non-fiction"
   },
   "hint": {
-    "sv": "Ditt eget liv, eller kunskap du vill dela.",
-    "en": "Your own life, or knowledge you want to share."
+    "sv": "Berätta ditt liv eller dela din kunskap, med strukturer, guider och mallar för minnen, människor och källor.",
+    "en": "Tell your life or share what you know, with structures, guides and templates for memories, people and sources."
   }
 }

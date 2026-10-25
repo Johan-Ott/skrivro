@@ -1,12 +1,16 @@
 [
   {
     "id": "memoar",
-    "name": "Memoir",
-    "hint": "Memories, letters and documents from a life.",
-    "sorts": ["Memories", "Letters and documents"],
+    "name": "Memoir and non-fiction",
+    "hint": "Memories, people and sources, and labels that show where you show, tell and need to check facts.",
+    "sorts": ["Memories", "Groundwork"],
     "labels": [
-      ["Memory", "#8a6d3b"],
-      ["Check facts", "#e08a1e"]
+      ["Scene", "#2f86c9"],
+      ["Summary", "#7d7d7d"],
+      ["Reflection", "#8a6d3b"],
+      ["Example", "#3f9c5a"],
+      ["Check facts", "#e08a1e"],
+      ["Sensitive", "#d4483b"]
     ],
     "chapters": []
   }

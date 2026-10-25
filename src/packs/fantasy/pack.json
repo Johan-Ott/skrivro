@@ -1,12 +1,13 @@
 {
   "id": "fantasy",
   "version": "1.0.0",
+  "look": "magi",
   "name": {
     "sv": "Fantasy",
     "en": "Fantasy"
   },
   "hint": {
-    "sv": "Magisystem, riken och varelser, också för urban fantasy.",
-    "en": "Magic systems, realms and creatures, urban fantasy too."
+    "sv": "Magi med pris och gränser, levande riken och en färdig struktur, för episk och urban fantasy.",
+    "en": "Magic with costs and limits, living realms and a ready structure, for epic and urban fantasy."
   }
 }

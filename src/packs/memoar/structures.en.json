@@ -2,31 +2,85 @@
   {
     "id": "memoar",
     "name": "Memoir",
-    "hint": "A life told around one question: what happened, and what did it mean.",
-    "totalGoal": 80000,
+    "hint": "A chapter of a life around one question: the then-self lives through it, the now-self understands what it meant.",
+    "totalGoal": 75000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
-        "title": "Where from",
+        "title": "Before",
         "chapters": [
-          ["The moment", "A scene that shows what the book is about."],
-          ["Growing up", "The place, the people and what shaped you."]
+          [
+            "The moment",
+            "Open with a scene from the book's most charged moment, unexplained, so the reader feels the question the book carries."
+          ],
+          [
+            "The question",
+            "Let the now-self step forward briefly: what you are trying to understand, and why you are writing it now."
+          ],
+          [
+            "Life before",
+            "The place, the people and what the then-self believed and wanted, in concrete scenes rather than background."
+          ],
+          [
+            "The first sign",
+            "A small event that pointed ahead in hindsight, written as the then-self lived it."
+          ]
         ]
       },
       {
         "title": "What happened",
         "chapters": [
-          ["The turning point", "What changed everything."],
-          ["The struggle", "The hard part, and how you got through it."],
-          ["The people", "Those who mattered most, for better or worse."]
+          [
+            "The turning point",
+            "The event that splits life into before and after, as a full scene with senses and dialogue."
+          ],
+          [
+            "New rules",
+            "How everyday life changed: summarise the weeks, but stay in scene wherever something is at stake."
+          ],
+          [
+            "The people around you",
+            "Those who helped, betrayed or simply stayed, each shown through something they did."
+          ],
+          [
+            "What you didn't say",
+            "What you hid from others or from yourself, and what it began to cost."
+          ]
+        ]
+      },
+      {
+        "title": "The reckoning",
+        "chapters": [
+          [
+            "The hardest part",
+            "The lowest point, written without sparing yourself and without the now-self offering comfort."
+          ],
+          [
+            "The truth",
+            "A conversation, a letter or a discovery that makes it impossible to go on as before."
+          ],
+          [
+            "The choice",
+            "What you did, and how the then-self understood it in the moment, before hindsight."
+          ]
         ]
       },
       {
         "title": "What it meant",
         "chapters": [
-          ["The understanding", "What you see now that you did not see then."],
-          ["Now", "Where you stand today."]
+          [
+            "Afterwards",
+            "The consequences, as honest about what went wrong as about what went right."
+          ],
+          [
+            "Understanding",
+            "The now-self looks back: what you see today that you couldn't see then, and what is still unresolved."
+          ],
+          [
+            "Back to the moment",
+            "Return to the opening scene or place and show what has changed in you."
+          ]
         ]
       }
     ]
@@ -34,21 +88,78 @@
   {
     "id": "fackbok",
     "name": "Non-fiction",
-    "hint": "A question, the knowledge that answers it and what the reader can do with it.",
+    "hint": "The reader's problem, a clear promise and one idea per chapter, with evidence and examples, until the reader can use it.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
-        "title": "",
+        "title": "The promise",
         "chapters": [
-          ["Introduction", "The question the book answers, and why it matters."],
-          ["Background", "What the reader needs to know first."],
-          ["First part", "The first big idea, with examples."],
-          ["Second part", "The next idea, built on the first."],
-          ["Third part", "The hardest, or the most surprising."],
-          ["How to", "How the reader uses it in their own life."],
-          ["Conclusion", "The essentials in brief."]
+          [
+            "The reader's problem",
+            "Open with a concrete situation in which the reader recognises their own problem."
+          ],
+          [
+            "The promise",
+            "Say what the reader will be able to do, know or understand after the book, and how the book will get them there."
+          ],
+          [
+            "Why it's hard",
+            "Show why the usual answers fall short. This is where you earn the reader's trust."
+          ]
+        ]
+      },
+      {
+        "title": "The foundation",
+        "chapters": [
+          [
+            "What you need to know first",
+            "The concepts and facts the rest of the book rests on, and nothing more."
+          ],
+          [
+            "The first idea",
+            "One claim stated plainly, with evidence, an example and what it means for the reader."
+          ],
+          [
+            "The second idea",
+            "The next claim, built on the first. Show the link in the very first paragraph."
+          ],
+          [
+            "A case in depth",
+            "A case, a person or an experiment that shows the ideas at work in real life, from start to finish."
+          ]
+        ]
+      },
+      {
+        "title": "Going deeper",
+        "chapters": [
+          [
+            "The third idea",
+            "The most surprising or difficult idea, now that the reader has the footing to take it in."
+          ],
+          [
+            "The case against",
+            "The counterarguments and where knowledge runs out. Honesty here makes the rest of the book stronger."
+          ],
+          [
+            "Common mistakes",
+            "How it usually goes wrong, and how readers can spot the signs in themselves."
+          ]
+        ]
+      },
+      {
+        "title": "Putting it to use",
+        "chapters": [
+          ["How to do it", "Concrete steps in order that the reader can take as soon as tomorrow."],
+          [
+            "When it doesn't go to plan",
+            "The most common obstacles along the way, and what the reader does then."
+          ],
+          [
+            "Conclusion",
+            "Tie back to the promise from the start: the essentials in brief, and the way forward."
+          ]
         ]
       }
     ]

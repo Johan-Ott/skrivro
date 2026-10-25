@@ -1,0 +1,25 @@
+---
+sort: Guide
+---
+
+# Fallgropar och omarbetning
+
+**Vanliga fallgropar**
+
+- **Lösningen från ingenstans.** En ledtråd som läsaren aldrig fick se känns som fusk. Lägg in den tidigare, i förbigående.
+- **Den skyldige syns för tydligt.** Hen är den enda med starkt motiv, eller berättelsen undviker hen märkbart. Ge fler misstänkta lika starka skäl, och låt den skyldige synas lagom ofta.
+- **Utredaren har tur.** Ett vittne som råkar komma in med svaret tar segern från utredaren. Låt arbete och skärpa avgöra.
+- **Föreläsningen i slutet.** Tio sidor förklaring dödar spänningen. Visa bitarna falla på plats i en scen, och förklara bara det läsaren inte redan förstått.
+- **Den sackande mitten.** Förhör efter förhör utan att något ändras. Ett andra brott, en falsk lösning eller ett hot mot utredaren håller tempot uppe.
+- **För många misstänkta.** Tre till fem som läsaren minns slår tio som hen blandar ihop. Ge var och en ett eget drag och en egen lögn.
+- **Rutin som fakta.** Polisarbete som inte väcker frågor kan sammanfattas i en mening.
+- **Motivet i sista kapitlet.** Läsaren behöver ha sett fröet till motivet tidigare, även om hen inte förstod det.
+
+**Omarbetning, i den här ordningen**
+
+- Läs bara scenerna med etiketten Ledtråd. Går gåtan att lösa med dem?
+- Läs boken som den skyldige. Gör hen något som bara är begripligt om hen är oskyldig? Stryk eller förklara det.
+- Följ varje falskt spår till dess upplösning. Hänger någon tråd lös?
+- Ge manuset till en testläsare och fråga vid tre punkter vem hen tror är skyldig. Gissar alla rätt tidigt, göm bättre. Förstår ingen lösningen ens efteråt, visa tydligare.
+- Kontrollera varje kapitelslut: slutar det på en fråga?
+- Korta avslöjandet till det som verkligen behövs.

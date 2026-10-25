@@ -1,12 +1,13 @@
 {
   "id": "thriller",
   "version": "1.0.0",
+  "look": "thriller",
   "name": {
     "sv": "Thriller",
     "en": "Thriller"
   },
   "hint": {
-    "sv": "Ett hot som hela tiden växer, och en klocka som tickar.",
-    "en": "A threat that keeps growing, and a ticking clock."
+    "sv": "En klocka som tickar och insatser som växer: struktur, skurkens plan, vändningar och kapitelslut som drar.",
+    "en": "A ticking clock and rising stakes: structure, the villain's plan, twists and chapter endings that pull."
   }
 }

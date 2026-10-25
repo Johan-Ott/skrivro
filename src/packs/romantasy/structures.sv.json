@@ -2,7 +2,7 @@
   {
     "id": "romantasy",
     "name": "Romantasy",
-    "hint": "Romansens fyra faser flätade med en fantasyhandling: världen skapar hindren, och kärleken avgör slaget.",
+    "hint": "Romansens faser flätade med en fantasyhandling: världen skapar hindren, och kärleken avgör slaget.",
     "totalGoal": 110000,
     "sorts": [],
     "labels": [],
@@ -10,34 +10,78 @@
       {
         "title": "Två världar",
         "chapters": [
-          ["Den första världen", "Huvudpersonen, bördan och vad hen är beredd att göra."],
-          ["Mötet", "De två möts, och det gnistrar av motstånd."],
-          ["Den andra rösten", "En hemlighet och en egen värld."],
-          ["Pakten", "Ett uppdrag, ett avtal eller ett tvång binder dem samman."]
+          [
+            "Den första världen",
+            "Huvudpersonen, bördan och lögnen hen lever efter. Visa magins pris redan här, så att läsaren litar på reglerna senare."
+          ],
+          [
+            "Mötet",
+            "De två möts när deras mål krockar. Gnistan ska vara både motstånd och dragning, och båda ska ha skäl att inte lita på den andra."
+          ],
+          [
+            "Den andra rösten",
+            "Kärleksintressets värld: hemligheten, lojaliteten och varför hen inte kan släppa huvudpersonen. I dubbla perspektiv är det hens första kapitel."
+          ],
+          [
+            "Pakten",
+            "Ett uppdrag, ett avtal eller en magisk bindning tvingar dem samman så att ingen kan gå. Bokens första vändpunkt."
+          ]
         ]
       },
       {
         "title": "Dras närmare",
         "chapters": [
-          ["Magin vaknar", "En kraft eller ett arv börjar visa sig, och har ett pris."],
-          ["Makten runt dem", "Politik, lojaliteter och faror."],
-          ["Nästan", "Ett ögonblick som nästan blir mer."],
-          ["Mittpunkten", "Första kyssen, samtidigt som fantasyhandlingen vänder."]
+          [
+            "Nya regler",
+            "Världen öppnar sig: hovet, gränslandet, faran. De måste samarbeta, och börjar respektera det den andra kan."
+          ],
+          [
+            "Magin vaknar",
+            "En kraft eller ett arv visar sig och kostar något. Den andra ser det först, och det blir ett band eller ett hot mellan dem."
+          ],
+          [
+            "Nästan",
+            "Ett ögonblick av närhet som avbryts av världen eller väljs bort av en av dem. Läsaren ska längta, och valet ska synas."
+          ],
+          [
+            "Mittpunkten",
+            "Första kyssen eller natten, samtidigt som en sanning om världen vänder handlingen och ändrar vad de kämpar för."
+          ]
         ]
       },
       {
         "title": "Svek och val",
         "chapters": [
-          ["Sveket", "En hemlighet kommer fram och allt rasar."],
-          ["Isär", "De går skilda vägar när allt verkar förlorat."],
-          ["Valet", "Kärleken eller plikten."]
+          [
+            "Det falska lugnet",
+            "De är nära och allt verkar hålla, medan hemligheten och fienden närmar sig. Plantera det som ska rasa."
+          ],
+          [
+            "Sveket",
+            "Hemligheten kommer fram när insatserna är som högst. Det ska kännas oundvikligt och bottna i någons sår, inte i ett missförstånd."
+          ],
+          [
+            "Isär",
+            "Fienden vinner mark och de två står på var sin sida. Det lägsta läget, för kärleken och för världen samtidigt."
+          ],
+          [
+            "Valet",
+            "Huvudpersonen ser igenom sin lögn och väljer. Kärleken och det rätta blir samma val, och det kostar något på riktigt."
+          ]
         ]
       },
       {
         "title": "Det som återstår",
         "chapters": [
-          ["Slaget", "Den stora gesten är en del av det avgörande slaget."],
-          ["Bandet", "Lyckligt slut, eller ett löfte som håller till nästa bok."]
+          [
+            "Slaget",
+            "Bågarna möts: den stora gesten är en del av det avgörande slaget, och magin tar sitt pris."
+          ],
+          ["Bandet", "Kärleken sägs och visas. Båda har förändrats, och den andra ser det."],
+          [
+            "Det nya riket",
+            "Ett lyckligt slut, eller ett löfte som håller till nästa bok, i en värld som har förändrats av vad de gjorde."
+          ]
         ]
       }
     ]

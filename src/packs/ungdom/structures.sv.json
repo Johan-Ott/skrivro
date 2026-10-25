@@ -2,7 +2,7 @@
   {
     "id": "ungdom",
     "name": "Ungdomsroman",
-    "hint": "Att hitta sig själv: vänner, första gången och ett val som förändrar allt.",
+    "hint": "För 13 år och uppåt: en lögn som växer, ett gäng som spricker och ett val som huvudpersonen gör helt själv.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
@@ -10,24 +10,59 @@
       {
         "title": "Före",
         "chapters": [
-          ["Vem jag tror att jag är", "Huvudpersonen, familjen och vännerna."],
-          ["Det nya", "En ny skola, en ny vän eller en hemlighet."]
+          [
+            "Mitt i vardagen",
+            "Börja i en scen där huvudpersonen vill något och något redan skaver, utan bakgrundsförklaringar."
+          ],
+          [
+            "Det som rubbar allt",
+            "En händelse hen inte kan strunta i: en ny skola, en hemlighet, ett brutet löfte."
+          ],
+          [
+            "Beslutet",
+            "Hen väljer själv att ge sig in i det, av ett skäl som läsaren känner igen från sitt eget liv."
+          ]
         ]
       },
       {
-        "title": "Mitt i",
+        "title": "Nya regler",
         "chapters": [
-          ["Första gången", "Något händer för första gången."],
-          ["Gruppen", "Att höra till, eller inte."],
-          ["Lögnen", "Något huvudpersonen döljer växer."]
+          [
+            "Nya människor",
+            "En ny vän, en rival eller ett gäng som öppnar en annan värld och ställer nya krav."
+          ],
+          ["Första gången", "Något händer för första gången, och det känns i hela kroppen."],
+          [
+            "Att höra till",
+            "Vad hen måste göra eller dölja för att få vara med, och vad det kostar någon annan."
+          ],
+          [
+            "Lögnen växer",
+            "Det hen döljer blir större och svårare att backa från. Sluta kapitlet nära att det upptäcks."
+          ]
+        ]
+      },
+      {
+        "title": "Allt brister",
+        "chapters": [
+          ["Mittpunkten", "En seger som visar sig vara falsk, eller en sanning som ändrar spelet."],
+          ["Priset", "Vänner, familj eller självbilden får betala för hens val."],
+          [
+            "Avslöjandet",
+            "Lögnen kommer fram inför de människor som betyder mest, och huvudpersonen står ensam."
+          ],
+          ["Botten", "Hen ser sin egen del i det som hänt. Ingen vuxen kommer och räddar läget."]
         ]
       },
       {
         "title": "Efter",
         "chapters": [
-          ["Allt brister", "Lögnen kommer fram."],
-          ["Valet", "Att välja vem man vill vara."],
-          ["Någon ny", "Den huvudpersonen blev."]
+          ["Valet", "Hen bestämmer vem hen vill vara, och gör något svårt för att visa det."],
+          [
+            "Det avgörande",
+            "Huvudpersonen löser konflikten med sina egna medel, inte med tur eller en förälder."
+          ],
+          ["Någon ny", "Ett slut med hopp: vad som har förändrats, och vad som får förbli olöst."]
         ]
       }
     ]
@@ -35,20 +70,42 @@
   {
     "id": "barnbok",
     "name": "Kapitelbok för barn",
-    "hint": "Korta kapitel på några sidor, en tydlig fråga, ett äventyr och ett tryggt slut. Barnet löser det själv.",
-    "totalGoal": 8000,
+    "hint": "För 6 till 9 år: tio korta kapitel med en krok i varje, ett äventyr, och ett problem som barnet löser själv.",
+    "totalGoal": 9000,
     "sorts": [],
     "labels": [],
     "parts": [
       {
         "title": "",
         "chapters": [
-          ["Hemma", "Huvudpersonen och det hen önskar sig."],
-          ["Något händer", "En överraskning sätter igång allt."],
-          ["Äventyret", "Ut i det okända, med en vän."],
-          ["Det svåra", "Ett problem som verkar för stort."],
-          ["Modet", "Huvudpersonen löser det, på sitt eget sätt."],
-          ["Hem igen", "Tryggt, men inte riktigt som förut."]
+          [
+            "Hemma",
+            "Huvudpersonen, det hen önskar sig och något roligt eller konstigt redan på första sidan."
+          ],
+          [
+            "Något händer",
+            "En överraskning sätter igång allt. Sluta kapitlet med en fråga läsaren vill ha svar på."
+          ],
+          ["Planen", "Huvudpersonen bestämmer sig och gör en plan, gärna tillsammans med en vän."],
+          ["Ut i det okända", "Äventyret börjar, och först går det bättre än väntat."],
+          [
+            "Första hindret",
+            "Något går snett. Lös det till hälften och låt ett nytt problem dyka upp."
+          ],
+          [
+            "Bråket",
+            "Vännerna blir osams eller planen spricker. Sluta så att barnet måste få veta hur det går."
+          ],
+          ["Det svåra", "Problemet verkar för stort, och ingen vuxen finns till hands."],
+          [
+            "Modet",
+            "Huvudpersonen kommer själv på lösningen, med något hen lärt sig tidigare i boken."
+          ],
+          ["Lösningen", "Planen genomförs, med en sista överraskning eller ett skratt."],
+          [
+            "Hem igen",
+            "Tryggt, men inte riktigt som förut. Visa vad hen har lärt sig utan att säga det."
+          ]
         ]
       }
     ]
