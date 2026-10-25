@@ -11,6 +11,8 @@ sort: Guide
 - **Klockan som glöms.** En tidsgräns nämns i början och sedan aldrig mer. Påminn, och krymp den.
 - **Platta insatser.** Samma fara i kapitel tre som i kapitel tjugo. Varje del ska ha mer på spel än den förra.
 - **Slumpen räddar.** Tur får gärna sätta huvudpersonen i knipa, aldrig ta hen ur den.
+- **Den självklara utvägen.** Läsaren undrar varför hen inte ringer polisen, flyr eller berättar för någon. Stäng varje sådan utväg i texten, med ett skäl som läsaren köper: polisen är inblandad, ingen tror på hen, det skulle kosta någon annan livet.
+- **Tekniken som glöms.** Telefoner, kameror och spårning finns. Låt dem fungera som i verkligheten, och bygg hindren runt dem i stället för att låtsas att de inte finns.
 - **Vändning för vändningens skull.** En överraskning som inte var planterad, eller som gör det tidigare meningslöst, känns som fusk.
 - **Action utan känsla.** En jakt där läsaren inte vet vad huvudpersonen tänker och fruktar blir bara koreografi.
 - **Den repetitiva mitten.** Jakt, flykt, jakt, flykt. Varje sekvens ska förändra något: ny kunskap, ny allierad, ny förlust.

@@ -22,6 +22,10 @@ Byt namn på anteckningen till personens namn.
 
 **Hemligheten:** vad vill hen inte att kärleksintresset ska veta, och vad händer när det kommer fram?
 
+**Varför läsaren hejar:** vad gör hen redan i första scenen som får läsaren på sin sida? Mod, humor, omsorg om någon svagare.
+
+**Bristen:** vilket fel kostar hen något på riktigt under boken? Stolthet, misstro, en hämndlystnad som skadar fel person.
+
 **Det som drar:** vad hos kärleksintresset lockar hen, mot hens egen vilja?
 
 **Rösten:** hur låter hen i sitt perspektiv? Torr, arg, lekfull, kontrollerad. Vilka ord använder hen som ingen annan gör?

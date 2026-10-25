@@ -2,13 +2,13 @@
   {
     "id": "scifi",
     "name": "Science fiction",
-    "hint": "Det nya och dess följder, världarna där det märks och samhället det har format.",
-    "sorts": ["Teknik", "Världar", "Samhället"],
+    "hint": "Det nya och dess följder, platserna där det märks och samhället det har format, samlade under Världen.",
+    "sorts": ["Världen"],
     "labels": [
       ["Novum", "#2f86c9"],
       ["Följder", "#e08a1e"],
       ["Förundran", "#3aa17e"],
-      ["Världen", "#7a5cc9"],
+      ["Världsbygge", "#7a5cc9"],
       ["Avslöjande", "#d4483b"]
     ],
     "chapters": []

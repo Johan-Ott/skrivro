@@ -16,6 +16,8 @@ Rename the note to the character's name.
 
 **The threat to the relationship:** how do they drive the two apart? Which secret do they know, which loyalty do they exploit?
 
+**The temptation:** what do they offer one of the two, and why is it hard to say no? Power, revenge, the return of someone who was lost.
+
 **The link:** how are they tied to one of the leads? Family, teacher, former ally, the one who caused the wound.
 
 **First visible move:** when does the reader first notice them, and what do they do?

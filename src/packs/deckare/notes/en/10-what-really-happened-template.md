@@ -18,6 +18,8 @@ Rename the note to the name of the case. This is the crime as it actually happen
 
 **The days after:** how does the culprit keep protecting themselves while the investigation runs?
 
+**Facts that can be checked:** sunset, weather, train times, opening hours, who was on which shift. Anything the reader can look up must be right.
+
 **What went wrong:** what did not go to plan? A witness, the weather, something left behind.
 
 **The traces left:** every trace the crime left, and where it is. Carry them over to the clue list.

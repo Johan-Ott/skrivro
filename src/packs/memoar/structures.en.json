@@ -12,7 +12,7 @@
         "chapters": [
           [
             "The moment",
-            "Open with a scene from the book's most charged moment, unexplained, so the reader feels the question the book carries."
+            "Open with a scene that carries the book's question, ideally from its most charged moment, and explain nothing yet."
           ],
           [
             "The question",
@@ -88,7 +88,7 @@
   {
     "id": "fackbok",
     "name": "Non-fiction",
-    "hint": "The reader's problem, a clear promise and one idea per chapter, with evidence and examples, until the reader can use it.",
+    "hint": "For the explanatory and practical book: the reader's problem, a clear promise and one idea per chapter, with evidence and examples.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
@@ -151,7 +151,10 @@
       {
         "title": "Putting it to use",
         "chapters": [
-          ["How to do it", "Concrete steps in order that the reader can take as soon as tomorrow."],
+          [
+            "How to do it",
+            "Concrete steps in order that the reader can take tomorrow, or in an explanatory book: what the reader now sees differently."
+          ],
           [
             "When it doesn't go to plan",
             "The most common obstacles along the way, and what the reader does then."

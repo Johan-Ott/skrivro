@@ -18,15 +18,7 @@ describe("structures and pieces", () => {
 
     const book = composeTemplate(structure, ["deckare", "romans", "magi", "urban", "serie"]);
 
-    expect(book.sorts).toEqual([
-      "Ledtrådar",
-      "Relationen",
-      "Magisystem",
-      "Riken",
-      "Varelser",
-      "Den dolda världen",
-      "Trådar",
-    ]);
+    expect(book.sorts).toEqual(["Ledtrådar", "Relationen", "Världen", "Trådar"]);
     expect(book.labels.map(([name]) => name)).toEqual(
       expect.arrayContaining(["Skriv om", "Ledtråd", "Gnista", "Magi"]),
     );

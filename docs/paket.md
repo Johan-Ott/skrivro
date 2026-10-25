@@ -6,7 +6,7 @@ plugin. Appen hittar mapparna själv; det finns ingen lista att uppdatera.
 
 ```
 src/packs/romantasy/
-  pack.json                 id, version, namn och beskrivning på svenska och engelska
+  pack.json                 id, version, look (omslaget), namn och beskrivning, ev. covers
   structures.sv.json        strukturerna, i samma form som i templates.sv.json
   structures.en.json
   pieces.sv.json            bitarna (etiketter och anteckningssorter), om paketet har några
@@ -17,6 +17,10 @@ src/packs/romantasy/
 
 Alla filer utom `pack.json` är valfria. Svenska och engelska ska ha samma strukturer, bitar och
 lika många anteckningar; `tests/packs.test.ts` kontrollerar det.
+
+`covers` listar paket som det här redan rymmer det bästa av: en bok med romantasy får inte också
+romance- och fantasypaketens anteckningar. En struktur tar med paketets bit med samma id, så att
+dess etiketter och sorter följer med.
 
 ## En anteckning
 

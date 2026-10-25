@@ -12,7 +12,9 @@ A romance lives or dies scene by scene. These are the moves that keep the reader
 - **Chemistry in the details.** What they notice about each other says more than their words. The way they push up their glasses when they lie. The warmth of a shoulder in a cramped car.
 - **Lines with subtext.** An argument about who does the dishes can be about not daring to ask for anything.
 - **Switch POV with purpose.** One voice per scene. Let the new voice start where the last could not see: what he was thinking when she walked out.
+- **The inner voice.** Readers want to be inside the head of the one who feels. After something important: the feeling first, then the thought, then the action. Do not skip the reaction to get on with things, because the reaction is where the reader falls in love.
 - **Closeness as a choice.** A question, a pause, a clear yes. It makes intimate scenes stronger, not weaker.
+- **The intimate scene changes something.** A kiss or a night should move the relationship: a defence falls, a promise is made, a fear grows. If the scene changes nothing, it is a pause, however hot it is.
 - **Humour in romantic comedy.** Build the comedy on the characters: their rules, their pride, their terrible plans. Repeat a joke three times, and let the third time mean something.
 - **Chapter endings that pull.** End on a feeling or a decision that cannot be taken back. "She deleted the text. Then she typed it again and hit send."
 - **Vary the pace.** After a big scene, give a quiet one where the character takes it in. That is where the reader has time to fall in love.

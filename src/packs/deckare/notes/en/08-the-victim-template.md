@@ -20,4 +20,8 @@ Rename the note to the character's name.
 
 **What the body and the scene say:** cause of death, time, and whatever is wrong about the place. What shows at once, and what is found later?
 
+**What they left behind:** the phone, the calendar, the emails, the bank statements, a locked desk. What can the detective read from them, and what has someone already removed?
+
+**The picture someone protects:** who lies about the victim after the death, to protect them, themselves or the family name?
+
 **Why the reader should care:** one detail that makes the victim a person and not just a puzzle. A note on the fridge, a habit, a promise never kept.

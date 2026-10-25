@@ -13,14 +13,17 @@ sort: Guide
 - **Sammanfattning hela vägen.** Utan scener blir boken en rapport. Ta de viktigaste ögonblicken i realtid.
 - **Fackboken som börjar i dig.** Läsaren bryr sig om sitt problem först och om din resa sedan. Lägg din bakgrund där den ger förtroende, inte på första sidan.
 - **Påståenden utan belägg.** En enda felaktig siffra kan få läsaren att tvivla på resten.
+- **Allt på en gång.** En fackbok som vill säga allt om ämnet blir en lärobok. Välj det läsaren behöver för att lösa sitt problem, och hänvisa vidare för resten.
 
 **Verkliga människor, med omsorg**
 
+- Skriv första utkastet fritt, som om ingen skulle läsa det. Bestäm sedan, avsnitt för avsnitt, vad som ska ut i världen.
 - Fråga dig om varje avsnitt: behöver berättelsen det här, eller vill jag bara få säga det?
-- Ändra namn och igenkännbara detaljer på dem som inte valt att synas, och skriv i ett förord att du har gjort det.
-- Var särskilt varsam med barn, med dem som inte längre kan svara för sig och med andras hälsa och hemligheter.
+- Ändra namn och igenkännbara detaljer på dem som inte valt att synas, och skriv i en författarnot att du har gjort det. Tänk på att ett ändrat namn inte räcker om yrket, orten och familjen pekar ut personen ändå.
+- Var särskilt varsam med barn, med dem som inte längre kan svara för sig och med andras hälsa, sexualitet, ekonomi och hemligheter.
+- Minns någon det annorlunda? Du behöver inte ge dig, men du kan låta det synas: "Min bror minns det som att det var han som ringde."
 - Överväg att låta den det gäller läsa avsnittet innan boken är klar. Du bestämmer själv, men du får veta vad du står för.
-- Rör det anklagelser mot någon som går att känna igen, tala med förlaget eller en jurist innan boken ges ut.
+- Pekar du ut någon som går att känna igen som brottslig eller klandervärd, tala med förlaget eller en jurist innan boken ges ut. I Sverige räcker det inte alltid att uppgiften är sann för att undgå ansvar för förtal; det måste också ha varit försvarligt att lämna den.
 
 **Omarbetningen**
 
@@ -29,3 +32,4 @@ sort: Guide
 - Stäm av varje Kolla fakta mot dina källor i Underlag.
 - Läs dialogen högt. Låter personen som sig själv?
 - Läs boken som den du skriver om skulle läsa den, och sedan som en främling.
+- Låt en provläsare som inte känner dig läsa. Fråga var hen tappade intresset och var hen inte trodde på dig, inte vad hen tyckte.

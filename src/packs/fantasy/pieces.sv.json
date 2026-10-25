@@ -2,8 +2,8 @@
   {
     "id": "magi",
     "name": "Fantasy och magi",
-    "hint": "Ett magisystem med regler, pris och gränser, riken med egna strider och varelser med egen vilja.",
-    "sorts": ["Magisystem", "Riken", "Varelser"],
+    "hint": "Ett magisystem med regler, pris och gränser, riken med egna strider och varelser med egen vilja, samlade under Världen.",
+    "sorts": ["Världen"],
     "labels": [
       ["Magi", "#7a5cc9"],
       ["Priset", "#d4483b"],
@@ -17,7 +17,7 @@
     "id": "urban",
     "name": "Urban fantasy",
     "hint": "En stad du känner igen, en dold värld under den och reglerna som håller hemligheten.",
-    "sorts": ["Den dolda världen"],
+    "sorts": ["Världen"],
     "labels": [
       ["Vardagen", "#7d7d7d"],
       ["Det dolda", "#7a5cc9"],

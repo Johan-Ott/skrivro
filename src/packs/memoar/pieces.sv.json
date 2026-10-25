@@ -2,7 +2,7 @@
   {
     "id": "memoar",
     "name": "Memoar och fackbok",
-    "hint": "Minnen, människor och källor, och etiketter som visar var du visar, berättar och behöver kolla fakta.",
+    "hint": "Minnen, människor och källor, och etiketter för scen och sammanfattning, för det du måste kolla och för det som är känsligt.",
     "sorts": ["Minnen", "Underlag"],
     "labels": [
       ["Scen", "#2f86c9"],

@@ -10,6 +10,8 @@ Rename the note to the name of the place.
 
 **Why here:** why does the main character end up here, and why do they not want to stay at first?
 
+**What only exists here:** readers love the island, the café and the bookshop, but what makes your place yours? A detail, a problem or a tradition no other book has.
+
 **The people:** three to five people who live here. A name, a quirk and a small story of their own for each.
 
 **The traditions:** a festival, a market, a meeting, something that recurs and can carry a scene.

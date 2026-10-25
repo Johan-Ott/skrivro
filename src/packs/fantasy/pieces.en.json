@@ -2,8 +2,8 @@
   {
     "id": "magi",
     "name": "Fantasy and magic",
-    "hint": "A magic system with rules, costs and limits, realms with their own conflicts and creatures with a will.",
-    "sorts": ["Magic system", "Realms", "Creatures"],
+    "hint": "A magic system with rules, costs and limits, realms with their own conflicts and creatures with a will of their own, gathered under The world.",
+    "sorts": ["The world"],
     "labels": [
       ["Magic", "#7a5cc9"],
       ["The cost", "#d4483b"],
@@ -17,7 +17,7 @@
     "id": "urban",
     "name": "Urban fantasy",
     "hint": "A city you recognise, a hidden world beneath it and the rules that keep the secret.",
-    "sorts": ["The hidden world"],
+    "sorts": ["The world"],
     "labels": [
       ["The everyday", "#7d7d7d"],
       ["The hidden", "#7a5cc9"],

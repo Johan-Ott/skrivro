@@ -18,6 +18,8 @@ Rename the note to the character's name.
 
 **The other side:** what shows when the wall comes down? The tenderness, the humour, what they do when no one is watching.
 
+**The line:** what will they never do, however dark they are? Readers forgive a dangerous love interest a great deal, but only if the line shows early and holds when it counts.
+
 **Why them:** what do they see in the main character that no one else does?
 
 **The power:** what do they have that the main character lacks, and how do they show they will not abuse it between them?

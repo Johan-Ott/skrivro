@@ -18,6 +18,10 @@ Rename the note to the character's name.
 
 **What they see:** what do they see in the main character that no one else does?
 
+**The respect:** in which early scene do they show that no means no, and that they take the other seriously?
+
+**The flaw:** what are they bad at, and what makes them hard to love at times? Flawless is boring.
+
 **The other side:** what do they only show once the wall comes down?
 
 **The chemistry:** what is it in the way they talk, argue and laugh that only these two share?

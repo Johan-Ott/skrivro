@@ -2,7 +2,7 @@
   {
     "id": "fantasy",
     "name": "Fantasy in four parts",
-    "hint": "Home, the wide world, the darkness and the return, with magic that costs all the way.",
+    "hint": "Home, the wide world, the darkness and the return, with magic that exacts its price all the way. Works for both epic and urban fantasy.",
     "totalGoal": 110000,
     "sorts": [],
     "labels": [],
@@ -16,7 +16,7 @@
           ],
           [
             "The call",
-            "Something pulls them out of everyday life, and it ties into the book's big what if."
+            "Something pulls them out of everyday life, and it ties into the book's big what if. They hesitate, and the reader understands why."
           ],
           [
             "The first magic",
@@ -24,7 +24,7 @@
           ],
           [
             "The departure",
-            "They choose to leave, or are forced to, and the door home closes behind them."
+            "They choose to leave, or are forced to, and the door home closes behind them. In urban fantasy, this is the step into the hidden world."
           ]
         ]
       },
@@ -33,7 +33,7 @@
         "chapters": [
           [
             "New ground",
-            "A new realm or people brings wonder, but also customs and rules the main character breaks."
+            "A new realm, a new people or the city's hidden side brings wonder, but also customs and rules the main character breaks."
           ],
           [
             "Companions and enemies",
@@ -54,7 +54,7 @@
         "chapters": [
           [
             "The enemy strikes",
-            "The antagonist's plan turns out larger than anyone believed, and it costs losses."
+            "The antagonist's plan turns out larger than anyone believed, and what has been won so far is lost."
           ],
           [
             "The price is paid",
@@ -75,7 +75,7 @@
         "chapters": [
           [
             "The final battle",
-            "The conflict is decided by rules the reader already knows and by the main character's own choice. No new powers at the last minute."
+            "The conflict is decided in battle, by cunning or through a sacrifice, but always by rules the reader already knows and by the main character's own choice. No new powers at the last minute."
           ],
           [
             "What has changed",

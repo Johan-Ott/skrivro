@@ -16,6 +16,8 @@ Byt namn på anteckningen till rikets, hovets eller landets namn.
 
 **Platserna:** två eller tre platser där mycket händer. Hur ser de ut, hur låter och luktar de?
 
+**Vem som betalar:** vem bär makten på sina axlar? Tjänarna, bönderna, de utan magi. Visa dem, så blir världen verklig och insatserna större.
+
 **Den som tjänar på kriget:** vem vill att det fortsätter, och varför?
 
 **Hotet mot alla:** det som till slut tvingar fiender att samarbeta.

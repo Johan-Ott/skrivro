@@ -24,6 +24,10 @@ Byt namn på anteckningen till parets namn.
 
 **Den mörka natten:** vad förstår var och en när de är ensamma?
 
+**Insikten:** vad måste var och en ändra hos sig själv, och vad gör den andra för att mötas halvvägs?
+
 **Den stora gesten:** vem gör vad, och varför läker det just det sår boken visade?
+
+**Försoningen:** vem ber om förlåtelse för vad, och hur får läsaren se att det är menat?
 
 **Slutet:** lyckligt för alltid eller lyckligt för nu? Vilken bild visar att det håller?

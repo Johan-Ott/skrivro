@@ -20,6 +20,10 @@ Rename the note to the name of the case. Copy the block below once for every clu
 
 **What it really shows:** its true meaning.
 
+**Fair play:** is it on the page before the detective draws the conclusion? Note the chapter.
+
 **When the detective understands:** the chapter, and what makes it click.
+
+**Resolution:** for a red herring, where does the reader get the real explanation, and is it as concrete as the herring was?
 
 **Tagged in the text:** does the scene carry the label Clue or Red herring?

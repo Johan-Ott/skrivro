@@ -8,7 +8,7 @@ Stäm av innan du börjar putsa språket.
 
 **Paret**
 
-- Möts de tidigt, inom de första kapitlen?
+- Möts de tidigt, inom första tiondelen av boken?
 - Har båda ett eget mål, ett eget liv och ett eget sår?
 - Har båda en lögn om kärlek som relationen utmanar?
 - Finns det ett yttre skäl som tvingar dem att fortsätta ses?
@@ -20,7 +20,8 @@ Stäm av innan du börjar putsa språket.
 - Ligger mittpunkten ungefär halvvägs, och känns det då som att det kan gå?
 - Bottnar brytningen i deras sår, inte i ett missförstånd?
 - Gör båda något aktivt för att hitta tillbaka, inte bara den ena?
-- Motsvarar den stora gesten det sår den läker?
+- Motsvarar den stora gesten det sår den läker, och är den andra fri att säga nej till den?
+- Får försoningen tid, och ber den som sårat om förlåtelse på riktigt?
 - Är slutet lyckligt, och får läsaren se det i en egen scen?
 
 **Världen runt dem**
@@ -28,6 +29,7 @@ Stäm av innan du börjar putsa språket.
 - Har bifigurerna egna liv, och pressar eller hjälper de relationen?
 - Spelar platsen roll, och vill läsaren vara där?
 - I feelgood: hänger hotet mot platsen ihop med det som händer mellan paret?
+- I feelgood: har huvudpersonens nya liv en egen båge, även utan kärleken?
 
 **Tonen**
 

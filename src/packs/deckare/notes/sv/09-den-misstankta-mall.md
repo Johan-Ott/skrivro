@@ -2,9 +2,11 @@
 sort: karaktarer
 ---
 
-# Den misstänkta (mall)
+# Den misstänkte (mall)
 
 Byt namn på anteckningen till personens namn. Gör en för varje misstänkt, och ge var och en ett eget drag så att läsaren inte blandar ihop dem.
+
+**Det egna draget:** det som gör hen omöjlig att blanda ihop med de andra. Ett yrke, ett sätt att tala, ett föremål hen alltid har med sig.
 
 **Bandet till offret:** hur kände de varandra, och hur stod det till mellan dem den sista tiden?
 
@@ -13,6 +15,8 @@ Byt namn på anteckningen till personens namn. Gör en för varje misstänkt, oc
 **Tillfället:** kunde hen ha varit på platsen? Hur nära var hen?
 
 **Alibit:** var säger sig hen ha varit, och vem kan bekräfta det? Håller det?
+
+**I förhöret:** vad vill hen uppnå när utredaren ställer frågor? Skydda någon, vinna tid, peka på någon annan, få veta vad polisen vet?
 
 **Lögnen:** vad ljuger hen om i förhöret?
 

@@ -2,7 +2,7 @@
   {
     "id": "ungdom",
     "name": "Ungdomsroman",
-    "hint": "För 13 år och uppåt: en lögn som växer, ett gäng som spricker och ett val som huvudpersonen gör helt själv.",
+    "hint": "För 13 år och uppåt: en lögn som växer, ett gäng som spricker och ett val som huvudpersonen gör helt själv. Varje steg blir ofta två eller tre kapitel.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
@@ -31,7 +31,10 @@
             "Nya människor",
             "En ny vän, en rival eller ett gäng som öppnar en annan värld och ställer nya krav."
           ],
-          ["Första gången", "Något händer för första gången, och det känns i hela kroppen."],
+          [
+            "Första gången",
+            "Den första festen, kyssen eller lögnen till en förälder: något nytt som känns i hela kroppen och inte går att ta tillbaka."
+          ],
           [
             "Att höra till",
             "Vad hen måste göra eller dölja för att få vara med, och vad det kostar någon annan."
@@ -62,7 +65,92 @@
             "Det avgörande",
             "Huvudpersonen löser konflikten med sina egna medel, inte med tur eller en förälder."
           ],
-          ["Någon ny", "Ett slut med hopp: vad som har förändrats, och vad som får förbli olöst."]
+          [
+            "Den hen blev",
+            "Ett slut med hopp: vad som har förändrats, och vad som får förbli olöst."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mellanalder",
+    "name": "Mellanåldersbok",
+    "hint": "För 9 till 12 år: ett problem som de vuxna inte kan lösa, en vän med egen vilja och en sidointrig hemma. Sexton kapitel på knappt 2 000 ord.",
+    "totalGoal": 30000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "Början",
+        "chapters": [
+          [
+            "En vanlig dag",
+            "Visa huvudpersonen hemma eller i skolan, vad hen vill och vad som redan skaver, med handling från första raden."
+          ],
+          [
+            "Det som händer",
+            "Något oväntat rubbar vardagen: ett fynd, ett besked, en ny elev. Sluta på en fråga."
+          ],
+          [
+            "Varför ingen vuxen",
+            "Visa varför de vuxna inte kan eller får hjälpa, så att problemet blir huvudpersonens eget."
+          ],
+          [
+            "Beslutet",
+            "Hen bestämmer sig för att göra något själv, och tar det första steget innan kapitlet är slut."
+          ]
+        ]
+      },
+      {
+        "title": "Försöken",
+        "chapters": [
+          [
+            "Vännen",
+            "En vän eller en motvillig medhjälpare kommer in, med egna mål som inte är huvudpersonens."
+          ],
+          ["Första försöket", "Planen fungerar nästan. Ge ett litet framsteg och ett nytt hinder."],
+          [
+            "Hemma",
+            "Sidointrigen: ett syskon, en förälder eller en rival gör livet svårare och speglar huvudproblemet."
+          ],
+          [
+            "Hemligheten",
+            "Huvudpersonen döljer något för någon som betyder mycket, och det börjar kosta."
+          ]
+        ]
+      },
+      {
+        "title": "Det mörkaste",
+        "chapters": [
+          [
+            "Mittpunkten",
+            "En upptäckt ändrar allt: problemet är större, eller något annat än hen trodde."
+          ],
+          ["Bråket", "Vännerna blir osams, och huvudpersonen bär en del av skulden."],
+          [
+            "Allt går fel",
+            "Planen spricker inför andra, hemligheten kommer fram och hen står ensam."
+          ],
+          [
+            "Det hen redan kan",
+            "Ensam med det svåra minns hen något från tidigare i boken som pekar mot en väg ut."
+          ]
+        ]
+      },
+      {
+        "title": "Hela vägen",
+        "chapters": [
+          ["Förlåt", "Hen söker upp vännen och tar ansvar för sin del, innan det avgörande."],
+          ["Den nya planen", "En plan som bygger på hens egen styrka och på vännen, inte på tur."],
+          [
+            "Det avgörande",
+            "Huvudpersonen löser problemet med egna medel. De vuxna får komma in efteråt, inte innan."
+          ],
+          [
+            "Tillbaka",
+            "Ett hoppfullt slut i en scen som speglar början och visar vad som är annorlunda nu."
+          ]
         ]
       }
     ]

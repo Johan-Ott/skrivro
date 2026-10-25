@@ -18,6 +18,8 @@ Byt namn på anteckningen till fallets namn. Här står brottet som det faktiskt
 
 **Dagarna efter:** hur fortsätter den skyldige att skydda sig medan utredningen pågår?
 
+**Fakta som går att kontrollera:** solnedgång, väder, tågtider, öppettider, vem som jobbade vilket pass. Allt som läsaren kan slå upp ska stämma.
+
 **Det som gick snett:** vad blev inte som planerat? Ett vittne, ett väder, en sak som glömdes kvar.
 
 **Spåren som blev kvar:** varje spår som brottet lämnade, och var det finns. För över dem till Ledtrådslistan.

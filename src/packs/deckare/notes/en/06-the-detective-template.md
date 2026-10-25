@@ -6,7 +6,7 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Role and authority:** police officer, journalist, lawyer, priest or nosy neighbour? What can they do that others cannot, and what are they absolutely not allowed to do?
+**Role and authority:** police officer, journalist, lawyer, priest or nosy neighbour? What can they do that others cannot, and what are they absolutely not allowed to do? If they are an amateur: how do they get access to the scene and the people, and why does no one stop them?
 
 **Why them:** what keeps them on the case when others let go? A tie to the victim, a debt, professional pride, plain stubbornness?
 
@@ -21,6 +21,8 @@ Rename the note to the character's name.
 **The lie they believe:** a conviction about themselves or the world that the case will challenge. For example: "I work best alone" or "people are what they seem".
 
 **Want and need:** what they want (solve the case, get promoted, be left alone) and what they actually need (forgive, ask for help, see themselves clearly).
+
+**Sounding board:** who do they think out loud with? A colleague, a friend or a boss who pushes back lets the reasoning happen in dialogue instead of inside their head, and gives the reader someone to be cleverer than.
 
 **Private life:** a relationship that suffers from the work, or gives them strength. Who is waiting at home, and for how much longer?
 

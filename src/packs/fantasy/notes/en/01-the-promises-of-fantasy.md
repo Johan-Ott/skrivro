@@ -11,9 +11,11 @@ A reader who opens a fantasy novel wants to be taken somewhere else, and to trus
 - **Magic that costs.** The reader wants to feel that every spell takes something. Magic without a price becomes a shortcut, and shortcuts kill tension.
 - **Stakes on two scales.** The world is at stake, but what makes the reader care is personal: a sister, a promise, a home.
 - **A main character who grows.** The person standing there at the end is not the one we met at the start. The journey through the world is also a journey inward.
-- **A what if that carries the book.** Every fantasy rests on an idea: what if memories could be sold, what if the gods died when no one prayed to them any more. The idea should be felt in every part of the book.
-- **An ending that settles the big question.** The main conflict is resolved in this book, even in a series. Leave threads if you like, but not the central one.
+- **A what if that carries the book.** Every fantasy rests on an idea: what if memories could be sold, what if the gods died when no one prayed to them any more. The idea should be felt throughout the book, in the magic, in the struggle for power and in the main character's own choice.
+- **An ending that settles the book's question.** The conflict this book has built up is resolved in this book, even in a series. The series arc can live on, but the reader should close the book feeling that something has been decided.
 
-**For urban fantasy** the same promises apply, plus one more: the ordinary city must feel real, so the hidden world beneath it becomes believable. The bus stop, the late-night corner shop, the neighbour nobody ever sees, any of them can hide something.
+**The first chapter is a contract.** The opening pages promise what kind of book this is: how much magic, how dark, how big. If the dragons arrive in chapter twelve, let the reader sense them in chapter one. A promise never made can never be kept.
+
+**Epic or urban.** Epic fantasy promises a whole world, a long road and stakes that reach across kingdoms. Urban fantasy promises our own city with something hidden beneath it, and a main character who lives in both. The promises above hold for both, but the weight falls differently. The guide Epic and urban fantasy covers the differences.
 
 **Try this:** write your book's what if in a single sentence. If you can't, that is the first thing to solve.

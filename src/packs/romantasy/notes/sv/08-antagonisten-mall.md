@@ -16,6 +16,8 @@ Byt namn på anteckningen till personens namn.
 
 **Hotet mot relationen:** hur driver hen isär de två? Vilken hemlighet känner hen till, vilken lojalitet utnyttjar hen?
 
+**Frestelsen:** vad erbjuder hen någon av de två, och varför är det svårt att säga nej? Makt, hämnd, att få tillbaka den som gick förlorad.
+
 **Kopplingen:** hur är hen knuten till någon av dem? Släkt, lärare, före detta allierad, den som orsakade såret.
 
 **Första synliga steget:** när märker läsaren hen för första gången, och vad gör hen då?

@@ -20,4 +20,8 @@ Byt namn på anteckningen till personens namn.
 
 **Vad kroppen och platsen berättar:** dödsorsak, tidpunkt, och det som är fel med platsen. Vad syns direkt, och vad upptäcks senare?
 
+**Det hen lämnade efter sig:** telefonen, kalendern, mejlen, kontoutdragen, ett låst skrivbord. Vad kan utredaren läsa ut, och vad har någon redan hunnit ta bort?
+
+**Bilden någon skyddar:** vem ljuger om offret efter döden, för att skydda hen, sig själv eller familjens namn?
+
 **Varför läsaren ska bry sig:** en detalj som gör offret till en människa och inte bara en gåta. En lapp på kylskåpet, en ovana, ett löfte som aldrig hölls.

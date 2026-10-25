@@ -24,6 +24,10 @@ Rename the note to the couple's names.
 
 **The dark night:** what does each of them understand when they are alone?
 
+**The realisation:** what must each of them change in themselves, and what does the other do to meet them halfway?
+
 **The grand gesture:** who does what, and why does it heal exactly the wound the book showed?
+
+**The reconciliation:** who apologises for what, and how does the reader see that it is meant?
 
 **The ending:** happily ever after or happy for now? Which image shows it will hold?

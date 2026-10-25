@@ -19,7 +19,10 @@ A romance has a contract with its reader. The reader knows how it ends, and that
 - **Warmth.** A place and people the reader would like to move in with.
 - **Laughter.** The humour comes from the characters and the situations, not from making them stupid.
 - **Hope.** Grief, divorce and hard things are allowed, but the ending leaves the reader lighter than they began.
+- **A new life.** In feel-good, the lead's own journey, starting over, finding home or daring, matters as much as the love story. The ending must be happy for them, and almost always for the couple too.
 
 A clear promise on page one can look like this: "Linnea had three rules for her new life on the island. No men, no seagulls in the kitchen, no rushing. By nine in the morning she had broken two." The reader knows at once what the book promises: humour, a place and a love story.
 
-**The heat level.** Decide early how much of the sensual is shown, from closed door to open, and keep that level all the way through.
+**The heat level.** Decide early how much of the sensual is shown, from closed door to open, and keep that level all the way through. Feel-good usually sits at closed or half-open door; romance can sit anywhere. Many readers choose books by heat level, or spice level as it is often called, so state it openly in the book's description.
+
+**The answer to the question.** The reader knows it ends happily. The tension lies in how these two will get there, with the wounds and the reasons you have given them. The more impossible it looks halfway through, the stronger the ending.

@@ -2,7 +2,7 @@
   {
     "id": "romantasy",
     "name": "Romantasy",
-    "hint": "The world and the relationship as sorts of their own, and labels that track the heat, the magic and the betrayal.",
+    "hint": "The world and the relationship as sorts of their own, and labels that track the spark, the magic and the betrayal through the book.",
     "sorts": ["The world", "The relationship"],
     "labels": [
       ["Spark", "#c9508f"],

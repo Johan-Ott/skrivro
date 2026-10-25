@@ -2,7 +2,7 @@
   {
     "id": "memoar",
     "name": "Memoir and non-fiction",
-    "hint": "Memories, people and sources, and labels that show where you show, tell and need to check facts.",
+    "hint": "Memories, people and sources, with labels for scene and summary, for what you must check and for what is sensitive.",
     "sorts": ["Memories", "Groundwork"],
     "labels": [
       ["Scene", "#2f86c9"],

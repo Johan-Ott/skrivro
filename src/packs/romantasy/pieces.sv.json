@@ -2,10 +2,10 @@
   {
     "id": "romantasy",
     "name": "Romantasy",
-    "hint": "Världen och relationen som egna sorter, och etiketter som följer glöden, magin och sveket genom boken.",
+    "hint": "Världen och relationen som egna sorter, och etiketter som följer gnistan, magin och sveket genom boken.",
     "sorts": ["Världen", "Relationen"],
     "labels": [
-      ["Glöd", "#c9508f"],
+      ["Gnista", "#c9508f"],
       ["Magi", "#2f86c9"],
       ["Makten", "#7a5cc9"],
       ["Hemlighet", "#e08a1e"],

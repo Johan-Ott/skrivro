@@ -18,6 +18,10 @@ Byt namn på anteckningen till personens namn.
 
 **Vad hen ser:** vad ser hen hos huvudpersonen som ingen annan ser?
 
+**Respekten:** i vilken tidig scen visar hen att ett nej betyder nej, och att hen tar den andra på allvar?
+
+**Bristen:** vad är hen dålig på, och vad gör det svårt att älska hen ibland? Felfri blir tråkig.
+
 **Den andra sidan:** vad visar hen först när muren faller?
 
 **Kemin:** vad är det i hur de pratar, bråkar och skrattar som bara de två har?

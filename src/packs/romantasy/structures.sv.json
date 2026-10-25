@@ -2,7 +2,7 @@
   {
     "id": "romantasy",
     "name": "Romantasy",
-    "hint": "Romansens faser flätade med en fantasyhandling: världen skapar hindren, och kärleken avgör slaget.",
+    "hint": "Romansens faser flätade med en fantasyhandling: världen skapar hindren, och kärleken avgör slaget. Varje steg kan bli flera kapitel.",
     "totalGoal": 110000,
     "sorts": [],
     "labels": [],
@@ -12,7 +12,7 @@
         "chapters": [
           [
             "Den första världen",
-            "Huvudpersonen, bördan och lögnen hen lever efter. Visa magins pris redan här, så att läsaren litar på reglerna senare."
+            "Huvudpersonen, bördan och lögnen hen lever efter. Ge läsaren skäl att heja på hen, och visa magins pris redan här, så att läsaren litar på reglerna senare."
           ],
           [
             "Mötet",
@@ -20,11 +20,11 @@
           ],
           [
             "Den andra rösten",
-            "Kärleksintressets värld: hemligheten, lojaliteten och varför hen inte kan släppa huvudpersonen. I dubbla perspektiv är det hens första kapitel."
+            "Kärleksintressets värld: hemligheten, lojaliteten och varför hen inte kan släppa huvudpersonen. I dubbla perspektiv är det hens första kapitel. Med ett enda perspektiv visar du det genom det huvudpersonen ser men inte förstår."
           ],
           [
             "Pakten",
-            "Ett uppdrag, ett avtal eller en magisk bindning tvingar dem samman så att ingen kan gå. Bokens första vändpunkt."
+            "Ett uppdrag, ett avtal eller en magisk bindning tvingar dem samman så att ingen kan gå. Bokens första vändpunkt, ungefär en fjärdedel in."
           ]
         ]
       },
@@ -62,11 +62,11 @@
           ],
           [
             "Isär",
-            "Fienden vinner mark och de två står på var sin sida. Det lägsta läget, för kärleken och för världen samtidigt."
+            "Fienden vinner mark och de två står på var sin sida. Var för sig ser de vad de har förlorat. Det lägsta läget, för kärleken och för världen samtidigt."
           ],
           [
             "Valet",
-            "Huvudpersonen ser igenom sin lögn och väljer. Kärleken och det rätta blir samma val, och det kostar något på riktigt."
+            "Båda ser igenom sin lögn, och huvudpersonen väljer. Kärleken och det rätta blir samma val, och det kostar något på riktigt."
           ]
         ]
       },
@@ -77,10 +77,13 @@
             "Slaget",
             "Bågarna möts: den stora gesten är en del av det avgörande slaget, och magin tar sitt pris."
           ],
-          ["Bandet", "Kärleken sägs och visas. Båda har förändrats, och den andra ser det."],
+          [
+            "Bandet",
+            "Kärleken sägs och visas. Båda har förändrats, och den andra ser det. Den som svek har gjort bot i handling, inte bara bett om ursäkt."
+          ],
           [
             "Det nya riket",
-            "Ett lyckligt slut, eller ett löfte som håller till nästa bok, i en värld som har förändrats av vad de gjorde."
+            "Lyckligt för alltid, eller lyckligt för nu med ett löfte som håller till nästa bok, i en värld som har förändrats av vad de gjorde. Låt sista bilden eka mot den första."
           ]
         ]
       }

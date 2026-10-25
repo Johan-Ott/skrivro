@@ -2,7 +2,7 @@
   {
     "id": "romantasy",
     "name": "Romantasy",
-    "hint": "The romance's phases braided with a fantasy plot: the world makes the obstacles, and love decides the battle.",
+    "hint": "The romance's phases braided with a fantasy plot: the world makes the obstacles, and love decides the battle. Each step can become several chapters.",
     "totalGoal": 110000,
     "sorts": [],
     "labels": [],
@@ -12,7 +12,7 @@
         "chapters": [
           [
             "The first world",
-            "The main character, the burden and the lie they live by. Show the price of magic here, so the reader trusts the rules later."
+            "The main character, the burden and the lie they live by. Give the reader a reason to root for them, and show the price of magic here, so the reader trusts the rules later."
           ],
           [
             "The meeting",
@@ -20,11 +20,11 @@
           ],
           [
             "The second voice",
-            "The love interest's world: the secret, the loyalty and why they cannot let the main character go. In dual POV, this is their first chapter."
+            "The love interest's world: the secret, the loyalty and why they cannot let the main character go. In dual POV, this is their first chapter. With a single POV, show it through what the main character sees but does not understand."
           ],
           [
             "The bargain",
-            "A quest, a pact or a magical bond ties them together so neither can walk away. The book's first turning point."
+            "A quest, a pact or a magical bond ties them together so neither can walk away. The book's first turning point, about a quarter of the way in."
           ]
         ]
       },
@@ -62,11 +62,11 @@
           ],
           [
             "Apart",
-            "The enemy gains ground and the two stand on opposite sides. The low point, for love and for the world at once."
+            "The enemy gains ground and the two stand on opposite sides. Each, alone, sees what they have lost. The low point, for love and for the world at once."
           ],
           [
             "The choice",
-            "The main character sees through their lie and chooses. Love and what is right become the same choice, and it truly costs."
+            "Both see through their lie, and the main character chooses. Love and what is right become the same choice, and it truly costs."
           ]
         ]
       },
@@ -77,10 +77,13 @@
             "The battle",
             "The arcs meet: the grand gesture is part of the deciding battle, and the magic takes its price."
           ],
-          ["The bond", "Love is spoken and shown. Both have changed, and the other sees it."],
+          [
+            "The bond",
+            "Love is spoken and shown. Both have changed, and the other sees it. Whoever betrayed has made amends in deeds, not just in an apology."
+          ],
           [
             "The new realm",
-            "A happy ending, or a promise that holds until the next book, in a world changed by what they did."
+            "Happily ever after, or happy for now with a promise that holds until the next book, in a world changed by what they did. Let the final image echo the first."
           ]
         ]
       }

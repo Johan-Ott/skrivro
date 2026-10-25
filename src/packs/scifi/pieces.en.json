@@ -2,13 +2,13 @@
   {
     "id": "scifi",
     "name": "Science fiction",
-    "hint": "The new thing and its consequences, the worlds where they show and the society they have shaped.",
-    "sorts": ["Technology", "Worlds", "Society"],
+    "hint": "The new thing and its consequences, the places where they show and the society they have shaped, gathered under The world.",
+    "sorts": ["The world"],
     "labels": [
       ["Novum", "#2f86c9"],
       ["Consequence", "#e08a1e"],
       ["Wonder", "#3aa17e"],
-      ["The world", "#7a5cc9"],
+      ["Worldbuilding", "#7a5cc9"],
       ["Reveal", "#d4483b"]
     ],
     "chapters": []

@@ -12,7 +12,7 @@
         "chapters": [
           [
             "Ögonblicket",
-            "Öppna i en scen ur bokens mest laddade stund, utan förklaring, så att läsaren känner frågan boken bär."
+            "Öppna i en scen som bär bokens fråga, gärna ur den mest laddade stunden, och förklara ingenting än."
           ],
           [
             "Frågan",
@@ -85,7 +85,7 @@
   {
     "id": "fackbok",
     "name": "Fackbok",
-    "hint": "Läsarens problem, ett tydligt löfte och en idé per kapitel, med belägg och exempel, tills läsaren kan använda det.",
+    "hint": "För den förklarande och vägledande fackboken: läsarens problem, ett tydligt löfte och en idé per kapitel, med belägg och exempel.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
@@ -148,7 +148,10 @@
       {
         "title": "Använd det",
         "chapters": [
-          ["Så gör du", "Konkreta steg i ordning, som läsaren kan ta redan i morgon."],
+          [
+            "Så gör du",
+            "Konkreta steg i ordning som läsaren kan ta redan i morgon, eller i en förklarande bok: vad läsaren nu ser annorlunda."
+          ],
           ["När det inte går som tänkt", "De vanligaste hindren på vägen, och vad läsaren gör då."],
           [
             "Avslutning",

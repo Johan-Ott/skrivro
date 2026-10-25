@@ -4,13 +4,15 @@ sort: Memories
 
 # The turning point (template)
 
-Rename the note to the turning point in a few words, like "The call from the hospital". A memoir has one big turning point and often a few smaller ones.
+For memoir. Rename the note to the turning point in a few words, like "The call from the hospital". A memoir has one big turning point and often a few smaller ones.
 
 **Before:** what life looked like, and what you took for granted.
 
-**The signs:** small events that pointed ahead, but that you didn't understand at the time.
+**The signs:** small events that pointed ahead, but that you didn't understand at the time. Which should the reader notice, and which should only be felt in hindsight?
 
 **The event:** what happened, where and when. This becomes a full scene.
+
+**The physical detail:** what you saw, heard or were holding when it happened. It is often what the reader remembers.
 
 **The first day and night:** what you did, thought and couldn't bring yourself to do.
 
@@ -22,4 +24,4 @@ Rename the note to the turning point in a few words, like "The call from the hos
 
 **The link to the book's question:** how the turning point makes the question impossible to avoid.
 
-**The chapter:** where in the book it comes, and how the chapters before build towards it.
+**The chapter:** where in the book it comes, and how the chapters before build towards it. If the book opens with it, what do you hold back until the reader gets there again?

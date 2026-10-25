@@ -16,6 +16,8 @@ Rename the note to the name of the realm, court or land.
 
 **The places:** two or three places where a lot happens. How do they look, sound and smell?
 
+**Who pays:** who carries power on their backs? The servants, the farmers, those without magic. Show them, and the world becomes real and the stakes grow.
+
 **Who profits from the war:** who wants it to go on, and why?
 
 **The threat to everyone:** the thing that finally forces enemies to work together.

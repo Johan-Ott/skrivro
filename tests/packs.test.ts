@@ -50,12 +50,18 @@ describe("genre packs", () => {
     expect(withTemplates.map((pack) => pack.id)).toEqual(swedish.map((pack) => pack.id));
   });
 
-  it("start a romantasy book with the pack's guides and character templates", async () => {
+  it("start a romantasy book with its own pack only, its labels, guides and character templates", async () => {
     const files = createMemoryFileSystem({});
 
-    const created = await createProject(files, "/Skrivro", details);
+    const created = await createProject(files, "/Skrivro", {
+      ...details,
+      genre: "romans",
+      pieces: ["magi"],
+    });
 
-    const { tree } = await readProjectFile(files, created.dir, []);
+    const { tree, fields } = await readProjectFile(files, created.dir, []);
+    expect(fields["packs"]).toEqual(["romantasy"]);
+    expect(JSON.stringify(fields["labels"])).toContain("Svek");
     expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(5);
     expect(childrenOf(tree, (node) => node.title === "Världen")).toHaveLength(2);
     expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(3);

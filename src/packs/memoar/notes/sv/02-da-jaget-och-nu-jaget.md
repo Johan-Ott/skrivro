@@ -9,9 +9,11 @@ Varje memoar har två berättare: den du var när det hände, och den du är nä
 - **Då-jaget upplever.** Hen vet inte hur det slutar. I scenerna skriver du med hens kunskap, ord och rädslor. En tioåring tänker inte "min mammas depression", hen tänker "mamma ligger i soffan igen".
 - **Nu-jaget förstår.** Hen kliver fram i korta stycken och ser mönstret: "Först trettio år senare förstod jag att hon var lika rädd som jag."
 - **Håll isär dem.** Låt inte nu-jaget förklara mitt i en scen. Låt scenen verka först och reflektera efteråt, gärna i ett eget stycke.
-- **Tjäna in insikten.** En insikt känns sann bara om läsaren har sett det som ledde dit. Visa först, tolka sedan.
+- **Insikten kommer efter.** En insikt känns sann bara om läsaren har sett det som ledde dit. Visa först, tolka sedan.
 - **Låt avståndet växa.** I början av boken ligger nu-jaget ofta i bakgrunden. Mot slutet tar hen mer plats, när förståelsen är det som återstår.
 - **Den bärande frågan.** Formulera i en mening vad nu-jaget försöker förstå, till exempel "Varför stannade jag så länge?" Varje kapitel ska föra frågan framåt.
+- **Tempus.** Det vanliga är preteritum med då-jagets blick, och nu-jaget i presens när hen kliver fram: "Jag förstår i dag att..." Presens i scenerna ger närhet, men gör det svårare för nu-jaget att höras. Välj en gång och håll fast vid det.
+- **Avståndet först.** Det går att skriva om något du fortfarande står mitt i, men nu-jaget behöver ett avstånd för att kunna se mönstret. Saknas det, skriv utkastet för din egen skull och vänta med boken.
 
 **I fackboken** motsvaras då-jaget av läsaren: den som ännu inte vet. Skriv varje kapitel från hens utgångsläge, inte från ditt. Fråga dig vad läsaren tror innan kapitlet, och vad hen ska tro efter det.
 

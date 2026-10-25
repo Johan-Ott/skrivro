@@ -7,7 +7,8 @@
     "en": "Romantasy"
   },
   "hint": {
-    "sv": "Kärlek och magi i samma båge: 15 kapitel, guider för långsam glöd och mallar för par, magi och riken.",
-    "en": "Love and magic in one arc: 15 chapters, slow-burn guides and templates for the couple, magic and realms."
-  }
+    "sv": "Kärlek och magi i samma båge: en struktur i 15 steg, guider för långsam glöd och mallar för paret, magin och rikena.",
+    "en": "Love and magic in one arc: a 15-step structure, slow-burn guides and templates for the couple, the magic and the realms."
+  },
+  "covers": ["romance", "fantasy"]
 }

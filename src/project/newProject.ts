@@ -110,8 +110,9 @@ async function templateFor(fileSystem: FileSystem, libraryDir: string, details: 
     : [];
   const all = [...structures(), ...own];
   const structure = all.find((each) => each.id === details.structure) ?? (all[0] as BookTemplate);
-  const pieces = [details.genre ?? "", ...details.pieces].filter(Boolean);
-  return composeTemplate(structure, pieces);
+  // A pack's structure brings the pack's piece of the same name, with its labels and sorts.
+  const pieces = [details.genre ?? "", ...details.pieces, structure.id].filter(Boolean);
+  return composeTemplate(structure, [...new Set(pieces)]);
 }
 
 // The template's goal, labels and note sorts; Skrivro's standard labels when it adds none.

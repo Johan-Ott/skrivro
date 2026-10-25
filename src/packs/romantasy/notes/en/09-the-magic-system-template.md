@@ -18,6 +18,8 @@ Rename the note to what the magic is called in your world.
 
 **How it feels:** what do you see, hear and feel when it is used? Give it senses.
 
+**How the reader learns it:** which early scene shows a rule and a price in action, so the reader understands them before they decide anything?
+
 **The forbidden:** which magic is forbidden, by whom, and why does someone want to use it anyway?
 
 **The bond:** how does the magic tie into the love story? A bond that shares feelings, a curse that touches them both, a power only the other can wake.

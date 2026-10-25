@@ -2,7 +2,7 @@
   {
     "id": "ungdom",
     "name": "Young adult novel",
-    "hint": "For ages 13 and up: a lie that grows, a friend group that cracks and a choice the protagonist makes entirely alone.",
+    "hint": "For ages 13 and up: a lie that grows, a friend group that cracks and a choice the protagonist makes entirely alone. Each step often becomes two or three chapters.",
     "totalGoal": 60000,
     "sorts": [],
     "labels": [],
@@ -11,11 +11,11 @@
         "title": "Before",
         "chapters": [
           [
-            "In the middle of everyday life",
-            "Open on a scene where the protagonist wants something and something already rubs, with no background lecture."
+            "An ordinary day",
+            "Open on a scene where the protagonist wants something and something is already wrong, with no background lecture."
           ],
           [
-            "What upsets everything",
+            "What throws everything",
             "An event they can't ignore: a new school, a secret, a broken promise."
           ],
           [
@@ -31,7 +31,10 @@
             "New people",
             "A new friend, a rival or a group that opens up another world and makes new demands."
           ],
-          ["The first time", "Something happens for the first time, and they feel it everywhere."],
+          [
+            "The first time",
+            "The first party, the first kiss or the first lie to a parent: something new that they feel everywhere and can't take back."
+          ],
           [
             "Belonging",
             "What they have to do or hide to be part of it, and what that costs someone else."
@@ -72,8 +75,90 @@
             "The protagonist resolves the conflict by their own means, not by luck or a parent."
           ],
           [
-            "Someone new",
+            "Who they became",
             "An ending with hope: what has changed, and what is allowed to stay unresolved."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mellanalder",
+    "name": "Middle-grade novel",
+    "hint": "For ages 9 to 12: a problem the adults can't solve, a friend with a will of their own and a subplot at home. Sixteen chapters of just under 2,000 words.",
+    "totalGoal": 30000,
+    "sorts": [],
+    "labels": [],
+    "parts": [
+      {
+        "title": "The start",
+        "chapters": [
+          [
+            "An ordinary day",
+            "Show the protagonist at home or at school, what they want and what is already wrong, with action from the first line."
+          ],
+          [
+            "Something happens",
+            "Something unexpected upsets everyday life: a discovery, some news, a new pupil. End on a question."
+          ],
+          [
+            "Why no adult",
+            "Show why the adults can't or mustn't help, so the problem becomes the protagonist's own."
+          ],
+          [
+            "The decision",
+            "They decide to do something themselves, and take the first step before the chapter ends."
+          ]
+        ]
+      },
+      {
+        "title": "Trying",
+        "chapters": [
+          [
+            "The friend",
+            "A friend or a reluctant helper joins in, with goals of their own that aren't the protagonist's."
+          ],
+          ["The first attempt", "The plan almost works. Give a small win and a new obstacle."],
+          [
+            "At home",
+            "The subplot: a sibling, a parent or a rival makes life harder and mirrors the main problem."
+          ],
+          [
+            "The secret",
+            "The protagonist hides something from someone who matters a lot, and it starts to cost."
+          ]
+        ]
+      },
+      {
+        "title": "The darkest point",
+        "chapters": [
+          [
+            "The midpoint",
+            "A discovery changes everything: the problem is bigger, or different from what they thought."
+          ],
+          ["The falling-out", "The friends quarrel, and the protagonist is partly to blame."],
+          [
+            "Everything goes wrong",
+            "The plan falls apart in front of others, the secret comes out and they stand alone."
+          ],
+          [
+            "What they already know",
+            "Alone with it, they remember something from earlier in the book that points to a way out."
+          ]
+        ]
+      },
+      {
+        "title": "All the way",
+        "chapters": [
+          ["Sorry", "They seek out the friend and own their part, before the deciding moment."],
+          ["The new plan", "A plan built on their own strength and on the friend, not on luck."],
+          [
+            "The deciding moment",
+            "The protagonist solves the problem by their own means. The adults may come in afterwards, not before."
+          ],
+          [
+            "Back again",
+            "A hopeful ending in a scene that mirrors the opening and shows what is different now."
           ]
         ]
       }
@@ -113,7 +198,7 @@
           ],
           ["The hard part", "The problem seems too big, and there's no adult around."],
           [
-            "The courage",
+            "Brave enough",
             "The protagonist works out the solution alone, using something they learned earlier in the book."
           ],
           ["The solution", "The plan is carried out, with one last surprise or a laugh."],

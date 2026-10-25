@@ -18,6 +18,8 @@ Byt namn på anteckningen till magins namn i din värld.
 
 **Hur den känns:** vad ser, hör och känner man när den används? Ge den sinnen.
 
+**Hur läsaren lär sig den:** vilken tidig scen visar en regel och ett pris i handling, så att läsaren förstår dem innan de avgör något?
+
 **Det förbjudna:** vilken magi är förbjuden, av vem, och varför vill någon ändå använda den?
 
 **Bandet:** hur knyter magin an till kärleken? Ett band som delar känslor, en förbannelse som rör dem båda, en kraft som bara väcks av den andra.

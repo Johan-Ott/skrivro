@@ -4,7 +4,7 @@ sort: Minnen
 
 # Ett minne (mall)
 
-Byt namn på anteckningen till minnet i några ord, som "Sista sommaren på gården". Gör en för varje minne du vill använda.
+För memoaren, och för den personliga fackboken där egna minnen blir exempel. Byt namn på anteckningen till minnet i några ord, som "Sista sommaren på gården". Gör en för varje minne du vill använda.
 
 **När och var:** år, årstid, plats. Så exakt du kan, och hur säker du är.
 
@@ -20,8 +20,10 @@ Byt namn på anteckningen till minnet i några ord, som "Sista sommaren på går
 
 **Vad du förstår nu:** vad minnet betyder i dag, i en eller två meningar.
 
+**Luckorna:** det du inte minns. Fyll inte i det i tysthet; säg hellre att du inte minns, eller gissa öppet.
+
 **Scen eller sammanfattning:** behöver minnet spelas upp i realtid, eller räcker ett stycke?
 
-**Kontrollen:** vem mer minns det, och minns hen det annorlunda? Finns foton, brev eller dagböcker?
+**Kontrollen:** vem mer minns det, och minns hen det annorlunda? Finns foton, brev, dagböcker eller tidningar från den dagen?
 
-**Platsen i boken:** vilket kapitel, och vad minnet för framåt.
+**Platsen i boken:** vilket kapitel, och hur minnet för bokens fråga framåt.

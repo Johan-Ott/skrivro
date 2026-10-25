@@ -17,6 +17,7 @@ Run through this when the draft is done. The suspense has to hold before you pol
 
 - Does the reader learn early what they stand to lose?
 - Do they act, rather than just react, from the second part onwards?
+- Has every obvious way out, like calling the police or running, been closed with a reason the reader accepts?
 - Do they win the showdown through their own skill and choice?
 - Have they paid a price that shows?
 
@@ -25,12 +26,14 @@ Run through this when the draft is done. The suspense has to hold before you pol
 - Does the villain have a plan that makes sense and works for a long time?
 - Does the villain make moves between the main character's scenes?
 - Is the villain most dangerous exactly when the main character is weakest?
+- Is there a reason the villain does not simply get rid of the main character early on?
 
 **Stakes and twists**
 
 - Do the stakes rise in every part, from external to personal to inner?
 - Is every major twist planted with at least one earlier seed?
 - Does at least one twist change how the reader sees what has already happened?
+- Are the twists of different kinds, rather than the same surprise twice?
 
 **Pace**
 

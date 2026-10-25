@@ -24,4 +24,13 @@ A thriller runs on two forces: time running out, and the price of failure going 
 
 **Plant the twists.** A twist no one could have seen coming feels cheap. Lay down two or three seeds early, so the reader can look back and see the answer was there.
 
+**Kinds of twist.** Vary them, so the reader does not learn to wait for the same thing.
+
+- **Who:** the ally works for the villain, or the victim is the one who planned it all.
+- **Why:** the villain wanted something other than the main character thought, and the plan was never about what looked like the target.
+- **When and where:** what the threat was about has already happened, or is happening somewhere else right now.
+- **What they know about themselves:** the main character is wrong about their own past, or the narrator has held something back all along.
+
+Test every twist: does what came before make more sense in hindsight, or none at all? Only the first is a real twist.
+
 **In Skrivro.** Put the labels Time pressure and Stakes rise on scenes and filter in Contents. Are there long stretches with neither? That is where the pace sags.

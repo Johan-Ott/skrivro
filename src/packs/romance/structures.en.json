@@ -2,7 +2,7 @@
   {
     "id": "romans",
     "name": "The romance in four phases",
-    "hint": "Two who meet, fall, pull back and fight for love. The ending is happy.",
+    "hint": "Two who meet, fall, pull back and fight for love. The ending is happy. Each step can become several chapters.",
     "totalGoal": 80000,
     "sorts": [],
     "labels": [],
@@ -66,7 +66,7 @@
           ],
           [
             "The break-up",
-            "It ends, for a reason rooted in both their wounds. The reader should understand both and still want to shake them."
+            "It ends, about three quarters of the way in, for a reason rooted in both their wounds. The reader should understand both and still want to shake them."
           ]
         ]
       },
@@ -83,7 +83,7 @@
           ],
           [
             "The grand gesture",
-            "Someone risks everything, in a way that heals exactly the wound the book showed at the start."
+            "Someone risks everything, in a way that heals exactly the wound the book showed at the start. Often both need to act, and whoever did the hurting truly apologises."
           ],
           [
             "Happy ending",
@@ -96,7 +96,7 @@
   {
     "id": "feelgood",
     "name": "Feel-good and romantic comedy",
-    "hint": "A new start, a meeting that grates, warmth, a setback and a warm ending.",
+    "hint": "A new start, a meeting that grates, warmth, a setback and a warm ending. The lead's new life carries as much as the love story.",
     "totalGoal": 80000,
     "sorts": [],
     "labels": [],
@@ -162,7 +162,7 @@
           ],
           [
             "The choice",
-            "The lead chooses the place and love, with a gesture that shows they have changed."
+            "The lead chooses the place and love, with a gesture that shows they have changed. The love interest shows they have changed too."
           ],
           [
             "The warm ending",

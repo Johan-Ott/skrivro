@@ -24,6 +24,8 @@ Byt namn på anteckningen till personens namn.
 
 **Det som gör hen älskvärd:** vad gillar läsaren hos hen redan på första sidan? Humorn, omtanken, envisheten.
 
+**Bristen:** vad gör hen fel, om och om igen, som kostar något i relationen? Stoltheten, flykten, kontrollen.
+
 **Rösten:** hur låter hen i sitt perspektiv? Vilka ord, vilken humor, vad lägger hen märke till?
 
 **Bågen:** vem är hen i första kapitlet, och vilket val i slutet visar att hen har förändrats?

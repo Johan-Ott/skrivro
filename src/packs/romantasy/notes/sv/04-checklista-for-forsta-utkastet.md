@@ -8,12 +8,15 @@ Läs igenom utkastet en gång och stäm av, innan du börjar putsa meningar.
 
 **Kärleken**
 
-- Möts de två tidigt, senast inom de första kapitlen?
+- Möts de två tidigt, inom första tiondelen av boken?
 - Har båda ett konkret mål, och står målen i vägen för varandra?
 - Finns det ett yttre skäl som tvingar dem samman, så att de inte bara kan gå?
 - Bygger spänningen i steg, och tar eller ger varje steg något?
+- Har båda en egen båge, och har båda förändrats i slutet?
+- Om magi, ett avtal eller ödet binder dem: väljer de ändå varandra själva?
 - Är det tydligt i varje intim scen att båda vill?
 - Bottnar brytningen i deras sår och lojaliteter, inte i ett samtal de borde ha haft?
+- Gör den som svek bot i handling, och får den andra tid att välja förlåtelsen?
 - Slutar boken lyckligt, eller med ett löfte som håller?
 
 **Världen**
@@ -22,6 +25,7 @@ Läs igenom utkastet en gång och stäm av, innan du börjar putsa meningar.
 - Löser magin aldrig ett problem gratis i slutet?
 - Vill makten runt dem något eget, även när de inte är på sidan?
 - Är antagonisten begriplig, och slår hen mot relationen och inte bara mot riket?
+- Får den här bokens hot ett avgörande, även om serien fortsätter?
 
 **Flätningen**
 
@@ -35,3 +39,4 @@ Läs igenom utkastet en gång och stäm av, innan du börjar putsa meningar.
 - Vet läsaren efter första kapitlet vilken ton och värmegrad boken har?
 - Slutar de flesta kapitel med något som får hen att läsa vidare?
 - Har världen förändrats i slutet, tack vare vad de två gjorde?
+- Får läsaren stanna en stund hos paret efter slaget, innan boken tar slut?

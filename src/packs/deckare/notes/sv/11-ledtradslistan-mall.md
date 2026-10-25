@@ -20,6 +20,10 @@ Byt namn på anteckningen till fallets namn. Kopiera blocket nedan en gång för
 
 **Vad den egentligen visar:** den riktiga betydelsen.
 
+**Ärligt spel:** syns den i texten innan utredaren drar sin slutsats? Skriv kapitlet.
+
 **När utredaren förstår:** kapitel, och vad som får hen att förstå.
+
+**Upplösningen:** för ett falskt spår, var får läsaren den riktiga förklaringen, och är den lika konkret som spåret var?
 
 **Märkt i texten:** har scenen etiketten Ledtråd eller Falskt spår?

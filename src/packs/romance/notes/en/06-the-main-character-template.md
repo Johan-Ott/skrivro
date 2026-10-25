@@ -24,6 +24,8 @@ Rename the note to the character's name.
 
 **What makes them lovable:** what does the reader like about them on page one? The humour, the kindness, the stubbornness.
 
+**The flaw:** what do they get wrong, again and again, that costs them in the relationship? The pride, the running away, the need for control.
+
 **The voice:** how do they sound in their own point of view? Which words, what humour, what do they notice?
 
 **The arc:** who are they in the first chapter, and which choice at the end shows they have changed?

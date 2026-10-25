@@ -23,13 +23,23 @@ export interface Pack {
   look: string;
   name: string;
   hint: string;
+  /** Packs this one holds the best of, left out of a book that has it: romance and fantasy for
+   * romantasy. */
+  covers: string[];
   structures: BookTemplate[];
   pieces: TemplatePiece[];
   notes: PackNote[];
 }
 
 type Words = { sv: string; en: string };
-type Manifest = { id: string; version: string; look: string; name: Words; hint: Words };
+type Manifest = {
+  id: string;
+  version: string;
+  look: string;
+  name: Words;
+  hint: Words;
+  covers?: string[];
+};
 
 const MANIFESTS = import.meta.glob<Manifest>("../packs/*/pack.json", {
   eager: true,
@@ -66,6 +76,7 @@ function packAt(path: string, manifest: Manifest, language: "sv" | "en"): Pack {
     look: manifest.look,
     name: manifest.name[language],
     hint: manifest.hint[language],
+    covers: manifest.covers ?? [],
     structures: list<BookTemplate>("structures"),
     pieces: list<TemplatePiece>("pieces"),
     notes,
@@ -99,8 +110,9 @@ export const isPackOwned = (packId: string) => IS_BETA || bought.has(packId);
 /** The owned packs a new book's structure, genre and pieces come from, each once. */
 export function packsFor(templateIds: string[]) {
   const found = templateIds.map(packOf).filter((pack): pack is Pack => pack !== null);
-  return [...new Map(found.map((pack) => [pack.id, pack])).values()].filter((pack) =>
-    isPackOwned(pack.id),
+  const covered = new Set(found.flatMap((pack) => pack.covers));
+  return [...new Map(found.map((pack) => [pack.id, pack])).values()].filter(
+    (pack) => isPackOwned(pack.id) && !covered.has(pack.id),
   );
 }
 

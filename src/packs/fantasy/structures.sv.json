@@ -2,7 +2,7 @@
   {
     "id": "fantasy",
     "name": "Fantasyns fyra delar",
-    "hint": "Hemmet, den vida världen, mörkret och återkomsten, med en magi som kostar hela vägen.",
+    "hint": "Hemmet, den vida världen, mörkret och återkomsten, med en magi som kräver sitt pris hela vägen. Fungerar för både episk och urban fantasy.",
     "totalGoal": 110000,
     "sorts": [],
     "labels": [],
@@ -12,17 +12,20 @@
         "chapters": [
           [
             "Vardagen med en spricka",
-            "Huvudpersonen i handling i en konkret vardag, och ett första tecken på att något är fel. Grunda läsaren innan du förklarar."
+            "Huvudpersonen i handling i en konkret vardag, och ett första tecken på att något är fel. Ge läsaren fotfäste innan du förklarar."
           ],
           [
             "Kallelsen",
-            "Något drar ut hen ur vardagen, och det hänger ihop med bokens stora tänk om."
+            "Något drar ut hen ur vardagen, och det hänger ihop med bokens stora tänk om. Hen tvekar, och läsaren förstår varför."
           ],
           [
             "Den första magin",
             "Läsaren ser magin på nära håll och ser vad den kostar, så att reglerna sätts i handling och inte i en föreläsning."
           ],
-          ["Avfärden", "Hen väljer att ge sig av, eller tvingas, och dörren hem stängs bakom hen."]
+          [
+            "Avfärden",
+            "Hen väljer att ge sig av, eller tvingas, och dörren hem stängs bakom hen. I urban fantasy är det steget in i den dolda världen."
+          ]
         ]
       },
       {
@@ -30,7 +33,7 @@
         "chapters": [
           [
             "Ny mark",
-            "Ett nytt rike eller folk ger förundran, men också seder och regler som hen bryter mot."
+            "Ett nytt rike, ett nytt folk eller stadens dolda sida ger förundran, men också seder och regler som hen bryter mot."
           ],
           [
             "Följeslagare och fiender",
@@ -51,7 +54,7 @@
         "chapters": [
           [
             "Fienden slår till",
-            "Antagonistens plan visar sig större än någon trott, och det kostar förluster."
+            "Antagonistens plan visar sig större än någon trott, och det som vunnits hittills går förlorat."
           ],
           [
             "Priset betalas",
@@ -72,7 +75,7 @@
         "chapters": [
           [
             "Slutstriden",
-            "Konflikten avgörs med regler läsaren redan kan och med huvudpersonens eget val. Inga nya krafter i sista stund."
+            "Konflikten avgörs i strid, med list eller genom ett offer, men alltid med regler läsaren redan kan och med huvudpersonens eget val. Inga nya krafter i sista stund."
           ],
           [
             "Det som förändrats",

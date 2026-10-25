@@ -24,4 +24,13 @@ En thriller drivs av två krafter: tiden som rinner ut, och priset för att miss
 
 **Plantera vändningarna.** En vändning som inte gick att ana känns billig. Lägg ut två eller tre frön tidigt, så att läsaren i efterhand ser att svaret fanns där.
 
+**Vändningens sorter.** Variera dem, så att läsaren inte lär sig vänta på samma sak.
+
+- **Vem:** bundsförvanten arbetar för skurken, eller offret är den som planerade allt.
+- **Varför:** skurken ville något annat än det huvudpersonen trodde, och planen gällde aldrig det som såg ut att vara målet.
+- **När och var:** det som hotet gällde har redan hänt, eller händer någon annanstans just nu.
+- **Vad huvudpersonen vet om sig själv:** huvudpersonen har fel om sitt eget förflutna, eller berättaren har undanhållit något hela tiden.
+
+Testa varje vändning: blir det som redan hänt mer meningsfullt i efterhand, eller meningslöst? Bara det första är en riktig vändning.
+
 **I Skrivro.** Sätt etiketterna Tidspress och Insatserna höjs på scenerna och filtrera i Innehåll. Finns det långa sträckor utan någon av dem? Där sackar tempot.

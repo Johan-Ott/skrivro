@@ -18,6 +18,8 @@ Byt namn på anteckningen till personens namn.
 
 **Den andra sidan:** vad visar sig när muren faller? Ömheten, humorn, det hen gör när ingen ser.
 
+**Gränsen:** vad gör hen aldrig, hur mörk hen än är? Läsaren förlåter mycket hos ett farligt kärleksintresse, men bara om gränsen syns tidigt och håller när det gäller.
+
 **Varför just hen:** vad ser hen hos huvudpersonen som ingen annan ser?
 
 **Makten:** vad har hen som huvudpersonen saknar, och hur visar hen att hen inte missbrukar det mellan dem?

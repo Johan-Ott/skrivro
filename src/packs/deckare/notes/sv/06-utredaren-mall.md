@@ -6,7 +6,7 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Roll och mandat:** polis, journalist, advokat, präst eller nyfiken granne? Vad får hen göra som andra inte får, och vad får hen absolut inte göra?
+**Roll och mandat:** polis, journalist, advokat, präst eller nyfiken granne? Vad får hen göra som andra inte får, och vad får hen absolut inte göra? Är hen amatör: hur får hen tillträde till platsen och personerna, och varför stoppar ingen hen?
 
 **Varför just hen:** vad gör att hen inte kan släppa fallet när andra gör det? Ett band till offret, en skuld, en yrkesheder, ren envishet?
 
@@ -21,6 +21,8 @@ Byt namn på anteckningen till personens namn.
 **Lögnen hen tror på:** en övertygelse om sig själv eller världen som fallet kommer att utmana. Till exempel: "jag klarar mig bäst ensam" eller "folk är som de verkar".
 
 **Vill och behöver:** vad hen vill (lösa fallet, bli befordrad, få vara i fred) och vad hen egentligen behöver (förlåta, be om hjälp, se sig själv).
+
+**Bollplanket:** vem tänker hen högt med? En kollega, en vän eller en chef som säger emot gör att resonemanget kan ske i dialog i stället för i huvudet, och ger läsaren någon att vara klokare än.
 
 **Privatlivet:** en relation som lider av arbetet, eller som ger hen kraft. Vem väntar hemma, och hur länge till?
 

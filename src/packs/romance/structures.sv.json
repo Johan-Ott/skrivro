@@ -2,7 +2,7 @@
   {
     "id": "romans",
     "name": "Romansens fyra faser",
-    "hint": "Två som möts, faller, drar sig undan och kämpar för kärleken. Slutet är lyckligt.",
+    "hint": "Två som möts, faller, drar sig undan och kämpar för kärleken. Slutet är lyckligt. Varje steg kan bli flera kapitel.",
     "totalGoal": 80000,
     "sorts": [],
     "labels": [],
@@ -66,7 +66,7 @@
           ],
           [
             "Brytningen",
-            "Det tar slut, av ett skäl som bottnar i båda deras sår. Läsaren ska förstå båda och ändå vilja skaka dem."
+            "Det tar slut, ungefär tre fjärdedelar in, av ett skäl som bottnar i båda deras sår. Läsaren ska förstå båda och ändå vilja skaka dem."
           ]
         ]
       },
@@ -83,7 +83,7 @@
           ],
           [
             "Den stora gesten",
-            "Någon vågar allt, på ett sätt som läker just det sår boken visade i början."
+            "Någon vågar allt, på ett sätt som läker just det sår boken visade i början. Ofta behöver båda göra något, och den som sårat ber om förlåtelse på riktigt."
           ],
           [
             "Lyckligt slut",
@@ -96,7 +96,7 @@
   {
     "id": "feelgood",
     "name": "Feelgood och romantisk komedi",
-    "hint": "En ny början, ett möte som skaver, värme, ett bakslag och ett varmt slut.",
+    "hint": "En ny början, ett möte som skaver, värme, ett bakslag och ett varmt slut. Huvudpersonens nya liv bär lika mycket som kärleken.",
     "totalGoal": 80000,
     "sorts": [],
     "labels": [],
@@ -165,7 +165,7 @@
           ],
           [
             "Valet",
-            "Huvudpersonen väljer platsen och kärleken, med en gest som visar att hen har förändrats."
+            "Huvudpersonen väljer platsen och kärleken, med en gest som visar att hen har förändrats. Kärleksintresset visar att hen också har gjort det."
           ],
           [
             "Det varma slutet",
