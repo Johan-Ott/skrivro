@@ -1,3 +1,4 @@
+import { ConfirmLayer } from "./ConfirmLayer.js";
 import { PacksLayer } from "./packs/PackList.js";
 import type { AppState } from "./App.js";
 import { signInToAccount } from "./googleAccount.js";
@@ -79,6 +80,7 @@ function ShelfFrame(
     <>
       {menu.layers}
       <ProfileLayer app={app} project={null} />
+      <ConfirmLayer />
     </>
   );
   const profile = <ProfileButton app={app} />;

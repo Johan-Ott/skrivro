@@ -1,13 +1,9 @@
 import { invoke } from "@tauri-apps/api/core";
 import { appDataDir } from "@tauri-apps/api/path";
-import {
-  confirm,
-  createTauriPlatform,
-  isPhone,
-  withForwardSlashes,
-} from "@llkit/platform/tauri.js";
+import { createTauriPlatform, isPhone, withForwardSlashes } from "@llkit/platform/tauri.js";
 import { tauriFileSystem } from "@llkit/storage/tauriFileSystem.js";
 import { STATE_FILE } from "../sync/syncState.js";
+import { confirmInApp } from "./ConfirmLayer.js";
 import type { Platform, RemoteState, Spelling } from "./platform.js";
 import { androidSignIn, computerSignIn } from "./tauriGoogleSignIn.js";
 import { t } from "../i18n/i18n.js";
@@ -37,11 +33,10 @@ async function removeBook(dir: string, title: string, isEverywhere = false) {
   const everywhere = t("”{title}” tas bort här och läggs i papperskorgen i din Drive i 30 dagar.", {
     title,
   });
-  const isSure = await confirm(isEverywhere ? everywhere : message, {
+  const isSure = await confirmInApp({
     title: t("Ta bort boken"),
-    kind: "warning",
+    message: isEverywhere ? everywhere : message,
     okLabel: t("Ta bort"),
-    cancelLabel: t("Avbryt"),
   });
   if (isSure) await invoke("remove_book", { path: dir });
   return isSure;

@@ -1,3 +1,4 @@
+import { Fragment, Slice } from "prosemirror-model";
 import { describe, expect, it } from "vitest";
 import { parseMarkdown } from "../src/manuscript/parseMarkdown";
 import { manuscriptSchema as schema } from "../src/manuscript/schema";
@@ -113,6 +114,23 @@ describe("parseMarkdown", () => {
     ]);
     expect(doc.child(0).childCount).toBe(2);
     expect(roundTrip(scene)).toBe(scene);
+  });
+
+  it("shows a Markdown list as a bulleted list, written back as it was until it changes", () => {
+    const scene = "Stäm av:\n\n- **Brottet** tidigt?\n- Den skyldige med?\n";
+    const doc = parseMarkdown(scene);
+
+    expect(doc.child(1).attrs["style"]).toBe("punktlista");
+    expect(doc.child(1).childCount).toBe(2);
+    expect(roundTrip(scene)).toBe(scene);
+    const edited = doc.replace(
+      doc.content.size - 2,
+      doc.content.size - 2,
+      new Slice(Fragment.from(schema.text("!")), 0, 0),
+    );
+    expect(serializeMarkdown(edited)).toBe(
+      "Stäm av:\n\n::: punktlista\n**Brottet** tidigt?\n\nDen skyldige med?!\n:::\n",
+    );
   });
 
   it("reads a scene break and a style block", () => {

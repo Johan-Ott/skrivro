@@ -1,6 +1,6 @@
 import type { Node } from "prosemirror-model";
 import { footnoteDefinitions } from "./footnotes.js";
-import { parseMarkdown } from "./parseMarkdown.js";
+import { listContent, parseMarkdown } from "./parseMarkdown.js";
 import { pictureMarkdown } from "./pictures.js";
 import { serializeInlineContent } from "./serializeInline.js";
 
@@ -66,6 +66,8 @@ function cachedCanonical(paragraph: Node): string {
 }
 
 function serializeStyleBlock(block: Node): string {
+  const source = block.attrs["source"] as string | null;
+  if (source !== null && listContent(block) === block.attrs["canonical"]) return source;
   const style = String(block.attrs["style"]);
   const openFence = block.attrs["openFence"] as string | null;
   const fenceStyle = openFence?.replace(/^:::/, "").trim();

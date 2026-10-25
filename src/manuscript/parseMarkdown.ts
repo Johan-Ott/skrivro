@@ -1,4 +1,4 @@
-import type { PhrasingContent, RootContent } from "mdast";
+import type { List, Paragraph, PhrasingContent, RootContent } from "mdast";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import type { Node } from "prosemirror-model";
 import { splitFootnotes, type FootnoteTexts } from "./footnotes.js";
@@ -62,12 +62,41 @@ const onlyPicture = (children: PhrasingContent[]) => {
 function blockFrom(child: RootContent, chunk: string, notes: FootnoteTexts): Node {
   const source = chunk.slice(child.position?.start.offset, child.position?.end.offset);
   if (child.type === "thematicBreak") return schema.node("sceneBreak", { source });
+  if (child.type === "list")
+    return listFrom(child, chunk, notes, source) ?? schema.node("rawBlock", { source });
   if (child.type !== "paragraph") return schema.node("rawBlock", { source });
   const picture = onlyPicture(child.children);
   if (picture) return schema.node("picture", { ...picture, source });
+  return paragraphFrom(child, chunk, notes, source);
+}
+
+function paragraphFrom(
+  child: Paragraph,
+  chunk: string,
+  notes: FootnoteTexts,
+  source: string | null,
+) {
   const content = parseInline(child.children, chunk, [], notes);
   const canonical = serializeInlineContent(schema.node("paragraph", null, content));
   return schema.node("paragraph", { source, canonical }, content);
+}
+
+/** What a list's style block holds, to tell an untouched list from an edited one. */
+export const listContent = (block: Node) => {
+  const lines: string[] = [String(block.attrs["style"])];
+  block.forEach((item) => lines.push(serializeInlineContent(item)));
+  return lines.join("\n");
+};
+
+// A Markdown list, as in a note written elsewhere, is shown as the punktlista or numrerad style;
+// it is written back as it was until it is changed. A list holding more than paragraphs stays.
+function listFrom(list: List, chunk: string, notes: FootnoteTexts, source: string): Node | null {
+  const blocks = list.children.flatMap((item) => item.children);
+  if (!blocks.every((block) => block.type === "paragraph")) return null;
+  const items = blocks.map((block) => paragraphFrom(block as Paragraph, chunk, notes, null));
+  const style = list.ordered ? "numrerad" : "punktlista";
+  const shown = schema.node("styleBlock", { style }, items);
+  return schema.node("styleBlock", { style, source, canonical: listContent(shown) }, items);
 }
 
 function styleBlock(text: string, fence: StyleFence, notes: FootnoteTexts): PlacedBlock {

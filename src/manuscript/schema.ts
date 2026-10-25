@@ -50,6 +50,9 @@ export const manuscriptSchema = new Schema({
         openFence: { default: null },
         innerTrailing: { default: null },
         closeFence: { default: null },
+        /** A Markdown list shown as this style, written back as it was until it is changed. */
+        source: { default: null },
+        canonical: { default: null },
       },
       parseDOM: [
         {
