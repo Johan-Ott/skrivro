@@ -75,6 +75,7 @@ function makeCalls(current: () => AppState) {
         sortId: id,
         newSortTitle: id ? null : sort,
         isLinked,
+        body: null,
       });
     },
   };

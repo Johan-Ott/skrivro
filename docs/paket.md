@@ -33,8 +33,10 @@ sort: Guide
 Texten, i vanlig Markdown.
 ```
 
-`sort` är var anteckningen hamnar i den nya boken: `karaktarer` för Personer, eller namnet på en
-egen sort, som `Guide` eller `Världen`, som då skapas. Filerna läggs in i namnordning.
+`sort: Guide` gör anteckningen till en guide: den skrivs in i bokens sort Guide när paketet läggs
+till, med listorna som punktlistor. Alla andra är mallar: de skrivs inte in, utan erbjuds under Mall
+i Ny anteckning för sin sort, `karaktarer` för Personer eller en egen sort som `Världen`, så många
+gånger skribenten vill. Mallens första stycke om att byta namn och "(mall)" i titeln tas bort där.
 
 ## Köp
 

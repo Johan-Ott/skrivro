@@ -1,8 +1,9 @@
 import { withAdditions, withoutChaptersIn, type Additions } from "../../project/pieceAdditions.js";
 import {
+  guidesOf,
   isPackInBook,
   joinSorts,
-  packNotesTree,
+  packGuides,
   withPackNoted,
   type Pack,
 } from "../../project/packs.js";
@@ -26,23 +27,23 @@ export async function addToBook(project: Project, wanted: Additions) {
 
 const isSort = (node: TreeNode) => node.kind === "sort" || node.id === CHARACTERS_ID;
 
-// The pack's notes the book has no note of the same name for, so nothing comes twice, also in a
+// The pack's guides the book has no note of the same name for, so nothing comes twice, also in a
 // book from before the book noted its packs.
-function notesMissingIn(project: Project, pack: Pack) {
+function guidesMissingIn(project: Project, pack: Pack) {
   const titles = new Set(Object.values(project.summaries).map((summary) => summary.title));
-  return pack.notes.filter((note) => !titles.has(note.title));
+  return guidesOf(pack).filter((note) => !titles.has(note.title));
 }
 
 /** The book's packs for Genrepaket: which it has, and adding one. */
 export const packsOfBook = (project: Project, save: (change: ProjectChange) => void) => ({
   has: (pack: Pack) =>
     isPackInBook(project.fields, pack) ||
-    (pack.notes.length > 0 && notesMissingIn(project, pack).length === 0),
+    (guidesOf(pack).length > 0 && guidesMissingIn(project, pack).length === 0),
   add: async (pack: Pack) => save(await addPackToBook(project, pack)),
 });
 
-/** A whole pack in a book that already exists: its pieces' notes and labels, and its guides and
- * templates, each in the sort of its name that the book has, or a new one. */
+/** A whole pack in a book that already exists: its pieces' sorts and labels, and its guides. Its
+ * templates are offered in Ny anteckning from then on. */
 export async function addPackToBook(project: Project, pack: Pack) {
   if (isPackInBook(project.fields, pack)) return { fields: project.fields, tree: project.tree };
   const withPieces = await addToBook(project, {
@@ -50,14 +51,9 @@ export async function addPackToBook(project: Project, pack: Pack) {
     labels: pack.pieces.flatMap((piece) => piece.labels),
     chapters: [],
   });
-  const missing = { ...pack, notes: notesMissingIn(project, pack) };
-  const notes = await packNotesTree(platform.fileSystem, project.dir, [missing]);
-  const people = withPieces.tree.find((node) => node.id === CHARACTERS_ID);
-  const characters = {
-    ...(people ?? { id: CHARACTERS_ID, kind: "sort" as const }),
-    children: notes.characters,
-  };
-  const sorts = joinSorts([...withPieces.tree.filter(isSort), characters, ...notes.own]);
+  const missing = { ...pack, notes: guidesMissingIn(project, pack) };
+  const guides = await packGuides(platform.fileSystem, project.dir, [missing]);
+  const sorts = joinSorts([...withPieces.tree.filter(isSort), ...guides]);
   const tree = withSpecialFolders([...withPieces.tree.filter((node) => !isSort(node)), ...sorts]);
   return { fields: withPackNoted(withPieces.fields, pack.id), tree };
 }

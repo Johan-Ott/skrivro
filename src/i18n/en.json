@@ -1523,5 +1523,9 @@
   "Från version 1.0 köps ett paket en gång i appbutiken: Microsoft Store på Windows och Google Play på Android. Det du redan har lagt till i en bok är ditt.": "From version 1.0 a pack is bought once in the app store: Microsoft Store on Windows and Google Play on Android. What you have already added to a book is yours.",
   "Se vad som ingår": "See what's inside",
   "Så ser det ut i boken": "How it looks in the book",
-  "✓ I boken": "✓ In the book"
+  "✓ I boken": "✓ In the book",
+  "{count} mallar": "{count} templates",
+  "Mall": "Template",
+  "Enkel": "Simple",
+  "Välj dem under Mall när du skapar en ny anteckning, så många gånger du vill.": "Pick them under Template when you make a new note, as many times as you like."
 }

@@ -51,10 +51,15 @@ const Chapters = ({ pack }: { pack: Pack }) =>
 function Sorts({ pack }: { pack: Pack }) {
   const counts = new Map<string, number>();
   for (const note of pack.notes) counts.set(note.sort, (counts.get(note.sort) ?? 0) + 1);
+  // The guides are notes; the templates wait under Mall in Ny anteckning for their sort.
+  const amount = (sort: string, count: number) => {
+    if (sort === "Guide") return String(count);
+    return count === 1 ? t("1 mall") : t("{count} mallar", { count });
+  };
   return [...counts].map(([sort, count]) => (
     <span key={sort} className="pack-preview-sort">
       {sort === CHARACTERS_ID ? t("Personer") : sort}
-      <span className="pack-preview-dim">{count}</span>
+      <span className="pack-preview-dim">{amount(sort, count)}</span>
     </span>
   ));
 }

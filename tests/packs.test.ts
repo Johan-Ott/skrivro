@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { setUiLanguage } from "../src/i18n/i18n";
 import { createProject } from "../src/project/newProject";
-import { isPackInBook, joinSorts, packOf, packs } from "../src/project/packs";
+import { isPackInBook, joinSorts, noteTemplates, packOf, packs } from "../src/project/packs";
 import { readProjectFile } from "../src/project/projectFile";
 import { CHARACTERS_ID } from "../src/project/sorts";
 import { structures, templatePieces } from "../src/project/templates";
@@ -63,11 +63,14 @@ describe("genre packs", () => {
     expect(fields["packs"]).toEqual(["romantasy"]);
     expect(JSON.stringify(fields["labels"])).toContain("Svek");
     expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(5);
-    expect(childrenOf(tree, (node) => node.title === "Världen")).toHaveLength(2);
-    expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(3);
+    expect(tree.some((node) => node.title === "Världen")).toBe(true);
+    expect(noteTemplates(fields, "Världen")).toHaveLength(2);
+    expect(noteTemplates(fields, CHARACTERS_ID).map((each) => each.name)).toContain(
+      "Huvudpersonen",
+    );
   });
 
-  it("put a crime pack's clue templates in the piece's own Ledtrådar, not in a second one", async () => {
+  it("offer a crime pack's templates for Ledtrådar and Personer, and write its guides as lists", async () => {
     const files = createMemoryFileSystem({});
 
     const created = await createProject(files, "/Skrivro", {
@@ -76,10 +79,16 @@ describe("genre packs", () => {
       genre: "deckare",
     });
 
-    const { tree } = await readProjectFile(files, created.dir, []);
+    const { tree, fields } = await readProjectFile(files, created.dir, []);
     expect(tree.filter((node) => node.title === "Ledtrådar")).toHaveLength(1);
-    expect(childrenOf(tree, (node) => node.title === "Ledtrådar")).toHaveLength(2);
-    expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(4);
+    expect(noteTemplates(fields, "Ledtrådar")).toHaveLength(2);
+    const [detective] = noteTemplates(fields, CHARACTERS_ID);
+    expect(detective?.name).toBe("Utredaren");
+    expect(detective?.body).not.toContain("Byt namn");
+    const [promises] = childrenOf(tree, (node) => node.title === "Guide");
+    const guide = await files.readText(`${created.dir}/scenes/${promises?.id ?? ""}.md`);
+    expect(guide).toContain("::: punktlista");
+    expect(guide).not.toMatch(/^- /m);
   });
 
   it("note the packs a book starts with, so they are never added again", async () => {

@@ -8,8 +8,7 @@ import { BOOK_SUFFIX, parentOf, withoutBookSuffix } from "./libraryFolders.js";
 import { writeProjectFile } from "./projectFile.js";
 import type { Narration } from "../manuscript/narration.js";
 import { manuscriptSceneIds, NOTES_ID, withSpecialFolders, type TreeNode } from "./tree.js";
-import { CHARACTERS_ID } from "./sorts.js";
-import { joinSorts, packNotesTree, packsField, packsFor } from "./packs.js";
+import { joinSorts, packGuides, packsField, packsFor } from "./packs.js";
 import { readOwnTemplates, OWN_PREFIX } from "./ownTemplates.js";
 import { composeTemplate, structures, templateBook, type BookTemplate } from "./templates.js";
 import { t } from "../i18n/i18n.js";
@@ -162,7 +161,7 @@ const withNotesFirst = (tree: TreeNode[], sortId: string, notes: TreeNode[]) =>
 const asNotes = (ids: string[]): TreeNode[] => ids.map((id) => ({ id, kind: "scene" }));
 
 // The notes a new book starts with: the welcome, the structure's steps when the chapters are
-// not made, and the notes of the packs its structure, genre and pieces come from.
+// not made, and the guides of the packs its structure, genre and pieces come from.
 async function startingNotes(
   making: { fileSystem: FileSystem; dir: string },
   steps: BookTemplate | null,
@@ -171,14 +170,10 @@ async function startingNotes(
   const { fileSystem, dir } = making;
   const welcome = await writeWelcome(fileSystem, dir);
   const stepsNote = steps ? [await writeStepsNote(fileSystem, dir, steps)] : [];
-  const pack = await packNotesTree(fileSystem, dir, packsFor(chosen));
+  const guides = await packGuides(fileSystem, dir, packsFor(chosen));
   const place = (tree: TreeNode[]) =>
-    withNotesFirst(
-      withNotesFirst(tree, NOTES_ID, asNotes([welcome, ...stepsNote])),
-      CHARACTERS_ID,
-      pack.characters,
-    );
-  return { welcome, sorts: pack.own, place };
+    withNotesFirst(tree, NOTES_ID, asNotes([welcome, ...stepsNote]));
+  return { welcome, sorts: guides, place };
 }
 
 /** An imported book, or the template's, with the welcome note under Övrigt. */

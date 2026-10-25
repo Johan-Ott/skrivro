@@ -3,6 +3,8 @@ import { useState } from "react";
 import { isLinkedByDefault } from "../../project/cards.js";
 import { CHARACTERS_ID, findNode, sortsOf } from "../../project/tree.js";
 import { nodeLabel } from "../../project/treeLabels.js";
+import type { NoteTemplate } from "../../project/packs.js";
+import { TemplateChips } from "./TemplateChips.js";
 import { bookLanguage } from "../../project/bookLanguage.js";
 import { NameSuggestions } from "./NameSuggestions.js";
 import { Choice, DialogActions, Switch } from "@llkit/controls.js";
@@ -117,6 +119,7 @@ function NoteFields({ form, project }: { form: Form; project: Project }) {
         <span className="field-label">{t("Sort")}</span>
         <SortChips project={project} {...form} onPick={form.pick} onNewSort={form.setNewSort} />
       </div>
+      <TemplateChips form={form} project={project} />
       <LinkRow form={form} />
     </>
   );
@@ -137,17 +140,22 @@ function useNoteForm(initialSort: string) {
   const [sortId, setSortId] = useState(initialSort);
   const [newSort, setNewSort] = useState<string | null>(null);
   const [linkChoice, setLinkChoice] = useState<boolean | null>(null);
+  const [template, setTemplate] = useState<NoteTemplate | null>(null);
   const isLinked = linkChoice ?? (newSort !== null || isLinkedByDefault(sortId));
   const note: NewNote = {
     name: name.trim(),
     sortId,
     newSortTitle: newSort?.trim() ? newSort.trim() : null,
     isLinked,
+    body: null,
   };
   const isReady = note.name !== "" && (newSort === null || note.newSortTitle !== null);
-  const pick = (id: string) => (setSortId(id), setNewSort(null));
+  const pick = (id: string) => (setSortId(id), setNewSort(null), setTemplate(null));
   const flip = () => setLinkChoice(!isLinked);
-  return { name, setName, sortId, pick, newSort, setNewSort, isLinked, flip, note, isReady };
+  return {
+    ...{ name, setName, sortId, pick, newSort, setNewSort, isLinked, flip, note, isReady },
+    ...{ template, setTemplate },
+  };
 }
 
 const startsInSeries = ({ series, sortId }: NewNoteDialogProps) =>
@@ -186,7 +194,8 @@ export function NewNoteDialog(props: NewNoteDialogProps) {
   const form = useNoteForm(props.sortId ?? CHARACTERS_ID);
   const { isInSeries, home, changeHome } = useHome(props, form);
   useEscape(props.onClose);
-  const create = () => form.isReady && (props.onCreate(form.note, isInSeries), props.onClose());
+  const note = { ...form.note, body: form.template?.body ?? null };
+  const create = () => form.isReady && (props.onCreate(note, isInSeries), props.onClose());
   return (
     <div className="dialog-backdrop" onClick={props.onClose}>
       <form

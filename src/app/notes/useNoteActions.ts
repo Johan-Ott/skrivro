@@ -15,6 +15,8 @@ export interface NewNote {
   sortId: string | null;
   newSortTitle: string | null;
   isLinked: boolean;
+  /** A pack's template the note starts from, instead of its sort's questions. */
+  body: string | null;
 }
 
 interface NoteActionsInput {
@@ -55,7 +57,7 @@ export function useNoteActions({ project, session, updateTree, refresh }: NoteAc
     async (note: NewNote) => {
       if (!project || project.isReadOnly) return;
       const { tree, sortId } = withSort(project.tree, note);
-      const body = noteQuestions(sortId);
+      const body = note.body ?? noteQuestions(sortId);
       const id = await createScene(platform.fileSystem, project.dir, note.name, body);
       if (note.isLinked !== isLinkedByDefault(sortId)) {
         await setNoteLink(session, project.dir, id, note.isLinked);

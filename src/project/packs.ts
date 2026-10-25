@@ -1,10 +1,9 @@
 import type { FileSystem } from "@llkit/storage/fileSystem.js";
 import { isSwedish } from "../i18n/i18n.js";
 import { newSceneId } from "../storage/sceneId.js";
-import { CHARACTERS_ID } from "./sorts.js";
 import type { BookTemplate, TemplatePiece } from "./templates.js";
 import type { TreeNode } from "./tree.js";
-import { writeNote } from "./welcome.js";
+import { asManuscript, blocksOf, writeNote } from "./welcome.js";
 
 // The basics are free; a genre is a pack, bought once, in a folder of its own in src/packs:
 // pack.json, its structures and pieces as JSON, and its guides and templates as Markdown.
@@ -124,10 +123,10 @@ export function packsField(templateIds: string[]) {
 
 const listIn = (value: unknown): unknown[] => (Array.isArray(value) ? value : []);
 
-/** Whether a book has the pack: as noted in it, or, in a book from before that was kept, by all
- * the labels of one of its pieces. */
+/** Whether a book has the pack: as noted in it, or, in a book from before packs were noted, by
+ * all the labels of one of its pieces. */
 export function isPackInBook(fields: Record<string, unknown>, pack: Pack) {
-  if (listIn(fields["packs"]).includes(pack.id)) return true;
+  if (Array.isArray(fields["packs"])) return fields["packs"].includes(pack.id);
   const labels = new Set(
     listIn(fields["labels"]).map((label) => (label as { name?: string }).name),
   );
@@ -141,22 +140,15 @@ export const withPackNoted = (fields: Record<string, unknown>, packId: string) =
   packs: [...new Set([...listIn(fields["packs"]), packId])],
 });
 
-/** Writes the packs' notes, and puts each in Personer or in a sort of its own. */
-export async function packNotesTree(fileSystem: FileSystem, dir: string, from: Pack[]) {
-  const sorts = new Map<string, TreeNode[]>();
-  for (const note of from.flatMap((pack) => pack.notes)) {
-    const id = await writeNote(fileSystem, dir, note.title, note.body);
-    sorts.set(note.sort, [...(sorts.get(note.sort) ?? []), { id, kind: "scene" }]);
+/** Writes the packs' guides into a Guide sort; their templates wait in Ny anteckning. */
+export async function packGuides(fileSystem: FileSystem, dir: string, from: Pack[]) {
+  const children: TreeNode[] = [];
+  for (const note of from.flatMap(guidesOf)) {
+    const id = await writeNote(fileSystem, dir, note.title, asManuscript(note.body));
+    children.push({ id, kind: "scene" });
   }
-  const characters = sorts.get(CHARACTERS_ID) ?? [];
-  sorts.delete(CHARACTERS_ID);
-  const own: TreeNode[] = [...sorts].map(([title, children]) => ({
-    id: newSceneId(),
-    kind: "sort",
-    title,
-    children,
-  }));
-  return { own, characters };
+  const sort: TreeNode = { id: newSceneId(), kind: "sort", title: GUIDE, children };
+  return children.length ? [sort] : [];
 }
 
 /** Sorts of the same name made one, as a piece's Ledtrådar and a pack's notes for it. Personer
@@ -172,6 +164,31 @@ export function joinSorts(sorts: TreeNode[]): TreeNode[] {
   return [...joined.values()];
 }
 
+const GUIDE = "Guide";
+
 /** A pack's notes as guides, and as templates for characters and the world. */
-export const guidesOf = (pack: Pack) => pack.notes.filter((note) => note.sort === "Guide");
-export const templatesOf = (pack: Pack) => pack.notes.filter((note) => note.sort !== "Guide");
+export const guidesOf = (pack: Pack) => pack.notes.filter((note) => note.sort === GUIDE);
+export const templatesOf = (pack: Pack) => pack.notes.filter((note) => note.sort !== GUIDE);
+
+export interface NoteTemplate {
+  name: string;
+  body: string;
+}
+
+// "Utredaren (mall)" is offered as Utredaren, without the line on renaming it.
+const asTemplate = (note: PackNote): NoteTemplate => ({
+  name: note.title.replace(/\s*\((mall|template)\)$/i, ""),
+  body: asManuscript(
+    blocksOf(note.body)
+      .filter((block) => !/^(Byt namn på anteckningen|Rename the note)/.test(block))
+      .join("\n\n"),
+  ),
+});
+
+/** The templates the book's packs give a new note in a sort: Personer by its id, others by name. */
+export const noteTemplates = (fields: Record<string, unknown>, sort: string) =>
+  packs()
+    .filter((pack) => isPackInBook(fields, pack))
+    .flatMap(templatesOf)
+    .filter((note) => note.sort === sort)
+    .map(asTemplate);

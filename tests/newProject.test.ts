@@ -163,7 +163,8 @@ describe("createProject", () => {
     expect(project.fields).toMatchObject({ totalGoal: 95_000 });
     const notes = project.tree.find((node) => node.id === "anteckningar")?.children ?? [];
     const steps = await files.readText(`${created.dir}/scenes/${notes[1]?.id ?? ""}.md`);
-    expect(steps).toContain("- Det falska spåret: En sann detalj pekar fel");
+    expect(steps).toContain("::: punktlista\nBrottet: ");
+    expect(steps).toContain("\n\nDet falska spåret: En sann detalj pekar fel");
   });
 
   it("never writes into an existing project with the same name", async () => {

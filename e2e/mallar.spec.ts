@@ -28,7 +28,7 @@ test("pieces are added to a book that exists once: its notes, labels and closing
   await expect(sidebar.getByText("Teman", { exact: true })).toHaveCount(1);
 });
 
-test("a genre pack is added to the book from Mallar och bitar, with its guides and clue notes", async ({
+test("a genre pack is added from Mallar och bitar, and its templates start new notes", async ({
   page,
 }) => {
   await page.locator(".book-title-menu:not(.contents)").click();
@@ -42,4 +42,13 @@ test("a genre pack is added to the book from Mallar och bitar, with its guides a
   await page.keyboard.press("Escape");
   await expect(page.locator(".sidebar")).toContainText("Guide");
   await expect(page.locator(".sidebar")).toContainText("Ledtrådar");
+
+  await page.getByRole("button", { name: "+ Ny anteckning" }).click();
+  const note = page.getByRole("dialog", { name: "Ny anteckning" });
+  await note.getByRole("textbox", { name: "Namn" }).fill("Kommissarie Berg");
+  await note.getByRole("radio", { name: "Utredaren" }).click();
+  await page.screenshot({ path: `${process.env["TMP"]}/ny-anteckning-mall.png` });
+  await note.getByRole("button", { name: "Skapa" }).click();
+  await expect(page.locator(".ProseMirror")).toContainText("Roll och mandat");
+  await page.screenshot({ path: `${process.env["TMP"]}/mall-anteckning.png` });
 });

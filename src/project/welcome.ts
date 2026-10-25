@@ -36,13 +36,28 @@ export async function writeNote(fileSystem: FileSystem, dir: string, title: stri
 export const writeWelcome = (fileSystem: FileSystem, dir: string) =>
   writeNote(fileSystem, dir, t("Välkommen"), text());
 
+// The manuscript keeps a bullet list as Skrivro's punktlista style, each item a paragraph.
+export const asList = (block: string) =>
+  `::: punktlista\n${block
+    .split("\n")
+    .map((line) => line.replace(/^- /, ""))
+    .join("\n\n")}\n:::`;
+
+export const blocksOf = (text: string) => text.split(/\n\s*\n/);
+
+/** A note's Markdown, with "- " lists, as a scene's text. */
+export const asManuscript = (body: string) =>
+  blocksOf(body)
+    .map((block) => (block.startsWith("- ") ? asList(block) : block))
+    .join("\n\n");
+
 const partText = (part: BookTemplate["parts"][number]) =>
   [
     part.title && `**${part.title}**`,
-    ...part.chapters.map(([title = "", what = ""]) => `- ${title}: ${what}`),
+    asList(part.chapters.map(([title = "", what = ""]) => `- ${title}: ${what}`).join("\n")),
   ]
     .filter(Boolean)
-    .join("\n");
+    .join("\n\n");
 
 /** The structure's steps as a note, for a writer who finds the story while writing it. */
 export const writeStepsNote = (fileSystem: FileSystem, dir: string, template: BookTemplate) =>

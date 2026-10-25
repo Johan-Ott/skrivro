@@ -49,12 +49,16 @@ const Structures = ({ pack }: { pack: Pack }) =>
     </div>
   ));
 
-const Section = ({ title, children }: { title: string; children: ReactNode }) => (
+const Section = (props: { title: string; hint?: string; children: ReactNode }) => (
   <section className="pack-section">
-    <span className="field-label">{title}</span>
-    {children}
+    <span className="field-label">{props.title}</span>
+    {props.hint && <span className="choice-hint">{props.hint}</span>}
+    {props.children}
   </section>
 );
+
+const TEMPLATES_HINT = () =>
+  t("Välj dem under Mall när du skapar en ny anteckning, så många gånger du vill.");
 
 function Sections({ pack }: { pack: Pack }) {
   const [guides, templates] = [guidesOf(pack), templatesOf(pack)];
@@ -72,7 +76,7 @@ function Sections({ pack }: { pack: Pack }) {
         </Section>
       )}
       {templates.length > 0 && (
-        <Section title={t("Mallar för karaktärer och värld")}>
+        <Section title={t("Mallar för karaktärer och värld")} hint={TEMPLATES_HINT()}>
           <Notes pack={pack} notes={templates} />
         </Section>
       )}
