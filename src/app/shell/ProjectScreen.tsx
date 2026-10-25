@@ -1,3 +1,4 @@
+import { addPackToBook } from "../templates/addPieces.js";
 import { PacksLayer } from "../packs/PackList.js";
 import { ProfileButton } from "../profile/ProfileLayer.js";
 import type { MouseEvent } from "react";
@@ -156,7 +157,9 @@ function Floating({ app, project }: ScreenProps) {
         />
       )}
       <Overlays app={app} />
-      <PacksLayer />
+      <PacksLayer
+        onAdd={async (pack) => void app.updateProject(await addPackToBook(project, pack))}
+      />
     </>
   );
 }

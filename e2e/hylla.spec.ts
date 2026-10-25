@@ -43,7 +43,16 @@ test("the genre packs are found in the logo's menu, each saying what it holds", 
   await page.getByRole("menuitem", { name: "Genrepaket…" }).click();
 
   const dialog = page.getByRole("dialog", { name: "Genrepaket" });
-  const romantasy = dialog.locator(".pack-card").filter({ hasText: "Romantasy" });
-  await expect(romantasy).toContainText("9 guider och mallar");
+  const romantasy = dialog.locator(".pack-tile").filter({ hasText: "Romantasy" });
+  await expect(romantasy).toContainText("5 guider");
   await expect(romantasy).toContainText("Ingår under betan");
+
+  await romantasy.getByRole("button", { name: "Se vad som ingår" }).click();
+  await expect(dialog.locator(".pack-structure").first()).toBeVisible();
+  const guide = dialog.locator(".pack-note").first();
+  await guide.locator("summary").click();
+  await expect(guide.locator(".pack-note-text p").first()).toBeVisible();
+  await page.screenshot({ path: `${process.env["TMP"]}/paketsida.png`, fullPage: true });
+  await dialog.getByRole("button", { name: "← Alla paket" }).click();
+  await expect(romantasy).toBeVisible();
 });

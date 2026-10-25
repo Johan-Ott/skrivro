@@ -12,12 +12,12 @@ test("pieces are added to a book that exists: its notes, labels and closing chap
   await page.locator(".book-title-menu:not(.contents)").click();
   await page.getByRole("menuitem", { name: "Mallar och bitar…" }).click();
   const dialog = page.getByRole("dialog", { name: "Mallar och bitar" });
-  await dialog.getByRole("button", { name: "Deckare" }).click();
+  await dialog.getByRole("button", { name: "Litterär roman" }).click();
   await dialog.getByRole("button", { name: "Serie" }).click();
   await dialog.getByRole("button", { name: "Lägg till", exact: true }).click();
 
   const sidebar = page.locator(".sidebar");
-  await expect(sidebar.getByText("Ledtrådar", { exact: true })).toBeVisible();
+  await expect(sidebar.getByText("Teman", { exact: true })).toBeVisible();
   await expect(sidebar.getByText("Kroken")).toBeVisible();
 });
 
@@ -27,11 +27,10 @@ test("a genre pack is added to the book from Mallar och bitar, with its guides a
   await page.locator(".book-title-menu:not(.contents)").click();
   await page.getByRole("menuitem", { name: "Mallar och bitar…" }).click();
   const dialog = page.getByRole("dialog", { name: "Mallar och bitar" });
-  const crime = dialog.locator(".pack-card").filter({ hasText: "Deckare" });
+  const crime = dialog.locator(".pack-row").filter({ hasText: "Deckare" });
   await crime.getByRole("button", { name: "Lägg till i boken" }).click();
 
   await expect(crime.getByRole("button", { name: "Tillagt" })).toBeVisible();
-  await page.screenshot({ path: `${process.env["TMP"]}/paketdialog.png` });
   await page.keyboard.press("Escape");
   await expect(page.locator(".sidebar")).toContainText("Guide");
   await expect(page.locator(".sidebar")).toContainText("Ledtrådar");

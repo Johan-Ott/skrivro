@@ -44,29 +44,29 @@ export function StructureList(props: Omit<Props, "libraryDir"> & { own: BookTemp
 export function PieceToggles(props: {
   chosen: string[];
   except?: string;
+  /** Only the free basics, where the genres come as packs beside them. */
+  isFreeOnly?: boolean;
   onChange: (pieces: string[]) => void;
 }) {
+  const isOn = (id: string) => props.chosen.includes(id);
   const flip = (id: string) =>
-    props.onChange(
-      props.chosen.includes(id)
-        ? props.chosen.filter((each) => each !== id)
-        : [...props.chosen, id],
-    );
+    props.onChange(isOn(id) ? props.chosen.filter((each) => each !== id) : [...props.chosen, id]);
+  const shown = templatePieces().filter(
+    (piece) => piece.id !== props.except && (!props.isFreeOnly || packOf(piece.id) === null),
+  );
   return (
     <div className="chip-row piece-row" aria-label={t("Bitar")}>
-      {templatePieces()
-        .filter((piece) => piece.id !== props.except)
-        .map((piece) => (
-          <button
-            key={piece.id}
-            className="chip"
-            aria-pressed={props.chosen.includes(piece.id)}
-            title={[piece.hint, packOf(piece.id)?.name].filter(Boolean).join(" · ")}
-            onClick={() => flip(piece.id)}
-          >
-            {piece.name}
-          </button>
-        ))}
+      {shown.map((piece) => (
+        <button
+          key={piece.id}
+          className="chip"
+          aria-pressed={props.chosen.includes(piece.id)}
+          title={[piece.hint, packOf(piece.id)?.name].filter(Boolean).join(" · ")}
+          onClick={() => flip(piece.id)}
+        >
+          {piece.name}
+        </button>
+      ))}
     </div>
   );
 }

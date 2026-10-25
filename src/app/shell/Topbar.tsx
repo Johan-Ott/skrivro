@@ -3,6 +3,7 @@ import { LookButton } from "../settingsPanel.js";
 import { RemoteBadge } from "../settings/RemoteControlRow.js";
 import { WindowControls } from "@llkit/shell/WindowControls.js";
 import { DayProgress } from "./DayProgress.js";
+import { TopbarMore } from "./TopbarMore.js";
 import type { MouseEvent, ReactNode } from "react";
 import type { Today } from "../useWritingStats.js";
 import type { View } from "../useWritingMode.js";
@@ -167,6 +168,7 @@ function TopbarEnd(props: TopbarProps) {
       >
         <FocusIcon />
       </IconButton>
+      <TopbarMore {...props} />
       <WindowControls />
     </div>
   );

@@ -1,84 +1,62 @@
-import { useState } from "react";
 import { createStore } from "@llkit/store.js";
-import { Dialog } from "@llkit/controls.js";
-import { recordFailure } from "@llkit/errorLog.js";
-import { isPackOwned, packs, type Pack } from "../../project/packs.js";
+import { CloseButton, Dialog } from "@llkit/controls.js";
+import { packs, type Pack } from "../../project/packs.js";
+import { PackRow, PackTile, type OnAdd } from "./PackCard.js";
+import { PackDetail } from "./PackDetail.js";
 import { t } from "../../i18n/i18n.js";
 
-// The genre packs, as cards that say what each holds. Found in the logo's menu and in Mallar och
-// bitar, never pushed: no reminders, nothing that opens by itself.
+// The genre packs: found in the logo's menu and in Mallar och bitar, never pushed. No reminders,
+// nothing that opens by itself.
 
-const count = (amount: number, one: string, many: string) => (amount === 1 ? one : many);
+// The packs with guides and templates first, then those that so far hold a structure.
+const inOrder = () =>
+  [...packs()].sort((one, other) => Number(other.notes.length > 0) - Number(one.notes.length > 0));
 
-/** "1 struktur · 10 guider och mallar · 5 etiketter", or what of it the pack has. */
-export function packContents(pack: Pack) {
-  const [structures, notes] = [pack.structures.length, pack.notes.length];
-  const labels = pack.pieces.flatMap((piece) => piece.labels).length;
-  return [
-    structures > 0 &&
-      count(structures, t("1 struktur"), t("{count} strukturer", { count: structures })),
-    notes > 0 &&
-      count(notes, t("1 guide eller mall"), t("{count} guider och mallar", { count: notes })),
-    labels > 0 && count(labels, t("1 etikett"), t("{count} etiketter", { count: labels })),
-  ]
-    .filter(Boolean)
-    .join(" · ");
-}
-
-function PackCard(props: { pack: Pack; onAdd?: ((pack: Pack) => Promise<void>) | undefined }) {
-  const { pack, onAdd } = props;
-  const [isAdded, setAdded] = useState(false);
-  const add = () =>
-    void onAdd?.(pack)
-      .then(() => setAdded(true))
-      .catch(recordFailure("Paketet"));
-  return (
-    <div className="pack-card">
-      <span className="pack-card-text">
-        <span className="pack-card-name">
-          {pack.name} <span className="pack-card-holds">{packContents(pack)}</span>
-        </span>
-        <span className="choice-hint">{pack.hint}</span>
-      </span>
-      {onAdd && isPackOwned(pack.id) ? (
-        <button className="button secondary small" disabled={isAdded} onClick={add}>
-          {isAdded ? t("Tillagt") : t("Lägg till i boken")}
-        </button>
-      ) : (
-        <span className="pack-tag">
-          {isPackOwned(pack.id) ? t("Ingår under betan") : t("Köps en gång")}
-        </span>
-      )}
-    </div>
+const INTRO = () =>
+  t(
+    "Grunderna är gratis. En genre kommer som ett paket med struktur, guider och mallar, och köps en gång. Under betan ingår alla.",
   );
-}
 
-/** Every pack; with `onAdd`, each can be added to the open book. */
-export function PackList(props: { onAdd?: (pack: Pack) => Promise<void> }) {
-  return (
-    <div className="pack-list">
-      <p className="setting-hint">
-        {t(
-          "Grunderna är gratis. En genre kommer som ett paket med struktur, guider och mallar, och köps en gång. Under betan ingår alla.",
-        )}
-      </p>
-      {packs().map((pack) => (
-        <PackCard key={pack.id} pack={pack} onAdd={props.onAdd} />
+/** Every pack as a short row, each to add to the open book. */
+export const PackRows = ({ onAdd }: { onAdd: (pack: Pack) => Promise<void> }) => (
+  <div className="pack-rows">
+    {inOrder().map((pack) => (
+      <PackRow key={pack.id} pack={pack} onAdd={onAdd} onOpen={() => openPacks(pack.id)} />
+    ))}
+  </div>
+);
+
+// Closed, all packs (""), or one pack by its id.
+const shown = createStore<string | null>(null);
+
+/** Genrepaket… in the logo's menu, or straight to one pack. */
+export const openPacks = (packId = "") => shown.set(packId);
+
+const All = ({ onAdd }: { onAdd?: OnAdd }) => (
+  <>
+    <p className="setting-hint">{INTRO()}</p>
+    <div className="pack-grid">
+      {inOrder().map((pack) => (
+        <PackTile key={pack.id} pack={pack} onAdd={onAdd} onOpen={() => shown.set(pack.id)} />
       ))}
     </div>
-  );
-}
+  </>
+);
 
-const isOpen = createStore(false);
-
-/** Genrepaket… in the logo's menu. */
-export const openPacks = () => isOpen.set(true);
-
-export function PacksLayer() {
-  if (!isOpen.use()) return null;
+export function PacksLayer({ onAdd }: { onAdd?: OnAdd }) {
+  const packId = shown.use();
+  if (packId === null) return null;
+  const pack = packs().find((each) => each.id === packId);
   return (
-    <Dialog label={t("Genrepaket")} className="templates-dialog" onClose={() => isOpen.set(false)}>
-      <PackList />
+    <Dialog label={t("Genrepaket")} className="packs-dialog" onClose={() => shown.set(null)}>
+      <span className="packs-close">
+        <CloseButton onClose={() => shown.set(null)} />
+      </span>
+      {pack ? (
+        <PackDetail pack={pack} onAdd={onAdd} onBack={() => shown.set("")} />
+      ) : (
+        <All onAdd={onAdd} />
+      )}
     </Dialog>
   );
 }

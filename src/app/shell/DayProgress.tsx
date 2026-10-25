@@ -1,7 +1,7 @@
 import type { Today } from "../useWritingStats.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
 
-function dayText({ words, goal }: Today) {
+export function dayText({ words, goal }: Today) {
   if (!goal) return t("{count} ord idag", { count: formatNumber(words) });
   if (words >= goal) return t("Dagens mål nått · {count} ord", { count: formatNumber(words) });
   return t("{words} / {goal} ord", { words: formatNumber(words), goal: formatNumber(goal) });

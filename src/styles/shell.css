@@ -231,7 +231,12 @@
   background: var(--surface-hover);
 }
 
-/* A narrow window gives up the day's bar first, then Läs and Fokusläge, which have their keys. */
+/* A narrow window gives up the day's bar first, then Läs and Fokusläge, then the day's words:
+ * all of them wait in ⋯. */
+
+.topbar .topbar-more {
+  display: none;
+}
 
 @media (max-width: 1100px) {
   .topbar .day-progress-bar {
@@ -241,6 +246,16 @@
 
 @media (max-width: 900px) {
   .topbar .with-key {
+    display: none;
+  }
+
+  .topbar .topbar-more {
+    display: flex;
+  }
+}
+
+@media (max-width: 760px) {
+  .topbar .topbar-day {
     display: none;
   }
 }
@@ -3522,44 +3537,405 @@
   gap: 8px;
 }
 
-.pack-list {
+/* Genrepaket: each pack wears its genre's cover from the shelf (app.css .cover-*). */
+.packs-dialog {
+  position: relative;
+  width: min(780px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  gap: 14px;
+}
+
+.packs-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .pack-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.pack-tile {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+}
+
+.pack-cover {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  height: 104px;
+  padding: 14px 16px;
+  box-sizing: border-box;
+}
+
+.pack-cover::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+}
+
+.pack-cover-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.pack-cover-name {
+  font: 600 22px/1.15 var(--font-prose);
+}
+
+.pack-cover.small {
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 48px;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.pack-cover.small .pack-cover-name {
+  font-size: 18px;
+}
+
+.pack-tile-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px 14px;
+}
+
+.pack-tile-hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.pack-holds,
+.pack-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.pack-holds li::before {
+  content: "✓";
+  margin-right: 8px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.pack-holds li.later {
+  color: var(--text-muted);
+}
+
+.pack-holds li.later::before {
+  content: "·";
+  color: var(--text-muted);
+}
+
+.pack-contents {
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.pack-tile-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  align-self: stretch;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.pack-tile-foot .pack-tag,
+.pack-row .pack-tag {
+  margin-left: 0;
+}
+
+.pack-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   align-self: stretch;
 }
 
-.pack-card {
+.pack-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
-  border: 1px solid var(--border-soft);
+}
+
+.pack-row-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pack-row-name {
+  font-weight: 600;
+}
+
+.pack-row > .button {
+  flex-shrink: 0;
+}
+
+.pack-cover-button {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: start;
+  cursor: pointer;
+}
+
+.pack-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* The tile's height, so the covers' drawn lines and stars land where they do on the shelf. */
+.pack-detail > .pack-cover {
+  align-self: stretch;
   border-radius: var(--radius-card);
 }
 
-.pack-card-text {
+.pack-detail .pack-cover-name {
+  font-size: 26px;
+}
+
+/* The book drawn small: the sidebar on the left, a page of paper on the right. */
+.pack-preview {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  align-self: stretch;
+  height: 300px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  background: var(--bg-subtle);
+  pointer-events: none;
+}
+
+.pack-preview-side {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 12px;
+  overflow: hidden;
+  border-right: 1px solid var(--border-soft);
+  background: var(--bg-panel);
+  color: var(--text-tree);
+  font-size: 12px;
+}
+
+.pack-preview-side span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pack-preview-part {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 8px;
+}
+
+.pack-preview-kicker {
+  margin-top: 6px;
+  margin-left: -8px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pack-preview-side > .pack-preview-kicker {
+  margin-left: 0;
+}
+
+.pack-preview-sort {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pack-preview-dim {
+  color: var(--text-muted);
+}
+
+.pack-preview-page {
+  margin: 16px 20px 0;
+  padding: 22px 28px;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+  background: var(--paper);
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.08);
+  color: var(--text-prose);
+  mask-image: linear-gradient(to bottom, black 70%, transparent);
+}
+
+.pack-preview-page h3 {
+  margin: 0 0 10px;
+  font: 600 18px/1.25 var(--font-prose);
+}
+
+.pack-preview-page .pack-note-text {
+  padding: 0;
+  font-size: 13px;
+}
+
+.pack-preview-page .pack-labels {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+  .pack-preview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pack-preview-side {
+    display: none;
+  }
+}
+
+.pack-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: stretch;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.pack-structure {
+  display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.pack-card-name {
-  font-weight: 600;
+/* Numbered by CSS, so the part titles between the chapters don't count. */
+.pack-structure ol {
+  columns: 2 220px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: chapter;
+  font-size: 13px;
 }
 
-.pack-card-holds {
-  margin-left: 6px;
+.pack-structure li:not(.pack-part)::before {
+  counter-increment: chapter;
+  content: counter(chapter) ". ";
   color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 400;
 }
 
-.pack-card > .button,
-.pack-card > .pack-tag {
-  flex-shrink: 0;
-  margin-left: 0;
+.pack-structure li.pack-part {
+  margin: 6px 0 2px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  break-after: avoid;
+}
+
+.pack-notes {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+}
+
+.pack-note + .pack-note {
+  border-top: 1px solid var(--border-soft);
+}
+
+.pack-note summary {
+  padding: 9px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pack-note-text {
+  padding: 0 14px 12px 30px;
+  font: 15px/1.55 var(--font-prose);
+}
+
+.pack-note-text p,
+.pack-note-text ul {
+  margin: 0 0 8px;
+}
+
+.pack-note-text .pack-more {
+  color: var(--text-muted);
+  font: italic 13px var(--font-ui);
+}
+
+.pack-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.pack-label-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.pack-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pack-tile .link-button,
+.pack-row-text .link-button {
+  color: var(--primary);
+}
+
+.pack-row-text .link-button {
+  align-self: flex-start;
+  font-size: 12px;
 }
 
 .templates-section .settings-text {

@@ -8,7 +8,7 @@ import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
 import type { ProjectChange } from "../labels/LabelsDialog.js";
 import { addPackToBook, addToBook, additionsOf } from "./addPieces.js";
-import { PackList } from "../packs/PackList.js";
+import { PackRows } from "../packs/PackList.js";
 import { PieceToggles } from "./TemplateChoices.js";
 import { importTemplateFile, shareTemplateFile, useOwnTemplates } from "./templateFiles.js";
 import { t } from "../../i18n/i18n.js";
@@ -58,7 +58,7 @@ function AddPieces(props: DialogProps) {
   return (
     <section className="templates-section">
       <span className="field-label">{t("Lägg till bitar")}</span>
-      <PieceToggles chosen={pieces} onChange={setPieces} />
+      <PieceToggles chosen={pieces} onChange={setPieces} isFreeOnly />
       <OwnTemplatePicker own={own} value={ownId} onChange={setOwnId} />
       <span className="setting-hint">
         {t("Anteckningssorter, etiketter och kapitel som boken inte redan har.")}
@@ -133,7 +133,7 @@ export function TemplatesDialog(props: DialogProps) {
       <AddPieces {...props} />
       <section className="templates-section">
         <span className="field-label">{t("Genrepaket")}</span>
-        <PackList
+        <PackRows
           onAdd={async (pack) => props.onUpdate(await addPackToBook(props.project, pack))}
         />
       </section>
