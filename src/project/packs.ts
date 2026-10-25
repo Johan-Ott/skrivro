@@ -19,6 +19,8 @@ export interface PackNote {
 export interface Pack {
   id: string;
   version: string;
+  /** The genre cover its card wears, as a book on the shelf does: "deckare" for cover-deckare. */
+  look: string;
   name: string;
   hint: string;
   structures: BookTemplate[];
@@ -27,7 +29,7 @@ export interface Pack {
 }
 
 type Words = { sv: string; en: string };
-type Manifest = { id: string; version: string; name: Words; hint: Words };
+type Manifest = { id: string; version: string; look: string; name: Words; hint: Words };
 
 const MANIFESTS = import.meta.glob<Manifest>("../packs/*/pack.json", {
   eager: true,
@@ -61,6 +63,7 @@ function packAt(path: string, manifest: Manifest, language: "sv" | "en"): Pack {
   return {
     id: manifest.id,
     version: manifest.version,
+    look: manifest.look,
     name: manifest.name[language],
     hint: manifest.hint[language],
     structures: list<BookTemplate>("structures"),
@@ -131,3 +134,7 @@ export function joinSorts(sorts: TreeNode[]): TreeNode[] {
   }
   return [...joined.values()];
 }
+
+/** A pack's notes as guides, and as templates for characters and the world. */
+export const guidesOf = (pack: Pack) => pack.notes.filter((note) => note.sort === "Guide");
+export const templatesOf = (pack: Pack) => pack.notes.filter((note) => note.sort !== "Guide");
