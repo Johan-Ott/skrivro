@@ -1506,7 +1506,6 @@
   "{count} etiketter": "{count} labels",
   "Ingår under betan": "Included during the beta",
   "Köps en gång": "Bought once",
-  "Tillagt": "Added",
   "Lägg till i boken": "Add to the book",
   "Grunderna är gratis. En genre kommer som ett paket med struktur, guider och mallar, och köps en gång. Under betan ingår alla.": "The basics are free. A genre comes as a pack with a structure, guides and templates, bought once. During the beta, all are included.",
   "Genrepaket": "Genre packs",
@@ -1523,5 +1522,6 @@
   "← Alla paket": "← All packs",
   "Från version 1.0 köps ett paket en gång i appbutiken: Microsoft Store på Windows och Google Play på Android. Det du redan har lagt till i en bok är ditt.": "From version 1.0 a pack is bought once in the app store: Microsoft Store on Windows and Google Play on Android. What you have already added to a book is yours.",
   "Se vad som ingår": "See what's inside",
-  "Så ser det ut i boken": "How it looks in the book"
+  "Så ser det ut i boken": "How it looks in the book",
+  "✓ I boken": "✓ In the book"
 }

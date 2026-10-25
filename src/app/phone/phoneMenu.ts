@@ -3,6 +3,7 @@ import type { MenuItem } from "@llkit/Menu.js";
 import { collaborationItems } from "../exporting/collaboration.js";
 import { HELP_TAB } from "../settings/SettingsDialog.js";
 import { group, helpItems } from "../shell/appMenu.js";
+import { openPacks } from "../packs/PackList.js";
 import { setPanelOpen } from "../sprint/sprint.js";
 import type { useMenuDialogs } from "../shell/useAppMenu.js";
 import { t } from "../../i18n/i18n.js";
@@ -45,6 +46,7 @@ export function phoneMenu(
       [
         { label: t("Tema…"), onSelect: book.theme.open },
         { label: t("Mallar och bitar…"), onSelect: book.templates.open },
+        { label: t("Genrepaket…"), onSelect: () => openPacks() },
         { label: t("Serie…"), onSelect: dialogs.series.open },
       ],
       true,

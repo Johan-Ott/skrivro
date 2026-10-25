@@ -1,10 +1,17 @@
 import { withAdditions, type Additions } from "../../project/pieceAdditions.js";
-import { joinSorts, packNotesTree, type Pack } from "../../project/packs.js";
+import {
+  isPackInBook,
+  joinSorts,
+  packNotesTree,
+  withPackNoted,
+  type Pack,
+} from "../../project/packs.js";
 import { CHARACTERS_ID } from "../../project/sorts.js";
 import { withSpecialFolders, type TreeNode } from "../../project/tree.js";
 import { platform } from "../platform.js";
 import { createScene } from "../sceneSession.js";
 import type { Project } from "../useProject.js";
+import type { ProjectChange } from "../labels/LabelsDialog.js";
 import { t } from "../../i18n/i18n.js";
 
 export { additionsOf } from "../../project/pieceAdditions.js";
@@ -18,9 +25,16 @@ export async function addToBook(project: Project, additions: Additions) {
 
 const isSort = (node: TreeNode) => node.kind === "sort" || node.id === CHARACTERS_ID;
 
+/** The book's packs for Genrepaket: which it has, and adding one. */
+export const packsOfBook = (project: Project, save: (change: ProjectChange) => void) => ({
+  has: (pack: Pack) => isPackInBook(project.fields, pack),
+  add: async (pack: Pack) => save(await addPackToBook(project, pack)),
+});
+
 /** A whole pack in a book that already exists: its pieces' notes and labels, and its guides and
  * templates, each in the sort of its name that the book has, or a new one. */
 export async function addPackToBook(project: Project, pack: Pack) {
+  if (isPackInBook(project.fields, pack)) return { fields: project.fields, tree: project.tree };
   const withPieces = await addToBook(project, {
     sorts: pack.pieces.flatMap((piece) => piece.sorts),
     labels: pack.pieces.flatMap((piece) => piece.labels),
@@ -34,5 +48,5 @@ export async function addPackToBook(project: Project, pack: Pack) {
   };
   const sorts = joinSorts([...withPieces.tree.filter(isSort), characters, ...notes.own]);
   const tree = withSpecialFolders([...withPieces.tree.filter((node) => !isSort(node)), ...sorts]);
-  return { fields: withPieces.fields, tree };
+  return { fields: withPackNoted(withPieces.fields, pack.id), tree };
 }

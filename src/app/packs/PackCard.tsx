@@ -5,7 +5,8 @@ import { t } from "../../i18n/i18n.js";
 
 // A pack wears its genre's cover, as a book on the shelf does, and says plainly what it holds.
 
-export type OnAdd = ((pack: Pack) => Promise<void>) | undefined;
+/** The open book, which packs it has and how one is added; none over the shelf. */
+export type Book = { has: (pack: Pack) => boolean; add: (pack: Pack) => Promise<void> } | undefined;
 
 export const PackCover = ({ pack, isSmall }: { pack: Pack; isSmall?: boolean }) => (
   <span className={`pack-cover cover-${pack.look}${isSmall ? " small" : ""}`} aria-hidden="true">
@@ -35,23 +36,27 @@ export const Status = ({ pack }: { pack: Pack }) => (
   </span>
 );
 
-export function AddButton({ pack, onAdd }: { pack: Pack; onAdd: OnAdd }) {
-  const [isAdded, setAdded] = useState(false);
-  if (!onAdd || !isPackOwned(pack.id)) return null;
-  const add = () =>
-    void onAdd(pack)
-      .then(() => setAdded(true))
-      .catch(recordFailure("Paketet"));
+export function AddButton({ pack, book }: { pack: Pack; book: Book }) {
+  const [isAdding, setAdding] = useState(false);
+  if (!book || !isPackOwned(pack.id)) return null;
+  if (book.has(pack)) return <span className="pack-in-book">{t("✓ I boken")}</span>;
+  const add = () => {
+    setAdding(true);
+    void book
+      .add(pack)
+      .catch(recordFailure("Paketet"))
+      .finally(() => setAdding(false));
+  };
   return (
-    <button className="button secondary small" disabled={isAdded} onClick={add}>
-      {isAdded ? t("Tillagt") : t("Lägg till i boken")}
+    <button className="button secondary small" disabled={isAdding} onClick={add}>
+      {t("Lägg till i boken")}
     </button>
   );
 }
 
 /** In Genrepaket: the cover, what the pack promises and holds, and the way inside. */
-export function PackTile(props: { pack: Pack; onAdd?: OnAdd; onOpen: () => void }) {
-  const { pack, onAdd } = props;
+export function PackTile(props: { pack: Pack; book?: Book; onOpen: () => void }) {
+  const { pack, book } = props;
   return (
     <article className="pack-tile">
       <button className="pack-cover-button" onClick={props.onOpen} aria-label={pack.name}>
@@ -70,7 +75,7 @@ export function PackTile(props: { pack: Pack; onAdd?: OnAdd; onOpen: () => void 
         </button>
         <div className="pack-tile-foot">
           <Status pack={pack} />
-          <AddButton pack={pack} onAdd={onAdd} />
+          <AddButton pack={pack} book={book} />
         </div>
       </div>
     </article>
@@ -78,7 +83,7 @@ export function PackTile(props: { pack: Pack; onAdd?: OnAdd; onOpen: () => void 
 }
 
 /** In Mallar och bitar: the same pack as a short row with a small cover. */
-export const PackRow = (props: { pack: Pack; onAdd?: OnAdd; onOpen: () => void }) => (
+export const PackRow = (props: { pack: Pack; book?: Book; onOpen: () => void }) => (
   <div className="pack-row">
     <PackCover pack={props.pack} isSmall />
     <span className="pack-row-text">
@@ -88,6 +93,6 @@ export const PackRow = (props: { pack: Pack; onAdd?: OnAdd; onOpen: () => void }
         {t("Se vad som ingår")}
       </button>
     </span>
-    <AddButton pack={props.pack} onAdd={props.onAdd} />
+    <AddButton pack={props.pack} book={props.book} />
   </div>
 );

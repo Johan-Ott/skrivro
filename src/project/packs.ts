@@ -104,6 +104,31 @@ export function packsFor(templateIds: string[]) {
   );
 }
 
+/** The packs a new book starts with, kept in project.json so they are never added twice. */
+export function packsField(templateIds: string[]) {
+  const ids = packsFor(templateIds).map((pack) => pack.id);
+  return ids.length ? { packs: ids } : {};
+}
+
+const listIn = (value: unknown): unknown[] => (Array.isArray(value) ? value : []);
+
+/** Whether a book has the pack: as noted in it, or, in a book from before that was kept, by all
+ * the labels of one of its pieces. */
+export function isPackInBook(fields: Record<string, unknown>, pack: Pack) {
+  if (listIn(fields["packs"]).includes(pack.id)) return true;
+  const labels = new Set(
+    listIn(fields["labels"]).map((label) => (label as { name?: string }).name),
+  );
+  return pack.pieces.some(
+    (piece) => piece.labels.length > 0 && piece.labels.every(([name]) => labels.has(name)),
+  );
+}
+
+export const withPackNoted = (fields: Record<string, unknown>, packId: string) => ({
+  ...fields,
+  packs: [...new Set([...listIn(fields["packs"]), packId])],
+});
+
 /** Writes the packs' notes, and puts each in Personer or in a sort of its own. */
 export async function packNotesTree(fileSystem: FileSystem, dir: string, from: Pack[]) {
   const sorts = new Map<string, TreeNode[]>();

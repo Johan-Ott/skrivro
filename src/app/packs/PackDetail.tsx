@@ -6,7 +6,7 @@ import {
   type Pack,
   type PackNote,
 } from "../../project/packs.js";
-import { AddButton, PackCover, Status, type OnAdd } from "./PackCard.js";
+import { AddButton, PackCover, Status, type Book } from "./PackCard.js";
 import { LabelChips, NoteText, PackPreview } from "./PackPreview.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -86,11 +86,11 @@ function Sections({ pack }: { pack: Pack }) {
 }
 
 /** The pack in full, with the way back to all packs. */
-export function PackDetail(props: { pack: Pack; onAdd: OnAdd; onBack: () => void }) {
+export function PackDetail(props: { pack: Pack; book: Book; onBack: () => void }) {
   // Opened from far down the list, the page still starts at its top.
   const top = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    top.current?.closest(".packs-dialog")?.scrollTo(0, 0);
+    top.current?.closest(".packs-body")?.scrollTo(0, 0);
   }, [props.pack]);
   return (
     <div className="pack-detail" ref={top}>
@@ -103,7 +103,7 @@ export function PackDetail(props: { pack: Pack; onAdd: OnAdd; onBack: () => void
       <Sections pack={props.pack} />
       <div className="pack-tile-foot">
         <Status pack={props.pack} />
-        <AddButton pack={props.pack} onAdd={props.onAdd} />
+        <AddButton pack={props.pack} book={props.book} />
       </div>
       <p className="setting-hint">
         {t(

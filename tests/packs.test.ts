@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { setUiLanguage } from "../src/i18n/i18n";
 import { createProject } from "../src/project/newProject";
-import { joinSorts, packOf, packs } from "../src/project/packs";
+import { isPackInBook, joinSorts, packOf, packs } from "../src/project/packs";
 import { readProjectFile } from "../src/project/projectFile";
 import { CHARACTERS_ID } from "../src/project/sorts";
 import { structures, templatePieces } from "../src/project/templates";
@@ -74,6 +74,29 @@ describe("genre packs", () => {
     expect(tree.filter((node) => node.title === "Ledtrådar")).toHaveLength(1);
     expect(childrenOf(tree, (node) => node.title === "Ledtrådar")).toHaveLength(2);
     expect(childrenOf(tree, (node) => node.id === CHARACTERS_ID)).toHaveLength(4);
+  });
+
+  it("note the packs a book starts with, so they are never added again", async () => {
+    const files = createMemoryFileSystem({});
+
+    const created = await createProject(files, "/Skrivro", { ...details, structure: "deckare" });
+
+    const { fields } = await readProjectFile(files, created.dir, []);
+    const [crime, horror] = ["deckare", "skrack"].map((id) =>
+      packs().find((pack) => pack.id === id),
+    );
+    expect(fields["packs"]).toEqual(["deckare"]);
+    expect(crime && isPackInBook(fields, crime)).toBe(true);
+    expect(horror && isPackInBook(fields, horror)).toBe(false);
+  });
+
+  it("know a pack in a book from before it was noted, by its labels", () => {
+    const horror = packs().find((pack) => pack.id === "skrack");
+    if (!horror) throw new Error("no horror pack");
+    const labels = horror.pieces[0]?.labels.map(([name, color]) => ({ name, color })) ?? [];
+
+    expect(isPackInBook({ labels }, horror)).toBe(true);
+    expect(isPackInBook({ labels: labels.slice(1) }, horror)).toBe(false);
   });
 
   it("start a book of the basics with no pack notes", async () => {

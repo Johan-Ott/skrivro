@@ -9,7 +9,7 @@ import { writeProjectFile } from "./projectFile.js";
 import type { Narration } from "../manuscript/narration.js";
 import { manuscriptSceneIds, NOTES_ID, withSpecialFolders, type TreeNode } from "./tree.js";
 import { CHARACTERS_ID } from "./sorts.js";
-import { joinSorts, packNotesTree, packsFor } from "./packs.js";
+import { joinSorts, packNotesTree, packsField, packsFor } from "./packs.js";
 import { readOwnTemplates, OWN_PREFIX } from "./ownTemplates.js";
 import { composeTemplate, structures, templateBook, type BookTemplate } from "./templates.js";
 import { t } from "../i18n/i18n.js";
@@ -142,6 +142,7 @@ const bookFields = (details: ProjectDetails) => ({
   ...(details.deadline ? { deadline: details.deadline } : {}),
   ...(details.narration ? { narration: details.narration } : {}),
   ...(details.language && details.language !== "sv-SE" ? { language: details.language } : {}),
+  ...packsField([details.structure, details.genre ?? "", ...details.pieces]),
 });
 
 // A writer who finds the story while writing starts on one chapter, whatever the structure.

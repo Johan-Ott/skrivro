@@ -5,6 +5,8 @@ import type { AppState } from "../App.js";
 import { NewNoteDialog } from "../notes/NewNoteDialog.js";
 import { openInHome } from "../notes/noteHomes.js";
 import { Overlays } from "../Overlays.js";
+import { PacksLayer } from "../packs/PackList.js";
+import { packsOfBook } from "../templates/addPieces.js";
 import { writingAreaProps } from "../paneProps.js";
 import { InsightsLayer } from "../progress/InsightsPanel.js";
 import { ProfileLayer } from "../profile/ProfileLayer.js";
@@ -41,6 +43,7 @@ function Floating({ app, project }: Props) {
         />
       )}
       <Overlays app={app} />
+      <PacksLayer book={packsOfBook(project, app.updateProject)} />
     </>
   );
 }

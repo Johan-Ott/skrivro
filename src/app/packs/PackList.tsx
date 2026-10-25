@@ -1,7 +1,7 @@
 import { createStore } from "@llkit/store.js";
 import { CloseButton, Dialog } from "@llkit/controls.js";
-import { packs, type Pack } from "../../project/packs.js";
-import { PackRow, PackTile, type OnAdd } from "./PackCard.js";
+import { packs } from "../../project/packs.js";
+import { PackRow, PackTile, type Book } from "./PackCard.js";
 import { PackDetail } from "./PackDetail.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -18,10 +18,10 @@ const INTRO = () =>
   );
 
 /** Every pack as a short row, each to add to the open book. */
-export const PackRows = ({ onAdd }: { onAdd: (pack: Pack) => Promise<void> }) => (
+export const PackRows = ({ book }: { book: Book }) => (
   <div className="pack-rows">
     {inOrder().map((pack) => (
-      <PackRow key={pack.id} pack={pack} onAdd={onAdd} onOpen={() => openPacks(pack.id)} />
+      <PackRow key={pack.id} pack={pack} book={book} onOpen={() => openPacks(pack.id)} />
     ))}
   </div>
 );
@@ -32,18 +32,18 @@ const shown = createStore<string | null>(null);
 /** Genrepaket… in the logo's menu, or straight to one pack. */
 export const openPacks = (packId = "") => shown.set(packId);
 
-const All = ({ onAdd }: { onAdd?: OnAdd }) => (
+const All = ({ book }: { book?: Book }) => (
   <>
     <p className="setting-hint">{INTRO()}</p>
     <div className="pack-grid">
       {inOrder().map((pack) => (
-        <PackTile key={pack.id} pack={pack} onAdd={onAdd} onOpen={() => shown.set(pack.id)} />
+        <PackTile key={pack.id} pack={pack} book={book} onOpen={() => shown.set(pack.id)} />
       ))}
     </div>
   </>
 );
 
-export function PacksLayer({ onAdd }: { onAdd?: OnAdd }) {
+export function PacksLayer({ book }: { book?: Book }) {
   const packId = shown.use();
   if (packId === null) return null;
   const pack = packs().find((each) => each.id === packId);
@@ -52,11 +52,13 @@ export function PacksLayer({ onAdd }: { onAdd?: OnAdd }) {
       <span className="packs-close">
         <CloseButton onClose={() => shown.set(null)} />
       </span>
-      {pack ? (
-        <PackDetail pack={pack} onAdd={onAdd} onBack={() => shown.set("")} />
-      ) : (
-        <All onAdd={onAdd} />
-      )}
+      <div className="packs-body">
+        {pack ? (
+          <PackDetail pack={pack} book={book} onBack={() => shown.set("")} />
+        ) : (
+          <All book={book} />
+        )}
+      </div>
     </Dialog>
   );
 }

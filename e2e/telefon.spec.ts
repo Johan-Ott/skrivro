@@ -217,3 +217,18 @@ test("who is named in the scene is atop the text, and opens the note", async ({ 
 
   await expect(page.locator(".beside-pane")).toBeVisible();
 });
+
+test("the genre packs open from the book's menu, and a pack is added to the book once", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "Meny", exact: true }).first().click();
+  await page.getByRole("menuitem", { name: "Boken ›" }).click();
+  await page.getByRole("menuitem", { name: "Genrepaket…" }).click();
+
+  const crime = page.locator(".pack-tile").filter({ hasText: "Deckare" });
+  await crime.getByRole("button", { name: "Lägg till i boken" }).click();
+  await expect(crime.getByText("✓ I boken")).toBeVisible();
+  await crime.getByRole("button", { name: "Se vad som ingår" }).click();
+  await expect(page.locator(".pack-preview-page h3")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Stäng" })).toBeInViewport();
+});

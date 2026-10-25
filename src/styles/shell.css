@@ -3538,12 +3538,48 @@
 }
 
 /* Genrepaket: each pack wears its genre's cover from the shelf (app.css .cover-*). */
-.packs-dialog {
+/* The title and × stay put while the packs scroll beneath them. */
+.dialog-backdrop > .dialog.packs-dialog {
   position: relative;
   width: min(780px, calc(100vw - 48px));
   max-height: calc(100vh - 48px);
-  overflow-y: auto;
+  overflow: hidden;
   gap: 14px;
+}
+
+.packs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  margin: 0 -20px -20px;
+  padding: 0 20px 20px;
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .dialog-backdrop > .dialog.packs-dialog {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .pack-preview {
+    height: 240px;
+  }
+
+  .pack-preview-page {
+    margin: 10px 10px 0;
+    padding: 16px 18px;
+  }
+
+  .pack-note summary {
+    padding: 12px 14px;
+  }
+
+  .pack-note-text {
+    padding: 0 14px 12px;
+  }
 }
 
 .packs-close {
@@ -3680,6 +3716,13 @@
 .pack-tile-foot .pack-tag,
 .pack-row .pack-tag {
   margin-left: 0;
+}
+
+.pack-in-book {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .pack-rows {
@@ -3899,6 +3942,10 @@
 .pack-note-text p,
 .pack-note-text ul {
   margin: 0 0 8px;
+}
+
+.pack-note-text ul {
+  padding-left: 20px;
 }
 
 .pack-note-text .pack-more {

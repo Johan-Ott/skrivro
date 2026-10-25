@@ -30,7 +30,8 @@ test("a genre pack is added to the book from Mallar och bitar, with its guides a
   const crime = dialog.locator(".pack-row").filter({ hasText: "Deckare" });
   await crime.getByRole("button", { name: "Lägg till i boken" }).click();
 
-  await expect(crime.getByRole("button", { name: "Tillagt" })).toBeVisible();
+  await expect(crime.getByText("✓ I boken")).toBeVisible();
+  await expect(crime.getByRole("button", { name: "Lägg till i boken" })).toBeHidden();
   await page.keyboard.press("Escape");
   await expect(page.locator(".sidebar")).toContainText("Guide");
   await expect(page.locator(".sidebar")).toContainText("Ledtrådar");

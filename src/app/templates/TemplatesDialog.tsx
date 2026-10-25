@@ -7,7 +7,7 @@ import { libraryOf } from "../journey/journeyFile.js";
 import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
 import type { ProjectChange } from "../labels/LabelsDialog.js";
-import { addPackToBook, addToBook, additionsOf } from "./addPieces.js";
+import { addToBook, additionsOf, packsOfBook } from "./addPieces.js";
 import { PackRows } from "../packs/PackList.js";
 import { PieceToggles } from "./TemplateChoices.js";
 import { importTemplateFile, shareTemplateFile, useOwnTemplates } from "./templateFiles.js";
@@ -133,9 +133,7 @@ export function TemplatesDialog(props: DialogProps) {
       <AddPieces {...props} />
       <section className="templates-section">
         <span className="field-label">{t("Genrepaket")}</span>
-        <PackRows
-          onAdd={async (pack) => props.onUpdate(await addPackToBook(props.project, pack))}
-        />
+        <PackRows book={packsOfBook(props.project, props.onUpdate)} />
       </section>
       <SaveAsTemplate {...props} />
       <button className="link-button quiet" onClick={importOne}>
