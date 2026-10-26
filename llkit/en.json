@@ -35,5 +35,7 @@
   "Skicka": "Send",
   "Nej tack": "No thanks",
   "{app} stängdes oväntat förra gången. Vill du skicka felrapporten till oss?": "{app} closed unexpectedly last time. Would you like to send us the error report?",
-  "Tillbaka": "Back"
+  "Tillbaka": "Back",
+  "Sidopanel": "Side panel",
+  "Visa eller dölj sidopanelen": "Show or hide the side panel"
 }

@@ -590,3 +590,122 @@ button:not(:disabled):active {
   position: fixed;
   bottom: calc(24px + env(safe-area-inset-bottom));
 }
+
+/* The side panel (Side.tsx): on the window's grey, left of the app's screen. A view with nothing
+   for it leaves it empty, and its button then rests. Folded away, it floats out while the pointer
+   rests on its button or on it, and lingers a moment so the pointer can cross the gap. --side-top
+   is where it floats from: the height of the app's top bar. */
+.side-frame {
+  display: flex;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 272px;
+  min-height: 0;
+  padding: 0 8px 8px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.side:empty {
+  display: none;
+}
+
+.side-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2px;
+}
+
+.side-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 6px 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.side-body > .side-heading:first-child {
+  margin-top: 4px;
+}
+
+.side-toggle {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-button);
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.side-toggle:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.side-toggle svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+body:has(.side:empty) .side-toggle {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.side-frame.folded > .side {
+  position: fixed;
+  top: calc(var(--side-top, 44px) + var(--safe-top));
+  bottom: 8px;
+  left: 8px;
+  z-index: var(--layer-sidebar);
+  padding: 8px;
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  box-shadow: var(--shadow-dialog);
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.12s 0.2s,
+    visibility 0s 0.32s;
+}
+
+body:has(.side-toggle:hover) .side-frame.folded > .side,
+.side-frame.folded > .side:hover {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+/* A phone has no room for the side beside the screen: an open side fills it, and the button folds
+   it to show the screen. */
+@media (max-width: 700px) {
+  .side-frame:not(.folded) > .side:not(:empty) {
+    flex: 1 1 0;
+    width: auto;
+    padding: 8px;
+  }
+
+  .side-frame:not(.folded):has(> .side:not(:empty)) > :not(.side),
+  .side-frame.folded > .side {
+    display: none;
+  }
+}

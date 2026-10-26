@@ -29,6 +29,8 @@ What any llstudios app is built on. Skrivro is the first app on it.
 - `guide/`: `createGuide(steps, storageKey)` and `GuideTip`, a tip per part of the app, one at a
   time, that can be skipped or started over
 - `appInfo`: the app's name, handed in with `provideAppName`, for the report and feedback
+- `Side`: the side panel, the same in every view: `SideFrame` round the app's screen, `SideToggle`
+  in its top bar, and each view's `<Side>` with what goes in it; folded or out per view
 
 ## A new app
 
