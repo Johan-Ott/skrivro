@@ -2,7 +2,13 @@ import { DEMO_PROJECT_DIR, DEMO_PROJECT_FILES } from "../demo/demoProject.js";
 import type { ImportedNode } from "../import/markdownImport.js";
 import { newSceneText, withSceneStatus } from "../manuscript/sceneFile.js";
 import { createFileNote, saveResearchFile } from "./researchFiles.js";
-import { joinPath, readIfThere, type FileSystem } from "@llkit/storage/fileSystem.js";
+import {
+  collectingWrites,
+  joinPath,
+  readIfThere,
+  writeAll,
+  type FileSystem,
+} from "@llkit/storage/fileSystem.js";
 import { newSceneId, scenePath } from "../storage/sceneId.js";
 import { BOOK_SUFFIX, parentOf, withoutBookSuffix } from "./libraryFolders.js";
 import { writeProjectFile } from "./projectFile.js";
@@ -189,13 +195,28 @@ export async function createProject(
   // is closed, never stands on the shelf or goes to Drive.
   const dir = `${finalDir}${MAKING}`;
   await fileSystem.makeDir(joinPath(dir, "scenes"));
+  const { collecting, flush } = collectingWrites(fileSystem);
+  const sceneId = await writeNewBook({ fileSystem: collecting, dir }, details, template, imported);
+  await flush();
+  await fileSystem.rename(dir, finalDir);
+  return { dir: finalDir, sceneId };
+}
+
+// The book's scenes, notes and project.json; gives the scene it opens on.
+async function writeNewBook(
+  making: { fileSystem: FileSystem; dir: string },
+  details: ProjectDetails,
+  template: BookTemplate,
+  imported?: ImportedNode[],
+) {
+  const { fileSystem, dir } = making;
   const isPlanned = details.isPlanned !== false || imported !== undefined;
   const book =
     imported ?? templateBook(isPlanned ? template : firstChapterOf(template), t("Scen 1"));
   const tree = await writeBook(fileSystem, dir, book);
   const fromTemplate = templateParts(template);
   const chosen = [details.structure, details.genre ?? "", ...details.pieces];
-  const notes = await startingNotes({ fileSystem, dir }, isPlanned ? null : template, chosen);
+  const notes = await startingNotes(making, isPlanned ? null : template, chosen);
   const all = withSpecialFolders([...tree, ...joinSorts([...fromTemplate.sorts, ...notes.sorts])]);
   const goal = details.totalGoal ? { totalGoal: details.totalGoal } : {};
   const fields = {
@@ -205,21 +226,21 @@ export async function createProject(
     welcome: notes.welcome,
   };
   await writeProjectFile(fileSystem, dir, fields, notes.place(all));
-  await fileSystem.rename(dir, finalDir);
-  return { dir: finalDir, sceneId: manuscriptSceneIds(tree)[0] ?? notes.welcome };
+  return manuscriptSceneIds(tree)[0] ?? notes.welcome;
 }
 
 // The example is copied once: asked for again, the copy already on the shelf opens. Its files go
-// into a new folder, so they are written all at once rather than one by one, which a phone is slow at.
+// into a new folder, so they are written in one call, not one by one, which a phone is slow at.
 export async function copyExampleProject(fileSystem: FileSystem, libraryDir: string) {
   const existing = joinPath(libraryDir, `Vintervägen${BOOK_SUFFIX}`);
   if ((await readIfThere(fileSystem, joinPath(existing, "project.json"))) !== null) return existing;
   const dir = await freeProjectDir(fileSystem, libraryDir, "Vintervägen");
-  const files = Object.entries(DEMO_PROJECT_FILES).map(
-    ([examplePath, text]) => [dir + examplePath.slice(DEMO_PROJECT_DIR.length), text] as const,
-  );
+  const files = Object.entries(DEMO_PROJECT_FILES).map(([examplePath, text]): [string, string] => [
+    dir + examplePath.slice(DEMO_PROJECT_DIR.length),
+    text,
+  ]);
   for (const folder of new Set(files.map(([path]) => parentOf(path))))
     await fileSystem.makeDir(folder);
-  await Promise.all(files.map(([path, text]) => fileSystem.writeText(path, text)));
+  await writeAll(fileSystem, files);
   return dir;
 }

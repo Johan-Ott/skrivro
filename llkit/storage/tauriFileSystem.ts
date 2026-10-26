@@ -31,6 +31,9 @@ export const tauriFileSystem: FileSystem = {
       () => [],
     ),
 
+  readTexts: (paths) => invoke("read_texts", { paths }),
+  writeTexts: (files) => invoke("write_texts", { files }),
+
   listTimes: async (dir) =>
     Object.fromEntries(await invoke<[string, number][]>("folder_times", { dir })),
 

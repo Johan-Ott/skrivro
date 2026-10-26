@@ -13,7 +13,23 @@ export interface FileSystem {
   makeDir(dir: string): Promise<void>;
   /** Each file in `dir` with modifiedAt's time, in one call where one per file is slow. */
   listTimes?(dir: string): Promise<Record<string, number>>;
+  /** Many files' text in one call; null for one that cannot be read. */
+  readTexts?(paths: string[]): Promise<(string | null)[]>;
+  /** Writes many new files, with their folders, in one call. */
+  writeTexts?(files: [string, string][]): Promise<void>;
 }
+
+/** Each file's text, null where it cannot be read, by readTexts or else one call per file. */
+export const readAll = (fileSystem: FileSystem, paths: string[]) =>
+  fileSystem.readTexts && paths.length > 1
+    ? fileSystem.readTexts(paths)
+    : Promise.all(paths.map((path) => fileSystem.readText(path).catch(() => null)));
+
+/** Writes new files, by writeTexts or else one call per file. */
+export const writeAll = (fileSystem: FileSystem, files: [string, string][]) =>
+  fileSystem.writeTexts
+    ? fileSystem.writeTexts(files)
+    : Promise.all(files.map(([path, text]) => fileSystem.writeText(path, text))).then(() => {});
 
 /** The files in `dir` with their times, by listTimes or else one call per file. */
 export async function timesIn(fileSystem: FileSystem, dir: string) {
@@ -23,6 +39,24 @@ export async function timesIn(fileSystem: FileSystem, dir: string) {
   return Object.fromEntries(
     names.flatMap((name, index) => (times[index] === null ? [] : [[name, times[index]]])),
   ) as Record<string, number>;
+}
+
+/** Keeps text writes, and renames of them, and writes them all in one call at flush: for files
+ * made in a folder of their own, which need no temp file each, where many calls are slow. */
+export function collectingWrites(fileSystem: FileSystem) {
+  const pending = new Map<string, string>();
+  const collecting: FileSystem = {
+    ...fileSystem,
+    writeText: async (path, text) => void pending.set(path, text),
+    readText: async (path) => pending.get(path) ?? fileSystem.readText(path),
+    rename: async (from, to) => {
+      const text = pending.get(from);
+      if (text === undefined) return fileSystem.rename(from, to);
+      pending.delete(from);
+      pending.set(to, text);
+    },
+  };
+  return { collecting, flush: () => writeAll(fileSystem, [...pending]) };
 }
 
 // Forward slashes work on Windows in both Node and Tauri.

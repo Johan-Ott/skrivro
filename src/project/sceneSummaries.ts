@@ -7,7 +7,7 @@ import {
   type SceneStatus,
 } from "../manuscript/sceneFile.js";
 import { countMarkdownWords } from "../manuscript/wordCount.js";
-import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
+import { joinPath, readAll, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { scenePath } from "../storage/sceneId.js";
 import { aliasesOf } from "./aliases.js";
 import { t, uiLanguage } from "../i18n/i18n.js";
@@ -114,27 +114,39 @@ export async function readSceneSummaries(
 ) {
   const { known, noteIds } = options;
   const times = fileSystem.listTimes ? await fileSystem.listTimes(joinPath(dir, "scenes")) : {};
-  const summaryOf = async (id: string) => {
+  const found = (id: string) => {
     const path = scenePath(dir, id);
     const kept = known && !known.changed.has(path) ? known.summaries[id] : undefined;
-    const isNote = noteIds?.has(id) ?? false;
-    const time = times[`${id}.md`];
-    const found = kept ?? unchangedSummary(path, isNote, time);
-    return found ?? cachedSummary(path, await fileSystem.readText(path), isNote, time);
+    return kept ?? unchangedSummary(path, noteIds?.has(id) ?? false, times[`${id}.md`]);
   };
-  const entries = await Promise.all(sceneIds.map(async (id) => [id, await summaryOf(id)] as const));
+  // What changed is read in one call, not one call per scene.
+  const toRead = sceneIds.filter((id) => !found(id));
+  const texts = await readAll(
+    fileSystem,
+    toRead.map((id) => scenePath(dir, id)),
+  );
+  const read = new Map(toRead.map((id, index) => [id, texts[index]]));
+  const summaryOf = (id: string) => {
+    const text = read.get(id);
+    if (text === undefined) return found(id) as SceneSummary;
+    if (text === null) throw new Error(`Scenen saknas: ${scenePath(dir, id)}`);
+    return cachedSummary(scenePath(dir, id), text, noteIds?.has(id) ?? false, times[`${id}.md`]);
+  };
+  const entries = sceneIds.map((id) => [id, summaryOf(id)] as const);
   saveKept();
   return Object.fromEntries(entries);
 }
 
 /** Each scene's or note's text after its front matter, by id; a file that is gone is left out. */
 export async function readSceneBodies(fileSystem: FileSystem, refs: { dir: string; id: string }[]) {
-  const bodies: Record<string, string> = {};
-  await Promise.all(
-    refs.map(async ({ dir, id }) => {
-      const file = await fileSystem.readText(scenePath(dir, id)).catch(() => null);
-      if (file !== null) bodies[id] = splitSceneFile(file).body;
-    }),
+  const files = await readAll(
+    fileSystem,
+    refs.map(({ dir, id }) => scenePath(dir, id)),
   );
+  const bodies: Record<string, string> = {};
+  refs.forEach(({ id }, index) => {
+    const file = files[index];
+    if (typeof file === "string") bodies[id] = splitSceneFile(file).body;
+  });
   return bodies;
 }
