@@ -69,3 +69,17 @@ describe("readSceneSummaries aliases", () => {
     expect(summaries["ERIK"]?.aliases).toEqual(["Eken", "Kommissarien"]);
   });
 });
+
+describe("readSceneSummaries with file times", () => {
+  it("does not read a scene again while its file's time is the same", async () => {
+    const files = createMemoryFileSystem({ "/tider/scenes/S1.md": "Ett två tre" });
+    await readSceneSummaries(files, "/tider", ["S1"]);
+    let reads = 0;
+    const counting = { ...files, readText: (path: string) => (reads++, files.readText(path)) };
+
+    const summaries = await readSceneSummaries(counting, "/tider", ["S1"]);
+
+    expect(reads).toBe(0);
+    expect(summaries["S1"]?.words).toBe(3);
+  });
+});

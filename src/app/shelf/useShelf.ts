@@ -38,6 +38,8 @@ function cacheShelf(libraryDir: string | null, books: ShelfBook[]) {
   }
 }
 
+const SETTLE_MS = 300;
+
 export function useShelf(libraryDir: string | null, knownProjects: string[]) {
   const [books, setBooks] = useState<ShelfBook[] | null>(() => cachedShelf(libraryDir));
   const known = knownProjects.join("\n");
@@ -48,10 +50,19 @@ export function useShelf(libraryDir: string | null, knownProjects: string[]) {
   }, [libraryDir, known]);
   useEffect(() => {
     void reload();
+    // A new book writes many files at once: the shelf is read once, when they have settled.
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const soon = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => void reload(), SETTLE_MS);
+    };
     // A book opened from elsewhere, such as the example, is not in the library's folder.
     const dirs = [...(libraryDir ? [libraryDir] : []), ...(known ? known.split("\n") : [])];
-    const stops = dirs.map((dir) => platform.watchFolder(dir, () => void reload()));
-    return () => stops.forEach((stopWatching) => void stopWatching.then((stop) => stop()));
+    const stops = dirs.map((dir) => platform.watchFolder(dir, soon));
+    return () => {
+      clearTimeout(timer);
+      stops.forEach((stopWatching) => void stopWatching.then((stop) => stop()));
+    };
   }, [libraryDir, known, reload]);
   return books;
 }

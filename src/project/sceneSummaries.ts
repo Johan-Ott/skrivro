@@ -7,7 +7,7 @@ import {
   type SceneStatus,
 } from "../manuscript/sceneFile.js";
 import { countMarkdownWords } from "../manuscript/wordCount.js";
-import { type FileSystem } from "@llkit/storage/fileSystem.js";
+import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { scenePath } from "../storage/sceneId.js";
 import { aliasesOf } from "./aliases.js";
 import { t, uiLanguage } from "../i18n/i18n.js";
@@ -40,9 +40,9 @@ function summarize(text: string, isNote: boolean): SceneSummary {
   };
 }
 
-// Kept between starts, per device and language, by file with the text's length and a checksum:
-// a scene is counted again only when it changed, so a book opened before opens at once.
-type Kept = { sum: string; summary: SceneSummary };
+// Kept between starts, per device and language, by file with the text's length and a checksum,
+// and the file's time: a scene whose time is the same is not even read again.
+type Kept = { sum: string; summary: SceneSummary; time?: number };
 const MOST_KEPT = 5000;
 const storedKey = () => `skrivro.summaries.1.${uiLanguage()}`;
 let kept: Map<string, Kept> | null = null;
@@ -79,16 +79,24 @@ function checksum(text: string) {
   return `${text.length}:${(hash >>> 0).toString(36)}`;
 }
 
-function cachedSummary(path: string, text: string, isNote: boolean): SceneSummary {
+const kind = (isNote: boolean) => (isNote ? "n" : "s");
+
+function cachedSummary(path: string, text: string, isNote: boolean, time?: number) {
   const all = keptSummaries();
-  const sum = `${isNote ? "n" : "s"}${checksum(text)}`;
+  const sum = `${kind(isNote)}${checksum(text)}`;
   const found = all.get(path);
-  if (found?.sum === sum) return found.summary;
-  const summary = summarize(text, isNote);
-  all.delete(path);
-  all.set(path, { sum, summary });
-  isChanged = true;
+  const summary = found?.sum === sum ? found.summary : summarize(text, isNote);
+  if (found?.sum !== sum || found.time !== time) {
+    all.delete(path);
+    all.set(path, { sum, summary, ...(time === undefined ? {} : { time }) });
+    isChanged = true;
+  }
   return summary;
+}
+
+function unchangedSummary(path: string, isNote: boolean, time: number | undefined) {
+  const found = time === undefined ? undefined : keptSummaries().get(path);
+  return found?.time === time && found?.sum.startsWith(kind(isNote)) ? found.summary : undefined;
 }
 
 /** What is known already: the summaries read last time, and which files changed since. */
@@ -105,14 +113,16 @@ export async function readSceneSummaries(
   options: { known?: KnownSummaries | undefined; noteIds?: ReadonlySet<string> } = {},
 ) {
   const { known, noteIds } = options;
-  const entries = await Promise.all(
-    sceneIds.map(async (id) => {
-      const path = scenePath(dir, id);
-      const kept = known && !known.changed.has(path) ? known.summaries[id] : undefined;
-      const text = kept ? "" : await fileSystem.readText(path);
-      return [id, kept ?? cachedSummary(path, text, noteIds?.has(id) ?? false)] as const;
-    }),
-  );
+  const times = fileSystem.listTimes ? await fileSystem.listTimes(joinPath(dir, "scenes")) : {};
+  const summaryOf = async (id: string) => {
+    const path = scenePath(dir, id);
+    const kept = known && !known.changed.has(path) ? known.summaries[id] : undefined;
+    const isNote = noteIds?.has(id) ?? false;
+    const time = times[`${id}.md`];
+    const found = kept ?? unchangedSummary(path, isNote, time);
+    return found ?? cachedSummary(path, await fileSystem.readText(path), isNote, time);
+  };
+  const entries = await Promise.all(sceneIds.map(async (id) => [id, await summaryOf(id)] as const));
   saveKept();
   return Object.fromEntries(entries);
 }

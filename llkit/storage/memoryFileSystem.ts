@@ -5,6 +5,8 @@ type Content = string | Uint8Array;
 interface Disk {
   files: Map<string, { content: Content; modifiedAt: number }>;
   folders: Set<string>;
+  /** Each write is later than the one before, as on a disk, even within a millisecond. */
+  lastTime: number;
 }
 
 const missing = (path: string) =>
@@ -17,7 +19,8 @@ function addFolderWithParents(disk: Disk, dir: string) {
 }
 
 function store(disk: Disk, path: string, content: Content) {
-  disk.files.set(path, { content, modifiedAt: Date.now() });
+  disk.lastTime = Math.max(Date.now(), disk.lastTime + 1);
+  disk.files.set(path, { content, modifiedAt: disk.lastTime });
   addFolderWithParents(disk, path.slice(0, path.lastIndexOf("/")));
 }
 
@@ -64,7 +67,7 @@ const asBytes = (content: Content) =>
 
 /** Used when Skrivro runs in a plain browser without Tauri. */
 export function createMemoryFileSystem(initialFiles: Record<string, string>): FileSystem {
-  const disk: Disk = { files: new Map(), folders: new Set() };
+  const disk: Disk = { files: new Map(), folders: new Set(), lastTime: 0 };
   Object.entries(initialFiles).forEach(([path, text]) => store(disk, path, text));
   return {
     readText: async (path) => asText(read(disk, path)),
@@ -74,6 +77,13 @@ export function createMemoryFileSystem(initialFiles: Record<string, string>): Fi
     rename: async (from, to) => renameFile(disk, from, to),
     list: async (dir) => childNames(disk, dir),
     modifiedAt: async (path) => disk.files.get(path)?.modifiedAt ?? null,
+    listTimes: async (dir) =>
+      Object.fromEntries(
+        childNames(disk, dir).flatMap((name) => {
+          const file = disk.files.get(`${dir}/${name}`);
+          return file ? [[name, file.modifiedAt]] : [];
+        }),
+      ),
     makeDir: async (dir) => addFolderWithParents(disk, dir),
   };
 }

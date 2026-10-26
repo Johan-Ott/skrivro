@@ -76,6 +76,7 @@ pub fn run() {
             typst::fetched_parts,
             books::remove_book,
             files::write_temp_text,
+            files::folder_times,
             backups::remove_backup,
             google::sign_in_in_browser,
             google::saved_google_key,
@@ -95,6 +96,7 @@ pub fn run() {
             typst::fetched_parts,
             books::remove_book,
             files::write_temp_text,
+            files::folder_times,
             backups::remove_backup,
             google::google_access_token,
             share::share_file

@@ -2,8 +2,7 @@ import { DAY } from "./stats.js";
 import { projectGoals } from "./progress.js";
 import { ownStepName } from "./statusSteps.js";
 import { SCENE_STATUSES, type SceneStatus } from "../manuscript/sceneFile.js";
-import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
-import { scenePath } from "../storage/sceneId.js";
+import { joinPath, timesIn, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { openProjectFolder } from "../storage/projectFolder.js";
 import { readSceneSummaries, type SceneSummary } from "./sceneSummaries.js";
 import { seriesTitle } from "./series.js";
@@ -144,10 +143,14 @@ async function bookSceneIds(fileSystem: FileSystem, dir: string, tree: TreeNode[
   return inManuscript.length > 0 ? inManuscript : onDisk;
 }
 
+// Two calls a book, not one per scene.
 async function lastChange(fileSystem: FileSystem, dir: string, sceneIds: string[]) {
-  const paths = [...sceneIds.map((id) => scenePath(dir, id)), joinPath(dir, "project.json")];
-  const times = await Promise.all(paths.map((path) => fileSystem.modifiedAt(path)));
-  const known = times.filter((time): time is number => time !== null);
+  const [scenes, top] = await Promise.all([
+    timesIn(fileSystem, joinPath(dir, "scenes")),
+    timesIn(fileSystem, dir),
+  ]);
+  const times = [...sceneIds.map((id) => scenes[`${id}.md`]), top["project.json"]];
+  const known = times.filter((time): time is number => time !== undefined);
   return known.length > 0 ? Math.max(...known) : null;
 }
 

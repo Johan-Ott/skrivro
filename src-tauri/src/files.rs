@@ -14,3 +14,20 @@ pub fn write_temp_text(path: String, text: String) -> Result<(), String> {
         .map_err(|error| error.to_string())?;
     file.sync_all().map_err(|error| error.to_string())
 }
+
+/// Every file in `dir` with its last change in milliseconds since 1970, in one call instead of
+/// one per file; empty when the folder is missing.
+#[tauri::command]
+pub fn folder_times(dir: String) -> Vec<(String, u64)> {
+    let Ok(entries) = std::fs::read_dir(&dir) else {
+        return Vec::new();
+    };
+    entries
+        .filter_map(Result::ok)
+        .filter_map(|entry| {
+            let changed = entry.metadata().ok()?.modified().ok()?;
+            let millis = changed.duration_since(std::time::UNIX_EPOCH).ok()?.as_millis();
+            Some((entry.file_name().to_string_lossy().into_owned(), millis as u64))
+        })
+        .collect()
+}

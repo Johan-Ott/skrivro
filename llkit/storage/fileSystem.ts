@@ -11,6 +11,18 @@ export interface FileSystem {
   /** Milliseconds since 1970, or null when the file is missing. */
   modifiedAt(path: string): Promise<number | null>;
   makeDir(dir: string): Promise<void>;
+  /** Each file in `dir` with modifiedAt's time, in one call where one per file is slow. */
+  listTimes?(dir: string): Promise<Record<string, number>>;
+}
+
+/** The files in `dir` with their times, by listTimes or else one call per file. */
+export async function timesIn(fileSystem: FileSystem, dir: string) {
+  if (fileSystem.listTimes) return fileSystem.listTimes(dir);
+  const names = await fileSystem.list(dir);
+  const times = await Promise.all(names.map((name) => fileSystem.modifiedAt(joinPath(dir, name))));
+  return Object.fromEntries(
+    names.flatMap((name, index) => (times[index] === null ? [] : [[name, times[index]]])),
+  ) as Record<string, number>;
 }
 
 // Forward slashes work on Windows in both Node and Tauri.

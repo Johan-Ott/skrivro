@@ -1,5 +1,4 @@
 import {
-  exists,
   mkdir,
   readDir,
   readFile,
@@ -25,13 +24,19 @@ export const tauriFileSystem: FileSystem = {
   rename: (from, to) => rename(from, to),
   makeDir: (dir) => mkdir(dir, { recursive: true }),
 
-  async list(dir) {
-    if (!(await exists(dir))) return [];
-    return (await readDir(dir)).map((entry) => entry.name);
-  },
+  // One call each, not a second one to ask whether the file is there: a missing one fails.
+  list: (dir) =>
+    readDir(dir).then(
+      (entries) => entries.map((entry) => entry.name),
+      () => [],
+    ),
 
-  async modifiedAt(path) {
-    if (!(await exists(path))) return null;
-    return (await stat(path)).mtime?.getTime() ?? null;
-  },
+  listTimes: async (dir) =>
+    Object.fromEntries(await invoke<[string, number][]>("folder_times", { dir })),
+
+  modifiedAt: (path) =>
+    stat(path).then(
+      (info) => info.mtime?.getTime() ?? null,
+      () => null,
+    ),
 };
