@@ -7,8 +7,8 @@ import {
 } from "../../project/ownNoteTemplates.js";
 import { noteTemplates, type NoteTemplate } from "../../project/packs.js";
 import { splitSceneFile } from "../../manuscript/sceneFile.js";
-import { isSpecial } from "../../project/sorts.js";
-import { findNode, type TreeNode } from "../../project/tree.js";
+import { sortKey } from "../../project/sorts.js";
+import { findNode } from "../../project/tree.js";
 import { scenePath } from "../../storage/sceneId.js";
 import { libraryOf } from "../journey/journeyFile.js";
 import { platform } from "../platform.js";
@@ -32,16 +32,13 @@ const loadOwn = async (libraryDir: string | null) =>
     await readNoteTemplates(platform.fileSystem, await libraryOf(libraryDir)).catch(() => []),
   );
 
-// Personer and the other fixed sorts are known by their id, a sort of the writer's by its name.
-const keyOf = (sort: TreeNode) => (isSpecial(sort.id) ? sort.id : (sort.title ?? ""));
-
 /** Spara som mall: the note's text, under its name, for new notes in its sort in every book. */
 export async function saveNoteAsTemplate(project: Project, libraryDir: string | null, id: string) {
   const parent = findNode(project.tree, id)?.parent;
   if (parent?.kind !== "sort") return;
   const text = await platform.fileSystem.readText(scenePath(project.dir, id));
   const name = project.summaries[id]?.title ?? t("Mall");
-  const template = { name, sort: keyOf(parent), body: splitSceneFile(text).body };
+  const template = { name, sort: sortKey(parent), body: splitSceneFile(text).body };
   await saveNoteTemplate(platform.fileSystem, await libraryOf(libraryDir), template);
   await loadOwn(libraryDir);
 }
@@ -49,8 +46,9 @@ export async function saveNoteAsTemplate(project: Project, libraryDir: string | 
 function templatesFor(project: Project, form: Form, mine: OwnNoteTemplate[]) {
   const sort = form.newSort === null ? findNode(project.tree, form.sortId)?.node : undefined;
   if (!sort) return [];
-  const key = keyOf(sort);
-  return [...noteTemplates(project.fields, key), ...mine.filter((each) => each.sort === key)];
+  const key = sortKey(sort);
+  const packs = noteTemplates(project.fields, key).filter((template) => !template.isStandard);
+  return [...packs, ...mine.filter((each) => each.sort === key)];
 }
 
 /** The templates for the chosen sort, or nothing when it has none. */

@@ -4,28 +4,36 @@ sort: karaktarer
 
 # Jag då och jag nu (mall)
 
-För memoaren. Byt namn på anteckningen till ditt namn, eller det du kallades då. Fyll i den innan du skriver, och igen när utkastet är klart: svaren brukar ändras.
+Byt namn på anteckningen till det jag kallades då.
 
-**Åldern:** hur gammal du var när bokens berättelse börjar, och när den slutar.
+**Åldern:**
 
-**Vad då-jaget ville:** det du jagade eller drömde om, med dina ord från då, inte dagens.
+<!-- Hur gammal var jag när berättelsen börjar och slutar? -->
 
-**Vad då-jaget trodde:** om sig själv, om familjen, om världen. Den tro som boken kommer att utmana.
+**Vad då-jaget ville:**
 
-**Rädslan:** det du helst undvek att tänka på.
+<!-- Vad jagade jag, med mina ord från då? -->
 
-**Rösten då:** ord, uttryck och sätt att tänka som hör till den åldern och den tiden. Vad hade du inte ord för än?
+**Vad då-jaget trodde:**
 
-**Det du inte visste:** det läsaren kanske anar, men som du inte såg i stunden.
+<!-- Vilken tro om mig själv kommer boken att utmana? -->
 
-**Nu-jaget:** var du står när du skriver. Vad du har förstått, och vad du fortfarande inte förstår.
+**Rösten då:**
 
-**Avståndet:** hur länge sedan det är, och om du står tillräckligt långt ifrån för att se mönstret. Vad är fortfarande för nära?
+<!-- Vad hade jag inte ord för än? -->
 
-**Bokens fråga:** den enda fråga som nu-jaget försöker besvara. "Varför slutade jag måla?"
+**Nu-jaget och avståndet:**
 
-**Förvandlingen:** i en mening, från vem till vem.
+<!-- Vad har jag förstått, och vad är fortfarande för nära? -->
 
-**Din egen del:** det du gjorde eller lät bli, som du måste vara ärlig med.
+**Bokens fråga:**
 
-**Det du inte tänker berätta:** gränsen du drar för dig själv, och om läsaren behöver veta att den finns.
+<!-- Vilken enda fråga försöker jag besvara, som: varför slutade jag måla? -->
+
+**Min egen del:**
+
+<!-- Vad gjorde jag, eller lät bli, som jag måste vara ärlig med? -->
+
+**Det jag inte tänker berätta:**
+
+<!-- Var drar jag gränsen, och behöver läsaren veta att den finns? -->

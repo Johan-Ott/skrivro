@@ -6,20 +6,34 @@ sort: Världen
 
 Byt namn på anteckningen till varelsens namn.
 
-**Första intrycket:** vad ser, hör och känner man för lukt när den kommer nära?
+**Första intrycket:**
 
-**Var den lever:** miljö, revir, och var man aldrig ska gå ensam.
+<!-- Vad ser, hör och luktar man när den kommer nära? -->
 
-**Vad den vill:** föda, revir, avkomma, eller något mer? Även ett monster har ett mål.
+**Vad den vill:**
 
-**Hur den fungerar:** hur den jagar, försvarar sig och förökar sig. Följer den världens regler, och magins?
+<!-- Vilket mål har den, även som monster? -->
 
-**Om den tänker:** har den språk, minne, en egen syn på människorna? En varelse som tänker och vill är en person, och kan behöva en egen personmall.
+**Hur den fungerar:**
 
-**Styrkan och svagheten:** vad gör den farlig, och vad kan stoppa den? Plantera svagheten tidigt.
+<!-- Hur jagar den, och följer den magins regler? -->
 
-**Förhållandet till människorna:** tämjd, jagad, dyrkad eller fruktad? Vilka sägner berättar man?
+**Om den tänker:**
 
-**Sanningen bakom sägnerna:** vad stämmer, och vad har folk fått om bakfoten?
+<!-- Har den språk, minne eller en egen syn på människorna? -->
 
-**Rollen i berättelsen:** hot, hjälp, symbol, eller en spegel av något huvudpersonen bär på?
+**Styrkan och svagheten:**
+
+<!-- Vad gör den farlig, och vad kan stoppa den? -->
+
+**Vad det kostar:**
+
+<!-- Vad kostar ett möte med den? -->
+
+**Sägnerna:**
+
+<!-- Vad berättar man om den, och vad stämmer? -->
+
+**Rollen:**
+
+<!-- Är den hot, hjälp, symbol eller en spegel? -->

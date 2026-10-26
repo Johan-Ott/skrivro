@@ -1,7 +1,17 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { setUiLanguage } from "../src/i18n/i18n";
 import { createProject } from "../src/project/newProject";
-import { isPackInBook, joinSorts, noteTemplates, packOf, packs } from "../src/project/packs";
+import {
+  isPackInBook,
+  joinSorts,
+  noteOf,
+  noteTemplates,
+  packOf,
+  packs,
+  standardNoteBody,
+} from "../src/project/packs";
+import { parseMarkdown } from "../src/manuscript/parseMarkdown";
+import { countDocumentWords } from "../src/manuscript/wordCount";
 import { readProjectFile } from "../src/project/projectFile";
 import { CHARACTERS_ID } from "../src/project/sorts";
 import { structures, templatePieces } from "../src/project/templates";
@@ -62,7 +72,7 @@ describe("genre packs", () => {
     const { tree, fields } = await readProjectFile(files, created.dir, []);
     expect(fields["packs"]).toEqual(["romantasy"]);
     expect(JSON.stringify(fields["labels"])).toContain("Svek");
-    expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(5);
+    expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(6);
     expect(tree.some((node) => node.title === "Världen")).toBe(true);
     expect(noteTemplates(fields, "Världen")).toHaveLength(2);
     expect(noteTemplates(fields, CHARACTERS_ID).map((each) => each.name)).toContain(
@@ -82,7 +92,9 @@ describe("genre packs", () => {
     const { tree, fields } = await readProjectFile(files, created.dir, []);
     expect(tree.filter((node) => node.title === "Ledtrådar")).toHaveLength(1);
     expect(noteTemplates(fields, "Ledtrådar")).toHaveLength(2);
-    const [detective] = noteTemplates(fields, CHARACTERS_ID);
+    const detective = noteTemplates(fields, CHARACTERS_ID).find(
+      (each) => each.name === "Utredaren",
+    );
     expect(detective?.name).toBe("Utredaren");
     expect(detective?.body).not.toContain("Byt namn");
     const [promises] = childrenOf(tree, (node) => node.title === "Guide");
@@ -145,4 +157,42 @@ describe("joinSorts", () => {
 it("gives every pack note a title", () => {
   const untitled = packs().flatMap((pack) => pack.notes.filter((note) => !note.title));
   expect(untitled).toEqual([]);
+});
+
+describe("the free basics", () => {
+  it("give a book without packs a standard person that counts no words until it is answered", () => {
+    const body = standardNoteBody({}, CHARACTERS_ID);
+
+    expect(body).toContain("<!--");
+    expect(countDocumentWords(parseMarkdown(body, { isNote: true }))).toBe(0);
+  });
+
+  it("have as many templates in English as in Swedish", () => {
+    const fixed = [CHARACTERS_ID, "platser", "saker", "anteckningar", "hemligheter"];
+    const counts = (named: string[]) =>
+      [...fixed, ...named].map((sort) => noteTemplates({}, sort).length);
+    const swedish = counts(["Teman", "Motiv", "Källor", "Serien"]);
+    setUiLanguage("en");
+
+    expect(counts(["Themes", "Motifs", "Sources", "Series"])).toEqual(swedish);
+    expect(swedish.every((count) => count > 0)).toBe(true);
+  });
+
+  it("are not a pack to buy", () => {
+    expect(packs().map((pack) => pack.id)).not.toContain("grund");
+  });
+});
+
+describe("noteOf", () => {
+  it("reads the standard line and keeps the sort when the front matter has more lines", () => {
+    const note = noteOf(
+      "---\nsort: platser\nstandard: true\nextra: x\n---\n# Plats (mall)\n\nText",
+    );
+
+    expect(note).toMatchObject({ sort: "platser", isStandard: true, title: "Plats (mall)" });
+  });
+
+  it("reads a note with only a sort as not standard", () => {
+    expect(noteOf("---\nsort: Guide\n---\n# Titel\n\nText").isStandard).toBe(false);
+  });
 });

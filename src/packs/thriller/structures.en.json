@@ -12,19 +12,19 @@
         "chapters": [
           [
             "Ordinary life",
-            "Show the main character, what they are good at and what they stand to lose, with a shadow of danger on page one."
+            "(ca 2 %) Show the main character, what they are good at and what they stand to lose, with a shadow of danger on page one."
           ],
           [
             "The first sign",
-            "Something is wrong, and the main character is the only one who sees it. The inciting moment."
+            "(ca 8 %) Something is wrong, and the main character is the only one who sees it. The inciting moment."
           ],
           [
             "No one believes them",
-            "The attempt to get help fails, so they have to act on their own."
+            "(ca 12 %) The attempt to get help fails, so they have to act on their own."
           ],
           [
             "No way back",
-            "A choice or an event locks them into the chase. Going home is no longer possible."
+            "(ca 25 %) A choice or an event locks them into the chase. Going home is no longer possible."
           ]
         ]
       },
@@ -33,19 +33,19 @@
         "chapters": [
           [
             "The trail",
-            "The main character takes the initiative and gets closer, but every answer raises a new question."
+            "(ca 30 %) The main character takes the initiative and gets closer, but every answer raises a new question."
           ],
           [
             "The opponent strikes back",
-            "The villain answers with a move that shows how dangerous they are and how far they will go."
+            "(ca 38 %) The villain answers with a move that shows how dangerous they are and how far they will go."
           ],
           [
             "The clock starts",
-            "A concrete deadline makes everything urgent, and the reader knows exactly when it will be too late."
+            "(ca 45 %) A concrete deadline makes everything urgent, and the reader knows exactly when it will be too late."
           ],
           [
             "The midpoint",
-            "The main character goes from hunted to hunter, or wins a victory that turns out to be false."
+            "(ca 50 %) The main character goes from hunted to hunter, or wins a victory that turns out to be false."
           ]
         ]
       },
@@ -54,16 +54,19 @@
         "chapters": [
           [
             "Everything was wrong",
-            "A planted truth turns what the reader believed upside down, and the plan collapses."
+            "(ca 58 %) A planted truth turns what the reader believed upside down, and the plan collapses."
           ],
           [
             "It gets personal",
-            "The threat turns on what the main character loves most, and the stakes peak."
+            "(ca 66 %) The threat turns on what the main character loves most, and the stakes peak."
           ],
-          ["Alone", "The ally betrays them or falls. The darkest point, with the least time left."],
+          [
+            "Alone",
+            "(ca 75 %) The ally betrays them or falls. The darkest point, with the least time left."
+          ],
           [
             "The last plan",
-            "The main character understands something about themselves or the villain and decides to strike."
+            "(ca 82 %) The main character understands something about themselves or the villain and decides to strike."
           ]
         ]
       },
@@ -72,15 +75,15 @@
         "chapters": [
           [
             "Against the clock",
-            "The plan goes into action and goes wrong. Everything is decided in little time, in short scenes."
+            "(ca 88 %) The plan goes into action and goes wrong. Everything is decided in little time, in short scenes."
           ],
           [
             "Face to face",
-            "The main character confronts the villain and wins through their own skill and choice, not luck."
+            "(ca 94 %) The main character confronts the villain and wins through their own skill and choice, not luck."
           ],
           [
             "After",
-            "Briefly: what has changed, what it cost, and whether the threat is truly over."
+            "(ca 99 %) Briefly: what has changed, what it cost, and whether the threat is truly over."
           ]
         ]
       }

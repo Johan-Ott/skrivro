@@ -12,15 +12,15 @@
         "chapters": [
           [
             "An ordinary day",
-            "Open on a scene where the protagonist wants something and something is already wrong, with no background lecture."
+            "(ca 3 %) Open on a scene where the protagonist wants something and something is already wrong, with no background lecture."
           ],
           [
             "What throws everything",
-            "An event they can't ignore: a new school, a secret, a broken promise."
+            "(ca 10 %) An event they can't ignore: a new school, a secret, a broken promise."
           ],
           [
             "The decision",
-            "They choose to get involved, for a reason the reader recognises from their own life."
+            "(ca 22 %) They choose to get involved, for a reason the reader recognises from their own life."
           ]
         ]
       },
@@ -29,19 +29,19 @@
         "chapters": [
           [
             "New people",
-            "A new friend, a rival or a group that opens up another world and makes new demands."
+            "(ca 28 %) A new friend, a rival or a group that opens up another world and makes new demands."
           ],
           [
             "The first time",
-            "The first party, the first kiss or the first lie to a parent: something new that they feel everywhere and can't take back."
+            "(ca 35 %) The first party, the first kiss or the first lie to a parent: something new that they feel everywhere and can't take back."
           ],
           [
             "Belonging",
-            "What they have to do or hide to be part of it, and what that costs someone else."
+            "(ca 42 %) What they have to do or hide to be part of it, and what that costs someone else."
           ],
           [
             "The lie grows",
-            "What they're hiding gets bigger and harder to back out of. End the chapter close to discovery."
+            "(ca 48 %) What they're hiding gets bigger and harder to back out of. End the chapter close to discovery."
           ]
         ]
       },
@@ -50,33 +50,36 @@
         "chapters": [
           [
             "The midpoint",
-            "A victory that turns out to be false, or a truth that changes the game."
+            "(ca 52 %) A victory that turns out to be false, or a truth that changes the game."
           ],
           [
             "The price",
-            "Friends, family or their sense of self pay for the protagonist's choices."
+            "(ca 60 %) Friends, family or their sense of self pay for the protagonist's choices."
           ],
           [
             "Found out",
-            "The lie comes out in front of the people who matter most, and the protagonist stands alone."
+            "(ca 70 %) The lie comes out in front of the people who matter most, and the protagonist stands alone."
           ],
           [
             "Rock bottom",
-            "They see their own part in what happened. No adult arrives to save the day."
+            "(ca 80 %) They see their own part in what happened. No adult arrives to save the day."
           ]
         ]
       },
       {
         "title": "After",
         "chapters": [
-          ["The choice", "They decide who they want to be, and do something hard to prove it."],
+          [
+            "The choice",
+            "(ca 88 %) They decide who they want to be, and do something hard to prove it."
+          ],
           [
             "The deciding moment",
-            "The protagonist resolves the conflict by their own means, not by luck or a parent."
+            "(ca 94 %) The protagonist resolves the conflict by their own means, not by luck or a parent."
           ],
           [
             "Who they became",
-            "An ending with hope: what has changed, and what is allowed to stay unresolved."
+            "(ca 99 %) An ending with hope: what has changed, and what is allowed to stay unresolved."
           ]
         ]
       }
@@ -95,19 +98,19 @@
         "chapters": [
           [
             "An ordinary day",
-            "Show the protagonist at home or at school, what they want and what is already wrong, with action from the first line."
+            "(ca 3 %) Show the protagonist at home or at school, what they want and what is already wrong, with action from the first line."
           ],
           [
             "Something happens",
-            "Something unexpected upsets everyday life: a discovery, some news, a new pupil. End on a question."
+            "(ca 10 %) Something unexpected upsets everyday life: a discovery, some news, a new pupil. End on a question."
           ],
           [
             "Why no adult",
-            "Show why the adults can't or mustn't help, so the problem becomes the protagonist's own."
+            "(ca 18 %) Show why the adults can't or mustn't help, so the problem becomes the protagonist's own."
           ],
           [
             "The decision",
-            "They decide to do something themselves, and take the first step before the chapter ends."
+            "(ca 25 %) They decide to do something themselves, and take the first step before the chapter ends."
           ]
         ]
       },
@@ -116,16 +119,19 @@
         "chapters": [
           [
             "The friend",
-            "A friend or a reluctant helper joins in, with goals of their own that aren't the protagonist's."
+            "(ca 30 %) A friend or a reluctant helper joins in, with goals of their own that aren't the protagonist's."
           ],
-          ["The first attempt", "The plan almost works. Give a small win and a new obstacle."],
+          [
+            "The first attempt",
+            "(ca 36 %) The plan almost works. Give a small win and a new obstacle."
+          ],
           [
             "At home",
-            "The subplot: a sibling, a parent or a rival makes life harder and mirrors the main problem."
+            "(ca 42 %) The subplot: a sibling, a parent or a rival makes life harder and mirrors the main problem."
           ],
           [
             "The secret",
-            "The protagonist hides something from someone who matters a lot, and it starts to cost."
+            "(ca 47 %) The protagonist hides something from someone who matters a lot, and it starts to cost."
           ]
         ]
       },
@@ -134,31 +140,40 @@
         "chapters": [
           [
             "The midpoint",
-            "A discovery changes everything: the problem is bigger, or different from what they thought."
+            "(ca 50 %) A discovery changes everything: the problem is bigger, or different from what they thought."
           ],
-          ["The falling-out", "The friends quarrel, and the protagonist is partly to blame."],
+          [
+            "The falling-out",
+            "(ca 58 %) The friends quarrel, and the protagonist is partly to blame."
+          ],
           [
             "Everything goes wrong",
-            "The plan falls apart in front of others, the secret comes out and they stand alone."
+            "(ca 68 %) The plan falls apart in front of others, the secret comes out and they stand alone."
           ],
           [
             "What they already know",
-            "Alone with it, they remember something from earlier in the book that points to a way out."
+            "(ca 76 %) Alone with it, they remember something from earlier in the book that points to a way out."
           ]
         ]
       },
       {
         "title": "All the way",
         "chapters": [
-          ["Sorry", "They seek out the friend and own their part, before the deciding moment."],
-          ["The new plan", "A plan built on their own strength and on the friend, not on luck."],
+          [
+            "Sorry",
+            "(ca 84 %) They seek out the friend and own their part, before the deciding moment."
+          ],
+          [
+            "The new plan",
+            "(ca 90 %) A plan built on their own strength and on the friend, not on luck."
+          ],
           [
             "The deciding moment",
-            "The protagonist solves the problem by their own means. The adults may come in afterwards, not before."
+            "(ca 95 %) The protagonist solves the problem by their own means. The adults may come in afterwards, not before."
           ],
           [
             "Back again",
-            "A hopeful ending in a scene that mirrors the opening and shows what is different now."
+            "(ca 99 %) A hopeful ending in a scene that mirrors the opening and shows what is different now."
           ]
         ]
       }
@@ -177,34 +192,37 @@
         "chapters": [
           [
             "At home",
-            "The protagonist, what they wish for, and something funny or strange on the very first page."
+            "(ca 5 %) The protagonist, what they wish for, and something funny or strange on the very first page."
           ],
           [
             "Something happens",
-            "A surprise sets everything going. End the chapter on a question the reader wants answered."
+            "(ca 15 %) A surprise sets everything going. End the chapter on a question the reader wants answered."
           ],
           [
             "The plan",
-            "The protagonist makes up their mind and makes a plan, ideally with a friend."
+            "(ca 25 %) The protagonist makes up their mind and makes a plan, ideally with a friend."
           ],
-          ["Into the unknown", "The adventure begins, and at first it goes better than expected."],
+          [
+            "Into the unknown",
+            "(ca 35 %) The adventure begins, and at first it goes better than expected."
+          ],
           [
             "The first obstacle",
-            "Something goes wrong. Solve it halfway and let a new problem appear."
+            "(ca 45 %) Something goes wrong. Solve it halfway and let a new problem appear."
           ],
           [
             "The falling-out",
-            "The friends quarrel or the plan falls apart. End so the child simply has to know what happens."
+            "(ca 55 %) The friends quarrel or the plan falls apart. End so the child simply has to know what happens."
           ],
-          ["The hard part", "The problem seems too big, and there's no adult around."],
+          ["The hard part", "(ca 68 %) The problem seems too big, and there's no adult around."],
           [
             "Brave enough",
-            "The protagonist works out the solution alone, using something they learned earlier in the book."
+            "(ca 80 %) The protagonist works out the solution alone, using something they learned earlier in the book."
           ],
-          ["The solution", "The plan is carried out, with one last surprise or a laugh."],
+          ["The solution", "(ca 90 %) The plan is carried out, with one last surprise or a laugh."],
           [
             "Home again",
-            "Safe, but not quite as before. Show what they've learned without saying it."
+            "(ca 97 %) Safe, but not quite as before. Show what they've learned without saying it."
           ]
         ]
       }

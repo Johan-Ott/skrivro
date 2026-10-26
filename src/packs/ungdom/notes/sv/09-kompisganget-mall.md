@@ -4,22 +4,32 @@ sort: Vänner
 
 # Kompisgänget (mall)
 
-Byt namn på anteckningen till gängets namn, eller vad de kallar sig. Skriv en rad per person under varje fält. I en kapitelbok räcker ofta en bästa vän och en till.
+Byt namn på anteckningen till gängets namn.
 
-**Vilka de är:** namn, ålder och vad var och en är känd för i klassen. Två till fyra personer räcker.
+**Vilka de är:**
 
-**Hur de blev vänner:** en händelse, en gata, en lagsport, eller att ingen annan ville vara med dem.
+<!-- Två till fyra namn: vad är var och en känd för? -->
 
-**Rollen i gänget:** den modiga, den roliga, den som oroar sig, den som håller ihop. Låt rollerna skava.
+**Hur de blev vänner:**
 
-**Vad var och en vill:** egna mål som ibland krockar med huvudpersonens.
+<!-- En händelse, en gata, eller att ingen annan ville vara med dem? -->
 
-**Det de säger till varandra:** ett internskämt, ett ord eller en ritual som bara de har.
+**Roller och mål:**
 
-**Hemligheten:** något någon i gänget döljer för de andra.
+<!-- Var krockar var och ens mål med huvudpersonens? -->
 
-**Sprickan:** var gänget kan gå sönder, och vad som skulle få det att hända.
+**Det bara de har:**
 
-**Rivalen eller det andra gänget:** vilka de mäter sig mot, och varför.
+<!-- Vilket internskämt, ord eller ritual? -->
 
-**Var de står i slutet:** närmare, splittrade, eller med någon ny?
+**Hemligheten:**
+
+<!-- Vad döljer någon i gänget för de andra? -->
+
+**Sprickan:**
+
+<!-- Var kan gänget gå sönder? -->
+
+**Var de står i slutet:**
+
+<!-- Närmare, splittrade, eller med någon ny? -->

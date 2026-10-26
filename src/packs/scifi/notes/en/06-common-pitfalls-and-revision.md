@@ -17,12 +17,20 @@ sort: Guide
 - **The jargon swamp.** Ten invented terms on one page. Use ordinary words wherever you can, and save new terms for what is truly new.
 - **Forgotten rules.** Time travel had a cost in the first part, but not in the last. Keep track of the rules.
 
-**Revision checklist**
+**Revision, in three passes**
 
-- Mark every passage that explains technology. Can it be cut in half, or moved into a scene with conflict?
-- Go through every invented term. Is each one needed, and does context explain it?
+Pass 1, the structure:
+
+- Tag scenes with the Novum and Consequence labels and filter them in Contents. Does the idea run through the whole book, or vanish in the middle?
 - Read the ending next to your novum note. Does the solution follow the rules?
 - Make rough estimates for distances, times and quantities. Do the same numbers hold throughout the book?
-- Tag scenes with the Novum and Consequence labels and filter them in Contents. Does the idea run through the whole book, or vanish in the middle?
+
+Pass 2, the scenes:
+
 - Ask of every chapter: what does this mean for an ordinary person in this world?
+- Mark every passage that explains technology. Can it be cut in half, or moved into a scene with conflict?
 - Read the first chapter as a new reader. Do you know who this is about, where we are and what is at stake?
+
+Pass 3, the lines:
+
+- Go through every invented term. Is each one needed, and does context explain it?

@@ -4,26 +4,32 @@ sort: Underlag
 
 # Källorna (mall)
 
-Byt namn på anteckningen till vad källorna gäller, som "Källor till kapitel 3" eller "Intervjuer". Samla allt som bär fakta i boken här, i memoar som i fackbok. Skriv in källan när du hittar den, inte när boken är klar.
+Byt namn på anteckningen till vad källorna gäller.
 
-**Källan:** bok, artikel, rapport, arkiv, intervju, brev, dagbok eller foto.
+**Källan:**
 
-**Förstahand eller andrahand:** är det originalet, eller någon som återger det? Leta dig fram till originalet när det går.
+<!-- Bok, artikel, arkiv, intervju, brev eller foto? -->
 
-**Vem och när:** upphovsperson, år och var du hittade den, så att du och läsaren kan hitta den igen.
+**Förstahand eller andrahand:**
 
-**Vad den belägger:** det exakta påståendet, siffran eller händelsen.
+<!-- Är det originalet, eller någon som återger det? -->
 
-**Hur säker:** en samlad forskningsöversikt, en enskild studie, ett vittne eller ett eget minne?
+**Vem och när:**
 
-**Citatet:** ordagrant, med sidnummer. Håll isär vad som är ditt och vad som är källans.
+<!-- Upphovsperson, år och var jag hittade den? -->
 
-**Var den används:** kapitel och stycke. Sätt etiketten Kolla fakta där tills du har stämt av.
+**Vad den belägger:**
 
-**Motrösterna:** källor som säger något annat, och hur du hanterar det i texten.
+<!-- Vilket exakt påstående, och hur säkert? -->
 
-**Tillstånd:** korta citat ur publicerade verk får användas med angiven källa, i den omfattning syftet kräver. Längre utdrag, dikter, sångtexter, fotografier och privata brev kräver nästan alltid lov. Har du fått det, och skriftligt?
+**Citatet:**
 
-**Intervjun:** vet den intervjuade hur citaten kommer att användas, och ska hen få läsa dem innan?
+<!-- Ordagrant, med sidnummer, och var i boken används det? -->
 
-**Senast kontrollerad:** datum.
+**Motrösterna:**
+
+<!-- Vilka källor säger något annat, och hur hanterar jag det? -->
+
+**Tillstånd:**
+
+<!-- Behövs lov för längre utdrag, foton eller brev, och har jag det skriftligt? -->

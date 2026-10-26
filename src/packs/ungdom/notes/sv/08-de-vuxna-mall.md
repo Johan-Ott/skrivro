@@ -6,18 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till den vuxnas namn eller roll, som "Pappa" eller "Mentorn". Gör en för varje vuxen som spelar roll.
 
-**Vem hen är för huvudpersonen:** förälder, styvförälder, lärare, tränare, granne.
+**Vem hen är:**
 
-**Vad hen vill för huvudpersonen:** och om det är samma sak som huvudpersonen vill.
+<!-- Vem är hen för huvudpersonen? -->
 
-**Hens eget bekymmer:** det som tar hens uppmärksamhet. Jobbet, en sjukdom, en ny partner, egna minnen.
+**Vad hen vill:**
 
-**Hur hen ser huvudpersonen:** och vad hen missar.
+<!-- Vad vill hen för huvudpersonen, och är det samma sak? -->
 
-**Varför hen inte löser det:** hen vet inte, hen tror fel, hen får inte veta eller hen är själv en del av problemet. Det måste vara trovärdigt.
+**Hens eget bekymmer:**
 
-**Det goda:** ett ögonblick av värme eller klokhet som läsaren minns. Även en sträng vuxen kan ha ett.
+<!-- Vad tar hens uppmärksamhet? -->
 
-**Det hen säger:** ett uttryck eller en vana som gör hen igenkännbar.
+**Vad hen missar:**
 
-**Var hen finns i slutet:** närmare, längre bort, eller förändrad av det huvudpersonen gjorde?
+<!-- Vad ser hen inte hos huvudpersonen? -->
+
+**Vad hen vet:**
+
+<!-- Vad vet hen som huvudpersonen inte vet? -->
+
+**Varför hen inte löser det:**
+
+<!-- Vad hindrar hen, på ett sätt läsaren köper? -->
+
+**Det goda:**
+
+<!-- Vilket ögonblick av värme eller klokhet minns läsaren? -->
+
+**Var hen finns i slutet:**
+
+<!-- Är hen närmare, längre bort eller förändrad av vad huvudpersonen gjorde? -->

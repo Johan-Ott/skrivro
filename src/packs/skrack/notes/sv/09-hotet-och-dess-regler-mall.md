@@ -4,28 +4,36 @@ sort: Det som skrämmer
 
 # Hotet och dess regler (mall)
 
-Byt namn på anteckningen till det du kallar hotet. Det här är din hemliga bild av det. Läsaren får se den i bitar, och kanske aldrig hel.
+Byt namn på anteckningen till det du kallar hotet.
 
-**Vad det är:** ett väsen, en förbannelse, en smitta, en människa, något utan namn. Skriv det rakt, för dig själv, och skriv vilken sorts skräck det är.
+**Vad det är:**
 
-**Varifrån det kommer:** vad som hände en gång, och varför det finns kvar.
+<!-- Vad är hotet, skrivet rakt för dig själv? -->
 
-**Vad det vill:** hunger, hämnd, sällskap, en kropp, att bli sett. Ett hot med en vilja skrämmer mer än ett utan.
+**Vad det vill:**
 
-**Vad det kan göra:** dess förmågor, och var gränsen för dem går.
+<!-- Vad vill det? Ett hot med en vilja skrämmer mer. -->
 
-**Vad det inte kan göra:** dess begränsningar. Det är här spänningen bor, och här lösningen finns.
+**Gränserna:**
 
-**Vad som lockar fram det:** ensamhet, mörker, en tid på dygnet, ett ord, rädslan i sig.
+<!-- Vad kan det inte göra? Där bor spänningen och lösningen. -->
 
-**Hur det märks innan det syns:** ljud, lukter, kyla, döda djur, människor som förändras. Det är dina varsel.
+**Varslen:**
 
-**Hur det visar sig när det syns:** en eller två detaljer som är fel, inte en hel beskrivning.
+<!-- Hur märks det innan det syns? -->
 
-**Reglerna:** en rad för varje regel, med kapitlet där läsaren ser den i handling. Markera regeln som avgör slutet.
+**När det syns:**
 
-**Vad läsaren får veta, och när:** vilka bitar av sanningen som kommer i vilket kapitel. Skriv också vad som aldrig förklaras. Det oförklarade är en del av rädslan.
+<!-- Vilka en eller två detaljer är fel? -->
 
-**Hur det kan stoppas, om alls:** och vad det kostar den som försöker.
+**Reglerna:**
 
-**Vad det är en bild av:** den mänskliga rädslan under ytan, och hur den hänger ihop med huvudpersonen.
+<!-- En rad per regel, med kapitlet där läsaren ser den. Vilken avgör slutet? -->
+
+**Det oförklarade:**
+
+<!-- Vad får läsaren aldrig veta? -->
+
+**Vad det är en bild av:**
+
+<!-- Vilken mänsklig rädsla ligger under ytan? -->

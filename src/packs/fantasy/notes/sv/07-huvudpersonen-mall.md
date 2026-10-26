@@ -6,24 +6,30 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Vill:** vad jagar hen när boken börjar? Något konkret som går att se, inte att bli lycklig.
+**Vill och behöver:**
 
-**Behöver:** vad måste hen förstå eller släppa taget om för att klara slutet?
+<!-- Vad jagar hen, och vad måste hen förstå för att klara slutet? -->
 
-**Lögnen hen tror på:** den felaktiga övertygelse om sig själv eller världen som resan kommer att krossa.
+**Lögnen hen tror på:**
 
-**Hemmet:** var hen kommer ifrån, och vad hen därför tar för givet om världen.
+<!-- Vilken tro om sig själv krossar resan? -->
 
-**Förmågan:** magi, färdighet eller arv. Vad kan hen, och vad kostar det hen varje gång?
+**Hemmet:**
 
-**Platsen i världen:** klass, folk, tro. Vem ser upp till hen, och vem ser ner på hen?
+<!-- Var kommer hen ifrån, och vad tar hen därför för givet? -->
 
-**Det hen inte kan:** en svaghet som världen eller fienden kommer att utnyttja.
+**Förmågan och priset:**
 
-**Rösten:** hur låter hen, i tanke och tal? Ett uttryck eller en svordom som bara hen använder.
+<!-- Vad kan hen, och vad kostar det varje gång? -->
 
-**Det andra livet:** i urban fantasy, jobbet, familjen eller hyran som det dolda hotar. Vad ljuger hen om, och för vem?
+**Det hen inte kan:**
 
-**Vad hen riskerar:** det personliga som står på spel, bredvid det stora.
+<!-- Vilken svaghet kommer fienden att utnyttja? -->
 
-**Hur hen förändras:** vem är hen i sista kapitlet, och vilket val visar det?
+**Rösten:**
+
+<!-- Ett uttryck eller en svordom som bara hen använder. -->
+
+**Förändringen:**
+
+<!-- Vilket val i sista kapitlet visar vem hen har blivit? -->

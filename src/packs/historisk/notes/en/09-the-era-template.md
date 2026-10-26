@@ -6,30 +6,34 @@ sort: The era
 
 Rename the note to the time and place, for instance a decade and a country.
 
-**The time span:** when the book begins and ends, and the key years in between.
+**Time span:**
 
-**The great events:** the war, famine, upheaval or discovery that marks the age. How it began and how it ended.
+<!-- Which war, famine or upheaval marks the time? -->
 
-**Power:** who rules, who judges, who collects taxes. How an ordinary person meets power in daily life.
+**Power and the law:**
 
-**Law and punishment:** what counted as a crime, how people were tried and what the punishments were.
+<!-- Who judges, and what were the punishments? -->
 
-**The social order:** rank or class, gender, age. Who may own, inherit, marry, travel and speak.
+**The social order:**
 
-**Faith:** the church, folk belief, superstition. What is sin and what is sacred.
+<!-- Who may own, inherit, marry and speak? -->
 
-**Daily life:** food, work, clothing, light and heat. What a day looks like from morning to night.
+**Faith:**
 
-**The year:** holy days, markets, sowing, harvest, slaughter and the other recurring days that rule life.
+<!-- What is sin and what is holy? -->
 
-**Money and prices:** what things cost, what a day's wage is, what counts as luxury and what as necessity.
+**Daily life and the year:**
 
-**Measures, coins and reckoning time:** which measures, weights and coins were in use, and which calendar applied.
+<!-- Which holidays, markets and work rule the year? -->
 
-**Illness and death:** common diseases, how the sick are cared for, how long people live, how they are buried.
+**Money and measures:**
 
-**News and distance:** how news travels, how long letters take, how people travel and how fast.
+<!-- What do things cost, and what is a day's wage? -->
 
-**What does not exist yet:** inventions, words, ideas and objects that come later. Your list against anachronisms.
+**Illness and distance:**
 
-**What people fear and hope for:** what keeps them awake at night.
+<!-- How fast do news, letters and people travel? -->
+
+**What does not exist yet:**
+
+<!-- Which words, objects and ideas come later? -->

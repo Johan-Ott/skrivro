@@ -18,12 +18,21 @@ sort: Guide
 - **Grymhet som kuliss.** Våld och lidande som ingen i berättelsen reagerar på. Mörker väger mest när det får följder för människorna.
 - **Urban fantasy: hemligheten utan logik.** Varför har ingen märkt något? Ge hemlighållandet en mekanism och ett pris.
 
-**Checklista för omarbetningen**
+**Omarbetning, i tre varv**
 
-- Stryk förklaringar på prov. Läs scenen utan dem. Saknas något?
-- Gå igenom alla påhittade namn och ord. Kan något bytas mot ett vanligt ord, och liknar några namn varandra för mycket?
-- Fråga i varje scen med magi: syns priset här?
-- Läs slutstriden bredvid anteckningen om magisystemet. Bryter någon lösning mot en regel?
+Varv 1, strukturen:
+
 - Märk scenerna med etiketterna Magi och Priset och filtrera fram dem i Innehåll. Är de utspridda över boken, eller klumpar de ihop sig?
 - Har boken flera synvinklar, läs varje persons kapitel i följd. Bär varje tråd på egen hand?
+- Läs slutstriden bredvid anteckningen om magisystemet. Bryter någon lösning mot en regel?
+
+Varv 2, scenerna:
+
+- Fråga i varje scen med magi: syns priset här?
+- Stryk förklaringar på prov. Läs scenen utan dem. Saknas något?
 - Läs första kapitlet högt. Förstår en ny läsare inom några sidor vem det handlar om, var vi är och vad personen vill?
+
+Varv 3, raderna:
+
+- Gå igenom alla påhittade namn och ord. Kan något bytas mot ett vanligt ord, och liknar några namn varandra för mycket?
+- Läs replikerna högt. Låter folk från olika riken olika, utan att det blir stavfel och apostrofer?

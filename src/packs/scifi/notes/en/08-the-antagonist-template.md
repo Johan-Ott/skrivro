@@ -4,22 +4,28 @@ sort: karaktarer
 
 # The antagonist (template)
 
-Rename the note to the character's name, or to the name of the system they represent.
+Rename the note to the character's name, or the system they represent.
 
-**Who or what:** a person, an organisation, a machine, a system. If it's a system, who is its face in the book?
+**Who or what:**
 
-**The goal:** what does the antagonist want, in one sentence?
+<!-- If the antagonist is a system: who is its face in the book? -->
 
-**The logic:** why does it make sense from the inside? Which problems do they actually solve?
+**The goal and the logic:**
 
-**Their relationship with the new thing:** do they own, control or understand the technology better than others?
+<!-- What do they want, and why is it reasonable from the inside? -->
 
-**Their power:** resources, information, laws, force. What do they have that the main character lacks?
+**The power:**
 
-**Where things stand when the book begins:** how far has the plan come, and what does the antagonist already know about the main character?
+<!-- What do they have that the main character lacks? -->
 
-**The plan in the meantime:** what is the antagonist doing while the main character is busy elsewhere?
+**The plan:**
 
-**The mirror:** in what way are they who the main character could become?
+<!-- How far has the plan come, and what are they doing while the main character is busy? -->
 
-**The weakness:** what can bring them down, and where is it planted?
+**The mirror:**
+
+<!-- How are they the person the main character could become? -->
+
+**The weakness:**
+
+<!-- What can bring them down, and where is it planted? -->

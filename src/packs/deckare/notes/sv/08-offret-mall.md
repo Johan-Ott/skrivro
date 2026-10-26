@@ -6,22 +6,30 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Vem hen var för de nära:** hur minns familjen, vännerna och kollegerna hen? Skriv tre olika bilder som inte riktigt stämmer överens.
+**Vem hen var:**
 
-**Vem hen var för omvärlden:** ryktet, yrket, platsen i samhället.
+<!-- Tre bilder från de nära som inte stämmer överens. -->
 
-**Det ingen visste:** hemligheten, skulden, affären eller upptäckten som ledde till brottet.
+**Det ingen visste:**
 
-**Det sista dygnet:** var hen var, vem hen träffade, vad hen sa. Vem såg hen sist i livet?
+<!-- Vilken hemlighet ledde till brottet? -->
 
-**Fiender och skulder:** vem hade ett horn i sidan till hen, och vem var skyldig hen något?
+**Det sista dygnet:**
 
-**Vem tjänar på döden:** pengar, frihet, tystnad, en plats som blir ledig. Och vem förlorar på den?
+<!-- Vem såg hen sist i livet? -->
 
-**Vad kroppen och platsen berättar:** dödsorsak, tidpunkt, och det som är fel med platsen. Vad syns direkt, och vad upptäcks senare?
+**Vem tjänar på döden:**
 
-**Det hen lämnade efter sig:** telefonen, kalendern, mejlen, kontoutdragen, ett låst skrivbord. Vad kan utredaren läsa ut, och vad har någon redan hunnit ta bort?
+<!-- Vem vinner på den, och vem förlorar? -->
 
-**Bilden någon skyddar:** vem ljuger om offret efter döden, för att skydda hen, sig själv eller familjens namn?
+**Kroppen och platsen:**
 
-**Varför läsaren ska bry sig:** en detalj som gör offret till en människa och inte bara en gåta. En lapp på kylskåpet, en ovana, ett löfte som aldrig hölls.
+<!-- Vad är fel med platsen, och vad upptäcks senare? -->
+
+**Det hen lämnade efter sig:**
+
+<!-- Vad har någon redan hunnit ta bort? -->
+
+**Varför läsaren ska bry sig:**
+
+<!-- Vilken detalj gör hen till en människa, inte en gåta? -->

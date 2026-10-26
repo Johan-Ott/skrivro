@@ -6,22 +6,30 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Who they were to those close to them:** how do family, friends and colleagues remember them? Write three different pictures that do not quite match.
+**Who they were:**
 
-**Who they were to the world:** reputation, job, place in the community.
+<!-- Three pictures from those close to them that do not agree. -->
 
-**What no one knew:** the secret, debt, affair or discovery that led to the crime.
+**What nobody knew:**
 
-**The last day:** where they were, who they met, what they said. Who was the last to see them alive?
+<!-- Which secret led to the crime? -->
 
-**Enemies and debts:** who had a grudge against them, and who owed them something?
+**The last day:**
 
-**Who gains from the death:** money, freedom, silence, a position left open. And who loses by it?
+<!-- Who saw them last alive? -->
 
-**What the body and the scene say:** cause of death, time, and whatever is wrong about the place. What shows at once, and what is found later?
+**Who gains from the death:**
 
-**What they left behind:** the phone, the calendar, the emails, the bank statements, a locked desk. What can the detective read from them, and what has someone already removed?
+<!-- Who gains from it, and who loses? -->
 
-**The picture someone protects:** who lies about the victim after the death, to protect them, themselves or the family name?
+**The body and the scene:**
 
-**Why the reader should care:** one detail that makes the victim a person and not just a puzzle. A note on the fridge, a habit, a promise never kept.
+<!-- What is wrong with the scene, and what is found later? -->
+
+**What they left behind:**
+
+<!-- What has someone already removed? -->
+
+**Why the reader should care:**
+
+<!-- Which detail makes them a person, not a puzzle? -->

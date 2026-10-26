@@ -12,19 +12,19 @@
         "chapters": [
           [
             "Ögonblicket",
-            "Öppna i en scen som bär bokens fråga, gärna ur den mest laddade stunden, och förklara ingenting än."
+            "(ca 0-2 %) Öppna i en scen som bär bokens fråga, gärna ur den mest laddade stunden, och förklara ingenting än."
           ],
           [
             "Frågan",
-            "Låt nu-jaget kliva fram kort: vad du försöker förstå, och varför du skriver om det just nu."
+            "(ca 5 %) Låt nu-jaget kliva fram kort: vad du försöker förstå, och varför du skriver om det just nu."
           ],
           [
             "Livet innan",
-            "Platsen, människorna och vad då-jaget trodde och ville, i konkreta scener, inte som bakgrund."
+            "(ca 10-20 %) Platsen, människorna och vad då-jaget trodde och ville, i konkreta scener, inte som bakgrund."
           ],
           [
             "Det första tecknet",
-            "En liten händelse som i efterhand pekade framåt, skriven som då-jaget upplevde den."
+            "(ca 22 %) En liten händelse som i efterhand pekade framåt, skriven som då-jaget upplevde den."
           ]
         ]
       },
@@ -33,19 +33,19 @@
         "chapters": [
           [
             "Vändpunkten",
-            "Händelsen som delar livet i ett före och ett efter, som en hel scen med sinnen och repliker."
+            "(ca 30 %) Händelsen som delar livet i ett före och ett efter, som en hel scen med sinnen och repliker."
           ],
           [
             "Nya villkor",
-            "Hur vardagen förändrades: sammanfatta veckorna, men stanna i scen där något står på spel."
+            "(ca 40 %) Hur vardagen förändrades: sammanfatta veckorna, men stanna i scen där något står på spel."
           ],
           [
             "Människorna runt dig",
-            "De som hjälpte, svek eller bara fanns där, var och en visad genom något hen gjorde."
+            "(ca 50 %) De som hjälpte, svek eller bara fanns där, var och en visad genom något hen gjorde."
           ],
           [
             "Det du inte sa",
-            "Det du dolde för andra eller för dig själv, och vad det började kosta."
+            "(ca 60 %) Det du dolde för andra eller för dig själv, och vad det började kosta."
           ]
         ]
       },
@@ -54,13 +54,16 @@
         "chapters": [
           [
             "Det svåraste",
-            "Det lägsta läget, skrivet utan att skona dig själv och utan att nu-jaget tröstar."
+            "(ca 70 %) Det lägsta läget, skrivet utan att skona dig själv och utan att nu-jaget tröstar."
           ],
           [
             "Sanningen",
-            "Ett samtal, ett brev eller en upptäckt som gör det omöjligt att fortsätta som förut."
+            "(ca 80 %) Ett samtal, ett brev eller en upptäckt som gör det omöjligt att fortsätta som förut."
           ],
-          ["Valet", "Vad du gjorde, och hur då-jaget förstod det i stunden, innan facit fanns."]
+          [
+            "Valet",
+            "(ca 85 %) Vad du gjorde, och hur då-jaget förstod det i stunden, innan facit fanns."
+          ]
         ]
       },
       {
@@ -68,15 +71,15 @@
         "chapters": [
           [
             "Efteråt",
-            "Följderna, med samma ärlighet om det som inte blev bra som om det som blev det."
+            "(ca 90 %) Följderna, med samma ärlighet om det som inte blev bra som om det som blev det."
           ],
           [
             "Förståelsen",
-            "Nu-jaget ser tillbaka: det du förstår i dag som du inte kunde se då, och det som är olöst."
+            "(ca 94 %) Nu-jaget ser tillbaka: det du förstår i dag som du inte kunde se då, och det som är olöst."
           ],
           [
             "Tillbaka till ögonblicket",
-            "Återvänd till öppningsscenen eller platsen och visa vad som har förändrats i dig."
+            "(ca 98 %) Återvänd till öppningsscenen eller platsen och visa vad som har förändrats i dig."
           ]
         ]
       }
@@ -95,15 +98,15 @@
         "chapters": [
           [
             "Läsarens problem",
-            "Öppna med en konkret situation där läsaren känner igen sitt eget problem."
+            "(ca 3 %) Öppna med en konkret situation där läsaren känner igen sitt eget problem."
           ],
           [
             "Löftet",
-            "Säg vad läsaren kan, vet eller förstår efter boken, och hur boken är upplagd för att ta hen dit."
+            "(ca 6 %) Säg vad läsaren kan, vet eller förstår efter boken, och hur boken är upplagd för att ta hen dit."
           ],
           [
             "Varför det är svårt",
-            "Visa varför de vanliga svaren inte räcker. Här vinner du läsarens förtroende."
+            "(ca 10 %) Visa varför de vanliga svaren inte räcker. Här vinner du läsarens förtroende."
           ]
         ]
       },
@@ -112,19 +115,19 @@
         "chapters": [
           [
             "Det du behöver veta först",
-            "Begreppen och fakta som resten av boken bygger på, och inte mer än så."
+            "(ca 18 %) Begreppen och fakta som resten av boken bygger på, och inte mer än så."
           ],
           [
             "Den första idén",
-            "Ett påstående i klartext, med belägg, ett exempel och vad det betyder för läsaren."
+            "(ca 30 %) Ett påstående i klartext, med belägg, ett exempel och vad det betyder för läsaren."
           ],
           [
             "Den andra idén",
-            "Nästa påstående, som bygger på det första. Visa kopplingen redan i första stycket."
+            "(ca 42 %) Nästa påstående, som bygger på det första. Visa kopplingen redan i första stycket."
           ],
           [
             "Ett exempel på djupet",
-            "Ett fall, en person eller ett försök som visar idéerna i verkligheten, från början till slut."
+            "(ca 52 %) Ett fall, en person eller ett försök som visar idéerna i verkligheten, från början till slut."
           ]
         ]
       },
@@ -133,15 +136,15 @@
         "chapters": [
           [
             "Den tredje idén",
-            "Det mest överraskande eller svåraste, nu när läsaren har grunden för att ta emot det."
+            "(ca 62 %) Det mest överraskande eller svåraste, nu när läsaren har grunden för att ta emot det."
           ],
           [
             "Det som talar emot",
-            "Motargumenten och var kunskapen tar slut. Ärligheten gör resten av boken starkare."
+            "(ca 72 %) Motargumenten och var kunskapen tar slut. Ärligheten gör resten av boken starkare."
           ],
           [
             "Vanliga misstag",
-            "Hur det brukar gå fel, och hur läsaren känner igen tecknen hos sig själv."
+            "(ca 80 %) Hur det brukar gå fel, och hur läsaren känner igen tecknen hos sig själv."
           ]
         ]
       },
@@ -150,12 +153,15 @@
         "chapters": [
           [
             "Så gör du",
-            "Konkreta steg i ordning som läsaren kan ta redan i morgon, eller i en förklarande bok: vad läsaren nu ser annorlunda."
+            "(ca 88 %) Konkreta steg i ordning som läsaren kan ta redan i morgon, eller i en förklarande bok: vad läsaren nu ser annorlunda."
           ],
-          ["När det inte går som tänkt", "De vanligaste hindren på vägen, och vad läsaren gör då."],
+          [
+            "När det inte går som tänkt",
+            "(ca 94 %) De vanligaste hindren på vägen, och vad läsaren gör då."
+          ],
           [
             "Avslutning",
-            "Knyt ihop med löftet från början: det viktigaste i korthet, och vägen vidare."
+            "(ca 98 %) Knyt ihop med löftet från början: det viktigaste i korthet, och vägen vidare."
           ]
         ]
       }

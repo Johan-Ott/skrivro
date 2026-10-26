@@ -25,11 +25,22 @@ sort: Guide
 - Överväg att låta den det gäller läsa avsnittet innan boken är klar. Du bestämmer själv, men du får veta vad du står för.
 - Pekar du ut någon som går att känna igen som brottslig eller klandervärd, tala med förlaget eller en jurist innan boken ges ut. I Sverige räcker det inte alltid att uppgiften är sann för att undgå ansvar för förtal; det måste också ha varit försvarligt att lämna den.
 
-**Omarbetningen**
+**Omarbetning, i tre varv**
 
-- Läs om med en fråga i taget: först bokens fråga, sedan scenerna, sist språket.
+Varv 1, strukturen:
+
+- Läs om med bara bokens fråga i huvudet. Bär varje kapitel den?
+- Läs boken som den du skriver om skulle läsa den, och sedan som en främling.
+
+Varv 2, scenerna:
+
 - Prova att stryka första stycket i varje kapitel. Börjar det bättre utan?
 - Stäm av varje Kolla fakta mot dina källor i Underlag.
+
+Varv 3, raderna:
+
 - Läs dialogen högt. Låter personen som sig själv?
-- Läs boken som den du skriver om skulle läsa den, och sedan som en främling.
+
+Sedan:
+
 - Låt en provläsare som inte känner dig läsa. Fråga var hen tappade intresset och var hen inte trodde på dig, inte vad hen tyckte.

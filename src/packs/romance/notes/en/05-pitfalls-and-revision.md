@@ -18,12 +18,20 @@ The most common pitfalls, and what to do about them.
 - **The gesture that pressures.** A proposal in front of a crowd, a scene at their workplace, a move the other never asked for. A gesture that makes it hard to say no is not romantic. Leave the other free to choose.
 - **A happy ending that is only stated.** The couple make up on the last page and the book stops. Give the reader at least one scene where the love already holds in everyday life.
 
-**Revision, in this order**
+**Revision, in three passes**
+
+Pass 1, the structure:
 
 - Tag each scene Spark, Tension, Closeness or The wall and see if the pattern builds to the midpoint and then falls towards the break-up.
 - Read only one lead's chapters, then only the other's: does each have a whole arc?
 - Read the meeting, the midpoint and the ending in a row: do they connect?
-- Read every chapter ending: does it pull you on?
-- Check that the grand gesture answers the wound you showed at the start.
 - In feel-good: tag Warmth and Humour and make sure no long stretch lacks both.
+
+Pass 2, the scenes:
+
+- Check that the grand gesture answers the wound you showed at the start.
+- Read every chapter ending: does it pull you on?
+
+Pass 3, the lines:
+
 - Read the dialogue aloud, and cut anything that explains a feeling the scene already shows.

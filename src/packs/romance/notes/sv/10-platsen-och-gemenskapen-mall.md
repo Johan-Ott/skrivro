@@ -6,20 +6,30 @@ sort: Gemenskapen
 
 Byt namn på anteckningen till platsens namn.
 
-**Platsen:** ort, kvarter, butik, gård eller hus. Hur ser den ut, hur luktar och låter den, under olika årstider?
+**Platsen:**
 
-**Varför här:** varför hamnar huvudpersonen här, och varför vill hen först inte stanna?
+<!-- Hur ser den ut, luktar och låter, under olika årstider? -->
 
-**Det som bara finns här:** ön, kaféet och bokhandeln älskas av läsare, men vad gör din plats till just din? En detalj, ett problem eller en tradition som ingen annan bok har.
+**Varför här:**
 
-**Människorna:** tre till fem personer som bor här. Ett namn, en egenhet och en liten egen historia för var och en.
+<!-- Varför vill huvudpersonen först inte stanna? -->
 
-**Traditionerna:** en fest, en marknad, ett möte, något som återkommer och kan bära en scen.
+**Det som bara finns här:**
 
-**Hotet:** vad kan gå förlorat? Ett hus som ska säljas, en butik som går dåligt, ett bygge som hotar.
+<!-- Vilken detalj eller tradition har ingen annan bok? -->
 
-**Den gemensamma saken:** vad samlas människorna kring, och hur dras huvudpersonen in?
+**Människorna:**
 
-**När de sluter upp:** hur visar gemenskapen i slutet att huvudpersonen hör till?
+<!-- Tre till fem invånare: ett namn och en egenhet var. -->
 
-**Vad som har förändrats:** hur ser platsen ut i sista kapitlet, och vad har huvudpersonen gett den?
+**Traditionerna:**
+
+<!-- Vilken fest eller marknad kan bära en scen? -->
+
+**Hotet och den gemensamma saken:**
+
+<!-- Vad kan gå förlorat, och vad samlas alla kring? -->
+
+**När de sluter upp:**
+
+<!-- Hur visar gemenskapen i slutet att huvudpersonen hör till? -->

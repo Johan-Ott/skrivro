@@ -6,26 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Livet just nu:** jobb, bostad, vänner, vardag. Vad fungerar, och vad har hen slutat hoppas på?
+**Livet just nu:**
 
-**Vill:** vad jagar hen, konkret? En befordran, ett hus, en lugn sommar.
+<!-- Vad har hen slutat hoppas på? -->
 
-**Behöver:** vad måste hen förstå eller våga för att kunna älska och bli älskad?
+**Vill och behöver:**
 
-**Såret:** vad hände som gjorde hen försiktig? Ett svek, en förlust, en uppväxt.
+<!-- Vad jagar hen, och vad måste hen våga för att kunna älska? -->
 
-**Lögnen om kärlek:** vilken felaktig tro styr hen? Till exempel: "Jag klarar mig bäst ensam."
+**Såret och lögnen om kärlek:**
 
-**Rädslan i kärleken:** vad är det värsta som kan hända om hen släpper in någon?
+<!-- Vilken felaktig tro om kärlek styr hen? -->
 
-**Varför inte nu:** hens skäl, sagda högt, till varför det här inte kan bli något.
+**Varför inte nu:**
 
-**Vad hen döljer:** något hen inte berättar, och som kommer fram.
+<!-- Vad är hen rädd ska hända om hen släpper in någon? -->
 
-**Det som gör hen älskvärd:** vad gillar läsaren hos hen redan på första sidan? Humorn, omtanken, envisheten.
+**Det som gör hen älskvärd:**
 
-**Bristen:** vad gör hen fel, om och om igen, som kostar något i relationen? Stoltheten, flykten, kontrollen.
+<!-- Vad gillar läsaren hos hen redan på första sidan? -->
 
-**Rösten:** hur låter hen i sitt perspektiv? Vilka ord, vilken humor, vad lägger hen märke till?
+**Bristen:**
 
-**Bågen:** vem är hen i första kapitlet, och vilket val i slutet visar att hen har förändrats?
+<!-- Vad gör hen fel om och om igen i relationer? -->
+
+**Rösten:**
+
+<!-- Vad lägger hen märke till som ingen annan gör? -->
+
+**Bågen:**
+
+<!-- Vilket val i slutet visar att hen har förändrats? -->

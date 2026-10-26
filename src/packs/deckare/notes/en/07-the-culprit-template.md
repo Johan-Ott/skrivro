@@ -6,26 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**The mask:** how do they appear to those around them, and to the reader? What role do they play in the story before the truth comes out?
+**The mask:**
 
-**Motive:** why did they do it? Write it so the reader understands, even if they do not forgive. Money, fear, love, shame, revenge, or protecting someone else?
+<!-- How do they appear to the reader before the truth comes out? -->
 
-**Why now:** what happened that meant it could not wait? A threat of exposure, a will, a reunion?
+**The motive and why now:**
 
-**Means:** the weapon, poison or method, and how they got hold of it.
+<!-- Why did they do it, and why then? -->
 
-**Opportunity:** where they were and when, minute by minute. Write it in What really happened and refer to it here.
+**The means and the opportunity:**
 
-**The plan and what went wrong:** how was it supposed to go, and what turned out differently? What went wrong is often where the clues are born.
+<!-- How, with what, and where were they? -->
 
-**The cover-up:** what did they do afterwards to protect themselves? Clean up, lie, build an alibi, point at someone else?
+**What went wrong:**
 
-**During the investigation:** how do they behave when the detective gets close? Helpful, grieving, indignant, absent? Which red herring do they lay?
+<!-- What did not go to plan? That is where the clues are born. -->
 
-**The mistake:** the detail that finally gives them away. It must be their own fault, not chance.
+**The cover-up:**
 
-**First meeting with the reader:** which chapter, and what are they doing there? Early is better, ideally in a scene about something else.
+<!-- Which red herring do they lay? -->
 
-**Played fair:** list the scenes where an attentive reader could have suspected the truth.
+**First meeting with the reader:**
 
-**When the mask drops:** how do they react when exposed? Deny, confess, try to run, or feel relief?
+<!-- Which chapter, ideally in a scene about something else? -->
+
+**The mistake:**
+
+<!-- Which detail gives them away? Their own fault, not chance. -->
+
+**When the mask falls:**
+
+<!-- Do they deny, confess, run, or feel relieved? -->

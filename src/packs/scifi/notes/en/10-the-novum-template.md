@@ -6,28 +6,34 @@ sort: The world
 
 Rename the note to what the people of the world call the new thing.
 
-**The new thing in one sentence:** what exists here that doesn't exist in our world?
+**The new thing in one sentence:**
 
-**How it works, roughly:** enough that you feel confident yourself. The reader only sees a fraction.
+<!-- What exists here that does not exist in our world? -->
 
-**The rules:** what can it do, and what can't it do?
+**How it works:**
 
-**The cost:** energy, money, health, freedom, something else. Who pays?
+<!-- What do you need to know yourself, even if the reader sees only a fraction? -->
 
-**The limit:** what can never be done, and what the story will put to the test.
+**The limit:**
 
-**The numbers:** the measures you must keep consistent, such as cost, range, time and energy.
+<!-- What can it never do? That is the limit the story tests. -->
 
-**The origin:** who created or discovered it, and when? What happened right after?
+**The cost:**
 
-**The first step:** the obvious consequence.
+<!-- Who pays, and with what? -->
 
-**The second step:** the consequence for society, work and power.
+**The numbers:**
 
-**The third step:** the unexpected consequence nobody planned for.
+<!-- Which measures of cost, range and time must hold through the book? -->
 
-**In everyday life:** a word, a habit or a rule of politeness that exists because of the new thing.
+**The consequences:**
 
-**What hasn't changed:** what is just as it always was, and gives the reader a foothold?
+<!-- Which consequence for society did nobody plan for? -->
 
-**When it goes wrong:** what does an accident look like, and who gets hurt?
+**In everyday life:**
+
+<!-- Which word or habit exists because of the new thing? -->
+
+**When it goes wrong:**
+
+<!-- What does an accident look like, and who is hit? -->

@@ -12,16 +12,19 @@
         "chapters": [
           [
             "Det vanliga livet",
-            "Visa huvudpersonen, vad hen är bra på och vad hen har att förlora, med en skugga av fara redan på första sidan."
+            "(ca 2 %) Visa huvudpersonen, vad hen är bra på och vad hen har att förlora, med en skugga av fara redan på första sidan."
           ],
           [
             "Det första tecknet",
-            "Något är fel, och huvudpersonen är den enda som ser det. Det utlösande ögonblicket."
+            "(ca 8 %) Något är fel, och huvudpersonen är den enda som ser det. Det utlösande ögonblicket."
           ],
-          ["Ingen tror på hen", "Försöket att få hjälp misslyckas, så att hen måste agera själv."],
+          [
+            "Ingen tror på hen",
+            "(ca 12 %) Försöket att få hjälp misslyckas, så att hen måste agera själv."
+          ],
           [
             "Ingen väg tillbaka",
-            "Ett beslut eller en händelse låser fast hen i jakten. Att gå hem är inte längre möjligt."
+            "(ca 25 %) Ett beslut eller en händelse låser fast hen i jakten. Att gå hem är inte längre möjligt."
           ]
         ]
       },
@@ -30,19 +33,19 @@
         "chapters": [
           [
             "Spåret",
-            "Huvudpersonen tar initiativet och kommer närmare, men varje svar väcker en ny fråga."
+            "(ca 30 %) Huvudpersonen tar initiativet och kommer närmare, men varje svar väcker en ny fråga."
           ],
           [
             "Motståndaren slår tillbaka",
-            "Skurken svarar med ett drag som visar hur farlig hen är och vad hen är beredd att göra."
+            "(ca 38 %) Skurken svarar med ett drag som visar hur farlig hen är och vad hen är beredd att göra."
           ],
           [
             "Klockan börjar ticka",
-            "En konkret tidsgräns gör allt brådskande, och läsaren vet exakt när det är för sent."
+            "(ca 45 %) En konkret tidsgräns gör allt brådskande, och läsaren vet exakt när det är för sent."
           ],
           [
             "Mittpunkten",
-            "Huvudpersonen går från jagad till jägare, eller vinner en seger som visar sig vara falsk."
+            "(ca 50 %) Huvudpersonen går från jagad till jägare, eller vinner en seger som visar sig vara falsk."
           ]
         ]
       },
@@ -51,16 +54,19 @@
         "chapters": [
           [
             "Allt var fel",
-            "En planterad sanning vänder upp och ned på det läsaren trott, och planen faller."
+            "(ca 58 %) En planterad sanning vänder upp och ned på det läsaren trott, och planen faller."
           ],
           [
             "Det blir personligt",
-            "Hotet riktas mot det huvudpersonen älskar mest, och insatserna når sin högsta nivå."
+            "(ca 66 %) Hotet riktas mot det huvudpersonen älskar mest, och insatserna når sin högsta nivå."
           ],
-          ["Ensam", "Bundsförvanten sviker eller faller. Det mörkaste läget, med minst tid kvar."],
+          [
+            "Ensam",
+            "(ca 75 %) Bundsförvanten sviker eller faller. Det mörkaste läget, med minst tid kvar."
+          ],
           [
             "Den sista planen",
-            "Huvudpersonen förstår något om sig själv eller skurken och väljer att slå till."
+            "(ca 82 %) Huvudpersonen förstår något om sig själv eller skurken och väljer att slå till."
           ]
         ]
       },
@@ -69,15 +75,15 @@
         "chapters": [
           [
             "Mot klockan",
-            "Planen sätts i verket och går snett. Allt avgörs på kort tid, i korta scener."
+            "(ca 88 %) Planen sätts i verket och går snett. Allt avgörs på kort tid, i korta scener."
           ],
           [
             "Ansikte mot ansikte",
-            "Huvudpersonen möter skurken och vinner med egen förmåga och ett eget val, inte med tur."
+            "(ca 94 %) Huvudpersonen möter skurken och vinner med egen förmåga och ett eget val, inte med tur."
           ],
           [
             "Efteråt",
-            "Kort: vad som är förändrat, vad det kostade, och om hotet verkligen är över."
+            "(ca 99 %) Kort: vad som är förändrat, vad det kostade, och om hotet verkligen är över."
           ]
         ]
       }

@@ -6,24 +6,34 @@ sort: karaktarer
 
 Rename the note to the main character's name.
 
-**Who they are:** age, job, daily life. What they do on an ordinary Tuesday before anything has happened.
+**Who they are:**
 
-**What they want:** a goal that existed before the threat and that the threat now stands in the way of. A main character who only wants to survive turns passive.
+<!-- What do they do on an ordinary Tuesday before anything has happened? -->
 
-**What they stand to lose:** a person, a home, a fresh start, their sanity. What makes the reader afraid on their behalf.
+**What they want:**
 
-**The private fear:** what they feared most before the threat ever came. Failing their child, turning into their father, not being believed.
+<!-- Which goal existed before the threat, and now stands in its way? -->
 
-**How the threat mirrors the fear:** how the supernatural or monstrous presses on exactly that spot.
+**What they stand to lose:**
 
-**The reason to stay:** why they do not just leave. Money, duty, guilt, someone who cannot be moved.
+<!-- What makes the reader afraid for them? -->
 
-**How they explain it away:** their first and most reasonable explanations, and what finally makes them stop believing them.
+**The private fear:**
 
-**The secret:** something they hide from others, or from themselves, that deepens the isolation.
+<!-- What were they most afraid of before the threat? -->
 
-**The strength:** what they have that might be enough in the confrontation. Stubbornness, knowledge, love, an old wound that taught them something.
+**The reason to stay:**
 
-**The bad decision:** a choice that makes everything worse, yet one the reader understands.
+<!-- Why don't they just leave? -->
 
-**What they are afterwards:** whole, damaged, changed or gone. What the ending says about the fear.
+**The secret:**
+
+<!-- What do they hide, from others or from themselves? -->
+
+**The bad decision:**
+
+<!-- Which choice makes everything worse but can still be understood? -->
+
+**What they are afterwards:**
+
+<!-- Whole, damaged, changed or gone? -->

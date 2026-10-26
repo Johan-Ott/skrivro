@@ -6,16 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**The role:** best friend, sister, neighbour, colleague, the one who runs the café. Who are they to the main character?
+**The role:**
 
-**A life of their own:** what is happening in their life while the book goes on? Give them a small story of their own.
+<!-- Who are they to the main character? -->
 
-**What they see:** what do they understand about the main character and the love story before the main character does?
+**A life of their own:**
 
-**When they push back:** in which scene do they say what the main character does not want to hear?
+<!-- What story of their own do they have while the book goes on? -->
 
-**Humour or warmth:** what do they bring to the book's tone?
+**What they see:**
 
-**At the end:** how do they rally, and what has changed for them?
+<!-- What do they understand about the love story before the main character? -->
 
-**The next book:** could they carry a love story of their own?
+**When they push back:**
+
+<!-- In which scene do they say what the main character does not want to hear? -->
+
+**What they think of the love interest:**
+
+<!-- What do they see in the other that the main character does not? -->
+
+**Humour or warmth:**
+
+<!-- Which line could only they say? -->
+
+**What chafes:**
+
+<!-- What are they tired of or worried about? -->
+
+**At the end:**
+
+<!-- How do they rally, and what has changed for them? -->

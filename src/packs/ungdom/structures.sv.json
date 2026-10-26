@@ -12,15 +12,15 @@
         "chapters": [
           [
             "Mitt i vardagen",
-            "Börja i en scen där huvudpersonen vill något och något redan skaver, utan bakgrundsförklaringar."
+            "(ca 3 %) Börja i en scen där huvudpersonen vill något och något redan skaver, utan bakgrundsförklaringar."
           ],
           [
             "Det som rubbar allt",
-            "En händelse hen inte kan strunta i: en ny skola, en hemlighet, ett brutet löfte."
+            "(ca 10 %) En händelse hen inte kan strunta i: en ny skola, en hemlighet, ett brutet löfte."
           ],
           [
             "Beslutet",
-            "Hen väljer själv att ge sig in i det, av ett skäl som läsaren känner igen från sitt eget liv."
+            "(ca 22 %) Hen väljer själv att ge sig in i det, av ett skäl som läsaren känner igen från sitt eget liv."
           ]
         ]
       },
@@ -29,45 +29,54 @@
         "chapters": [
           [
             "Nya människor",
-            "En ny vän, en rival eller ett gäng som öppnar en annan värld och ställer nya krav."
+            "(ca 28 %) En ny vän, en rival eller ett gäng som öppnar en annan värld och ställer nya krav."
           ],
           [
             "Första gången",
-            "Den första festen, kyssen eller lögnen till en förälder: något nytt som känns i hela kroppen och inte går att ta tillbaka."
+            "(ca 35 %) Den första festen, kyssen eller lögnen till en förälder: något nytt som känns i hela kroppen och inte går att ta tillbaka."
           ],
           [
             "Att höra till",
-            "Vad hen måste göra eller dölja för att få vara med, och vad det kostar någon annan."
+            "(ca 42 %) Vad hen måste göra eller dölja för att få vara med, och vad det kostar någon annan."
           ],
           [
             "Lögnen växer",
-            "Det hen döljer blir större och svårare att backa från. Sluta kapitlet nära att det upptäcks."
+            "(ca 48 %) Det hen döljer blir större och svårare att backa från. Sluta kapitlet nära att det upptäcks."
           ]
         ]
       },
       {
         "title": "Allt brister",
         "chapters": [
-          ["Mittpunkten", "En seger som visar sig vara falsk, eller en sanning som ändrar spelet."],
-          ["Priset", "Vänner, familj eller självbilden får betala för hens val."],
+          [
+            "Mittpunkten",
+            "(ca 52 %) En seger som visar sig vara falsk, eller en sanning som ändrar spelet."
+          ],
+          ["Priset", "(ca 60 %) Vänner, familj eller självbilden får betala för hens val."],
           [
             "Avslöjandet",
-            "Lögnen kommer fram inför de människor som betyder mest, och huvudpersonen står ensam."
+            "(ca 70 %) Lögnen kommer fram inför de människor som betyder mest, och huvudpersonen står ensam."
           ],
-          ["Botten", "Hen ser sin egen del i det som hänt. Ingen vuxen kommer och räddar läget."]
+          [
+            "Botten",
+            "(ca 80 %) Hen ser sin egen del i det som hänt. Ingen vuxen kommer och räddar läget."
+          ]
         ]
       },
       {
         "title": "Efter",
         "chapters": [
-          ["Valet", "Hen bestämmer vem hen vill vara, och gör något svårt för att visa det."],
+          [
+            "Valet",
+            "(ca 88 %) Hen bestämmer vem hen vill vara, och gör något svårt för att visa det."
+          ],
           [
             "Det avgörande",
-            "Huvudpersonen löser konflikten med sina egna medel, inte med tur eller en förälder."
+            "(ca 94 %) Huvudpersonen löser konflikten med sina egna medel, inte med tur eller en förälder."
           ],
           [
             "Den hen blev",
-            "Ett slut med hopp: vad som har förändrats, och vad som får förbli olöst."
+            "(ca 99 %) Ett slut med hopp: vad som har förändrats, och vad som får förbli olöst."
           ]
         ]
       }
@@ -86,19 +95,19 @@
         "chapters": [
           [
             "En vanlig dag",
-            "Visa huvudpersonen hemma eller i skolan, vad hen vill och vad som redan skaver, med handling från första raden."
+            "(ca 3 %) Visa huvudpersonen hemma eller i skolan, vad hen vill och vad som redan skaver, med handling från första raden."
           ],
           [
             "Det som händer",
-            "Något oväntat rubbar vardagen: ett fynd, ett besked, en ny elev. Sluta på en fråga."
+            "(ca 10 %) Något oväntat rubbar vardagen: ett fynd, ett besked, en ny elev. Sluta på en fråga."
           ],
           [
             "Varför ingen vuxen",
-            "Visa varför de vuxna inte kan eller får hjälpa, så att problemet blir huvudpersonens eget."
+            "(ca 18 %) Visa varför de vuxna inte kan eller får hjälpa, så att problemet blir huvudpersonens eget."
           ],
           [
             "Beslutet",
-            "Hen bestämmer sig för att göra något själv, och tar det första steget innan kapitlet är slut."
+            "(ca 25 %) Hen bestämmer sig för att göra något själv, och tar det första steget innan kapitlet är slut."
           ]
         ]
       },
@@ -107,16 +116,19 @@
         "chapters": [
           [
             "Vännen",
-            "En vän eller en motvillig medhjälpare kommer in, med egna mål som inte är huvudpersonens."
+            "(ca 30 %) En vän eller en motvillig medhjälpare kommer in, med egna mål som inte är huvudpersonens."
           ],
-          ["Första försöket", "Planen fungerar nästan. Ge ett litet framsteg och ett nytt hinder."],
+          [
+            "Första försöket",
+            "(ca 36 %) Planen fungerar nästan. Ge ett litet framsteg och ett nytt hinder."
+          ],
           [
             "Hemma",
-            "Sidointrigen: ett syskon, en förälder eller en rival gör livet svårare och speglar huvudproblemet."
+            "(ca 42 %) Sidointrigen: ett syskon, en förälder eller en rival gör livet svårare och speglar huvudproblemet."
           ],
           [
             "Hemligheten",
-            "Huvudpersonen döljer något för någon som betyder mycket, och det börjar kosta."
+            "(ca 47 %) Huvudpersonen döljer något för någon som betyder mycket, och det börjar kosta."
           ]
         ]
       },
@@ -125,31 +137,37 @@
         "chapters": [
           [
             "Mittpunkten",
-            "En upptäckt ändrar allt: problemet är större, eller något annat än hen trodde."
+            "(ca 50 %) En upptäckt ändrar allt: problemet är större, eller något annat än hen trodde."
           ],
-          ["Bråket", "Vännerna blir osams, och huvudpersonen bär en del av skulden."],
+          ["Bråket", "(ca 58 %) Vännerna blir osams, och huvudpersonen bär en del av skulden."],
           [
             "Allt går fel",
-            "Planen spricker inför andra, hemligheten kommer fram och hen står ensam."
+            "(ca 68 %) Planen spricker inför andra, hemligheten kommer fram och hen står ensam."
           ],
           [
             "Det hen redan kan",
-            "Ensam med det svåra minns hen något från tidigare i boken som pekar mot en väg ut."
+            "(ca 76 %) Ensam med det svåra minns hen något från tidigare i boken som pekar mot en väg ut."
           ]
         ]
       },
       {
         "title": "Hela vägen",
         "chapters": [
-          ["Förlåt", "Hen söker upp vännen och tar ansvar för sin del, innan det avgörande."],
-          ["Den nya planen", "En plan som bygger på hens egen styrka och på vännen, inte på tur."],
+          [
+            "Förlåt",
+            "(ca 84 %) Hen söker upp vännen och tar ansvar för sin del, innan det avgörande."
+          ],
+          [
+            "Den nya planen",
+            "(ca 90 %) En plan som bygger på hens egen styrka och på vännen, inte på tur."
+          ],
           [
             "Det avgörande",
-            "Huvudpersonen löser problemet med egna medel. De vuxna får komma in efteråt, inte innan."
+            "(ca 95 %) Huvudpersonen löser problemet med egna medel. De vuxna får komma in efteråt, inte innan."
           ],
           [
             "Tillbaka",
-            "Ett hoppfullt slut i en scen som speglar början och visar vad som är annorlunda nu."
+            "(ca 99 %) Ett hoppfullt slut i en scen som speglar början och visar vad som är annorlunda nu."
           ]
         ]
       }
@@ -168,31 +186,34 @@
         "chapters": [
           [
             "Hemma",
-            "Huvudpersonen, det hen önskar sig och något roligt eller konstigt redan på första sidan."
+            "(ca 5 %) Huvudpersonen, det hen önskar sig och något roligt eller konstigt redan på första sidan."
           ],
           [
             "Något händer",
-            "En överraskning sätter igång allt. Sluta kapitlet med en fråga läsaren vill ha svar på."
+            "(ca 15 %) En överraskning sätter igång allt. Sluta kapitlet med en fråga läsaren vill ha svar på."
           ],
-          ["Planen", "Huvudpersonen bestämmer sig och gör en plan, gärna tillsammans med en vän."],
-          ["Ut i det okända", "Äventyret börjar, och först går det bättre än väntat."],
+          [
+            "Planen",
+            "(ca 25 %) Huvudpersonen bestämmer sig och gör en plan, gärna tillsammans med en vän."
+          ],
+          ["Ut i det okända", "(ca 35 %) Äventyret börjar, och först går det bättre än väntat."],
           [
             "Första hindret",
-            "Något går snett. Lös det till hälften och låt ett nytt problem dyka upp."
+            "(ca 45 %) Något går snett. Lös det till hälften och låt ett nytt problem dyka upp."
           ],
           [
             "Bråket",
-            "Vännerna blir osams eller planen spricker. Sluta så att barnet måste få veta hur det går."
+            "(ca 55 %) Vännerna blir osams eller planen spricker. Sluta så att barnet måste få veta hur det går."
           ],
-          ["Det svåra", "Problemet verkar för stort, och ingen vuxen finns till hands."],
+          ["Det svåra", "(ca 68 %) Problemet verkar för stort, och ingen vuxen finns till hands."],
           [
             "Modet",
-            "Huvudpersonen kommer själv på lösningen, med något hen lärt sig tidigare i boken."
+            "(ca 80 %) Huvudpersonen kommer själv på lösningen, med något hen lärt sig tidigare i boken."
           ],
-          ["Lösningen", "Planen genomförs, med en sista överraskning eller ett skratt."],
+          ["Lösningen", "(ca 90 %) Planen genomförs, med en sista överraskning eller ett skratt."],
           [
             "Hem igen",
-            "Tryggt, men inte riktigt som förut. Visa vad hen har lärt sig utan att säga det."
+            "(ca 97 %) Tryggt, men inte riktigt som förut. Visa vad hen har lärt sig utan att säga det."
           ]
         ]
       }

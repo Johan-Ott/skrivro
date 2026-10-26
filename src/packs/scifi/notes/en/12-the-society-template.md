@@ -6,22 +6,34 @@ sort: The world
 
 Rename the note to the name of the society, state or group.
 
-**Who rules:** and how did they get power? Who wants to take it?
+**Who rules:**
 
-**How the new thing has shaped society:** what has changed in laws, class and work since it arrived?
+<!-- How did they get power, and who wants to take it? -->
 
-**Who wins and who loses:** which groups are better off, and which worse?
+**How the new thing shaped it:**
 
-**The economy:** what is expensive, what is free, and what has become worthless since the new thing arrived?
+<!-- Who is better off, and who is worse off? -->
 
-**The laws people notice:** three rules that shape everyday life, and what happens to those who break them.
+**The economy:**
 
-**The values:** what counts as honourable, shameful or old-fashioned?
+<!-- What is expensive, what is free, and what has become worthless? -->
 
-**The language:** new words, curses, ways of greeting. Which words have changed meaning?
+**Laws you notice:**
 
-**The resistance:** who fights back, and how?
+<!-- Which rule shapes everyday life, and what happens to someone who breaks it? -->
 
-**The history:** which event led here, and how do different groups tell it?
+**Values and language:**
 
-**What the reader recognises:** what in this society reminds us of our own time?
+<!-- Which words have changed meaning? -->
+
+**The resistance:**
+
+<!-- Who fights back, and how? -->
+
+**History:**
+
+<!-- Which event led here, and how do different groups tell it? -->
+
+**What the reader recognises:**
+
+<!-- What reminds us of our own time? -->

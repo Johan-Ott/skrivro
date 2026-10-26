@@ -1,27 +1,39 @@
 ---
-sort: Världen
+sort: platser
 ---
 
-# Platsen (mall)
+# Planeten, stationen eller skeppet (mall)
 
 Byt namn på anteckningen till platsens namn: en planet, en station, ett skepp, en stad.
 
-**Första intrycket:** vad ser, hör och känner den som kommer hit för första gången?
+**Första intrycket:**
 
-**Fysiken:** gravitation, ljus, luft, klimat, dygnets längd. Hur märks det i kroppen?
+<!-- Vad ser, hör och känner den som kommer hit första gången? -->
 
-**Varför människor finns här:** kolonisation, flykt, arbete, straff, eller för att de föddes här?
+**Fysiken:**
 
-**Det som håller dem vid liv:** vatten, energi, mat. Vad händer om det tar slut?
+<!-- Hur märks gravitation, ljus, luft och dygnets längd i kroppen? -->
 
-**Hur man bor:** hur man rör sig, vad som är trångt och vad som är dyrt.
+**Varför människor finns här:**
 
-**Hur platsen formar människorna:** vanor, rädslor och uttryck som bara finns här.
+<!-- Kolonisation, flykt, arbete, straff eller för att de föddes här? -->
 
-**Farorna:** vad kan döda en här, och hur skyddar man sig?
+**Det som håller dem vid liv:**
 
-**Det vackra:** vad gör platsen värd att se? Här bor förundran.
+<!-- Vilket vatten, vilken energi och mat, och vad händer om det tar slut? -->
 
-**Förbindelsen utåt:** hur långt bort är allt annat, hur tar man sig dit, och hur lång tid tar ett meddelande?
+**Hur platsen formar människorna:**
 
-**En detalj som bara invånarna känner till:** något som gör platsen levande.
+<!-- Vilka vanor och uttryck finns bara här? -->
+
+**Farorna:**
+
+<!-- Vad kan döda en här, och hur skyddar man sig? -->
+
+**Det vackra:**
+
+<!-- Vad gör platsen värd att se? -->
+
+**Förbindelsen utåt:**
+
+<!-- Hur långt bort är allt annat, och hur lång tid tar ett meddelande? -->

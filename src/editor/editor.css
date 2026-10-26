@@ -184,6 +184,33 @@
   pointer-events: none;
 }
 
+/* A template question is the hint of its empty answer. The hidden copy reserves the lines the
+   hint takes, since the visible one is positioned over the caret's line. */
+.manuscript .prompt-hint {
+  position: relative;
+}
+
+.manuscript .prompt-hint::before,
+.manuscript .prompt-hint::after {
+  content: attr(data-prompt);
+  display: block;
+}
+
+.manuscript .prompt-hint::before {
+  position: absolute;
+  inset: 0 0 auto;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.manuscript .prompt-hint::after {
+  visibility: hidden;
+}
+
+.manuscript .prompt-hint .ProseMirror-trailingBreak {
+  display: none;
+}
+
 /* Focus mode: everything but the paragraph or sentence being written is dimmed. */
 .manuscript.focus-stycke .ProseMirror,
 .manuscript.focus-mening .ProseMirror {

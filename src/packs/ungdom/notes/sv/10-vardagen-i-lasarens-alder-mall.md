@@ -4,24 +4,32 @@ sort: Vardagen
 
 # Vardagen i läsarens ålder (mall)
 
-Byt namn på anteckningen till platsen eller tiden, som "Skolan" eller "Sommarlovet". Fyll i den för att boken ska kännas sann för den som är i den åldern nu.
+Byt namn på anteckningen till platsen eller tiden.
 
-**Läsarens ålder:** exakt vilken åldersgrupp, och vad läsaren redan kan läsa och förstå.
+**Läsarens ålder:**
 
-**En vanlig dag:** från väckning till läggdags. Vad bestämmer hen själv, och vad bestämmer andra?
+<!-- Vilken åldersgrupp, och vad kan läsaren redan förstå? -->
 
-**Skolan:** klassen, lärarna, rasterna, matsalen. Var är det tryggt, och var är det farligt?
+**En vanlig dag:**
 
-**Hemma:** rummet, syskonen, maten, reglerna. Vad bråkar man om?
+<!-- Vad bestämmer hen själv, och vad bestämmer andra? -->
 
-**Fritiden:** sport, spel, kompisar, ensamtid. Var träffas man när ingen vuxen ser?
+**Skolan och hemma:**
 
-**Mobilen och nätet:** vad hen gör där, vad som kan gå fel, och hur mycket det ska synas i boken.
+<!-- Var är det tryggt, och var är det farligt? -->
 
-**Det som känns stort:** det en tolvåring eller femtonåring kan ligga vaken över. Rykten, betyg, kroppen, att vara ensam.
+**Fritiden och nätet:**
 
-**Det man inte säger högt:** till föräldrar, till vänner, till sig själv.
+<!-- Var träffas man när ingen vuxen ser? -->
 
-**Ord och uttryck:** hur unga i den åldern pratar, utan slang som åldras snabbt.
+**Det som känns stort:**
 
-**Det läsaren inte ska behöva:** ämnen eller detaljer som är för mycket för just den här åldersgruppen.
+<!-- Vad ligger man vaken över i den åldern? -->
+
+**Ord och uttryck:**
+
+<!-- Hur pratar de, utan slang som åldras snabbt? -->
+
+**Det läsaren inte ska behöva:**
+
+<!-- Vad är för mycket för just den här åldern? -->

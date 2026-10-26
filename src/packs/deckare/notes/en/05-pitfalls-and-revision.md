@@ -17,12 +17,26 @@ sort: Guide
 - **The lone wolf without consequences.** If the detective breaks the rules, it should cost them: a complaint, evidence thrown out in court, a colleague who stops trusting them.
 - **The motive in the final chapter.** The reader needs to have seen the seed of the motive earlier, even if they did not understand it.
 
-**Revision, in this order**
+**Revision, in three passes**
+
+Pass 1, the structure:
 
 - Read only the scenes labelled Clue. Can the puzzle be solved from them?
 - Read the book as the culprit. Do they do anything that only makes sense if they are innocent? Cut it or explain it.
 - Follow each red herring to its resolution. Is any thread left hanging?
+
+Pass 2, the scenes:
+
 - Sort the chapters by Story order and read When alongside What really happened. Could anyone have been in two places at once?
-- Give the manuscript to a test reader and ask at three points who they think did it. If everyone guesses right early, hide better. If no one understands the solution even afterwards, show more clearly.
+- Does every interview give something new: a lie, a clue or an obstacle? If not, it can be summed up in a sentence.
 - Check every chapter ending: does it end on a question?
 - Trim the reveal to what is truly needed.
+
+Pass 3, the lines:
+
+- Read the interviews aloud. Do the suspects sound different, and does each one lie in their own way?
+- Cut the detective's thoughts that repeat what the reader just saw.
+
+Finally:
+
+- Give the manuscript to a test reader and ask at three points who they think did it. If everyone guesses right early, hide better. If no one understands the solution even afterwards, show more clearly.

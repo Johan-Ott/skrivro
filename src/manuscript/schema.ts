@@ -37,7 +37,7 @@ export const manuscriptSchema = new Schema({
     paragraph: {
       group: "block",
       content: "inline*",
-      attrs: { ...blockAttrs, canonical: { default: null } },
+      attrs: { ...blockAttrs, canonical: { default: null }, prompt: { default: null } },
       parseDOM: [{ tag: "p" }, { tag: "h1" }, { tag: "h2" }, { tag: "h3" }, { tag: "li" }],
       toDOM: () => ["p", 0],
     },

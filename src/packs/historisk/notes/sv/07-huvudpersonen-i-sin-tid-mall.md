@@ -4,26 +4,36 @@ sort: karaktarer
 
 # Huvudpersonen i sin tid (mall)
 
-Byt namn på anteckningen till personens namn. Den passar för alla påhittade huvud- och bipersoner.
+Byt namn på anteckningen till personens namn.
 
-**Födelse och ställning:** år, plats, stånd eller klass. Vad det innebar att födas just där och då.
+**Födelse och ställning:**
 
-**Försörjningen:** hur hen får mat på bordet, och vad som händer om det slutar fungera.
+<!-- Vad innebar det att födas just där och då, i just den klassen? -->
 
-**Vad hen vill:** ett konkret mål som tiden gör svårt att nå. Ett giftermål, en gård, en lärlingsplats, att få tillbaka ett barn.
+**Försörjningen:**
 
-**Vad tiden tillåter hen:** vad hen får och inte får göra, utifrån kön, ålder, klass, tro och ursprung.
+<!-- Hur får hen mat på bordet? -->
 
-**Tron och världsbilden:** vad hen tror om Gud, sjukdom, döden, ödet och överheten. Vad hen tar för givet utan att tänka på det.
+**Vad hen vill:**
 
-**Det hen tycker som skaver mot i dag:** minst en åsikt eller vana som en läsare i dag inte delar. Den gör personen trovärdig.
+<!-- Vilket konkret mål gör tiden svårt att nå? -->
 
-**Var hen går ett steg längre än sin tid:** om alls, och vad det kostar hen.
+**Vad tiden tillåter hen:**
 
-**Kunskaper och gränser:** kan hen läsa, räkna, resa? Vad vet hen om världen utanför socknen eller staden?
+<!-- Vad får hen inte göra, utifrån kön, klass och tro? -->
 
-**Språket:** hur hen talar, svär, tilltalar andra och blir tilltalad. Ett par ord eller uttryck som är hens egna.
+**Tron och världsbilden:**
 
-**Förhållandet till det stora skeendet:** hur kriget, svälten eller omvälvningen når just hen, och när.
+<!-- Vad tar hen för givet om Gud, döden och överheten? -->
 
-**Vad hen förlorar och vinner:** vem hen är när boken slutar.
+**Det som skaver mot i dag:**
+
+<!-- Vilken åsikt delar inte en läsare i dag? -->
+
+**Språket:**
+
+<!-- Hur talar, svär och tilltalar hen andra? -->
+
+**Det stora skeendet:**
+
+<!-- Hur når kriget eller svälten just hen, och när? -->

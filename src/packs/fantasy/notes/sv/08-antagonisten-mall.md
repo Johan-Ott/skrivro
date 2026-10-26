@@ -4,24 +4,36 @@ sort: karaktarer
 
 # Antagonisten (mall)
 
-Byt namn på anteckningen till personens namn, eller till namnet på makten bakom hotet.
+Byt namn på anteckningen till personens namn, eller makten bakom hotet.
 
-**Målet:** vad vill hen uppnå, sagt i en mening?
+**Målet:**
 
-**Varför hen tror sig ha rätt:** sett från hens håll, vad är det goda i planen?
+<!-- Vad vill hen, i en mening? -->
 
-**Källan till makten:** magi, armé, tro, kunskap. Vad har hen som huvudpersonen saknar?
+**Varför hen har rätt:**
 
-**Priset hen redan har betalat:** vad har makten kostat hen? En antagonist som har offrat något blir djupare.
+<!-- Vad är det goda i planen, sett från hens håll? -->
 
-**Spegeln:** på vilket sätt liknar hen huvudpersonen, eller den huvudpersonen skulle kunna bli?
+**Makten och priset:**
 
-**Läget när boken börjar:** hur långt har planen kommit? Ett hot som redan har övertaget skapar tryck från första sidan.
+<!-- Vad har hen som huvudpersonen saknar, och vad har det kostat? -->
 
-**Planen under tiden:** vad gör hen medan huvudpersonen är på väg? Antagonisten står inte still mellan scenerna.
+**Spegeln:**
 
-**Ansiktet:** om hotet är en makt eller ett väsen, vilken person möter huvudpersonen öga mot öga?
+<!-- Hur liknar hen den huvudpersonen skulle kunna bli? -->
 
-**Svagheten:** det som till slut kan fälla hen. Var planteras det?
+**Planen:**
 
-**Första mötet:** när och hur märker läsaren hotet för första gången?
+<!-- Hur långt har planen kommit, och vad gör hen medan huvudpersonen är på väg? -->
+
+**Ansiktet:**
+
+<!-- Om hotet är en makt: vem möter huvudpersonen öga mot öga? -->
+
+**Första mötet:**
+
+<!-- När märker läsaren hotet första gången? -->
+
+**Svagheten:**
+
+<!-- Vad kan fälla hen, och var planteras det? -->

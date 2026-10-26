@@ -4,6 +4,7 @@ import type { Node } from "prosemirror-model";
 import { splitFootnotes, type FootnoteTexts } from "./footnotes.js";
 import { parseInline } from "./parseInline.js";
 import { pictureOf } from "./pictures.js";
+import { isLabelParagraph, promptOf } from "./prompts.js";
 import { manuscriptSchema as schema, STYLE_NAMES } from "./schema.js";
 import { serializeInlineContent } from "./serializeInline.js";
 import { findStyleFences, type StyleFence } from "./styleFences.js";
@@ -14,18 +15,20 @@ interface PlacedBlock {
   node: Node;
 }
 
-export function parseMarkdown(fileMarkdown: string): Node {
+/** A note, unlike a scene, may hold template questions: a comment under a label. */
+export function parseMarkdown(fileMarkdown: string, options: { isNote?: boolean } = {}): Node {
+  const isNote = options.isNote ?? false;
   const { body: markdown, notes } = splitFootnotes(fileMarkdown);
   const placed: PlacedBlock[] = [];
   let cursor = 0;
   for (const fence of findStyleFences(markdown)) {
     placed.push(
-      ...markdownBlocks(markdown, { from: cursor, to: fence.start }, notes),
-      styleBlock(markdown, fence, notes),
+      ...markdownBlocks(markdown, { from: cursor, to: fence.start }, notes, isNote),
+      styleBlock(markdown, fence, notes, isNote),
     );
     cursor = fence.end;
   }
-  placed.push(...markdownBlocks(markdown, { from: cursor, to: markdown.length }, notes));
+  placed.push(...markdownBlocks(markdown, { from: cursor, to: markdown.length }, notes, isNote));
   const { blocks, trailing } = withGaps(markdown, placed, 0);
   return schema.node("doc", { trailing }, blocks);
 }
@@ -44,13 +47,19 @@ function markdownBlocks(
   text: string,
   range: { from: number; to: number },
   notes: FootnoteTexts,
+  isNote: boolean,
 ): PlacedBlock[] {
   const { from, to } = range;
   const chunk = text.slice(from, to);
-  return fromMarkdown(chunk).children.map((child) => {
+  const { children } = fromMarkdown(chunk);
+  return children.map((child, index) => {
     const start = child.position?.start.offset ?? 0;
     const end = child.position?.end.offset ?? chunk.length;
-    return { start: from + start, end: from + end, node: blockFrom(child, chunk, notes) };
+    const isQuestion = isNote && child.type === "html" && isLabelParagraph(children[index - 1]);
+    const node = isQuestion
+      ? questionFrom(chunk.slice(start, end))
+      : blockFrom(child, chunk, notes);
+    return { start: from + start, end: from + end, node };
   });
 }
 
@@ -68,6 +77,14 @@ function blockFrom(child: RootContent, chunk: string, notes: FootnoteTexts): Nod
   const picture = onlyPicture(child.children);
   if (picture) return schema.node("picture", { ...picture, source });
   return paragraphFrom(child, chunk, notes, source);
+}
+
+// A one-line comment under a label is a template's question: an empty paragraph that saves as
+// the comment. Anything else stays a raw block.
+function questionFrom(source: string): Node {
+  const prompt = promptOf(source);
+  if (prompt === null) return schema.node("rawBlock", { source });
+  return schema.node("paragraph", { source, canonical: "", prompt });
 }
 
 function paragraphFrom(
@@ -99,11 +116,17 @@ function listFrom(list: List, chunk: string, notes: FootnoteTexts, source: strin
   return schema.node("styleBlock", { style, source, canonical: listContent(shown) }, items);
 }
 
-function styleBlock(text: string, fence: StyleFence, notes: FootnoteTexts): PlacedBlock {
+function styleBlock(
+  text: string,
+  fence: StyleFence,
+  notes: FootnoteTexts,
+  isNote: boolean,
+): PlacedBlock {
   const placement = { start: fence.start, end: fence.end };
   const rawFence = () => schema.node("rawBlock", { source: text.slice(fence.start, fence.end) });
   const isKnownStyle = (STYLE_NAMES as readonly string[]).includes(fence.style);
-  const inner = markdownBlocks(text, { from: fence.innerStart, to: fence.innerEnd }, notes);
+  const range = { from: fence.innerStart, to: fence.innerEnd };
+  const inner = markdownBlocks(text, range, notes, isNote);
   if (!isKnownStyle || inner.length === 0) return { ...placement, node: rawFence() };
   const { blocks, trailing } = withGaps(text.slice(0, fence.innerEnd), inner, fence.innerStart);
   const attrs = {

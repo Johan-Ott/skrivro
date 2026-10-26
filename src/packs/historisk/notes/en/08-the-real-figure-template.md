@@ -4,24 +4,36 @@ sort: karaktarer
 
 # The real figure (template)
 
-Rename the note to the person's name. Use it for everyone who really existed and appears in the book.
+Rename the note to the person's name.
 
-**Who they were:** life dates, role and why they are known. What the reader probably knows already.
+**Who they were:**
 
-**What is documented:** facts you can back with sources. Where they were, what they did and said, in the years the book covers.
+<!-- What does the reader probably know about them already? -->
 
-**What is disputed:** where the sources disagree or historians read them differently.
+**What is documented:**
 
-**What is unknown:** the gaps where you may invent. A conversation, a feeling, an evening nobody wrote about.
+<!-- What can you back with sources in the book's years? -->
 
-**How they are used in the book:** in the background, in a few scenes, or as part of the plot. The bigger the role, the more research it needs.
+**The gaps:**
 
-**Meeting the invented:** how your invented characters cross their path, and why it is plausible.
+<!-- Where do the sources disagree, and where may you invent? -->
 
-**What you put in their mouth:** lines and actions you have invented. Does any of it contradict what is known? Prefer what they actually said or wrote where it exists, and keep quotation and invention apart in your notes.
+**Their role in the book:**
 
-**The line you do not cross:** something you will not let them do, out of respect for the facts or for descendants.
+<!-- Background, a few scenes or part of the plot? -->
 
-**Sources:** the key sources on them, pointing to the note in Sources.
+**Meeting the invented:**
 
-**For the author's note:** what the reader needs to know about how you have treated them.
+<!-- Why is it believable that your characters cross their path? -->
+
+**What you put in their mouth:**
+
+<!-- Does anything you invented go against what is known? -->
+
+**The line you do not cross:**
+
+<!-- What do you not let them do, out of respect? -->
+
+**For the author's note:**
+
+<!-- What does the reader need to know about how you treated them? -->

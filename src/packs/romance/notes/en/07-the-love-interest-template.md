@@ -6,28 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**First impression:** what does the main character think of them when they meet, and what is wrong about it?
+**First impression:**
 
-**Want:** what are they chasing, and how does it clash with the main character's goal?
+<!-- What does the main character think of them at first, and what is wrong in it? -->
 
-**The wound and the lie:** what made them afraid of love, and what do they believe about themselves?
+**Wants:**
 
-**What they fear in love:** what do they think will happen if they show what they feel?
+<!-- How does their goal clash with the main character's? -->
 
-**Why them:** how do they challenge exactly what the main character believes about love?
+**The wound and the fear:**
 
-**What they see:** what do they see in the main character that no one else does?
+<!-- What made them afraid of love? -->
 
-**The respect:** in which early scene do they show that no means no, and that they take the other seriously?
+**Why them:**
 
-**The flaw:** what are they bad at, and what makes them hard to love at times? Flawless is boring.
+<!-- Which belief about love in the main character do they challenge? -->
 
-**The other side:** what do they only show once the wall comes down?
+**Respect:**
 
-**The chemistry:** what is it in the way they talk, argue and laugh that only these two share?
+<!-- In which early scene do they show that no means no? -->
 
-**The voice:** if they have their own point of view, how does it differ from the main character's?
+**The flaw and the other side:**
 
-**What they risk:** what do they lose if it does not hold?
+<!-- What do they show only when the wall comes down? -->
 
-**The grand gesture:** what do they do, or give up, and why does it mean the most to this particular main character?
+**The chemistry:**
+
+<!-- What in how they argue and laugh belongs only to the two of them? -->
+
+**The grand gesture:**
+
+<!-- What do they do or give up that matters most to this main character? -->

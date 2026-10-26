@@ -119,6 +119,16 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   sorts in Ny anteckning. Mentions are counted from the manuscript text, never stored; a note's
   page shows them under Nämns i. Connections ("Elin, brorsdotter") are project.json `connections`.
   Older projects' Karaktärer, Tidslinje and Research folders become sorts when they are read.
+- Pack notes (`src/packs/*/notes`) are read by `noteOf`: `sort:` and `standard: true` in the front
+  matter, other lines ignored. `src/packs/grund` is the free basics: in every book, never listed or
+  bought (`basics()` in `packs.ts`). A new note in a sort starts as that sort's `standard` template
+  (`standardNoteBody`), the chip Enkel. A template question is `**Label:**`, a blank line and
+  `<!-- the question -->` on its own line. In a note (`parseMarkdown(text, { isNote })`, told by
+  `session.isNote`), never in a scene, a one-line comment right under such a label is read as
+  an empty paragraph with a `prompt` attribute (`manuscript/prompts.ts`), shown as grey hint text
+  (`editor/promptHints.ts`), saved as the comment until the writer answers, and counted as no words,
+  nor the label above it. A note beside the text (`app/beside/`) is read with `isNote` off, so an
+  unanswered question shows there as a raw comment.
 - A series is a folder beside its books (`Vintervägen.serie`), built like a project but holding
   only sorts (`project/series.ts`). A book names it in project.json `series` (the folder name),
   and `useSeries` reads, watches and writes it beside the book. Notes live in "homes": the series
@@ -224,6 +234,9 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   of `npm run check`; run it before a release or after changing the interface.
 - `npm run dev:web` serves the same app in a browser against the example project in memory.
   Start it with `--host 127.0.0.1` for Claude's browser pane, which can not reach `::1`.
+- ProseMirror reads a click's selection on the next turn of the event loop. A test that types at
+  once after a click can land its text at the start of the document: wait ~50 ms
+  (`settleSelection` in `e2e/helpers.ts`).
 - Typing tests in the browser pane: the pane's `type` action pastes whole strings, so input
   rules (typography) only fire with `document.execCommand("insertText")` one character at a time.
 - Stopping a background `npx vite` leaves its node process on port 1420; stop that process too,

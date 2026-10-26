@@ -4,22 +4,32 @@ sort: karaktarer
 
 # Bundsförvanten (mall)
 
-Byt namn på anteckningen till personens namn. Bundsförvanten hjälper huvudpersonen, och blir ofta den som sviker eller faller när det är som mörkast.
+Byt namn på anteckningen till personens namn.
 
-**Vad hen tillför:** en förmåga, en kontakt, en plats att gömma sig, eller en röst som säger sanningen.
+**Vad hen tillför:**
 
-**Varför hen hjälper:** vänskap, skuld, pengar, eget intresse? Ju mer tvetydigt, desto mer spänning.
+<!-- Vilken förmåga, kontakt eller gömställe ger hen? -->
 
-**Kontrasten:** hur skiljer hen sig från huvudpersonen? Försiktig där huvudpersonen är dumdristig, eller säker där huvudpersonen tvivlar. En bundsförvant som tänker annorlunda ger konflikt i varje samtal.
+**Varför hen hjälper:**
 
-**Vad hen kostar:** vad tar hen ifrån huvudpersonen, även när hen hjälper? Tid, säkerhet, ett spår som leder skurken rätt, en hemlighet som läcker.
+<!-- Vänskap, skuld, pengar eller eget intresse? -->
 
-**Hemligheten:** vad vet eller har hen gjort som huvudpersonen inte känner till?
+**Kontrasten:**
 
-**Var lojaliteten prövas:** vilket kapitel, och vad står på spel för hen själv?
+<!-- Hur tänker hen annorlunda än huvudpersonen? -->
 
-**Sveket eller offret:** sviker hen, dör hen, eller väljer hen huvudpersonen till ett högt pris? Varför just då?
+**Vad hen kostar:**
 
-**Vad läsaren ska tro:** ska läsaren lita på hen, misstro hen, eller byta åsikt? Vilka frön lägger du ut?
+<!-- Vad tar hen ifrån huvudpersonen, även när hen hjälper? -->
 
-**Efteråt:** vad blir kvar av relationen, och vad betyder det för huvudpersonens båge?
+**Hemligheten:**
+
+<!-- Vad vet hen som huvudpersonen inte känner till? -->
+
+**Sveket eller offret:**
+
+<!-- I vilket kapitel prövas lojaliteten, och hur slutar det? -->
+
+**Vad läsaren ska tro:**
+
+<!-- Ska läsaren lita på hen, och vilka frön lägger du ut? -->

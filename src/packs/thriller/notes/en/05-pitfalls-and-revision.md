@@ -18,11 +18,23 @@ sort: Guide
 - **The repetitive middle.** Chase, escape, chase, escape. Each sequence should change something: new knowledge, a new ally, a new loss.
 - **The long aftermath.** Once the threat is over the book is nearly done. One or two short chapters are enough.
 
-**Revision, in this order**
+**Revision, in three passes**
 
-- Read every chapter ending in a row. Does each one pull, and do they vary?
+Pass 1, the structure:
+
 - Read the villain's plan alongside the manuscript. Does the villain do anything against the plan or their own interest?
 - Track the clock: mark every place time is mentioned. Are there long gaps?
 - Check each major twist: where is the seed planted?
+
+Pass 2, the scenes:
+
+- Read every chapter ending in a row. Does each one pull, and do they vary?
 - Cut explanations, backstory and trips from A to B that carry no tension.
+
+Pass 3, the lines:
+
+- Read the action scenes aloud. Short sentences when it happens, longer ones in the waiting?
+
+Finally:
+
 - Give the manuscript to a test reader and ask them to mark where they put the book down.

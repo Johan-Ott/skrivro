@@ -4,22 +4,28 @@ sort: karaktarer
 
 # Motståndaren (mall)
 
-Byt namn på anteckningen till personens namn, eller till namnet på systemet hen företräder.
+Byt namn på anteckningen till personens namn, eller systemet hen företräder.
 
-**Vem eller vad:** en person, en organisation, en maskin, ett system. Om det är ett system, vem är dess ansikte i boken?
+**Vem eller vad:**
 
-**Målet:** vad vill motståndaren, sagt i en mening?
+<!-- Om motståndaren är ett system: vem är dess ansikte i boken? -->
 
-**Logiken:** varför är det rimligt, sett inifrån? Vilka problem löser hen faktiskt?
+**Målet och logiken:**
 
-**Förhållandet till det nya:** äger, styr eller förstår motståndaren tekniken bättre än andra?
+<!-- Vad vill hen, och varför är det rimligt sett inifrån? -->
 
-**Makten:** resurser, information, lagar, våld. Vad har hen som huvudpersonen saknar?
+**Makten:**
 
-**Läget när boken börjar:** hur långt har planen kommit, och vad vet motståndaren redan om huvudpersonen?
+<!-- Vad har hen som huvudpersonen saknar? -->
 
-**Planen under tiden:** vad gör motståndaren medan huvudpersonen är upptagen med annat?
+**Planen:**
 
-**Spegeln:** på vilket sätt är hen den som huvudpersonen skulle kunna bli?
+<!-- Hur långt har planen kommit, och vad gör hen medan huvudpersonen är upptagen? -->
 
-**Svagheten:** vad kan fälla hen, och var planteras det?
+**Spegeln:**
+
+<!-- Hur är hen den som huvudpersonen skulle kunna bli? -->
+
+**Svagheten:**
+
+<!-- Vad kan fälla hen, och var planteras det? -->

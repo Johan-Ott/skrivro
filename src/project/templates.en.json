@@ -227,7 +227,7 @@
       "id": "serie",
       "name": "Series",
       "hint": "Threads that run between the books, and a last chapter that leads on.",
-      "sorts": ["Threads"],
+      "sorts": ["Threads", "Series"],
       "labels": [],
       "chapters": [["The hook", "A new threat or a secret that leads to the next book."]]
     }

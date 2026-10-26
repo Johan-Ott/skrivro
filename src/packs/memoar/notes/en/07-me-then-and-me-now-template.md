@@ -4,28 +4,36 @@ sort: karaktarer
 
 # Me then and me now (template)
 
-For memoir. Rename the note to your name, or what you were called back then. Fill it in before you write, and again when the draft is done: the answers tend to change.
+Rename the note to what I was called back then.
 
-**Age:** how old you were when the book's story begins, and when it ends.
+**The age:**
 
-**What the then-self wanted:** what you chased or dreamed of, in your words from then, not today's.
+<!-- How old was I when the story begins and ends? -->
 
-**What the then-self believed:** about themselves, the family, the world. The belief the book will challenge.
+**What the younger me wanted:**
 
-**The fear:** what you most avoided thinking about.
+<!-- What did I chase, in my words from then? -->
 
-**The voice back then:** words, phrases and ways of thinking that belong to that age and that time. What didn't you have words for yet?
+**What the younger me believed:**
 
-**What you didn't know:** what the reader may sense, but you couldn't see in the moment.
+<!-- Which belief about myself will the book challenge? -->
 
-**The now-self:** where you stand as you write. What you have understood, and what you still don't.
+**The voice then:**
 
-**The distance:** how long ago it was, and whether you stand far enough away to see the pattern. What is still too close?
+<!-- What did I not yet have words for? -->
 
-**The book's question:** the one question the now-self is trying to answer. "Why did I stop painting?"
+**The present me and the distance:**
 
-**The transformation:** in one sentence, from who to who.
+<!-- What have I understood, and what is still too close? -->
 
-**Your own part:** what you did or didn't do that you need to be honest about.
+**The book's question:**
 
-**What you won't tell:** the line you draw for yourself, and whether the reader needs to know it is there.
+<!-- Which one question am I trying to answer, like: why did I stop painting? -->
+
+**My own part:**
+
+<!-- What did I do, or fail to do, that I must be honest about? -->
+
+**What I will not tell:**
+
+<!-- Where do I draw the line, and does the reader need to know it is there? -->

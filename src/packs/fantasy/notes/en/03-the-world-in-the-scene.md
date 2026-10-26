@@ -29,7 +29,6 @@ The iceberg principle: you know ten times more about the world than the reader e
 
 **Chapter endings**
 
-- End on a question, a decision or a discovery, not on someone falling asleep.
 - A chapter may end quietly, as long as the reader is already carrying an open question.
 
 **Pacing**

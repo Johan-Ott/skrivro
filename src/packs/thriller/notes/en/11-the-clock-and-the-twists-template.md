@@ -4,28 +4,36 @@ sort: The threat
 
 # The clock and the twists (template)
 
-Rename the note to the book's working title. Keep the threat, the time and the major twists in one place, so you can see the tension rising all the way.
+Rename the note to the book's working title.
 
-**The threat in one sentence:** what happens, and when, if the main character fails?
+**The threat and the clock:**
 
-**The clock:** the concrete deadline. A date, a time, an event.
+<!-- What happens, and when, if the main character fails? -->
 
-**How the reader is reminded:** which recurring details show time running out? A countdown, a phone call, an illness getting worse.
+**How the reader is reminded:**
 
-**Where the clock shrinks:** which chapter, and what suddenly makes the time shorter?
+<!-- Which details show time running out? -->
 
-**Stakes in the first part:** what is at stake when the main character is drawn in?
+**The stakes:**
 
-**Stakes in the second part:** what has been added after the midpoint?
+<!-- How do the stakes turn personal after the midpoint? -->
 
-**Stakes in the third part:** how does it get personal, and what does it cost them inside?
+**The breathers:**
 
-**The breathers:** where do they fall, and what decision or new knowledge comes out of each one? A breather that changes nothing can be cut.
+<!-- Which decision comes out of each breather? -->
 
-**The first major twist:** what is it, in which chapter, and where is the seed planted?
+**The first twist:**
 
-**The midpoint twist:** from hunted to hunter, or a victory that proves false?
+<!-- What is it, and where is the seed planted? -->
 
-**The biggest twist:** the truth that changes how the reader sees everything so far. List at least two seeds that make it fair.
+**The midpoint twist:**
 
-**The final decision:** what must the main character choose in the showdown, and why is it hard?
+<!-- From hunted to hunter, or a false victory? -->
+
+**The biggest twist:**
+
+<!-- Which two seeds make it fair? -->
+
+**The final choice:**
+
+<!-- What must the main character choose in the showdown? -->

@@ -4,20 +4,32 @@ sort: The era
 
 # The timeline (template)
 
-Rename the note to Timeline. Here you set the real and the invented side by side, so they never collide. Keep adding as you write.
+Rename the note to Timeline.
 
-**The fixed points:** the real events with their dates, which you cannot move without saying so. One line per event, with its source.
+**The fixed points:**
 
-**The book's events:** every chapter with its date or rough time, and what happens.
+<!-- Which real events, with date and source, are fixed? -->
 
-**Season and weather:** for every chapter. Darkness, cold, harvest, roads that cannot be travelled. If there are records of the weather in those very years, use them.
+**The book's events:**
 
-**The calendar:** weekdays, holy days, markets and court days during the book's span. Look up which weekday an important date fell on. Remember that countries switched to the Gregorian calendar in different years, Britain and its colonies in 1752, Sweden in 1753.
+<!-- What date, season and weather does each chapter have? -->
 
-**Ages:** how old the main characters are at each key event, and the life dates of the real people.
+**The calendar:**
 
-**Travel and news:** how long it takes to get between places, and the earliest a piece of news could reach your characters.
+<!-- Which weekday was the date? Britain switched calendar in 1752, Sweden in 1753. -->
 
-**What you moved:** every real date you changed, and why. Carry it over to the author's note.
+**Ages:**
 
-**Check:** read the two tracks side by side. Is anyone somewhere they could not have reached in time? Does news arrive too fast? Is everyone in the scene still alive?
+<!-- How old are the main characters at each key event? -->
+
+**Travel times and news:**
+
+<!-- When could news have arrived at the earliest? -->
+
+**What you have moved:**
+
+<!-- Which real dates have you changed, and why? -->
+
+**Check:**
+
+<!-- Can everyone get where they need to be, and is everyone in the scene alive? -->

@@ -6,30 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Role and authority:** police officer, journalist, lawyer, priest or nosy neighbour? What can they do that others cannot, and what are they absolutely not allowed to do? If they are an amateur: how do they get access to the scene and the people, and why does no one stop them?
+**Role and remit:**
 
-**Why them:** what keeps them on the case when others let go? A tie to the victim, a debt, professional pride, plain stubbornness?
+<!-- What may they do that others may not, and what never? -->
 
-**Method:** how do they work? Talk to people, read documents, return to the scene again and again, trust their gut?
+**Why them:**
 
-**What they notice:** the kind of detail they catch and others miss. This is the tool that finally cracks the case.
+<!-- What keeps them on the case? -->
 
-**Blind spot:** what makes them miss something or get it wrong? A prejudice, a loyalty, exhaustion, someone they refuse to suspect.
+**The method and the eye:**
 
-**Wound:** what in their past makes this particular case hurt?
+<!-- Which detail do they catch that others miss? -->
 
-**The lie they believe:** a conviction about themselves or the world that the case will challenge. For example: "I work best alone" or "people are what they seem".
+**The blind spot:**
 
-**Want and need:** what they want (solve the case, get promoted, be left alone) and what they actually need (forgive, ask for help, see themselves clearly).
+<!-- What makes them get it wrong? -->
 
-**Sounding board:** who do they think out loud with? A colleague, a friend or a boss who pushes back lets the reasoning happen in dialogue instead of inside their head, and gives the reader someone to be cleverer than.
+**The wound and the lie:**
 
-**Private life:** a relationship that suffers from the work, or gives them strength. Who is waiting at home, and for how much longer?
+<!-- Why does this case chafe? -->
 
-**It gets personal:** how does the case come close to them? Which chapter, and what is at stake?
+**The sounding board:**
 
-**Voice:** how do they speak, and how do their thoughts sound? Dry humour, short sentences, endless questions? Write one line they would say to a suspect who is lying.
+<!-- Who do they think out loud with? -->
 
-**What they risk:** the job, a relationship, their reputation, their life.
+**The voice:**
 
-**Arc:** who are they in the last chapter, and what has the case taken from them or given them?
+<!-- A line they say to a suspect who is lying. -->
+
+**What it costs:**
+
+<!-- What do they risk, and who are they in the last chapter? -->

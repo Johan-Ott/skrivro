@@ -6,26 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Masken:** hur ser hen ut för omgivningen och för läsaren? Vilken roll spelar hen i berättelsen innan sanningen kommer fram?
+**Masken:**
 
-**Motivet:** varför gjorde hen det? Skriv det så att läsaren förstår, även om hen inte förlåter. Pengar, rädsla, kärlek, skam, hämnd, eller något som skyddar någon annan?
+<!-- Hur ser hen ut för läsaren innan sanningen kommer fram? -->
 
-**Varför nu:** vad hände som gjorde att det inte kunde vänta? Ett hot om avslöjande, ett testamente, ett återseende?
+**Motivet och varför nu:**
 
-**Medlet:** vapnet, giftet eller metoden, och hur hen fick tillgång till det.
+<!-- Varför gjorde hen det, och varför just då? -->
 
-**Tillfället:** var hen var och när, minut för minut. Skriv det i Det som verkligen hände och hänvisa hit.
+**Medlet och tillfället:**
 
-**Planen och det som gick snett:** hur skulle det ha gått till, och vad blev annorlunda? Det som gick snett är ofta där ledtrådarna föds.
+<!-- Hur, med vad, och var var hen? -->
 
-**Döljandet:** vad gjorde hen efteråt för att skydda sig? Städade, ljög, skapade ett alibi, pekade på någon annan?
+**Det som gick snett:**
 
-**Under utredningen:** hur beter hen sig när utredaren kommer nära? Hjälpsam, sorgsen, upprörd, frånvarande? Vilket falskt spår lägger hen ut?
+<!-- Vad blev inte som planerat? Där föds ledtrådarna. -->
 
-**Misstaget:** detaljen som till sist avslöjar hen. Den ska vara hens eget fel, inte slumpens.
+**Döljandet:**
 
-**Första mötet med läsaren:** vilket kapitel, och vad gör hen där? Gärna tidigt, gärna i en scen som handlar om något annat.
+<!-- Vilket falskt spår lägger hen ut? -->
 
-**Rättvist spelad:** lista de scener där en uppmärksam läsare kunde ha anat sanningen.
+**Första mötet med läsaren:**
 
-**När masken faller:** hur reagerar hen när hen avslöjas? Förnekar, erkänner, försöker fly, eller är lättad?
+<!-- Vilket kapitel, gärna i en scen om något annat? -->
+
+**Misstaget:**
+
+<!-- Vilken detalj avslöjar hen? Hens eget fel, inte slumpens. -->
+
+**När masken faller:**
+
+<!-- Förnekar, erkänner, flyr hen, eller är hen lättad? -->

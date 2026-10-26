@@ -6,20 +6,34 @@ sort: The world
 
 Rename the note to the creature's name.
 
-**First impression:** what do you see, hear and smell when it comes close?
+**First impression:**
 
-**Where it lives:** habitat, territory, and where you should never walk alone.
+<!-- What do you see, hear and smell when it comes close? -->
 
-**What it wants:** food, territory, young, or something more? Even a monster has a goal.
+**What it wants:**
 
-**How it works:** how it hunts, defends itself and breeds. Does it follow the rules of the world, and of magic?
+<!-- What goal does it have, even as a monster? -->
 
-**Whether it thinks:** does it have language, memory, a view of its own on people? A creature that thinks and wants is a person, and may need a character template of its own.
+**How it works:**
 
-**Strength and weakness:** what makes it dangerous, and what can stop it? Plant the weakness early.
+<!-- How does it hunt, and does it follow the rules of magic? -->
 
-**Its relationship with people:** tamed, hunted, worshipped or feared? What legends are told about it?
+**Whether it thinks:**
 
-**The truth behind the legends:** what is right, and what have people got wrong?
+<!-- Does it have language, memory or a view of its own on people? -->
 
-**Its role in the story:** threat, help, symbol, or a mirror of something the main character carries?
+**Strength and weakness:**
+
+<!-- What makes it dangerous, and what can stop it? -->
+
+**What it costs:**
+
+<!-- What does an encounter with it cost? -->
+
+**The legends:**
+
+<!-- What is told about it, and what is true? -->
+
+**Its role:**
+
+<!-- Is it a threat, a help, a symbol or a mirror? -->

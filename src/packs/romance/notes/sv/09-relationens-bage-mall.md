@@ -6,28 +6,30 @@ sort: Relationen
 
 Byt namn på anteckningen till parets namn.
 
-**Tropen:** vilken trop, eller vilka, bär relationen? Vad lovar den läsaren, och vilken egen vändning ger du den?
+**Varför inte:**
 
-**Varför inte:** båda personernas skäl till att det här aldrig kan bli något. Ett yttre och ett inre för var och en.
+<!-- Varför kan det aldrig bli något? Ett yttre och ett inre skäl var. -->
 
-**Det som binder dem:** vad tvingar dem att fortsätta ses? Ett jobb, ett arv, ett vad, en låtsasrelation.
+**Det som binder dem:**
 
-**Kemin:** vad är det som gnistrar? Hur bråkar de, hur skrattar de, vad märker de hos varandra?
+<!-- Vad tvingar dem att fortsätta ses? -->
 
-**Stegen:** fem till sju steg från första mötet till kärlek. Till exempel: irritation, en tjänst, ett ärligt samtal, nästan en kyss, kyssen, en natt, ett "jag stannar".
+**Stegen:**
 
-**Värmegraden:** stängd dörr, halvöppen eller öppen? Var i boken ligger de intima scenerna?
+<!-- Fem till sju steg från första mötet till kärlek. -->
 
-**Mittpunkten:** vad händer, och varför ser det ut att hålla?
+**Värmegraden:**
 
-**Brytningen:** vad driver isär dem, och hur bottnar det i båda deras sår?
+<!-- Stängd, halvöppen eller öppen dörr, och var i boken? -->
 
-**Den mörka natten:** vad förstår var och en när de är ensamma?
+**Mittpunkten och brytningen:**
 
-**Insikten:** vad måste var och en ändra hos sig själv, och vad gör den andra för att mötas halvvägs?
+<!-- Vad driver isär dem, i båda deras sår? -->
 
-**Den stora gesten:** vem gör vad, och varför läker det just det sår boken visade?
+**Den mörka natten och gesten:**
 
-**Försoningen:** vem ber om förlåtelse för vad, och hur får läsaren se att det är menat?
+<!-- Vilken gest läker just det sår boken visade? -->
 
-**Slutet:** lyckligt för alltid eller lyckligt för nu? Vilken bild visar att det håller?
+**Slutet:**
+
+<!-- Vilken bild visar att det håller? -->

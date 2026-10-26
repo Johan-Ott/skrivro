@@ -16,13 +16,24 @@ sort: Guide
 - **The known ending kills the suspense.** If everything hinges on how the great events end, there is no suspense. Move the question to the characters' fates.
 - **The research never ends.** There is always one more book to read. Write the draft and label the gaps.
 
-**Revision checklist**
+**Revision, in three passes**
 
-- Read every passage of background and ask: does the character know this, and would they think of it right now?
-- Search for modern words and phrases that pull the reader out of the age.
-- Filter the scenes labelled Check facts in Contents and work through them one by one.
-- Check times, distances and seasons: how long did the journey take, and what was the weather?
-- Read the main character's thoughts on faith, gender and class. Do they belong to the age, and is there a price when they do not?
-- Verify every real event against at least two independent sources.
+Pass 1, the structure:
+
 - Lay the timeline beside the manuscript and check that nobody is in two places at once and that no news arrives too fast.
+- Verify every real event against at least two independent sources, so the larger course of events holds.
+- Read the main character's thoughts on faith, gender and class. Do they belong to the age, and is there a price when they do not?
+
+Pass 2, the scenes:
+
+- Filter the scenes labelled Check facts in Contents and work through the details in them one by one: clothes, objects, words and prices.
+- Read every passage of background and ask: does the character know this, and would they think of it right now?
+- Check times, distances and seasons: how long did the journey take, and what was the weather?
+
+Pass 3, the lines:
+
+- Search for modern words and phrases that pull the reader out of the age.
+
+Finally:
+
 - Gather everything labelled Liberty taken and For the author's note, and write the note from that.

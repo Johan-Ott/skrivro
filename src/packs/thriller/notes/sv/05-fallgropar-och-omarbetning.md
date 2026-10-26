@@ -18,11 +18,23 @@ sort: Guide
 - **Den repetitiva mitten.** Jakt, flykt, jakt, flykt. Varje sekvens ska förändra något: ny kunskap, ny allierad, ny förlust.
 - **Det långa efterspelet.** När hotet är över är boken nästan slut. Ett eller två korta kapitel räcker.
 
-**Omarbetning, i den här ordningen**
+**Omarbetning, i tre varv**
 
-- Läs alla kapitelslut i följd. Drar varje slut vidare, och varierar de?
+Varv 1, strukturen:
+
 - Läs skurkens plan bredvid manuset. Gör skurken något som strider mot planen eller mot sitt eget intresse?
 - Följ klockan: markera varje ställe där tiden nämns. Finns det långa luckor?
 - Kontrollera varje stor vändning: var är fröet planterat?
+
+Varv 2, scenerna:
+
+- Läs alla kapitelslut i följd. Drar varje slut vidare, och varierar de?
 - Stryk förklaringar, bakgrund och resor från punkt A till B som inte bär spänning.
+
+Varv 3, raderna:
+
+- Läs actionscenerna högt. Korta meningar när det händer, längre i väntan?
+
+Sedan:
+
 - Ge manuset till en testläsare och be hen markera var hen la ifrån sig boken.

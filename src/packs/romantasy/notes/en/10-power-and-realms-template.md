@@ -6,20 +6,30 @@ sort: The world
 
 Rename the note to the name of the realm, court or land.
 
-**The realms or courts:** which exist, who rules them and what do they want?
+**The realms and the conflict:**
 
-**The conflict:** why are they at war, or on the edge of it? What is the old wrong?
+<!-- Which old wrong lies between the realms? -->
 
-**The loyalties:** where do the leads belong, and why is it dangerous to love across the line?
+**The loyalties:**
 
-**Laws and customs:** what rules govern marriage, oaths, inheritance and guest right? Which can be broken, and at what cost?
+<!-- Why is it dangerous for the two to love across the border? -->
 
-**The places:** two or three places where a lot happens. How do they look, sound and smell?
+**Laws and customs:**
 
-**Who pays:** who carries power on their backs? The servants, the farmers, those without magic. Show them, and the world becomes real and the stakes grow.
+<!-- Which oaths or laws can be broken, and at what price? -->
 
-**Who profits from the war:** who wants it to go on, and why?
+**The places:**
 
-**The threat to everyone:** the thing that finally forces enemies to work together.
+<!-- Two or three places where much happens. -->
 
-**What changes:** what does power look like when the book ends, because of what the two did?
+**Who pays:**
+
+<!-- How do those without power and magic show? -->
+
+**Who profits from the war:**
+
+<!-- Who wants the war to go on? -->
+
+**What changes:**
+
+<!-- What does power look like when the book ends? -->

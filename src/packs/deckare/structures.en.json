@@ -12,19 +12,19 @@
         "chapters": [
           [
             "The crime",
-            "The crime is discovered here, or within the first tenth of the book, so who and why are asked at once."
+            "(ca 8 %) The crime is discovered here, or within the first tenth of the book, so who and why are asked at once."
           ],
           [
             "The detective",
-            "Show who investigates, why it has to be them, and what they carry that the case will press on."
+            "(ca 5-12 %) Show who investigates, why it has to be them, and what they carry that the case will press on."
           ],
           [
             "The scene",
-            "The place, the body and the first finds. Hide the decisive clue here, in passing."
+            "(ca 10 %) The place, the body and the first finds. Hide the decisive clue here, in passing."
           ],
           [
             "The circle",
-            "Introduce the suspects, each with motive, opportunity and something to hide. The culprit is already among them."
+            "(ca 15 %) Introduce the suspects, each with motive, opportunity and something to hide. The culprit is already among them."
           ]
         ]
       },
@@ -33,19 +33,19 @@
         "chapters": [
           [
             "The interviews",
-            "Everyone lies about something. Let the detective catch one lie and miss another."
+            "(ca 20-35 %) Everyone lies about something. Let the detective catch one lie and miss another."
           ],
           [
             "The first theory",
-            "An obvious suspect emerges, so the reader believes they are a step ahead."
+            "(ca 35-45 %) An obvious suspect emerges, so the reader believes they are a step ahead."
           ],
           [
             "The red herring",
-            "A true detail points the wrong way, and the detective and the reader both follow it."
+            "(ca 45 %) A true detail points the wrong way, and the detective and the reader both follow it."
           ],
           [
             "A second crime",
-            "The midpoint: a new crime or discovery shatters the first theory and raises the stakes."
+            "(ca 50 %) The midpoint: a new crime or discovery shatters the first theory and raises the stakes."
           ]
         ]
       },
@@ -54,16 +54,19 @@
         "chapters": [
           [
             "It gets personal",
-            "The case comes close to the detective and threatens a relationship, a career or their sense of self."
+            "(ca 55-65 %) The case comes close to the detective and threatens a relationship, a career or their sense of self."
           ],
           [
             "The false solution",
-            "The wrong person is arrested or the case is closed. It looks settled, but one detail does not fit."
+            "(ca 75 %) The wrong person is arrested or the case is closed. It looks settled, but one detail does not fit."
           ],
-          ["The detective in danger", "The culprit realises the truth is close and strikes back."],
+          [
+            "The detective in danger",
+            "(ca 80-85 %) The culprit realises the truth is close and strikes back."
+          ],
           [
             "The decisive clue",
-            "Something the reader has seen all along takes on a new meaning, and the detective understands."
+            "(ca 85-90 %) Something the reader has seen all along takes on a new meaning, and the detective understands."
           ]
         ]
       },
@@ -72,13 +75,16 @@
         "chapters": [
           [
             "The confrontation",
-            "Detective and culprit meet with something at stake, and the solution plays out as a scene."
+            "(ca 90 %) Detective and culprit meet with something at stake, and the solution plays out as a scene."
           ],
           [
             "The reveal",
-            "How it was done and why, briefly, with the last pieces the reader has not already placed."
+            "(ca 95 %) How it was done and why, briefly, with the last pieces the reader has not already placed."
           ],
-          ["Afterwards", "What the case cost, who the detective is now, and what lies ahead."]
+          [
+            "Afterwards",
+            "(ca 98 %) What the case cost, who the detective is now, and what lies ahead."
+          ]
         ]
       }
     ]

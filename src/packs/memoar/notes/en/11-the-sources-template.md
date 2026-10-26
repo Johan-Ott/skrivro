@@ -4,26 +4,32 @@ sort: Groundwork
 
 # The sources (template)
 
-Rename the note to what the sources cover, like "Sources for chapter 3" or "Interviews". Gather everything that carries the book's facts here, for memoir and non-fiction alike. Log a source when you find it, not when the book is done.
+Rename the note to what the sources cover.
 
-**The source:** book, article, report, archive, interview, letter, diary or photo.
+**The source:**
 
-**First-hand or second-hand:** is it the original, or someone reporting it? Track down the original whenever you can.
+<!-- Book, article, archive, interview, letter or photo? -->
 
-**Who and when:** author, year and where you found it, so that you and the reader can find it again.
+**First or second hand:**
 
-**What it supports:** the exact claim, figure or event.
+<!-- Is it the original, or someone retelling it? -->
 
-**How reliable:** a systematic review, a single study, a witness or your own memory?
+**Who and when:**
 
-**The quote:** word for word, with page number. Keep clear what is yours and what is the source's.
+<!-- Author, year and where did I find it? -->
 
-**Where it's used:** chapter and passage. Put the Check facts label there until you have verified it.
+**What it supports:**
 
-**Dissenting voices:** sources that say otherwise, and how you deal with that in the text.
+<!-- Which exact claim, and how firmly? -->
 
-**Permissions:** short quotations from published works can usually be used with a credit, as far as the purpose requires. Longer extracts, poems, song lyrics, photographs and private letters almost always need permission. Have you got it, and in writing?
+**The quote:**
 
-**The interview:** does the interviewee know how the quotes will be used, and will they get to read them first?
+<!-- Word for word, with page number, and where in the book is it used? -->
 
-**Last checked:** date.
+**The counter-voices:**
+
+<!-- Which sources say something else, and how do I handle it? -->
+
+**Permission:**
+
+<!-- Do longer extracts, photos or letters need permission, and do I have it in writing? -->

@@ -4,28 +4,36 @@ sort: Hotet
 
 # Klockan och vändningarna (mall)
 
-Byt namn på anteckningen till bokens arbetsnamn. Här håller du hotet, tiden och de stora vändningarna på ett ställe, så att du ser att spänningen stiger hela vägen.
+Byt namn på anteckningen till bokens arbetsnamn.
 
-**Hotet på en mening:** vad händer, och när, om huvudpersonen misslyckas?
+**Hotet och klockan:**
 
-**Klockan:** den konkreta tidsgränsen. Ett datum, ett klockslag, en händelse.
+<!-- Vad händer, och när, om huvudpersonen misslyckas? -->
 
-**Hur läsaren påminns:** vilka återkommande detaljer visar att tiden rinner ut? En nedräkning, ett samtal, en sjukdom som förvärras.
+**Hur läsaren påminns:**
 
-**Där klockan krymper:** vilket kapitel, och vad gör att tiden plötsligt blir kortare?
+<!-- Vilka detaljer visar att tiden rinner ut? -->
 
-**Insatserna i första delen:** vad står på spel när huvudpersonen dras in?
+**Insatserna:**
 
-**Insatserna i andra delen:** vad har lagts till efter mittpunkten?
+<!-- Hur blir insatserna personliga efter mitten? -->
 
-**Insatserna i tredje delen:** hur blir det personligt, och vad kostar det hen inombords?
+**Andrummen:**
 
-**Andrummen:** var lägger du dem, och vilket beslut eller vilken ny kunskap kommer ut ur var och en? Ett andrum som inte ändrar något kan strykas.
+<!-- Vilket beslut kommer ut ur varje andrum? -->
 
-**Den första stora vändningen:** vad är den, i vilket kapitel, och var är fröet planterat?
+**Den första vändningen:**
 
-**Mittpunktens vändning:** från jagad till jägare, eller en seger som visar sig falsk?
+<!-- Vad är den, och var är fröet planterat? -->
 
-**Den största vändningen:** sanningen som ändrar hur läsaren ser allt som hänt. Lista minst två frön som gör den rättvis.
+**Mittpunktens vändning:**
 
-**Det sista beslutet:** vad måste huvudpersonen välja i uppgörelsen, och varför är det svårt?
+<!-- Från jagad till jägare, eller en falsk seger? -->
+
+**Den största vändningen:**
+
+<!-- Vilka två frön gör den rättvis? -->
+
+**Det sista beslutet:**
+
+<!-- Vad måste huvudpersonen välja i uppgörelsen? -->

@@ -4,28 +4,36 @@ sort: karaktarer
 
 # En människa i mitt liv (mall)
 
-Byt namn på anteckningen till personens namn, eller det namn hen ska ha i boken. Gör en för varje människa som betyder något för berättelsen. I en fackbok passar mallen för den du intervjuar eller följer: hoppa då över fälten om dig själv.
+Byt namn på anteckningen till det namn hen ska ha i boken.
 
-**Vem hen är för dig:** förälder, partner, vän, chef. Och vem hen var för andra, som du kanske inte såg.
+**Vem hen är för mig:**
 
-**Första minnet:** den första bilden du har av hen. Var, när och vad hen gjorde.
+<!-- Vem är hen för mig, och vem var hen för andra? -->
 
-**Det typiska:** ett uttryck, en gest eller en vana som gör hen levande på sidan. "Hon vek alltid tidningen i fyra innan hon läste."
+**Första minnet:**
 
-**Hur hen pratar:** ord, tonfall, dialekt, det hen aldrig skulle säga. Det du behöver för att replikerna ska låta som hen.
+<!-- Vilken är den första bilden jag har av hen? -->
 
-**Rollen i berättelsen:** hur hen påverkar bokens fråga. Hjälper, hindrar, sviker eller räddar hen?
+**Det typiska:**
 
-**Mer än en roll:** något som komplicerar bilden. Pappan som svek men lärde dig simma, väninnan som räddade dig men aldrig frågade hur du mådde.
+<!-- Vilken gest eller vana gör hen levande på sidan? -->
 
-**Hens egen sida:** hur hen själv skulle berätta det som hände. Vad visste hen som du inte visste?
+**Rollen i berättelsen:**
 
-**Det du är skyldig hen:** rättvisa, tacksamhet, en ursäkt, eller bara att bli sedd som en hel människa.
+<!-- Hjälper, hindrar, sviker eller räddar hen, och vad komplicerar bilden? -->
 
-**Det som är känsligt:** hälsa, hemligheter, andra i hens närhet som kan såras. Vad måste med, och vad kan lämnas utanför?
+**Hens egen sida:**
 
-**Namn och igenkänning:** riktigt namn eller ändrat? Vilka detaljer behöver ändras för att grannar och kolleger inte ska känna igen hen, inte bara främlingar?
+<!-- Hur skulle hen själv berätta det som hände? -->
 
-**Läsningen:** ska hen få läsa sina avsnitt innan boken är klar? Vad sa hen i så fall, och vad ändrade du?
+**Det som är känsligt:**
 
-**Var hen finns i boken:** kapitlen där hen syns.
+<!-- Vad måste med, och vad kan lämnas utanför? -->
+
+**Namn och igenkänning:**
+
+<!-- Vilka detaljer måste ändras så att ingen känner igen hen? -->
+
+**Läsningen:**
+
+<!-- Ska hen få läsa sina avsnitt innan boken är klar? -->

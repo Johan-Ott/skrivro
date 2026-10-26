@@ -12,19 +12,19 @@
         "chapters": [
           [
             "Världen i rörelse",
-            "Huvudpersonen mitt i en konkret uppgift i en främmande vardag. Detaljerna antyder världen utan att förklara den."
+            "(ca 3 %) Huvudpersonen mitt i en konkret uppgift i en främmande vardag. Detaljerna antyder världen utan att förklara den."
           ],
           [
             "Novumet",
-            "Det nya visar sig, eller dess första oväntade effekt, och läsaren förstår att något har förändrats."
+            "(ca 10 %) Det nya visar sig, eller dess första oväntade effekt, och läsaren förstår att något har förändrats."
           ],
           [
             "Det personliga",
-            "Det nya berör just huvudpersonen, och vi ser vad hen har att förlora."
+            "(ca 15 %) Det nya berör just huvudpersonen, och vi ser vad hen har att förlora."
           ],
           [
             "Vägen in",
-            "Hen fattar beslutet som binder hen vid frågan, och det finns ingen väg tillbaka."
+            "(ca 25 %) Hen fattar beslutet som binder hen vid frågan, och det finns ingen väg tillbaka."
           ]
         ]
       },
@@ -33,16 +33,19 @@
         "chapters": [
           [
             "Reglerna",
-            "Hen lär sig hur det nya fungerar genom försök och misstag, inte genom en föreläsning."
+            "(ca 32 %) Hen lär sig hur det nya fungerar genom försök och misstag, inte genom en föreläsning."
           ],
           [
             "Ringar på vattnet",
-            "Följder i andra och tredje led: vem vinner, vem förlorar och vad går sönder."
+            "(ca 40 %) Följder i andra och tredje led: vem vinner, vem förlorar och vad går sönder."
           ],
-          ["Förundran", "En scen av skala och förundran, där läsaren ser vad det nya gör möjligt."],
+          [
+            "Förundran",
+            "(ca 45 %) En scen av skala och förundran, där läsaren ser vad det nya gör möjligt."
+          ],
           [
             "Mittpunkten",
-            "Ett avslöjande om vad det nya egentligen är eller kostar vänder hela frågan."
+            "(ca 50 %) Ett avslöjande om vad det nya egentligen är eller kostar vänder hela frågan."
           ]
         ]
       },
@@ -51,19 +54,19 @@
         "chapters": [
           [
             "Systemet slår tillbaka",
-            "Makthavare, institutioner eller tekniken själv svarar, och insatserna växer."
+            "(ca 60 %) Makthavare, institutioner eller tekniken själv svarar, och insatserna växer."
           ],
           [
             "Den logiska följden",
-            "Reglerna följs till sin obekväma slutsats: det värsta som kan hända, enligt världens egen logik."
+            "(ca 70 %) Reglerna följs till sin obekväma slutsats: det värsta som kan hända, enligt världens egen logik."
           ],
           [
             "Det mörkaste läget",
-            "Hen förlorar det hen höll fast vid, och den gamla lösningen fungerar inte längre."
+            "(ca 78 %) Hen förlorar det hen höll fast vid, och den gamla lösningen fungerar inte längre."
           ],
           [
             "Svaret i reglerna",
-            "Hen hittar lösningen i något läsaren redan har förstått om det nya. Inga nya uppfinningar."
+            "(ca 85 %) Hen hittar lösningen i något läsaren redan har förstått om det nya. Inga nya uppfinningar."
           ]
         ]
       },
@@ -72,11 +75,11 @@
         "chapters": [
           [
             "Avgörandet",
-            "Huvudpersonen handlar och betalar för det. Ett mänskligt val avgör, inte bara tekniken."
+            "(ca 92 %) Huvudpersonen handlar och betalar för det. Ett mänskligt val avgör, inte bara tekniken."
           ],
           [
             "Efteråt",
-            "Världen och människan efter förändringen. Svara på bokens tänk om, eller lämna en fråga som läsaren bär med sig."
+            "(ca 98 %) Världen och människan efter förändringen. Svara på bokens tänk om, eller lämna en fråga som läsaren bär med sig."
           ]
         ]
       }

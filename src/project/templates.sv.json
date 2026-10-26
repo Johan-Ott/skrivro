@@ -215,7 +215,7 @@
       "id": "serie",
       "name": "Serie",
       "hint": "Trådar som löper mellan böckerna, och ett sista kapitel som leder vidare.",
-      "sorts": ["Trådar"],
+      "sorts": ["Trådar", "Serien"],
       "labels": [],
       "chapters": [["Kroken", "Ett nytt hot eller en hemlighet som leder till nästa bok."]]
     }

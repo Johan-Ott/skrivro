@@ -4,26 +4,32 @@ sort: Ledtrådar
 
 # Ledtrådslistan (mall)
 
-Byt namn på anteckningen till fallets namn. Kopiera blocket nedan en gång för varje ledtråd och varje falskt spår. Fyll i den medan du skriver, och läs igenom den innan du skriver avslöjandet.
+Byt namn på anteckningen till fallets namn.
 
-**Ledtråden:** vad är det? Ett föremål, något någon säger, en reaktion som inte stämmer.
+**Ledtråden:**
 
-**Sanning eller falskt spår:** pekar den mot den skyldige, eller bort från hen? Om den pekar bort, vad är den egentliga förklaringen?
+<!-- Vad är den? Kopiera fälten för varje ledtråd och falskt spår. -->
 
-**Första gången:** kapitel och scen där läsaren ser den.
+**Sanning eller falskt spår:**
 
-**Hur den göms:** i en uppräkning, bakom en dramatisk händelse, med en annan persons felaktiga tolkning?
+<!-- Pekar den mot den skyldige eller bort? -->
 
-**Andra gången:** var återkommer den och väcker en fråga?
+**Var den syns:**
 
-**Vad läsaren tror:** vad tror läsaren att den betyder när den syns?
+<!-- Kapitel och scen, första och andra gången. -->
 
-**Vad den egentligen visar:** den riktiga betydelsen.
+**Hur den göms:**
 
-**Ärligt spel:** syns den i texten innan utredaren drar sin slutsats? Skriv kapitlet.
+<!-- I en uppräkning, bakom något dramatiskt, i en felaktig tolkning? -->
 
-**När utredaren förstår:** kapitel, och vad som får hen att förstå.
+**Vad läsaren tror:**
 
-**Upplösningen:** för ett falskt spår, var får läsaren den riktiga förklaringen, och är den lika konkret som spåret var?
+<!-- Vad tror läsaren att den betyder, och vad visar den? -->
 
-**Märkt i texten:** har scenen etiketten Ledtråd eller Falskt spår?
+**Ärligt spel:**
+
+<!-- Syns den innan utredaren drar sin slutsats? -->
+
+**Upplösningen:**
+
+<!-- Var får läsaren den riktiga förklaringen till ett falskt spår? -->

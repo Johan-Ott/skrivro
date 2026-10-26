@@ -4,20 +4,28 @@ sort: karaktarer
 
 # The people around them (template)
 
-Rename the note to the character's name. Make one for each important side character.
+Rename the note to the character's name.
 
-**Role in the story:** the doubter, the one who knows more, the helper, the victim, or the one on the threat's side.
+**Role in the story:**
 
-**Relationship to the main character:** what they are to each other, and what is unresolved between them.
+<!-- The doubter, the one who knows more, the helper, the victim or the threat's servant? -->
 
-**What they want:** a goal of their own that has nothing to do with the threat. That is what makes them alive.
+**Relationship to the main character:**
 
-**What they believe is happening:** and what would change their mind.
+<!-- What is unresolved between them? -->
 
-**What they know:** about the place, its history or the threat, and why they do not say it straight out.
+**What they want:**
 
-**The moment the reader gets attached:** a scene that makes the reader want them to survive.
+<!-- Which goal of their own is not about the threat? -->
 
-**Their fate:** do they make it, get hurt, vanish or die? In which chapter, and which of the threat's rules it reveals.
+**What they know:**
 
-**What their fate does to the main character:** how the loss or the rescue changes the choices that follow.
+<!-- What do they know but not say outright? -->
+
+**The moment the reader gets attached:**
+
+<!-- Which scene makes the reader want them to survive? -->
+
+**Their fate:**
+
+<!-- Do they make it, and how does it change the main character's choices? -->

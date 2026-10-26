@@ -4,24 +4,32 @@ sort: Sources
 
 # The source log (template)
 
-Rename the note to the subject, for instance Clothing, Seafaring or The famine years. One note per subject works well; keep adding as you read.
+Rename the note to the subject, for instance Clothing, Seafaring or The famine years.
 
-**The subject:** what this collection of sources is about.
+**The source:**
 
-**The source:** title, creator, year and where you found it. Archive, library, museum, an interview or a visit.
+<!-- Title, author, year and where you found it. -->
 
-**Kind of source:** contemporary, meaning written or made at the time, or later scholarship. Contemporary sources give voices, words and details, but see only what their maker saw. Scholarship gives overview and context, but is already an interpretation.
+**Contemporary or research:**
 
-**How reliable it is:** who wrote it, for whom and why. Test it with four questions. Is it authentic, really what it claims to be? How close in time is it to what it describes? Is it independent, or does it rest on another source? Does it have a bias, a reason to exaggerate, flatter or stay silent?
+<!-- Is it a voice from the time or a later interpretation? -->
 
-**Whose voice is missing:** who does not appear in the source, often women, children, servants and those who could not write, and where you might find traces of them.
+**How reliable it is:**
 
-**The key points:** the facts you use, with page references.
+<!-- Does it have a reason to exaggerate, prettify or stay silent? -->
 
-**Details worth stealing:** words, prices, objects, customs and small moments that can bring a scene to life.
+**Whose voice is missing:**
 
-**Where it is used:** chapter and scene.
+<!-- Where do you find traces of those who could not write? -->
 
-**Contradicts something else:** if the source clashes with another, and which one you choose to follow.
+**What it says:**
 
-**Still to find out:** questions the source raises but does not answer.
+<!-- Which facts do you use, with page, and where in the book? -->
+
+**Details you can steal:**
+
+<!-- Which words, prices and objects can bring a scene to life? -->
+
+**Contradictions:**
+
+<!-- Does it clash with another source, and which do you follow? -->

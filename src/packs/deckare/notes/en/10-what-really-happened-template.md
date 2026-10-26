@@ -4,24 +4,32 @@ sort: Clues
 
 # What really happened (template)
 
-Rename the note to the name of the case. This is the crime as it actually happened, in order. The reader never sees it like this, but you need it for everything to add up. Write this one first.
+Rename the note to the name of the case.
 
-**The roots:** what happened long ago that made the crime possible? An old betrayal, an inheritance, an accident that was hushed up.
+**The roots:**
 
-**The trigger:** what happened just before that meant it could not wait?
+<!-- Write this one first. What happened long ago? -->
 
-**The day before:** where were the victim, the culprit and each suspect? Write down the times.
+**The trigger:**
 
-**The crime:** time, place and how. What did the culprit do, step by step?
+<!-- What happened just before, so it could not wait? -->
 
-**The minutes after:** what did the culprit do to hide it? What was moved, washed or taken away?
+**The day before:**
 
-**The days after:** how does the culprit keep protecting themselves while the investigation runs?
+<!-- Where was everyone, hour by hour? -->
 
-**Facts that can be checked:** sunset, weather, train times, opening hours, who was on which shift. Anything the reader can look up must be right.
+**The crime:**
 
-**What went wrong:** what did not go to plan? A witness, the weather, something left behind.
+<!-- Time, place and how, step by step. -->
 
-**The traces left:** every trace the crime left, and where it is. Carry them over to the clue list.
+**Afterwards:**
 
-**Who knows what:** who has seen or heard something, and why have they not said so?
+<!-- What did the culprit do to hide it? -->
+
+**Traces and witnesses:**
+
+<!-- Which traces were left, and who saw something without saying so? -->
+
+**Facts that can be checked:**
+
+<!-- Weather, train times, shifts: is everything the reader can look up right? -->

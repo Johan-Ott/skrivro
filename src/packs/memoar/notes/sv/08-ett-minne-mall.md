@@ -4,26 +4,32 @@ sort: Minnen
 
 # Ett minne (mall)
 
-För memoaren, och för den personliga fackboken där egna minnen blir exempel. Byt namn på anteckningen till minnet i några ord, som "Sista sommaren på gården". Gör en för varje minne du vill använda.
+Byt namn på anteckningen till minnet i några ord.
 
-**När och var:** år, årstid, plats. Så exakt du kan, och hur säker du är.
+**När och var:**
 
-**Den första bilden:** detaljen som minnet har fastnat på. En färg, ett ljud, en lukt.
+<!-- År, årstid och plats, och hur säker är jag? -->
 
-**Vilka som var där:** och vad var och en gjorde.
+**Den första bilden:**
 
-**Vad som hände:** i ordning, utan tolkning. Bara det en kamera hade sett.
+<!-- Vilken detalj har minnet fastnat på? -->
 
-**Vad som sades:** de repliker du minns, ordagrant eller ungefär.
+**Vad som hände:**
 
-**Vad du kände då:** i kroppen och i tankarna, med då-jagets ord.
+<!-- Vad hade en kamera sett och hört, utan tolkning? -->
 
-**Vad du förstår nu:** vad minnet betyder i dag, i en eller två meningar.
+**Då och nu:**
 
-**Luckorna:** det du inte minns. Fyll inte i det i tysthet; säg hellre att du inte minns, eller gissa öppet.
+<!-- Vad kände jag då, och vad betyder minnet i dag? -->
 
-**Scen eller sammanfattning:** behöver minnet spelas upp i realtid, eller räcker ett stycke?
+**Luckorna:**
 
-**Kontrollen:** vem mer minns det, och minns hen det annorlunda? Finns foton, brev, dagböcker eller tidningar från den dagen?
+<!-- Vad minns jag inte? Säg det hellre än att fylla i tyst. -->
 
-**Platsen i boken:** vilket kapitel, och hur minnet för bokens fråga framåt.
+**Kontrollen:**
+
+<!-- Vem mer minns det, och finns foton, brev eller dagböcker? -->
+
+**Scen eller sammanfattning:**
+
+<!-- Behöver minnet spelas upp som scen, eller räcker ett stycke? -->

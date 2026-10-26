@@ -6,22 +6,34 @@ sort: Världen
 
 Byt namn på anteckningen till samhällets, statens eller gruppens namn.
 
-**Vem styr:** och hur fick de makten? Vem vill ta den?
+**Vem styr:**
 
-**Hur det nya har format samhället:** vad har förändrats i lagar, klasser och arbete sedan det kom?
+<!-- Hur fick de makten, och vem vill ta den? -->
 
-**Vem vinner och vem förlorar:** vilka grupper har fått det bättre, och vilka sämre?
+**Hur det nya har format det:**
 
-**Ekonomin:** vad är dyrt, vad är gratis, och vad har blivit värdelöst sedan det nya kom?
+<!-- Vem har fått det bättre, och vem sämre? -->
 
-**Lagarna som märks:** tre regler som styr vardagen, och vad som händer den som bryter mot dem.
+**Ekonomin:**
 
-**Värderingarna:** vad räknas som hederligt, skamligt eller gammaldags?
+<!-- Vad är dyrt, vad är gratis, och vad har blivit värdelöst? -->
 
-**Språket:** nya ord, svordomar, sätt att hälsa. Vilka ord har bytt betydelse?
+**Lagarna som märks:**
 
-**Motståndet:** vem kämpar emot, och hur?
+<!-- Vilken regel styr vardagen, och vad händer den som bryter mot den? -->
 
-**Historien:** vilken händelse ledde hit, och hur berättar olika grupper om den?
+**Värderingarna och språket:**
 
-**Det läsaren känner igen:** vad i det här samhället påminner om vår egen tid?
+<!-- Vilka ord har bytt betydelse? -->
+
+**Motståndet:**
+
+<!-- Vem kämpar emot, och hur? -->
+
+**Historien:**
+
+<!-- Vilken händelse ledde hit, och hur berättar olika grupper om den? -->
+
+**Det läsaren känner igen:**
+
+<!-- Vad påminner om vår egen tid? -->

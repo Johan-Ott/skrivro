@@ -11,7 +11,6 @@ En sann bok växlar mellan att visa och att berätta. Båda behövs, men på oli
 - **Tumregel:** vändpunkter, konflikter och avsked blir scener. Rutiner, resor och år där inget avgörande händer blir sammanfattning.
 - **Bygg scenen på sinnena.** Ett minne fastnar ofta på en detalj: lukten av diesel, en röd kofta, radion i köket. Börja där och låt resten växa ur den.
 - **Dialog du minns ungefär.** Återskapa replikerna så nära du kan, med personens sätt att tala. Lägg inga ord i någons mun som strider mot det du vet om hen.
-- **Sluta i rörelse.** Låt kapitlet sluta när något just har förändrats, inte när allt har förklarats.
 
 **Fackbokens kapitel** har en egen form som läsaren lär sig känna igen:
 

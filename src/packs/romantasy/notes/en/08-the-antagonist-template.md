@@ -6,20 +6,30 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Want:** what will the antagonist do anything for?
+**Wants:**
 
-**Why it makes sense:** in what way are they right? An antagonist with a point is the most dangerous kind.
+<!-- What would they do anything for? -->
 
-**What they believe about love:** often a mirror of the leads' lie. What did they lose, or never have?
+**Why it makes sense:**
 
-**The power:** what do they have that the leads lack? An army, magic, knowledge, a name.
+<!-- In what way are they right? -->
 
-**The threat to the relationship:** how do they drive the two apart? Which secret do they know, which loyalty do they exploit?
+**What they believe about love:**
 
-**The temptation:** what do they offer one of the two, and why is it hard to say no? Power, revenge, the return of someone who was lost.
+<!-- What have they lost, or never had? -->
 
-**The link:** how are they tied to one of the leads? Family, teacher, former ally, the one who caused the wound.
+**Power and connection:**
 
-**First visible move:** when does the reader first notice them, and what do they do?
+<!-- How are they tied to one of the two? -->
 
-**How they lose:** what in the bond between the two did they not count on?
+**The threat to the relationship:**
+
+<!-- What do they offer that is hard to refuse? -->
+
+**First visible move:**
+
+<!-- When does the reader first notice them? -->
+
+**How they lose:**
+
+<!-- What in the bond between the two did they not count on? -->

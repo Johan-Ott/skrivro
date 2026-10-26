@@ -17,13 +17,21 @@ sort: Guide
 - **Blood instead of fear.** More violence does not make the book scarier, only cruder. The fear lies in what could happen to someone the reader cares about.
 - **The cheap final twist.** A last shock that does not follow from the rules, or an ending that takes everything back, feels like a trick. The last chill should grow out of what the reader already knows.
 
-**Revision checklist**
+**Revision, in three passes**
+
+Pass 1, the structure:
 
 - Read through the book with the labels showing. Are the shocks packed too tight, or the omens too far apart?
-- Cut the first explanation of the threat and see if the scene grows stronger without it.
-- Go through every appearance of the threat. Can you show less?
-- Look for scenes where the main character only reacts. Give them a choice.
 - Filter Rule in Contents and check that every rule that decides the ending has been seen earlier in the book.
-- Read the most frightening scenes aloud. Slow down before the worst, and tighten the prose when it happens.
-- Ask of every side character: does the reader care whether they survive?
 - Read the last page and ask what the reader carries with them once the book is closed.
+- Ask of every side character: does the reader care whether they survive?
+
+Pass 2, the scenes:
+
+- Look for scenes where the main character only reacts. Give them a choice.
+- Go through every appearance of the threat. Can you show less?
+- Cut the first explanation of the threat and see if the scene grows stronger without it.
+
+Pass 3, the lines:
+
+- Read the most frightening scenes aloud. Slow down before the worst, and tighten the prose when it happens.

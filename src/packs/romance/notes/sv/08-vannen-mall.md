@@ -6,16 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Rollen:** bästa vän, syster, granne, kollega, den som driver kaféet. Vem är hen för huvudpersonen?
+**Rollen:**
 
-**Eget liv:** vad händer i hens liv medan boken pågår? Ge hen en liten egen historia.
+<!-- Vem är hen för huvudpersonen? -->
 
-**Vad hen ser:** vad förstår hen om huvudpersonen och kärleken innan huvudpersonen själv gör det?
+**Eget liv:**
 
-**När hen säger emot:** i vilken scen säger hen det huvudpersonen inte vill höra?
+<!-- Vilken egen berättelse har hen medan boken pågår? -->
 
-**Humorn eller värmen:** vad tillför hen bokens ton?
+**Vad hen ser:**
 
-**I slutet:** hur sluter hen upp, och vad har förändrats för hen?
+<!-- Vad förstår hen om kärleken före huvudpersonen? -->
 
-**Nästa bok:** skulle hen kunna bära en egen kärlekshistoria?
+**När hen säger emot:**
+
+<!-- I vilken scen säger hen det huvudpersonen inte vill höra? -->
+
+**Vad hen tycker om kärleksintresset:**
+
+<!-- Vad ser hen hos den andre som huvudpersonen inte ser? -->
+
+**Humorn eller värmen:**
+
+<!-- Vilken replik kunde bara hen säga? -->
+
+**Vad som skaver:**
+
+<!-- Vad är hen less på eller orolig för? -->
+
+**I slutet:**
+
+<!-- Hur sluter hen upp, och vad har förändrats för hen? -->

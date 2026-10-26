@@ -13,6 +13,8 @@ export interface PackNote {
   sort: string;
   title: string;
   body: string;
+  /** The template a new note in the sort starts from, unless the writer picks another. */
+  isStandard: boolean;
 }
 
 export interface Pack {
@@ -54,12 +56,19 @@ const NOTES = import.meta.glob<string>("../packs/*/notes/*/*.md", {
   import: "default",
 });
 
-// "---\nsort: Guide\n---\n# Title\n\nThe text."
+// "---\nsort: Guide\n---\n# Title\n\nThe text." Front matter lines other than sort and
+// standard are left alone.
 export function noteOf(text: string): PackNote {
   const normal = text.replace(/\r\n/g, "\n");
-  const [, sort = "", rest = ""] = /^---\nsort: (.*)\n---\n([\s\S]*)$/.exec(normal) ?? [];
+  const [, header = "", rest = ""] = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(normal) ?? [];
+  const field = (name: string) => new RegExp(`^${name}:(.*)$`, "m").exec(header)?.[1]?.trim() ?? "";
   const [heading = "", ...body] = rest.trimStart().split("\n");
-  return { sort: sort.trim(), title: heading.replace(/^#\s*/, ""), body: body.join("\n").trim() };
+  return {
+    sort: field("sort"),
+    title: heading.replace(/^#\s*/, ""),
+    body: body.join("\n").trim(),
+    isStandard: field("standard") === "true",
+  };
 }
 
 function packAt(path: string, manifest: Manifest, language: "sv" | "en"): Pack {
@@ -84,8 +93,7 @@ function packAt(path: string, manifest: Manifest, language: "sv" | "en"): Pack {
 
 const loaded = new Map<string, Pack[]>();
 
-/** Every pack, in the interface's language: Swedish, or else English. */
-export function packs(): Pack[] {
+function everyPack(): Pack[] {
   const language = isSwedish() ? "sv" : "en";
   const known = loaded.get(language);
   if (known) return known;
@@ -93,6 +101,13 @@ export function packs(): Pack[] {
   loaded.set(language, all);
   return all;
 }
+
+/** The free basics: templates for the fixed sorts, in every book and never bought or listed. */
+const BASICS_ID = "grund";
+const basics = () => everyPack().filter((pack) => pack.id === BASICS_ID);
+
+/** Every genre pack, in the interface's language: Swedish, or else English. */
+export const packs = () => everyPack().filter((pack) => pack.id !== BASICS_ID);
 
 /** The pack a structure or piece comes in, or null for the free basics. */
 export const packOf = (templateId: string) =>
@@ -173,11 +188,14 @@ export const templatesOf = (pack: Pack) => pack.notes.filter((note) => note.sort
 export interface NoteTemplate {
   name: string;
   body: string;
+  /** What a new note in the sort starts as when no other template is picked. */
+  isStandard?: boolean;
 }
 
 // "Utredaren (mall)" is offered as Utredaren, without the line on renaming it.
 const asTemplate = (note: PackNote): NoteTemplate => ({
   name: note.title.replace(/\s*\((mall|template)\)$/i, ""),
+  isStandard: note.isStandard,
   body: asManuscript(
     blocksOf(note.body)
       .filter((block) => !/^(Byt namn på anteckningen|Rename the note)/.test(block))
@@ -185,10 +203,15 @@ const asTemplate = (note: PackNote): NoteTemplate => ({
   ),
 });
 
-/** The templates the book's packs give a new note in a sort: Personer by its id, others by name. */
+/** The templates the basics and the book's packs give a new note in a sort: Personer by its id,
+ * others by name. */
 export const noteTemplates = (fields: Record<string, unknown>, sort: string) =>
-  packs()
-    .filter((pack) => isPackInBook(fields, pack))
+  [...basics(), ...packs().filter((pack) => isPackInBook(fields, pack))]
     .flatMap(templatesOf)
     .filter((note) => note.sort === sort)
     .map(asTemplate);
+
+/** The text a new note starts with when the writer picks no template: the sort's standard, else
+ * nothing. */
+export const standardNoteBody = (fields: Record<string, unknown>, sort: string) =>
+  noteTemplates(fields, sort).find((template) => template.isStandard)?.body ?? "";

@@ -52,16 +52,19 @@ export interface SceneSession {
   isSuggesting: boolean;
   /** While text moves between scenes, as a merge does: saved, but not counted as written. */
   isRearranging: boolean;
+  /** Set by the app, which knows the tree: a note may hold template questions, a scene never. */
+  isNote: (dir: string, id: string) => boolean;
 }
 
 const textOf = (session: SceneSession, doc: Node) =>
   joinSceneFile({ frontMatter: session.scene?.frontMatter ?? "", body: serializeMarkdown(doc) });
 
 export function createSceneSession(fileSystem: FileSystem, hooks: SceneSessionHooks) {
-  const current: { scene: OpenScene | null; isSuggesting: boolean; isRearranging: boolean } = {
+  const current: Pick<SceneSession, "scene" | "isSuggesting" | "isRearranging" | "isNote"> = {
     scene: null,
     isSuggesting: false,
     isRearranging: false,
+    isNote: () => false,
   };
   const autosave = createAutosave({
     write: async (text) => {
@@ -100,7 +103,7 @@ function showScene(session: SceneSession, dir: string, id: string, text: string)
   session.scene = { dir, id, frontMatter, title: sceneTitle(frontMatter) ?? t("Namnlös scen") };
   session.hooks.onScene(session.scene);
   session.autosave.loaded(text);
-  session.hooks.editor.load(parseMarkdown(body));
+  session.hooks.editor.load(parseMarkdown(body, { isNote: session.isNote(dir, id) }));
 }
 
 // Leaving a scene whose text is not on disk would lose it, so the switch waits for the save,
@@ -211,11 +214,8 @@ async function changeFrontMatter(
   }
   const path = scenePath(where.dir, where.id);
   const { frontMatter, body } = splitSceneFile(await session.fileSystem.readText(path));
-  await writeAtomic(
-    session.fileSystem,
-    path,
-    joinSceneFile({ frontMatter: change(frontMatter), body }),
-  );
+  const text = joinSceneFile({ frontMatter: change(frontMatter), body });
+  await writeAtomic(session.fileSystem, path, text);
 }
 
 export const renameScene = (session: SceneSession, dir: string, id: string, title: string) =>

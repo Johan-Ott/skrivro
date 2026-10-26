@@ -15,12 +15,23 @@ sort: Guide
 - **Mörker utan ljus.** Ett tungt ämne utan hopp kan lämna en ung läsare ensam med det. Ge en väg ut, även en liten.
 - **Långsam start.** Tre kapitel bakgrund innan något händer. Börja där det börjar.
 
-**Omarbetningen**
+**Omarbetning, i tre varv**
+
+Varv 1, strukturen:
+
+- Gå igenom varje scen och fråga: vem agerar? Om det inte är huvudpersonen, kan det bli det?
+- Läs svåra scener som en förälder till läsaren och som läsaren själv. Är du sann mot båda?
+
+Varv 2, scenerna:
 
 - Läs första sidan i varje kapitel. Händer något redan där?
 - Läs sista stycket i varje kapitel. Finns en krok?
-- Gå igenom varje scen och fråga: vem agerar? Om det inte är huvudpersonen, kan det bli det?
+
+Varv 3, raderna:
+
 - Stryk förklaringar efter repliker. Lita på att läsaren förstod.
 - Byt ut ord som läsaren i den åldern inte kan, om de inte förklaras av sammanhanget. Märk dem med Svårt ord i en kapitelbok.
-- Läs svåra scener som en förälder till läsaren och som läsaren själv. Är du sann mot båda?
+
+Sedan:
+
 - Låt en läsare i rätt ålder läsa, och fråga var hen slutade vilja läsa. Inte vad hen tyckte.

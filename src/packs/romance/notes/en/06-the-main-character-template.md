@@ -6,26 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Life right now:** job, home, friends, everyday life. What works, and what have they stopped hoping for?
+**Life right now:**
 
-**Want:** what are they chasing, concretely? A promotion, a house, a quiet summer.
+<!-- What have they stopped hoping for? -->
 
-**Need:** what must they understand or dare in order to love and be loved?
+**Wants and needs:**
 
-**The wound:** what happened that made them careful? A betrayal, a loss, an upbringing.
+<!-- What are they chasing, and what must they dare to be able to love? -->
 
-**The lie about love:** what false belief drives them? For example: "I am better off on my own."
+**The wound and the lie about love:**
 
-**What they fear in love:** what is the worst that could happen if they let someone in?
+<!-- Which false belief about love drives them? -->
 
-**Why not now:** their reasons, said out loud, for why this cannot become anything.
+**Why not now:**
 
-**What they hide:** something they do not tell, and that comes out.
+<!-- What do they fear will happen if they let someone in? -->
 
-**What makes them lovable:** what does the reader like about them on page one? The humour, the kindness, the stubbornness.
+**What makes them lovable:**
 
-**The flaw:** what do they get wrong, again and again, that costs them in the relationship? The pride, the running away, the need for control.
+<!-- What does the reader like about them on the first page? -->
 
-**The voice:** how do they sound in their own point of view? Which words, what humour, what do they notice?
+**The flaw:**
 
-**The arc:** who are they in the first chapter, and which choice at the end shows they have changed?
+<!-- What do they keep getting wrong in relationships? -->
+
+**The voice:**
+
+<!-- What do they notice that nobody else does? -->
+
+**The arc:**
+
+<!-- Which choice at the end shows they have changed? -->

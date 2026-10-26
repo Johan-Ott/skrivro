@@ -4,26 +4,36 @@ sort: Underlag
 
 # Läsaren och löftet (mall)
 
-Mest för fackboken, men fyll också i den för en memoar: även den har en läsare och ett löfte. Byt namn på anteckningen till bokens arbetstitel. Fyll i den innan du skriver första kapitlet, och läs den igen när du tappar riktningen.
+Byt namn på anteckningen till bokens arbetstitel.
 
-**Läsaren:** en verklig sorts människa, inte "alla". Ålder, situation och vad hen redan vet. "Föräldrar till tonåringar som har slutat prata med dem."
+**Läsaren:**
 
-**Problemet:** det läsaren brottas med, i hens egna ord. Vad har hen redan provat, och varför räckte det inte?
+<!-- Vem är läsaren: ålder, situation och vad hen redan vet? -->
 
-**Varför nu:** det som gör att hen tar upp boken just nu.
+**Problemet och varför nu:**
 
-**Löftet:** i en mening, vad läsaren kan, vet eller gör annorlunda efter sista sidan. I en memoar: vad läsaren får förstå eller känna igen.
+<!-- Vad brottas läsaren med, och varför tar hen upp boken nu? -->
 
-**Det boken inte lovar:** gränsen. Det boken medvetet lämnar åt andra, och vart du hänvisar läsaren.
+**Löftet:**
 
-**Varför just du:** erfarenhet, forskning, yrke eller en egen resa. Varför ska läsaren lita på dig, och var i boken märks det?
+<!-- Vad kan, vet eller förstår läsaren efter sista sidan? -->
 
-**Den bärande idén:** det enda läsaren ska minnas om hen glömmer resten.
+**Det boken inte lovar:**
 
-**Kapitlens påståenden:** ett påstående per kapitel, i ordning. Bygger vart och ett på det förra?
+<!-- Vad lämnar boken medvetet åt andra? -->
 
-**Exemplen:** de fall, personer eller försök som bär boken. Vilket är starkast, och var ska det ligga?
+**Varför just jag:**
 
-**Tonen:** lärare, kollega, vän eller guide? Tilltalar du läsaren med du? Håll samma tilltal genom hela boken.
+<!-- Vilken erfarenhet ger mig rätt att skriva boken? -->
 
-**Fackorden:** de begrepp läsaren måste lära sig, och de du kan klara dig utan.
+**Den bärande idén:**
+
+<!-- Vad ska läsaren minnas om hen glömmer resten? -->
+
+**Exemplen:**
+
+<!-- Vilket exempel är starkast, och var ska det ligga? -->
+
+**Tonen:**
+
+<!-- Lärare, kollega, vän eller guide, och samma tilltal hela boken? -->

@@ -1,25 +1,39 @@
 ---
-sort: Det som skrämmer
+sort: platser
 ---
 
-# Platsen (mall)
+# Den hemsökta platsen (mall)
 
 Byt namn på anteckningen till platsens namn: huset, gården, ön, skolan eller kvarteret där det händer.
 
-**Platsen i dagsljus:** hur den ser ut när allt är normalt. Vad som är vackert eller tryggt med den.
+**Platsen i dagsljus:**
 
-**Platsen i mörker:** hur samma rum förändras på natten, i dimma eller när strömmen går.
+<!-- Hur ser den ut när allt är normalt? -->
 
-**Rummen som betyder något:** de tre eller fyra ställen där de viktigaste scenerna sker, och vad som finns i vart och ett.
+**Platsen i mörker:**
 
-**Det förbjudna stället:** källaren, vinden, den igenmurade dörren, sjön. Dit huvudpersonen inte vill gå, och till sist måste.
+<!-- Hur förändras rummen på natten, i dimma eller utan ström? -->
 
-**Ljuden:** vad som knarrar, droppar och susar. Vilka ljud som hör hemma här, så att du vet när ett ljud är fel.
+**Rummen som betyder något:**
 
-**Historien:** vad som har hänt här förut. Vem som bodde här, och vad grannarna säger och inte säger.
+<!-- Var sker de viktigaste scenerna? -->
 
-**Varför det är svårt att lämna:** avstånd, väder, pengar, ett kontrakt, en känsla av att platsen håller kvar en.
+**Det förbjudna stället:**
 
-**Hur platsen isolerar:** täckning, vägar, närmaste granne, hur lång tid det tar för hjälp att komma.
+<!-- Vilket ställe vill huvudpersonen inte gå till men måste till sist? -->
 
-**Hur platsen förändras genom boken:** vad som går sönder, flyttas eller upptäcks, bit för bit.
+**Ljuden:**
+
+<!-- Vilka ljud hör hemma här, så att du märker när ett är fel? -->
+
+**Historien:**
+
+<!-- Vad har hänt här förut, och vad säger grannarna inte? -->
+
+**Varför det är svårt att lämna:**
+
+<!-- Vad håller kvar dem: avstånd, väder, pengar eller en känsla? -->
+
+**Hur platsen förändras:**
+
+<!-- Vad går sönder, flyttas eller upptäcks, bit för bit? -->

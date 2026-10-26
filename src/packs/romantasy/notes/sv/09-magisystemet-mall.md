@@ -6,22 +6,34 @@ sort: Världen
 
 Byt namn på anteckningen till magins namn i din värld.
 
-**Vem har magin:** och vem har den inte? Hur ser samhället på dem som har den?
+**Vem har magin:**
 
-**Källan:** var kommer den ifrån? Blod, stjärnor, eder, en gud, landet självt.
+<!-- Hur ser samhället på dem som har den? -->
 
-**Reglerna:** vad kan den göra, och vad kan den inte? Skriv två eller tre regler som läsaren måste kunna lita på.
+**Källan:**
 
-**Priset:** vad kostar varje användning? Smärta, minne, år, en bit av själen.
+<!-- Blod, stjärnor, eder, en gud eller landet självt? -->
 
-**Gränsen:** vad går aldrig, hur mycket man än betalar?
+**Reglerna och gränsen:**
 
-**Hur den känns:** vad ser, hör och känner man när den används? Ge den sinnen.
+<!-- Två eller tre regler, och det som aldrig går. -->
 
-**Hur läsaren lär sig den:** vilken tidig scen visar en regel och ett pris i handling, så att läsaren förstår dem innan de avgör något?
+**Priset:**
 
-**Det förbjudna:** vilken magi är förbjuden, av vem, och varför vill någon ändå använda den?
+<!-- Vad kostar varje användning? -->
 
-**Bandet:** hur knyter magin an till kärleken? Ett band som delar känslor, en förbannelse som rör dem båda, en kraft som bara väcks av den andra.
+**Hur den känns:**
 
-**I slutet:** vilket pris betalas i det avgörande slaget, och har läsaren sett det komma?
+<!-- Vad ser, hör och känner man när den används? -->
+
+**Hur läsaren lär sig den:**
+
+<!-- Vilken tidig scen visar en regel i handling? -->
+
+**Bandet:**
+
+<!-- Hur knyter magin an till kärleken? -->
+
+**I slutet:**
+
+<!-- Vilket pris betalas i det avgörande slaget? -->

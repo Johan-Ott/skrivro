@@ -6,24 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Wants:** what are they chasing when the book begins? Something concrete you can see.
+**Wants and needs:**
 
-**Needs:** what must they understand or let go of to make it through the ending?
+<!-- What are they chasing, and what must they understand to make it through? -->
 
-**The lie they believe:** the false belief about themselves or the world that the new thing will challenge.
+**The lie they believe:**
 
-**Their place in the world:** job, class, background. Which part of society does the reader see through them?
+<!-- Which belief about themselves or the world does the new thing challenge? -->
 
-**Their relationship with the new thing:** do they use it, make a living from it, or suffer because of it?
+**Place in the world:**
 
-**What they take for granted:** what in this future is so obvious to them that they never question it?
+<!-- Which part of society does the reader see through them? -->
 
-**Their expertise:** what are they good at, that the reader can rely on in a crisis?
+**Relationship to the new:**
 
-**The voice:** how do they sound? Which words from the book's world do they use without thinking?
+<!-- Do they use it, live off it or suffer from it? -->
 
-**The personal stakes:** a person, a memory, a home, a body.
+**Skill:**
 
-**The inner question:** how does their conflict mirror the book's big what if?
+<!-- What are they good at in a crisis? -->
 
-**How they change:** which choice at the end shows who they have become?
+**The voice:**
+
+<!-- Which words from the book's world do they use without thinking? -->
+
+**What is at stake:**
+
+<!-- What personal thing mirrors the book's big what if? -->
+
+**The change:**
+
+<!-- Which choice at the end shows who they have become? -->

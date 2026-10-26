@@ -6,28 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Första intrycket:** varför ogillar eller misstror huvudpersonen hen? Vad är sant i intrycket, och vad är fel?
+**Första intrycket:**
 
-**Vill:** vad jagar hen, och varför står det i vägen för huvudpersonens mål?
+<!-- Varför misstror huvudpersonen hen, och vad är fel i det? -->
 
-**Lojaliteten:** vem eller vad tjänar hen? Ett hov, en ed, en familj. Varför krockar det med kärleken?
+**Vill och lojaliteten:**
 
-**Såret och lögnen:** vad har lärt hen att inte lita på någon, och vilken felaktig tro följer av det?
+<!-- Vem tjänar hen, och varför krockar det med kärleken? -->
 
-**Rädslan i kärleken:** vad tror hen händer om hen visar vad hen känner?
+**Såret och rädslan:**
 
-**Den andra sidan:** vad visar sig när muren faller? Ömheten, humorn, det hen gör när ingen ser.
+<!-- Vad har lärt hen att inte lita på någon? -->
 
-**Gränsen:** vad gör hen aldrig, hur mörk hen än är? Läsaren förlåter mycket hos ett farligt kärleksintresse, men bara om gränsen syns tidigt och håller när det gäller.
+**Den andra sidan:**
 
-**Varför just hen:** vad ser hen hos huvudpersonen som ingen annan ser?
+<!-- Vad gör hen när ingen ser? -->
 
-**Makten:** vad har hen som huvudpersonen saknar, och hur visar hen att hen inte missbrukar det mellan dem?
+**Gränsen och makten:**
 
-**Hemligheten:** vad döljer hen, och hur blir det sveket?
+<!-- Vad gör hen aldrig, hur mörk hen än är? -->
 
-**Rösten:** om hen har ett eget perspektiv, hur skiljer det sig från huvudpersonens? Rytm, humor, vad hen lägger märke till.
+**Hemligheten:**
 
-**Bågen:** hur förändras hen, och vad måste hen ge upp?
+<!-- Vad döljer hen, och hur blir det sveket? -->
 
-**Den stora gesten:** vad offrar hen i slutet, och varför betyder det mest för just den här huvudpersonen?
+**Rösten:**
+
+<!-- Hur skiljer sig hens perspektiv från huvudpersonens? -->
+
+**Bågen och gesten:**
+
+<!-- Vad offrar hen i slutet för just den här huvudpersonen? -->

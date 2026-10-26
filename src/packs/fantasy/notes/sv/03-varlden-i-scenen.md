@@ -29,7 +29,6 @@ Isbergsprincipen: du vet tio gånger mer om världen än läsaren får se. Det s
 
 **Kapitelslut**
 
-- Avsluta på en fråga, ett beslut eller en upptäckt, inte på att någon somnar.
 - Ett kapitel får sluta i lugn, om läsaren redan bär på en olöst fråga.
 
 **Tempo**

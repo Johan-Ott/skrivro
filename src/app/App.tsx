@@ -16,7 +16,7 @@ import { cardActions } from "./notes/cardActions.js";
 import { openingSaying, useProject, type Project } from "./useProject.js";
 import { useSeries } from "./useSeries.js";
 import { useSeriesActions } from "./notes/useSeriesActions.js";
-import { homesOf } from "./notes/noteHomes.js";
+import { homesOf, setNoteLookup } from "./notes/noteHomes.js";
 import { useProjectActions, useTreeHandlers } from "./useProjectActions.js";
 import { useSpelling } from "./spelling/useSpelling.js";
 import { BookToasts, useRenameOffer } from "./renameOffer.js";
@@ -71,6 +71,8 @@ function useCoreState() {
   const onFolderChange = useCallback(() => void checkDisk(session), [session]);
   const projectState = useProject(onFolderChange);
   const { project, open, refresh, updateTree } = projectState;
+  // In the render, not an effect: a new note opens before the next render and must be known.
+  setNoteLookup(session, projectState.projectRef);
   const startup = useStartup(open, project?.dir ?? null);
   const { seriesState, seriesActions } = useSeriesParts(project, session, onFolderChange);
   const seriesDir = seriesState.series?.dir ?? null;
@@ -83,7 +85,6 @@ function useCoreState() {
   };
   const review = useReviewParts({ ...sceneState, project, author: startup.preferences.authorName });
   const writingMode = useWritingMode();
-  const profile = useSyncedProfile(startup);
   return {
     sceneState,
     projectState,
@@ -92,7 +93,8 @@ function useCoreState() {
     actions,
     ...review,
     writingMode,
-    profile,
+    // Called in the return, not above it, to keep this function within the lint line limit.
+    profile: useSyncedProfile(startup),
   };
 }
 

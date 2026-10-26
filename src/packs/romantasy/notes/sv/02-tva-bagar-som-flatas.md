@@ -17,7 +17,7 @@ De starkaste kapitlen är de där svaren hänger ihop: en vändning i världen t
 - **Bandet ersätter inte valet.** Ödesbundna, själsfränder, en magi som drar dem mot varandra: älskade troper, men bandet får inte göra jobbet åt dem. Låt dem välja varandra trots bandet, eller emot det. Kärleken ska gå att förklara utan magin.
 - **Långsam glöd i steg.** Varje steg närmare ska kosta något eller förändra något. Fiender blir motvilliga allierade, sedan något som liknar vänner, sedan något farligare.
 - **Två röster.** Med dubbla perspektiv vet läsaren mer än någon av dem. Bestäm vad läsaren får veta: känner hen till hemligheten blir det spänning, för hen väntar på smällen, och vet hen inget blir det en överraskning. Båda fungerar, men välj med avsikt. Ge varje röst eget ordförråd, egna rädslor och eget mål.
-- **Troper med avsikt.** Från fiender till älskare, bara en säng, arrangerat äktenskap, den farliga beskyddaren, ett avtal med ett dolt pris. Välj den trop som tvingar fram just din huvudpersons inre konflikt, leverera det den lovar och ge den en vändning läsaren inte väntat sig.
+- **Troper med avsikt.** Läsare letar efter dem. Se guiden Troper och löften.
 - **Lögnen och sanningen.** Båda bär på en felaktig tro om sig själva eller om kärlek. Världens kris pressar fram den, och kärleken gör det möjligt att släppa den.
 - **Makt mellan dem.** När den ena är prins och den andra fånge, låt maktskillnaden synas och krympa. Respekten växer när den mäktigare väljer att inte använda sin makt.
 - **Människorna runt dem.** En liten krets av vänner, syskon eller vapenbröder ger paret någon att skydda och någon som säger sanningen. Den hittade familjen är en egen trop som många läsare letar efter.

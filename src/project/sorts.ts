@@ -29,6 +29,10 @@ const RETIRED_FOLDERS = ["tidslinje", "research"];
 
 export const isSpecial = (id: string) =>
   id === TRASH_ID || FIXED_SORTS.some((sort) => sort.id === id);
+/** What a sort's templates are kept under: Personer and the other fixed sorts by id, a sort of the
+ * writer's by its name. */
+export const sortKey = (sort: TreeNode) => (isSpecial(sort.id) ? sort.id : (sort.title ?? ""));
+
 export const isNoteSide = (node: TreeNode) =>
   node.kind === "sort" || node.id === TRASH_ID || RETIRED_FOLDERS.includes(node.id);
 

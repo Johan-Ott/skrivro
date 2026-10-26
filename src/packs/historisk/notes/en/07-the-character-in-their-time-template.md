@@ -4,26 +4,36 @@ sort: karaktarer
 
 # The character in their time (template)
 
-Rename the note to the character's name. It works for every invented main or side character.
+Rename the note to the character's name.
 
-**Birth and standing:** year, place, rank or class. What it meant to be born right there and then.
+**Birth and standing:**
 
-**Livelihood:** how they put food on the table, and what happens if that fails.
+<!-- What did it mean to be born just there and then, in that class? -->
 
-**What they want:** a concrete goal the age makes hard to reach. A marriage, a farm, an apprenticeship, getting a child back.
+**Making a living:**
 
-**What the age allows them:** what they may and may not do, given gender, age, class, faith and origin.
+<!-- How do they put food on the table? -->
 
-**Faith and worldview:** what they believe about God, illness, death, fate and authority. What they take for granted without a thought.
+**What they want:**
 
-**What they believe that grates today:** at least one view or habit a modern reader does not share. It makes the character believable.
+<!-- Which concrete goal do the times make hard to reach? -->
 
-**Where they step beyond their time:** if at all, and what it costs them.
+**What the times allow:**
 
-**Knowledge and limits:** can they read, count, travel? What do they know of the world beyond the parish or the town?
+<!-- What may they not do, given gender, class and faith? -->
 
-**Speech:** how they talk, swear, address others and are addressed. A couple of words or phrases that are theirs alone.
+**Faith and worldview:**
 
-**Relation to the great events:** how the war, famine or upheaval reaches them in particular, and when.
+<!-- What do they take for granted about God, death and authority? -->
 
-**What they lose and gain:** who they are when the book ends.
+**What chafes today:**
+
+<!-- Which view does a reader today not share? -->
+
+**The language:**
+
+<!-- How do they speak, swear and address others? -->
+
+**The great events:**
+
+<!-- How does the war or the famine reach them, and when? -->

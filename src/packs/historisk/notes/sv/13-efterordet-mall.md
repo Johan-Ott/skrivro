@@ -4,26 +4,32 @@ sort: Källor
 
 # Efterordet (mall)
 
-Byt namn på anteckningen till Efterord. Fyll på under hela skrivandet och skriv den färdiga texten sist. Ett bra efterord är kort, ärligt och lika väl skrivet som resten av boken.
+Byt namn på anteckningen till Efterord.
 
-**Det som är sant:** de verkliga händelser, platser och personer som boken bygger på.
+**Det som är sant:**
 
-**Det som är påhittat:** personer, platser och händelser du har skapat. Säg det rakt.
+<!-- Vilka verkliga händelser och personer bygger boken på? -->
 
-**Det du har ändrat:** datum du har flyttat, händelser du har slagit ihop, personer du har gjort till en. Förklara varför i en mening.
+**Det som är påhittat:**
 
-**Där källorna tiger:** luckorna i historien som du har fyllt med fantasi.
+<!-- Vad har du skapat? Säg det rakt. -->
 
-**Där historikerna är oense:** vilken tolkning du har valt, och varför.
+**Det du har ändrat:**
 
-**Språket:** om du har moderniserat språket eller använt gamla ord, och hur du har tänkt.
+<!-- Vilka datum och händelser har du flyttat, och varför? -->
 
-**Det som skaver i dag:** om boken återger språk eller åsikter från tiden som är sårande nu, och varför du har valt att ha med dem.
+**Luckor och tolkningar:**
 
-**Ord och uttryck som behöver förklaras:** om några ord från tiden kan vara okända för läsaren.
+<!-- Var är historikerna oense, och vilken tolkning har du valt? -->
 
-**För den som vill läsa mer:** några få källor eller platser att besöka, beskrivna med egna ord.
+**Det som skaver:**
 
-**Tack:** arkiv, museer och människor som har hjälpt dig.
+<!-- Varför finns ord eller åsikter med som sårar i dag? -->
 
-**Kontroll:** filtrera fram Fri tolkning och Till efterordet i Innehåll och se att allt viktigt finns med här.
+**För den som vill läsa mer:**
+
+<!-- Vilka få källor vill du peka på, och vem vill du tacka? -->
+
+**Kontroll:**
+
+<!-- Finns allt märkt Fri tolkning och Till efterordet med? -->

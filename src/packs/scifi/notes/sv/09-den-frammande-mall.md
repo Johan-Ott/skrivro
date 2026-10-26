@@ -6,24 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till varelsens, maskinens eller medvetandets namn.
 
-**Vad den är:** en främmande art, en artificiell intelligens, en förändrad människa, eller något annat?
+**Vad den är:**
 
-**Hur den har uppstått:** evolution på en annan värld, en konstruktion, ett experiment? Ursprunget förklarar hur den tänker.
+<!-- Varifrån kommer den, och hur förklarar ursprunget hur den tänker? -->
 
-**Kroppen och miljön:** vad behöver den för att leva, och hur formar det vad den värdesätter?
+**Kroppen och sinnena:**
 
-**Hur den upplever världen:** vilka sinnen har den, och hur ser den på tid, död och det egna jaget?
+<!-- Hur upplever den tid, död och det egna jaget? -->
 
-**Vad den vill:** ett mål som går att förstå, även om det inte är mänskligt.
+**Vad den vill:**
 
-**Hur den kommunicerar:** språk, tecken, handling? Vad går förlorat i översättningen?
+<!-- Vilket mål går att förstå, även om det inte är mänskligt? -->
 
-**Det som skiljer den från oss:** en grundläggande skillnad som skapar konflikt eller missförstånd.
+**Hur den kommunicerar:**
 
-**Det en människa aldrig skulle göra:** något den gör som är fullt logiskt för den, men som skrämmer eller förvirrar oss.
+<!-- Vad går förlorat i översättningen? -->
 
-**Det som förenar:** något den delar med människorna, som gör den begriplig för läsaren.
+**Det som skiljer:**
 
-**Vad människorna tror om den:** och vad som faktiskt stämmer.
+<!-- Vad gör den som är logiskt för den men skrämmer oss? -->
 
-**Rollen i berättelsen:** hot, allierad, spegel eller mysterium? Vilken fråga om människan ställer den?
+**Det som förenar:**
+
+<!-- Vad delar den med människorna? -->
+
+**Vad människorna tror:**
+
+<!-- Vad tror de om den, och vad stämmer egentligen? -->
+
+**Rollen i berättelsen:**
+
+<!-- Vilken fråga om människan ställer den? -->

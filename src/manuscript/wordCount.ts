@@ -1,14 +1,24 @@
 import type { Node } from "prosemirror-model";
 import { countWords } from "../countWords.js";
 import { splitFootnotes } from "./footnotes.js";
+import { isLabel, isUnanswered, UNANSWERED_FIELD } from "./prompts.js";
 import { manuscriptSchema as schema, STYLE_NAMES } from "./schema.js";
 import { findStyleFences } from "./styleFences.js";
 
-/** Text in raw blocks counts; scene breaks do not. */
+/** Text in raw blocks counts; scene breaks do not, nor a label above an unanswered question. */
 export function countDocumentWords(doc: Node): number {
   const leafText = (leaf: Node) =>
     leaf.type === schema.nodes.rawBlock ? `\n${String(leaf.attrs["source"])}\n` : "\n";
-  return countWords(doc.textBetween(0, doc.content.size, "\n", leafText));
+  const counted: string[] = [];
+  let from = 0;
+  doc.descendants((node, position, parent, index) => {
+    if (!isLabel(node) || !isUnanswered(parent?.maybeChild(index + 1) ?? undefined)) return true;
+    counted.push(doc.textBetween(from, position, "\n", leafText));
+    from = position + node.nodeSize;
+    return false;
+  });
+  counted.push(doc.textBetween(from, doc.content.size, "\n", leafText));
+  return countWords(counted.join("\n"));
 }
 
 export const countWordsBetween = (doc: Node, from: number, to: number) =>
@@ -36,6 +46,7 @@ function withoutFences(body: string) {
 export function countMarkdownWords(markdown: string): number {
   const { body, notes } = splitFootnotes(markdown);
   const text = withoutFences(body)
+    .replace(UNANSWERED_FIELD, "")
     .replace(PICTURE, "")
     .replace(TAG, "")
     .replace(ENTITY, "")

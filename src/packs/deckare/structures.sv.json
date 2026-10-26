@@ -12,37 +12,40 @@
         "chapters": [
           [
             "Brottet",
-            "Brottet upptäcks här, eller senast efter en tiondel av boken, så att frågan vem och varför är ställd direkt."
+            "(ca 8 %) Brottet upptäcks här, eller senast efter en tiondel av boken, så att frågan vem och varför är ställd direkt."
           ],
           [
             "Utredaren",
-            "Visa vem som utreder, varför just hen, och vad hen bär med sig som fallet kommer att trycka på."
+            "(ca 5-12 %) Visa vem som utreder, varför just hen, och vad hen bär med sig som fallet kommer att trycka på."
           ],
           [
             "Brottsplatsen",
-            "Platsen, kroppen och de första fynden. Göm den avgörande ledtråden här, i förbigående."
+            "(ca 10 %) Platsen, kroppen och de första fynden. Göm den avgörande ledtråden här, i förbigående."
           ],
           [
             "Kretsen",
-            "De misstänkta presenteras, var och en med motiv, tillfälle och något att dölja. Den skyldige är redan med."
+            "(ca 15 %) De misstänkta presenteras, var och en med motiv, tillfälle och något att dölja. Den skyldige är redan med."
           ]
         ]
       },
       {
         "title": "Utredningen",
         "chapters": [
-          ["Förhören", "Alla ljuger om något. Låt utredaren avslöja en lögn och missa en annan."],
+          [
+            "Förhören",
+            "(ca 20-35 %) Alla ljuger om något. Låt utredaren avslöja en lögn och missa en annan."
+          ],
           [
             "Den första teorin",
-            "En tydlig misstänkt växer fram, så att läsaren tror att hen ligger steget före."
+            "(ca 35-45 %) En tydlig misstänkt växer fram, så att läsaren tror att hen ligger steget före."
           ],
           [
             "Det falska spåret",
-            "En sann detalj pekar fel, och både utredaren och läsaren följer med."
+            "(ca 45 %) En sann detalj pekar fel, och både utredaren och läsaren följer med."
           ],
           [
             "Ett andra brott",
-            "Mittpunkten: ett nytt brott eller fynd krossar den första teorin och höjer insatserna."
+            "(ca 50 %) Mittpunkten: ett nytt brott eller fynd krossar den första teorin och höjer insatserna."
           ]
         ]
       },
@@ -51,16 +54,19 @@
         "chapters": [
           [
             "Det personliga",
-            "Fallet kommer nära utredaren och hotar en relation, karriären eller självbilden."
+            "(ca 55-65 %) Fallet kommer nära utredaren och hotar en relation, karriären eller självbilden."
           ],
           [
             "Den falska lösningen",
-            "Fel person grips eller utredningen läggs ned. Det ser klart ut, men en detalj skaver."
+            "(ca 75 %) Fel person grips eller utredningen läggs ned. Det ser klart ut, men en detalj skaver."
           ],
-          ["Utredaren i fara", "Den skyldige förstår att sanningen är nära och slår tillbaka."],
+          [
+            "Utredaren i fara",
+            "(ca 80-85 %) Den skyldige förstår att sanningen är nära och slår tillbaka."
+          ],
           [
             "Den avgörande ledtråden",
-            "Något läsaren har sett hela tiden får en ny betydelse, och utredaren förstår."
+            "(ca 85-90 %) Något läsaren har sett hela tiden får en ny betydelse, och utredaren förstår."
           ]
         ]
       },
@@ -69,13 +75,13 @@
         "chapters": [
           [
             "Konfrontationen",
-            "Utredaren och den skyldige möts med något på spel, och lösningen visas i scen."
+            "(ca 90 %) Utredaren och den skyldige möts med något på spel, och lösningen visas i scen."
           ],
           [
             "Avslöjandet",
-            "Hur det gick till och varför, kort, med de sista bitarna som läsaren inte redan lagt."
+            "(ca 95 %) Hur det gick till och varför, kort, med de sista bitarna som läsaren inte redan lagt."
           ],
-          ["Efteråt", "Vad fallet kostade, vem utredaren är nu, och vad som väntar."]
+          ["Efteråt", "(ca 98 %) Vad fallet kostade, vem utredaren är nu, och vad som väntar."]
         ]
       }
     ]

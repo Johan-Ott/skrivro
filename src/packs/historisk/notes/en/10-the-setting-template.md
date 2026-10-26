@@ -1,27 +1,39 @@
 ---
-sort: The era
+sort: platser
 ---
 
-# The setting (template)
+# The setting in its time (template)
 
 Rename the note to the name of the place: the farm, the quarter, the ship, the castle or the town. Make one for each important place.
 
-**Where and when:** the location, and which years it appears in the book.
+**Where and when:**
 
-**Real or invented:** did the place really exist? If it is invented, which real place is it based on?
+<!-- Where is the place, and which years does it appear in the book? -->
 
-**How it looked:** buildings, materials, rooms, streets. What was new and what was already old back then.
+**Real or invented:**
 
-**Sounds, smells and light:** what you hear, smell and see at different times of day and year.
+<!-- Did it really exist, or which real place is it based on? -->
 
-**The people:** who lives and works here, who gives orders and who serves.
+**How it looked:**
 
-**An ordinary day here:** work, trade, worship, feasts, quarrels.
+<!-- Which buildings, materials and rooms were there, new and old? -->
 
-**How the events reach it:** what changes when history breaks in. Soldiers, rumours, shortages, newcomers.
+**Sounds, smells and light:**
 
-**The seasons:** how the place changes over the year, and what that means for the plot.
+<!-- What do you hear, smell and see at different times? -->
 
-**The mental map:** distances to the nearest village, town, church and harbour, and how long it takes to get there.
+**The people:**
 
-**Sources:** maps, pictures, descriptions or visits the place is built on.
+<!-- Who lives and works here, and who gives orders? -->
+
+**An ordinary day here:**
+
+<!-- What happens here on an ordinary day? -->
+
+**How the events reach it:**
+
+<!-- What changes when history breaks in? -->
+
+**Sources:**
+
+<!-- Which maps, pictures or visits is the place built on? -->

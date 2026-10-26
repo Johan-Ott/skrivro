@@ -6,24 +6,34 @@ sort: karaktarer
 
 Rename the note to the name of the being, machine or mind.
 
-**What it is:** an alien species, an artificial intelligence, an altered human, or something else?
+**What it is:**
 
-**How it came to be:** evolution on another world, a construction, an experiment? Its origin explains how it thinks.
+<!-- Where does it come from, and how does the origin explain how it thinks? -->
 
-**Body and environment:** what does it need to live, and how does that shape what it values?
+**Body and senses:**
 
-**How it experiences the world:** what senses does it have, and how does it see time, death and the self?
+<!-- How does it experience time, death and self? -->
 
-**What it wants:** a goal that can be understood, even if it isn't human.
+**What it wants:**
 
-**How it communicates:** language, signs, action? What gets lost in translation?
+<!-- Which goal can be understood, even if it is not human? -->
 
-**What sets it apart from us:** a fundamental difference that creates conflict or misunderstanding.
+**How it communicates:**
 
-**What a human would never do:** something it does that is perfectly logical to it, but frightens or baffles us.
+<!-- What is lost in translation? -->
 
-**What connects us:** something it shares with humans, which makes it comprehensible to the reader.
+**What sets it apart:**
 
-**What people believe about it:** and what is actually true.
+<!-- What does it do that is logical to it but frightens us? -->
 
-**Its role in the story:** threat, ally, mirror or mystery? What question about being human does it raise?
+**What we share:**
+
+<!-- What does it have in common with humans? -->
+
+**What humans believe:**
+
+<!-- What do they believe about it, and what is actually true? -->
+
+**Role in the story:**
+
+<!-- Which question about being human does it raise? -->

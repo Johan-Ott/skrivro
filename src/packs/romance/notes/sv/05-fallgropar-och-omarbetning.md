@@ -18,12 +18,20 @@ De vanligaste fallgroparna, och vad du gör åt dem.
 - **Gesten som pressar.** Ett frieri inför publik, ett uppträdande på jobbet, en flytt den andra inte bett om. En gest som gör det svårt att säga nej är inte romantisk. Låt den andra vara fri att välja.
 - **Ett lyckligt slut som bara sägs.** Paret försonas på sista sidan och boken tar slut. Ge läsaren minst en scen där kärleken redan håller i vardagen.
 
-**Omarbetning, i den här ordningen**
+**Omarbetning, i tre varv**
+
+Varv 1, strukturen:
 
 - Märk varje scen med Gnista, Spänning, Närhet eller Muren och se om mönstret bygger mot mittpunkten och sedan faller mot brytningen.
 - Läs bara den enas kapitel, sedan bara den andras: har båda en hel båge?
 - Läs mötet, mittpunkten och slutet efter varandra: hänger de ihop?
-- Läs alla kapitelslut: drar de vidare?
-- Kontrollera att den stora gesten svarar på det sår du visade i början.
 - I feelgood: märk Värme och Humor och se att inget långt avsnitt saknar båda.
+
+Varv 2, scenerna:
+
+- Kontrollera att den stora gesten svarar på det sår du visade i början.
+- Läs alla kapitelslut: drar de vidare?
+
+Varv 3, raderna:
+
 - Läs replikerna högt, och stryk det som förklarar en känsla som scenen redan visar.

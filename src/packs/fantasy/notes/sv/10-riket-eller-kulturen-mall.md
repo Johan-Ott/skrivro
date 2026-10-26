@@ -4,28 +4,36 @@ sort: Världen
 
 # Riket eller kulturen (mall)
 
-Byt namn på anteckningen till rikets eller folkets namn. I urban fantasy fungerar mallen också för en grupp i den dolda världen.
+Byt namn på anteckningen till rikets eller folkets namn.
 
-**I en mening:** vad är det första en främling lägger märke till här?
+**I en mening:**
 
-**Landet:** klimat, landskap, vad som växer och vad man äter. Hur formar marken människorna?
+<!-- Vad lägger en främling märke till först? -->
 
-**Vad man lever av:** jordbruk, handel, gruvor, plundring. Vad är bristvara, och vem kontrollerar den?
+**Landet och födan:**
 
-**Makten:** vem styr, hur fick de makten, och vem vill ta den ifrån dem?
+<!-- Vad lever man av, och vem kontrollerar det som är bristvara? -->
 
-**Tron:** vad tror man på, och vad är förbjudet? Vad svär man vid när man slår sig på tummen?
+**Makten:**
 
-**Vardagen:** arbete, fester, sorgeriter, hur man hälsar. En sed som en utomstående missförstår.
+<!-- Vem styr, och vem vill ta makten ifrån dem? -->
 
-**De inre striderna:** fattiga mot rika, gamla mot unga, troende mot tvivlare. Vad grälar man om vid middagsbordet?
+**Tron och vardagen:**
 
-**Grannarna:** vem handlar man med, vem fruktar man, och vem har man krigat mot?
+<!-- Vilken sed missförstår en utomstående? -->
 
-**Historien som lever:** en händelse som alla fortfarande pratar om, och som olika grupper minns olika.
+**Striderna:**
 
-**Synen på magin:** vördad, förbjuden, vardaglig eller en handelsvara?
+<!-- Vad grälar man om, och vem har man krigat mot? -->
 
-**Namnen:** hur låter namnen här, på personer och platser? Ge folket ett eget ljudmönster.
+**Historien som lever:**
 
-**Det huvudpersonen tar för givet:** det hen inte ens ser, eftersom hen har vuxit upp med det.
+<!-- Vilken händelse minns olika grupper på olika sätt? -->
+
+**Synen på magin:**
+
+<!-- Är magin vördad, förbjuden eller vardaglig? -->
+
+**Det huvudpersonen tar för givet:**
+
+<!-- Vad ser hen inte ens, eftersom hen vuxit upp med det? -->

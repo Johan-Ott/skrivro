@@ -6,26 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**The goal:** what do they want to achieve? Write it in one sentence without using the word evil.
+**The goal:**
 
-**Why they believe they are right:** from where they stand, they are the hero. What injustice, loss or conviction do they carry?
+<!-- What do they want, in one sentence without the word evil? -->
 
-**Resources:** money, people, knowledge, access, time. What do they have that the main character lacks?
+**Why they think they are right:**
 
-**Method:** how do they operate? Violence, lies, technology, the law, other people's fear?
+<!-- Which injustice or loss do they carry? -->
 
-**Why they are dangerous to this main character:** what do they know about them, or what can they take from them?
+**Resources and method:**
 
-**The mirror:** in what way does the villain resemble the main character? A choice that could have gone the other way.
+<!-- What do they have that the main character lacks? -->
 
-**First time the reader sees them:** the villain in person, or only their work? Make it a move that shows skill and control, not just cruelty.
+**Why the main character:**
 
-**The mask:** if their identity is meant to stay hidden, who does the reader think they are? Where do they appear without being exposed?
+<!-- What can they take from the main character? -->
 
-**How they meet resistance:** when the plan hits trouble, do they grow more careful, more violent, or more personal?
+**The first time:**
 
-**Weakness:** pride, someone they care about, a need to be seen. The one the main character can finally use.
+<!-- How do they show skill and control, not just cruelty? -->
 
-**The line they cross:** the moment the reader realises they will do anything.
+**The mask:**
 
-**The end:** how do they lose, and what does that say about them?
+<!-- Who does the reader think they are? -->
+
+**The line they cross:**
+
+<!-- When does the reader understand they will do anything? -->
+
+**The weakness and the end:**
+
+<!-- What brings them down in the end? -->

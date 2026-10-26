@@ -11,7 +11,6 @@ A true book moves between showing and telling. Both are needed, but in different
 - **Rule of thumb:** turning points, conflicts and goodbyes become scenes. Routines, journeys and years when nothing decisive happens become summary.
 - **Build the scene on the senses.** A memory often catches on one detail: the smell of diesel, a red cardigan, the radio in the kitchen. Start there and let the rest grow out of it.
 - **Dialogue you roughly remember.** Rebuild the lines as closely as you can, in the person's own way of speaking. Never put words in someone's mouth that contradict what you know of them.
-- **End in motion.** Close the chapter when something has just changed, not when everything has been explained.
 
 **A non-fiction chapter** has a shape of its own that the reader learns to recognise:
 

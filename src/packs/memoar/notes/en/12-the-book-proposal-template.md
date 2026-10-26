@@ -4,26 +4,32 @@ sort: Groundwork
 
 # The book proposal (template)
 
-For anyone who wants a publisher. Non-fiction is often sold on a proposal with one or two sample chapters, while a memoir by a new author usually needs a finished manuscript. The proposal helps either way, because it forces you to say what the book is. Rename the note to the book's working title.
+Rename the note to the book's working title.
 
-**Title and subtitle:** in non-fiction the subtitle often says what the reader gets.
+**Title and subtitle:**
 
-**The book in one sentence:** who it is for and what it does. "A book for parents of teenagers about how to start talking again."
+<!-- What does the subtitle say the reader gets? -->
 
-**The book in one paragraph:** the question or problem, the promise and how the book gets the reader there.
+**The book in one sentence:**
 
-**The reader:** who buys the book, and where they can be found. How big is the group?
+<!-- Who is the book for, and what does it do? -->
 
-**Why now:** what makes the book needed today, and not five years ago.
+**The reader and why now:**
 
-**Why you:** your experience, your knowledge and the places where you already reach readers.
+<!-- Who buys the book, and why is it needed today? -->
 
-**Comparable books:** two or three books from recent years with the same readers. What does yours do that they don't?
+**Why me:**
 
-**The contents:** chapter by chapter, a short paragraph on each. The book's structure is a good start.
+<!-- Where do I already reach readers? -->
 
-**The sample chapters:** which ones you send. The introduction and the chapter that shows the book at its best.
+**Comparable books:**
 
-**Length and timing:** approximate length in words, the number of pictures or boxes, and when the manuscript can be ready.
+<!-- Two or three from recent years: what does mine do that they do not? -->
 
-**The rights:** pictures, quotes and interviews that need permission, and whether you already have it.
+**Contents and sample chapters:**
+
+<!-- A paragraph per chapter, and which chapters do I send? -->
+
+**Length and time:**
+
+<!-- How long will the book be, and when can the manuscript be done? -->

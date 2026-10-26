@@ -4,26 +4,32 @@ sort: Sources
 
 # The author's note (template)
 
-Rename the note to Author's note. Add to it throughout the writing and write the finished text last. A good author's note is short, honest and as well written as the rest of the book.
+Rename the note to Author's note.
 
-**What is true:** the real events, places and people the book is built on.
+**What is true:**
 
-**What is invented:** characters, places and events you created. Say it plainly.
+<!-- Which real events and people does the book build on? -->
 
-**What you changed:** dates you moved, events you merged, several people you made into one. Explain why in a sentence.
+**What is invented:**
 
-**Where the sources are silent:** the gaps in history you filled with imagination.
+<!-- What have you created? Say it plainly. -->
 
-**Where historians disagree:** which reading you chose, and why.
+**What you have changed:**
 
-**The language:** whether you modernised the language or used old words, and your thinking behind it.
+<!-- Which dates and events have you moved, and why? -->
 
-**What grates today:** whether the book reproduces language or views from the age that hurt now, and why you chose to keep them.
+**Gaps and interpretations:**
 
-**Words that need explaining:** any period words that may be unfamiliar to the reader.
+<!-- Where do historians disagree, and which reading have you chosen? -->
 
-**For readers who want more:** a few sources or places to visit, described in your own words.
+**What chafes:**
 
-**Thanks:** archives, museums and people who helped you.
+<!-- Why are words or views in the book that hurt today? -->
 
-**Check:** filter Liberty taken and For the author's note in Contents and make sure everything important is here.
+**For those who want to read more:**
+
+<!-- Which few sources do you point to, and who do you thank? -->
+
+**Check:**
+
+<!-- Is everything labelled Liberty taken and For the author's note here? -->

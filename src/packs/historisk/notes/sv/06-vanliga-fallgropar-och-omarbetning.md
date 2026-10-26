@@ -16,13 +16,24 @@ sort: Guide
 - **Facit tar udden av spänningen.** Om allt handlar om hur det stora skeendet slutar finns ingen spänning. Flytta frågan till personernas öden.
 - **Researchen blir aldrig klar.** Man kan alltid läsa en bok till. Skriv utkastet och märk luckorna.
 
-**Checklista för omarbetningen**
+**Omarbetning, i tre varv**
 
-- Läs varje stycke med bakgrund och fråga: vet personen det här, och skulle hen tänka på det just nu?
-- Sök efter moderna ord och uttryck som drar ut läsaren ur tiden.
-- Filtrera fram scenerna med Kolla fakta i Innehåll och gå igenom dem en efter en.
-- Kontrollera tider, avstånd och årstider: hur länge tog resan, och vad var det för väder?
-- Läs huvudpersonens tankar om tro, kön och klass. Hör de hemma i tiden, och har det ett pris när de inte gör det?
-- Stäm av varje verklig händelse mot minst två oberoende källor.
+Varv 1, strukturen:
+
 - Lägg tidslinjen bredvid manuset och kontrollera att ingen är på två ställen samtidigt och att inga nyheter kommer fram för fort.
+- Stäm av varje verklig händelse mot minst två oberoende källor, så att det stora förloppet håller.
+- Läs huvudpersonens tankar om tro, kön och klass. Hör de hemma i tiden, och har det ett pris när de inte gör det?
+
+Varv 2, scenerna:
+
+- Filtrera fram scenerna med Kolla fakta i Innehåll och gå igenom detaljerna i dem en efter en: kläder, föremål, ord och priser.
+- Läs varje stycke med bakgrund och fråga: vet personen det här, och skulle hen tänka på det just nu?
+- Kontrollera tider, avstånd och årstider: hur länge tog resan, och vad var det för väder?
+
+Varv 3, raderna:
+
+- Sök efter moderna ord och uttryck som drar ut läsaren ur tiden.
+
+Sedan:
+
 - Samla allt med Fri tolkning och Till efterordet, och skriv efterordet utifrån det.

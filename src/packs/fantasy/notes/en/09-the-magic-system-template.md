@@ -4,30 +4,36 @@ sort: The world
 
 # The magic system (template)
 
-Rename the note to the magic's name, as the people of the world call it.
+Rename the note to the magic's name in the world.
 
-**What magic does:** what can it achieve? Describe it with one concrete image.
+**What the magic does:**
 
-**The source:** where does the power come from? A god, nature, blood, words, a place?
+<!-- What can it achieve, in one concrete image? -->
 
-**Who can use it:** everyone, a few, those who have trained? How can you tell who has it?
+**Who and how:**
 
-**How it is triggered:** gestures, words, rituals, sacrifice, sheer will. What does it look, sound and feel like?
+<!-- Who can use it, and how does it feel when it is cast? -->
 
-**The rules:** two or three rules the reader must be able to rely on, put so simply an apprentice could recite them.
+**The rules:**
 
-**The cost:** what does each use take? How does the cost show in the body or in life, and what does it take from the main character?
+<!-- Two or three rules, simple enough for an apprentice to recite. -->
 
-**The limits:** three things magic can never do, however much you pay.
+**The cost:**
 
-**When it goes wrong:** what happens if someone pushes too hard, or gets it wrong?
+<!-- What does each use cost, in the body or in life? -->
 
-**Who controls it:** laws, guilds, bans, apprenticeships. Who profits from it and who fears it?
+**The limits:**
 
-**What it has changed:** war, medicine, trade, faith. How is the world different because magic exists?
+<!-- Three things magic can never do, however much you pay. -->
 
-**What it mirrors:** how do the cost or the limit tie into the book's theme?
+**The world around the magic:**
 
-**What the reader never learns:** a mystery that stays below the waterline.
+<!-- Who controls it, and who fears it? -->
 
-**Where the reader learns it:** which scenes show the rules and the cost, before magic decides anything?
+**What the reader never learns:**
+
+<!-- What is the magic really, beneath what everyone believes? -->
+
+**Where the reader learns it:**
+
+<!-- Which scenes show the rules before magic decides anything? -->

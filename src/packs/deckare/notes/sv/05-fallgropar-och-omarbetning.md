@@ -17,12 +17,26 @@ sort: Guide
 - **Ensamvargen utan följder.** Bryter utredaren mot reglerna ska det kosta: en anmälan, ett bevis som inte håller i rätten, en kollega som slutar lita på hen.
 - **Motivet i sista kapitlet.** Läsaren behöver ha sett fröet till motivet tidigare, även om hen inte förstod det.
 
-**Omarbetning, i den här ordningen**
+**Omarbetning, i tre varv**
+
+Varv 1, strukturen:
 
 - Läs bara scenerna med etiketten Ledtråd. Går gåtan att lösa med dem?
 - Läs boken som den skyldige. Gör hen något som bara är begripligt om hen är oskyldig? Stryk eller förklara det.
 - Följ varje falskt spår till dess upplösning. Hänger någon tråd lös?
+
+Varv 2, scenerna:
+
 - Sortera kapitlen i Tidsordning och läs När bredvid Det som verkligen hände. Kan någon ha varit på två ställen samtidigt?
-- Ge manuset till en testläsare och fråga vid tre punkter vem hen tror är skyldig. Gissar alla rätt tidigt, göm bättre. Förstår ingen lösningen ens efteråt, visa tydligare.
+- Ger varje förhör något nytt: en lögn, en ledtråd eller ett hinder? Annars kan det sammanfattas i en mening.
 - Kontrollera varje kapitelslut: slutar det på en fråga?
 - Korta avslöjandet till det som verkligen behövs.
+
+Varv 3, raderna:
+
+- Läs förhören högt. Låter de misstänkta olika, och ljuger var och en på sitt eget sätt?
+- Stryk utredarens tankar som upprepar det läsaren just sett.
+
+Sedan:
+
+- Ge manuset till en testläsare och fråga vid tre punkter vem hen tror är skyldig. Gissar alla rätt tidigt, göm bättre. Förstår ingen lösningen ens efteråt, visa tydligare.

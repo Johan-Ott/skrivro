@@ -6,24 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till huvudpersonens namn.
 
-**Vem hen är:** ålder, yrke, vardag. Vad hen gör en vanlig tisdag innan något har hänt.
+**Vem hen är:**
 
-**Vad hen vill:** ett mål som fanns före hotet och som hotet står i vägen för. En huvudperson som bara vill överleva blir passiv.
+<!-- Vad gör hen en vanlig tisdag innan något har hänt? -->
 
-**Det hen har att förlora:** en person, ett hem, en nystart, sitt förstånd. Det som gör att läsaren är rädd för hens skull.
+**Vad hen vill:**
 
-**Den privata rädslan:** det hen var räddast för redan före hotet. Att svika sitt barn, att bli som sin pappa, att inte bli trodd.
+<!-- Vilket mål fanns före hotet, och står nu i vägen för det? -->
 
-**Hur hotet speglar rädslan:** på vilket sätt det övernaturliga eller monstruösa trycker på just den punkten.
+**Det hen har att förlora:**
 
-**Skälet att stanna:** varför hen inte bara åker därifrån. Pengar, plikt, skuld, en person som inte kan flytta.
+<!-- Vad gör läsaren rädd för hens skull? -->
 
-**Hur hen förklarar bort det:** hens första och rimligaste förklaringar, och vad som till sist får hen att sluta tro på dem.
+**Den privata rädslan:**
 
-**Hemligheten:** något hen döljer för andra, eller för sig själv, som gör isoleringen värre.
+<!-- Vad var hen räddast för redan före hotet? -->
 
-**Styrkan:** det hen har som kan räcka i konfrontationen. Envishet, kunskap, kärlek, en gammal skada som lärt hen något.
+**Skälet att stanna:**
 
-**Det dåliga beslutet:** ett val hen gör som förvärrar allt, men som läsaren ändå förstår.
+<!-- Varför åker hen inte bara därifrån? -->
 
-**Vad hen är efteråt:** hel, skadad, förändrad eller borta. Vad slutet säger om rädslan.
+**Hemligheten:**
+
+<!-- Vad döljer hen, för andra eller sig själv? -->
+
+**Det dåliga beslutet:**
+
+<!-- Vilket val gör allt värre men går ändå att förstå? -->
+
+**Vad hen är efteråt:**
+
+<!-- Hel, skadad, förändrad eller borta? -->

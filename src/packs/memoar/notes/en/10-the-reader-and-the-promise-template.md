@@ -4,26 +4,36 @@ sort: Groundwork
 
 # The reader and the promise (template)
 
-Mostly for non-fiction, but fill it in for a memoir too: it also has a reader and a promise. Rename the note to the book's working title. Fill it in before you write the first chapter, and reread it whenever you lose your way.
+Rename the note to the book's working title.
 
-**The reader:** a real kind of person, not "everyone". Age, situation and what they already know. "Parents of teenagers who have stopped talking to them."
+**The reader:**
 
-**The problem:** what the reader is struggling with, in their own words. What have they already tried, and why wasn't it enough?
+<!-- Who is the reader: age, situation and what they already know? -->
 
-**Why now:** what makes them pick up the book right now.
+**The problem and why now:**
 
-**The promise:** in one sentence, what the reader can do, know or change after the last page. In a memoir: what the reader gets to understand or recognise.
+<!-- What is the reader struggling with, and why do they pick up the book now? -->
 
-**What the book doesn't promise:** the boundary. What the book deliberately leaves to others, and where you point the reader instead.
+**The promise:**
 
-**Why you:** experience, research, profession or a journey of your own. Why should the reader trust you, and where in the book does it show?
+<!-- What can the reader do, know or understand after the last page? -->
 
-**The core idea:** the one thing the reader should remember if they forget the rest.
+**What the book does not promise:**
 
-**The chapter claims:** one claim per chapter, in order. Does each build on the one before?
+<!-- What does the book deliberately leave to others? -->
 
-**The examples:** the cases, people or experiments that carry the book. Which is strongest, and where should it go?
+**Why me:**
 
-**The tone:** teacher, colleague, friend or guide? Do you speak to the reader as "you"? Keep the same address throughout.
+<!-- Which experience gives me the right to write this book? -->
 
-**The technical terms:** the concepts the reader has to learn, and the ones you can do without.
+**The central idea:**
+
+<!-- What should the reader remember if they forget the rest? -->
+
+**The examples:**
+
+<!-- Which example is strongest, and where should it go? -->
+
+**The tone:**
+
+<!-- Teacher, colleague, friend or guide, and the same address all through? -->

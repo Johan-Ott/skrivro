@@ -6,18 +6,34 @@ sort: karaktarer
 
 Rename the note to the adult's name or role, like "Dad" or "The mentor". Make one for each adult who matters.
 
-**Who they are to the protagonist:** parent, step-parent, teacher, coach, neighbour.
+**Who they are:**
 
-**What they want for the protagonist:** and whether it's the same as what the protagonist wants.
+<!-- Who are they to the protagonist? -->
 
-**Their own worry:** what takes up their attention. Work, an illness, a new partner, memories of their own.
+**What they want:**
 
-**How they see the protagonist:** and what they miss.
+<!-- What do they want for the protagonist, and is it the same thing? -->
 
-**Why they don't solve it:** they don't know, they've got it wrong, they're kept in the dark, or they're part of the problem. It has to be believable.
+**Their own worry:**
 
-**The good in them:** a moment of warmth or wisdom the reader will remember. Even a strict adult can have one.
+<!-- What takes up their attention? -->
 
-**What they say:** a phrase or habit that makes them recognisable.
+**What they miss:**
 
-**Where they stand at the end:** closer, further away, or changed by what the protagonist did?
+<!-- What do they not see in the protagonist? -->
+
+**What they know:**
+
+<!-- What do they know that the protagonist does not? -->
+
+**Why they do not solve it:**
+
+<!-- What stops them, in a way the reader believes? -->
+
+**The good in them:**
+
+<!-- Which moment of warmth or wisdom will the reader remember? -->
+
+**Where they stand at the end:**
+
+<!-- Are they closer, further away or changed by what the protagonist did? -->

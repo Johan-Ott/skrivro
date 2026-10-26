@@ -17,13 +17,21 @@ sort: Guide
 - **Blod i stället för rädsla.** Mer våld gör inte boken läskigare, bara grövre. Rädslan sitter i vad som kan hända någon man bryr sig om.
 - **Den billiga sista vändningen.** En sista chock som inte följer av reglerna, eller ett slut som tar tillbaka allt, känns som ett trick. Det sista obehaget ska växa ur det läsaren redan vet.
 
-**Checklista för omarbetningen**
+**Omarbetning, i tre varv**
+
+Varv 1, strukturen:
 
 - Läs igenom boken med etiketterna framme. Står chockerna för tätt, eller är det för långt mellan varslen?
-- Stryk den första förklaringen av hotet och se om scenen blir starkare utan den.
-- Gå igenom varje gång hotet syns. Kan du visa mindre?
-- Leta efter scener där huvudpersonen bara reagerar. Ge hen ett val.
 - Filtrera fram Regel i Innehåll och kontrollera att varje regel som avgör slutet har setts tidigare i boken.
-- Läs de mest skrämmande scenerna högt. Sakta ner före det värsta och korta texten när det händer.
-- Fråga om varje bifigur: bryr sig läsaren om hen överlever?
 - Läs sista sidan och fråga dig vad läsaren bär med sig när boken är stängd.
+- Fråga om varje bifigur: bryr sig läsaren om hen överlever?
+
+Varv 2, scenerna:
+
+- Leta efter scener där huvudpersonen bara reagerar. Ge hen ett val.
+- Gå igenom varje gång hotet syns. Kan du visa mindre?
+- Stryk den första förklaringen av hotet och se om scenen blir starkare utan den.
+
+Varv 3, raderna:
+
+- Läs de mest skrämmande scenerna högt. Sakta ner före det värsta och korta texten när det händer.

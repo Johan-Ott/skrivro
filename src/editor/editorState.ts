@@ -20,6 +20,7 @@ import { NO_WORDS, type CompletionWords } from "./vocabulary.js";
 import { focusPlugin, typewriterPlugin } from "./focus.js";
 import { mentionsPlugin, type MentionMatcher } from "./mentions.js";
 import { placeholder } from "./placeholder.js";
+import { promptHints } from "./promptHints.js";
 import { repetitionsPlugin } from "./repetitionMarks.js";
 import { spellingPlugin, type SpellingSwitch } from "./spellingMarks.js";
 import { commentsPlugin, type CommentAnchor } from "./commentMarks.js";
@@ -151,6 +152,7 @@ export function createEditorState(doc: Node, switches = DEFAULT_SWITCHES): Edito
       revisionPlugin(switches.revisionChanges),
       suggestionPlugin(switches.suggestedFrom),
       placeholder(t("Börja skriva…")),
+      promptHints(),
     ],
   });
 }

@@ -6,22 +6,34 @@ sort: The world
 
 Rename the note to what those in the know call the hidden world.
 
-**The city:** which city or place, and which streets, cafes and bus stops keep coming back? The ordinary world must feel real.
+**The city:**
 
-**What is hidden:** which creatures, powers or peoples live beneath the surface?
+<!-- Which streets and places come back, so the ordinary world feels real? -->
 
-**How it stays secret:** magic, laws, fear, or ordinary people's unwillingness to see. What does it cost to keep up the front?
+**What is hidden:**
 
-**The modern world:** why don't cameras, phones, the internet and the authorities expose the secret? Who in the ordinary world knows anyway?
+<!-- Which creatures, powers or peoples live beneath the surface? -->
 
-**The border:** where do the two worlds meet? A door, a time of day, a word?
+**How it stays secret:**
 
-**The factions:** which groups exist in the hidden world, what do they want, and which pacts keep the peace?
+<!-- Why do cameras, phones and authorities not expose it? -->
 
-**The rules of the hidden:** who is in charge, and what happens to someone who gives something away?
+**The border:**
 
-**How the main character steps in:** born into it, stumbling in, or dragged in? What do they lose in the ordinary world?
+<!-- Where do the worlds meet: a door, a time of day, a word? -->
 
-**The everyday in the magical:** bills, neighbours, the day job. How does it mix with the supernatural?
+**The factions:**
 
-**If the secret leaks:** what would happen to the city if everyone knew?
+<!-- Who decides, and what happens to someone who reveals something? -->
+
+**How the main character steps in:**
+
+<!-- Born into it, stumbling in or dragged in? -->
+
+**The other life:**
+
+<!-- The job, the family or the rent the hidden world threatens. Who do they lie to? -->
+
+**If the secret leaks:**
+
+<!-- What happens to the city if everyone finds out? -->

@@ -6,20 +6,30 @@ sort: Världen
 
 Byt namn på anteckningen till rikets, hovets eller landets namn.
 
-**Rikena eller hoven:** vilka finns, vem styr dem och vad vill de?
+**Rikena och konflikten:**
 
-**Konflikten:** varför är de i krig, eller på gränsen till det? Vad är den gamla oförrätten?
+<!-- Vilken gammal oförrätt finns mellan rikena? -->
 
-**Lojaliteterna:** vem tillhör huvudpersonerna, och varför är det farligt att älska över gränsen?
+**Lojaliteterna:**
 
-**Lagar och seder:** vilka regler styr äktenskap, eder, arv och gästrätt? Vilka kan brytas, och vad kostar det?
+<!-- Varför är det farligt för de två att älska över gränsen? -->
 
-**Platserna:** två eller tre platser där mycket händer. Hur ser de ut, hur låter och luktar de?
+**Lagar och seder:**
 
-**Vem som betalar:** vem bär makten på sina axlar? Tjänarna, bönderna, de utan magi. Visa dem, så blir världen verklig och insatserna större.
+<!-- Vilka eder eller lagar kan brytas, och till vilket pris? -->
 
-**Den som tjänar på kriget:** vem vill att det fortsätter, och varför?
+**Platserna:**
 
-**Hotet mot alla:** det som till slut tvingar fiender att samarbeta.
+<!-- Två eller tre platser där mycket händer. -->
 
-**Vad som ändras:** hur ser makten ut när boken är slut, tack vare vad de två gjorde?
+**Vem som betalar:**
+
+<!-- Hur syns de utan makt och magi? -->
+
+**Den som tjänar på kriget:**
+
+<!-- Vem vill att kriget fortsätter? -->
+
+**Vad som ändras:**
+
+<!-- Hur ser makten ut när boken är slut? -->

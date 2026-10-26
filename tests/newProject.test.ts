@@ -133,11 +133,11 @@ describe("createProject", () => {
       kind: "chapter",
       title: "Brottet",
       summary:
-        "Brottet upptäcks här, eller senast efter en tiondel av boken, så att frågan vem och varför är ställd direkt.",
+        "(ca 8 %) Brottet upptäcks här, eller senast efter en tiondel av boken, så att frågan vem och varför är ställd direkt.",
     });
     expect(manuscriptSceneIds(project.tree)).toHaveLength(16);
     const sorts = project.tree.filter((node) => node.kind === "sort").map((node) => node.title);
-    expect(sorts.slice(-3)).toEqual(["Ledtrådar", "Trådar", "Guide"]);
+    expect(sorts.slice(-4)).toEqual(["Ledtrådar", "Trådar", "Serien", "Guide"]);
     expect(project.fields).toMatchObject({ totalGoal: 85_000 });
     expect((project.fields["labels"] as { name: string }[]).map((label) => label.name)).toContain(
       "Falskt spår",
@@ -164,7 +164,7 @@ describe("createProject", () => {
     const notes = project.tree.find((node) => node.id === "anteckningar")?.children ?? [];
     const steps = await files.readText(`${created.dir}/scenes/${notes[1]?.id ?? ""}.md`);
     expect(steps).toContain("::: punktlista\nBrottet: ");
-    expect(steps).toContain("\n\nDet falska spåret: En sann detalj pekar fel");
+    expect(steps).toContain("\n\nDet falska spåret: (ca 45 %) En sann detalj pekar fel");
   });
 
   it("never writes into an existing project with the same name", async () => {

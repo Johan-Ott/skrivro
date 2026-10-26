@@ -19,13 +19,21 @@ De vanligaste fallgroparna, och vad du gör åt dem.
 - **Fantasyn som kuliss.** Kriget nämns men tvingar aldrig fram ett beslut. Låt hotet ändra vad paret kan göra, var de kan vara och vem de kan lita på.
 - **Romansen försvinner i slutstriden.** Den stora gesten hör hemma i slaget, inte i ett kapitel efteråt.
 
-**Omarbetning, i den här ordningen**
+**Omarbetning, i tre varv**
+
+Varv 1, strukturen:
 
 - Följ bara kärleksbågen genom boken: märk scenerna med Gnista och se om stegen ökar.
 - Följ bara världsbågen: märk Magi och Makten och se om hotet växer.
 - Läs mittpunkten och slutet bredvid varandra: svarar slutet på det mittpunkten öppnade?
-- Sök upp varje scen märkt Hemlighet och kontrollera att sveket har sina rötter där.
 - Läs scenerna märkta Svek och det som kommer efter: får försoningen lika mycket plats som brytningen?
+
+Varv 2, scenerna:
+
+- Sök upp varje scen märkt Hemlighet och kontrollera att sveket har sina rötter där.
 - Läs varje kapitelslut: finns det en krok?
-- Läs kapitlen märkta Andra rösten för sig: låter rösten olik huvudpersonens, även utan namn?
 - Stryk varje förklaring av världen som läsaren klarar sig utan.
+
+Varv 3, raderna:
+
+- Läs kapitlen märkta Andra rösten för sig: låter rösten olik huvudpersonens, även utan namn?

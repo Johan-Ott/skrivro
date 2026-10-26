@@ -19,13 +19,21 @@ The most common pitfalls, and what to do about them.
 - **The fantasy as a backdrop.** The war is mentioned but never forces a decision. Let the threat change what the couple can do, where they can go and whom they can trust.
 - **The romance vanishes in the final battle.** The grand gesture belongs in the battle, not in a chapter afterwards.
 
-**Revision, in this order**
+**Revision, in three passes**
+
+Pass 1, the structure:
 
 - Follow only the love arc through the book: tag the scenes Spark and see if the steps rise.
 - Follow only the world arc: tag Magic and Power and see if the threat grows.
 - Read the midpoint and the ending side by side: does the ending answer what the midpoint opened?
-- Find every scene tagged Secret and check that the betrayal has its roots there.
 - Read the scenes tagged Betrayal and what follows them: does the reconciliation get as much room as the break-up?
+
+Pass 2, the scenes:
+
+- Find every scene tagged Secret and check that the betrayal has its roots there.
 - Read every chapter ending: is there a hook?
-- Read the chapters tagged Second POV on their own: does the voice sound unlike the lead's, even without names?
 - Cut every explanation of the world the reader can do without.
+
+Pass 3, the lines:
+
+- Read the chapters tagged Second POV on their own: does the voice sound unlike the lead's, even without names?

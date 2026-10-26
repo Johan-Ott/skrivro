@@ -6,30 +6,34 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Want:** what are they chasing when the book opens, concrete and visible? A title, revenge, freedom.
+**Wants and needs:**
 
-**Need:** what must they learn to become whole, without knowing it themselves?
+<!-- What are they chasing, and what must they learn without knowing it? -->
 
-**The wound:** what happened that shaped them, and how does it show in how they act today?
+**The wound and the lie:**
 
-**The lie:** what false belief drives them? For example: "If anyone sees my magic, they will use me."
+<!-- Which false belief drives them? -->
 
-**What they fear in love:** what are they most afraid will happen if they let someone in?
+**The fear in love:**
 
-**The ability:** magic, heritage or skill. What can they do, what does it cost, and what can they not do?
+<!-- What do they not want the love interest to know? -->
 
-**The burden:** who or what are they responsible for, and what happens if they fail it?
+**The ability and the burden:**
 
-**The secret:** what do they not want the love interest to know, and what happens when it comes out?
+<!-- What can they do, and what does it cost? -->
 
-**Why the reader roots for them:** what do they do in the very first scene that wins the reader over? Courage, humour, care for someone weaker.
+**Why the reader cheers:**
 
-**The flaw:** which fault truly costs them during the book? Pride, distrust, a thirst for revenge that hurts the wrong person.
+<!-- What do they do in the first scene that wins the reader? -->
 
-**The pull:** what about the love interest draws them in, against their own will?
+**The flaw:**
 
-**The voice:** how do they sound in their own point of view? Dry, angry, playful, controlled. Which words do they use that no one else does?
+<!-- Which flaw costs them something real? -->
 
-**The arc:** who are they in the first chapter, who in the last, and which choice at the end shows the difference?
+**The voice:**
 
-**What they risk:** in the world, and between them.
+<!-- Which words do they use that nobody else does? -->
+
+**The arc:**
+
+<!-- Which choice in the last chapter shows the difference? -->

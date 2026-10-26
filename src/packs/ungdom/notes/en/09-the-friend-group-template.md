@@ -4,22 +4,32 @@ sort: Friends
 
 # The friend group (template)
 
-Rename the note to the group's name, or what they call themselves. Write a line per person under each field. In a chapter book a best friend and one more is often enough.
+Rename the note to the group's name.
 
-**Who they are:** names, ages and what each of them is known for in class. Two to four people is enough.
+**Who they are:**
 
-**How they became friends:** an event, a street, a team, or the fact that nobody else would have them.
+<!-- Two to four names: what is each one known for? -->
 
-**Their role in the group:** the brave one, the funny one, the worrier, the one who holds it together. Let the roles rub.
+**How they became friends:**
 
-**What each one wants:** goals of their own that sometimes clash with the protagonist's.
+<!-- An event, a street, or that nobody else wanted them? -->
 
-**What they say to each other:** an in-joke, a word or a ritual only they share.
+**Roles and goals:**
 
-**The secret:** something someone in the group hides from the others.
+<!-- Where does each one's goal clash with the protagonist's? -->
 
-**The crack:** where the group could break, and what would make it happen.
+**What only they have:**
 
-**The rival or the other group:** who they measure themselves against, and why.
+<!-- Which inside joke, word or ritual? -->
 
-**Where they stand at the end:** closer, split up, or with someone new?
+**The secret:**
+
+<!-- What does someone in the group hide from the others? -->
+
+**The crack:**
+
+<!-- Where could the group break? -->
+
+**Where they stand at the end:**
+
+<!-- Closer, split, or with someone new? -->

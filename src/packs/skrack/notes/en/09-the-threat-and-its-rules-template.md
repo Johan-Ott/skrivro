@@ -4,28 +4,36 @@ sort: What frightens
 
 # The threat and its rules (template)
 
-Rename the note to whatever you call the threat. This is your secret picture of it. The reader sees it in pieces, and perhaps never whole.
+Rename the note to whatever you call the threat.
 
-**What it is:** a creature, a curse, a contagion, a person, something without a name. Write it plainly, for yourself, and note what kind of horror it is.
+**What it is:**
 
-**Where it comes from:** what happened once, and why it is still here.
+<!-- What is the threat, written plainly for yourself? -->
 
-**What it wants:** hunger, revenge, company, a body, to be seen. A threat with a will is scarier than one without.
+**What it wants:**
 
-**What it can do:** its powers, and where they end.
+<!-- What does it want? A threat with a will frightens more. -->
 
-**What it cannot do:** its limits. This is where the suspense lives, and where the solution lies.
+**The limits:**
 
-**What draws it out:** solitude, darkness, a time of day, a word, fear itself.
+<!-- What can it not do? The suspense and the solution live there. -->
 
-**How it is felt before it is seen:** sounds, smells, cold, dead animals, people who change. These are your omens.
+**The omens:**
 
-**How it shows itself when seen:** one or two details that are wrong, not a full description.
+<!-- How is it felt before it is seen? -->
 
-**The rules:** one line per rule, with the chapter where the reader sees it in action. Mark the rule that decides the ending.
+**When it shows:**
 
-**What the reader learns, and when:** which pieces of the truth arrive in which chapter. Write down too what is never explained. The unexplained is part of the fear.
+<!-- Which one or two details are wrong? -->
 
-**How it can be stopped, if at all:** and what it costs whoever tries.
+**The rules:**
 
-**What it stands for:** the human fear beneath the surface, and how it ties to the main character.
+<!-- One line per rule, with the chapter where the reader sees it. Which decides the ending? -->
+
+**The unexplained:**
+
+<!-- What does the reader never learn? -->
+
+**What it stands for:**
+
+<!-- Which human fear lies beneath the surface? -->

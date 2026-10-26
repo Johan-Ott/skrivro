@@ -4,26 +4,32 @@ sort: karaktarer
 
 # The suspect (template)
 
-Rename the note to the character's name. Make one for each suspect, and give each a distinct trait so the reader does not mix them up.
+Rename the note to the character's name.
 
-**The distinct trait:** what makes them impossible to confuse with the others. A job, a way of speaking, an object they always carry.
+**The distinct trait:**
 
-**Tie to the victim:** how did they know each other, and how did things stand between them lately?
+<!-- What makes them impossible to mix up with the others? -->
 
-**Motive:** why could they have done it? Make the motive at least as strong as the culprit's.
+**The tie to the victim:**
 
-**Opportunity:** could they have been at the scene? How close were they?
+<!-- How were things between them lately? -->
 
-**Alibi:** where do they say they were, and who can confirm it? Does it hold?
+**Motive and opportunity:**
 
-**In the interview:** what do they want when the detective asks questions? To protect someone, buy time, point at someone else, find out what the police know?
+<!-- Why might they have done it, as strongly as the culprit? -->
 
-**The lie:** what do they lie about when questioned?
+**The alibi:**
 
-**What they hide:** something other than the crime that makes them look guilty. An affair, a debt, a different crime, a shame.
+<!-- Where do they say they were, and does it hold? -->
 
-**Why the reader suspects them:** which clue or behaviour points their way?
+**The lie and what they hide:**
 
-**When suspicion falls away:** which chapter, and what clears them?
+<!-- Which other secret makes them suspicious? -->
 
-**What they know:** a piece of the truth they hold without realising it, and that the detective needs.
+**When suspicion lifts:**
+
+<!-- What clears them, and in which chapter? -->
+
+**What they know:**
+
+<!-- Which piece of the truth do they hold without understanding it? -->

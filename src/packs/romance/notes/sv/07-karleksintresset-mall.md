@@ -6,28 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Första intrycket:** vad tycker huvudpersonen om hen när de möts, och vad är fel i det?
+**Första intrycket:**
 
-**Vill:** vad jagar hen, och hur krockar det med huvudpersonens mål?
+<!-- Vad tycker huvudpersonen om hen först, och vad är fel i det? -->
 
-**Såret och lögnen:** vad gjorde hen rädd för kärlek, och vad tror hen om sig själv?
+**Vill:**
 
-**Rädslan i kärleken:** vad tror hen händer om hen visar vad hen känner?
+<!-- Hur krockar hens mål med huvudpersonens? -->
 
-**Varför just hen:** hur utmanar hen exakt det huvudpersonen tror om kärlek?
+**Såret och rädslan:**
 
-**Vad hen ser:** vad ser hen hos huvudpersonen som ingen annan ser?
+<!-- Vad gjorde hen rädd för kärlek? -->
 
-**Respekten:** i vilken tidig scen visar hen att ett nej betyder nej, och att hen tar den andra på allvar?
+**Varför just hen:**
 
-**Bristen:** vad är hen dålig på, och vad gör det svårt att älska hen ibland? Felfri blir tråkig.
+<!-- Vilken tro om kärlek hos huvudpersonen utmanar hen? -->
 
-**Den andra sidan:** vad visar hen först när muren faller?
+**Respekten:**
 
-**Kemin:** vad är det i hur de pratar, bråkar och skrattar som bara de två har?
+<!-- I vilken tidig scen visar hen att ett nej betyder nej? -->
 
-**Rösten:** om hen har ett eget perspektiv, hur skiljer det sig från huvudpersonens?
+**Bristen och den andra sidan:**
 
-**Vad hen riskerar:** vad förlorar hen om det inte håller?
+<!-- Vad visar hen först när muren faller? -->
 
-**Den stora gesten:** vad gör hen, eller vad ger hen upp, och varför betyder det mest för just huvudpersonen?
+**Kemin:**
+
+<!-- Vad i hur de bråkar och skrattar har bara de två? -->
+
+**Den stora gesten:**
+
+<!-- Vad gör eller ger hen upp, som betyder mest för just huvudpersonen? -->

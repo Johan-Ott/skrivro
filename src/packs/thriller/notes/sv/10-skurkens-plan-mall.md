@@ -4,24 +4,32 @@ sort: Skurkens plan
 
 # Skurkens plan (mall)
 
-Byt namn på anteckningen till planens namn. Det här är vad skurken gör, i tidsordning, oavsett om läsaren ser det eller inte. Skriv den innan du skriver jakten, så att skurken alltid har ett drag att göra.
+Byt namn på anteckningen till planens namn.
 
-**Slutmålet:** vad händer om planen lyckas? Vem drabbas, och hur?
+**Slutmålet:**
 
-**Tidsgränsen:** när måste planen vara genomförd, och varför just då?
+<!-- Skriv den här först. Vad händer om planen lyckas? -->
 
-**Förberedelserna:** vad har skurken redan gjort när boken börjar?
+**Tidsgränsen:**
 
-**Stegen:** skriv varje steg med tid och plats. Till exempel: måndag kväll, nyckelkortet stjäls; onsdag, vakten byts ut; fredag klockan sex på morgonen, lastbilen kör in.
+<!-- När måste planen vara klar, och varför just då? -->
 
-**Vad huvudpersonen ser:** för varje steg, vilket spår lämnar det, och när upptäcker hen det?
+**Stegen:**
 
-**Skurkens svar:** när huvudpersonen kommer närmare, vilka drag gör skurken? Hot, falska spår, ett angrepp, ett erbjudande?
+<!-- Varje steg med tid och plats, även det läsaren aldrig ser. -->
 
-**Varför skurken inte bara röjer huvudpersonen ur vägen:** om hen kan, varför gör hen det inte? Hen behöver något som huvudpersonen vet eller har, ett dödsfall skulle väcka uppmärksamhet, eller det har blivit personligt och hen vill vinna.
+**Vad huvudpersonen ser:**
 
-**Reservplanen:** vad gör skurken när den första planen spricker?
+<!-- Vilket spår lämnar varje steg? -->
 
-**Sprickan:** den punkt där planen är sårbar, och som huvudpersonen till sist hittar.
+**Skurkens svar:**
 
-**Det läsaren vet före huvudpersonen:** vilka steg visar du ur skurkens perspektiv, för att bygga spänning?
+<!-- Vad gör skurken när huvudpersonen kommer nära? -->
+
+**Reservplanen och sprickan:**
+
+<!-- Var är planen sårbar? -->
+
+**Det läsaren vet först:**
+
+<!-- Vilka steg visar du ur skurkens perspektiv? -->

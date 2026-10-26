@@ -4,30 +4,36 @@ sort: karaktarer
 
 # Huvudpersonen (mall)
 
-Byt namn på anteckningen till huvudpersonens namn. Mallen passar alla åldrar; i en kapitelbok räcker ofta en mening per fält.
+Byt namn på anteckningen till huvudpersonens namn.
 
-**Ålder och klass:** hur gammal hen är, och vilken klass eller vilket stadium. Ett eller två år äldre än läsaren.
+**Ålder och berättare:**
 
-**Berättaren:** jag eller hen, preteritum eller presens? I ungdomsromaner är jagform vanlig, ofta i presens. Kapitelböcker skrivs både i jag och i hen.
+<!-- Ett eller två år äldre än läsaren: jag eller hen? -->
 
-**Vill:** det hen jagar när boken börjar, sagt som hen själv skulle säga det. "Jag vill bara att allt ska bli som förut."
+**Vill och behöver:**
 
-**Behöver:** det hen egentligen måste lära sig eller våga, som hen inte vet om än.
+<!-- Vad jagar hen, och vad måste hen egentligen våga? -->
 
-**Problemet:** bokens stora problem, så som det ser ut för hen. Varför är det enormt just i den åldern?
+**Problemet:**
 
-**Varför de vuxna inte kan lösa det:** de vet inte, de förstår inte, de är en del av problemet eller så har hen lovat att inte säga något.
+<!-- Varför är problemet enormt just i den åldern? -->
 
-**Styrkan:** det hen är bra på, som kommer att lösa problemet till slut. Plantera den tidigt.
+**Varför de vuxna inte kan lösa det:**
 
-**Svagheten:** det som får hen att göra fel, som envishet, blyghet eller ett humör.
+<!-- Vet de inte, förstår de inte, eller har hen lovat att tiga? -->
 
-**Rädslan:** det hen helst inte vill att någon ska få veta.
+**Styrka och svaghet:**
 
-**Rösten:** tre uttryck eller sätt att tänka som är hens egna. Hur låter hen när hen är arg, glad, generad?
+<!-- Vad är hen bra på som löser problemet, och vad får hen att göra fel? -->
 
-**Hemma:** vem hen bor med, hur det är där, och vad hen saknar.
+**Rösten:**
 
-**Det hen gör själv i slutet:** det avgörande steget, med egna medel. Vad kostar det hen?
+<!-- Hur låter hen när hen är arg, glad eller generad? -->
 
-**Förändringen:** hur hen är annorlunda på sista sidan, utan att någon behöver säga det.
+**Hemma:**
+
+<!-- Vem bor hen med, och vad saknar hen där? -->
+
+**Det hen gör själv i slutet:**
+
+<!-- Vilket avgörande steg tar hen med egna medel? -->

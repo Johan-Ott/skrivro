@@ -4,24 +4,36 @@ sort: Världen
 
 # Den dolda världen (mall)
 
-Byt namn på anteckningen till det som de invigda kallar den dolda världen.
+Byt namn på anteckningen till det de invigda kallar den dolda världen.
 
-**Staden:** vilken stad eller plats, och vilka gator, kaféer och hållplatser kommer tillbaka? Den vanliga världen ska kännas äkta.
+**Staden:**
 
-**Det som döljs:** vilka varelser, krafter eller folk lever under ytan?
+<!-- Vilka gator och platser kommer tillbaka, så att den vanliga världen känns äkta? -->
 
-**Hur det hålls hemligt:** magi, lagar, rädsla, eller vanliga människors ovilja att se. Vad kostar det att hålla fasaden?
+**Det som döljs:**
 
-**Den moderna världen:** varför avslöjar inte kameror, telefoner, nätet och myndigheterna hemligheten? Vem i den vanliga världen vet ändå?
+<!-- Vilka varelser, krafter eller folk lever under ytan? -->
 
-**Gränsen:** var möts de två världarna? En dörr, en tid på dygnet, ett ord?
+**Hur det hålls hemligt:**
 
-**Fraktionerna:** vilka grupper finns i det dolda, vad vill de, och vilka avtal håller freden?
+<!-- Varför avslöjar inte kameror, telefoner och myndigheter det? -->
 
-**Reglerna i det dolda:** vem bestämmer, och vad händer med den som avslöjar något?
+**Gränsen:**
 
-**Hur huvudpersonen kliver in:** född in i det, snubblar in eller dras in? Vad förlorar hen i den vanliga världen?
+<!-- Var möts världarna: en dörr, en tid på dygnet, ett ord? -->
 
-**Det vardagliga i det magiska:** räkningar, grannar, jobbet. Hur blandas det med det övernaturliga?
+**Fraktionerna:**
 
-**Om hemligheten läcker:** vad skulle hända med staden om alla fick veta?
+<!-- Vem bestämmer, och vad händer med den som avslöjar något? -->
+
+**Hur huvudpersonen kliver in:**
+
+<!-- Född in i det, snubblar in eller dras in? -->
+
+**Det andra livet:**
+
+<!-- Jobbet, familjen eller hyran som det dolda hotar. Vem ljuger hen för? -->
+
+**Om hemligheten läcker:**
+
+<!-- Vad händer med staden om alla får veta? -->

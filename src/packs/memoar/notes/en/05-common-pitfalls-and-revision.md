@@ -25,11 +25,22 @@ sort: Guide
 - Consider letting the person concerned read the passage before the book is done. The decision is yours, but you'll know what you are standing behind.
 - If you single out someone identifiable as criminal or blameworthy, talk to the publisher or a lawyer before the book comes out. Defamation law differs between countries; in some, Sweden among them, the fact that a claim is true is not always enough on its own.
 
-**The revision**
+**Revision, in three passes**
 
-- Reread with one question at a time: first the book's question, then the scenes, last the language.
+Pass 1, the structure:
+
+- Reread with only the book's question in mind. Does every chapter carry it?
+- Read the book as the people in it would read it, and then as a stranger.
+
+Pass 2, the scenes:
+
 - Try cutting the first paragraph of each chapter. Does it start better without it?
 - Check every Check facts tag against your sources in Groundwork.
+
+Pass 3, the lines:
+
 - Read the dialogue aloud. Does each person sound like themselves?
-- Read the book as the people in it would read it, and then as a stranger.
+
+Finally:
+
 - Give it to a test reader who doesn't know you. Ask where they lost interest and where they stopped believing you, not what they thought of it.

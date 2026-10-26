@@ -1,0 +1,13 @@
+{
+  "id": "grund",
+  "version": "1.0.0",
+  "look": "grund",
+  "name": {
+    "sv": "Grunden",
+    "en": "The basics"
+  },
+  "hint": {
+    "sv": "Mallar för personer, platser, saker, teman, motiv, källor, hemligheter och synopsis, och för redaktörens frågor och omarbetning i tre varv.",
+    "en": "Templates for characters, places, things, themes, motifs, sources, secrets and the synopsis, and for the editor's questions and revision in three passes."
+  }
+}

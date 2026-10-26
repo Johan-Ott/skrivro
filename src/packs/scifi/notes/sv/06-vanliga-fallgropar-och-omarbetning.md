@@ -17,12 +17,20 @@ sort: Guide
 - **Jargongträsket.** Tio påhittade termer på en sida. Använd vanliga ord så långt det går, och spara termerna för det som verkligen är nytt.
 - **Glömda regler.** Tidsresan hade ett pris i första delen, men inte i den sista. Håll koll på reglerna.
 
-**Checklista för omarbetningen**
+**Omarbetning, i tre varv**
 
-- Markera varje stycke som förklarar teknik. Kan det kortas till hälften, eller flyttas in i en scen med konflikt?
-- Gå igenom alla påhittade termer. Behövs alla, och förklaras de av sammanhanget?
+Varv 1, strukturen:
+
+- Märk scenerna med etiketterna Novum och Följder och filtrera fram dem i Innehåll. Följs idén genom hela boken, eller försvinner den i mitten?
 - Läs slutet bredvid anteckningen om novumet. Följer lösningen reglerna?
 - Gör ett överslag för avstånd, tider och mängder. Gäller samma siffror genom hela boken?
-- Märk scenerna med etiketterna Novum och Följder och filtrera fram dem i Innehåll. Följs idén genom hela boken, eller försvinner den i mitten?
+
+Varv 2, scenerna:
+
 - Fråga för varje kapitel: vad betyder det här för en vanlig människa i den här världen?
+- Markera varje stycke som förklarar teknik. Kan det kortas till hälften, eller flyttas in i en scen med konflikt?
 - Läs första kapitlet som en ny läsare. Förstår du vem det handlar om, var vi är och vad som står på spel?
+
+Varv 3, raderna:
+
+- Gå igenom alla påhittade termer. Behövs alla, och förklaras de av sammanhanget?

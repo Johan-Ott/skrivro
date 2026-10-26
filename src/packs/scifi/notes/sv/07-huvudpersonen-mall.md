@@ -6,24 +6,34 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Vill:** vad jagar hen när boken börjar? Något konkret som går att se.
+**Vill och behöver:**
 
-**Behöver:** vad måste hen förstå eller släppa taget om för att klara slutet?
+<!-- Vad jagar hen, och vad måste hen förstå för att klara slutet? -->
 
-**Lögnen hen tror på:** den felaktiga övertygelse om sig själv eller världen som det nya kommer att utmana.
+**Lögnen hen tror på:**
 
-**Platsen i världen:** yrke, klass, bakgrund. Vilken del av samhället ser läsaren genom hen?
+<!-- Vilken tro om sig själv eller världen utmanar det nya? -->
 
-**Förhållandet till det nya:** använder hen det, lever hen på det, eller drabbas hen av det?
+**Platsen i världen:**
 
-**Det hen tar för givet:** vad i den här framtiden är så självklart för hen att hen aldrig ifrågasätter det?
+<!-- Vilken del av samhället ser läsaren genom hen? -->
 
-**Kunnandet:** vad är hen bra på, som läsaren kan lita på när det blir kris?
+**Förhållandet till det nya:**
 
-**Rösten:** hur låter hen? Vilka ord ur bokens värld använder hen utan att tänka på det?
+<!-- Använder hen det, lever hen på det eller drabbas hen av det? -->
 
-**Det personliga som står på spel:** en person, ett minne, ett hem, en kropp.
+**Kunnandet:**
 
-**Den inre frågan:** hur speglar hens konflikt bokens stora tänk om?
+<!-- Vad är hen bra på när det blir kris? -->
 
-**Hur hen förändras:** vilket val i slutet visar vem hen har blivit?
+**Rösten:**
+
+<!-- Vilka ord ur bokens värld använder hen utan att tänka? -->
+
+**Det som står på spel:**
+
+<!-- Vad personligt speglar bokens stora tänk om? -->
+
+**Förändringen:**
+
+<!-- Vilket val i slutet visar vem hen har blivit? -->

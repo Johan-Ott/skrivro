@@ -4,24 +4,36 @@ sort: karaktarer
 
 # The antagonist (template)
 
-Rename the note to the character's name, or to the name of the power behind the threat.
+Rename the note to the character's name, or the power behind the threat.
 
-**The goal:** what do they want to achieve, in one sentence?
+**The goal:**
 
-**Why they think they're right:** from their side, what is good about the plan?
+<!-- What do they want, in one sentence? -->
 
-**The source of their power:** magic, an army, faith, knowledge. What do they have that the main character lacks?
+**Why they are right:**
 
-**The price they've already paid:** what has power cost them? An antagonist who has sacrificed something runs deeper.
+<!-- What is good about the plan, seen from their side? -->
 
-**The mirror:** how are they like the main character, or like the person the main character could become?
+**The power and its price:**
 
-**Where things stand when the book begins:** how far has the plan come? A threat that already has the upper hand creates pressure from the first page.
+<!-- What do they have that the main character lacks, and what did it cost? -->
 
-**The plan in the meantime:** what are they doing while the main character is on the road? The antagonist doesn't stand still between scenes.
+**The mirror:**
 
-**The face:** if the threat is a power or a being, which person does the main character meet face to face?
+<!-- How are they like the person the main character could become? -->
 
-**The weakness:** what can bring them down in the end, and where is it planted?
+**The plan:**
 
-**The first encounter:** when and how does the reader first sense the threat?
+<!-- How far has the plan come, and what are they doing while the main character is on the way? -->
+
+**The face:**
+
+<!-- If the threat is a power: who does the main character meet face to face? -->
+
+**First encounter:**
+
+<!-- When does the reader first notice the threat? -->
+
+**The weakness:**
+
+<!-- What can bring them down, and where is it planted? -->

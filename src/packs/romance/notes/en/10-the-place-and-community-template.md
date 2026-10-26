@@ -6,20 +6,30 @@ sort: The community
 
 Rename the note to the name of the place.
 
-**The place:** town, neighbourhood, shop, farm or house. How does it look, smell and sound, through the seasons?
+**The place:**
 
-**Why here:** why does the main character end up here, and why do they not want to stay at first?
+<!-- How does it look, smell and sound, through the seasons? -->
 
-**What only exists here:** readers love the island, the café and the bookshop, but what makes your place yours? A detail, a problem or a tradition no other book has.
+**Why here:**
 
-**The people:** three to five people who live here. A name, a quirk and a small story of their own for each.
+<!-- Why does the main character not want to stay at first? -->
 
-**The traditions:** a festival, a market, a meeting, something that recurs and can carry a scene.
+**What only exists here:**
 
-**The threat:** what could be lost? A house to be sold, a shop in trouble, a development that looms.
+<!-- Which detail or tradition does no other book have? -->
 
-**The common cause:** what do people gather around, and how is the main character drawn in?
+**The people:**
 
-**When they rally:** how does the community show at the end that the main character belongs?
+<!-- Three to five residents: a name and a quirk each. -->
 
-**What has changed:** how does the place look in the last chapter, and what has the main character given it?
+**The traditions:**
+
+<!-- Which festival or market can carry a scene? -->
+
+**The threat and the common cause:**
+
+<!-- What could be lost, and what does everyone gather around? -->
+
+**When they rally:**
+
+<!-- How does the community show at the end that the main character belongs? -->

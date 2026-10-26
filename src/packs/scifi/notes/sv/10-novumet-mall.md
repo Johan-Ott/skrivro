@@ -6,28 +6,34 @@ sort: Världen
 
 Byt namn på anteckningen till det människorna i världen kallar det nya.
 
-**Det nya i en mening:** vad finns här som inte finns i vår värld?
+**Det nya i en mening:**
 
-**Hur det fungerar, ungefär:** så mycket att du själv känner dig säker. Läsaren får bara se en bråkdel.
+<!-- Vad finns här som inte finns i vår värld? -->
 
-**Reglerna:** vad kan det, och vad kan det inte?
+**Hur det fungerar:**
 
-**Priset:** energi, pengar, hälsa, frihet, något annat. Vem betalar?
+<!-- Vad behöver du själv veta, även om läsaren bara ser en bråkdel? -->
 
-**Gränsen:** det som aldrig går, och som berättelsen kommer att pröva.
+**Gränsen:**
 
-**Siffrorna:** de mått du måste hålla konsekventa, som kostnad, räckvidd, tid och energi.
+<!-- Vad kan det aldrig? Det är gränsen berättelsen prövar. -->
 
-**Ursprunget:** vem skapade eller upptäckte det, och när? Vad hände strax efteråt?
+**Priset:**
 
-**Första ledet:** den uppenbara följden.
+<!-- Vem betalar, och med vad? -->
 
-**Andra ledet:** följden för samhället, arbetet och makten.
+**Siffrorna:**
 
-**Tredje ledet:** den oväntade följden som ingen planerade för.
+<!-- Vilka mått för kostnad, räckvidd och tid måste hålla genom boken? -->
 
-**I vardagen:** ett ord, en vana eller en artighetsregel som finns tack vare det nya.
+**Följderna:**
 
-**Det som inte har förändrats:** vad är precis som förr, och ger läsaren fotfäste?
+<!-- Vilken följd för samhället planerade ingen för? -->
 
-**När det går fel:** hur ser en olycka ut, och vem drabbas?
+**I vardagen:**
+
+<!-- Vilket ord eller vilken vana finns tack vare det nya? -->
+
+**När det går fel:**
+
+<!-- Hur ser en olycka ut, och vem drabbas? -->

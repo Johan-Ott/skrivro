@@ -170,7 +170,7 @@ export function useProject(onFolderChange: () => void) {
   }, [open]);
   useFolderWatch(dir, refresh, onFolderChange);
   const close = useCallback(() => setProject(null), []);
-  return { project, opening, open, close, choose, refresh, ...updates };
+  return { project, projectRef, opening, open, close, choose, refresh, ...updates };
 }
 
 const GATHER_MS = 100;

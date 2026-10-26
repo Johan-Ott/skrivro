@@ -1,7 +1,8 @@
 import { useCallback } from "react";
-import { noteQuestions } from "../../project/noteQuestions.js";
+import { standardNoteBody } from "../../project/packs.js";
 import { isLinkedByDefault } from "../../project/cards.js";
-import { insertNode, NOTES_ID, type TreeNode } from "../../project/tree.js";
+import { sortKey } from "../../project/sorts.js";
+import { findNode, insertNode, NOTES_ID, type TreeNode } from "../../project/tree.js";
 import { createFileNote, saveResearchFile } from "../../project/researchFiles.js";
 import { newSceneId } from "../../storage/sceneId.js";
 import { t } from "../../i18n/i18n.js";
@@ -57,7 +58,8 @@ export function useNoteActions({ project, session, updateTree, refresh }: NoteAc
     async (note: NewNote) => {
       if (!project || project.isReadOnly) return;
       const { tree, sortId } = withSort(project.tree, note);
-      const body = note.body ?? noteQuestions(sortId);
+      const sort = findNode(tree, sortId)?.node;
+      const body = note.body ?? (sort ? standardNoteBody(project.fields, sortKey(sort)) : "");
       const id = await createScene(platform.fileSystem, project.dir, note.name, body);
       if (note.isLinked !== isLinkedByDefault(sortId)) {
         await setNoteLink(session, project.dir, id, note.isLinked);

@@ -1,27 +1,39 @@
 ---
-sort: Epoken
+sort: platser
 ---
 
-# Miljön (mall)
+# Miljön i sin tid (mall)
 
 Byt namn på anteckningen till platsens namn: gården, kvarteret, skeppet, slottet eller staden. Gör en för varje viktig plats.
 
-**Var och när:** platsens läge, och vilka år den syns i boken.
+**Var och när:**
 
-**Verklig eller påhittad:** fanns platsen på riktigt? Om den är påhittad, vilken verklig plats bygger den på?
+<!-- Var ligger platsen, och vilka år syns den i boken? -->
 
-**Hur den såg ut:** byggnader, material, rum, gator. Vad som var nytt och vad som var gammalt redan då.
+**Verklig eller påhittad:**
 
-**Ljud, lukter och ljus:** vad man hör, känner och ser vid olika tider på dygnet och året.
+<!-- Fanns den på riktigt, eller vilken verklig plats bygger den på? -->
 
-**Människorna:** vilka som bor och arbetar här, vem som bestämmer och vem som tjänar.
+**Hur den såg ut:**
 
-**Vad som händer här en vanlig dag:** arbete, handel, gudstjänst, fester, bråk.
+<!-- Vilka byggnader, material och rum fanns, nya och gamla? -->
 
-**Hur skeendet når hit:** vad som förändras när historien bryter in. Soldater, rykten, brist, nya människor.
+**Ljud, lukter och ljus:**
 
-**Årstiderna:** hur platsen förändras över året, och vad det betyder för handlingen.
+<!-- Vad hör, känner och ser man vid olika tider? -->
 
-**Kartan i huvudet:** avstånd till närmaste by, stad, kyrka och hamn, och hur lång tid det tar att ta sig dit.
+**Människorna:**
 
-**Källor:** kartor, bilder, beskrivningar eller besök som platsen bygger på.
+<!-- Vilka bor och arbetar här, och vem bestämmer? -->
+
+**En vanlig dag:**
+
+<!-- Vad händer här en vanlig dag? -->
+
+**Hur skeendet når hit:**
+
+<!-- Vad förändras när historien bryter in? -->
+
+**Källor:**
+
+<!-- Vilka kartor, bilder eller besök bygger platsen på? -->

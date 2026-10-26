@@ -6,20 +6,30 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Vill:** vad är antagonisten beredd att göra allt för?
+**Vill:**
 
-**Varför det är begripligt:** på vilket sätt har hen rätt? En antagonist med en poäng är farligast.
+<!-- Vad är hen beredd att göra allt för? -->
 
-**Vad hen tror om kärlek:** ofta en spegel av huvudpersonernas lögn. Vad har hen förlorat, eller aldrig fått?
+**Varför det är begripligt:**
 
-**Makten:** vad har hen som huvudpersonerna saknar? En armé, magi, kunskap, ett namn.
+<!-- På vilket sätt har hen rätt? -->
 
-**Hotet mot relationen:** hur driver hen isär de två? Vilken hemlighet känner hen till, vilken lojalitet utnyttjar hen?
+**Vad hen tror om kärlek:**
 
-**Frestelsen:** vad erbjuder hen någon av de två, och varför är det svårt att säga nej? Makt, hämnd, att få tillbaka den som gick förlorad.
+<!-- Vad har hen förlorat, eller aldrig fått? -->
 
-**Kopplingen:** hur är hen knuten till någon av dem? Släkt, lärare, före detta allierad, den som orsakade såret.
+**Makten och kopplingen:**
 
-**Första synliga steget:** när märker läsaren hen för första gången, och vad gör hen då?
+<!-- Hur är hen knuten till någon av de två? -->
 
-**Hur hen förlorar:** vad i bandet mellan de två har hen inte räknat med?
+**Hotet mot relationen:**
+
+<!-- Vad erbjuder hen som är svårt att säga nej till? -->
+
+**Första synliga steget:**
+
+<!-- När märker läsaren hen första gången? -->
+
+**Hur hen förlorar:**
+
+<!-- Vad i bandet mellan de två har hen inte räknat med? -->
