@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { checkSpellingNow, type SpellingSwitch } from "../../editor/spellingMarks.js";
 import type { useEditorView } from "../../editor/useEditorView.js";
 import { bookLanguage } from "../../project/bookLanguage.js";
+import { everyName } from "../../project/cards.js";
 import type { Notes } from "../notes/useNotes.js";
 import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
@@ -31,7 +32,7 @@ export function useSpelling(
   const spelling = platform.spelling;
   const language = project ? bookLanguage(project.fields) : null;
   // As text, so a new notes object with the same names asks nothing again.
-  const names = notes.cards.map((card) => card.name).join("\n");
+  const names = everyName(notes.cards).join("\n");
   const own = project ? ownWords(project.fields).join("\n") : "";
   const isKnown = useMemo(() => knownWords(names.split("\n"), own.split("\n")), [names, own]);
   const addWord = (word: string) =>

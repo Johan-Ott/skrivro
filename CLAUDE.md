@@ -61,7 +61,9 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   synced devices never write the same file; reading adds them up with the older `stats.json`
   (`project/stats.ts`). The device name is made once and kept in localStorage.
   Each scene save adds what it changed (`onSaved` in `sceneSession.ts`), so moving or trashing
-  scenes never counts as writing. The daily goal is `dailyGoal` in project.json.
+  scenes never counts as writing. A save in a note counts for nothing (`listenToSaves`), so the
+  day's words, the goal and the streak are the manuscript's. The daily goal is `dailyGoal` in
+  project.json.
 - Footnotes are Markdown footnotes: `[^1]` in the text, `[^1]: Text.` at the end of the scene file
   (`manuscript/footnotes.ts`). In the editor a footnote is an inline atom holding its plain text;
   CSS numbers them. Ctrl+Alt+F, the palette or the selection bar inserts one
@@ -135,6 +137,10 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   first, then the book (`notes/noteHomes.ts`); the sidebar shows the series' sorts and the book's
   own only when they hold notes. Moving notes into a series renames their files there
   (`moveNotesToSeries`), so nothing is copied or deleted; an open note is closed first.
+- A note is linked by its title and by `aliases: Eken, Kommissarien` (comma separated) in its front
+  matter, never by a guessed part of the title, since "Doktor" of "Doktor Holm" would link every
+  doctor (`namesOf` in `cards.ts`). A trailing s is the genitive. Nothing in the interface writes
+  `aliases:` yet.
 - Names of notes are underlined in the open scene by a decoration plugin (`editor/mentions.ts`);
   nothing is written into the scene file. The editor only gets `{ id, pattern }` pairs from
   `useMentionLinks`; a click shows `MentionCard`.

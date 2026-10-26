@@ -95,13 +95,20 @@ export function useWritingStats(
 
 /** Each save is counted, remembered as where the writer is, and kept as an automatic version. */
 export function listenToSaves(
-  { savedRef, editor }: Pick<ReturnType<typeof useSceneSession>, "savedRef" | "editor">,
+  {
+    savedRef,
+    editor,
+    session,
+  }: Pick<ReturnType<typeof useSceneSession>, "savedRef" | "editor" | "session">,
   recordSave: (dir: string, before: string, after: string) => void,
   isAutoSnapshotOn: boolean,
 ) {
   savedRef.current = (scene, before, after) => {
-    recordSave(scene.dir, before, after);
-    recordText(`${scene.dir}/${scene.id}`, after, wordsAdded(before, after));
+    // Only the manuscript is counted: what is written in a note is not the book growing.
+    if (!session.isNote(scene.dir, scene.id)) {
+      recordSave(scene.dir, before, after);
+      recordText(`${scene.dir}/${scene.id}`, after, wordsAdded(before, after));
+    }
     const state = editor.viewRef.current?.state;
     if (state) rememberPlace(scene.dir, placeOf(scene.id, state));
     if (!isAutoSnapshotOn) return;

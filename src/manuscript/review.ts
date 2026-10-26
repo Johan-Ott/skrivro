@@ -45,9 +45,12 @@ export function nameSuspects(
   ignored: string[],
 ): NameSuspect[] {
   const found = new Map<string, NameSuspect>();
+  const written = new Set(names.flatMap((name) => name.split(/\s+/)));
+  const isWritten = (word: string) =>
+    written.has(word) || (word.endsWith("s") && written.has(word.slice(0, -1)));
   for (const [sceneId, text] of Object.entries(sceneTexts)) {
     for (const [word] of text.matchAll(CAPITALISED_WORD)) {
-      if (ignored.includes(word)) continue;
+      if (ignored.includes(word) || isWritten(word)) continue;
       const suggestion = closestName(word, names);
       if (!suggestion) continue;
       const suspect = found.get(word) ?? { word, suggestion, count: 0, sceneIds: [] };

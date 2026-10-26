@@ -50,14 +50,14 @@ describe("a template question", () => {
 
   it("is not counted as words, and nor are the labels above unanswered questions", () => {
     expect(countDocumentWords(parseMarkdown(NEW_PERSON, NOTE))).toBe(0);
-    expect(countMarkdownWords(NEW_PERSON)).toBe(0);
+    expect(countMarkdownWords(NEW_PERSON, true)).toBe(0);
   });
 
   it("counts the answer and its label, in the document and in the file alike", () => {
     const answered = answerFirstQuestion();
 
     expect(countDocumentWords(answered)).toBe(3);
-    expect(countMarkdownWords(serializeMarkdown(answered))).toBe(3);
+    expect(countMarkdownWords(serializeMarkdown(answered), true)).toBe(3);
   });
 });
 
@@ -88,9 +88,9 @@ describe("the count of a file with questions", () => {
     const crlf = NEW_PERSON.replaceAll("\n", "\r\n");
     const spaced = "**Vill:**\n\n\n<!-- Vad jagar hen? -->\n";
 
-    expect(countMarkdownWords(crlf)).toBe(countDocumentWords(parseMarkdown(crlf, NOTE)));
-    expect(countMarkdownWords(spaced)).toBe(countDocumentWords(parseMarkdown(spaced, NOTE)));
-    expect(countMarkdownWords(spaced)).toBe(0);
+    expect(countMarkdownWords(crlf, true)).toBe(countDocumentWords(parseMarkdown(crlf, NOTE)));
+    expect(countMarkdownWords(spaced, true)).toBe(countDocumentWords(parseMarkdown(spaced, NOTE)));
+    expect(countMarkdownWords(spaced, true)).toBe(0);
   });
 });
 
@@ -108,5 +108,20 @@ describe("a comment under a bold line", () => {
     const doc = parseMarkdown(OWN_NOTE, NOTE);
 
     expect(doc.child(1).attrs["prompt"]).toBe("kom ihåg tidslinjen");
+  });
+});
+
+describe("the count of a file", () => {
+  const OWN_COMMENT = "Hon gick.\n\n**Obs:**\n\n<!-- kom ihåg tidslinjen -->\n";
+
+  it("leaves a scene's bold line and comment as the document counts them", () => {
+    expect(countMarkdownWords(OWN_COMMENT)).toBe(countDocumentWords(parseMarkdown(OWN_COMMENT)));
+  });
+
+  it("leaves a note's unanswered question out, as the document does", () => {
+    const note = parseMarkdown(OWN_COMMENT, NOTE);
+
+    expect(countMarkdownWords(OWN_COMMENT, true)).toBe(countDocumentWords(note));
+    expect(countMarkdownWords(OWN_COMMENT, true)).toBe(2);
   });
 });

@@ -15,21 +15,31 @@ export interface SceneSummary {
   title: string;
   words: number;
   status: SceneStatus;
+  /** Other names of a note, from `aliases: Smeknamn, Titel` in its front matter. */
+  aliases?: string[];
   /** Without one the note follows its sort. */
   link?: boolean;
   /** A research file's name in the book's filer/ folder. */
   file?: string;
 }
 
-function summarize(text: string): SceneSummary {
+const namesIn = (list: string | null) =>
+  (list ?? "")
+    .split(",")
+    .map((name) => name.trim())
+    .filter((name) => name !== "");
+
+function summarize(text: string, isNote: boolean): SceneSummary {
   const { frontMatter, body } = splitSceneFile(text);
   const title = sceneTitle(frontMatter) ?? t("Namnlös scen");
   const link = noteLink(frontMatter);
+  const aliases = namesIn(readField(frontMatter, "aliases"));
   const file = readField(frontMatter, "file");
   return {
     title,
-    words: countMarkdownWords(body),
+    words: countMarkdownWords(body, isNote),
     status: sceneStatus(frontMatter),
+    ...(aliases.length === 0 ? {} : { aliases }),
     ...(link === null ? {} : { link }),
     ...(file === null ? {} : { file }),
   };
@@ -74,12 +84,12 @@ function checksum(text: string) {
   return `${text.length}:${(hash >>> 0).toString(36)}`;
 }
 
-function cachedSummary(path: string, text: string): SceneSummary {
+function cachedSummary(path: string, text: string, isNote: boolean): SceneSummary {
   const all = keptSummaries();
-  const sum = checksum(text);
+  const sum = `${isNote ? "n" : "s"}${checksum(text)}`;
   const found = all.get(path);
   if (found?.sum === sum) return found.summary;
-  const summary = summarize(text);
+  const summary = summarize(text, isNote);
   all.delete(path);
   all.set(path, { sum, summary });
   isChanged = true;
@@ -97,13 +107,15 @@ export async function readSceneSummaries(
   fileSystem: FileSystem,
   dir: string,
   sceneIds: string[],
-  known?: KnownSummaries,
+  options: { known?: KnownSummaries | undefined; noteIds?: ReadonlySet<string> } = {},
 ) {
+  const { known, noteIds } = options;
   const entries = await Promise.all(
     sceneIds.map(async (id) => {
       const path = scenePath(dir, id);
       const kept = known && !known.changed.has(path) ? known.summaries[id] : undefined;
-      return [id, kept ?? cachedSummary(path, await fileSystem.readText(path))] as const;
+      const text = kept ? "" : await fileSystem.readText(path);
+      return [id, kept ?? cachedSummary(path, text, noteIds?.has(id) ?? false)] as const;
     }),
   );
   saveKept();

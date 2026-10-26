@@ -1517,6 +1517,7 @@
   "✓ I boken": "✓ In the book",
   "{count} mallar": "{count} templates",
   "Mall": "Template",
+  "Sparad som mall: {name}. Du hittar den under Mall i Ny anteckning.": "Saved as a template: {name}. You find it under Template in New note.",
   "Enkel": "Simple",
   "Välj dem under Mall när du skapar en ny anteckning, så många gånger du vill.": "Pick them under Template when you make a new note, as many times as you like.",
   "Spara som mall": "Save as template"

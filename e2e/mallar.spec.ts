@@ -58,6 +58,7 @@ test("a note saved as a template starts the next note in its sort", async ({ pag
   await sidebar.getByText("Personer", { exact: true }).click();
   await sidebar.getByText("Elin", { exact: true }).click({ button: "right" });
   await page.getByRole("menuitem", { name: "Spara som mall" }).click();
+  await expect(page.getByRole("status")).toContainText("Sparad som mall: Elin");
 
   await page.getByRole("button", { name: "+ Ny anteckning" }).click();
   const note = page.getByRole("dialog", { name: "Ny anteckning" });

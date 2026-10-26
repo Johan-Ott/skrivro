@@ -45,6 +45,30 @@ describe("nameSuspects", () => {
   });
 });
 
+describe("nameSuspects with aliases", () => {
+  it("does not flag a word of a full name because an alias is one letter from it", () => {
+    const names = ["Kommissarie Ekblom", "Kommissarien"];
+
+    const suspects = nameSuspects({ scen: "Kommissarie Ekblom kom. Kommissarien log." }, names, []);
+
+    expect(suspects).toEqual([]);
+  });
+
+  it("does not flag the genitive of a word of a full name either", () => {
+    const names = ["Kommissarie Ekblom", "Kommissarien"];
+
+    const suspects = nameSuspects({ scen: "Kommissaries hatt låg där." }, names, []);
+
+    expect(suspects).toEqual([]);
+  });
+
+  it("still flags a misspelling of an alias", () => {
+    const suspects = nameSuspects({ scen: "Kommissariem log." }, ["Kommissarien"], []);
+
+    expect(suspects.map((suspect) => suspect.word)).toEqual(["Kommissariem"]);
+  });
+});
+
 describe("repetitions", () => {
   const text =
     "Det kom i morse. Som om ingenting hade hänt.\nHon satte sig. Utanför fönstret hade isen lagt sig.";

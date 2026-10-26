@@ -232,3 +232,17 @@ test("the genre packs open from the book's menu, and a pack is added to the book
   await expect(page.locator(".pack-preview-page h3")).toBeVisible();
   await expect(page.getByRole("button", { name: "Stäng" })).toBeInViewport();
 });
+
+test("Spara som mall says so in a toast wide enough to read, above the tabs", async ({ page }) => {
+  await page.getByRole("treeitem", { name: /^Personer/ }).click();
+  await page.getByRole("treeitem").filter({ hasText: "Elin" }).click({ button: "right" });
+
+  await page.getByRole("menuitem", { name: "Spara som mall" }).click();
+
+  const toast = page.getByRole("status").filter({ hasText: "Sparad som mall" });
+  await expect(toast).toBeVisible();
+  const box = await toast.boundingBox();
+  const tabs = await page.getByRole("navigation", { name: "Läge" }).boundingBox();
+  expect(box?.width).toBeGreaterThan(250);
+  expect((box?.y ?? 0) + (box?.height ?? 0)).toBeLessThan(tabs?.y ?? 0);
+});

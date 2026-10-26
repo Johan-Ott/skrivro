@@ -39,3 +39,33 @@ describe("readSceneSummaries", () => {
     });
   });
 });
+
+describe("readSceneSummaries for notes", () => {
+  it("count a note's unanswered questions as no words, and a scene's comment as words", async () => {
+    const text = "**Vill:**\n\n<!-- Vad jagar hen? -->\n";
+    const files = createMemoryFileSystem({
+      "/bok/scenes/NOTE.md": text,
+      "/bok/scenes/SCENE.md": text,
+    });
+
+    const summaries = await readSceneSummaries(files, "/bok", ["NOTE", "SCENE"], {
+      noteIds: new Set(["NOTE"]),
+    });
+
+    expect(summaries["NOTE"]?.words).toBe(0);
+    expect(summaries["SCENE"]?.words).toBe(4);
+  });
+});
+
+describe("readSceneSummaries aliases", () => {
+  it("read the other names of a note from its front matter", async () => {
+    const files = createMemoryFileSystem({
+      "/bok/scenes/ERIK.md":
+        "---\nid: ERIK\ntitle: Erik Holm\naliases: Eken, Kommissarien\n---\nText.",
+    });
+
+    const summaries = await readSceneSummaries(files, "/bok", ["ERIK"]);
+
+    expect(summaries["ERIK"]?.aliases).toEqual(["Eken", "Kommissarien"]);
+  });
+});

@@ -1242,6 +1242,11 @@ body .phone-app .text-when input {
   z-index: var(--layer-float);
 }
 
+/* The book's toasts are stacked by their own container, which already clears the tabs. */
+.with-phone-tabs .app-toasts .toast {
+  position: static;
+}
+
 /* A version's two buttons, one under the other, so neither wraps and is cut off. */
 @media (max-width: 600px) {
   .snapshot-view .review-actions {

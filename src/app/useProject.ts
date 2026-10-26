@@ -8,6 +8,7 @@ import {
   type SceneSummary,
 } from "../project/sceneSummaries.js";
 import { reconcileScenes, type TreeNode } from "../project/tree.js";
+import { noteIdsOf } from "../project/cards.js";
 import { openProjectFolder, type OpenedProject } from "../storage/projectFolder.js";
 import { describeSaveError, type SaveFailure } from "@llkit/storage/saveError.js";
 import { errorLog, recordFailure } from "@llkit/errorLog.js";
@@ -41,7 +42,8 @@ export async function readProject(
   const listing = await openProjectFolder(fileSystem, dir);
   const file = await readProjectFile(fileSystem, dir, listing.scenes, isOpening);
   const { tree } = reconcileScenes(file.tree, listing.scenes);
-  const summaries = await readSceneSummaries(fileSystem, dir, listing.scenes, known);
+  const noteIds = noteIdsOf(tree);
+  const summaries = await readSceneSummaries(fileSystem, dir, listing.scenes, { known, noteIds });
   const title = file.fields["title"];
   const name = typeof title === "string" ? title : folderName(dir);
   return {

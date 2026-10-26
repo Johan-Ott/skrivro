@@ -14,6 +14,7 @@ import { libraryOf } from "../journey/journeyFile.js";
 import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
+import { templateSaved } from "./TemplateSavedToast.js";
 
 // The templates a new note can start from: the book's packs' and the writer's own.
 
@@ -41,6 +42,7 @@ export async function saveNoteAsTemplate(project: Project, libraryDir: string | 
   const template = { name, sort: sortKey(parent), body: splitSceneFile(text).body };
   await saveNoteTemplate(platform.fileSystem, await libraryOf(libraryDir), template);
   await loadOwn(libraryDir);
+  templateSaved.set(name);
 }
 
 function templatesFor(project: Project, form: Form, mine: OwnNoteTemplate[]) {

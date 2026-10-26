@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { cardsOf, chapterRuns, countMentions, mentionPattern } from "../src/project/cards";
+import {
+  cardsOf,
+  chapterRuns,
+  countMentions,
+  everyName,
+  mentionPattern,
+  namesOf,
+} from "../src/project/cards";
 import {
   CHARACTERS_ID,
   NOTES_ID,
@@ -108,5 +115,54 @@ describe("chapterRuns", () => {
     ];
 
     expect(labels).toEqual(["1–8", "1, 2, 5, 8", ""]);
+  });
+});
+
+describe("the names a note is linked by", () => {
+  const erik = {
+    id: "erik",
+    sortId: CHARACTERS_ID,
+    name: "Erik Holm",
+    aliases: ["Holm", "Erik", "Eken"],
+  };
+
+  it("are its title and its aliases, with the genitive s", () => {
+    const text = "Holm teg. Erik log. Eriks hand. Eken log. Erik Holms rygg. Eker.";
+
+    const found = text.match(mentionPattern(namesOf(erik)) ?? /^$/g);
+
+    expect(found).toEqual(["Holm", "Erik", "Eriks", "Eken", "Erik Holms"]);
+  });
+
+  it("never include a part of the title that the writer has not listed", () => {
+    const doctor = { id: "doktor", sortId: CHARACTERS_ID, name: "Doktor Holm" };
+
+    const found = "Doktor Holm kom. Doktorn sa Holm. En doktor.".match(
+      mentionPattern(namesOf(doctor)) ?? /^$/g,
+    );
+
+    expect(namesOf(doctor)).toEqual(["Doktor Holm"]);
+    expect(found).toEqual(["Doktor Holm"]);
+  });
+
+  it("link a person by the full title and its s form only, not by the first or last name alone", () => {
+    const plain = { id: "plain", sortId: CHARACTERS_ID, name: "Erik Holm" };
+    const text = "Erik Holm kom. Erik Holms hatt. Holm gick. Erik log.";
+
+    const found = text.match(mentionPattern(namesOf(plain)) ?? /^$/g);
+
+    expect(found).toEqual(["Erik Holm", "Erik Holms"]);
+  });
+
+  it("are counted as mentions of the one note", () => {
+    const mentions = countMentions([erik], { scene: "Holm kom. Erik gick. Han sa inget." });
+
+    expect(mentions.get("erik")?.count).toBe(2);
+  });
+
+  it("list every name once for spelling and the name check", () => {
+    const place = { id: "udden", sortId: "platser", name: "Holm", aliases: ["Erik"] };
+
+    expect(everyName([erik, place])).toEqual(["Erik Holm", "Holm", "Erik", "Eken"]);
   });
 });

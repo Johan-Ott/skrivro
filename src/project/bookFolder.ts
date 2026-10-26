@@ -4,6 +4,7 @@ import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { openProjectFolder } from "../storage/projectFolder.js";
 import { newSceneId, scenePath } from "../storage/sceneId.js";
 import type { BookParts } from "./bookSettings.js";
+import { noteIdsOf } from "./cards.js";
 import { readProjectFile, writeProjectFile } from "./projectFile.js";
 import { readSceneSummaries } from "./sceneSummaries.js";
 import { reconcileScenes, type TreeNode } from "./tree.js";
@@ -22,7 +23,8 @@ async function readFile({ fileSystem, dir }: BookFolder) {
 export async function readBook(book: BookFolder) {
   const { file, scenes } = await readFile(book);
   const { tree } = reconcileScenes(file.tree, scenes);
-  const summaries = await readSceneSummaries(book.fileSystem, book.dir, scenes);
+  const noteIds = noteIdsOf(tree);
+  const summaries = await readSceneSummaries(book.fileSystem, book.dir, scenes, { noteIds });
   return { fields: file.fields, tree, summaries };
 }
 

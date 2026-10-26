@@ -8,7 +8,7 @@ import { narrationNotes, narrationOf } from "../../manuscript/narration.js";
 import { proseNotes, type ProseNote } from "../../manuscript/prose.js";
 import { splitCompounds } from "../../manuscript/compounds.js";
 import { bookLanguage } from "../../project/bookLanguage.js";
-import { mentionPattern, type Card } from "../../project/cards.js";
+import { cardsNamedIn, everyName, type Card } from "../../project/cards.js";
 import { CHARACTERS_ID, findNode } from "../../project/tree.js";
 import { chapterOf } from "../../project/treeLabels.js";
 import { platform } from "../platform.js";
@@ -78,12 +78,12 @@ export function useReview({ project, scene, doc, cards, repeatWindow }: ReviewIn
   const sceneText = doc.textBetween(0, doc.content.size, "\n");
   const inChapter = useMemo(() => {
     const text = [sceneText, ...chapterTexts].join("\n");
-    return cards.filter((card) => card.id !== scene.id && mentionPattern(card.name)?.test(text));
+    return cardsNamedIn(cards, text).filter((card) => card.id !== scene.id);
   }, [cards, sceneText, chapterTexts, scene.id]);
-  const suspects = useMemo(() => {
-    const names = cards.map((card) => card.name);
-    return nameSuspects({ [scene.id]: sceneText }, names, ignoredNames(project));
-  }, [cards, sceneText, scene.id, project]);
+  const suspects = useMemo(
+    () => nameSuspects({ [scene.id]: sceneText }, everyName(cards), ignoredNames(project)),
+    [cards, sceneText, scene.id, project],
+  );
   const repeats = useMemo(() => sceneRepetitions(doc, repeatWindow), [doc, repeatWindow]);
   const language = bookLanguage(project.fields);
   const prose = useMemo(() => {

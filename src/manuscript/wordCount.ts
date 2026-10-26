@@ -42,11 +42,11 @@ function withoutFences(body: string) {
 }
 
 /** The same count as the document's, from a scene file's text without building the document:
- * reading a long book is then many times faster. */
-export function countMarkdownWords(markdown: string): number {
+ * reading a long book is then many times faster. A note's unanswered questions are not words. */
+export function countMarkdownWords(markdown: string, isNote = false): number {
   const { body, notes } = splitFootnotes(markdown);
-  const text = withoutFences(body)
-    .replace(UNANSWERED_FIELD, "")
+  const unfenced = withoutFences(body);
+  const text = (isNote ? unfenced.replace(UNANSWERED_FIELD, "") : unfenced)
     .replace(PICTURE, "")
     .replace(TAG, "")
     .replace(ENTITY, "")
