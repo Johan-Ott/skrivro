@@ -47,6 +47,9 @@ export const manuscriptSchema = new Schema({
       attrs: {
         before: { default: null },
         style: { default: "brev" },
+        /** A list's first number and whether its items are parted by blank lines, as it was read. */
+        start: { default: 1 },
+        isSpread: { default: false },
         openFence: { default: null },
         innerTrailing: { default: null },
         closeFence: { default: null },

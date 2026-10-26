@@ -150,6 +150,15 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   (`notes/Aliases.tsx`), the only place for other names: the person templates have no such field.
 - A note of a series has no Gör till scen i: the series is shared by several books, so its notes
   are never a scene of one of them.
+- Lists: a note's lists are saved as Markdown lists (`- a`, `1. a`), so another editor reads them; a
+  scene's keep Skrivro's own `::: punktlista` form (`serializeMarkdown(doc, { isNote })`, told by
+  `textOf` in `app/sceneText.ts`). A list is untouched byte for byte until it changes. Typing `- `
+  at the start of a line makes a bullet in a note and a dialogue dash `– ` in a scene, `1. ` a
+  numbered list in a note (`editor/listInput.ts`). The phone has buttons for both lists. A list
+  keeps its first number (`3.`) and its blank lines between items. One with an item of two
+  paragraphs, a nested list or a checkbox is a raw block, in a note and in a scene: it cannot be
+  edited in the editor, and nothing of it is rewritten: a block that cannot be edited is better
+  than text that is lost, and such items are rare. Checkboxes that can be ticked come in phase 2.
 - Innehåll's filter also lists the notes whose name, other name or label holds the text.
 - A comment (`<!-- -->`) in a scene is the writer's note to self, alone on a line or among words: no
   word count counts it, not the file's, the document's or a selection's (`wordCount.ts`). The text

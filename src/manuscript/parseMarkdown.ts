@@ -1,4 +1,4 @@
-import type { List, Paragraph, PhrasingContent, RootContent } from "mdast";
+import type { List, ListItem, Paragraph, PhrasingContent, RootContent } from "mdast";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import type { Node } from "prosemirror-model";
 import { splitFootnotes, type FootnoteTexts } from "./footnotes.js";
@@ -105,15 +105,26 @@ export const listContent = (block: Node) => {
   return lines.join("\n");
 };
 
-// A Markdown list, as in a note written elsewhere, is shown as the punktlista or numrerad style;
-// it is written back as it was until it is changed. A list holding more than paragraphs stays.
+// An item of one plain paragraph: no second paragraph, nested list or checkbox (`[ ] text`, which
+// writing the text again would escape), since writing the list again would change them.
+const CHECKBOX = /^\[[ xX]\]\s/;
+const isPlainItem = (item: ListItem) => {
+  const [only] = item.children;
+  const first = only?.type === "paragraph" ? only.children[0] : undefined;
+  const isCheckbox = first?.type === "text" && CHECKBOX.test(first.value);
+  return item.children.length === 1 && only?.type === "paragraph" && !isCheckbox;
+};
+
+// A Markdown list is shown as the punktlista or numrerad style, with its first number and blank
+// lines, and written back as it was until changed. Any other list stays a raw block.
 function listFrom(list: List, chunk: string, notes: FootnoteTexts, source: string): Node | null {
-  const blocks = list.children.flatMap((item) => item.children);
-  if (!blocks.every((block) => block.type === "paragraph")) return null;
-  const items = blocks.map((block) => paragraphFrom(block as Paragraph, chunk, notes, null));
+  if (!list.children.every(isPlainItem)) return null;
+  const paragraphs = list.children.map((item) => item.children[0] as Paragraph);
+  const items = paragraphs.map((each) => paragraphFrom(each, chunk, notes, null));
   const style = list.ordered ? "numrerad" : "punktlista";
-  const shown = schema.node("styleBlock", { style }, items);
-  return schema.node("styleBlock", { style, source, canonical: listContent(shown) }, items);
+  const attrs = { style, start: list.start ?? 1, isSpread: list.spread ?? false };
+  const shown = schema.node("styleBlock", attrs, items);
+  return schema.node("styleBlock", { ...attrs, source, canonical: listContent(shown) }, items);
 }
 
 function styleBlock(

@@ -19,6 +19,7 @@ import { completionPlugin } from "./completion.js";
 import { NO_WORDS, type CompletionWords } from "./vocabulary.js";
 import { focusPlugin, typewriterPlugin } from "./focus.js";
 import { mentionsPlugin, type MentionMatcher } from "./mentions.js";
+import { listRules } from "./listInput.js";
 import { placeholder } from "./placeholder.js";
 import { promptHints } from "./promptHints.js";
 import { repetitionsPlugin } from "./repetitionMarks.js";
@@ -56,6 +57,8 @@ export interface EditorSwitches {
   isTypographyOn: () => boolean;
   isAutocorrectOn: () => boolean;
   isCompletionOn: () => boolean;
+  /** Whether the open text is a note: its lists are Markdown lists, a "- " starts one. */
+  isNote: () => boolean;
   completion: () => CompletionWords;
   mentionMatchers: () => MentionMatcher[];
   onMention: (id: string, box: DOMRect) => void;
@@ -78,6 +81,7 @@ export const DEFAULT_SWITCHES: EditorSwitches = {
   isTypographyOn: () => true,
   isAutocorrectOn: () => false,
   isCompletionOn: () => false,
+  isNote: () => false,
   completion: () => NO_WORDS,
   mentionMatchers: () => [],
   onMention: () => undefined,
@@ -123,6 +127,7 @@ const writingRules = (switches: EditorSwitches) =>
   inputRules({
     rules: [
       sceneBreakRule,
+      ...listRules(switches.isNote),
       ...typographyRules(switches.isTypographyOn),
       ...autocorrectRules(switches.isAutocorrectOn),
     ],

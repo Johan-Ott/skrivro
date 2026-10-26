@@ -10,7 +10,7 @@ import {
   withSceneTitle,
   type SceneStatus,
 } from "../manuscript/sceneFile.js";
-import { serializeMarkdown } from "../manuscript/serializeMarkdown.js";
+import { textOf } from "./sceneText.js";
 import { writeAtomic } from "@llkit/storage/atomicWrite.js";
 import { createAutosave, type SaveStatus } from "@llkit/storage/autosave.js";
 import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
@@ -55,9 +55,6 @@ export interface SceneSession {
   /** Set by the app, which knows the tree: a note may hold template questions, a scene never. */
   isNote: (dir: string, id: string) => boolean;
 }
-
-const textOf = (session: SceneSession, doc: Node) =>
-  joinSceneFile({ frontMatter: session.scene?.frontMatter ?? "", body: serializeMarkdown(doc) });
 
 export function createSceneSession(fileSystem: FileSystem, hooks: SceneSessionHooks) {
   const current: Pick<SceneSession, "scene" | "isSuggesting" | "isRearranging" | "isNote"> = {

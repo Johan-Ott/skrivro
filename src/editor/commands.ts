@@ -102,6 +102,12 @@ export function setStyle(style: StyleChoice): Command {
   };
 }
 
+/** The style, or plain text again when the paragraphs have it already. */
+export const toggleStyle =
+  (style: StyleName): Command =>
+  (state, dispatch) =>
+    setStyle(currentStyle(state) === style ? "brodtext" : style)(state, dispatch);
+
 export function isMarkActive(state: EditorState, markName: TextMark): boolean {
   const markType = schema.marks[markName];
   const { from, to, empty, $from } = state.selection;

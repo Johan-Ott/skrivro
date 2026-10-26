@@ -26,8 +26,13 @@ const logged = (status: SaveStatus) => {
 
 /** The logic lives in sceneSession.ts; this holds the React state. */
 // The editor is writable, and shows the book's pictures, exactly while a scene is open.
-function openedModes(modes: ReturnType<typeof useEditorView>["modes"], opened: OpenScene | null) {
+function openedModes(
+  modes: ReturnType<typeof useEditorView>["modes"],
+  opened: OpenScene | null,
+  session: SceneSession | null,
+) {
   modes.current.isEditable = opened !== null;
+  modes.current.isNote = () => opened !== null && (session?.isNote(opened.dir, opened.id) ?? false);
   modes.current.pictureUrl = opened ? (name) => pictureUrlIn(opened.dir, name) : async () => null;
 }
 
@@ -59,7 +64,7 @@ export function useSceneSession() {
         editor: { load, currentDoc: () => viewRef.current?.state.doc ?? null },
         // Set before the text loads, so the editor is writable exactly when a scene is open.
         onScene: (opened) => {
-          openedModes(modes, opened);
+          openedModes(modes, opened, sessionRef.current);
           setScene(opened && { ...opened });
         },
         onConflict: setConflict,

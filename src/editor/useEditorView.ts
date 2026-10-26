@@ -48,6 +48,8 @@ interface EditorModes {
   isTypographyOn: boolean;
   isAutocorrectOn: boolean;
   isCompletionOn: boolean;
+  /** Asked at each key, since a note moved into the manuscript is a scene from then on. */
+  isNote: () => boolean;
   /** Names and the book's own words, each set by what knows them. */
   completion: CompletionWords;
   isSpellcheckOn: boolean;
@@ -70,6 +72,7 @@ const START_MODES: EditorModes = {
   isTypographyOn: true,
   isAutocorrectOn: false,
   isCompletionOn: false,
+  isNote: () => false,
   completion: NO_WORDS,
   isSpellcheckOn: true,
   isEditable: false,
@@ -93,6 +96,7 @@ function useModeSwitches() {
     isTypographyOn: () => modes.current.isTypographyOn,
     isAutocorrectOn: () => modes.current.isAutocorrectOn,
     isCompletionOn: () => modes.current.isCompletionOn,
+    isNote: () => modes.current.isNote(),
     completion: () => modes.current.completion,
     isSpellcheckOn: () => modes.current.isSpellcheckOn,
     isEditable: () => modes.current.isEditable,

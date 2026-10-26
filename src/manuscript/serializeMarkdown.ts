@@ -4,8 +4,11 @@ import { listContent, parseMarkdown } from "./parseMarkdown.js";
 import { pictureMarkdown } from "./pictures.js";
 import { serializeInlineContent } from "./serializeInline.js";
 
-export function serializeMarkdown(doc: Node): string {
-  return serializeBlocks(doc) + String(doc.attrs["trailing"] ?? "") + footnoteDefinitions(doc);
+/** A note's lists are written as Markdown lists, so another editor reads them; a scene's keep
+ * Skrivro's own form. */
+export function serializeMarkdown(doc: Node, options: { isNote?: boolean } = {}): string {
+  const body = serializeBlocks(doc, options.isNote ?? false);
+  return body + String(doc.attrs["trailing"] ?? "") + footnoteDefinitions(doc);
 }
 
 const BLANK_LINE = /\n[ \t]*\r?\n/;
@@ -20,28 +23,31 @@ function gapBefore(block: Node, previous: Node | null): string {
   return isValid ? before : "\n\n";
 }
 
-function serializeBlocks(parent: Node): string {
+function serializeBlocks(parent: Node, isNote: boolean): string {
   let markdown = "";
   let previous: Node | null = null;
   parent.forEach((block) => {
-    markdown += gapBefore(block, previous) + serializeBlock(block);
+    markdown += gapBefore(block, previous) + serializeBlock(block, isNote);
     previous = block;
   });
   return markdown;
 }
 
 // Every block but a paragraph is written by its kind.
-const OTHER_BLOCKS: Record<string, (block: Node, source: string | null) => string> = {
+const OTHER_BLOCKS: Record<
+  string,
+  (block: Node, source: string | null, isNote: boolean) => string
+> = {
   rawBlock: (_block, source) => source ?? "",
   sceneBreak: (_block, source) => source ?? "* * *",
-  styleBlock: (block) => serializeStyleBlock(block),
+  styleBlock: (block, _source, isNote) => serializeStyleBlock(block, isNote),
   picture: (block, source) => pictureSource(block, source),
 };
 
-function serializeBlock(block: Node): string {
+function serializeBlock(block: Node, isNote: boolean): string {
   const source = block.attrs["source"] as string | null;
   const other = OTHER_BLOCKS[block.type.name];
-  if (other) return other(block, source);
+  if (other) return other(block, source, isNote);
   const canonical = cachedCanonical(block);
   return source !== null && canonical === block.attrs["canonical"] ? source : canonical;
 }
@@ -65,14 +71,44 @@ function cachedCanonical(paragraph: Node): string {
   return canonical;
 }
 
-function serializeStyleBlock(block: Node): string {
+// A list of whole, one-line items, written as `- item` or `1. item`; null for anything else, as an
+// empty item that is still being typed, which keeps the fence until it holds text.
+function markdownList(block: Node): string | null {
+  const style = block.attrs["style"];
+  if (style !== "punktlista" && style !== "numrerad") return null;
+  const texts = block.children.map((item) =>
+    item.type.name === "paragraph" ? cachedCanonical(item) : "",
+  );
+  if (texts.some((text) => text === "" || text.includes("\n"))) return null;
+  const first = Number(block.attrs["start"]);
+  const lines = texts.map(
+    (text, index) => `${style === "numrerad" ? `${first + index}.` : "-"} ${text}`,
+  );
+  const list = lines.join(block.attrs["isSpread"] ? "\n\n" : "\n");
+  return isReadBackAsList(list, style, texts) ? list : null;
+}
+
+// An item that begins like Markdown, "# Rubrik" or "1. Ett", would be read as something else when
+// the file is opened again, so such a list keeps the fence.
+function isReadBackAsList(list: string, style: string, texts: string[]) {
+  const back = parseMarkdown(list);
+  const only = back.childCount === 1 ? back.child(0) : null;
+  if (only?.type.name !== "styleBlock" || only.attrs["style"] !== style) return false;
+  return only.children.map(cachedCanonical).join("\n") === texts.join("\n");
+}
+
+function serializeStyleBlock(block: Node, isNote: boolean): string {
   const source = block.attrs["source"] as string | null;
   if (source !== null && listContent(block) === block.attrs["canonical"]) return source;
+  return (isNote ? markdownList(block) : null) ?? serializeFence(block, isNote);
+}
+
+function serializeFence(block: Node, isNote: boolean): string {
   const style = String(block.attrs["style"]);
   const openFence = block.attrs["openFence"] as string | null;
   const fenceStyle = openFence?.replace(/^:::/, "").trim();
   const open = openFence !== null && fenceStyle === style ? openFence : `::: ${style}\n`;
   const innerTrailing = (block.attrs["innerTrailing"] as string | null) ?? "\n";
   const close = (block.attrs["closeFence"] as string | null) ?? ":::";
-  return open + serializeBlocks(block) + innerTrailing + close;
+  return open + serializeBlocks(block, isNote) + innerTrailing + close;
 }
