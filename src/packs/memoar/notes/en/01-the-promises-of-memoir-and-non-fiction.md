@@ -17,7 +17,7 @@ A reader who opens a true book hands you their trust. This is what you promise i
 
 **A non-fiction book promises**
 
-- **An answer to the reader's problem.** The reader picks up the book because something is unclear, hard or intriguing. The book should take them somewhere better.
+- **An answer to the reader's problem.** The reader picks up the book because something is unclear, hard or intriguing. The book should take them somewhere better. _If the book solves no problem, the reader puts it down halfway._
 - **A clear promise, early.** By the end of the introduction the reader knows what they will be able to do, know or understand after the last page. _If the promise is vague, the reader doesn't know what they are getting._
 - **A path they can follow.** Each chapter builds on the one before, and the reader always knows where they are. _If chapters don't build on each other, the reader gets lost._
 - **Knowledge that holds up.** Claims are backed, and sources can be found. Where knowledge runs out, you say so. _One wrong figure makes the reader doubt the rest._

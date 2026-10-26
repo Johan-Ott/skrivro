@@ -7,11 +7,14 @@ import { t } from "../../i18n/i18n.js";
 
 const CHAPTERS_SHOWN = 1;
 
-// The notes' Markdown is plain: paragraphs, "- " lists and **bold**.
+// The notes' Markdown is plain: paragraphs, "- " lists, **bold** and _italic_.
+const EMPHASIS = /(\*\*.+?\*\*|(?<![\p{L}\p{N}])_.+?_(?![\p{L}\p{N}]))/u;
 const inline = (text: string) =>
-  text
-    .split(/\*\*(.+?)\*\*/)
-    .map((part, index) => (index % 2 ? <strong key={index}>{part}</strong> : part));
+  text.split(EMPHASIS).map((part, index) => {
+    if (index % 2 === 0) return part;
+    if (part.startsWith("**")) return <strong key={index}>{part.slice(2, -2)}</strong>;
+    return <em key={index}>{part.slice(1, -1)}</em>;
+  });
 
 /** A note's text, all of it or its first few paragraphs, saying so if the rest is in the pack. */
 export function NoteText(props: { body: string; most?: number; isTeaser?: boolean }) {

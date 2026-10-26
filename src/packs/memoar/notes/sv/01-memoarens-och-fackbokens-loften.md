@@ -17,7 +17,7 @@ En läsare som öppnar en sann bok ger dig sitt förtroende. Det här lovar du t
 
 **Fackboken lovar**
 
-- **Ett svar på läsarens problem.** Läsaren tar upp boken för att något är oklart, svårt eller lockande. Boken ska ta hen därifrån.
+- **Ett svar på läsarens problem.** Läsaren tar upp boken för att något är oklart, svårt eller lockande. Boken ska ta hen därifrån. _Löser boken inget problem lägger läsaren den ifrån sig halvvägs._
 - **Ett tydligt löfte tidigt.** Senast i inledningen vet läsaren vad hen kan, förstår eller kan göra efter sista sidan. _Är löftet suddigt vet läsaren inte vad hen får._
 - **En väg som går att följa.** Varje kapitel bygger på det förra, och läsaren vet hela tiden var hen är. _Bygger inte kapitlen på varandra tappar läsaren bort sig._
 - **Kunskap som håller.** Påståenden har belägg, och källorna går att hitta. Där kunskapen tar slut säger du det. _En enda felaktig siffra får läsaren att tvivla på resten._
