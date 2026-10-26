@@ -9,6 +9,7 @@ import {
 } from "../project/sceneSummaries.js";
 import { reconcileScenes, type TreeNode } from "../project/tree.js";
 import { noteIdsOf } from "../project/cards.js";
+import type { TreeChange } from "./notes/noteHomes.js";
 import { openProjectFolder, type OpenedProject } from "../storage/projectFolder.js";
 import { describeSaveError, type SaveFailure } from "@llkit/storage/saveError.js";
 import { errorLog, recordFailure } from "@llkit/errorLog.js";
@@ -84,6 +85,7 @@ function useProjectWriter(projectRef: React.RefObject<Project | null>) {
 export function useProjectUpdates(
   projectRef: React.RefObject<Project | null>,
   setProject: React.Dispatch<React.SetStateAction<Project | null>>,
+  onTreeChange?: (dir: string, trees: TreeChange) => void,
 ) {
   const { write, treeFailure, settled } = useProjectWriter(projectRef);
   // Counted, so a read that began before a change knows it is out of date.
@@ -97,10 +99,11 @@ export function useProjectUpdates(
       // At once, so a second change before the next render builds on this one.
       projectRef.current = { ...project, tree, fields };
       edits.current++;
+      onTreeChange?.(project.dir, { before: project.tree, after: tree });
       setProject((current) => current && { ...current, tree, fields });
       return write(fields, tree);
     },
-    [projectRef, setProject, write],
+    [projectRef, setProject, write, onTreeChange],
   );
   const updateTree = useCallback((tree: TreeNode[]) => update({ tree }), [update]);
   const updateFields = useCallback(
@@ -157,11 +160,14 @@ function useRefresh(
   return refresh;
 }
 
-export function useProject(onFolderChange: () => void) {
+export function useProject(
+  onFolderChange: () => void,
+  onTreeChange?: (dir: string, trees: TreeChange) => void,
+) {
   const [project, setProject] = useState<Project | null>(null);
   const projectRef = useRef<Project | null>(null);
   projectRef.current = project;
-  const updates = useProjectUpdates(projectRef, setProject);
+  const updates = useProjectUpdates(projectRef, setProject, onTreeChange);
   const dir = project?.dir ?? null;
 
   const { opening, open } = useOpen(setProject);

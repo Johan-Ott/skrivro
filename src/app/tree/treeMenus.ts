@@ -2,6 +2,7 @@ import { platform } from "../platform.js";
 import { TRASH_ID, type NodeKind, type TreeNode } from "../../project/tree.js";
 import { SCENE_STATUSES, type SceneStatus } from "../../manuscript/sceneFile.js";
 import type { MenuItem } from "@llkit/Menu.js";
+import { noteItems } from "./noteMenus.js";
 import { shortcutOf } from "../shortcuts.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -43,6 +44,11 @@ export interface TreeMenuActions {
   moveInto: (node: TreeNode, parentId: string) => void;
   /** Keeps the note as a template for new notes; null where notes are not the book's own. */
   saveAsTemplate: ((node: TreeNode) => void) | null;
+  /** Makes the note a scene, last in the chapter or last in the book; null in a series. */
+  makeScene: ((node: TreeNode, chapterId: string | null) => void) | null;
+  chapters: () => { id: string; name: string }[];
+  /** Whether a thing in Papperskorg was a note, which goes back to its sort. */
+  wasNote: (node: TreeNode) => boolean;
 }
 
 export function foldMenu(view: { foldAll: () => void; unfoldAll: () => void }): MenuItem[] {
@@ -100,39 +106,6 @@ const sortItems = (node: TreeNode, actions: TreeMenuActions): MenuItem[] => [
   { label: t("Ny anteckning"), onSelect: () => actions.newNote(node.id) },
   { label: t("Lägg till fil…"), onSelect: () => actions.addFile(node.id) },
 ];
-
-// A note moves to another sort, such as from Övrigt to Personer.
-function sortMoves(node: TreeNode, actions: TreeMenuActions): MenuItem[] {
-  const sorts = actions.otherSorts(node);
-  if (sorts.length === 0) return [];
-  const submenu = sorts.map(({ id, name }) => ({
-    label: name,
-    onSelect: () => actions.moveInto(node, id),
-  }));
-  return [{ label: t("Flytta till"), submenu }];
-}
-
-// A note has no status; its menu chooses whether its name is linked instead.
-function noteItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] | null {
-  const isLinked = actions.linkOf(node);
-  if (isLinked === null) return null;
-  const { moveToSeries, saveAsTemplate } = actions;
-  return [
-    {
-      label: t("Koppla namnet i texten"),
-      isChecked: isLinked,
-      separatorBefore: true,
-      onSelect: () => actions.setLink(node, !isLinked),
-    },
-    ...sortMoves(node, actions),
-    ...(moveToSeries
-      ? [{ label: t("Flytta till serien"), onSelect: () => moveToSeries(node) }]
-      : []),
-    ...(saveAsTemplate
-      ? [{ label: t("Spara som mall"), onSelect: () => saveAsTemplate(node) }]
-      : []),
-  ];
-}
 
 // The status is written to the scene file and drives the progress on the shelf.
 function statusItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] {
@@ -215,8 +188,10 @@ export function rowMenu(
   move?: (step: 1 | -1) => void,
 ): MenuItem[] {
   if (node.id === TRASH_ID) return [];
-  if (isInTrash)
-    return [{ label: t("Lägg tillbaka i manuset"), onSelect: () => actions.restore(node) }];
+  if (isInTrash) {
+    const label = actions.wasNote(node) ? t("Lägg tillbaka") : t("Lägg tillbaka i manuset");
+    return [{ label, onSelect: () => actions.restore(node) }];
+  }
   const added = newItemsFor(node, actions);
   const open = sceneItems(node, actions);
   const [firstAdded, ...restAdded] = added;

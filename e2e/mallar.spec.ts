@@ -69,3 +69,27 @@ test("a note saved as a template starts the next note in its sort", async ({ pag
   await expect(page.locator(".ProseMirror")).not.toBeEmpty();
   await page.screenshot({ path: `${process.env["TMP"]}/egen-mall.png` });
 });
+
+test("a note with unsaved text becomes a scene from its menu, and leaves its questions behind", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "+ Ny anteckning" }).click();
+  const note = page.getByRole("dialog", { name: "Ny anteckning" });
+  await note.getByRole("textbox", { name: "Namn" }).fill("Gäst");
+  await note.getByRole("button", { name: "Skapa" }).click();
+  await expect(page.locator(".prompt-hint").first()).toBeVisible();
+  await page.locator(".prompt-hint").nth(2).click();
+  await page.waitForTimeout(300);
+  await page.keyboard.type("Vill ha hem.");
+
+  const sidebar = page.locator(".sidebar");
+  await sidebar.getByText("Gäst", { exact: true }).click({ button: "right" });
+  await page.getByRole("menuitem", { name: "Gör till scen i" }).hover();
+  await page.getByRole("menuitem", { name: "Sist i manuset" }).click();
+  await sidebar.getByText("Gäst", { exact: true }).click();
+
+  await expect(page.locator(".prompt-hint")).toHaveCount(0);
+  await expect(page.locator(".ProseMirror")).toContainText("Vill ha hem.");
+  await expect(page.locator(".ProseMirror")).not.toContainText("Andra namn");
+  await expect(page.locator(".ProseMirror")).not.toContainText("<!--");
+});

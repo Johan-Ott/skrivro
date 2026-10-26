@@ -13,6 +13,10 @@ export function promptOf(source: string) {
 export const UNANSWERED_FIELD =
   /^\*\*[^*\n]+:\*\*[ \t]*\r?\n(?:[ \t]*\r?\n)+<!--(?:(?!-->).)*-->[ \t]*$/gm;
 
+/** The same, with the blank lines that follow, so taking it out leaves nothing of it behind. */
+export const UNANSWERED_FIELD_AND_GAP =
+  /^\*\*[^*\n]+:\*\*[ \t]*\r?\n(?:[ \t]*\r?\n)+<!--(?:(?!-->).)*-->[ \t]*\r?\n?(?:[ \t]*\r?\n)*/gm;
+
 /** A paragraph of one bold text ending in a colon, as read from Markdown. */
 export function isLabelParagraph(block: RootContent | undefined) {
   if (block?.type !== "paragraph") return false;

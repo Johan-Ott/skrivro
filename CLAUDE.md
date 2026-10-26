@@ -131,6 +131,11 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   (`editor/promptHints.ts`), saved as the comment until the writer answers, and counted as no words,
   nor the label above it. A note beside the text (`app/beside/`) is read with `isNote` off, so an
   unanswered question shows there as a raw comment.
+  A note made a scene (Gör till scen, or dragged into the manuscript) loses its unanswered questions
+  and their labels in its file (`project/noteToScene.ts`, `useMovedNotes`), also a comment of the
+  writer's own under a bold line, which is read as a question. Moving it back does not put them
+  back: they were the template's, not the writer's. The note as it was is kept first in Versioner
+  ("Innan den blev scen"), so nothing is lost: Återställ brings the questions and the comment back.
 - A series is a folder beside its books (`Vintervägen.serie`), built like a project but holding
   only sorts (`project/series.ts`). A book names it in project.json `series` (the folder name),
   and `useSeries` reads, watches and writes it beside the book. Notes live in "homes": the series

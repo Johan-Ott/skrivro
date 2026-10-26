@@ -1,5 +1,5 @@
 import { isLinkedByDefault } from "../../project/cards.js";
-import { findNode, moveNode, sortsOf, type TreeNode } from "../../project/tree.js";
+import { findNode, manuscriptNodes, moveNode, sortsOf, type TreeNode } from "../../project/tree.js";
 import { nodeLabel } from "../../project/treeLabels.js";
 import { statusSteps } from "../../project/statusSteps.js";
 import { labelMenu } from "../labels/LabelsInTree.js";
@@ -52,6 +52,16 @@ function sortActions({ project, onChangeTree, onSaveAsTemplate }: TreeViewProps)
     },
     moveInto: (node: TreeNode, parentId: string) =>
       onChangeTree(moveNode(project.tree, node.id, parentId, Number.MAX_SAFE_INTEGER)),
+    wasNote: (node: TreeNode) => sortsOf(project.tree).some((sort) => sort.id === node.trashedFrom),
+    makeScene: project.dir.endsWith(".serie")
+      ? null
+      : (node: TreeNode, chapterId: string | null) =>
+          onChangeTree(moveNode(project.tree, node.id, chapterId, Number.MAX_SAFE_INTEGER)),
+    chapters: () =>
+      manuscriptNodes(project.tree, "chapter").map((chapter) => ({
+        id: chapter.id,
+        name: nodeLabel(chapter, project.tree, project.summaries),
+      })),
   };
 }
 

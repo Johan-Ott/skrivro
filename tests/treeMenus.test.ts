@@ -29,6 +29,9 @@ const actions: TreeMenuActions = {
   otherSorts: () => [],
   moveInto: noop,
   saveAsTemplate: null,
+  makeScene: null,
+  chapters: () => [],
+  wasNote: () => false,
 };
 const labels = (items: ReturnType<typeof rowMenu>) =>
   items.map((item) => (item.separatorBefore ? `| ${item.label}` : item.label));
@@ -175,6 +178,33 @@ describe("tree menus", () => {
   it("offers nothing on Papperskorg itself and only a way back for things in it", () => {
     expect(rowMenu(node("folder", TRASH_ID), false, actions)).toEqual([]);
     expect(labels(rowMenu(node("scene"), true, actions))).toEqual(["Lägg tillbaka i manuset"]);
+  });
+
+  it("calls a thing from a sort in Papperskorg Lägg tillbaka, and a scene's way back i manuset", () => {
+    const fromSort: TreeMenuActions = { ...actions, wasNote: () => true };
+
+    expect(labels(rowMenu(node("scene"), true, fromSort))).toEqual(["Lägg tillbaka"]);
+  });
+
+  it("lets a note become a scene last in the book or in a chapter, but not in a series", () => {
+    const made: string[] = [];
+    const inBook: TreeMenuActions = {
+      ...actions,
+      linkOf: () => true,
+      chapters: () => [{ id: "k1", name: "1. Brevet" }],
+      makeScene: (note, chapterId) => made.push(`${note.id}:${chapterId}`),
+    };
+
+    const submenu = rowMenu(node("scene", "elin"), false, inBook).find(
+      (item) => item.label === "Gör till scen i",
+    )?.submenu;
+    submenu?.forEach((item) => item.onSelect?.());
+
+    expect(submenu?.map((item) => item.label)).toEqual(["Sist i manuset", "1. Brevet"]);
+    expect(made).toEqual(["elin:null", "elin:k1"]);
+    expect(labels(rowMenu(node("scene"), false, { ...inBook, makeScene: null }))).not.toContain(
+      "Gör till scen i",
+    );
   });
 
   it("shows the keyboard shortcuts", () => {
