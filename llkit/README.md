@@ -30,7 +30,9 @@ What any llstudios app is built on. Skrivro is the first app on it.
   time, that can be skipped or started over
 - `appInfo`: the app's name, handed in with `provideAppName`, for the report and feedback
 - `Side`: the side panel, the same in every view: `SideFrame` round the app's screen, `SideToggle`
-  in its top bar, and each view's `<Side>` with what goes in it; folded or out per view
+  in its top bar, and each view's `<Side>` with what goes in it; folded or out per view with the
+  button or Ctrl+\, floating out while the pointer rests on the button. On a phone an open side
+  fills the screen, and `foldOnPhone` folds it after a pick
 
 ## A new app
 

@@ -44,7 +44,7 @@ test("the genre packs are found in the logo's menu, each saying what it holds", 
 
   const dialog = page.getByRole("dialog", { name: "Genrepaket" });
   const romantasy = dialog.locator(".pack-tile").filter({ hasText: "Romantasy" });
-  await expect(romantasy).toContainText("5 guider");
+  await expect(romantasy).toContainText("9 guider");
   await expect(romantasy).toContainText("Ingår under betan");
 
   await romantasy.getByRole("button", { name: "Se vad som ingår" }).click();

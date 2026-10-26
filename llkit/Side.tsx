@@ -4,12 +4,8 @@ import { t } from "./i18n.js";
 import { useShortcut } from "./keys.js";
 import { createStore } from "./store.js";
 
-// The side panel, the same in every view of an app: on the window's grey, left of what the view
-// shows. The app puts one SideFrame round its screen and one SideToggle in its top bar; each view
-// puts what goes in the side in <Side>, which may be nothing, and the button then rests. Each view's
-// side is folded away or out on its own, with the button or Ctrl+\; folded, it floats out while the
-// pointer rests on the button. On a phone an open side fills the screen, and picking in it folds it
-// (foldOnPhone). `view` is the app's name for what shows, as "tavlan" or "chatt".
+// The side panel, the same in every view: one SideFrame round the screen, one SideToggle in the top
+// bar, and each view's <Side>, folded per view with the button or Ctrl+\ (see README.md).
 
 const slot = createStore<HTMLElement | null>(null);
 const sideSlot = (element: HTMLElement | null) => {
