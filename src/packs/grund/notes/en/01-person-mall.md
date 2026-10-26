@@ -7,10 +7,6 @@ standard: true
 
 Rename the note to the character's name.
 
-**Other names:**
-
-<!-- Nicknames, surnames, titles. What do the others call them, and what do they call themselves? -->
-
 **Facts:**
 
 <!-- Age, looks, scars, family. What you look up mid-scene. -->

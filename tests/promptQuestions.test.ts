@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { parseMarkdown } from "../src/manuscript/parseMarkdown";
 import { serializeMarkdown } from "../src/manuscript/serializeMarkdown";
-import { countDocumentWords, countMarkdownWords } from "../src/manuscript/wordCount";
+import {
+  countDocumentWords,
+  countMarkdownWords,
+  countWordsBetween,
+} from "../src/manuscript/wordCount";
 import { manuscriptSchema as schema } from "../src/manuscript/schema";
 
 const NOTE = { isNote: true };
@@ -71,9 +75,12 @@ describe("a comment that is not a template question", () => {
     expect(serializeMarkdown(doc)).toBe(SCENE);
   });
 
-  it("counts as before, in the document and in the file alike", () => {
-    expect(countDocumentWords(parseMarkdown(SCENE))).toBe(8);
-    expect(countMarkdownWords(SCENE)).toBe(8);
+  it("is no words: the document, the file and a selection count a comment as nothing", () => {
+    const doc = parseMarkdown(SCENE);
+
+    expect(countDocumentWords(doc)).toBe(5);
+    expect(countMarkdownWords(SCENE)).toBe(5);
+    expect(countWordsBetween(doc, 0, doc.content.size)).toBe(5);
   });
 
   it("is no question when a line holds two comments", () => {

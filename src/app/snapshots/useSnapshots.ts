@@ -36,6 +36,7 @@ export function useSnapshots(project: Project | null, session: SceneSession) {
     if (!project) return;
     const where = dir ?? (session.scene?.id === id ? session.scene.dir : project.dir);
     if (session.scene?.id !== id && !(await openScene(session, where, id))) return;
+    setWork(null);
     setScene({ dir: where, id });
     await reload({ dir: where, id });
   };

@@ -5,10 +5,17 @@ import { isLabel, isUnanswered, UNANSWERED_FIELD } from "./prompts.js";
 import { manuscriptSchema as schema, STYLE_NAMES } from "./schema.js";
 import { findStyleFences } from "./styleFences.js";
 
-/** Text in raw blocks counts; scene breaks do not, nor a label above an unanswered question. */
+// A comment is the writer's note to self, not the book's text, wherever it stands. It ends at its
+// first `-->`, so what follows it on the same line is counted.
+const COMMENT = /<!--(?:(?!-->)[\s\S])*-->/g;
+const words = (text: string) => countWords(text.replace(COMMENT, " "));
+
+const leafText = (leaf: Node) =>
+  leaf.type === schema.nodes.rawBlock ? `\n${String(leaf.attrs["source"])}\n` : "\n";
+
+/** Text in raw blocks counts; scene breaks do not, nor a comment, nor a label above an unanswered
+ * question. */
 export function countDocumentWords(doc: Node): number {
-  const leafText = (leaf: Node) =>
-    leaf.type === schema.nodes.rawBlock ? `\n${String(leaf.attrs["source"])}\n` : "\n";
   const counted: string[] = [];
   let from = 0;
   doc.descendants((node, position, parent, index) => {
@@ -18,11 +25,11 @@ export function countDocumentWords(doc: Node): number {
     return false;
   });
   counted.push(doc.textBetween(from, doc.content.size, "\n", leafText));
-  return countWords(counted.join("\n"));
+  return words(counted.join("\n"));
 }
 
 export const countWordsBetween = (doc: Node, from: number, to: number) =>
-  countWords(doc.textBetween(from, to, "\n"));
+  words(doc.textBetween(from, to, "\n", leafText));
 
 // What Markdown writes around the words: a picture on a line of its own, underline and strike,
 // and characters written as entities, such as &amp;.
@@ -47,6 +54,7 @@ export function countMarkdownWords(markdown: string, isNote = false): number {
   const { body, notes } = splitFootnotes(markdown);
   const unfenced = withoutFences(body);
   const text = (isNote ? unfenced.replace(UNANSWERED_FIELD, "") : unfenced)
+    .replace(COMMENT, " ")
     .replace(PICTURE, "")
     .replace(TAG, "")
     .replace(ENTITY, "")

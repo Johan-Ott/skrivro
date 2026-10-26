@@ -78,3 +78,41 @@ test("Escape closes the new connection's form", async ({ page }) => {
 
   await expect(page.getByRole("button", { name: "+ Koppling" })).toBeVisible();
 });
+
+test("a person's other names are chosen among the parts of the title, or typed", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "+ Ny anteckning" }).click();
+  const dialog = page.getByRole("dialog", { name: "Ny anteckning" });
+  await dialog.getByRole("textbox", { name: "Namn" }).fill("Erik Holm");
+  await dialog.getByRole("button", { name: "Skapa" }).click();
+  await expect(page.getByRole("button", { name: "Holm", exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "Holm", exact: true }).click();
+  await page.getByRole("button", { name: "+ Andra namn" }).click();
+  await page.getByRole("textbox", { name: "Ett annat namn" }).fill("Eken");
+  await page.keyboard.press("Enter");
+
+  const names = page.locator(".aliases");
+  await expect(names).toContainText("Holm");
+  await expect(names).toContainText("Eken");
+  await expect(page.getByRole("button", { name: "Erik", exact: true })).toBeVisible();
+});
+
+test("Escape in the field for another name adds nothing, and a part of the title stays offered", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "+ Ny anteckning" }).click();
+  const dialog = page.getByRole("dialog", { name: "Ny anteckning" });
+  await dialog.getByRole("textbox", { name: "Namn" }).fill("Erik Holm");
+  await dialog.getByRole("button", { name: "Skapa" }).click();
+  await page.getByRole("button", { name: "Erik", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Holm", exact: true })).toBeVisible();
+
+  await page.getByRole("button", { name: "+ Andra namn" }).click();
+  await page.getByRole("textbox", { name: "Ett annat namn" }).fill("Skuggan");
+  await page.keyboard.press("Escape");
+
+  await expect(page.locator(".aliases")).not.toContainText("Skuggan");
+  await expect(page.locator(".aliases")).toContainText("Erik");
+});

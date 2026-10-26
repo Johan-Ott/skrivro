@@ -7,8 +7,9 @@ import {
   type ContentsGroup,
   type ContentsRow,
 } from "../../project/contents.js";
-import { rowMatches } from "../../project/contentsFilter.js";
+import { notesMatching, rowMatches } from "../../project/contentsFilter.js";
 import { findNode } from "../../project/tree.js";
+import type { Project } from "../useProject.js";
 import { nodeLabel } from "../../project/treeLabels.js";
 import { Row } from "./ContentsRowView.js";
 import type { ContentsProps } from "./ContentsView.js";
@@ -121,6 +122,22 @@ function PartRows(props: ListParts & { group: ContentsGroup }) {
   );
 }
 
+/** The notes the filter holds too: a label on a note is found here as on a chapter. */
+const MatchingNotes = (props: {
+  notes: { id: string; title: string }[];
+  onOpen: (id: string) => void;
+}) =>
+  props.notes.length > 0 && (
+    <div className="contents-notes">
+      <span className="field-label">{t("Anteckningar")}</span>
+      {props.notes.map((note) => (
+        <button key={note.id} className="contents-note" onClick={() => props.onOpen(note.id)}>
+          {note.title}
+        </button>
+      ))}
+    </div>
+  );
+
 // The short columns' names, once over the chapters, in the rows' own grid.
 const ColumnNames = () => (
   <div className="contents-columns" aria-hidden="true">
@@ -132,11 +149,19 @@ const ColumnNames = () => (
   </div>
 );
 
+// What the filter holds: chapters by their words, and notes by name, other name and label.
+function matches(project: Project, found: ContentsProps["notes"], query: string) {
+  const sources = { tree: project.tree, fields: project.fields, ...found };
+  return {
+    isShown: (row: ContentsRow) => rowMatches(sources, row, query),
+    notes: notesMatching(sources, project.summaries, query),
+  };
+}
+
 /** The chapters, by part in reading order, or as one list in the order of time. */
 export function ContentsList(props: ContentsProps & { isTimeOrder: boolean; query: string }) {
   const { project, isTimeOrder, query } = props;
-  const sources = { tree: project.tree, fields: project.fields, ...props.notes };
-  const isShown = (row: ContentsRow) => rowMatches(sources, row, query);
+  const { isShown, notes } = matches(project, props.notes, query);
   const rows = contentsRows(project.tree, project.summaries);
   const timeOrdered = inTimeOrder(rows, timeOrderOf(project.fields));
   const drag = useRowDrag(timeOrdered, (timeOrder) => props.onSaveFields({ timeOrder }));
@@ -149,9 +174,10 @@ export function ContentsList(props: ContentsProps & { isTimeOrder: boolean; quer
   if (rows.length === 0) return <p className="contents-empty">{t("Inga kapitel än.")}</p>;
   return (
     <div className="contents-list">
-      {query && !rows.some(isShown) && (
+      {query && !rows.some(isShown) && notes.length === 0 && (
         <p className="contents-empty">{t("Inget kapitel har ”{query}”.", { query })}</p>
       )}
+      <MatchingNotes notes={notes} onOpen={props.onOpenScene} />
       <ColumnNames />
       {isTimeOrder
         ? timeOrdered.map((row) => (

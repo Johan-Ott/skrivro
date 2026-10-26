@@ -43,3 +43,11 @@ test("a filter that finds nothing says so", async ({ page }) => {
 
   await expect(page.getByText("Inget kapitel har ”xyzzy”.")).toBeVisible();
 });
+
+test("a filter also finds the notes by name, so a person is one click away", async ({ page }) => {
+  await page.getByRole("textbox", { name: "Filtrera" }).fill("Elin");
+
+  const notes = page.locator(".contents-notes");
+  await expect(notes.getByRole("button", { name: "Elin", exact: true })).toBeVisible();
+  await expect(page.getByText("Inget kapitel har")).toHaveCount(0);
+});

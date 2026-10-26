@@ -7,10 +7,6 @@ standard: true
 
 Byt namn på anteckningen till personens namn.
 
-**Andra namn:**
-
-<!-- Smeknamn, efternamn, titlar. Vad kallar de andra hen, och vad kallar hen sig själv? -->
-
 **Fakta:**
 
 <!-- Ålder, utseende, ärr, släkt. Det du behöver slå upp mitt i en scen. -->

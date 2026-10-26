@@ -6,10 +6,6 @@ sort: karaktarer
 
 Rename the note to the character's name.
 
-**Other names:**
-
-<!-- In the series, not the book. What are they called, and does it change? -->
-
 **What never changes:**
 
 <!-- Year of birth, eyes, voice, a scar. What does the reader know them by? -->

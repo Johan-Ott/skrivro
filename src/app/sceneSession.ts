@@ -197,7 +197,7 @@ export async function resolveConflict(
 }
 
 // The open scene's front matter changes through its autosave, so unsaved text is saved with it.
-async function changeFrontMatter(
+export async function changeFrontMatter(
   session: SceneSession,
   where: { dir: string; id: string },
   change: (frontMatter: string) => string,

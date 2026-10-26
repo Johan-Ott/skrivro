@@ -142,10 +142,18 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   first, then the book (`notes/noteHomes.ts`); the sidebar shows the series' sorts and the book's
   own only when they hold notes. Moving notes into a series renames their files there
   (`moveNotesToSeries`), so nothing is copied or deleted; an open note is closed first.
-- A note is linked by its title and by `aliases: Eken, Kommissarien` (comma separated) in its front
-  matter, never by a guessed part of the title, since "Doktor" of "Doktor Holm" would link every
-  doctor (`namesOf` in `cards.ts`). A trailing s is the genitive. Nothing in the interface writes
-  `aliases:` yet.
+- A note is linked by its title and by `aliases: [Eken, Kommissarien]` in its front matter (as the
+  writer's other tools write it; no brackets is read too), never by a guessed part of the title,
+  since "Doktor" of "Doktor Holm" would link every doctor (`namesOf` in `cards.ts`,
+  `project/aliases.ts`). A trailing s is the genitive. The row "Andra namn" under "+ Koppling" on
+  a note's page writes `aliases:` and offers the parts of a full title as chips to click
+  (`notes/Aliases.tsx`), the only place for other names: the person templates have no such field.
+- A note of a series has no Gör till scen i: the series is shared by several books, so its notes
+  are never a scene of one of them.
+- Innehåll's filter also lists the notes whose name, other name or label holds the text.
+- A comment (`<!-- -->`) in a scene is the writer's note to self, alone on a line or among words: no
+  word count counts it, not the file's, the document's or a selection's (`wordCount.ts`). The text
+  after its first `-->` on the same line is counted.
 - Names of notes are underlined in the open scene by a decoration plugin (`editor/mentions.ts`);
   nothing is written into the scene file. The editor only gets `{ id, pattern }` pairs from
   `useMentionLinks`; a click shows `MentionCard`.

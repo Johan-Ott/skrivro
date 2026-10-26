@@ -6,10 +6,6 @@ sort: karaktarer
 
 Byt namn på anteckningen till personens namn.
 
-**Andra namn:**
-
-<!-- I serien, inte i boken. Vad kallas hen, och ändras det? -->
-
 **Det som aldrig ändras:**
 
 <!-- Födelseår, ögon, röst, ett ärr. Vad känner läsaren igen hen på? -->

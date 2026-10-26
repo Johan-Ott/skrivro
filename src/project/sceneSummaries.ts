@@ -9,6 +9,7 @@ import {
 import { countMarkdownWords } from "../manuscript/wordCount.js";
 import { type FileSystem } from "@llkit/storage/fileSystem.js";
 import { scenePath } from "../storage/sceneId.js";
+import { aliasesOf } from "./aliases.js";
 import { t, uiLanguage } from "../i18n/i18n.js";
 
 export interface SceneSummary {
@@ -23,17 +24,11 @@ export interface SceneSummary {
   file?: string;
 }
 
-const namesIn = (list: string | null) =>
-  (list ?? "")
-    .split(",")
-    .map((name) => name.trim())
-    .filter((name) => name !== "");
-
 function summarize(text: string, isNote: boolean): SceneSummary {
   const { frontMatter, body } = splitSceneFile(text);
   const title = sceneTitle(frontMatter) ?? t("Namnlös scen");
   const link = noteLink(frontMatter);
-  const aliases = namesIn(readField(frontMatter, "aliases"));
+  const aliases = aliasesOf(frontMatter);
   const file = readField(frontMatter, "file");
   return {
     title,

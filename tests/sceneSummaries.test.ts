@@ -41,7 +41,7 @@ describe("readSceneSummaries", () => {
 });
 
 describe("readSceneSummaries for notes", () => {
-  it("count a note's unanswered questions as no words, and a scene's comment as words", async () => {
+  it("count a note's unanswered questions as no words, and a scene's comment as no words either", async () => {
     const text = "**Vill:**\n\n<!-- Vad jagar hen? -->\n";
     const files = createMemoryFileSystem({
       "/bok/scenes/NOTE.md": text,
@@ -53,7 +53,7 @@ describe("readSceneSummaries for notes", () => {
     });
 
     expect(summaries["NOTE"]?.words).toBe(0);
-    expect(summaries["SCENE"]?.words).toBe(4);
+    expect(summaries["SCENE"]?.words).toBe(1);
   });
 });
 

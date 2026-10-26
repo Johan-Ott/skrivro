@@ -1,7 +1,8 @@
 import type { Card, Mentions } from "./cards.js";
 import type { ContentsRow } from "./contents.js";
 import { labelsOf } from "./labels.js";
-import { findNode, type TreeNode } from "./tree.js";
+import type { SceneSummary } from "./sceneSummaries.js";
+import { findNode, sceneIdsIn, sortsOf, type TreeNode } from "./tree.js";
 
 const fold = (text: string) => text.toLocaleLowerCase("sv");
 
@@ -34,4 +35,25 @@ export function rowMatches(sources: FilterSources, row: ContentsRow, query: stri
     .map((card) => card.name);
   const texts = [row.title, row.summary, row.pov, ...named, ...labelNames(sources, row)];
   return texts.some((text) => fold(text).includes(wanted));
+}
+
+/** The notes whose name, other name or label holds the text, so a label on a note is found here
+ * as it is among the chapters. */
+export function notesMatching(
+  sources: Pick<FilterSources, "tree" | "fields">,
+  summaries: Record<string, SceneSummary>,
+  query: string,
+) {
+  const wanted = fold(query.trim());
+  if (!wanted) return [];
+  const labels = labelsOf(sources.fields);
+  return sortsOf(sources.tree)
+    .flatMap((sort) => sceneIdsIn(sources.tree, sort.id))
+    .filter((id) => {
+      const ids = findNode(sources.tree, id)?.node.labels ?? [];
+      const names = labels.filter((label) => ids.includes(label.id)).map((label) => label.name);
+      const texts = [summaries[id]?.title ?? "", ...(summaries[id]?.aliases ?? []), ...names];
+      return texts.some((text) => fold(text).includes(wanted));
+    })
+    .map((id) => ({ id, title: summaries[id]?.title ?? "" }));
 }

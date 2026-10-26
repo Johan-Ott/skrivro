@@ -12,6 +12,7 @@ import {
 } from "../project/tree.js";
 import { chapterOf } from "../project/treeLabels.js";
 import type { AppState } from "./App.js";
+import { saveAliases } from "./notes/aliasActions.js";
 import { NoteHeader, NoteMentions, noteSortOf, type NotePageProps } from "./notes/NotePage.js";
 import { NoteVoice } from "./notes/NoteVoice.js";
 import { MarginNotes } from "./review/MarginNotes.js";
@@ -103,6 +104,7 @@ function textParts(app: AppState, project: Project) {
     onOpen: openText(app),
     onSaveFields: (fields: Record<string, unknown>) =>
       void (isInSeries ? app.seriesState.updateSeriesFields(fields) : app.updateFields(fields)),
+    onSetAliases: (aliases: string[]) => void saveAliases(app, home, scene.id, aliases),
   };
   return {
     header: <NoteHeader {...noteProps} sortId={sortId} />,

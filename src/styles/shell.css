@@ -601,6 +601,29 @@
   color: var(--text-label);
 }
 
+.alias-suggestion {
+  padding: 0 8px;
+  border: 1px dashed var(--border-control);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-label);
+  font: inherit;
+}
+
+.contents-note {
+  padding: 0 10px;
+  border: 1px solid var(--border-control);
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+}
+
+.alias-input {
+  width: 160px;
+  padding: 2px 6px;
+  font: inherit;
+}
+
 .connection-remove {
   margin-left: 4px;
   color: var(--text-label);
@@ -771,6 +794,14 @@
 }
 
 .contents-meta,
+.contents-notes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 12px;
+}
+
 .contents-empty {
   color: var(--text-label);
 }
