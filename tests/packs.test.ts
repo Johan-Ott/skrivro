@@ -72,7 +72,7 @@ describe("genre packs", () => {
     const { tree, fields } = await readProjectFile(files, created.dir, []);
     expect(fields["packs"]).toEqual(["romantasy"]);
     expect(JSON.stringify(fields["labels"])).toContain("Svek");
-    expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(6);
+    expect(childrenOf(tree, (node) => node.title === "Guide")).toHaveLength(9);
     expect(tree.some((node) => node.title === "Världen")).toBe(true);
     expect(noteTemplates(fields, "Världen")).toHaveLength(2);
     expect(noteTemplates(fields, CHARACTERS_ID).map((each) => each.name)).toContain(

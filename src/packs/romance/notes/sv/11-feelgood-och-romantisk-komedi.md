@@ -6,6 +6,15 @@ sort: Guide
 
 Feelgood och romantisk komedi delar mycket med romancen, men de lovar något mer: att boken ska kännas bra att vara i. Det kräver hantverk, inte bara mysiga miljöer.
 
+**Löftena.** Feelgood och romantisk komedi lovar det romancen lovar, och dessutom:
+
+- **Värme.** En plats och människor som läsaren vill flytta till.
+- **Skratt.** Humorn kommer ur personerna och situationerna, inte ur att göra dem dumma.
+- **Hopp.** Sorg, skilsmässa och svåra saker får finnas, men slutet lämnar läsaren lättare än hen började.
+- **Ett nytt liv.** Huvudpersonens egen resa, att börja om, hitta hem eller våga, är lika viktig som kärleken. Slutet ska vara lyckligt för hen, och nästan alltid också för paret.
+
+**Hantverket**
+
 - **Två berättelser i en.** I feelgood bär huvudpersonens nya liv lika mycket som kärleken: ett jobb att bygga upp, en familj att försonas med, en plats att höra till. Låt de två berättelserna hjälpa och stjälpa varandra.
 - **Romantisk komedi är en romance först.** Där är kärleken huvudhandlingen, och humorn är sättet den berättas på. Skämten ska föra paret närmare eller längre ifrån varandra, inte bara fylla ut.
 - **Komiken kommer ur personen.** Den som har en tydlig regel, en stolthet eller en dålig plan är rolig av sig själv. Sätt hen där regeln krockar med verkligheten. "Hon hade lovat sig själv att aldrig mer laga mat åt en man. Nu stod hon i en främlings kök med en lammstek i ugnen och tjugo gäster på väg."

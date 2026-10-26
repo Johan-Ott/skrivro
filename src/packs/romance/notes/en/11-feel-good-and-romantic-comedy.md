@@ -6,6 +6,15 @@ sort: Guide
 
 Feel-good and romantic comedy share a great deal with romance, but they promise something more: that the book will feel good to be inside. That takes craft, not just cosy settings.
 
+**The promises.** Feel-good and romantic comedy promise what romance promises, and also:
+
+- **Warmth.** A place and people the reader would like to move in with.
+- **Laughter.** The humour comes from the characters and the situations, not from making them stupid.
+- **Hope.** Grief, divorce and hard things are allowed, but the ending leaves the reader lighter than they began.
+- **A new life.** The lead's own journey, starting over, finding home or daring, matters as much as the love story. The ending must be happy for them, and almost always for the couple too.
+
+**The craft**
+
 - **Two stories in one.** In feel-good, the lead's new life carries as much as the love story: a business to build, a family to make peace with, a place to belong to. Let the two stories help and hinder each other.
 - **Romantic comedy is a romance first.** There the love story is the main plot, and the humour is the way it is told. The jokes should move the couple closer or further apart, not just fill space.
 - **The comedy comes from the character.** Someone with a firm rule, a pride or a bad plan is funny on their own. Put them where the rule collides with reality. "She had promised herself never to cook for a man again. Now she stood in a stranger's kitchen with a leg of lamb in the oven and twenty guests on their way."
