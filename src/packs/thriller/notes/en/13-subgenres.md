@@ -25,7 +25,7 @@ The promises of the thriller hold for all of them, but the threat lives in diffe
 **The spy thriller**
 
 - The promise: nobody is who they say, and loyalty costs.
-- Pitfall: jargon and organisation charts. Let one person carry it.
+- Pitfall: jargon and organization charts. Let one person carry it.
 
 **The political thriller**
 

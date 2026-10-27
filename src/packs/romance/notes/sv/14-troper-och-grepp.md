@@ -18,5 +18,8 @@ Troper är det läsare söker på, så namnet står på svenska med det engelska
 - **Hemkomsten (coming home).** _Fungerar när_ platsen och det förflutna pressar. _Kliché när_ storstaden alltid är tomhet och småstaden alltid lösningen.
 - **Långsam glöd (slow burn).** _Fungerar när_ varje scen flyttar dem lite. _Kliché när_ de talar förbi varandra i tre hundra sidor.
 - **Brytningen i tredje akten (third act breakup).** _Fungerar när_ den kommer ur såren de burit hela boken. _Kliché när_ ett missförstånd som ett samtal skulle lösa skiljer dem åt.
+- **Brorsans bästa vän (brother's best friend).** _Fungerar när_ lojaliteten mot brodern är ett verkligt val och hindret går att läsa ur båda parters sår. _Kliché när_ brodern bara är en vakt som släpper igenom dem i sista kapitlet.
+- **Hemlig identitet (secret identity).** _Fungerar när_ lögnen ger dem närhet de inte annars skulle ha vågat, och avslöjandet kostar. _Kliché när_ den som ljugit blir förlåten utan att det syns.
+- **Rivalerna (rivals).** _Fungerar när_ tävlingen speglar vad båda saknar och en seger hotar relationen. _Kliché när_ det är lätt att se vem som vinner.
 
 **Gör den din.** Byt ett villkor, inte tropen: vem som har makten, vad regeln kostar, vem som spricker först.

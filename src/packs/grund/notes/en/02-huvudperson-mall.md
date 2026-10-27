@@ -16,11 +16,11 @@ Rename the note to the character's name.
 
 **Needs:**
 
-<!-- What must they really get or understand, without knowing it at the start? -->
+<!-- What must they understand, without knowing it at the start? It can be: nothing. -->
 
 **The wound and the lie:**
 
-<!-- What happened once, and which false belief about themselves did it give them? -->
+<!-- Only if they change: what event gave them a false belief about themselves? -->
 
 **Afraid of:**
 

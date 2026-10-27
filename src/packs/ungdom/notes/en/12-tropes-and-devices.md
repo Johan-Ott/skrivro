@@ -15,5 +15,8 @@ The trope is the promise, the execution is yours.
 - **The competition.** _Works when_ the rules force moral choices. _Cliché when_ they win through a last stroke of luck.
 - **The absent parents.** _Works when_ the absence is a wound and gives the child room to act. _Cliché when_ it is only a way to get rid of adults.
 - **The one who doesn't fit in.** _Works when_ the outsiderness is concrete: who, where, how. _Cliché when_ it is solved by their turning out to be special.
+- **The secret place.** _Works when_ the place has a rule someone breaks and is threatened with discovery. _Cliché when_ it is only a cozy backdrop with no consequences.
+- **The friend who switches sides.** _Works when_ we understand the reason and it can be forgiven, or not. _Cliché when_ they turn bad because the plot needs a villain.
+- **Two homes.** _Works when_ the child has different rules, rooms and roles in each place and carries them along. _Cliché when_ one home is the bad one and the other the good one.
 
 **Make it yours.** Change one condition, not the trope: who is new, what the role costs, who doesn't keep up.

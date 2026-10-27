@@ -26,7 +26,7 @@ Take one scene at a time, in order.
 - **Cut the pleasantries in dialogue.** Hello, how are you, thanks, goodbye. Start the line where something is at stake.
 - **Which question pulls the reader through the scene?** It need not be suspense. A question asked early and only half answered is enough: will she say it?
 - **Does the chapter end on a question?** Or at a place where the reader can put the book down?
-- **Are the facts right?** Names, distances, times and who knows what. Story order and the notes have the answers.
+- **Are the facts right?** Names, distances, times and who knows what. Chronological order and the notes have the answers.
 
 **Pass 3: The lines**
 

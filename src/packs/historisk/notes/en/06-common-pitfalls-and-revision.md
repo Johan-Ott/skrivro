@@ -9,7 +9,7 @@ sort: Guide
 - **The info dump.** A paragraph on the tax system in the middle of a love scene. If the reader does not need it to follow the scene, cut it or let it surface in a conflict.
 - **Modern people in costume.** The main character thinks exactly like a reader today, and everyone else is cruel. It flattens both the age and the person.
 - **The backdrop.** War, plague or revolution happens but never touches the characters' choices. Then the book could be set at any time.
-- **The monochrome past.** Everyone is dirty, cruel and bigoted in the same way. Even then there was tenderness, humour, doubt and great differences between people.
+- **The monochrome past.** Everyone is dirty, cruel and bigoted in the same way. Even then there was tenderness, humor, doubt and great differences between people.
 - **The museum.** Every object gets described. Choose the details the character actually notices.
 - **Pastiche.** So much archaic language that the reader struggles. Readability always wins.
 - **The real figure takes over.** A famous historical person steals scenes from your invented ones. Keep real figures at the edge of the frame.

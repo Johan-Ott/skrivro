@@ -34,6 +34,6 @@ Rename the note to the name of the society, state or group.
 
 <!-- Which event led here, and how do different groups tell it? -->
 
-**What the reader recognises:**
+**What the reader recognizes:**
 
 <!-- What reminds us of our own time? -->

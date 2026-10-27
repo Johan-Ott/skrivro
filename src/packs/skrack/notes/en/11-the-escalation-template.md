@@ -36,4 +36,4 @@ Rename the note to something like The staircase.
 
 **The worst:**
 
-<!-- Which scene does the whole book build towards, and what remains afterwards? -->
+<!-- Which scene does the whole book build toward, and what remains afterwards? -->

@@ -15,5 +15,8 @@ Tropen är löftet, utförandet är ditt.
 - **Tävlingen.** _Fungerar när_ reglerna tvingar fram moraliska val. _Kliché när_ hen vinner genom en sista tur.
 - **Föräldrarna som är borta.** _Fungerar när_ frånvaron är ett sår och ger barnet utrymme att handla. _Kliché när_ den bara är ett sätt att slippa vuxna.
 - **Den som inte passar in.** _Fungerar när_ utanförskapet är konkret: vem, var, hur. _Kliché när_ det löses av att hen visar sig vara speciell.
+- **Det hemliga stället.** _Fungerar när_ stället har en regel som någon bryter och hotas av att bli upptäckt. _Kliché när_ det bara är en mysig kuliss utan följder.
+- **Vännen som byter sida.** _Fungerar när_ vi förstår skälet och det går att förlåta, eller inte. _Kliché när_ hen blir ond för att handlingen behöver en skurk.
+- **Två hem.** _Fungerar när_ barnet har olika regler, rum och roller på varje ställe och bär dem med sig. _Kliché när_ ett av hemmen är det onda och det andra det goda.
 
 **Gör den din.** Byt ett villkor, inte tropen: vem som är ny, vad rollen kostar, vem som inte hänger med.

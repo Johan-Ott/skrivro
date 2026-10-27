@@ -18,6 +18,6 @@ A reader who opens a fantasy novel wants to be taken somewhere else, and to trus
 
 **The first chapter is a contract.** The opening pages promise what kind of book this is: how much magic, how dark, how big. If the dragons arrive in chapter twelve, let the reader sense them in chapter one. A promise never made can never be kept.
 
-**Epic or urban, and more.** Epic fantasy promises a whole world, a long road and stakes that reach across kingdoms. Urban fantasy promises our own city with something hidden beneath it, and a main character who lives in both. The promises above hold for both, but the weight falls differently. The guide Epic and urban fantasy covers the differences, and the guide Subgenres takes grimdark, cosy and more.
+**Epic or urban, and more.** Epic fantasy promises a whole world, a long road and stakes that reach across kingdoms. Urban fantasy promises our own city with something hidden beneath it, and a main character who lives in both. The promises above hold for both, but the weight falls differently. The guide Epic and urban fantasy covers the differences, and the guide Subgenres takes grimdark, cozy and more.
 
 **Try this:** write your book's what if in a single sentence. If you can't, that is the first thing to solve.

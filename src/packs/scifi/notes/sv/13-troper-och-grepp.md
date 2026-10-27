@@ -16,5 +16,8 @@ Varje rad: vad den gör, när den fungerar, när den blir kliché.
 - **Det stora hotet utifrån.** En flotta, en signal, en asteroid. _Fungerar när_ människor tvingas välja mellan sig själva. _Kliché när_ hela världen enas på tre sidor.
 - **Uppfinnaren och följderna.** Någon skapar något som förändrar allt. _Fungerar när_ uppfinnaren inte förstår vad hen gjort. _Kliché när_ hen är ensam genial och orsakar allt.
 - **Kryosömnen.** Någon vaknar i en annan tid. _Fungerar när_ främlingskapet märks i vardagens detaljer och allt hen kände är borta. _Kliché när_ det bara är en bekväm förklaring för att få en nybörjare att fråga.
+- **Det äldre fyndet.** Ruiner, en artefakt eller en gammal signal. _Fungerar när_ fyndet ställer en fråga om vilka som fanns där och vad som hände dem. _Kliché när_ det är en genväg som löser huvudpersonens problem.
+- **Gränsvärlden.** En plats långt från centrum där reglerna är lösare. _Fungerar när_ avståndet verkligen kostar tid, nyheter och hjälp. _Kliché när_ det är vilda västern med laser.
+- **Översättaren.** Någon som förmedlar mellan språk, kulturer eller sinnen. _Fungerar när_ översättningen aldrig är perfekt och valen får följder. _Kliché när_ en maskin översätter allt direkt och felfritt.
 
 **Gör den din.** Byt ett villkor, inte tropen: vem som äger tekniken, vad den kostar, var den utspelar sig, vad människorna tror om den. Bygger du boken på en trop, bryt mot den en gång, med flit.

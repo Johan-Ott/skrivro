@@ -8,7 +8,7 @@ sort: Guide
 
 - **The moral.** The book exists to teach something, and the reader can tell. Let the protagonist get it wrong and find out for themselves. The reader draws the conclusion without being told.
 - **The rescuing adult.** A parent, a police officer or a teacher solves the problem in the last chapter. That takes the victory away from the protagonist and from the reader.
-- **An adult voice in a young head.** The twelve-year-old thinks "I realised my fear was really about loss". Write what they do and feel, not what a therapist would say.
+- **An adult voice in a young head.** The twelve-year-old thinks "I realized my fear was really about loss". Write what they do and feel, not what a therapist would say.
 - **Childhood memories instead of now.** The book is about how it was for you, back in your day. Young readers want to be in their own present, or in a world that feels just as alive.
 - **The wrong length.** A 30,000-word chapter book or a 120,000-word YA novel. Stay close to the age band's range.
 - **The empty friend.** The friend only exists to agree. Give them goals of their own that sometimes clash.

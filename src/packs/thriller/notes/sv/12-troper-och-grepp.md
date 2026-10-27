@@ -15,5 +15,8 @@ En trop är ett grepp läsaren känner igen och gärna vill ha: bomben med timer
 - **Familjen som gisslan.** _Fungerar när_ det tvingar huvudpersonen att välja mellan uppdraget och de egna. _Kliché när_ det bara höjer insatsen och offret saknar egen vilja.
 - **Huvudpersonen vet för mycket.** _Fungerar när_ hen först inte förstår vad hen vet. _Kliché när_ minnet kommer tillbaka precis när det behövs.
 - **Jakten.** _Fungerar när_ varje etapp förändrar något och kostar något. _Kliché när_ den är utfyllnad mellan två samtal.
+- **Vittnet som måste hållas vid liv.** _Fungerar när_ vittnet har egna skäl att inte samarbeta och en egen rädsla. _Kliché när_ det bara är en packad väska som ska flyttas mellan två skottlossningar.
+- **Främling i främmande land.** _Fungerar när_ det okända är ett hinder i varje scen: språket, lagarna, vem man kan fråga. _Kliché när_ en lokal guide förklarar allt.
+- **Informatören.** _Fungerar när_ hen riskerar mer än huvudpersonen och inte är fullt ärlig. _Kliché när_ hen dör precis före det viktiga namnet.
 
 **Gör den din.** Byt ett villkor, inte tropen: vem som bär bomben, vad klockan egentligen mäter, var förrädaren sitter, vad huvudpersonen tror sig veta. Bygger du boken på en trop, bryt mot den en gång, med flit.

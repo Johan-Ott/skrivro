@@ -21,7 +21,7 @@ Check these before you start polishing the prose.
 - Is the break-up rooted in their wounds, not in a misunderstanding?
 - Do both do something active to find their way back, not just one of them?
 - Does the grand gesture match the wound it heals, and is the other free to say no to it?
-- Does the reconciliation get time, and does whoever did the hurting truly apologise?
+- Does the reconciliation get time, and does whoever did the hurting truly apologize?
 - Is the ending happy, and does the reader get to see it in a scene of its own?
 
 **The world around them**

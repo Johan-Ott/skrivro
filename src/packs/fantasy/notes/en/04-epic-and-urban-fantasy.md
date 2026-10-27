@@ -20,7 +20,7 @@ Both are fantasy, but they promise different things and demand different craft. 
 - **The secret has a mechanism.** Why doesn't everyone know? Magic that makes people forget, a law among the initiated, or plain unwillingness to see. Decide too why phone cameras, news feeds and the authorities haven't exposed anything.
 - **Two lives that chafe.** The main character has a job, a family or rent to pay, and the hidden world demands time and lies. The conflict between the two lives is the engine.
 - **Factions.** The hidden world is rarely united. Let groups with their own aims, old pacts and territories bring politics and tension, and put the main character between them.
-- **Voice.** The genre is often carried by a close, personal narrating voice, frequently with dry humour in the middle of danger. Decide early how close the reader gets and how the main character sounds.
+- **Voice.** The genre is often carried by a close, personal narrating voice, frequently with dry humor in the middle of danger. Decide early how close the reader gets and how the main character sounds.
 - **The plot as a puzzle.** Many urban fantasy novels are built like an investigation: a body, a disappearance, a threat to the secret. Lay out the clues as carefully as in a crime novel.
 
 **Blends.** Portal fantasy takes someone from our world into another and thrives on the contrast. Low fantasy keeps magic rare and dangerous in an otherwise everyday world. Whatever blend you choose, the same holds: the reader should understand early which rules apply.

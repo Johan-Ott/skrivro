@@ -16,5 +16,8 @@ Tropen är löftet, utförandet är ditt.
 - **Gruppen som splittras.** _Fungerar när_ beslutet kommer ur verklig rädsla eller lojalitet. _Kliché när_ det beror på dumhet.
 - **Monstret som har regler.** _Fungerar när_ reglerna avslöjas i steg och kostar. _Kliché när_ regeln råkar vara det huvudpersonen just har.
 - **Det sista obehaget.** _Fungerar när_ det växer ur det som hänt. _Kliché när_ det alltid är en hand ur graven.
+- **Det hittade materialet.** _Fungerar när_ breven, banden eller loggarna har en röst och visar något huvudpersonen missar. _Kliché när_ de bara förklarar hotet i ett svep.
+- **Det som följer med.** _Fungerar när_ hotet knyts till en människa, ett föremål eller en skuld, och flytten inte räddar. _Kliché när_ det följer med utan att någon vet hur eller varför.
+- **Den som varnar.** _Fungerar när_ varningen är ofullständig och kostar den som ger den något. _Kliché när_ en främling ger en gåtfull varning i sista stund och sedan försvinner.
 
 **Gör den din.** Byt ett villkor, inte tropen: platsen, vem som inte blir trodd, vad regeln kostar.

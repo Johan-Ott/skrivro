@@ -12,7 +12,7 @@ A historical novel wins or loses its reader in the first pages, and in how the a
 
 **One detail per sense.** Pick a sound, a smell and something to touch in each new setting. Three well chosen details are enough. More turns into an inventory.
 
-**Background in small doses.** If the reader must grasp a historical situation, let it come through quarrels, rumours and misunderstandings between characters. One character explaining something to another who already knows it is a sign you are lecturing.
+**Background in small doses.** If the reader must grasp a historical situation, let it come through quarrels, rumors and misunderstandings between characters. One character explaining something to another who already knows it is a sign you are lecturing.
 
 **Point of view.** The character knows only what they could know. A soldier in a battle does not know how the battle is going. A merchant knows prices, not affairs of state. The narrow view makes history vivid and creates suspense.
 

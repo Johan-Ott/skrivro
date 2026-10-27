@@ -15,6 +15,9 @@ The trope is the promise, the execution is yours.
 - **The child who sees.** _Works when_ the child's view is credible and costs the adults. _Cliché when_ it is just a creepy smile and a song.
 - **The group that splits up.** _Works when_ the decision comes from real fear or loyalty. _Cliché when_ it comes from stupidity.
 - **The monster with rules.** _Works when_ the rules are revealed in steps and cost something. _Cliché when_ the rule happens to be what the hero has just got.
-- **The last unease.** _Works when_ it grows from what has happened. _Cliché when_ it is always a hand from the grave.
+- **The final sting.** _Works when_ it grows from what has happened. _Cliché when_ it is always a hand from the grave.
+- **The found material.** _Works when_ the letters, tapes or logs have a voice and show something the protagonist misses. _Cliché when_ they merely explain the threat in one go.
+- **What follows you.** _Works when_ the threat is tied to a person, an object or a debt, and moving away does not save you. _Cliché when_ it follows without anyone knowing how or why.
+- **The one who warns.** _Works when_ the warning is incomplete and costs the one who gives it. _Cliché when_ a stranger gives a cryptic warning at the last moment and then vanishes.
 
 **Make it yours.** Change one condition, not the trope: the place, who isn't believed, what the rule costs.

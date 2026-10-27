@@ -26,7 +26,7 @@ Rename the note to the character's name.
 
 <!-- What do they see in the other that the main character does not? -->
 
-**Humour or warmth:**
+**Humor or warmth:**
 
 <!-- Which line could only they say? -->
 

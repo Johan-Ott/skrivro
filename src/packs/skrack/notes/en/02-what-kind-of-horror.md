@@ -9,7 +9,7 @@ Before you plan the staircase, decide what the threat is and how much the reader
 **Where the threat comes from.** Most horror novels draw their threat from one of these sources, sometimes from two at once.
 
 - **The supernatural.** Ghosts, creatures, curses. Its strength is that it breaks the laws of the world. Its weakness is that without rules it quickly turns arbitrary.
-- **The human.** A stalker, a cult, a neighbour. Nothing needs explaining, and it frightens precisely because it could happen.
+- **The human.** A stalker, a cult, a neighbor. Nothing needs explaining, and it frightens precisely because it could happen.
 - **The body.** Contagion, transformation, a body that will not obey. The fear lives under the skin and gets close at once.
 - **The community and the old ways.** A village, a custom, a sacrifice that everyone except the main character seems to understand. The threat is the community itself.
 - **The incomprehensible.** Something so vast or alien that the mind cannot hold it. It follows rules, but they were not made for people, and understanding them is itself a harm.

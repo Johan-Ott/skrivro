@@ -17,4 +17,6 @@ Den långsamma glöden vinns eller förloras på scennivå. Några grepp som hå
 - **Den intima scenen ändrar något.** En kyss eller en natt ska flytta relationen: ett försvar faller, makten mellan dem skiftar, en hemlighet blir svårare att bära. Ändrar scenen ingenting är den en paus, hur het den än är.
 - **Sluta med en krok.** Avsluta kapitlet med en fråga, en upptäckt eller en känsla som inte går att ta tillbaka. "Bandet runt hennes handled glödde. Det gjorde det bara när han ljög."
 - **Växla takt.** Efter en stor actionscen, ge en lugn scen där de bearbetar det som hänt, tillsammans. Det är ofta där närheten växer mest.
+- **Striden är också en scen mellan dem.** Fråga vad striden ändrar för paret: vem räddar vem, vem ser den andra vara rädd, vems pris betalas. En strid där relationen står stilla är utbytbar, hur bra den än är koreograferad. Håll dig nära en persons blick, skriv kaoset genom det hen hinner uppfatta, och visa följden i nästa scen.
+- **Humor och retande.** Även i en mörk värld behöver paret skratta ibland. Ett vasst skämt mitt i faran visar att de är nära och att de är levande. Låt humorn komma ur personerna, inte ur författaren, och bryt den med en ärlig mening när det gör ont.
 - **Världen genom känslan.** Beskriv hovet genom hur det får huvudpersonen att känna sig: liten, iakttagen, hungrig. Då gör världsbygget två jobb samtidigt.

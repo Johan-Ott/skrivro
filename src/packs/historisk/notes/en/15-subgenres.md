@@ -30,7 +30,7 @@ The promises of historical fiction hold for all of them, but each subgenre has i
 **The family saga**
 
 - The promise: time passes through a family, and the reader follows what is handed on.
-- Pitfall: many people and no centre. Choose whose hand the reader holds.
+- Pitfall: many people and no center. Choose whose hand the reader holds.
 
 **Antiquity and the Middle Ages**
 

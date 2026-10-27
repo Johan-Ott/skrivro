@@ -24,11 +24,11 @@ The promises of romantasy hold for all of them, but the weight shifts. Choose ea
 - Set-up: conversations as moves in a game, alliances that shift.
 - Pitfall: intrigue without consequences. Let betrayal cost.
 
-**Cosy romantasy**
+**Cozy romantasy**
 
 - The promise: low stakes, warmth, a small place and a slow love.
 - Set-up: daily life, craft and community carry the book, and the magic is small.
-- Pitfall: forgetting the opposition. Even cosy needs something to win.
+- Pitfall: forgetting the opposition. Even cozy needs something to win.
 
 **Urban romantasy**
 
@@ -39,7 +39,7 @@ The promises of romantasy hold for all of them, but the weight shifts. Choose ea
 **Fairy-tale retelling**
 
 - The promise: a familiar tale that looks anew at its hero and its villain.
-- Set-up: recognise the shape, change who holds the power and what is true.
+- Set-up: recognize the shape, change who holds the power and what is true.
 - Pitfall: following the tale so closely that nothing surprises.
 
 **Dark romantasy**

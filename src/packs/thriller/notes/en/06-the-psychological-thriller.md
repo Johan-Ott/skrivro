@@ -6,7 +6,7 @@ sort: Guide
 
 Here the threat does not live in another city but in the same house. The question is not only whether the main character makes it in time, but whether they can trust anyone, even themselves.
 
-**The threat from someone close.** A partner, a sister, a neighbour, a new friend who knows a little too much. Give that person real warmth at the start. The reader must understand why the main character trusted them, or they just look naive.
+**The threat from someone close.** A partner, a sister, a neighbor, a new friend who knows a little too much. Give that person real warmth at the start. The reader must understand why the main character trusted them, or they just look naive.
 
 **The closed setting.** A home, a workplace, a holiday resort. The place should feel both safe and shut in: doors that lock, but also lock from the inside. Everyday things carry the threat: a cup of tea, a phone in the wrong place, a key on another hook.
 

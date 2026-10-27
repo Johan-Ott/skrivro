@@ -9,14 +9,14 @@ Epic and urban fantasy, portal fantasy and low fantasy are in the guide Epic and
 **Grimdark**
 
 - The promise: a world without heroes, where choices cost and nobody is clean.
-- Set-up: morally grey people, violence with consequences, victories that wound.
+- Set-up: morally gray people, violence with consequences, victories that wound.
 - Pitfall: darkness as a pose. Cruelty without consequence is just scenery.
 
-**Cosy fantasy**
+**Cozy fantasy**
 
 - The promise: low stakes, warmth and a community that heals.
 - Set-up: a cafe, a bookshop, a village. The conflict is small but real.
-- Pitfall: forgetting the conflict. Cosy without direction is only atmosphere.
+- Pitfall: forgetting the conflict. Cozy without direction is only atmosphere.
 
 **Sword and sorcery**
 

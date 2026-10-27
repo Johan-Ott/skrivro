@@ -11,8 +11,8 @@ A clue should be seen without shining. At the end the reader should think "it wa
 **Three kinds of clue.** Mix them, so the reader cannot learn where they hide.
 
 - **Physical:** an object, a mark, something missing. The coffee cup on the rack has been washed, though the victim never washed up.
-- **Testimony:** something said in passing. The neighbour mentions how quiet the evening was, though the dog always barks at visitors.
-- **Behaviour:** a reaction that does not fit. The sister never asks how he died.
+- **Testimony:** something said in passing. The neighbor mentions how quiet the evening was, though the dog always barks at visitors.
+- **Behavior:** a reaction that does not fit. The sister never asks how he died.
 
 **Hide in plain sight.**
 
@@ -27,4 +27,4 @@ A clue should be seen without shining. At the end the reader should think "it wa
 
 **Inside the detective's head.** If the story follows the detective's thoughts, it cannot hold back what they have already worked out. Delay the insight instead: they notice the detail, get interrupted, and only understand later.
 
-**In Skrivro.** Put the label Clue or Red herring on scenes and filter in Contents. Are the clues spread out, or bunched in the last third? Fill in When on the chapters and sort by Story order to see whether alibis hold or break where they should.
+**In Skrivro.** Put the label Clue or Red herring on scenes and filter in Contents. Are the clues spread out, or bunched in the last third? Fill in When on the chapters and sort by Chronological order to see whether alibis hold or break where they should.

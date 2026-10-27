@@ -28,7 +28,7 @@ Rename the note to the name of the place: the house, the farm, the island, the s
 
 **The history:**
 
-<!-- What has happened here before, and what do the neighbours not say? -->
+<!-- What has happened here before, and what do the neighbors not say? -->
 
 **Why it is hard to leave:**
 

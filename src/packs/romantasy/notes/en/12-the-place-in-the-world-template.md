@@ -6,7 +6,7 @@ sort: platser
 
 Rename the note to the name of the place: the fortress, the ballroom, the forest, the prison, the alley under the bridge.
 
-**What the traveller sees first:**
+**What the traveler sees first:**
 
 <!-- What is the first image on arrival? -->
 

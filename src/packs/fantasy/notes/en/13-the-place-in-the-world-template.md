@@ -6,7 +6,7 @@ sort: platser
 
 Rename the note to the name of the place: the fortress, the forest, the market town, the temple, the alley under the bridge. The template also works for a place in the hidden world of urban fantasy.
 
-**What the traveller sees first:**
+**What the traveler sees first:**
 
 <!-- What is the first image on arrival? -->
 

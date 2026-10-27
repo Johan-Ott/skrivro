@@ -9,7 +9,7 @@ The iceberg principle: you know ten times more about the world than the reader e
 **The opening**
 
 - **Start with a person, not a map.** The first page shows someone who wants something, in a concrete situation. The world appears in what they see, touch and take for granted.
-- **Something familiar, something new.** Bread and rain the reader recognises. A baker who charges in dreams they don't. That balance gives the reader a foothold.
+- **Something familiar, something new.** Bread and rain the reader recognizes. A baker who charges in dreams they don't. That balance gives the reader a foothold.
 - **The particular over the general.** Not a market, but stalls selling salted eel and weather in bottles. One exact detail carries more world than a paragraph of description.
 - **No more than one new name per page at first.** Every invented word costs the reader effort. Write the emperor before you write Vaskar the Third of Orrun.
 

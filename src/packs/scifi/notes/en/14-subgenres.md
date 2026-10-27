@@ -9,7 +9,7 @@ The promises of science fiction hold for all of them, but each subgenre has its 
 **Space opera**
 
 - The promise: scale, pace, big conflicts and a crew on a ship.
-- Set-up: empires, fleets and politics, with a small crew at the centre.
+- Set-up: empires, fleets and politics, with a small crew at the center.
 - Pitfall: the scale becoming scenery. Ask what someone in the crew wants.
 
 **Hard science fiction**

@@ -17,5 +17,8 @@ Hur en trop fungerar står i guiden Troper och löften. I romantasy bärs tropen
 - **Den moraliskt gråa älskaren (morally grey).** _Fungerar när_ gråheten har ett pris och inte bara är en estetik. _Kliché när_ allt grått visar sig ha en god förklaring.
 - **Den utvalda med ett pris (chosen one).** _Fungerar när_ kraften kostar och formar relationen. _Kliché när_ hjälten är unik utan skäl i berättelsen.
 - **Dold natur (hidden identity).** _Fungerar när_ sanningen är planterad tidigt. _Kliché när_ den kommer från ingenstans.
+- **Bandet till en varelse (bonded creature).** _Fungerar när_ bandet kostar och varelsen har egen vilja som pressar parets val. _Kliché när_ varelsen bara är ett fortskaffningsmedel eller en söt följeslagare.
+- **Allierade på uppdrag (quest companions).** _Fungerar när_ uppdraget tvingar dem att lita på varandra trots olika mål. _Kliché när_ vägen bara är en rad platser där de kommer närmare.
+- **Återkomsten från exil (return from exile).** _Fungerar när_ det som lämnades har förändrats och återkomsten kostar. _Kliché när_ alla förlåter i första scenen.
 
 **Gör den din.** Byt ett villkor, inte tropen: vem som har makten, vad magin kostar, vem som spricker först.

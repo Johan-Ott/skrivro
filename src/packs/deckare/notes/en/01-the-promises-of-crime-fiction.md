@@ -17,6 +17,6 @@ Anyone who opens a mystery has made a deal with you. Break it and the book feels
 
 **Breaking one on purpose.** Readers forgive a broken convention when they can tell it was a choice. Break one promise at a time and keep the rest rock solid. Give something back that weighs more than what you took: a mystery without a full solution can work if the question that remains is what the book is really about.
 
-**Choose your kind of mystery.** The promises hold for all of them, but the weight shifts. Decide which one you are writing before you choose your detective, because it settles their authority, their method and how much police work the book needs. The guide Subgenres goes through the classic puzzle, the cosy mystery, the police procedural and the others.
+**Choose your kind of mystery.** The promises hold for all of them, but the weight shifts. Decide which one you are writing before you choose your detective, because it settles their authority, their method and how much police work the book needs. The guide Subgenres goes through the classic puzzle, the cozy mystery, the police procedural and the others.
 
 **Test your manuscript:** can you point to the page where the reader first meets the culprit, and the page where the decisive clue first appears? If the meeting falls in the first third and the clue before the midpoint, you are keeping the most important promises.

@@ -32,7 +32,7 @@ Rename the note to the name they will have in the book.
 
 **Names and recognition:**
 
-<!-- Which details must change so nobody recognises them? -->
+<!-- Which details must change so nobody recognizes them? -->
 
 **The reading:**
 

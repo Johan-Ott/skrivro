@@ -10,13 +10,13 @@ sort: Guide
 
 - Löftet: ett problem som läsaren känner igen, berättat sant och nära.
 - Upplägg: en vardag, en förändring och ett val. Insatserna är personliga men stora.
-- Fallgrop: ämnet blir viktigare än personen. Börja med henne.
+- Fallgrop: ämnet blir viktigare än personen. Börja med personen.
 
 **Kärlek och förälskelse**
 
 - Löftet: pirr, osäkerhet och första gången något betyder mycket. Ju yngre läsare, desto mer blickar och mindre kropp.
 - Upplägg: två personer, ett hinder och ett val. Vänskapen runt omkring bär.
-- Fallgrop: att förälskelsen löser allt. Låt personen också ha ett eget liv.
+- Fallgrop: att förälskelsen löser allt. Låt den hen är kär i ha ett eget liv.
 
 **Fantasy för unga**
 

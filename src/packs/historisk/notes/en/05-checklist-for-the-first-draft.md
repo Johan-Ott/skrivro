@@ -17,7 +17,7 @@ Go through the list when the draft is done. Fact checking comes last, once you k
 
 - Does it feel like another time from the first page?
 - Is the age shown through daily life and action rather than explanation?
-- Do the characters think like people of their time about children, faith, gender, class and honour?
+- Do the characters think like people of their time about children, faith, gender, class and honor?
 - Have you checked travel times, letters and news? How long did it take to get between places?
 - Do seasons, weekdays and the characters' ages match the timeline?
 

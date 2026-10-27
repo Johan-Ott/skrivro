@@ -12,7 +12,7 @@ A true book moves between showing and telling. Both are needed, but in different
 - **Build the scene on the senses.** A memory often catches on one detail: the smell of diesel, a red cardigan, the radio in the kitchen. Start there and let the rest grow out of it.
 - **Dialogue you roughly remember.** Rebuild the lines as closely as you can, in the person's own way of speaking. Never put words in someone's mouth that contradict what you know of them.
 
-**A non-fiction chapter** has a shape of its own that the reader learns to recognise:
+**A non-fiction chapter** has a shape of its own that the reader learns to recognize:
 
 - **Open with a case** or a question that makes the problem concrete.
 - **One claim per chapter,** stated plainly and early.

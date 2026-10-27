@@ -25,7 +25,7 @@ Young readers already meet death, divorce, bullying and anxiety. A book can be t
 
 **How to write it**
 
-- **From the inside.** Show what it does to the protagonist, not facts about the subject. The reader should recognise themselves, not be informed.
+- **From the inside.** Show what it does to the protagonist, not facts about the subject. The reader should recognize themselves, not be informed.
 - **No preaching, no wallowing.** The hard part is there for the story's sake, not to shock or to teach.
 - **Suicide and self-harm.** Never describe methods in detail, and never let death look like a solution or something beautiful. Show that help exists and that things can get better. These are the guidelines that exist for how the media portray suicide, and publishers follow them.
 - **Support afterwards.** A short afterword can tell the reader where to turn: the school counsellor, a doctor or a support line for young people. Check which ones exist where the book is published.

@@ -12,11 +12,11 @@ The promises of crime fiction hold for all of them, but each subgenre has its ow
 - Set-up: few suspects, a clear timeline, the reveal as the high point.
 - Pitfall: characters who are chess pieces. Give each one their own lie and their own need.
 
-**The cosy mystery**
+**The cozy mystery**
 
 - The promise: an amateur, a small community, violence offstage, a world that heals.
 - Set-up: setting and supporting cast carry the book as much as the puzzle.
-- Pitfall: forgetting the puzzle. Cosy without fair play is just small talk.
+- Pitfall: forgetting the puzzle. Cozy without fair play is just small talk.
 
 **The small-town series**
 

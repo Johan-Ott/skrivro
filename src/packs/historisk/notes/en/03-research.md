@@ -14,7 +14,7 @@ Research serves the story. You do not need to know everything about the age, but
 - **Court records.** Quarrels, thefts and slander, with testimony that often preserves ordinary people's own words.
 - **Probate inventories.** What a home actually held, from pots to clothes, and what everything was worth.
 - **Parish registers and censuses.** Births, marriages, causes of death, moves, and in some places who could read.
-- **Newspapers and advertisements.** Prices, news, rumours and what was new and coveted.
+- **Newspapers and advertisements.** Prices, news, rumors and what was new and coveted.
 - **Travel accounts.** Visitors from elsewhere notice what the locals took for granted.
 - **Maps and pictures.** What the place looked like, where the roads ran and how far it was.
 

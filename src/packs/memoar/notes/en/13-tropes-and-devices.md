@@ -16,5 +16,8 @@ The device is the promise, the execution is yours.
 - **The exercise.** _Works when_ it gives an answer the reader did not have before. _Cliché when_ it is a questionnaire in mid-chapter.
 - **The recurring image.** _Works when_ its meaning shifts each time. _Cliché when_ it is explained at the end.
 - **The opponent who is right.** _Works when_ you actually change your mind a little. _Cliché when_ the objection is a straw man.
+- **The place you return to.** _Works when_ the place has changed in a way that shows how you have changed. _Cliché when_ it is a nostalgic trip where everything is forgiven.
+- **The silence in the family.** _Works when_ you show what was never said and what it cost. _Cliché when_ a secret in the last chapter explains everything.
+- **The object that carries the memory.** _Works when_ the object has a history that changes with what you learn. _Cliché when_ it is only a symbol you point at.
 
 **Make it yours.** Change one condition, not the device: who is telling, what the device costs, where it shows.

@@ -14,7 +14,9 @@ The slow burn is won or lost scene by scene. A few moves that keep the tension a
 - **One point of view at a time.** One voice per scene. Switch at a new chapter or a clear scene break, and let the new voice open with something the last one did not know.
 - **Almost, and then stop.** An interruption should come from the world or from a choice, never from chance. A guard knocking is cheap. Her pulling back because she remembers who he serves is strong.
 - **Consent as tension.** A question, a pause, a yes you can see. It does not kill the heat, it sharpens it.
-- **The intimate scene changes something.** A kiss or a night should move the relationship: a defence falls, the power between them shifts, a secret gets harder to carry. If the scene changes nothing, it is a pause, however hot it is.
+- **The intimate scene changes something.** A kiss or a night should move the relationship: a defense falls, the power between them shifts, a secret gets harder to carry. If the scene changes nothing, it is a pause, however hot it is.
 - **End on a hook.** Close the chapter on a question, a discovery or a feeling that cannot be taken back. "The band on her wrist glowed. It only did that when he lied."
 - **Vary the pace.** After a big action scene, give them a quiet one where they deal with what happened, together. That is often where closeness grows most.
+- **The fight is also a scene between them.** Ask what the fight changes for the couple: who saves whom, who sees the other afraid, whose price is paid. A fight where the relationship stands still is interchangeable, however well choreographed. Stay close to one person's eyes, write the chaos through what they have time to notice, and show the consequence in the next scene.
+- **Humor and teasing.** Even in a dark world the couple needs to laugh sometimes. A sharp joke in the middle of danger shows that they are close and that they are alive. Let the humor come from the characters, not the author, and break it with an honest sentence when it hurts.
 - **The world through feeling.** Describe the court by how it makes your lead feel: small, watched, hungry. Then the worldbuilding does two jobs at once.

@@ -8,7 +8,7 @@ A reader who opens a true book hands you their trust. This is what you promise i
 
 **A memoir promises**
 
-- **A chapter of a life, not a whole life.** A memoir covers a bounded stretch of time with one question at its centre: the year of the illness, the move, the divorce, the years at the factory. That is what sets it apart from autobiography, which follows the whole life in order. Whatever doesn't touch the question can wait for another book. _A whole life instead becomes a chronicle without a question._
+- **A chapter of a life, not a whole life.** A memoir covers a bounded stretch of time with one question at its center: the year of the illness, the move, the divorce, the years at the factory. That is what sets it apart from autobiography, which follows the whole life in order. Whatever doesn't touch the question can wait for another book. _A whole life instead becomes a chronicle without a question._
 - **The truth as you remember it.** You don't invent events. You may reconstruct dialogue and detail, but not change what happened. Say so when memory is shaky: "I think it was March." _If you invent, you lose the reader's trust._
 - **Openness about what you have shaped.** If you have merged several conversations into one, moved an event in time or made one person out of two, say so in a short author's note. _Readers forgive shaping, but not being fooled._
 - **An honest narrator.** You are the most closely examined person in the book. Show your own mistakes as clearly as anyone else's. _A narrator with no share in the story stops being believed._

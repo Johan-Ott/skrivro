@@ -16,11 +16,11 @@ Byt namn på anteckningen till personens namn.
 
 **Behöver:**
 
-<!-- Vad måste hen egentligen få eller förstå, som hen inte vet om i början? -->
+<!-- Vad måste hen förstå, utan att veta det i början? Kan vara: ingenting. -->
 
 **Såret och lögnen:**
 
-<!-- Vad hände en gång, och vilken felaktig tro om sig själv gav det hen? -->
+<!-- Bara vid förvandling: vilken händelse gav hen en falsk tro om sig själv? -->
 
 **Rädd för:**
 

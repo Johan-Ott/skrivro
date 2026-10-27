@@ -27,7 +27,7 @@ Pass 1, the structure:
 
 Pass 2, the scenes:
 
-- Sort the chapters by Story order and read When alongside What really happened. Could anyone have been in two places at once?
+- Sort the chapters by Chronological order and read When alongside What really happened. Could anyone have been in two places at once?
 - Does every interview give something new: a lie, a clue or an obstacle? If not, it can be summed up in a sentence.
 - Check every chapter ending: does it end on a question?
 - Trim the reveal to what is truly needed.

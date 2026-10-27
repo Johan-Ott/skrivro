@@ -42,7 +42,9 @@ Romansens löften gäller alla, men varje undergenre har sin tyngdpunkt. Feelgoo
 - Löftet: kärlek efter skilsmässa, sorg eller ett liv som blev något annat.
 - Upplägg: de har ett förflutet, barn, vanor och ärr som måste få plats.
 - Fallgrop: att göra åldern till en ursäkt. Låt den ge djup, inte bara trötthet.
-  **Dark romance**
+
+**Dark romance**
+
 - Löftet: ett mörkt begär, ofta med makt, tvång eller våld i relationen. Den leker med samtyckets gräns, men boken vet att den gör det och säger det öppet, med en innehållsvarning.
 - Upplägg: hotet är en del av dragningen, och vägen dit ska vara tydlig för läsaren.
 - Fallgrop: att våldet romantiseras utan att boken märker det. Låt det få följder.

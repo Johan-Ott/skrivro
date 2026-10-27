@@ -17,7 +17,7 @@ Go through the list when the draft is done, before you start rewriting.
 **The escalation**
 
 - Is each part of the book more dangerous, closer or more personal than the last?
-- Is there a clear first price, where the reader realises anyone can be next?
+- Is there a clear first price, where the reader realizes anyone can be next?
 - Does the worst scene come late enough?
 
 **The main character**

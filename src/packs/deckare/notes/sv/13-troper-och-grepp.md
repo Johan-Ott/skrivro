@@ -19,5 +19,8 @@ En trop är ett grepp som läsaren känner igen och gärna vill ha. Tropen är l
 - **Fallet blir personligt.** _Fungerar när_ det gör utredningen svårare: omdömet grumlas, hen ser för lite. _Kliché när_ det bara höjer insatsen.
 - **Mördarens kapitel i kursiv.** _Fungerar när_ rösten ger läsaren något utredaren saknar. _Kliché när_ det bara ska skrämma.
 - **Det kalla fallet.** _Fungerar när_ tiden är en del av gåtan: vad har folk glömt, flyttat, förtigit? _Kliché när_ ny teknik löser det på en natt.
+- **Arvet och testamentet.** _Fungerar när_ pengarna också är ett sätt att bli sedd eller försonad. _Kliché när_ det bara är girighet och en advokat som läser upp ett papper.
+- **Vittnen som säger olika.** _Fungerar när_ varje version är sann för den som minns den och skillnaderna är ledtrådar. _Kliché när_ ett vittne är en lögnare utan skäl.
+- **Utredaren utan mandat.** _Fungerar när_ bristen tvingar fram andra metoder, och sanningen kostar jobbet eller vänskapen. _Kliché när_ chefen bara säger "du är avstängd" och hen löser det ändå.
 
 **Gör den din.** Byt ett villkor, inte tropen: vem som utreder, vad det kostar, var det utspelar sig. Bygger du boken på en trop, bryt mot den en gång, med flit.

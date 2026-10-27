@@ -16,5 +16,8 @@ Greppet är löftet, utförandet är ditt.
 - **Övningen.** _Fungerar när_ den ger ett svar läsaren inte hade förut. _Kliché när_ den är ett frågeformulär mitt i kapitlet.
 - **Den återkommande bilden.** _Fungerar när_ den ändrar betydelse varje gång. _Kliché när_ den förklaras i slutet.
 - **Motståndaren som får rätt.** _Fungerar när_ du faktiskt ändrar dig något. _Kliché när_ invändningen är en halmgubbe.
+- **Platsen du återvänder till.** _Fungerar när_ platsen har ändrats på ett sätt som visar hur du har ändrats. _Kliché när_ det är en nostalgisk resa där allt blir förlåtet.
+- **Tystnaden i familjen.** _Fungerar när_ du visar vad som aldrig sades och vad det kostade. _Kliché när_ en hemlighet i sista kapitlet förklarar allt.
+- **Föremålet som bär minnet.** _Fungerar när_ föremålet har en historia som ändras med vad du får veta. _Kliché när_ det bara är en symbol som du pekar på.
 
 **Gör det ditt.** Byt ett villkor, inte greppet: vem som berättar, vad greppet kostar, var det syns.

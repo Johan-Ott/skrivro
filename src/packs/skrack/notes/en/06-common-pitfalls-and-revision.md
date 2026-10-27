@@ -10,7 +10,7 @@ sort: Guide
 - **The monster is on stage too much.** The more the reader sees, the less afraid they are. Show parts, traces and effects.
 - **The threat follows no rules.** If it can do anything there is no suspense, only chance. The reader stops guessing and stops caring.
 - **The foolish main character.** Going down to the cellar for no reason makes the reader laugh. Give them a compelling reason: the child is down there.
-- **The explanation takes over.** A long chapter where someone tells the whole backstory kills the unease. Let the truth come in pieces and make things worse.
+- **The explanation takes over.** A long chapter where someone tells the whole backstory kills the dread. Let the truth come in pieces and make things worse.
 - **Nobody cares about the victims.** People who exist only to die frighten no one. Give each victim a face and something to live for.
 - **Everything is dark all the time.** Without ordinary life and warmth there is nothing to lose and no contrast.
 - **The ending is too tidy.** If everything is solved and nobody is scarred, it was never truly dangerous.

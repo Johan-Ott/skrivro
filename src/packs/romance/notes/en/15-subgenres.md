@@ -42,7 +42,9 @@ The promises of romance hold for all of them, but each subgenre has its own weig
 - The promise: love after divorce, loss or a life that turned into something else.
 - Set-up: they have a past, children, habits and scars that need room.
 - Pitfall: making age an excuse. Let it give depth, not just weariness.
-  **Dark romance**
+
+**Dark romance**
+
 - The promise: a dark desire, often with power, coercion or violence in the relationship. It plays with the line of consent, but the book knows it does and says so openly, with a content warning.
 - Set-up: the threat is part of the pull, and the road there should be clear to the reader.
 - Pitfall: violence romanticised without the book noticing. Give it consequences.

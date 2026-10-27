@@ -18,5 +18,8 @@ How a trope works is in the guide Tropes and promises. Here are the most common 
 - **Coming home.** _Works when_ the place and the past press on them. _Cliché when_ the city is always emptiness and the small town always the answer.
 - **Slow burn.** _Works when_ every scene moves them a little. _Cliché when_ they talk past each other for three hundred pages.
 - **Third act breakup.** _Works when_ it grows out of the wounds they have carried all book. _Cliché when_ a misunderstanding that one conversation would solve pulls them apart.
+- **Brother's best friend.** _Works when_ loyalty to the brother is a real choice and the obstacle can be read from both partners' wounds. _Cliché when_ the brother is only a guard who lets them through in the last chapter.
+- **Secret identity.** _Works when_ the lie gives them a closeness they would not otherwise have dared, and the reveal costs. _Cliché when_ the one who lied is forgiven without it showing.
+- **Rivals.** _Works when_ the competition mirrors what both lack and a win threatens the relationship. _Cliché when_ it is easy to see who wins.
 
 **Make it yours.** Change one condition, not the trope: who holds the power, what the rule costs, who cracks first.

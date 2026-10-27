@@ -17,7 +17,7 @@ A reader who picks up romantasy is buying two promises at once: a love story and
 
 **Breaking one on purpose.** An open ending for the series can work if the couple have chosen each other and the next book is in debt to the reader. A dark ending can work if the book promised darkness from page one and the reader was warned. Break one promise at a time and pay back with something that weighs more.
 
-**Choose your kind of romantasy.** Heat, tone and the size of the world shift. The guide Subgenres goes through fae, academy, court, cosy and the others.
+**Choose your kind of romantasy.** Heat, tone and the size of the world shift. The guide Subgenres goes through fae, academy, court, cozy and the others.
 
 **Promise early.** By the first chapters the reader should know what kind of book this is: how dark, how steamy, how epic. If the first scene shows an execution in the square and a look between two enemies in the crowd, you have promised both danger and heat. Keep that promise, in the same tone, all the way.
 

@@ -7,7 +7,7 @@ sort: Guide
 **Pitfalls**
 
 - **The prologue as history lesson.** A thousand years of war before we meet a single person. Start with someone, and let the history come in piece by piece.
-- **The chosen one without a choice.** A prophecy that does the work for the main character. Make the prophecy wrong, ambiguous, or something they must choose to fulfil.
+- **The chosen one without a choice.** A prophecy that does the work for the main character. Make the prophecy wrong, ambiguous, or something they must choose to fulfill.
 - **Magic as last-minute rescue.** A new power awakens exactly when it's needed. Plant it early, and show what it costs.
 - **Worldbuilding instead of story.** Thirty pages on the customs system. Keep it in your notes; the book only needs what affects the scene.
 - **Invented words for ordinary things.** A special word for horse or coffee wears the reader out. Only invent words for what is truly new.
