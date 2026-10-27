@@ -10,6 +10,26 @@ export function countText({ total, current }: { total: number; current: number }
   return total === 1 ? t("1 träff") : t("{total} träffar", { total });
 }
 
+/** The count; with no match in the manuscript but some in the notes, it says so and offers them. */
+export function SearchCount({ actions }: { actions: SearchCountActions }) {
+  const position = actions.position();
+  const inNotes = position.total === 0 ? actions.inNotes() : 0;
+  if (inNotes === 0) return <span className="search-count">{countText(position)}</span>;
+  return (
+    <button className="link-button search-count" onClick={actions.showNotes}>
+      {inNotes === 1
+        ? t("1 träff i anteckningar")
+        : t("{count} träffar i anteckningar", { count: inNotes })}
+    </button>
+  );
+}
+
+interface SearchCountActions {
+  position: () => { total: number; current: number };
+  inNotes: () => number;
+  showNotes: () => void;
+}
+
 const MAX_SHOWN = 50;
 
 /** Across the whole manuscript: each scene with a match, its count and where the first one is. */

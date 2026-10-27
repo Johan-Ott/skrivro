@@ -7,16 +7,18 @@ import type { useEditorView } from "../editor/useEditorView.js";
 import {
   applyQuery,
   countMatches,
+  countMatchesIn,
   nextSceneWith,
   builtScene,
   type ManuscriptScope,
 } from "../editor/manuscriptSearch.js";
-import { manuscriptSceneIds, sceneIdsIn, sortsOf } from "../project/tree.js";
+import { manuscriptSceneIds } from "../project/tree.js";
 import { scenePath } from "../storage/sceneId.js";
 import { replaceInScenes, undoReplace, type SceneChange } from "./manuscriptReplace.js";
 import { platform } from "./platform.js";
 import { sceneHits } from "./searchHits.js";
-import { isKept, searchChips, WITH_NOTES } from "./searchFilter.js";
+import { isKept, noteIds, notesLeftOut, WITH_NOTES } from "./searchFilter.js";
+import { useChips } from "./useSearchChips.js";
 import { openScene, type SceneSession } from "./sceneSession.js";
 import type { Project } from "./useProject.js";
 
@@ -37,9 +39,6 @@ interface SearchParts {
   only?: string[];
 }
 
-const noteIds = (project: Project) =>
-  sortsOf(project.tree).flatMap((sort) => sceneIdsIn(project.tree, sort.id));
-
 // Scenes still in the cloud have no text here; the notes come after the book when asked for.
 function manuscriptIds(project: Project, only: string[] = []) {
   const notes = only.includes(WITH_NOTES) ? noteIds(project) : [];
@@ -48,8 +47,10 @@ function manuscriptIds(project: Project, only: string[] = []) {
   );
 }
 
-async function loadScenes(project: Project) {
-  const ids = manuscriptIds(project, [WITH_NOTES]);
+// Searching the open scene only needs the notes, for the hint that they hold the words; the whole
+// manuscript is read once it is searched too.
+async function loadScenes(project: Project, isWholeManuscript: boolean) {
+  const ids = isWholeManuscript ? manuscriptIds(project, [WITH_NOTES]) : notesLeftOut(project);
   const texts = await Promise.all(
     ids.map((id) => platform.fileSystem.readText(scenePath(project.dir, id)).catch(() => null)),
   );
@@ -62,15 +63,17 @@ async function loadScenes(project: Project) {
 }
 
 /** The open scene as the editor has it; every other scene as it is on disk. */
-function useSceneStates(parts: SearchParts, isOn: boolean) {
+function useSceneStates(parts: SearchParts, isWholeManuscript: boolean) {
   const [scenes, setScenes] = useState(new Map<string, EditorState>());
   const { project, isSearchOpen } = parts;
+  const openId = parts.session.scene?.id;
   useEffect(() => {
-    if (!project || !isSearchOpen || !isOn) return;
+    if (!project || !isSearchOpen) return;
     let isCurrent = true;
-    void loadScenes(project).then((loaded) => isCurrent && setScenes(loaded));
+    void loadScenes(project, isWholeManuscript).then((loaded) => isCurrent && setScenes(loaded));
     return () => void (isCurrent = false);
-  }, [project, isSearchOpen, isOn]);
+    // Read again when the open scene changes, so what was written in the scene left is found.
+  }, [project?.dir, project?.tree, project?.scenes, isSearchOpen, isWholeManuscript, openId]);
   return (id: string, open: EditorState | null) =>
     id === parts.session.scene?.id ? open : (scenes.get(id) ?? null);
 }
@@ -115,30 +118,27 @@ function findingActions(parts: StepParts) {
             query,
           )
         : [],
+    inNotes: (query: SearchQuery, open: EditorState | null) =>
+      project
+        ? countMatchesIn(notesLeftOut(project, parts.only), (id) => parts.stateOf(id, open), query)
+        : 0,
     openHit: (id: string, query: SearchQuery) => void showMatchIn(parts, id, query, false),
   };
 }
 
 export function useManuscriptSearch(searchParts: SearchParts) {
   const [isOn, setOn] = useState(false);
-  const [only, setOnly] = useState<string[]>([]);
+  const { only, chips, toggleChip, showNotes } = useChips(searchParts.project, setOn);
   const parts = { ...searchParts, only };
   const [replaceDone, setReplaceDone] = useState<ReplaceDone | null>(null);
   const stateOf = useSceneStates(parts, isOn);
   const replaceAll = (query: SearchQuery) =>
     void replaceEverywhere(parts, query).then((done) => done && setReplaceDone(done));
-  const chips = (parts.project ? searchChips(parts.project) : []).map((chip) => ({
-    ...chip,
-    isOn: only.includes(chip.id),
-  }));
-  const toggleChip = (id: string) =>
-    setOnly(only.includes(id) ? only.filter((each) => each !== id) : [...only, id]);
-
   const replacedInScene = (count: number, search: string) =>
     count > 0 && setReplaceDone({ count, search, changes: null });
   const finding = findingActions({ ...parts, stateOf });
   const scope: ManuscriptScope = {
-    ...{ isOn, setOn, ...finding, replaceAll, replacedInScene, chips, toggleChip },
+    ...{ isOn, setOn, ...finding, replaceAll, replacedInScene, chips, toggleChip, showNotes },
   };
   const undo = () => {
     if (replaceDone?.changes) void undoEverywhere(parts, replaceDone.changes);

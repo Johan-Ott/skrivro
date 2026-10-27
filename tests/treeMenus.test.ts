@@ -32,6 +32,8 @@ const actions: TreeMenuActions = {
   makeScene: null,
   chapters: () => [],
   wasNote: () => false,
+  isFile: () => false,
+  newLapp: null,
 };
 const labels = (items: ReturnType<typeof rowMenu>) =>
   items.map((item) => (item.separatorBefore ? `| ${item.label}` : item.label));

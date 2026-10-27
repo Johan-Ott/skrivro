@@ -8,11 +8,16 @@ import { takeSnapshot } from "./snapshots.js";
 import { noteIdsOf } from "./cards.js";
 import { manuscriptSceneIds, type TreeNode } from "./tree.js";
 
-// A note made a scene loses its unanswered questions and their labels, which are the template's.
-// Answered fields stay. A comment of the writer's under a bold line counts as a question.
+// A note made a scene loses the template's questions and the bold labels above its fields; what
+// was written under a label stays. A comment of the writer's under a bold line counts as a question.
 
 /** The note's text without its unanswered questions, and nothing else changed. */
 export const withoutQuestions = (body: string) => body.replace(UNANSWERED_FIELD_AND_GAP, "");
+
+const LABEL_LINE = /^\*\*[^*\n]+:\*\*[ \t]*(?:\r?\n(?:[ \t]*\r?\n)*|(?![\s\S]))/gm;
+
+/** The note's text as a scene: without its unanswered questions, and without the labels. */
+export const withoutTemplate = (body: string) => withoutQuestions(body).replace(LABEL_LINE, "");
 
 /** The notes of `before` that `after` holds in the manuscript. */
 export function notesMadeScenes(before: TreeNode[], after: TreeNode[]) {
@@ -26,7 +31,7 @@ export async function cleanNotesMadeScenes(fileSystem: FileSystem, dir: string, 
     const path = scenePath(dir, id);
     const text = await fileSystem.readText(path);
     const { frontMatter, body } = splitSceneFile(text);
-    const cleaned = withoutQuestions(body);
+    const cleaned = withoutTemplate(body);
     if (cleaned === body) continue;
     // Nothing goes without a way back: the note as it was is kept in Versioner.
     await takeSnapshot(fileSystem, { dir, id }, text, {

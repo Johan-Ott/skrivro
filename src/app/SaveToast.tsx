@@ -51,6 +51,20 @@ export function ReadOnlyNotice({ isReadOnly }: { isReadOnly: boolean }) {
   );
 }
 
+type TrashedProps = { label: string; onPutBack: () => void };
+
+export function TrashedNotice({ trashed }: { trashed: TrashedProps | null }) {
+  if (!trashed) return null;
+  return (
+    <div className="toast inverted" role="status">
+      <span>{t("Scenen ligger i Papperskorgen och går bara att läsa.")}</span>
+      <button className="link-button" onClick={trashed.onPutBack}>
+        {trashed.label}
+      </button>
+    </div>
+  );
+}
+
 const TOAST_MS = 8000;
 
 export function ReplaceToast(props: {

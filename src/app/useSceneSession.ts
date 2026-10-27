@@ -1,16 +1,18 @@
 import { createStore } from "@llkit/store.js";
 import { pictureUrlIn } from "./pictureFiles.js";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { manuscriptSceneIds } from "../project/tree.js";
 import type { Project } from "./useProject.js";
 import { useEditorView } from "../editor/useEditorView.js";
 import type { SaveStatus } from "@llkit/storage/autosave.js";
 import { errorLog } from "@llkit/errorLog.js";
 import { platform } from "./platform.js";
+import { useSavedOnLeaving } from "./useSavedOnLeaving.js";
 import { greetBack, placeIn, showResume, useRememberPlace } from "./resume/lastPlace.js";
 import {
   closeScene,
   createSceneSession,
+  flushOrKeep,
   openScene,
   sceneEdited,
   type DiskConflict,
@@ -34,17 +36,6 @@ function openedModes(
   modes.current.isEditable = opened !== null;
   modes.current.isNote = () => opened !== null && (session?.isNote(opened.dir, opened.id) ?? false);
   modes.current.pictureUrl = opened ? (name) => pictureUrlIn(opened.dir, name) : async () => null;
-}
-
-// Closing asks to save first; a phone may close an app in the background without asking, so the
-// text is saved as soon as it leaves the screen.
-function useSavedOnLeaving(session: SceneSession) {
-  useEffect(() => platform.guardClose(() => session.autosave.flush()), [session]);
-  useEffect(() => {
-    const onHide = () => document.hidden && void session.autosave.flush();
-    document.addEventListener("visibilitychange", onHide);
-    return () => document.removeEventListener("visibilitychange", onHide);
-  }, [session]);
 }
 
 export function useSceneSession() {
@@ -74,7 +65,8 @@ export function useSceneSession() {
     [load, viewRef, modes],
   );
   sessionRef.current = session;
-  useSavedOnLeaving(session);
+  const keepWhenLeaving = useCallback(() => flushOrKeep(session), [session]);
+  useSavedOnLeaving(keepWhenLeaving);
 
   useRememberPlace({ scene, editor });
   return { session, scene, saveStatus, conflict, editor, savedRef };

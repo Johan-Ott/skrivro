@@ -1,4 +1,6 @@
 import type { Node } from "prosemirror-model";
+import { flushAllSaves } from "./saveGuard.js";
+import { takeSnapshot } from "../project/snapshots.js";
 import { parseMarkdown } from "../manuscript/parseMarkdown.js";
 import {
   joinSceneFile,
@@ -15,7 +17,6 @@ import { writeAtomic } from "@llkit/storage/atomicWrite.js";
 import { createAutosave, type SaveStatus } from "@llkit/storage/autosave.js";
 import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { newSceneId, scenePath } from "../storage/sceneId.js";
-import { takeSnapshot } from "../project/snapshots.js";
 import { writeSuggestion } from "../project/revisions.js";
 import { decideExternalChange } from "../storage/syncFiles.js";
 import { t } from "../i18n/i18n.js";
@@ -95,7 +96,7 @@ export async function closeScene(session: SceneSession) {
   return true;
 }
 
-function showScene(session: SceneSession, dir: string, id: string, text: string) {
+export function showScene(session: SceneSession, dir: string, id: string, text: string) {
   const { frontMatter, body } = splitSceneFile(text);
   session.scene = { dir, id, frontMatter, title: sceneTitle(frontMatter) ?? t("Namnlös scen") };
   session.hooks.onScene(session.scene);
@@ -106,6 +107,8 @@ function showScene(session: SceneSession, dir: string, id: string, text: string)
 // Leaving a scene whose text is not on disk would lose it, so the switch waits for the save,
 // and saves again after the read for what was typed meanwhile.
 export async function openScene(session: SceneSession, dir: string, id: string) {
+  // A lapp written in its box may be the one opened here, so what waits for the disk goes first.
+  await flushAllSaves();
   if (!(await session.autosave.flush())) return false;
   const text = await session.fileSystem.readText(scenePath(dir, id));
   if (!(await session.autosave.flush())) return false;
@@ -166,31 +169,23 @@ export async function createScene(fileSystem: FileSystem, dir: string, title: st
   return id;
 }
 
-export async function resolveConflict(
-  session: SceneSession,
-  choice: ConflictChoice,
-  conflict: DiskConflict,
-) {
-  const scene = session.scene;
-  if (!scene) return;
-  if (choice === "both") {
-    const otherBody = splitSceneFile(conflict.diskText).body;
-    await createScene(
-      session.fileSystem,
-      scene.dir,
-      t("{title} (andra versionen)", { title: scene.title }),
-      otherBody,
-    );
-  }
-  // The editor's text is kept among the scene's versions, so nothing is lost.
-  if (choice === "theirs")
-    await takeSnapshot(session.fileSystem, scene, conflict.editorText, { time: Date.now() });
-  session.autosave.release();
-  session.hooks.onConflict(null);
-  if (choice === "theirs") return showScene(session, scene.dir, scene.id, conflict.diskText);
-  session.autosave.loaded(conflict.diskText);
-  session.autosave.changed(conflict.editorText);
-  await session.autosave.flush();
+// The text last kept as a version, so hiding, pagehide and onPause in a row make one.
+const keptText = new WeakMap<SceneSession, string>();
+
+/** Saves what waits. A conflict or a sync can hold the save, and then the text is kept as a version
+ * instead, so leaving the app never loses it. */
+export async function flushOrKeep(session: SceneSession) {
+  if (await session.autosave.flush()) return true;
+  const { scene } = session;
+  const doc = session.hooks.editor.currentDoc();
+  if (!scene || !doc) return false;
+  const text = textOf(session, doc);
+  if (text === session.autosave.lastSavedText() || text === keptText.get(session)) return true;
+  const when = { time: Date.now(), label: t("Text som inte hann sparas") };
+  return takeSnapshot(session.fileSystem, scene, text, when).then(
+    () => (keptText.set(session, text), true),
+    () => false,
+  );
 }
 
 // The open scene's front matter changes through its autosave, so unsaved text is saved with it.

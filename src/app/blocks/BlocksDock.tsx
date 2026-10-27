@@ -81,7 +81,7 @@ function OpenPanels(props: Props & { open: string[] }) {
 
 export function BlocksDock(props: Props) {
   const open = openBlocks.use();
-  const notes = useStickyNotes(props.project.dir);
+  const notes = useStickyNotes(props.project, props.app);
   const button = (block: Block) => (
     <DockButton
       key={block.id}

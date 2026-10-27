@@ -19,9 +19,9 @@ const EDITED_ELSEWHERE = t(
   t("Scenen ändrades i en annan app eller på en annan enhet medan du skrev. Inget har raderats."),
 );
 
-function VersionCard(props: { label: string; body: string; excerpt: string; isChosen: boolean }) {
+function VersionCard(props: { label: string; body: string; excerpt: string }) {
   return (
-    <div className={props.isChosen ? "version-card chosen" : "version-card"}>
+    <div className="version-card">
       <span className="version-label">{props.label}</span>
       <span className="version-meta">
         {t("{count} ord", { count: formatNumber(countWords(props.body)) })}
@@ -42,11 +42,11 @@ function ConflictActions({ onChoose, onLater }: Pick<ConflictDialogProps, "onCho
       <button className="button secondary" onClick={() => onChoose("theirs")}>
         {t("Behåll den andra")}
       </button>
-      <button className="button secondary" onClick={() => onChoose("both")}>
-        {t("Behåll båda")}
-      </button>
-      <button className="button primary" onClick={() => onChoose("mine")} autoFocus>
+      <button className="button secondary" onClick={() => onChoose("mine")}>
         {t("Behåll den här enhetens")}
+      </button>
+      <button className="button primary" onClick={() => onChoose("both")} autoFocus>
+        {t("Behåll båda")}
       </button>
     </div>
   );
@@ -67,12 +67,11 @@ export function ConflictDialog(props: ConflictDialogProps) {
           <span className="dialog-text">{props.text ?? EDITED_ELSEWHERE}</span>
         </div>
         <div className="version-grid">
-          <VersionCard label={t("Den här enheten")} body={mine} excerpt={excerpts.mine} isChosen />
+          <VersionCard label={t("Den här enheten")} body={mine} excerpt={excerpts.mine} />
           <VersionCard
             label={props.otherLabel ?? t("Den andra versionen")}
             body={theirs}
             excerpt={excerpts.theirs}
-            isChosen={false}
           />
         </div>
         <ConflictActions onChoose={onChoose} onLater={props.onLater} />

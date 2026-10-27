@@ -107,6 +107,17 @@
   height: 4px;
 }
 
+/* Ny lapp: the quick catch, under Fortsätt skriva. */
+.phone-new-lapp {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-button);
+  background: var(--bg);
+  color: var(--text);
+}
+
 .phone-continue {
   display: flex;
   align-items: center;
@@ -364,10 +375,36 @@ body .selection-bar.phone .icon-button {
 
 .phone-app .block-head .close-button,
 .phone-app .insights-head .close-button {
-  grid-column: 3;
   width: 44px;
   height: 44px;
   font-size: 22px;
+}
+
+/* The close button has the grid's last column to itself, wholly on the screen; a panel here is a
+   screen of its own, so there is nothing to minimise. */
+.phone-app .block-head-buttons {
+  grid-column: 3;
+  justify-self: end;
+}
+
+.phone-app .block-minimize:not(.review-menu) {
+  display: none;
+}
+
+/* Granska has ⋯ as well as ×, so its bar has room for two buttons at each end. */
+.phone-app .review-header {
+  grid-template-columns: 88px minmax(0, 1fr) 88px;
+}
+
+.phone-app .review-menu {
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+}
+
+/* A key to press for Tillbaka means nothing without a keyboard. */
+.phone-app .back-button-key {
+  display: none;
 }
 
 /* A long press on a button or a heading does nothing; only the writer's own text can be marked */
@@ -959,6 +996,36 @@ body .phone-app .text-when input {
    focus header is not needed. */
 .phone-app .focus-header {
   display: none;
+}
+
+/* A comment is written over the foot of the text, so the words commented stay in sight above it. */
+.phone-app .phone-comment-box {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: calc(var(--layer-float) + 2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 45dvh;
+  padding: 12px 12px calc(12px + var(--safe-bottom));
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+
+/* The words commented stand on one line over the field, shortened with … when they are long. */
+.phone-app .phone-comment-box .comment-quote {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Klar and Avbryt are big enough for a thumb. */
+.phone-app .phone-comment-box .button {
+  min-width: 44px;
+  min-height: 44px;
 }
 
 /* Under the phone's own bar, where the title is. */

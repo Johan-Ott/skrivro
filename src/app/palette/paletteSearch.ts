@@ -57,9 +57,13 @@ export function searchPalette(entries: PaletteEntry[], query: string, uses: Uses
   const folded = fold(query.trim());
   if (folded === "") return startEntries(entries, uses);
   const used = (entry: PaletteEntry) => uses[entry.id] ?? 0;
-  return entries
+  const scored = entries
     .map((entry, index) => ({ entry, index, points: score(entry.label, folded) }))
-    .filter((match) => match.points > 0)
+    .filter((match) => match.points > 0);
+  // Letters spread out are a last resort, so they never crowd out a real match.
+  const hasRealMatch = scored.some((match) => match.points > 1);
+  return scored
+    .filter((match) => !hasRealMatch || match.points > 1)
     .sort(
       (first, second) =>
         second.points - first.points ||

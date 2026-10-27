@@ -44,6 +44,18 @@ export function countMatches(state: EditorState, query: SearchQuery): number {
   return count;
 }
 
+/** The matches in these scenes together; a scene without text here counts as none. */
+export function countMatchesIn(
+  ids: string[],
+  stateOf: (id: string) => EditorState | null,
+  query: SearchQuery,
+) {
+  return ids.reduce((sum, id) => {
+    const state = stateOf(id);
+    return sum + (state ? countMatches(state, query) : 0);
+  }, 0);
+}
+
 /** Blocks without a match are written back unchanged. */
 export function replaceAllInText(sceneText: string, query: SearchQuery) {
   let state = searchableScene(sceneText, query);
@@ -64,6 +76,10 @@ export interface ManuscriptScope {
   replacedInScene: (count: number, search: string) => void;
   /** Every scene with a match, for the list under the search. */
   hits: (query: SearchQuery, open: EditorState | null) => SceneHit[];
+  /** Matches in the notes while the notes are left out of the search; 0 when they are in. */
+  inNotes: (query: SearchQuery, open: EditorState | null) => number;
+  /** Takes the notes into the search. */
+  showNotes: () => void;
   /** Opens the scene at its first match. */
   openHit: (id: string, query: SearchQuery) => void;
   /** Status steps and labels that narrow the search to some scenes. */

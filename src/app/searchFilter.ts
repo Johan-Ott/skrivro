@@ -1,7 +1,7 @@
 import { SCENE_STATUSES } from "../manuscript/sceneFile.js";
 import { labelsOf } from "../project/labels.js";
 import { statusSteps } from "../project/statusSteps.js";
-import { findNode } from "../project/tree.js";
+import { findNode, sceneIdsIn, sortsOf } from "../project/tree.js";
 import type { Project } from "./useProject.js";
 import { t } from "../i18n/i18n.js";
 
@@ -42,3 +42,10 @@ export function isKept(project: Project, sceneId: string, only: string[]) {
   const isLabelKept = labels.length === 0 || labels.some((id) => own.includes(id));
   return isStatusKept && isLabelKept;
 }
+
+export const noteIds = (project: Project) =>
+  sortsOf(project.tree).flatMap((sort) => sceneIdsIn(project.tree, sort.id));
+
+/** The notes on this device, while the search leaves them out. */
+export const notesLeftOut = (project: Project, only: string[] = []) =>
+  only.includes(WITH_NOTES) ? [] : noteIds(project).filter((id) => project.scenes.includes(id));

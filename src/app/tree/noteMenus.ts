@@ -38,11 +38,11 @@ export function noteItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] 
       onSelect: () => actions.setLink(node, !isLinked),
     },
     ...sortMoves(node, actions),
-    ...sceneMoves(node, actions),
+    ...(actions.isFile(node) ? [] : sceneMoves(node, actions)),
     ...(moveToSeries
       ? [{ label: t("Flytta till serien"), onSelect: () => moveToSeries(node) }]
       : []),
-    ...(saveAsTemplate
+    ...(saveAsTemplate && !actions.isFile(node)
       ? [{ label: t("Spara som mall"), onSelect: () => saveAsTemplate(node) }]
       : []),
   ];

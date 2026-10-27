@@ -5,11 +5,10 @@ import { PAUSE_MS } from "../editor/repetitionMarks.js";
 import type { ManuscriptScope } from "../editor/manuscriptSearch.js";
 import { useCallback, useMemo } from "react";
 import { useAutoBackup } from "./useAutoBackup.js";
-import { ConflictDialog } from "./ConflictDialog.js";
+import { ConflictLayer } from "./ConflictLayer.js";
 import { CommandPalette } from "./palette/CommandPalette.js";
 import type { usePalette } from "./palette/usePalette.js";
 import {
-  resolveConflict,
   writeOverScene,
   type DiskConflict,
   type OpenScene,
@@ -39,6 +38,7 @@ import { bookLanguage } from "../project/bookLanguage.js";
 import type { useStartup } from "./useStartup.js";
 import type { SettingsChange } from "./useWritingSettings.js";
 import { useDriveSync, type DriveSync } from "./useDriveSync.js";
+import type { TreeNode } from "../project/tree.js";
 import { Celebrations } from "./journey/Celebrations.js";
 
 interface OverlayParts {
@@ -50,6 +50,7 @@ interface OverlayParts {
   editor: ReturnType<typeof useEditorView>;
   search: { scope: ManuscriptScope };
   refresh: () => Promise<void>;
+  updateTree: (tree: TreeNode[]) => Promise<void>;
   series: Project | null;
   seriesState: { refreshSeries: () => Promise<void> };
   updateFields: (fields: Record<string, unknown>) => Promise<void>;
@@ -69,23 +70,6 @@ interface OverlayParts {
     openSearchWith: (text: string) => void;
     setBeside: (beside: Beside | null) => void;
   };
-}
-
-function ConflictLayer(props: {
-  conflict: DiskConflict | null;
-  scene: OpenScene | null;
-  session: SceneSession;
-  refresh: () => Promise<void>;
-}) {
-  const { conflict, scene, session } = props;
-  if (!conflict || !scene) return null;
-  return (
-    <ConflictDialog
-      sceneTitle={scene.title}
-      conflict={conflict}
-      onChoose={(choice) => void resolveConflict(session, choice, conflict).then(props.refresh)}
-    />
-  );
 }
 
 function MentionLayer({ app }: { app: OverlayParts }) {

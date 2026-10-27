@@ -1,7 +1,9 @@
 import { t } from "../i18n/i18n.js";
 import { withoutBookSuffix } from "../project/libraryFolders.js";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { readProjectFile, writeProjectFile } from "../project/projectFile.js";
+import { writeProjectFile } from "../project/projectFile.js";
+import { readProjectFolder } from "./readProjectFolder.js";
+import type { OpenedProject } from "../storage/projectFolder.js";
 import {
   readSceneSummaries,
   type KnownSummaries,
@@ -10,7 +12,6 @@ import {
 import { reconcileScenes, type TreeNode } from "../project/tree.js";
 import { noteIdsOf } from "../project/cards.js";
 import type { TreeChange } from "./notes/noteHomes.js";
-import { openProjectFolder, type OpenedProject } from "../storage/projectFolder.js";
 import { describeSaveError, type SaveFailure } from "@llkit/storage/saveError.js";
 import { errorLog, recordFailure } from "@llkit/errorLog.js";
 import { platform } from "./platform.js";
@@ -40,8 +41,7 @@ export async function readProject(
   isOpening = true,
 ): Promise<Project> {
   const fileSystem = platform.fileSystem;
-  const listing = await openProjectFolder(fileSystem, dir);
-  const file = await readProjectFile(fileSystem, dir, listing.scenes, isOpening);
+  const { listing, file } = await readProjectFolder(dir, isOpening);
   const { tree } = reconcileScenes(file.tree, listing.scenes);
   const noteIds = noteIdsOf(tree);
   const summaries = await readSceneSummaries(fileSystem, dir, listing.scenes, { known, noteIds });
@@ -82,6 +82,12 @@ function useProjectWriter(projectRef: React.RefObject<Project | null>) {
   return { write, treeFailure, settled };
 }
 
+/** A change that is made on the tree as it stands when it is applied, so two in a row both count. */
+export type TreeChanger = (tree: TreeNode[]) => TreeNode[];
+
+const newTree = (change: TreeNode[] | TreeChanger | undefined, current: TreeNode[]) =>
+  typeof change === "function" ? change(current) : (change ?? current);
+
 export function useProjectUpdates(
   projectRef: React.RefObject<Project | null>,
   setProject: React.Dispatch<React.SetStateAction<Project | null>>,
@@ -91,10 +97,10 @@ export function useProjectUpdates(
   // Counted, so a read that began before a change knows it is out of date.
   const edits = useRef(0);
   const update = useCallback(
-    (change: { tree?: TreeNode[]; fields?: Record<string, unknown> }) => {
+    (change: { tree?: TreeNode[] | TreeChanger; fields?: Record<string, unknown> }) => {
       const project = projectRef.current;
       if (!project || project.isReadOnly) return Promise.resolve();
-      const tree = change.tree ?? project.tree;
+      const tree = newTree(change.tree, project.tree);
       const fields = { ...project.fields, ...change.fields };
       // At once, so a second change before the next render builds on this one.
       projectRef.current = { ...project, tree, fields };
@@ -105,7 +111,7 @@ export function useProjectUpdates(
     },
     [projectRef, setProject, write, onTreeChange],
   );
-  const updateTree = useCallback((tree: TreeNode[]) => update({ tree }), [update]);
+  const updateTree = useCallback((tree: TreeNode[] | TreeChanger) => update({ tree }), [update]);
   const updateFields = useCallback(
     (fields: Record<string, unknown>) => update({ fields }),
     [update],

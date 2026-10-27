@@ -1,4 +1,5 @@
 import { saveNoteAsTemplate } from "./notes/TemplateChips.js";
+import { startLapp } from "./createLapp.js";
 import { selectionBarOf } from "./selectionBarOf.js";
 import { PersonSecrets, SecretPanel } from "./notes/SecretPanel.js";
 import type { ProjectChange } from "./labels/LabelsDialog.js";
@@ -12,6 +13,7 @@ import {
 } from "../project/tree.js";
 import { chapterOf } from "../project/treeLabels.js";
 import type { AppState } from "./App.js";
+import { trashedScene } from "./trashedScene.js";
 import { saveAliases } from "./notes/aliasActions.js";
 import { NoteHeader, NoteMentions, noteSortOf, type NotePageProps } from "./notes/NotePage.js";
 import { NoteVoice } from "./notes/NoteVoice.js";
@@ -127,6 +129,7 @@ export function sidebarProps(app: AppState, project: Project) {
     ...{ isFollowingOpenScene: writingMode.settings.followOpenText, onOpenScene: openText(app) },
     isContentsShown: writingMode.view === "innehall",
     onShowContents: () => writingMode.setView("innehall"),
+    onNewLapp: () => void startLapp(app, project),
     syncReviewCount: app.syncReview.toChoose,
     onShowSyncReview: () => writingMode.setView("synk"),
     ...{ onShowSnapshots: app.snapshots.show, onShowDrafts: app.drafts.show },
@@ -181,9 +184,12 @@ function seriesTreeProps(app: AppState, series: Project) {
 }
 
 export function writingAreaProps(app: AppState, project: Project) {
+  const trashed = trashedScene(app, project);
   return {
     editor: app.editor,
     isReadOnly: project.isReadOnly,
+    isLocked: project.isReadOnly || trashed !== null,
+    trashed,
     isHidden: app.writingMode.view !== "skriv",
     hasScene: app.scene !== null,
     focusLocation: focusLocation(project, app.scene),

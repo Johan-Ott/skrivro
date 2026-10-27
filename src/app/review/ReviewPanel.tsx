@@ -8,6 +8,7 @@ import type { NameSuspect } from "../../manuscript/review.js";
 import type { ProseNote } from "../../manuscript/prose.js";
 import type { Card } from "../../project/cards.js";
 import type { useReview } from "./useReview.js";
+import { useMenuButton, type MenuItem } from "@llkit/Menu.js";
 import { t } from "../../i18n/i18n.js";
 
 interface ReviewPanelProps {
@@ -15,6 +16,8 @@ interface ReviewPanelProps {
   review: ReturnType<typeof useReview> | null;
   commentsSection: ReactNode;
   narrationSection: ReactNode;
+  /** What Granska can start, such as writing suggestions; no ⋯ when there is nothing. */
+  menuItems: MenuItem[];
   /** About the whole book rather than the scene, such as people who fade out of it. */
   bookNotes: ProseNote[];
   revisionSection: ReactNode;
@@ -139,7 +142,21 @@ function InBook({ notes }: { notes: ProseNote[] }) {
   );
 }
 
+function ReviewMenu({ items }: { items: MenuItem[] }) {
+  const menu = useMenuButton(t("Mer"), items);
+  if (items.length === 0) return null;
+  return (
+    <>
+      <button className="block-minimize review-menu" aria-label={t("Mer")} onClick={menu.open}>
+        ⋯
+      </button>
+      {menu.menu}
+    </>
+  );
+}
+
 function ReviewHeader(props: {
+  items: MenuItem[];
   isShown: boolean;
   onClose: () => void;
   onGrab: ((event: PointerEvent<HTMLElement>) => void) | undefined;
@@ -150,6 +167,7 @@ function ReviewHeader(props: {
         <GripIcon />
         {t("Granska")}
       </span>
+      <ReviewMenu items={props.items} />
       <HeadButtons
         id="granska"
         closeLabel={t("Stäng granskning")}
@@ -165,11 +183,14 @@ function useCountInTopbar(count: number, onCount: (count: number | null) => void
   useEffect(() => () => onCount(null), [onCount]);
 }
 
+function countOf({ review, commentCount, revisionCount }: ReviewPanelProps) {
+  const found = review ? review.suspects.length + review.repeats.length + review.prose.length : 0;
+  return found + commentCount + revisionCount;
+}
+
 export function ReviewPanel(props: ReviewPanelProps) {
   const { review } = props;
-  const found = review ? review.suspects.length + review.repeats.length + review.prose.length : 0;
-  const count = found + props.commentCount + props.revisionCount;
-  useCountInTopbar(count, props.onCount);
+  useCountInTopbar(countOf(props), props.onCount);
   const isShown = props.isOpen || props.isPinnedOpen;
   const floating = useFloating("granska", !usePhone());
   return (
@@ -182,6 +203,7 @@ export function ReviewPanel(props: ReviewPanelProps) {
       onKeyDown={(event) => event.key === "Escape" && props.onOpenChange(false)}
     >
       <ReviewHeader
+        items={props.menuItems}
         isShown={isShown}
         onClose={() => props.onOpenChange(false)}
         onGrab={floating.onPointerDown}

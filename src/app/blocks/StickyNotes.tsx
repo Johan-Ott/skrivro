@@ -170,10 +170,10 @@ function UndoRemove(props: { state: StickyNotesState; removed: StickyNote; onDon
   );
 }
 
-/** The book's notes over the text; opened with none, it starts the first. A hidden note is back
- * the next time Lappar opens, since the layer starts afresh. */
+/** The book's lappar over the text; opened with none, it starts the first. A hidden one is back
+ * the next time Lappar opens. The lapp that is open in the text is not shown here as well. */
 export function StickyNotesLayer({ state }: { state: StickyNotesState }) {
-  const { notes } = state;
+  const { notes, openId } = state;
   const [hidden, setHidden] = useState<string[]>([]);
   const [removed, setRemoved] = useState<StickyNote | null>(null);
   const hasStarted = useRef(false);
@@ -186,7 +186,7 @@ export function StickyNotesLayer({ state }: { state: StickyNotesState }) {
   return (
     <>
       {(notes ?? [])
-        .filter((note) => !hidden.includes(note.id))
+        .filter((note) => !hidden.includes(note.id) && note.id !== openId)
         .map((note) => (
           <StickyNoteCard
             key={note.id}

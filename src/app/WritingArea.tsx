@@ -2,8 +2,6 @@ import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { useEditorState } from "../editor/editorStore.js";
 import { WritingTip } from "./guide/GuideTip.js";
 import type { ManuscriptScope } from "../editor/manuscriptSearch.js";
-import { refreshPageMarks } from "../editor/pageMarks.js";
-import { refreshRepetitions } from "../editor/repetitionMarks.js";
 import { SearchPanel } from "../editor/SearchPanel.js";
 import type { useEditorView } from "../editor/useEditorView.js";
 import type { WritingSettings } from "../editor/writingSettings.js";
@@ -13,14 +11,20 @@ import type { SaveFailure } from "@llkit/storage/saveError.js";
 import { FocusHeader } from "./FocusHeader.js";
 import { usePanels } from "./settingsPanel.js";
 import type { Today } from "./useWritingStats.js";
-import { ReadOnlyNotice, SaveToast, TreeFailureToast, SavedNowToast } from "./SaveToast.js";
+import {
+  ReadOnlyNotice,
+  SaveToast,
+  TrashedNotice,
+  TreeFailureToast,
+  SavedNowToast,
+} from "./SaveToast.js";
 import { useEscape } from "@llkit/keys.js";
 import { useCommandKey } from "./shortcuts.js";
 import { useTextSizeKeys, type SettingsChange } from "./useWritingSettings.js";
 import { WritingSettingsPanel } from "./WritingSettingsPanel.js";
 import { SheetEdges, type SheetProps } from "./SheetEdges.js";
 import { pageClass, pageStyle, type BookLook } from "./bookLook.js";
-import { platform } from "./platform.js";
+import { useEditorModes } from "./useEditorModes.js";
 import { t } from "../i18n/i18n.js";
 import { useTextMenu } from "./spelling/useTextMenu.js";
 
@@ -43,6 +47,10 @@ interface WritingAreaProps {
   footer: ReactNode;
   /** Saved by a newer Skrivro: shown, never written to. */
   isReadOnly: boolean;
+  /** The open scene lies in Papperskorgen: shown, never written to, until it is put back. */
+  trashed: { label: string; onPutBack: () => void } | null;
+  /** Read-only or in Papperskorgen: the text cannot be typed in. */
+  isLocked: boolean;
   /** Hidden, not removed, so the editor keeps its scene and undo history. */
   isHidden: boolean;
   manuscriptSearch: ManuscriptScope;
@@ -138,34 +146,8 @@ function Floating(props: WritingAreaProps & { isSettingsOpen: boolean }) {
       <SavedNowToast onSave={props.onSaveNow} />
       <TreeFailureToast failure={props.treeFailure} />
       <ReadOnlyNotice isReadOnly={props.isReadOnly} />
+      <TrashedNotice trashed={props.trashed} />
     </>
-  );
-}
-
-// A phone's keyboard corrects the words itself.
-const isAutocorrectOn = (settings: WritingSettings) => settings.autocorrect && !platform.isPhone;
-const isCompletionOn = (settings: WritingSettings) => settings.completion && !platform.isPhone;
-
-// ProseMirror reads the modes on every update, so no new editor state is needed.
-function useEditorModes(props: WritingAreaProps) {
-  const { editor, settings } = props;
-  const modes = editor.modes.current;
-  modes.isTypewriterOn = props.isFocusMode && settings.typewriter;
-  modes.isTypographyOn = settings.typography;
-  modes.isAutocorrectOn = isAutocorrectOn(settings);
-  modes.isCompletionOn = isCompletionOn(settings);
-  modes.isSpellcheckOn = settings.spellcheck;
-  if (props.isReadOnly) modes.isEditable = false;
-  modes.repeatWindow = settings.review ? settings.repeatWindow : null;
-  const showsMarks = settings.showPages || (settings.paper && !props.isFocusMode);
-  modes.pageMarks = showsMarks ? (props.scenePages ?? null) : null;
-  const { run } = editor;
-  useEffect(() => run(refreshRepetitions, false), [settings.review, settings.repeatWindow, run]);
-  useEffect(() => run(refreshPageMarks, false), [props.scenePages, showsMarks, run]);
-  // ProseMirror reads the spellcheck attribute only when the view updates.
-  useEffect(
-    () => editor.viewRef.current?.setProps({}),
-    [settings.spellcheck, props.isReadOnly, props.hasScene, editor.viewRef],
   );
 }
 

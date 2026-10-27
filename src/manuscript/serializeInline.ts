@@ -1,6 +1,7 @@
 import type { Paragraph, PhrasingContent } from "mdast";
 import { toMarkdown } from "mdast-util-to-markdown";
 import type { Mark, Node } from "prosemirror-model";
+import { PLACEHOLDER } from "./placeholders.js";
 
 type Wrapper = "italic" | "bold" | "underline" | "strike";
 const WRAPPERS: Wrapper[] = ["italic", "bold", "underline", "strike"];
@@ -40,11 +41,28 @@ function textWithSafeFences(value: string): PhrasingContent[] {
   });
 }
 
+// Written as typed, not as \[?], unless reading it back could change it: before ( [ or : it would
+// become a link or a definition, and with * _ ` < & \ inside, a mark.
+const MARKDOWN_AFTER = /^[([:]/;
+const MARKDOWN_INSIDE = /[*_`<&\\]/;
+
+function textWithPlaceholders(value: string): PhrasingContent[] {
+  const parts = value.split(new RegExp(`(${PLACEHOLDER.source})`));
+  return parts.flatMap((part, index) => {
+    if (part === "") return [];
+    const isSafe =
+      index % 2 === 1 &&
+      !MARKDOWN_AFTER.test(parts[index + 1] ?? "") &&
+      !MARKDOWN_INSIDE.test(part);
+    return isSafe ? [{ type: "html", value: part }] : textWithSafeFences(part);
+  });
+}
+
 function leaves(nodes: Node[]): PhrasingContent[] {
   const result: PhrasingContent[] = [];
   let plain = "";
   const flush = () => {
-    if (plain !== "") result.push(...textWithSafeFences(plain));
+    if (plain !== "") result.push(...textWithPlaceholders(plain));
     plain = "";
   };
   for (const node of nodes) {

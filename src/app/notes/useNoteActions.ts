@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { askForFirstAnswer, takeAskForFirstAnswer } from "../../editor/firstAnswerAsk.js";
 import { standardNoteBody } from "../../project/packs.js";
 import { isLinkedByDefault } from "../../project/cards.js";
 import { sortKey } from "../../project/sorts.js";
@@ -25,6 +26,7 @@ interface NoteActionsInput {
   session: SceneSession;
   updateTree: (tree: TreeNode[]) => Promise<void>;
   refresh: () => Promise<void>;
+  focusEditor?: (() => void) | undefined;
 }
 
 function withSort(tree: TreeNode[], note: NewNote) {
@@ -52,24 +54,39 @@ function useAddFile({ project, session, updateTree, refresh }: NoteActionsInput)
   );
 }
 
+// A new note is opened with the caret in it, and a link choice that differs from the sort's is
+// written to it.
+async function createNote(input: NoteActionsInput, project: Project, note: NewNote) {
+  const { session, updateTree, refresh, focusEditor } = input;
+  const { tree, sortId } = withSort(project.tree, note);
+  const sort = findNode(tree, sortId)?.node;
+  const body = note.body ?? (sort ? standardNoteBody(project.fields, sortKey(sort)) : "");
+  const id = await createScene(platform.fileSystem, project.dir, note.name, body);
+  if (note.isLinked !== isLinkedByDefault(sortId)) {
+    await setNoteLink(session, project.dir, id, note.isLinked);
+  }
+  await updateTree(insertNode(tree, { id, kind: "scene" }, sortId, Number.MAX_SAFE_INTEGER));
+  await refresh();
+  askForFirstAnswer();
+  if (await openScene(session, project.dir, id)) focusEditor?.();
+  else takeAskForFirstAnswer();
+  earnBadge("rollistan");
+}
+
 /** Only a link choice that differs from the sort's is written to the note. */
-export function useNoteActions({ project, session, updateTree, refresh }: NoteActionsInput) {
+export function useNoteActions({
+  project,
+  session,
+  updateTree,
+  refresh,
+  focusEditor,
+}: NoteActionsInput) {
   const newNote = useCallback(
     async (note: NewNote) => {
       if (!project || project.isReadOnly) return;
-      const { tree, sortId } = withSort(project.tree, note);
-      const sort = findNode(tree, sortId)?.node;
-      const body = note.body ?? (sort ? standardNoteBody(project.fields, sortKey(sort)) : "");
-      const id = await createScene(platform.fileSystem, project.dir, note.name, body);
-      if (note.isLinked !== isLinkedByDefault(sortId)) {
-        await setNoteLink(session, project.dir, id, note.isLinked);
-      }
-      await updateTree(insertNode(tree, { id, kind: "scene" }, sortId, Number.MAX_SAFE_INTEGER));
-      await refresh();
-      await openScene(session, project.dir, id);
-      earnBadge("rollistan");
+      await createNote({ project, session, updateTree, refresh, focusEditor }, project, note);
     },
-    [project, session, updateTree, refresh],
+    [project, session, updateTree, refresh, focusEditor],
   );
   const addFile = useAddFile({ project, session, updateTree, refresh });
   const setLink = useCallback(

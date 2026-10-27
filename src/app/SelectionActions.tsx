@@ -13,6 +13,8 @@ export interface SelectionActionProps {
   onSearchBook?: ((text: string) => void) | undefined;
   /** A note named after the words, for a name or a place met in the text. */
   onMakeNote?: ((name: string) => void) | undefined;
+  /** The words out of the scene and into the note Strukna, to be got back later. */
+  onMoveToCuts?: (() => void) | undefined;
 }
 
 // A name or a place is a few words; a longer selection is no note's title.
@@ -25,7 +27,7 @@ const ActionButton = (props: { label: string; onClick: () => void }) => (
 );
 
 function WordButtons(props: SelectionActionProps & { text: string; words: number }) {
-  const { onSearchBook, onMakeNote, onReadAloud, text, words } = props;
+  const { onSearchBook, onMakeNote, onMoveToCuts, onReadAloud, text, words } = props;
   return (
     <span className="bar-group">
       <ActionButton label={t("Kommentera")} onClick={props.onComment} />
@@ -36,6 +38,7 @@ function WordButtons(props: SelectionActionProps & { text: string; words: number
       {onMakeNote && text && words <= MOST_NOTE_WORDS && (
         <ActionButton label={t("Gör till anteckning")} onClick={() => onMakeNote(text)} />
       )}
+      {onMoveToCuts && <ActionButton label={t("Flytta till Strukna")} onClick={onMoveToCuts} />}
     </span>
   );
 }

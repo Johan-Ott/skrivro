@@ -1,6 +1,7 @@
 import type { AppState } from "./App.js";
 import { FootnotePopover } from "./FootnotePopover.js";
 import { offerNoteName } from "./notes/NewNoteDialog.js";
+import { canMoveToCuts, moveToCuts } from "./cuts.js";
 import { insertChosenPicture } from "./palette/sceneContext.js";
 import { speechContext } from "./ReadAloud.js";
 import { SelectionBar } from "./SelectionBar.js";
@@ -19,6 +20,7 @@ export const selectionBarOf = (app: AppState, project: Project) => (
         app.search.scope.setOn(true);
         app.writingMode.openSearchWith(text);
       }}
+      onMoveToCuts={canMoveToCuts(app, project) ? () => void moveToCuts(app, project) : undefined}
       onMakeNote={(name) => {
         offerNoteName(name);
         app.setNewNoteSort(null);

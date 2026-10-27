@@ -1,6 +1,7 @@
 import type { Node } from "prosemirror-model";
 import { countWords } from "../countWords.js";
 import { splitFootnotes } from "./footnotes.js";
+import { PLACEHOLDER } from "./placeholders.js";
 import { isLabel, isUnanswered, UNANSWERED_FIELD } from "./prompts.js";
 import { manuscriptSchema as schema, STYLE_NAMES } from "./schema.js";
 import { findStyleFences } from "./styleFences.js";
@@ -8,7 +9,7 @@ import { findStyleFences } from "./styleFences.js";
 // A comment is the writer's note to self, not the book's text, wherever it stands. It ends at its
 // first `-->`, so what follows it on the same line is counted.
 const COMMENT = /<!--(?:(?!-->)[\s\S])*-->/g;
-const words = (text: string) => countWords(text.replace(COMMENT, " "));
+const words = (text: string) => countWords(text.replace(COMMENT, " ").replace(PLACEHOLDER, " "));
 
 const leafText = (leaf: Node) =>
   leaf.type === schema.nodes.rawBlock ? `\n${String(leaf.attrs["source"])}\n` : "\n";
@@ -55,6 +56,7 @@ export function countMarkdownWords(markdown: string, isNote = false): number {
   const unfenced = withoutFences(body);
   const text = (isNote ? unfenced.replace(UNANSWERED_FIELD, "") : unfenced)
     .replace(COMMENT, " ")
+    .replace(PLACEHOLDER, " ")
     .replace(PICTURE, "")
     .replace(TAG, "")
     .replace(ENTITY, "")

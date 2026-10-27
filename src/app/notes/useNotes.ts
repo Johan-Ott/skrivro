@@ -1,4 +1,5 @@
 import { readSceneBodies } from "../../project/sceneSummaries.js";
+import { spaceAfterColon } from "../../manuscript/colonSpace.js";
 import { useEffect, useMemo, useState } from "react";
 import { plainText } from "../../manuscript/compare.js";
 import { cardsOf, countMentions, type Card } from "../../project/cards.js";
@@ -58,7 +59,7 @@ function noteCards(homes: Project[]): NoteCard[] {
 // A prompt not yet answered, such as "Vill:" on a new person, says nothing of the note.
 const firstSentence = (text: string) => {
   const line = text.split("\n").find((each) => each.trim() && !each.trim().endsWith(":")) ?? "";
-  return (line.trim().match(/^[^.!?]*/)?.[0] ?? "").trim();
+  return spaceAfterColon((line.trim().match(/^[^.!?]*/)?.[0] ?? "").trim());
 };
 
 /** `homes` must keep its identity between renders (useMemo), or the texts are read every time. */

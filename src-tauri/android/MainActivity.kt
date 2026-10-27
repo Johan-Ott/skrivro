@@ -41,6 +41,13 @@ class MainActivity : TauriActivity() {
     ViewCompat.requestApplyInsets(findViewById(android.R.id.content))
   }
 
+  // Android can end the app soon after it is paused, so the page writes what waits at once, as it
+  // does when the page is hidden. It is a best effort: the write may not finish.
+  override fun onPause() {
+    webView?.evaluateJavascript("window.skrivroSavePending && window.skrivroSavePending()", null)
+    super.onPause()
+  }
+
   // Turned on its side a phone would get the desktop layout on a screen too low for it, so a phone
   // stays upright. A tablet turns freely.
   private fun keepPhonesUpright() {

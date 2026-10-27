@@ -17,6 +17,7 @@ import {
 import { BackButton, Choice } from "@llkit/controls.js";
 import { SubmitStep } from "./SubmitStep.js";
 import { PublishTabs, type Step } from "./PublishTiles.js";
+import { PlaceholderWarning } from "../review/PlaceholderTasks.js";
 import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -26,6 +27,8 @@ interface PublishProps {
   onSaveFields: (fields: Record<string, unknown>) => void;
   onOpenScene: (title: string) => void;
   onBack: () => void;
+  /** Back to the text with Granska open, where the placeholders are listed. */
+  onShowToCheck: () => void;
   onStudio: () => void;
 }
 
@@ -171,6 +174,7 @@ export function PublishView(props: PublishProps) {
           onBack={props.onBack}
         />
         <StepsOrTiles props={props} publishing={publishing} />
+        <PlaceholderWarning project={props.project} onShow={props.onShowToCheck} />
         <button
           className="button primary publish-button"
           disabled={exporter.state.kind === "running"}

@@ -4,6 +4,7 @@ import {
   cleanNotesMadeScenes,
   notesMadeScenes,
   withoutQuestions,
+  withoutTemplate,
 } from "../src/project/noteToScene";
 import { listSnapshots } from "../src/project/snapshots";
 import { moveNode, type TreeNode } from "../src/project/tree";
@@ -60,14 +61,26 @@ describe("a note that becomes a scene", () => {
     expect(notesMadeScenes(tree, tree)).toEqual([]);
   });
 
+  it("loses the template's labels too, and keeps what was written under them", () => {
+    expect(withoutTemplate(NOTE)).toBe("Mörker.\n\n");
+  });
+
+  it("keeps a bold line that is not a label, and the writer's own text around the labels", () => {
+    const text = "**Viktigt** att komma ihåg.\n\n**Vill:**\n\nHem.\n\nSlut.\n";
+
+    expect(withoutTemplate(text)).toBe("**Viktigt** att komma ihåg.\n\nHem.\n\nSlut.\n");
+  });
+
+  it("takes a label that ends the text, with Windows line breaks as they were", () => {
+    expect(withoutTemplate("Hem.\r\n\r\n**Rädd för:**")).toBe("Hem.\r\n\r\n");
+  });
+
   it("is cleaned in its file, front matter kept", async () => {
     const files = createMemoryFileSystem({ "/bok/scenes/NOTE.md": noteFile(NOTE) });
 
     await cleanNotesMadeScenes(files, "/bok", ["NOTE"]);
 
-    expect(await files.readText("/bok/scenes/NOTE.md")).toBe(
-      noteFile("**Rädd för:**\n\nMörker.\n\n"),
-    );
+    expect(await files.readText("/bok/scenes/NOTE.md")).toBe(noteFile("Mörker.\n\n"));
   });
 
   it("is kept as it was in Versioner before its questions go", async () => {
@@ -90,8 +103,8 @@ describe("a note that becomes a scene", () => {
     expect(version?.body).toBe(own);
   });
 
-  it("gets no version and is not touched when every field is answered", async () => {
-    const text = noteFile("**Vill:**\n\nHem.\n\n\n\nMer.");
+  it("gets no version and is not touched when it has no template labels or questions", async () => {
+    const text = noteFile("Hem.\n\n\n\nMer.");
     const files = createMemoryFileSystem({ "/bok/scenes/NOTE.md": text });
 
     await cleanNotesMadeScenes(files, "/bok", ["NOTE"]);

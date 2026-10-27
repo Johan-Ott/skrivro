@@ -1,4 +1,5 @@
 import { redo, undo } from "prosemirror-history";
+import { usePhone } from "./phone/usePhone.js";
 import type { Command, EditorState } from "prosemirror-state";
 import type { ReactNode } from "react";
 import {
@@ -77,6 +78,7 @@ export function MarkButtons(props: {
 }
 
 function MarkToggles({ editorState, run }: { editorState: EditorState | null; run: Run }) {
+  const isPhone = usePhone();
   return (
     <>
       {MARKS.map(([mark, label, command, keys]) => (
@@ -84,7 +86,7 @@ function MarkToggles({ editorState, run }: { editorState: EditorState | null; ru
           key={mark}
           className={`icon-button ${mark}`}
           aria-label={label}
-          title={`${label} (${keys})`}
+          title={isPhone ? label : `${label} (${keys})`}
           aria-pressed={editorState !== null && isMarkActive(editorState, mark)}
           onClick={() => run(command)}
         >

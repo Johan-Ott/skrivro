@@ -3,6 +3,7 @@ import { useEditorState } from "../../editor/editorStore.js";
 import { useState } from "react";
 import { insertSceneBreak, toggleStyle } from "../../editor/commands.js";
 import { insertFootnote } from "../../editor/footnoteEditing.js";
+import { insertPlaceholder } from "../../editor/placeholderMarks.js";
 import type { AppState } from "../App.js";
 import { insertChosenPicture } from "../palette/sceneContext.js";
 import { StylePicker } from "../StylePicker.js";
@@ -26,6 +27,7 @@ function tools(app: AppState, project: Project, toggleSettings: () => void): Too
     [t("Numrerad lista"), "1.", () => run(toggleStyle("numrerad"))],
     [t("Scenbrytning"), "⁂", () => run(insertSceneBreak)],
     [t("Infoga fotnot"), t("Fotnot"), () => run(insertFootnote)],
+    [t("Platshållare"), "?", () => run(insertPlaceholder)],
     [t("Infoga bild…"), t("Bild"), () => void insertChosenPicture(project.dir, run)],
     [t("Skrivinställningar"), "Aa", toggleSettings],
   ];

@@ -1,4 +1,5 @@
 import { WindowBar } from "@llkit/shell/WindowControls.js";
+import { takeAskForReview } from "../review/reviewWanted.js";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { manuscriptSceneIds } from "../../project/tree.js";
 import type { AppState } from "../App.js";
@@ -76,6 +77,12 @@ function useScreenOpensText(app: AppState, screen: PhoneScreen) {
   }, [screen]);
 }
 
+// The text is on disk before another screen shows, not up to a second later.
+function useSavedWhenScreenChanges(app: AppState, screen: PhoneScreen) {
+  const { flush } = app.session.autosave;
+  useEffect(() => () => void flush(), [screen, flush]);
+}
+
 // Öppna bredvid from Boken: what is beside the text shows over the text screen.
 function useBesideShowsText(app: AppState, showText: (id: string) => void) {
   const { beside } = app.writingMode;
@@ -103,9 +110,10 @@ function usePhoneScreens({ app, project }: Props) {
   useTextFollowsScene(app.scene?.id ?? null, screen, showText);
   useBesideShowsText(app, showText);
   useScreenOpensText(app, screen);
+  useSavedWhenScreenChanges(app, screen);
   // Granska covers the whole screen, so it closes when another text or screen shows.
   const { setReviewOpen } = app.writingMode;
-  useEffect(() => setReviewOpen(false), [screen, app.scene?.id, setReviewOpen]);
+  useEffect(() => setReviewOpen(takeAskForReview()), [screen, app.scene?.id, setReviewOpen]);
   const openText = (id: string) =>
     id === app.scene?.id ? showText(id) : openInHome(app.session, app.homes, id);
   const continueId = useLastManuscriptScene(app, project);

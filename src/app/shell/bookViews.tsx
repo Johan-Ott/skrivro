@@ -1,4 +1,5 @@
 import type { AppState } from "../App.js";
+import { askForReviewOnNextScreen } from "../review/reviewWanted.js";
 import { ContentsView } from "../contents/ContentsView.js";
 import { ReadView } from "../contents/ReadView.js";
 import { cursorAtBlock } from "../../editor/commands.js";
@@ -99,6 +100,13 @@ const authorOf = (app: AppState) => ({
   title: app.profile.profile.title,
 });
 
+// Back to the text with Granska open, where the placeholders are listed.
+function showToCheck(app: AppState, onBack: () => void) {
+  askForReviewOnNextScreen();
+  onBack();
+  app.writingMode.setReviewOpen(true);
+}
+
 export function PublishScreen({ app, project, onBack }: ViewProps) {
   const [isStudio, setStudio] = useState(false);
   const saveFields = (fields: Record<string, unknown>) => void app.updateFields(fields);
@@ -122,6 +130,7 @@ export function PublishScreen({ app, project, onBack }: ViewProps) {
       onSaveFields={saveFields}
       onOpenScene={(title) => openSceneTitled(app, project, title)}
       onBack={onBack}
+      onShowToCheck={() => showToCheck(app, onBack)}
       onStudio={() => setStudio(true)}
     />
   );

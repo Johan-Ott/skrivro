@@ -1,3 +1,4 @@
+import { countWords } from "../countWords.js";
 import type { ContentsRow } from "./contents.js";
 
 // Each chapter's pace: how long it is, how much of it is spoken, and how long its sentences run.
@@ -16,16 +17,16 @@ export interface ChapterTempo {
 }
 
 const SPOKEN = /^\s*[\u2013\u2014\-”"“]/;
-const wordCount = (text: string) => (text.match(/[\p{L}\p{N}]+/gu) ?? []).length;
 
+// Talk and sentence length are shares of the text as given, so they are counted on that text.
 function paceOf(text: string) {
-  const words = wordCount(text);
+  const words = countWords(text);
   const spoken = text
     .split("\n")
     .filter((line) => SPOKEN.test(line))
-    .reduce((sum, line) => sum + wordCount(line), 0);
+    .reduce((sum, line) => sum + countWords(line), 0);
   const sentences = Math.max(1, (text.match(/[.!?…]+(?=\s|$)/g) ?? []).length);
-  return { words, dialogue: words ? spoken / words : 0, sentence: words / sentences };
+  return { dialogue: words ? spoken / words : 0, sentence: words / sentences };
 }
 
 const median = (values: number[]) => {
@@ -40,7 +41,7 @@ export function chapterTempo(rows: ContentsRow[], texts: Record<string, string>)
   const chapters = rows.flatMap((row) => {
     if (row.number === null) return [];
     const pace = paceOf(row.sceneIds.map((id) => texts[id] ?? "").join("\n"));
-    return [{ id: row.id, number: row.number, title: row.title, ...pace }];
+    return [{ id: row.id, number: row.number, title: row.title, words: row.words, ...pace }];
   });
   const middle = {
     words: median(chapters.map((chapter) => chapter.words)),

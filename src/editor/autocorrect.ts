@@ -1,5 +1,5 @@
 import { InputRule } from "prosemirror-inputrules";
-import { Plugin, PluginKey } from "prosemirror-state";
+import { Plugin, PluginKey, type EditorState } from "prosemirror-state";
 import type { EditorView } from "prosemirror-view";
 import type { SpellingSwitch } from "./spellingMarks.js";
 
@@ -18,6 +18,16 @@ const capitalise = (match: RegExpMatchArray) => {
 const isSpeechTag = (match: RegExpMatchArray) =>
   /[?!]/.test(match[1] ?? "") && /^[–”]/.test(match.input ?? "");
 
+// A list item is not a sentence: the writer starts "tjära" or "rep" with a small letter.
+const isInList = (state: EditorState) => {
+  const { $from } = state.selection;
+  return Array.from({ length: $from.depth + 1 }, (_each, depth) => $from.node(depth)).some(
+    (node) =>
+      node.type.name === "styleBlock" &&
+      ["punktlista", "numrerad"].includes(String(node.attrs["style"])),
+  );
+};
+
 /** The rules, asking `isOn` each time so they switch without a new editor state. */
 export function autocorrectRules(isOn: () => boolean): InputRule[] {
   const sentenceStart = new InputRule(
@@ -26,6 +36,7 @@ export function autocorrectRules(isOn: () => boolean): InputRule[] {
       // The text up to and with the full stop, to see whether it ends an abbreviation.
       const head = (match.input ?? "").slice(0, (match.index ?? 0) + 1);
       if (!isOn() || GOES_ON.test(head) || isSpeechTag(match)) return null;
+      if (match[1] === "" && isInList(state)) return null;
       return state.tr.insertText(capitalise(match), start, end);
     },
   );

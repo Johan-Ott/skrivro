@@ -3,7 +3,7 @@ import {
   addWritten,
   dailyGoalOf,
   dayKey,
-  readDeviceStats,
+  readDeviceStatsOrSetAside,
   readStats,
   streak,
   wordsAdded,
@@ -50,7 +50,7 @@ export function thisDevice() {
 async function addToThisDevice(dir: string, added: number) {
   const { fileSystem } = platform;
   const device = thisDevice();
-  const own = await readDeviceStats(fileSystem, dir, device);
+  const own = await readDeviceStatsOrSetAside(fileSystem, dir, device);
   await writeDeviceStats(fileSystem, dir, device, addWritten(own, dayKey(Date.now()), added));
   return readStats(fileSystem, dir);
 }

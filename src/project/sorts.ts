@@ -10,6 +10,8 @@ export const PLACES_ID = "platser";
 export const THINGS_ID = "saker";
 /** Övrigt: notes whose names are not linked in the text unless the writer asks. */
 export const NOTES_ID = "anteckningar";
+/** Lappar: each a note, drawn on or written in, shown over the text on a computer. */
+export const STICKY_ID = "lappar";
 /** Hemligheter: what the reader and the people learn, and when. */
 export const SECRETS_ID = "hemligheter";
 export const TRASH_ID = "trash";
@@ -20,6 +22,7 @@ const FIXED_SORTS: { id: string; kind: "sort"; title: string }[] = [
   { id: PLACES_ID, kind: "sort", title: "Platser" },
   { id: THINGS_ID, kind: "sort", title: "Saker" },
   { id: NOTES_ID, kind: "sort", title: "Övrigt" },
+  { id: STICKY_ID, kind: "sort", title: "Lappar" },
   { id: SECRETS_ID, kind: "sort", title: "Hemligheter" },
 ];
 const TRASH: TreeNode = { id: TRASH_ID, kind: "folder", title: "Papperskorg" };

@@ -1,3 +1,4 @@
+import type { StickyNote } from "../project/stickyNotes.js";
 // The example as a guide: a note that says what to try and where, and one of each thing Skrivro
 // keeps beside the text, so every part of it has something to show.
 
@@ -52,10 +53,10 @@ export const COMMENT = [
 ];
 
 /** A note to write and draw on beside the text. */
-export const STICKY = [
+export const STICKY: StickyNote[] = [
   {
     id: "01J9Z4K2QX00000000000000L1",
-    color: "gul",
+    color: "gul" as const,
     text: "Vem tände ljusen på isen?\n\nRita och sudda med pennan och sudden här ovanför.",
     strokes: [],
     left: 24,

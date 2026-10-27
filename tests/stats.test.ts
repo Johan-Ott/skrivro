@@ -4,6 +4,7 @@ import {
   dailyGoalOf,
   dayKey,
   readDeviceStats,
+  readDeviceStatsOrSetAside,
   readStats,
   streak,
   wordsAdded,
@@ -115,5 +116,59 @@ describe("dailyGoalOf", () => {
     const goals = [{ dailyGoal: 1000 }, {}, { dailyGoal: 0 }].map(dailyGoalOf);
 
     expect(goals).toEqual([1000, null, null]);
+  });
+});
+
+describe("a device's own stats before words are added to them", () => {
+  it("are none for a file that is missing, but an error for one that is there and cannot be read", async () => {
+    const files = createMemoryFileSystem({ "/bok/stats/dator.json": "{ halv" });
+
+    expect(await readDeviceStats(files, "/bok", "telefon")).toEqual({});
+    await expect(readDeviceStats(files, "/bok", "dator")).rejects.toThrow();
+  });
+
+  it("are not written over when the file could not be read, so the days already counted stay", async () => {
+    const files = createMemoryFileSystem({ "/bok/stats/dator.json": "{ halv" });
+
+    await expect(readDeviceStats(files, "/bok", "dator")).rejects.toThrow();
+
+    expect(await files.readText("/bok/stats/dator.json")).toBe("{ halv");
+  });
+});
+
+describe("a device's stats file that cannot be read", () => {
+  it("is put aside in trash/ and counting goes on from nothing, so the file is kept and not written over", async () => {
+    const files = createMemoryFileSystem({ "/bok/stats/dator.json": "{ halv" });
+
+    const own = await readDeviceStatsOrSetAside(files, "/bok", "dator");
+
+    expect(own).toEqual({});
+    expect(await files.readText("/bok/trash/dator.json")).toBe("{ halv");
+    expect(await files.list("/bok/stats")).toEqual([]);
+  });
+
+  it("is read as it is when it is fine, or as nothing when it is missing", async () => {
+    const files = createMemoryFileSystem({ "/bok/stats/dator.json": '{ "2026-10-02": 812 }' });
+
+    expect(await readDeviceStatsOrSetAside(files, "/bok", "dator")).toEqual({ "2026-10-02": 812 });
+    expect(await readDeviceStatsOrSetAside(files, "/bok", "telefon")).toEqual({});
+  });
+});
+
+describe("a stats file that is fine but cannot be read just now", () => {
+  it("is not put aside: a read error is not a broken file, and the days in it stay where they are", async () => {
+    const files = createMemoryFileSystem({ "/bok/stats/dator.json": '{ "2026-10-02": 812 }' });
+    const locked = {
+      ...files,
+      readText: async (path: string) => {
+        if (path.includes("/stats/")) throw new Error("låst av synken");
+        return files.readText(path);
+      },
+    };
+
+    await expect(readDeviceStatsOrSetAside(locked, "/bok", "dator")).rejects.toThrow("låst");
+
+    expect(await files.readText("/bok/stats/dator.json")).toContain("812");
+    expect(await files.list("/bok")).not.toContain("trash");
   });
 });

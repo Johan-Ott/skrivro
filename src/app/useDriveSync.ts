@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { isTimeToSyncOnReturn } from "./syncOnReturn.js";
 import { joinPath } from "@llkit/storage/fileSystem.js";
 import { syncProject } from "../sync/driveSync.js";
 import { STATE_FILE } from "../sync/syncState.js";
@@ -64,11 +65,13 @@ export interface SyncedBook {
 function useSyncRun(dirs: string[], { refresh, guard }: SyncedBook) {
   const [status, setStatus] = useState<DriveStatus>(OFF);
   const isRunning = useRef(false);
+  const lastRunAt = useRef<number | null>(null);
   // "|" cannot appear in a path, so the folders make one stable key for the callback.
   const dirsKey = dirs.join("|");
   const syncNow = useCallback(async () => {
     if (!dirsKey || isRunning.current) return;
     isRunning.current = true;
+    lastRunAt.current = Date.now();
     setStatus({ kind: "syncing" });
     try {
       const hasChanged = await syncFolders(dirsKey.split("|"), guard);
@@ -81,7 +84,7 @@ function useSyncRun(dirs: string[], { refresh, guard }: SyncedBook) {
       isRunning.current = false;
     }
   }, [dirsKey, refresh, guard]);
-  return { status, setStatus, syncNow };
+  return { status, setStatus, syncNow, lastRunAt };
 }
 
 function useDriveConnection(
@@ -96,6 +99,30 @@ function useDriveConnection(
   return { connect, disconnect };
 }
 
+// The sync runs soon after the book opens, every few minutes, and when the app comes back to the
+// foreground, so the other device's text is here before more is written over it.
+function useSyncSchedule(isOn: boolean, run: ReturnType<typeof useSyncRun>) {
+  const { syncNow, setStatus, lastRunAt } = run;
+  useEffect(() => {
+    if (!isOn) return setStatus(OFF);
+    // The book shows first; walking all its files at the same moment would hold it up.
+    const first = setTimeout(() => void syncNow(), AFTER_OPENING);
+    const timer = setInterval(() => void syncNow(), EVERY);
+    const onReturn = () => {
+      const isOnline = navigator.onLine !== false;
+      if (!document.hidden && isOnline && isTimeToSyncOnReturn(lastRunAt.current, Date.now())) {
+        void syncNow();
+      }
+    };
+    document.addEventListener("visibilitychange", onReturn);
+    return () => {
+      clearTimeout(first);
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", onReturn);
+    };
+  }, [isOn, syncNow, setStatus, lastRunAt]);
+}
+
 export function useDriveSync(
   dirs: string[],
   preferences: AppPreferences,
@@ -104,17 +131,9 @@ export function useDriveSync(
 ) {
   const isAvailable = platform.googleSignIn !== undefined;
   const isOn = preferences.isDriveSyncOn && isAvailable;
-  const { status, setStatus, syncNow } = useSyncRun(dirs, book);
-  useEffect(() => {
-    if (!isOn) return setStatus(OFF);
-    // The book shows first; walking all its files at the same moment would hold it up.
-    const first = setTimeout(() => void syncNow(), AFTER_OPENING);
-    const timer = setInterval(() => void syncNow(), EVERY);
-    return () => {
-      clearTimeout(first);
-      clearInterval(timer);
-    };
-  }, [isOn, syncNow, setStatus]);
+  const run = useSyncRun(dirs, book);
+  const { status, setStatus, syncNow } = run;
+  useSyncSchedule(isOn, run);
   return {
     isAvailable,
     isOn,

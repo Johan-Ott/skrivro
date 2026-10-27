@@ -25,6 +25,8 @@ async function openResearchFile(dir: string, name: string) {
 export function usePictureUrl(dir: string, name: string) {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
+    // The picture of the file before is not this file's.
+    setUrl(null);
     if (!isPictureFile(name)) return;
     let made: string | null = null;
     const show = (bytes: Uint8Array) => {

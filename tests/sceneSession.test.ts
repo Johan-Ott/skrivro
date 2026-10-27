@@ -7,10 +7,10 @@ import {
   openScene,
   renameScene,
   setSceneStatus,
-  resolveConflict,
   sceneEdited,
   type DiskConflict,
 } from "../src/app/sceneSession";
+import { resolveConflict } from "../src/app/conflictResolution";
 import { parseMarkdown } from "../src/manuscript/parseMarkdown";
 import { listSnapshots } from "../src/project/snapshots";
 import { createMemoryFileSystem } from "@llkit/storage/memoryFileSystem.js";

@@ -1,7 +1,8 @@
 import { splitSceneFile } from "../manuscript/sceneFile.js";
 import { countMarkdownWords } from "../manuscript/wordCount.js";
 import { writeAtomic } from "@llkit/storage/atomicWrite.js";
-import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
+import { setAside } from "../storage/setAside.js";
+import { joinPath, readIfThere, type FileSystem } from "@llkit/storage/fileSystem.js";
 
 /** Words written per day, as { "2026-10-02": 812 }. */
 export type Stats = Record<string, number>;
@@ -44,12 +45,21 @@ export function streak(stats: Stats, today: string): number {
 const sharedPath = (dir: string) => joinPath(dir, "stats.json");
 const devicePath = (dir: string, device: string) => joinPath(dir, `stats/${device}.json`);
 
+const isStatsObject = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+
+function statsOf(text: string): Stats {
+  const parsed: unknown = JSON.parse(text);
+  if (!isStatsObject(parsed)) throw new Error("Statistikfilen har ett oväntat innehåll.");
+  const entries = Object.entries(parsed).filter(([, words]) => typeof words === "number");
+  return Object.fromEntries(entries) as Stats;
+}
+
+// For showing: a file that cannot be read counts as nothing yet.
 async function readStatsFile(fileSystem: FileSystem, path: string): Promise<Stats> {
   try {
-    const parsed: unknown = JSON.parse(await fileSystem.readText(path));
-    if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) return {};
-    const entries = Object.entries(parsed).filter(([, words]) => typeof words === "number");
-    return Object.fromEntries(entries) as Stats;
+    const text = await readIfThere(fileSystem, path);
+    return text === null ? {} : statsOf(text);
   } catch {
     return {};
   }
@@ -71,8 +81,12 @@ export async function readStats(fileSystem: FileSystem, dir: string): Promise<St
   );
 }
 
-export const readDeviceStats = (fileSystem: FileSystem, dir: string, device: string) =>
-  readStatsFile(fileSystem, devicePath(dir, device));
+/** For adding to: none yet when the file is missing, but an error when it is there and cannot be
+ * read, since the days it holds would be written over with nothing. */
+export async function readDeviceStats(fileSystem: FileSystem, dir: string, device: string) {
+  const text = await readIfThere(fileSystem, devicePath(dir, device));
+  return text === null ? {} : statsOf(text);
+}
 
 export async function writeDeviceStats(
   fileSystem: FileSystem,
@@ -92,4 +106,22 @@ export async function writeDeviceStats(
 export function dailyGoalOf(fields: Record<string, unknown>): number | null {
   const goal = fields["dailyGoal"];
   return typeof goal === "number" && goal > 0 ? goal : null;
+}
+
+/** The device's own stats for adding to. A file that is there but cannot be read is put aside in
+ * trash/, not counted as empty and written over, and counting goes on from nothing. */
+export async function readDeviceStatsOrSetAside(
+  fileSystem: FileSystem,
+  dir: string,
+  device: string,
+) {
+  // A read that fails is not a broken file: it throws on, and nothing is put aside.
+  const text = await readIfThere(fileSystem, devicePath(dir, device));
+  if (text === null) return {};
+  try {
+    return statsOf(text);
+  } catch {
+    await setAside(fileSystem, dir, devicePath(dir, device), `${device}.json`);
+    return {};
+  }
 }

@@ -1,3 +1,4 @@
+import { stickyNoteFileText } from "../project/stickyNotes.js";
 import { COMMENT, connections, GUIDE, GUIDE_IDS, SECRET, secretNode, STICKY } from "./demoGuide.js";
 
 export const DEMO_PROJECT_DIR = "/Vintervägen.skrivro";
@@ -166,6 +167,12 @@ const PROJECT = {
       children: [{ id: GUIDE_IDS.guide, kind: "scene" }],
     },
     {
+      id: "lappar",
+      kind: "sort",
+      title: "Lappar",
+      children: STICKY.map((note) => ({ id: note.id, kind: "scene" })),
+    },
+    {
       id: "hemligheter",
       kind: "sort",
       title: "Hemligheter",
@@ -191,6 +198,7 @@ export const DEMO_PROJECT_FILES: Record<string, string> = {
   ...scene(GUIDE_IDS.secret, "Henrik lever", "utkast", SECRET),
   [`${DEMO_PROJECT_DIR}/comments/${SCENE_IDS.fyren}.json`]: `${JSON.stringify(COMMENT, null, 2)}
 `,
-  [`${DEMO_PROJECT_DIR}/lappar.json`]: `${JSON.stringify(STICKY, null, 2)}
-`,
+  ...Object.fromEntries(
+    STICKY.map((note) => [`${DEMO_PROJECT_DIR}/scenes/${note.id}.md`, stickyNoteFileText(note)]),
+  ),
 };

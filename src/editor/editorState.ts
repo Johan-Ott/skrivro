@@ -27,6 +27,7 @@ import { spellingPlugin, type SpellingSwitch } from "./spellingMarks.js";
 import { commentsPlugin, type CommentAnchor } from "./commentMarks.js";
 import { insertFootnote, uniqueFootnoteLabels } from "./footnoteEditing.js";
 import { pageMarksPlugin } from "./pageMarks.js";
+import { placeholderPlugin } from "./placeholderMarks.js";
 import { revisionPlugin } from "./revisionMarks.js";
 import { suggestionPlugin } from "./suggestionMarks.js";
 import type { RevisionChange } from "../manuscript/revision.js";
@@ -153,6 +154,7 @@ export function createEditorState(doc: Node, switches = DEFAULT_SWITCHES): Edito
       repetitionsPlugin(switches.repeatWindow),
       spellingPlugin(switches.spelling),
       commentsPlugin(switches.commentAnchors, switches.onComment),
+      placeholderPlugin(),
       pageMarksPlugin(switches.pageMarks),
       revisionPlugin(switches.revisionChanges),
       suggestionPlugin(switches.suggestedFrom),

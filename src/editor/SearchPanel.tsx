@@ -10,7 +10,7 @@ import {
 import type { Command, EditorState } from "prosemirror-state";
 import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
 import { applyQuery, replaceOneAndMove, type ManuscriptScope } from "./manuscriptSearch.js";
-import { countText, SearchFilters, SearchResults } from "./SearchResults.js";
+import { SearchCount, SearchFilters, SearchResults } from "./SearchResults.js";
 import { t } from "../i18n/i18n.js";
 
 interface SearchPanelProps {
@@ -57,6 +57,9 @@ function searchActions(props: SearchPanelProps, query: SearchQuery) {
   if (!scope) {
     return {
       position: () => matchPosition(editorState),
+      // Searching the open scene only still says when the notes hold the words.
+      inNotes: () => props.manuscript?.inNotes(query, editorState) ?? 0,
+      showNotes: () => props.manuscript?.showNotes(),
       step: (isBackwards: boolean) => run(isBackwards ? findPrev : findNext, false),
       replaceOne: () => run(replaceOneAndMove, false),
       replaceEvery: () => {
@@ -68,6 +71,8 @@ function searchActions(props: SearchPanelProps, query: SearchQuery) {
   }
   return {
     position: () => scope.position(query, editorState),
+    inNotes: () => scope.inNotes(query, editorState),
+    showNotes: scope.showNotes,
     step: (isBackwards: boolean) => scope.step(query, isBackwards),
     replaceOne: () => {
       run(replaceCurrent, false);
@@ -117,7 +122,7 @@ function FindRow(props: {
         onChange={(event) => props.query.setSearch(event.target.value)}
         onKeyDown={props.onKey}
       />
-      <span className="search-count">{countText(props.actions.position())}</span>
+      <SearchCount actions={props.actions} />
       <StepButtons actions={props.actions} />
       <button className="icon-button" aria-label={t("Stäng sökning")} onClick={props.onClose}>
         ×

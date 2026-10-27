@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { STICKY_ID } from "../src/project/sorts";
 import {
   ancestorIds,
   findNode,
@@ -49,6 +50,7 @@ describe("visibleRows", () => {
       `0:${PLACES_ID}`,
       `0:${THINGS_ID}`,
       `0:${NOTES_ID}`,
+      `0:${STICKY_ID}`,
       `0:${SECRETS_ID}`,
       `0:${TRASH_ID}`,
     ]);
@@ -154,6 +156,7 @@ describe("sidebarSections", () => {
       PLACES_ID,
       THINGS_ID,
       NOTES_ID,
+      STICKY_ID,
       SECRETS_ID,
     ]);
     expect(sections.trash.map((row) => row.node.id)).toEqual([TRASH_ID]);

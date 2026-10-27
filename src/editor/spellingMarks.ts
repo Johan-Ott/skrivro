@@ -1,6 +1,7 @@
 import type { Node } from "prosemirror-model";
 import { Plugin, PluginKey, type Command, type PluginView } from "prosemirror-state";
 import { Decoration, DecorationSet, type EditorView } from "prosemirror-view";
+import { withoutPlaceholders } from "../manuscript/placeholders.js";
 import { documentText } from "./documentText.js";
 
 /** What the spelling check needs from the app; null turns it off. */
@@ -26,7 +27,7 @@ const WORD = /\p{L}+(?:['’-]\p{L}+)*/gu;
 
 export function wordsIn(doc: Node) {
   const { text, toDoc } = documentText(doc);
-  return [...text.matchAll(WORD)].map((match) => ({
+  return [...withoutPlaceholders(text).matchAll(WORD)].map((match) => ({
     word: match[0],
     from: toDoc(match.index),
     to: toDoc(match.index + match[0].length),

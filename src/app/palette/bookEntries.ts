@@ -7,7 +7,7 @@ import { t } from "../../i18n/i18n.js";
 export function sceneEntries(context: PaletteContext): PaletteEntry[] {
   const { splitScene, mergeScene, read, openChapterId, readAloud, toggleSuggesting } = context;
   return [
-    ...(toggleSuggesting ? [command(t("Förslagsläge"), toggleSuggesting)] : []),
+    ...(toggleSuggesting ? [command(t("Skriv förslag"), toggleSuggesting)] : []),
     ...(readAloud ? [command(t("Läs upp från markören"), readAloud, shortcutOf("readAloud"))] : []),
     ...(read && openChapterId ? [command(t("Läs kapitlet"), () => read(openChapterId))] : []),
     ...(read ? [command(t("Läs hela boken"), () => read(null), shortcutOf("read"))] : []),

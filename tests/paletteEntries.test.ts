@@ -91,3 +91,21 @@ describe("paletteEntries", () => {
     expect(shown).toEqual(["01ARVID"]);
   });
 });
+
+describe("Skriv förslag in the palette", () => {
+  it("can be found by its name, so what is behind ⋯ in Granska is not hidden", () => {
+    const { value } = context();
+    let started = 0;
+
+    const entries = paletteEntries({ ...value, toggleSuggesting: () => started++ });
+    entries.find((entry) => entry.label === "Skriv förslag")?.run();
+
+    expect(started).toBe(1);
+  });
+
+  it("is not offered when no text is open", () => {
+    const { value } = context();
+
+    expect(paletteEntries(value).map((entry) => entry.label)).not.toContain("Skriv förslag");
+  });
+});

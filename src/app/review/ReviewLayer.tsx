@@ -17,14 +17,11 @@ import { bookLanguage } from "../../project/bookLanguage.js";
 import { NarrationPicker, narrationLine } from "./NarrationPicker.js";
 import { ReviewPanel } from "./ReviewPanel.js";
 import { useReview } from "./useReview.js";
-import { documentText } from "../../editor/documentText.js";
-import { CommentsSection } from "./CommentsSection.js";
-import { BookTasks } from "./BookTasks.js";
-import { SceneSecretWarnings } from "../notes/SecretPanel.js";
-import { sidebarProps } from "../paneProps.js";
+import { CommentsAndTasks } from "./CommentsAndTasks.js";
 import { RevisionSection } from "./RevisionSection.js";
 import { usePhone } from "../phone/usePhone.js";
-import { SuggestStart } from "./Suggesting.js";
+import { PhoneCommentBox } from "./PhoneCommentBox.js";
+import { suggestMenuItems } from "./Suggesting.js";
 import type { useComments } from "./useComments.js";
 
 const selectRange =
@@ -58,27 +55,6 @@ type ShownProps = {
   comments: Comments;
 };
 
-// The open scene's comments, then what is still open elsewhere in the book.
-function CommentsAndTasks(props: ShownProps) {
-  return (
-    <>
-      <CommentsSection comments={props.comments} text={documentText(props.doc).text} />
-      <SceneSecretWarnings
-        book={props.project}
-        sceneId={props.scene.id}
-        notes={props.app.notes}
-        onOpen={sidebarProps(props.app, props.project).onOpenScene}
-      />
-      <BookTasks
-        project={props.project}
-        openSceneId={props.scene.id}
-        comments={props.comments.comments}
-        onOpen={sidebarProps(props.app, props.project).onOpenScene}
-      />
-    </>
-  );
-}
-
 // Opened while a comment is written, and closed once it is sent if it then stands in the margin.
 // Opened by itself for an editor's changes, too, so they are seen.
 function useOpening(app: AppState, isWriting: boolean, focused: string | null) {
@@ -97,7 +73,8 @@ function useOpening(app: AppState, isWriting: boolean, focused: string | null) {
 // A misspelled word among them shows its corrections instead, so only one thing opens at a time.
 function useOpenedByClick(app: AppState, focused: string | null) {
   const { setReviewOpen, settings } = app.writingMode;
-  const isInMargin = settings.commentsInMargin && !usePhone();
+  const isPhone = usePhone();
+  const isInMargin = settings.commentsInMargin && !isPhone;
   const isMisspelled = misspelledAtCaret(app.editor, useEditorState(app.editor)) !== null;
   useEffect(() => {
     if (focused && !isInMargin && !isMisspelled) setReviewOpen(true);
@@ -147,36 +124,45 @@ function NarrationSection({ app, fields }: { app: AppState; fields: Record<strin
 }
 
 const Narration = ({ app, project }: Pick<ShownProps, "app" | "project">) => (
-  <>
-    <NarrationSection app={app} fields={project.fields} />
-    <SuggestStart app={app} />
-  </>
+  <NarrationSection app={app} fields={project.fields} />
 );
+
+// A comment is written in Granska; on a phone, in a box over the text instead.
+function useWritingInPanel(app: AppState, comments: Comments) {
+  const isPhone = usePhone();
+  const isWriting = comments.draft !== null && !isPhone;
+  useOpening(app, isWriting, comments.focused);
+  return isWriting;
+}
 
 function ShownReview(props: ShownProps) {
   const { app } = props;
   const { review: isReviewOn, repeatWindow } = app.writingMode.settings;
   const review = useReview({ ...props, cards: app.notes.cards, repeatWindow });
-  useOpening(app, props.comments.draft !== null, props.comments.focused);
+  const isWritingInPanel = useWritingInPanel(app, props.comments);
   return (
-    <ReviewPanel
-      review={isReviewOn ? review : null}
-      commentsSection={<CommentsAndTasks {...props} />}
-      narrationSection={<Narration app={app} project={props.project} />}
-      bookNotes={bookNotesOf(app, props.project)}
-      revisionSection={<RevisionSection revision={app.revision} />}
-      revisionCount={app.revision.changes.length}
-      repeatWindow={repeatWindow}
-      onOpenCard={app.cards.open}
-      onReplaceAll={(suspect) => app.search.scope.replaceAll(replaceAllQuery(suspect))}
-      onIgnore={(word) => void app.updateFields({ ignoredNames: [...review.ignored, word] })}
-      onShowRange={(range) => app.editor.run(selectRange(range))}
-      isPinnedOpen={props.comments.draft !== null}
-      commentCount={openComments(props.comments.comments)}
-      isOpen={app.writingMode.isReviewOpen}
-      onOpenChange={app.writingMode.setReviewOpen}
-      onCount={app.writingMode.setReviewCount}
-    />
+    <>
+      <PhoneCommentBox comments={props.comments} />
+      <ReviewPanel
+        review={isReviewOn ? review : null}
+        commentsSection={<CommentsAndTasks {...props} />}
+        narrationSection={<Narration app={app} project={props.project} />}
+        menuItems={suggestMenuItems(app)}
+        bookNotes={bookNotesOf(app, props.project)}
+        revisionSection={<RevisionSection revision={app.revision} />}
+        revisionCount={app.revision.changes.length}
+        repeatWindow={repeatWindow}
+        onOpenCard={app.cards.open}
+        onReplaceAll={(suspect) => app.search.scope.replaceAll(replaceAllQuery(suspect))}
+        onIgnore={(word) => void app.updateFields({ ignoredNames: [...review.ignored, word] })}
+        onShowRange={(range) => app.editor.run(selectRange(range))}
+        isPinnedOpen={isWritingInPanel}
+        commentCount={openComments(props.comments.comments)}
+        isOpen={app.writingMode.isReviewOpen}
+        onOpenChange={app.writingMode.setReviewOpen}
+        onCount={app.writingMode.setReviewCount}
+      />
+    </>
   );
 }
 

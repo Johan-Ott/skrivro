@@ -1,4 +1,5 @@
 import type { SearchQuery } from "prosemirror-search";
+import { spaceAfterColon } from "../manuscript/colonSpace.js";
 import type { EditorState } from "prosemirror-state";
 import { countMatches, type SceneHit } from "../editor/manuscriptSearch.js";
 import { placeOf } from "../project/treeLabels.js";
@@ -13,7 +14,7 @@ function snippetOf(state: EditorState, query: SearchQuery) {
   const { doc } = state;
   const from = Math.max(0, match.from - AROUND);
   const to = Math.min(doc.content.size, match.to + AROUND);
-  const text = doc.textBetween(from, to, " ", " ").replace(/\s+/g, " ").trim();
+  const text = spaceAfterColon(doc.textBetween(from, to, " ", " ").replace(/\s+/g, " ").trim());
   return `${from > 0 ? "…" : ""}${text}${to < doc.content.size ? "…" : ""}`;
 }
 

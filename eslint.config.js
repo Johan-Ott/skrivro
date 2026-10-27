@@ -1,4 +1,5 @@
 import eslintJs from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -15,6 +16,11 @@ export default tseslint.config(
   },
   eslintJs.configs.recommended,
   ...tseslint.configs.strict,
+  {
+    // A hook that is called only sometimes changes the order of hooks and crashes the screen.
+    plugins: { "react-hooks": reactHooks },
+    rules: { "react-hooks/rules-of-hooks": "error" },
+  },
   {
     linterOptions: { noInlineConfig: true, reportUnusedDisableDirectives: "error" },
     rules: {

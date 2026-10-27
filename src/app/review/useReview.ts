@@ -3,6 +3,7 @@ import type { Node } from "prosemirror-model";
 import { useEffect, useMemo, useState } from "react";
 import { sceneRepetitions } from "../../editor/repetitionMarks.js";
 import { plainText } from "../../manuscript/compare.js";
+import { withoutPlaceholders } from "../../manuscript/placeholders.js";
 import { nameSuspects } from "../../manuscript/review.js";
 import { narrationNotes, narrationOf } from "../../manuscript/narration.js";
 import { proseNotes, type ProseNote } from "../../manuscript/prose.js";
@@ -41,7 +42,8 @@ function useChapterTexts(project: Project, sceneId: string) {
     const wanted = key ? key.split(",") : [];
     const refs = wanted.map((id) => ({ dir: project.dir, id }));
     void readSceneBodies(platform.fileSystem, refs).then(
-      (bodies) => isCurrent && setTexts(wanted.map((id) => plainText(bodies[id] ?? ""))),
+      (bodies) =>
+        isCurrent && setTexts(wanted.map((id) => withoutPlaceholders(plainText(bodies[id] ?? "")))),
     );
     return () => void (isCurrent = false);
   }, [project.dir, key]);
@@ -75,7 +77,7 @@ function useSplitCompounds(text: string, language: string) {
 /** `doc` is the text at the writer's last pause, so Granska does not count on every key. */
 export function useReview({ project, scene, doc, cards, repeatWindow }: ReviewInput) {
   const chapterTexts = useChapterTexts(project, scene.id);
-  const sceneText = doc.textBetween(0, doc.content.size, "\n");
+  const sceneText = withoutPlaceholders(doc.textBetween(0, doc.content.size, "\n"));
   const inChapter = useMemo(() => {
     const text = [sceneText, ...chapterTexts].join("\n");
     return cardsNamedIn(cards, text).filter((card) => card.id !== scene.id);

@@ -83,3 +83,33 @@ describe("readSceneSummaries with file times", () => {
     expect(summaries["S1"]?.words).toBe(3);
   });
 });
+
+describe("a note without a title", () => {
+  it("is named by its first line, as a sticky note is", async () => {
+    const files = createMemoryFileSystem({
+      "/bok/scenes/L1.md": "---\ncolor: gul\n---\n\nKolla årtalet på brevet.\nOch namnet.",
+      "/bok/scenes/L2.md": "---\ncolor: gul\n---\n",
+    });
+
+    const summaries = await readSceneSummaries(files, "/bok", ["L1", "L2"], {
+      noteIds: new Set(["L1", "L2"]),
+    });
+
+    expect(summaries["L1"]?.title).toBe("Kolla årtalet på brevet.");
+    expect(summaries["L2"]?.title).toBe("Tom lapp");
+  });
+});
+
+describe("an empty sticky note", () => {
+  it("is called Tom lapp, not Namnlös scen", async () => {
+    const files = createMemoryFileSystem({
+      "/bok/scenes/LTOM.md": "---\nid: LTOM\ncolor: gul\nplace: 24, 24, 200, 180\n---\n",
+    });
+
+    const summaries = await readSceneSummaries(files, "/bok", ["LTOM"], {
+      noteIds: new Set(["LTOM"]),
+    });
+
+    expect(summaries["LTOM"]?.title).toBe("Tom lapp");
+  });
+});

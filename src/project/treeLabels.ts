@@ -1,4 +1,5 @@
 import type { SceneSummary } from "./sceneSummaries.js";
+import { STICKY_ID } from "./sorts.js";
 import {
   CHARACTERS_ID,
   findNode,
@@ -25,6 +26,7 @@ const specialFolderLabel = (id: string) =>
     [PLACES_ID]: t("Platser"),
     [THINGS_ID]: t("Saker"),
     [NOTES_ID]: t("Övrigt"),
+    [STICKY_ID]: t("Lappar"),
     [SECRETS_ID]: t("Hemligheter"),
     [TRASH_ID]: t("Papperskorg"),
   })[id] ?? "";

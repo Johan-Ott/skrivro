@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePhone } from "../phone/usePhone.js";
 import { locate, type Comment } from "../../project/comments.js";
 import { snapshotWhen } from "../../project/snapshots.js";
 import type { useComments } from "./useComments.js";
@@ -6,7 +7,15 @@ import { t } from "../../i18n/i18n.js";
 
 type Comments = ReturnType<typeof useComments>;
 
-function Writer(props: { label: string; onSend: (body: string) => void; onCancel: () => void }) {
+interface WriterProps {
+  label: string;
+  /** The button that sends, when it is not the same word as the label. */
+  sendLabel?: string;
+  onSend: (body: string) => void;
+  onCancel: () => void;
+}
+
+export function Writer(props: WriterProps) {
   const [body, setBody] = useState("");
   return (
     <div className="comment-writer">
@@ -23,7 +32,7 @@ function Writer(props: { label: string; onSend: (body: string) => void; onCancel
           disabled={body.trim() === ""}
           onClick={() => props.onSend(body.trim())}
         >
-          {props.label}
+          {props.sendLabel ?? props.label}
         </button>
         <button className="button secondary small" onClick={props.onCancel}>
           {t("Avbryt")}
@@ -71,8 +80,10 @@ function CommentActions({ comment, comments }: { comment: Comment; comments: Com
   );
 }
 
+// On a phone the comment is written in a box over the text, not here.
 function Draft({ comments }: { comments: Comments }) {
-  if (!comments.draft) return null;
+  const isPhone = usePhone();
+  if (!comments.draft || isPhone) return null;
   return (
     <div className="review-item focused">
       <span className="comment-quote">”{comments.draft.quote}”</span>

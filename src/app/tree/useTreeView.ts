@@ -25,6 +25,8 @@ import { t } from "../../i18n/i18n.js";
 
 export interface TreeViewProps {
   project: Project;
+  /** Starts an empty lapp: in the menu of the sort Lappar, and on a phone as the quick catch. */
+  onNewLapp?: (() => void) | undefined;
   openSceneId: string | null;
   /** The tree unfolds to the open scene; true when left out. */
   isFollowingOpenScene?: boolean;

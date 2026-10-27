@@ -76,3 +76,17 @@ describe("inGroups", () => {
     expect(labels).toEqual(["Arvid", "Udden", "Köket", "Ny anteckning"]);
   });
 });
+
+describe("a name met in the book", () => {
+  it("is not found among commands that only have its letters spread out", () => {
+    const entries = [
+      entry("Kikaren", "Saker"),
+      entry("Skrivraden mitt på skärmen av"),
+      entry("Kopiera kontaktinformation"),
+    ];
+
+    const found = searchPalette(entries, "Kikaren").map((each) => each.label);
+
+    expect(found).toEqual(["Kikaren"]);
+  });
+});

@@ -1,7 +1,8 @@
-import { EditorState } from "prosemirror-state";
+import { EditorState, TextSelection } from "prosemirror-state";
 import type { EditorView } from "prosemirror-view";
 import { describe, expect, it } from "vitest";
-import { autocorrectPlugin, isOneStep } from "../src/editor/autocorrect";
+import { autocorrectPlugin, autocorrectRules, isOneStep } from "../src/editor/autocorrect";
+import { parseMarkdown } from "../src/manuscript/parseMarkdown";
 import type { SpellingSwitch } from "../src/editor/spellingMarks";
 import { manuscriptSchema as schema } from "../src/manuscript/schema";
 
@@ -59,5 +60,33 @@ describe("autocorrectPlugin", () => {
     await new Promise((settled) => setTimeout(settled));
 
     expect(dispatched).toEqual([]);
+  });
+});
+
+describe("the capital at the start of a line", () => {
+  const capitalFor = (markdown: string) => {
+    const doc = parseMarkdown(markdown);
+    const selection = TextSelection.atEnd(doc);
+    const end = selection.from;
+    const state = EditorState.create({ doc, selection });
+    const [rule] = autocorrectRules(() => true) as unknown as [
+      { match: RegExp; handler: HandlerOf },
+    ];
+    const match = rule.match.exec("t");
+    return match ? rule.handler(state, match, end - 1, end) : null;
+  };
+  type HandlerOf = (
+    state: EditorState,
+    match: RegExpExecArray,
+    from: number,
+    to: number,
+  ) => { doc: { textContent: string } } | null;
+
+  it("is written in a paragraph", () => {
+    expect(capitalFor("t")?.doc.textContent).toBe("T");
+  });
+
+  it("is not written for a list item, which the writer starts as they like", () => {
+    expect(capitalFor("- t")).toBeNull();
   });
 });

@@ -2,11 +2,12 @@ import type { Node } from "prosemirror-model";
 import { Plugin, PluginKey, type Command, type PluginView } from "prosemirror-state";
 import { Decoration, DecorationSet } from "prosemirror-view";
 import { repetitions, wordsWithSentences } from "../manuscript/review.js";
+import { withoutPlaceholders } from "../manuscript/placeholders.js";
 import { documentText } from "./documentText.js";
 
 const found = (doc: Node, window: number) => {
   const { text, toDoc } = documentText(doc);
-  return repetitions(wordsWithSentences(text), window).map((repetition) => ({
+  return repetitions(wordsWithSentences(withoutPlaceholders(text)), window).map((repetition) => ({
     word: repetition.word,
     most: repetition.most,
     ranges: repetition.ranges.map((range) => ({ from: toDoc(range.from), to: toDoc(range.to) })),

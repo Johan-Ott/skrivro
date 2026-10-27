@@ -300,10 +300,6 @@ select:focus-visible {
   border-radius: var(--radius-card);
 }
 
-.version-card.chosen {
-  border-color: var(--primary);
-}
-
 .version-label {
   font-weight: 500;
 }
@@ -1999,6 +1995,14 @@ button.book-cover:hover {
   border-radius: 3px;
   background: var(--match);
   cursor: pointer;
+}
+
+/* A placeholder [?]: grey with a dotted underline, as a prompt's hint is. */
+
+.manuscript .placeholder-note {
+  color: var(--text-muted);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
 }
 
 .review-item.focused {

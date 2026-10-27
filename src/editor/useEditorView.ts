@@ -1,4 +1,6 @@
 import { NO_WORDS, type CompletionWords } from "./vocabulary.js";
+import { takeAskForFirstAnswer } from "./firstAnswerAsk.js";
+import { firstAnswer } from "./promptHints.js";
 import type { Node } from "prosemirror-model";
 import type { Command, EditorState } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
@@ -114,18 +116,29 @@ function useModeSwitches() {
   return { switches, modes };
 }
 
+const MOST_FRAMES = 30;
+
+// Focus on an editor that cannot be edited does nothing, so a just-opened scene is tried frame by
+// frame, and given up after about half a second.
+function focusWhenEditable(view: EditorView, frames = MOST_FRAMES) {
+  if (view.editable) return view.focus();
+  if (frames > 0 && !view.isDestroyed) {
+    requestAnimationFrame(() => focusWhenEditable(view, frames - 1));
+  }
+}
+
 // A hidden editor cannot take focus, so the request waits until it is shown.
 function useFocusRequest(viewRef: React.RefObject<EditorView | null>) {
   const isRequested = useRef(false);
   const requestFocus = useCallback(() => {
     const view = viewRef.current;
-    if (view?.dom.offsetParent) return view.focus();
+    if (view?.dom.offsetParent) return focusWhenEditable(view);
     isRequested.current = true;
   }, [viewRef]);
   const focusIfRequested = useCallback(() => {
     if (!isRequested.current || !viewRef.current?.dom.offsetParent) return;
     isRequested.current = false;
-    viewRef.current.focus();
+    focusWhenEditable(viewRef.current);
   }, [viewRef]);
   return { requestFocus, focusIfRequested };
 }
@@ -168,7 +181,9 @@ export function useEditorView(onDocChange: (doc: Node) => void) {
 
   const mount = useMount(viewRef, switches, store, onDocChangeRef);
   const load = useCallback((doc: Node) => {
-    viewRef.current?.updateState(createEditorState(doc, switches));
+    const state = createEditorState(doc, switches);
+    const answer = takeAskForFirstAnswer() ? firstAnswer(doc) : null;
+    viewRef.current?.updateState(answer ? state.apply(state.tr.setSelection(answer)) : state);
     store.set(viewRef.current?.state ?? null);
   }, []);
 

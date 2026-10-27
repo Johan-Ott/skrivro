@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { freshlyTrashed } from "./freshlyTrashed.js";
 import { SCENE_STATUSES } from "../../manuscript/sceneFile.js";
 import { TRASH_ID, type TreeNode } from "../../project/tree.js";
 import type { TreeRow as Row } from "../../project/treeRows.js";
@@ -35,7 +36,7 @@ function useNewlyTrashed({ dir, tree }: TreeViewProps["project"]) {
     const inTrash = tree.find((node) => node.id === TRASH_ID)?.children ?? [];
     const before = seen.current;
     seen.current = { dir, ids: new Set(inTrash.map((node) => node.id)) };
-    const fresh = before?.dir === dir && inTrash.find((node) => !before.ids.has(node.id));
+    const fresh = before?.dir === dir && freshlyTrashed(before.ids, inTrash);
     if (fresh) setTrashed(fresh);
   }, [dir, tree]);
   useEffect(() => {

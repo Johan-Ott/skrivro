@@ -1,5 +1,6 @@
 import type { FileSystem } from "@llkit/storage/fileSystem.js";
 import { isSwedish } from "../i18n/i18n.js";
+import { readField, splitSceneFile } from "../manuscript/sceneFile.js";
 import { newSceneId } from "../storage/sceneId.js";
 import type { BookTemplate, TemplatePiece } from "./templates.js";
 import type { TreeNode } from "./tree.js";
@@ -59,15 +60,13 @@ const NOTES = import.meta.glob<string>("../packs/*/notes/*/*.md", {
 // "---\nsort: Guide\n---\n# Title\n\nThe text." Front matter lines other than sort and
 // standard are left alone.
 export function noteOf(text: string): PackNote {
-  const normal = text.replace(/\r\n/g, "\n");
-  const [, header = "", rest = ""] = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(normal) ?? [];
-  const field = (name: string) => new RegExp(`^${name}:(.*)$`, "m").exec(header)?.[1]?.trim() ?? "";
+  const { frontMatter, body: rest } = splitSceneFile(text.replace(/\r\n/g, "\n"));
   const [heading = "", ...body] = rest.trimStart().split("\n");
   return {
-    sort: field("sort"),
+    sort: readField(frontMatter, "sort") ?? "",
     title: heading.replace(/^#\s*/, ""),
     body: body.join("\n").trim(),
-    isStandard: field("standard") === "true",
+    isStandard: readField(frontMatter, "standard") === "true",
   };
 }
 

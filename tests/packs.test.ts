@@ -192,6 +192,14 @@ describe("noteOf", () => {
     expect(note).toMatchObject({ sort: "platser", isStandard: true, title: "Plats (mall)" });
   });
 
+  it("reads a note saved with Windows line endings", () => {
+    const note = noteOf(
+      "---\r\nsort: platser\r\nstandard: true\r\n---\r\n# Plats\r\n\r\nText\r\nmer",
+    );
+
+    expect(note).toEqual({ sort: "platser", title: "Plats", body: "Text\nmer", isStandard: true });
+  });
+
   it("reads a note with only a sort as not standard", () => {
     expect(noteOf("---\nsort: Guide\n---\n# Titel\n\nText").isStandard).toBe(false);
   });

@@ -12,6 +12,7 @@ import { sidebarProps } from "../paneProps.js";
 import { ContentsIcon } from "../shell/icons.js";
 import { PhoneBarStart, SearchButton } from "./PhoneBarStart.js";
 import { SyncNotices } from "../SyncLayer.js";
+import { startLapp } from "../createLapp.js";
 import { TreeView } from "../tree/TreeView.js";
 import type { Project } from "../useProject.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
@@ -122,7 +123,15 @@ export function PhoneBook(props: PhoneBookProps) {
         />
         <TodayCard app={app} project={project} />
         <ContinueButton {...props} />
-        <TreeView {...sidebarProps(app, project)} onOpenScene={props.onOpenText} hasAddButton />
+        <button className="phone-new-lapp" onClick={() => void startLapp(app, project)}>
+          {t("Ny lapp")}
+        </button>
+        <TreeView
+          {...sidebarProps(app, project)}
+          onOpenScene={props.onOpenText}
+          hasAddButton
+          onNewLapp={() => void startLapp(app, project)}
+        />
       </main>
     </div>
   );
