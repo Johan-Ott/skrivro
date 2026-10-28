@@ -21,6 +21,7 @@ test("a planner lays out a book, keeps her characters, and plans it in Innehåll
   for (let step = 0; step < 2; step++) await page.getByRole("button", { name: "Fortsätt" }).click();
   await page.getByPlaceholder("Arbetstitel duger").fill("Saltet");
   await page.getByRole("button", { name: "Skapa boken" }).click();
+  await page.getByRole("button", { name: "Börja skriva" }).click();
   await editor(page).click();
   await page.keyboard.type("Sigrid kom till ön i mars.", { delay: 2 });
 

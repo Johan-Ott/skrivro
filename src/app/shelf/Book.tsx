@@ -1,7 +1,7 @@
 import type { MouseEvent } from "react";
 import { whenUpdated, type ShelfBook } from "../../project/shelf.js";
 import { amountOf, deadlineLine } from "../../project/shelfLines.js";
-import { coverLookOf } from "../../project/shelfLook.js";
+import { coverLookOf, pagesWidth } from "../../project/shelfLook.js";
 import { templatePieces } from "../../project/templates.js";
 import { useMenuButton } from "@llkit/Menu.js";
 import { platform } from "../platform.js";
@@ -12,6 +12,8 @@ import { retitleBook } from "../../project/projectFile.js";
 import { recordFailure } from "@llkit/errorLog.js";
 import { FavoriteStar, toggleFavorite, useShelfOrder } from "./shelfChoices.js";
 import { coverItem } from "./coverMenu.js";
+import { useLanding, type Arrival } from "./Arrival.js";
+import { MissingBook } from "./MissingBook.js";
 
 interface BookProps {
   book: ShelfBook;
@@ -22,6 +24,8 @@ interface BookProps {
   onForget: (book: ShelfBook) => void;
   onRemove: (book: ShelfBook) => void;
   onRemoveEverywhere: ((book: ShelfBook) => void) | null;
+  /** The book Ny bok just made, which flies in and glows when it is this one. */
+  arriving?: Arrival | null;
 }
 
 // "Bok 2" for a numbered book in a series; the kind of book otherwise.
@@ -162,43 +166,21 @@ function BookMeta(props: BookMenuProps & { hasPicture: boolean }) {
   );
 }
 
-function MissingBook({
-  book,
-  onLocate,
-  onForget,
-}: Pick<BookProps, "book" | "onLocate" | "onForget">) {
-  return (
-    <div className="book">
-      <div className="book-cover missing">
-        <span className="book-title">{book.title}</span>
-        <span className="book-words">{t("Hittas inte")}</span>
-      </div>
-      <div className="book-meta">
-        <span className="book-updated">
-          {t("Mappen har flyttats eller döpts om. Texten finns kvar där du lade den.")}
-        </span>
-        {onLocate && (
-          <button className="link-button" onClick={() => onLocate(book)}>
-            {t("Leta upp mappen")}
-          </button>
-        )}
-        <button className="link-button quiet" onClick={() => onForget(book)}>
-          {t("Ta bort från hyllan")}
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function PresentBook(props: BookProps) {
   const cover = useShelfCover(props.book.dir);
+  const landing = useLanding(props.arriving, props.book.dir);
   // A right-click, or a finger held on the book, opens the same menu as its ⋯ button.
   const openMenu = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.currentTarget.querySelector<HTMLButtonElement>(".book-menu")?.click();
   };
   return (
-    <div className="book" onContextMenu={openMenu}>
+    <div
+      ref={landing.ref}
+      className={`book ${landing.className}`}
+      style={{ "--thick": `${pagesWidth(props.book.words)}px` } as object}
+      onContextMenu={openMenu}
+    >
       <Cover {...props} pictureUrl={cover.url} />
       <FavoriteStar dir={props.book.dir} />
       <BookMeta

@@ -6,6 +6,8 @@ import { CloudBook } from "./CloudBook.js";
 import { ContinueWriting } from "./ContinueWriting.js";
 import type { CloudBook as InCloud, Fetching } from "./useCloudBooks.js";
 import { useShelf } from "./useShelf.js";
+import { NewBookSlot } from "./NewBookSlot.js";
+import { Cheer, type Arrival } from "./Arrival.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
 
 // Where every start leads: a new book, the writer's books and the ones in their Drive, and a
@@ -32,6 +34,9 @@ interface BookshelfProps {
     onFetch: (name: string) => void;
     remove: (book: InCloud) => void;
   };
+  /** The book Ny bok just made, on its way to the shelf. */
+  arriving: Arrival | null;
+  onArrived: () => void;
 }
 
 function summary(books: ShelfBook[]) {
@@ -43,16 +48,6 @@ function summary(books: ShelfBook[]) {
   return count === 1
     ? t("1 bok · {words} ord", { words: sum })
     : t("{count} böcker · {words} ord totalt", { count, words: sum });
-}
-
-function NewBook({ onNewProject }: Pick<BookshelfProps, "onNewProject">) {
-  return (
-    <div className="book">
-      <button className="book-cover new-book" onClick={onNewProject}>
-        {t("+ Ny bok")}
-      </button>
-    </div>
-  );
 }
 
 // The books in Drive come after the ones on this device, which open at once.
@@ -92,12 +87,11 @@ function Welcome(props: Pick<BookshelfProps, "author" | "onOpenExample">) {
 
 function ShelfRows(props: BookshelfProps & { books: ShelfBook[] }) {
   const groups = shelfGroups(props.books, useShelfOrder());
-  const isEmpty = !props.books.some((book) => !book.isMissing);
   if (groups.length === 0)
     return (
       <div className="books">
-        <NewBook {...props} />
         <CloudBooks cloud={props.cloud} />
+        <NewBookSlot onNewProject={props.onNewProject} />
         {props.cloud.isListing ? (
           <p className="shelf-listing">{t("Hämtar dina böcker från Drive…")}</p>
         ) : (
@@ -109,11 +103,11 @@ function ShelfRows(props: BookshelfProps & { books: ShelfBook[] }) {
     <section key={group.series ?? ""} className="shelf-group">
       {group.series && <h2 className="shelf-series">{group.series}</h2>}
       <div className="books">
-        {index === 0 && isEmpty && <NewBook {...props} />}
         {group.books.map((book) => (
           <Book key={book.dir} book={book} {...props} />
         ))}
         {index === 0 && <CloudBooks cloud={props.cloud} />}
+        {index === 0 && <NewBookSlot onNewProject={props.onNewProject} />}
       </div>
     </section>
   ));
@@ -134,17 +128,16 @@ function ShelfHead(props: BookshelfProps & { books: ShelfBook[] | null }) {
           {t("Importera manus…")}
         </button>
       </span>
-      {props.books?.some((book) => !book.isMissing) && (
-        <button className="button primary small" onClick={props.onNewProject}>
-          {t("+ Ny bok")}
-        </button>
-      )}
+      <button className="button primary small" onClick={props.onNewProject}>
+        {t("+ Ny bok")}
+      </button>
     </div>
   );
 }
 
 export function Bookshelf(props: BookshelfProps) {
-  const books = useShelf(props.libraryDir, props.knownProjects);
+  const books = useShelf(props.libraryDir, props.knownProjects, props.arriving?.book ?? null);
+  const { arriving } = props;
   return (
     <div className="shelf-screen">
       <main className="shelf">
@@ -152,6 +145,13 @@ export function Bookshelf(props: BookshelfProps) {
         <ShelfHead {...props} books={books} />
         {books && <ShelfRows books={books} {...props} />}
       </main>
+      {arriving && (
+        <Cheer
+          title={arriving.book.title}
+          onWrite={() => props.onOpen(arriving.book.dir)}
+          onDone={props.onArrived}
+        />
+      )}
     </div>
   );
 }

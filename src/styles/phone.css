@@ -212,28 +212,11 @@
   padding: max(40px, var(--safe-top)) 20px 24px;
 }
 
+/* Two books and their plank fill the width between the shelf's 20px edges. */
 .phone-screen .books {
-  display: grid;
-  padding: 0;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.phone-screen .book {
-  width: auto;
-  min-width: 0;
-  gap: 8px;
-}
-
-.phone-screen .book-cover {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 3;
-  padding: 16px 14px;
-}
-
-.phone-screen .book-title {
-  font-size: 20px;
+  --gap: 20px;
+  --w: calc((100vw - 40px - 2 * var(--gap)) / 2);
+  row-gap: 24px;
 }
 
 .phone-screen .book-meta {

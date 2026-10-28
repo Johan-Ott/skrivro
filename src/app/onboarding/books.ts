@@ -33,6 +33,9 @@ export const startDetails = (dailyGoal: number, language = "sv-SE"): ProjectDeta
   language,
 });
 
+/** Only a novel and short stories have a genre; another book chooses its cover's colour. */
+export const hasGenre = (type: string) => type === "roman" || type === "noveller";
+
 /** The details with the structure Skrivro suggests for them, and that structure's goal. */
 export function withSuggestion(details: ProjectDetails): ProjectDetails {
   const structure = suggestedStructure(details.type, details.genre ?? "", details.pieces);

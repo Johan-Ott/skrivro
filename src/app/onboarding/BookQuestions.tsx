@@ -1,11 +1,42 @@
+import type { ReactNode } from "react";
 import type { ProjectDetails } from "../../project/newProject.js";
 import { NarrationPicker } from "../review/NarrationPicker.js";
+import { hasGenre } from "./books.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
 
 // The first and last questions of a new book: what kind it is, and its title, voice and goals.
 // The step between, its shape, is BookShape.
 
 export type FieldProps = { details: ProjectDetails; onChange: (details: ProjectDetails) => void };
+
+// Each kind of book drawn as a small book of its own.
+const GLYPHS: Record<string, ReactNode> = {
+  roman: (
+    <>
+      <rect x="8.5" y="4.5" width="15" height="23" rx="1.5" />
+      <path d="M12 4.5v23" />
+    </>
+  ),
+  noveller: (
+    <>
+      <rect x="5.5" y="9.5" width="5.5" height="18" rx="1" />
+      <rect x="13" y="5.5" width="5.5" height="22" rx="1" />
+      <rect x="20.5" y="11.5" width="5.5" height="16" rx="1" />
+    </>
+  ),
+  fackbok: (
+    <>
+      <rect x="7.5" y="4.5" width="17" height="23" rx="1.5" />
+      <path d="M11 4.5v23M14.5 11h6.5M14.5 15h6.5M14.5 19h4" />
+    </>
+  ),
+  annat: (
+    <>
+      <rect x="8.5" y="4.5" width="15" height="23" rx="1.5" strokeDasharray="2.5 2.5" />
+      <path d="M16 12.5v7M12.5 16h7" />
+    </>
+  ),
+};
 
 const TYPES: [string, string, string][] = [
   ["roman", t("Roman"), t("En lång berättelse")],
@@ -14,20 +45,28 @@ const TYPES: [string, string, string][] = [
   ["annat", t("Annat"), t("Något eget, du bygger det själv")],
 ];
 
+export const typeLabel = (type: string) => TYPES.find(([each]) => each === type)?.[1] ?? "";
+
 export function BookTypes({ details, onChange }: FieldProps) {
+  // A book without a genre does not keep the one chosen for a novel before.
+  const choose = (type: string) =>
+    onChange({ ...details, type, genre: hasGenre(type) ? (details.genre ?? "") : "" });
   return (
-    <div className="template-list" role="radiogroup" aria-label={t("Vad skriver du?")}>
+    <div className="nb-types" role="radiogroup" aria-label={t("Vad skriver du?")}>
       {TYPES.map(([type, label, hint]) => (
         <button
           key={type}
           type="button"
           role="radio"
-          className="template-choice"
+          className="nb-choice"
           aria-checked={details.type === type}
-          onClick={() => onChange({ ...details, type })}
+          onClick={() => choose(type)}
         >
-          <span className="template-name">{label}</span>
-          <span className="choice-hint">{hint}</span>
+          <svg className="glyph" viewBox="0 0 32 32" aria-hidden="true">
+            {GLYPHS[type]}
+          </svg>
+          <span className="name">{label}</span>
+          <span className="hint">{hint}</span>
         </button>
       ))}
     </div>

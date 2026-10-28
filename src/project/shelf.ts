@@ -170,7 +170,8 @@ const missingBook = (dir: string): ShelfBook => ({
   stage: null,
 });
 
-async function readBook(fileSystem: FileSystem, dir: string): Promise<ShelfBook> {
+/** One book as the shelf shows it, read from its folder. */
+export async function readBook(fileSystem: FileSystem, dir: string): Promise<ShelfBook> {
   if ((await fileSystem.list(dir)).length === 0) return missingBook(dir);
   const fields = await readProjectFields(fileSystem, dir);
   const sceneIds = await bookSceneIds(fileSystem, dir, fields.tree);

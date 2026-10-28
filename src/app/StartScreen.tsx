@@ -24,6 +24,7 @@ import { Welcome } from "./onboarding/Welcome.js";
 import { firstLanguage, type Choices } from "./onboarding/FirstChoices.js";
 import { Bookshelf } from "./shelf/Bookshelf.js";
 import { useCloudBooks } from "./shelf/useCloudBooks.js";
+import { useArrival } from "./shelf/Arrival.js";
 import { shelfHandlers } from "./shelf/shelfHandlers.js";
 
 // Skrivro starts at the welcome the first time, and at the shelf after: every book is begun,
@@ -119,14 +120,19 @@ function useCloud(app: App) {
 
 function NewBookSheet(props: {
   app: App;
-  onCreate: (details: ProjectDetails) => Promise<void>;
+  onCreate: (details: ProjectDetails, from: DOMRect | null) => Promise<boolean>;
   onClose: () => void;
 }) {
   const { preferences } = props.app.startup;
   return (
     <NewBookDialog
-      start={startDetails(preferences.defaultDailyGoal, preferences.bookLanguage)}
+      // Ny bok shows the cover from the start: Skog, until the writer picks another.
+      start={{
+        ...startDetails(preferences.defaultDailyGoal, preferences.bookLanguage),
+        coverLook: "skog",
+      }}
       libraryDir={preferences.libraryDir ?? ""}
+      author={preferences.authorName}
       onCreate={props.onCreate}
       onClose={props.onClose}
     />
@@ -138,7 +144,9 @@ function Shelf({ app }: StartScreenProps) {
   const isPhone = usePhone();
   const [isNewBookOpen, setNewBookOpen] = useNewBookSheet(app);
   const books = useBookActions(app);
+  const arrival = useArrival(books.create);
   const cloud = useCloud(app);
+  const closeNewBook = () => setNewBookOpen(false);
   return (
     <ShelfFrame app={app} onNewProject={() => setNewBookOpen(true)} isPhone={isPhone}>
       <Bookshelf
@@ -150,11 +158,13 @@ function Shelf({ app }: StartScreenProps) {
         onImport={books.import}
         onOpenExample={books.example}
         cloud={cloud}
+        arriving={arrival.arriving}
+        onArrived={arrival.done}
         {...shelfHandlers(app.startup, isPhone, cloud.look)}
       />
       <Opening saying={books.busy} />
       {isNewBookOpen && (
-        <NewBookSheet app={app} onCreate={books.create} onClose={() => setNewBookOpen(false)} />
+        <NewBookSheet app={app} onCreate={arrival.onCreate} onClose={closeNewBook} />
       )}
     </ShelfFrame>
   );

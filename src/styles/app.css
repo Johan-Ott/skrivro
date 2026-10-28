@@ -826,7 +826,46 @@ html.look-shown .selection-bar {
 
 /* The top bar says Bokhylla; the shelf itself is the books, large, as a store shows them. */
 
+/* The shelf's wood, the books' paper and the unwritten book, light and dark. */
+:root {
+  --plank: #e9e6e0;
+  --plank-edge: #d6d1c7;
+  --plank-shadow: rgba(0, 0, 0, 0.12);
+  --leaf: #f7f3ea;
+  --leaf-line: #dcd5c6;
+  --leaf-ink: #6b6458;
+  --blank: #ebe7de;
+  --blank-ink: #6f6a62;
+  --blank-line: rgba(0, 0, 0, 0.12);
+  --page: #fdfcf9;
+  --page-ink: #1a1a1a;
+  --gutter: rgba(0, 0, 0, 0.16);
+  --accent-soft: rgba(14, 107, 79, 0.3);
+  --book-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+:root[data-theme="dark"] {
+  --plank: #2c2b28;
+  --plank-edge: #3d3b37;
+  --plank-shadow: rgba(0, 0, 0, 0.5);
+  --leaf: #d3ccbc;
+  --leaf-line: #aaa392;
+  --leaf-ink: #4a443a;
+  --blank: #34322e;
+  --blank-ink: #bab5ad;
+  --blank-line: rgba(255, 255, 255, 0.1);
+  --page: #272623;
+  --page-ink: #e6e4df;
+  --gutter: rgba(0, 0, 0, 0.55);
+  --accent-soft: rgba(127, 211, 168, 0.26);
+  --book-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Every size on a book follows its width, --w, so the shelf, Fortsätt skriva and a phone share
+   one set of rules. */
 .shelf {
+  --w: 170px;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -838,17 +877,58 @@ html.look-shown .selection-bar {
   font-size: 13px;
 }
 
+/* The books stand on a plank. Each book carries its own piece of it, half a gap wide on either
+   side, so the pieces meet into one plank per row. */
 .books {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 240px);
-  gap: 48px 36px;
+  --gap: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px var(--gap);
+  padding: 8px calc(var(--gap) / 2) 0;
 }
 
 .book {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: var(--w);
+  isolation: isolate;
+}
+
+.book::after {
+  position: absolute;
+  top: calc(var(--w) * 1.5);
+  right: calc(var(--gap) / -2);
+  left: calc(var(--gap) / -2);
+  z-index: -1;
+  height: 14px;
+  background: linear-gradient(var(--plank-edge) 0 3px, var(--plank) 3px);
+  box-shadow: 0 10px 16px -8px var(--plank-shadow);
+  content: "";
+}
+
+/* The pages to the right of the cover, as thick as the book is long (--thick, set per book). */
+.book::before {
+  position: absolute;
+  top: calc(var(--w) * 0.0375);
+  left: calc(var(--w) - 10px);
+  z-index: -1;
+  width: calc(var(--thick, 6px) + 10px);
+  height: calc(var(--w) * 1.44);
+  border-radius: 0 3px 3px 0;
+  background: repeating-linear-gradient(90deg, var(--leaf) 0 2px, var(--leaf-line) 2px 3px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  content: "";
+  transition: transform 0.15s;
+}
+
+.book:has(button.book-cover:enabled:hover)::before {
+  transform: translateY(-3px);
+}
+
+.book:has(.missing)::before {
+  display: none;
 }
 
 /* The star waits in the cover's corner, seen on a favourite and on a book pointed at. */
@@ -877,16 +957,19 @@ html.look-shown .selection-bar {
   color: #f2c14e;
 }
 
+/* The spine is a darker strip along the cover's left edge. */
 .book-cover {
+  --spine: inset calc(var(--w) * 0.025) 0 0 rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 240px;
-  height: 360px;
-  padding: 26px 22px;
+  gap: 6px;
+  width: var(--w);
+  height: calc(var(--w) * 1.5);
+  padding: calc(var(--w) * 0.11) calc(var(--w) * 0.09);
   border: 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 3px 8px 8px 3px;
+  box-shadow: var(--spine), var(--book-shadow);
   text-align: left;
   transition: transform 0.15s;
 }
@@ -897,7 +980,8 @@ html.look-shown .selection-bar {
   box-shadow:
     inset 0 3px 0 rgba(201, 164, 0, 0.6),
     inset 0 -3px 0 rgba(201, 164, 0, 0.6),
-    0 2px 10px rgba(0, 0, 0, 0.16);
+    var(--spine),
+    var(--book-shadow);
 }
 
 .book-cover.stage-klar .book-title {
@@ -918,13 +1002,13 @@ html.look-shown .selection-bar {
   object-fit: cover;
 }
 
-button.book-cover:hover {
+button.book-cover:enabled:hover {
   transform: translateY(-3px);
 }
 
 /* The covers: a genre's colours and one quiet mark of it, drawn behind the words. */
 
-.book-cover:not(.with-picture, .new-book, .missing, .in-cloud) {
+.book-cover:not(.with-picture, .missing) {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -944,7 +1028,8 @@ button.book-cover:hover {
 }
 
 .cover-deckare::before {
-  background: linear-gradient(#b3261e, #b3261e) 22px calc(100% - 64px) / 48px 3px no-repeat;
+  background: linear-gradient(#b3261e, #b3261e) calc(var(--w) * 0.09) calc(100% - var(--w) * 0.27) /
+    calc(var(--w) * 0.2) max(1px, calc(var(--w) * 0.0125)) no-repeat;
 }
 
 .cover-thriller {
@@ -1003,8 +1088,10 @@ button.book-cover:hover {
 }
 
 .cover-urban::before {
-  background: linear-gradient(#ff4fa3, #ff4fa3) 20px calc(100% - 64px) / 60% 2px no-repeat;
-  box-shadow: inset 0 -40px 60px -30px rgba(255, 79, 163, 0.35);
+  background: linear-gradient(#ff4fa3, #ff4fa3) calc(var(--w) * 0.083)
+    calc(100% - var(--w) * 0.27) / 60% max(1px, calc(var(--w) * 0.008)) no-repeat;
+  box-shadow: inset 0 calc(var(--w) * -0.17) calc(var(--w) * 0.25) calc(var(--w) * -0.125)
+    rgba(255, 79, 163, 0.35);
 }
 
 .cover-scifi {
@@ -1028,10 +1115,10 @@ button.book-cover:hover {
 }
 
 .cover-historisk::before {
-  inset: 10px;
+  inset: calc(var(--w) * 0.042);
   border: 1px solid rgba(61, 42, 20, 0.5);
   outline: 1px solid rgba(61, 42, 20, 0.35);
-  outline-offset: 3px;
+  outline-offset: calc(var(--w) * 0.0125);
 }
 
 .cover-feelgood {
@@ -1054,7 +1141,6 @@ button.book-cover:hover {
 }
 
 .cover-litterar .book-title {
-  font-size: 30px;
   font-weight: 500;
 }
 
@@ -1094,32 +1180,171 @@ button.book-cover:hover {
 }
 
 .book-kind {
-  font-size: 12px;
+  min-height: 1em;
+  font-size: max(9px, calc(var(--w) * 0.05));
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.75;
 }
 
 .book-title {
-  font: 600 30px/1.12 var(--font-prose);
-  overflow-wrap: break-word;
+  font: 600 calc(var(--w) * 0.125) / 1.12 var(--font-prose);
+  overflow-wrap: anywhere;
   hyphens: auto;
+  text-wrap: balance;
 }
 
 .book-words {
-  font-size: 13px;
+  font-size: max(9px, calc(var(--w) * 0.054));
   opacity: 0.75;
 }
 
-.book-cover.new-book {
+/* The unwritten book at the end of the shelf: a plain band that opens a little when pointed at,
+   showing the first page behind it. */
+.new-book-slot {
+  --thick: 4px;
+}
+
+.new-book {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  perspective: 900px;
+}
+
+.new-book .book-cover {
   align-items: center;
   justify-content: center;
-  border: 1px dashed var(--text-dim);
-  border-radius: var(--radius-card);
-  background: transparent;
-  box-shadow: none;
-  color: var(--text-muted);
-  font-size: 14px;
+  gap: calc(var(--w) * 0.05);
+  text-align: center;
+  transform-origin: left center;
+  transition:
+    transform 350ms var(--ease),
+    box-shadow 350ms var(--ease);
+}
+
+.new-book:hover .book-cover,
+.new-book:focus-visible .book-cover {
+  transform: rotateY(-34deg);
+  box-shadow:
+    var(--spine),
+    14px 8px 26px rgba(0, 0, 0, 0.28);
+}
+
+.new-book svg {
+  width: calc(var(--w) * 0.2);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  opacity: 0.8;
+}
+
+.new-book .book-title {
+  font-size: calc(var(--w) * 0.13);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.new-book .book-words {
+  max-width: 14ch;
+  line-height: 1.35;
+  opacity: 1;
+}
+
+.new-book-leaf {
+  position: absolute;
+  inset: 1.5% 0;
+  padding: calc(var(--w) * 0.17) calc(var(--w) * 0.12);
+  border-radius: 2px 6px 6px 2px;
+  background:
+    linear-gradient(var(--leaf), var(--leaf)) top / 100% 36% no-repeat,
+    repeating-linear-gradient(180deg, var(--leaf) 0 9px, var(--leaf-line) 9px 10px);
+  color: var(--leaf-ink);
+  font: italic 500 calc(var(--w) * 0.075) / 1.2 var(--font-prose);
+  text-align: left;
+}
+
+.cover-blank {
+  background: var(--blank);
+  color: var(--blank-ink);
+}
+
+.cover-blank::before {
+  inset: 6%;
+  border: 1px solid var(--blank-line);
+  border-radius: 2px 5px 5px 2px;
+}
+
+/* A new book glows where it landed. */
+.book.landed .book-cover {
+  animation: book-landed 1.6s var(--ease);
+}
+
+@keyframes book-landed {
+  30% {
+    box-shadow:
+      var(--spine),
+      var(--book-shadow),
+      0 0 38px 12px var(--accent-soft);
+  }
+}
+
+/* The cover flies alone; its pages and the lines under it come once it stands on the shelf. */
+.book.flying .book-cover {
+  transform-origin: 0 0;
+}
+
+.book::before,
+.book-meta {
+  transition: opacity 0.3s;
+}
+
+.book.flying::before,
+.book.flying .book-meta {
+  opacity: 0;
+}
+
+/* While Ny bok is open it is the unwritten book itself, so the shelf's one is gone. */
+body:has(.new-book-dialog) .new-book {
+  visibility: hidden;
+}
+
+.cheer {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  z-index: var(--layer-dialog);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 14px;
+  border: 1px solid var(--border-control);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: var(--shadow-high);
+  font-size: 13.5px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: cheer-in 200ms var(--ease) 600ms backwards;
+}
+
+.cheer svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes cheer-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
 }
 
 .book-cover.missing {
@@ -1134,8 +1359,8 @@ button.book-cover:hover {
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  width: 240px;
-  margin-top: 16px;
+  width: var(--w);
+  margin-top: 26px;
 }
 
 .book-name {
@@ -3339,17 +3564,28 @@ html.welcome-shown body {
   height: 52px;
 }
 
-/* A book in the writer's Drive that this device has not fetched: pale, with a dashed edge. */
+/* A book in the writer's Drive that this device has not fetched: its colours drained, and while
+   it is fetched they fill it again from the foot up. */
 
 .book-cover.in-cloud {
-  border: 1px dashed var(--border-control);
-  background: var(--bg-subtle);
-  box-shadow: none;
-  color: var(--text-muted);
+  opacity: 0.5;
+  filter: grayscale(0.9) brightness(0.85);
+}
+
+.book:has(.in-cloud)::before {
+  opacity: 0.35;
 }
 
 .book-cover.in-cloud:disabled {
   cursor: progress;
+}
+
+.book-cover.book-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: clip-path 0.3s;
 }
 
 /* Above the books: what the shelf holds, and the ways to a new book. */
@@ -3370,27 +3606,380 @@ html.welcome-shown body {
   flex-grow: 1;
 }
 
-/* Ny bok: one question at a time, the step and the buttons along its foot. */
+/* Ny bok is an open book: the dialog is only its place on the screen, the book draws itself. It
+   grows out of the shelf's blank book, so the dialog's own arrival is left out. */
 
-.new-book-dialog {
-  width: min(560px, calc(100vw - 32px));
-  max-height: calc(var(--visible-height, 100dvh) - 48px);
+.dialog.new-book-dialog {
+  width: auto;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  animation: none;
+}
+
+.new-book-dialog > .dialog-title {
+  display: none;
+}
+
+.dialog-backdrop:has(> .new-book-dialog) {
+  transition: background-color 300ms ease-in;
+}
+
+.dialog-backdrop:has(> .new-book-dialog.shrinking) {
+  background: transparent;
+}
+
+.nb-case {
+  position: relative;
+  width: min(960px, calc(100vw - 32px));
+  padding: 12px;
+  border-radius: 6px 12px 12px 6px;
+  box-shadow: var(--shadow-high);
+  transform-origin: 0 0;
+}
+
+/* The cover round the pages. A new one fades in over the old. */
+.nb-board {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.nb-board.fading-in {
+  animation: fade 350ms ease-out;
+}
+
+.nb-spread {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: min(680px, calc(var(--visible-height, 100dvh) - 72px));
+  border-radius: 3px 6px 6px 3px;
+  background: var(--page);
+  color: var(--page-ink);
+}
+
+/* The fold between the pages. */
+.nb-spread::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--gutter);
+  opacity: 0.6;
+  content: "";
+  pointer-events: none;
+}
+
+.nb-page {
+  min-width: 0;
+  min-height: 0;
+}
+
+.nb-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 34px 22px;
+  box-shadow: inset -26px 0 26px -26px var(--gutter);
+}
+
+.nb-questions h2 {
+  margin: 0;
+  font: 600 26px/1.2 var(--font-prose);
+}
+
+.nb-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
   overflow-y: auto;
 }
 
-.new-book-form {
+.nb-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-control);
+}
+
+.nb-foot .spacer {
+  flex-grow: 1;
+}
+
+.nb-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.nb-dots i {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--surface-hover);
+}
+
+.nb-dots i.on {
+  background: var(--text);
+}
+
+.nb-dots span {
+  margin-left: 4px;
+}
+
+/* The title page the answers write. */
+.nb-title-page {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.new-book-dialog .dialog-actions {
   align-items: center;
-  margin-top: 8px;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 52px 36px 30px;
+  box-shadow: inset 26px 0 26px -26px var(--gutter);
+  text-align: center;
 }
 
-.new-book-dialog .dialog-actions .spacer {
-  flex-grow: 1;
+.nb-tp-kind {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.nb-tp-middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nb-tp-title {
+  font: 600 44px/1.1 var(--font-prose);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.nb-tp-title.untitled {
+  color: var(--text-dim);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.nb-tp-rule {
+  width: 44px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.nb-tp-by {
+  color: var(--text-muted);
+  font: italic 16px var(--font-prose);
+}
+
+.nb-tp-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.nb-tp-forecast {
+  max-width: 32ch;
+  margin-bottom: 10px;
+  color: var(--page-ink);
+  font: italic 14px/1.4 var(--font-prose);
+}
+
+/* The page that turns between questions, blank on both sides. */
+.nb-sheets {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  perspective: 1800px;
+  pointer-events: none;
+}
+
+.nb-sheet {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: var(--page);
+}
+
+.nb-sheet.ahead {
+  left: 50%;
+  background: linear-gradient(90deg, var(--gutter), transparent 14%), var(--page);
+  transform-origin: left center;
+}
+
+.nb-sheet.back {
+  left: 0;
+  background: linear-gradient(270deg, var(--gutter), transparent 14%), var(--page);
+  transform-origin: right center;
+}
+
+/* The choices: a card for each kind of book and each way of writing. */
+.nb-types,
+.nb-ways {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.nb-choice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border-control);
+  border-radius: 12px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nb-choice[aria-checked="true"] {
+  border-color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--text);
+}
+
+.nb-choice .glyph {
+  grid-row: span 2;
+  width: 34px;
+  height: 34px;
+  color: var(--text-muted);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.nb-choice[aria-checked="true"] .glyph {
+  color: var(--text);
+}
+
+.nb-choice .name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nb-choice .hint {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.nb-choice.plain {
+  grid-template-columns: 1fr;
+  row-gap: 2px;
+}
+
+.nb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nb-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* A cover for each genre and colour, small enough for a row of seven. */
+.nb-swatches {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px 2px;
+}
+
+.nb-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 2px 4px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.nb-swatch:hover {
+  background: var(--surface-hover);
+}
+
+.nb-swatch:hover .nb-mini {
+  transform: translateY(-2px);
+}
+
+.nb-swatch[aria-checked="true"] {
+  color: var(--text);
+}
+
+.nb-swatch[aria-checked="true"] .nb-mini {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.nb-mini {
+  --w: 34px;
+  padding: 0;
+  border-radius: 2px 4px 4px 2px;
+  box-shadow:
+    inset 3px 0 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 120ms;
+}
+
+/* Narrow, the book is one page: the questions, without the title page. */
+@media (max-width: 760px) {
+  .nb-case {
+    width: calc(100vw - 16px);
+    padding: 6px;
+  }
+
+  .nb-spread {
+    grid-template-columns: 1fr;
+  }
+
+  .nb-spread::after,
+  .nb-title-page,
+  .nb-sheets {
+    display: none;
+  }
+
+  .nb-questions {
+    padding: 22px 18px 16px;
+    box-shadow: none;
+  }
+
+  .nb-swatches {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 /* What the choices give the book, as a quiet list under them. */
@@ -3447,19 +4036,8 @@ html.welcome-shown body {
 }
 
 .continue-writing .book-cover {
+  --w: 136px;
   flex-shrink: 0;
-  width: 136px;
-  height: 204px;
-  padding: 16px 14px;
-}
-
-.continue-writing .book-title {
-  font-size: 18px;
-}
-
-.continue-writing .book-kind,
-.continue-writing .book-words {
-  font-size: 10px;
 }
 
 .continue-text {
@@ -3499,9 +4077,7 @@ html.welcome-shown body {
 }
 
 .phone-screen .continue-writing .book-cover {
-  width: 88px;
-  height: 132px;
-  padding: 10px;
+  --w: 88px;
 }
 
 .phone-screen .continue-writing .book-title,
@@ -3768,7 +4344,7 @@ html.welcome-shown body {
 /* On a phone the first shelf's welcome goes under Ny bok, the whole width. */
 @media (max-width: 760px) {
   .books .shelf-welcome {
-    grid-column: 1 / -1;
+    flex-basis: 100%;
     max-width: none;
     padding: 4px 0 0;
   }

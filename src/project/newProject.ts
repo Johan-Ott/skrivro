@@ -40,6 +40,8 @@ export interface ProjectDetails {
   narration: Narration | null;
   /** Such as "en-GB"; a book without one is Swedish. */
   language?: string;
+  /** The plain cover chosen for a book without a genre; see shelfLook.ts. */
+  coverLook?: string;
 }
 
 // Characters Windows, macOS or a cloud service refuses in a folder name.
@@ -143,7 +145,8 @@ function templateParts(template: BookTemplate) {
 const bookFields = (details: ProjectDetails) => ({
   title: details.title.trim() || t("Namnlöst projekt"),
   type: details.type,
-  ...(details.genre ? { genre: details.genre } : {}),
+  // A book with a genre wears the genre's cover; one without wears the colour chosen for it.
+  ...(details.genre ? { genre: details.genre } : { coverLook: details.coverLook }),
   dailyGoal: details.dailyGoal,
   ...(details.deadline ? { deadline: details.deadline } : {}),
   ...(details.narration ? { narration: details.narration } : {}),
@@ -218,11 +221,10 @@ async function writeNewBook(
   const chosen = [details.structure, details.genre ?? "", ...details.pieces];
   const notes = await startingNotes(making, isPlanned ? null : template, chosen);
   const all = withSpecialFolders([...tree, ...joinSorts([...fromTemplate.sorts, ...notes.sorts])]);
-  const goal = details.totalGoal ? { totalGoal: details.totalGoal } : {};
   const fields = {
     ...bookFields(details),
     ...fromTemplate.fields,
-    ...goal,
+    ...(details.totalGoal ? { totalGoal: details.totalGoal } : {}),
     welcome: notes.welcome,
   };
   await writeProjectFile(fileSystem, dir, fields, notes.place(all));

@@ -40,8 +40,33 @@ function cacheShelf(libraryDir: string | null, books: ShelfBook[]) {
 
 const SETTLE_MS = 300;
 
-export function useShelf(libraryDir: string | null, knownProjects: string[]) {
+// A new book writes many files at once: the shelf is read once, when they have settled.
+function watchShelf(dirs: string[], reload: () => Promise<void>) {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const soon = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => void reload(), SETTLE_MS);
+  };
+  const stops = dirs.map((dir) => platform.watchFolder(dir, soon));
+  return () => {
+    clearTimeout(timer);
+    stops.forEach((stopWatching) => void stopWatching.then((stop) => stop()));
+  };
+}
+
+const withAdded = (books: ShelfBook[] | null, added: ShelfBook) =>
+  books?.some((book) => book.dir === added.dir) ? books : [...(books ?? []), added];
+
+/** `added`: a book just made, shown at once instead of when the folder watch reads it. */
+export function useShelf(
+  libraryDir: string | null,
+  knownProjects: string[],
+  added: ShelfBook | null = null,
+) {
   const [books, setBooks] = useState<ShelfBook[] | null>(() => cachedShelf(libraryDir));
+  useEffect(() => {
+    if (added) setBooks((now) => withAdded(now, added));
+  }, [added]);
   const known = knownProjects.join("\n");
   const reload = useCallback(async () => {
     const read = await readShelf(platform.fileSystem, libraryDir, known ? known.split("\n") : []);
@@ -50,19 +75,11 @@ export function useShelf(libraryDir: string | null, knownProjects: string[]) {
   }, [libraryDir, known]);
   useEffect(() => {
     void reload();
-    // A new book writes many files at once: the shelf is read once, when they have settled.
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    const soon = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => void reload(), SETTLE_MS);
-    };
     // A book opened from elsewhere, such as the example, is not in the library's folder.
-    const dirs = [...(libraryDir ? [libraryDir] : []), ...(known ? known.split("\n") : [])];
-    const stops = dirs.map((dir) => platform.watchFolder(dir, soon));
-    return () => {
-      clearTimeout(timer);
-      stops.forEach((stopWatching) => void stopWatching.then((stop) => stop()));
-    };
+    return watchShelf(
+      [...(libraryDir ? [libraryDir] : []), ...(known ? known.split("\n") : [])],
+      reload,
+    );
   }, [libraryDir, known, reload]);
   return books;
 }

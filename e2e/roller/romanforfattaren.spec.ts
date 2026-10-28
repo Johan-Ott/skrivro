@@ -18,6 +18,7 @@ test("a novelist starts a book on her phone and writes the first chapter", async
   for (let step = 0; step < 2; step++) await page.getByRole("button", { name: "Fortsätt" }).click();
   await page.getByPlaceholder("Arbetstitel duger").fill("Fyrvaktarens dotter");
   await page.getByRole("button", { name: "Skapa boken" }).click();
+  await page.getByRole("button", { name: "Börja skriva" }).click();
   await page
     .getByRole("button", { name: /Börja skriva|Fortsätt skriva/ })
     .first()

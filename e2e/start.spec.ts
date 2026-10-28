@@ -13,6 +13,7 @@ test("the first start goes to the shelf, where a new book opens a scene to write
   for (let step = 0; step < 2; step++) await page.getByRole("button", { name: "Fortsätt" }).click();
   await page.getByPlaceholder("Arbetstitel duger").fill("Isen");
   await page.getByRole("button", { name: "Skapa boken" }).click();
+  await page.getByRole("button", { name: "Börja skriva" }).click();
   await editor(page).click();
   await page.keyboard.type("Det var kallt.");
 
@@ -29,8 +30,7 @@ test("a new book's genre gives its structure, and what it gets shows before it i
   await page.getByRole("button", { name: "+ Ny bok" }).click();
   await page.getByRole("button", { name: "Fortsätt" }).click();
 
-  await page.getByRole("button", { name: "Genre" }).click();
-  await page.getByRole("menuitemradio", { name: "Deckare" }).click();
+  await page.getByRole("radio", { name: "Deckare" }).click();
   for (const piece of ["Skräck", "Romans"]) {
     await page.getByRole("button", { name: piece, exact: true }).click();
   }
@@ -43,7 +43,7 @@ test("a new book's genre gives its structure, and what it gets shows before it i
   await expect(gets.first()).toContainText("1 kapitel");
   await page.getByRole("button", { name: "Fortsätt" }).click();
   await expect(page.getByLabel("Bokens längd i ord")).toHaveValue(/85/);
-  await expect(page.getByText("Cirka 340 sidor")).toBeVisible();
+  await expect(page.getByText("Cirka 340 sidor", { exact: true })).toBeVisible();
 });
 
 test("an empty book opens on its welcome, which goes to the trash on request", async ({ page }) => {
@@ -56,6 +56,7 @@ test("an empty book opens on its welcome, which goes to the trash on request", a
   for (let step = 0; step < 2; step++) await page.getByRole("button", { name: "Fortsätt" }).click();
   await page.getByPlaceholder("Arbetstitel duger").fill("Tom");
   await page.getByRole("button", { name: "Skapa boken" }).click();
+  await page.getByRole("button", { name: "Börja skriva" }).click();
 
   await expect(editor(page)).toContainText("inte en del av boken");
   await expect(page.locator(".sidebar")).not.toContainText("Personer");

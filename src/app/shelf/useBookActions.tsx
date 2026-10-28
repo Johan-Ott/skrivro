@@ -24,7 +24,8 @@ function useOpening(app: App) {
   return { busy, opened };
 }
 
-/** Each way a book reaches the shelf, opened as soon as it is there. */
+/** Each way a book reaches the shelf, opened as soon as it is there; a new book waits on the
+ * shelf, where Ny bok shows it land. */
 export function useBookActions(app: App) {
   const { preferences } = app.startup;
   const { busy, opened } = useOpening(app);
@@ -34,11 +35,10 @@ export function useBookActions(app: App) {
     busy,
     open: (dir: string) => void opened(async () => dir, "Boken", t("Öppnar boken…")),
     create: (details: ProjectDetails) =>
-      opened(
-        () => library().then((dir) => newBook(dir, details)),
-        "Boken kunde inte skapas",
-        t("Skapar boken…"),
-      ),
+      library()
+        .then((dir) => newBook(dir, details))
+        .catch(recordFailure("Boken kunde inte skapas"))
+        .then((dir) => dir ?? null),
     import: () =>
       void opened(
         () => library().then((dir) => importedBook(dir, goal)),

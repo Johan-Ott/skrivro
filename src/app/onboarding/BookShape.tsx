@@ -1,38 +1,14 @@
-import {
-  composeTemplate,
-  GENRES,
-  structures,
-  templatePieces,
-  type BookTemplate,
-} from "../../project/templates.js";
+import { composeTemplate, structures, type BookTemplate } from "../../project/templates.js";
 import { ImportLink, PieceToggles, StructureList } from "../templates/TemplateChoices.js";
 import { packsFor, type Pack } from "../../project/packs.js";
-import { Dropdown } from "@llkit/controls.js";
 import { defaultLabels } from "../../project/labels.js";
-import { useOwnTemplates } from "../templates/templateFiles.js";
 import { withStructure, withSuggestion } from "./books.js";
+import { CoverChoices } from "./CoverSwatches.js";
 import type { FieldProps } from "./BookQuestions.js";
 import { t } from "../../i18n/i18n.js";
 
 // The book's shape in one step: the genre that gives it a structure, what is blended in, and
 // whether the writer plans first or writes their way forward. What the book gets shows below.
-
-const hasGenre = (type: string) => type === "roman" || type === "noveller";
-
-function GenreChoice({ details, onChange }: FieldProps) {
-  const genres = templatePieces().filter((piece) => GENRES.includes(piece.id));
-  const choose = (genre: string) =>
-    onChange(
-      withSuggestion({ ...details, genre, pieces: details.pieces.filter((id) => id !== genre) }),
-    );
-  const options: [string, string][] = [
-    ["", t("Ingen särskild")],
-    ...genres.map((genre): [string, string] => [genre.id, genre.name]),
-  ];
-  return (
-    <Dropdown label={t("Genre")} value={details.genre ?? ""} options={options} onSelect={choose} />
-  );
-}
 
 const WAYS: [boolean, string, string][] = [
   [true, t("Jag planerar först"), t("Ett kapitel för varje steg i strukturen.")],
@@ -41,24 +17,25 @@ const WAYS: [boolean, string, string][] = [
 
 function WritingWay({ details, onChange }: FieldProps) {
   return (
-    <div className="template-list" role="radiogroup" aria-label={t("Hur skriver du?")}>
+    <div className="nb-ways" role="radiogroup" aria-label={t("Hur skriver du?")}>
       {WAYS.map(([isPlanned, label, hint]) => (
         <button
           key={label}
+          type="button"
           role="radio"
-          className="template-choice"
+          className="nb-choice plain"
           aria-checked={(details.isPlanned !== false) === isPlanned}
           onClick={() => onChange({ ...details, isPlanned })}
         >
-          <span className="template-name">{label}</span>
-          <span className="choice-hint">{hint}</span>
+          <span className="name">{label}</span>
+          <span className="hint">{hint}</span>
         </button>
       ))}
     </div>
   );
 }
 
-const chapterCount = (book: BookTemplate) =>
+export const chapterCount = (book: BookTemplate) =>
   book.parts.reduce((count, part) => count + part.chapters.length, 0);
 
 const addedLabels = (book: BookTemplate) => {
@@ -106,11 +83,12 @@ function WhatItGets(props: {
   );
 }
 
-type ShapeProps = FieldProps & { libraryDir: string };
+/** The writer's own structures beside the built-in ones, read by the dialog. */
+export type OwnStructures = { own: BookTemplate[]; reload: () => Promise<void> };
 
-function StructureSwap(
-  props: ShapeProps & { own: BookTemplate[]; reload: () => Promise<void>; onDone: () => void },
-) {
+type ShapeProps = FieldProps & OwnStructures & { libraryDir: string };
+
+function StructureSwap(props: ShapeProps & { onDone: () => void }) {
   return (
     <>
       <StructureList
@@ -127,16 +105,21 @@ function Choices(props: FieldProps & { hasSteps: boolean }) {
   const { details, onChange } = props;
   return (
     <>
-      {hasGenre(details.type) && <span className="field-label">{t("Genre")}</span>}
-      {hasGenre(details.type) && <GenreChoice {...props} />}
-      <span className="field-label">{t("Blanda i")}</span>
-      <PieceToggles
-        chosen={details.pieces}
-        except={details.genre ?? ""}
-        onChange={(pieces) => onChange(withSuggestion({ ...details, pieces }))}
-      />
-      {props.hasSteps && <span className="field-label">{t("Hur skriver du?")}</span>}
-      {props.hasSteps && <WritingWay {...props} />}
+      <CoverChoices {...props} />
+      <div className="nb-field">
+        <span className="nb-label">{t("Blanda i")}</span>
+        <PieceToggles
+          chosen={details.pieces}
+          except={details.genre ?? ""}
+          onChange={(pieces) => onChange(withSuggestion({ ...details, pieces }))}
+        />
+      </div>
+      {props.hasSteps && (
+        <div className="nb-field">
+          <span className="nb-label">{t("Hur skriver du?")}</span>
+          <WritingWay {...props} />
+        </div>
+      )}
     </>
   );
 }
@@ -147,12 +130,10 @@ export function BookShape(
   props: ShapeProps & { isSwapping: boolean; setSwapping: (isSwapping: boolean) => void },
 ) {
   const { details, isSwapping, setSwapping } = props;
-  const { own, reload } = useOwnTemplates(props.libraryDir);
-  const all = [...structures(), ...own];
+  const all = [...structures(), ...props.own];
   const structure = all.find((each) => each.id === details.structure) ?? all[0];
   if (!structure) return null;
-  if (isSwapping)
-    return <StructureSwap {...props} own={own} reload={reload} onDone={() => setSwapping(false)} />;
+  if (isSwapping) return <StructureSwap {...props} onDone={() => setSwapping(false)} />;
   return (
     <>
       <Choices {...props} hasSteps={structure.parts.length > 0} />

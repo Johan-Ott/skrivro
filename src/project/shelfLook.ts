@@ -69,3 +69,7 @@ export function coverLookOf(
   if (isChoice(chosen)) return `cover-${chosen}`;
   return genre && GENRE_LOOKS.includes(genre) ? `cover-${genre}` : plainLook(dir);
 }
+
+/** How far a book's pages stand out beside its cover, in pixels: one for every 22 pages of 250 words. */
+export const pagesWidth = (words: number) =>
+  Math.round(Math.min(22, Math.max(3, words / 250 / 22)));
