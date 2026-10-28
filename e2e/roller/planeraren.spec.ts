@@ -40,7 +40,10 @@ test("a planner lays out a book, keeps her characters, and plans it in Innehåll
   const dialog = page.getByRole("dialog", { name: "Ny anteckning" });
   await dialog.getByRole("textbox", { name: "Namn" }).fill("Sigrid");
   await dialog.getByRole("button", { name: "Skapa" }).click();
-  // The new note opens, and the tree unfolds Personer to show it.
+  // The new note opens; the notes are unfolded to show it, and are only clicked open if they are not.
+  const notes = sidebar(page).getByRole("button", { name: "Anteckningar" });
+  if ((await notes.getAttribute("aria-expanded")) === "false") await notes.click();
+  await expect(notes).toHaveAttribute("aria-expanded", "true");
   await expect(sidebar(page)).toContainText("Sigrid");
 
   await sidebar(page).getByRole("treeitem").filter({ hasText: "Scen 1" }).first().click();
