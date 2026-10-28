@@ -61,8 +61,9 @@ function PanelsButton(props: Props & { open: string[] }) {
 function LayoutsButton({ app }: { app: AppState }) {
   const active = activeLayout.use();
   const menu = useMenuButton(t("Layouter"), layoutItems(app, layouts.use()));
-  const name = t("Layout {slot}", { slot: active ?? 0 });
-  const label = active ? t("Layouter · {name}", { name }) : t("Layouter");
+  const label = active
+    ? t("Layouter · {name}", { name: t("Layout {slot}", { slot: active }) })
+    : t("Layouter");
   return <DockMenuButton label={label} menu={menu} />;
 }
 
