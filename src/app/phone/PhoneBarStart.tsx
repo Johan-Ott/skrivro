@@ -19,7 +19,7 @@ export function PhoneBarStart({ app, project, onReview }: Props & { onReview?: (
   const bookProps = sidebarProps(app, project);
   const theme = useThemeDialog(bookProps);
   const templates = useTemplatesDialog(bookProps);
-  const menu = useMenuButton(t("Meny"), phoneMenu(app, dialogs, { theme, templates }, onReview));
+  const menu = useMenuButton(t("Meny"), phoneMenu(app, dialogs, { theme, templates, onReview }));
   return (
     <span className="phone-bar-start">
       <button className="topbar-button" aria-label={t("Meny")} onClick={menu.open}>

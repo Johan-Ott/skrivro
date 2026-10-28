@@ -96,8 +96,11 @@ function ContinueButton({ project, continueId, onContinue }: PhoneBookProps) {
 
 // Granska opens over the text, so from Boken it shows the chosen text and asks for Granska there.
 function PhoneBookHeader({ app, project, onContents, onOpenText }: HeaderProps) {
-  const sceneId = app.scene?.id;
-  const review = () => sceneId && (reviewAsk.ask(), onOpenText(sceneId));
+  const review = () => {
+    if (!app.scene) return;
+    reviewAsk.ask();
+    onOpenText(app.scene.id);
+  };
   return (
     <header className="phone-bar">
       <PhoneBarStart app={app} project={project} onReview={review} />

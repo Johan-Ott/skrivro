@@ -38,18 +38,19 @@ const reviewItem = (app: AppState, onReview?: () => void): MenuItem[] => {
   return [{ label, onSelect: onReview }];
 };
 
-type BookDialogs = Record<"theme" | "templates", { open: () => void }>;
+type BookDialogs = Record<"theme" | "templates", { open: () => void }> & {
+  onReview?: (() => void) | undefined;
+};
 
 export function phoneMenu(
   app: AppState,
   dialogs: ReturnType<typeof useMenuDialogs>,
   book: BookDialogs,
-  onReview?: () => void,
 ): MenuItem[] {
   const help = { label: t("Hjälp"), onSelect: () => app.writingMode.settingsDialog.open(HELP_TAB) };
   return [
     { label: t("Bokhylla"), onSelect: () => void app.showShelf() },
-    ...reviewItem(app, onReview),
+    ...reviewItem(app, book.onReview),
     ...group(
       t("Boken"),
       [
