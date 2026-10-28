@@ -47,7 +47,9 @@ test("a scene is made a note in Platser from its menu, and shows there", async (
 
   const notes = sidebar(page).getByRole("button", { name: "Anteckningar" });
   await expect(notes).toHaveAttribute("aria-expanded", "true");
-  const rows = await sidebar(page).getByRole("treeitem").allInnerTexts();
+  // The moved row is marked like the open one, so its word count shows after the name.
+  const texts = await sidebar(page).getByRole("treeitem").allInnerTexts();
+  const rows = texts.map((text) => text.split("\n")[0]);
   const isen = rows.indexOf("Isen");
   expect(isen).toBeGreaterThan(rows.indexOf("Platser"));
   expect(isen).toBeLessThan(rows.indexOf("Saker"));

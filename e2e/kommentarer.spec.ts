@@ -81,7 +81,8 @@ test("on a phone Granska opens with nothing to look at too", async ({ page }) =>
   await page.keyboard.press("ControlOrMeta+a");
   await page.keyboard.type("Det snöade.");
 
-  await page.getByRole("button", { name: "Granska", exact: true }).click();
+  await page.getByRole("button", { name: "Meny", exact: true }).click();
+  await page.getByRole("menuitem", { name: /^Granska/ }).click();
 
   await expect(page.getByRole("complementary", { name: "Granskning" })).toBeVisible();
 });
