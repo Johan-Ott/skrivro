@@ -1,5 +1,5 @@
 ---
-sort: Vardagen
+sort: Everyday life
 ---
 
 # The subplot at home (template)

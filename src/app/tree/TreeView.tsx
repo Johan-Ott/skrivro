@@ -1,5 +1,6 @@
 import { BackButton } from "@llkit/controls.js";
-import type { DragEvent, ReactNode } from "react";
+import { SectionHeading } from "./SectionHeading.js";
+import type { ReactNode } from "react";
 import { swipesOf, TrashUndo } from "./useSwipes.js";
 import {
   withoutEmptyFixedSorts,
@@ -21,7 +22,7 @@ import { nodeLabel } from "../../project/treeLabels.js";
 import { LabelsLayer } from "../labels/LabelsInTree.js";
 import { TreeTools } from "./TreeTools.js";
 import { menuActions } from "./treeMenuActions.js";
-import { t, formatNumber } from "../../i18n/i18n.js";
+import { t } from "../../i18n/i18n.js";
 
 export type { TreeViewProps } from "./useTreeView.js";
 
@@ -35,13 +36,14 @@ function menuOf(row: Row, tree: Tree, menuFor: ReturnType<typeof menuActions>) {
 
 function Rows({ rows, props, tree }: { rows: Row[]; props: TreeViewProps; tree: Tree }) {
   const { view, actions, drag, openMenu } = tree;
-  const menuFor = menuActions(actions, props, view);
+  const menuFor = menuActions(tree, props);
   return [
     ...rows.map((row) => (
       <TreeRow
         key={row.node.id}
         {...rowView(row, props, view.collapsed)}
         isRenaming={view.renamingId === row.node.id}
+        isMoved={view.movedId === row.node.id}
         dropHint={drag.dropHintFor(row.node.id)}
         dragProps={drag.rowDragProps(row, actions.canEdit(row.node) && !tree.isFiltered)}
         {...rowHandlers(row, actions, view)}
@@ -53,38 +55,20 @@ function Rows({ rows, props, tree }: { rows: Row[]; props: TreeViewProps; tree: 
   ];
 }
 
-function SectionHeading(props: {
-  label: string;
-  onDrop?: () => void;
-  words?: number;
-  filter?: ReactNode;
-}) {
-  return (
-    <div
-      role="none"
-      className="sidebar-heading"
-      onDragOver={(event: DragEvent) => props.onDrop && event.preventDefault()}
-      onDrop={(event: DragEvent) => (event.preventDefault(), props.onDrop?.())}
-    >
-      {props.label}
-      {props.filter}
-      {props.words !== undefined && (
-        <span className="sidebar-heading-words" aria-label={t("Ord i boken")}>
-          {formatNumber(props.words)}
-        </span>
-      )}
-    </div>
-  );
-}
-
 // Skrivro's own sorts show once they hold a note; + Ny anteckning offers them all.
 function BookNotes({ props, tree }: { props: TreeViewProps & BookExtras; tree: Tree }) {
   if (!props.seriesNotes) {
     const notes = withoutEmptyFixedSorts(tree.sections.notes);
     return (
       <>
-        {notes.length > 0 && <SectionHeading label={t("Anteckningar")} />}
-        <Rows rows={notes} props={props} tree={tree} />
+        {notes.length > 0 && (
+          <SectionHeading
+            label={t("Anteckningar")}
+            isFolded={tree.folded.notes}
+            onToggle={() => tree.folded.toggle("notes")}
+          />
+        )}
+        <Rows rows={tree.folded.notes ? [] : notes} props={props} tree={tree} />
       </>
     );
   }
@@ -119,7 +103,7 @@ function NotesAndTrash({ props, tree }: { props: TreeViewProps & BookExtras; tre
 }
 
 function AddButton({ props, tree }: { props: TreeViewProps; tree: Tree }) {
-  const menuFor = menuActions(tree.actions, props, tree.view);
+  const menuFor = menuActions(tree, props);
   const newLapp = props.onNewLapp ? [{ label: t("Ny lapp"), onSelect: props.onNewLapp }] : [];
   return (
     <button
@@ -146,11 +130,14 @@ function BookHeading({ props, tree }: { props: TreeViewProps; tree: Tree }) {
   );
 }
 
+// The manuscript folded leaves its rows out; chapter focus always shows the chapter's scenes.
+const bookRows = (tree: Tree) => (tree.folded.book && !tree.focused ? [] : tree.sections.book);
+
 /** One tree, so the arrow keys walk through all of it. */
 export function TreeView(props: TreeViewProps & BookExtras) {
   const tree = useTreeView(props);
-  const { sections, view } = tree;
-  const menuFor = menuActions(tree.actions, props, tree.view);
+  const { view } = tree;
+  const menuFor = menuActions(tree, props);
   return (
     <div
       role="tree"
@@ -160,13 +147,20 @@ export function TreeView(props: TreeViewProps & BookExtras) {
     >
       <BookHeading props={props} tree={tree} />
       <div className="tree-scroll">
-        <Rows rows={sections.book} props={props} tree={tree} />
+        <Rows rows={bookRows(tree)} props={props} tree={tree} />
         {props.hasAddButton && <AddButton props={props} tree={tree} />}
         <NotesAndTrash props={props} tree={tree} />
       </div>
       {view.menu && <Menu {...view.menu} label={t("Boken")} onClose={() => view.setMenu(null)} />}
       <LabelsLayer props={props} view={view} />
       <TrashUndo props={props} tree={tree} />
+      {tree.drag.isRefused && (
+        <div className="toast inverted tree-undo" role="status">
+          {t(
+            "Det som står i manuset blir inte en anteckning när det dras. Välj Gör till anteckning i scenens meny.",
+          )}
+        </div>
+      )}
     </div>
   );
 }

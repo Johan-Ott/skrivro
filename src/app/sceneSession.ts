@@ -1,6 +1,5 @@
 import type { Node } from "prosemirror-model";
 import { flushAllSaves } from "./saveGuard.js";
-import { takeSnapshot } from "../project/snapshots.js";
 import { parseMarkdown } from "../manuscript/parseMarkdown.js";
 import {
   joinSceneFile,
@@ -36,7 +35,8 @@ export interface DiskConflict {
 export type ConflictChoice = "mine" | "theirs" | "both";
 
 export interface SceneSessionHooks {
-  editor: { load(doc: Node): void; currentDoc(): Node | null };
+  /** `key` names the text, so the editor puts the caret back where it was left in it. */
+  editor: { load(doc: Node, key?: string): void; currentDoc(): Node | null };
   onScene(scene: OpenScene | null): void;
   onConflict(conflict: DiskConflict | null): void;
   onSaveStatus(status: SaveStatus): void;
@@ -101,7 +101,8 @@ export function showScene(session: SceneSession, dir: string, id: string, text: 
   session.scene = { dir, id, frontMatter, title: sceneTitle(frontMatter) ?? t("Namnlös scen") };
   session.hooks.onScene(session.scene);
   session.autosave.loaded(text);
-  session.hooks.editor.load(parseMarkdown(body, { isNote: session.isNote(dir, id) }));
+  const doc = parseMarkdown(body, { isNote: session.isNote(dir, id) });
+  session.hooks.editor.load(doc, scenePath(dir, id));
 }
 
 // Leaving a scene whose text is not on disk would lose it, so the switch waits for the save,
@@ -167,25 +168,6 @@ export async function createScene(fileSystem: FileSystem, dir: string, title: st
   await fileSystem.makeDir(joinPath(dir, "scenes"));
   await writeAtomic(fileSystem, scenePath(dir, id), newSceneText(id, title) + body);
   return id;
-}
-
-// The text last kept as a version, so hiding, pagehide and onPause in a row make one.
-const keptText = new WeakMap<SceneSession, string>();
-
-/** Saves what waits. A conflict or a sync can hold the save, and then the text is kept as a version
- * instead, so leaving the app never loses it. */
-export async function flushOrKeep(session: SceneSession) {
-  if (await session.autosave.flush()) return true;
-  const { scene } = session;
-  const doc = session.hooks.editor.currentDoc();
-  if (!scene || !doc) return false;
-  const text = textOf(session, doc);
-  if (text === session.autosave.lastSavedText() || text === keptText.get(session)) return true;
-  const when = { time: Date.now(), label: t("Text som inte hann sparas") };
-  return takeSnapshot(session.fileSystem, scene, text, when).then(
-    () => (keptText.set(session, text), true),
-    () => false,
-  );
 }
 
 // The open scene's front matter changes through its autosave, so unsaved text is saved with it.

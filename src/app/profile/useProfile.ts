@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { writeAtomic } from "@llkit/storage/atomicWrite.js";
 import { joinPath } from "@llkit/storage/fileSystem.js";
 import { recordFailure } from "@llkit/errorLog.js";
-import { libraryOf } from "../journey/journeyFile.js";
+import { libraryOf } from "../libraryFolder.js";
 import { platform } from "../platform.js";
 
 /** What the writer says about themselves; the name itself lives in the settings, as before. */

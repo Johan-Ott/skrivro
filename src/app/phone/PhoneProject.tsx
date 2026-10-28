@@ -1,5 +1,5 @@
 import { WindowBar } from "@llkit/shell/WindowControls.js";
-import { takeAskForReview } from "../review/reviewWanted.js";
+import { reviewAsk } from "../../askOnce.js";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { manuscriptSceneIds } from "../../project/tree.js";
 import type { AppState } from "../App.js";
@@ -113,7 +113,7 @@ function usePhoneScreens({ app, project }: Props) {
   useSavedWhenScreenChanges(app, screen);
   // Granska covers the whole screen, so it closes when another text or screen shows.
   const { setReviewOpen } = app.writingMode;
-  useEffect(() => setReviewOpen(takeAskForReview()), [screen, app.scene?.id, setReviewOpen]);
+  useEffect(() => setReviewOpen(reviewAsk.take()), [screen, app.scene?.id, setReviewOpen]);
   const openText = (id: string) =>
     id === app.scene?.id ? showText(id) : openInHome(app.session, app.homes, id);
   const continueId = useLastManuscriptScene(app, project);

@@ -1,5 +1,12 @@
 import type { SearchQuery } from "prosemirror-search";
-import { replaceAll, replaceNext, search, setSearchState } from "prosemirror-search";
+import {
+  findNextNoWrap,
+  replaceAll,
+  replaceCurrent,
+  replaceNext,
+  search,
+  setSearchState,
+} from "prosemirror-search";
 import { EditorState, type Command } from "prosemirror-state";
 import { parseMarkdown } from "../manuscript/parseMarkdown.js";
 import { joinSceneFile, splitSceneFile } from "../manuscript/sceneFile.js";
@@ -44,18 +51,6 @@ export function countMatches(state: EditorState, query: SearchQuery): number {
   return count;
 }
 
-/** The matches in these scenes together; a scene without text here counts as none. */
-export function countMatchesIn(
-  ids: string[],
-  stateOf: (id: string) => EditorState | null,
-  query: SearchQuery,
-) {
-  return ids.reduce((sum, id) => {
-    const state = stateOf(id);
-    return sum + (state ? countMatches(state, query) : 0);
-  }, 0);
-}
-
 /** Blocks without a match are written back unchanged. */
 export function replaceAllInText(sceneText: string, query: SearchQuery) {
   let state = searchableScene(sceneText, query);
@@ -76,10 +71,6 @@ export interface ManuscriptScope {
   replacedInScene: (count: number, search: string) => void;
   /** Every scene with a match, for the list under the search. */
   hits: (query: SearchQuery, open: EditorState | null) => SceneHit[];
-  /** Matches in the notes while the notes are left out of the search; 0 when they are in. */
-  inNotes: (query: SearchQuery, open: EditorState | null) => number;
-  /** Takes the notes into the search. */
-  showNotes: () => void;
   /** Opens the scene at its first match. */
   openHit: (id: string, query: SearchQuery) => void;
   /** Status steps and labels that narrow the search to some scenes. */
@@ -89,7 +80,7 @@ export interface ManuscriptScope {
 
 export interface SceneHit {
   id: string;
-  /** The chapter and the scene. */
+  /** The chapter and the scene, or the note's sort and the note. */
   place: string;
   count: number;
   snippet: string;
@@ -117,4 +108,12 @@ export const replaceOneAndMove: Command = (state, dispatch, view) => {
   const before = view.state.doc;
   replaceNext(view.state, view.dispatch);
   return view.state.doc !== before || replaceNext(view.state, view.dispatch);
+};
+
+// Across the book Ersätt also replaces at the first click: the match chosen, or else the next one
+// in the scene; stepping on to the next scene is left to the search.
+export const replaceChosenOrNext: Command = (state, dispatch, view) => {
+  if (!view) return replaceCurrent(state, dispatch);
+  if (replaceCurrent(view.state, view.dispatch)) return true;
+  return findNextNoWrap(view.state, view.dispatch) && replaceCurrent(view.state, view.dispatch);
 };

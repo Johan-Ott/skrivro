@@ -3,6 +3,7 @@ import { manuscriptWords } from "../../project/treeLabels.js";
 import { FilterButton } from "../labels/LabelsInTree.js";
 import { FoldIcon, UnfoldIcon } from "../shell/icons.js";
 import type { Tree, TreeViewProps } from "./useTreeView.js";
+import { Chevron } from "./Chevron.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
 
 function Tool(props: { label: string; onClick: () => void; children: ReactNode }) {
@@ -35,7 +36,19 @@ const BookWords = ({ project }: Pick<TreeViewProps, "project">) => (
   </span>
 );
 
-/** Above the book: filter, unfold all, fold all, and the book's words. */
+// The manuscript folds as one, apart from the notes; how it was left is kept.
+const BookToggle = ({ tree }: { tree: Tree }) => (
+  <button
+    className="sidebar-heading-toggle tree-book-toggle"
+    aria-expanded={!tree.folded.book}
+    onClick={() => tree.folded.toggle("book")}
+  >
+    <Chevron isOpen={!tree.folded.book} />
+    {t("Manus")}
+  </button>
+);
+
+/** Above the book: the manuscript's fold, filter, unfold all, fold all, and the book's words. */
 export function TreeTools({ props, tree }: { props: TreeViewProps; tree: Tree }) {
   const { view } = tree;
   const { project } = props;
@@ -45,6 +58,7 @@ export function TreeTools({ props, tree }: { props: TreeViewProps; tree: Tree })
       onDragOver={(event: DragEvent) => event.preventDefault()}
       onDrop={(event: DragEvent) => (event.preventDefault(), tree.dropAtBookEnd())}
     >
+      <BookToggle tree={tree} />
       <FilterButton props={props} view={view} />
       <FoldTools view={view} />
       <BookWords project={project} />

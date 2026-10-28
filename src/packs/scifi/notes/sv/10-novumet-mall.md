@@ -1,5 +1,6 @@
 ---
 sort: Världen
+standard: true
 ---
 
 # Novumet (mall)
@@ -29,11 +30,3 @@ Byt namn på anteckningen till det människorna i världen kallar det nya.
 **Följderna:**
 
 <!-- Vilken följd för samhället planerade ingen för? -->
-
-**I vardagen:**
-
-<!-- Vilket ord eller vilken vana finns tack vare det nya? -->
-
-**När det går fel:**
-
-<!-- Hur ser en olycka ut, och vem drabbas? -->

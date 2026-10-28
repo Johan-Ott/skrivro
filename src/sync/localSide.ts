@@ -1,4 +1,5 @@
 import { takeSnapshot } from "../project/snapshots.js";
+import { setAside } from "../storage/setAside.js";
 import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { t } from "../i18n/i18n.js";
 
@@ -60,18 +61,10 @@ export async function replaceLocal(
   return isWritten;
 }
 
-/** Under a free name, so an older file in trash/ is never replaced. */
+/** Under a free name, as everything set aside in trash/, so an older file there is never replaced. */
 export async function moveToTrash(book: LocalBook, path: string) {
-  const { fileSystem, dir } = book;
-  await fileSystem.makeDir(joinPath(dir, "trash"));
-  const taken = await fileSystem.list(joinPath(dir, "trash"));
   const name = path.slice(path.lastIndexOf("/") + 1);
-  const dot = name.lastIndexOf(".");
-  const [stem, extension] = dot > 0 ? [name.slice(0, dot), name.slice(dot)] : [name, ""];
-  let free = name;
-  for (let number = 2; taken.includes(free); number++) free = `${stem} ${number}${extension}`;
-  await fileSystem.rename(joinPath(dir, path), joinPath(dir, `trash/${free}`));
-  return `trash/${free}`;
+  return `trash/${await setAside(book.fileSystem, book.dir, joinPath(book.dir, path), name)}`;
 }
 
 const SCENE_PATH = /^scenes\/([^/]+)\.md$/;

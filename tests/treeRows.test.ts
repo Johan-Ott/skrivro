@@ -16,7 +16,13 @@ import {
   TRASH_ID,
   type TreeNode,
 } from "../src/project/tree";
-import { dropMove, sidebarSections, visibleRows, withoutEmptySorts } from "../src/project/treeRows";
+import {
+  dropMove,
+  isRefusedDrop,
+  sidebarSections,
+  visibleRows,
+  withoutEmptySorts,
+} from "../src/project/treeRows";
 
 const scene = (id: string): TreeNode => ({ id, kind: "scene" });
 
@@ -171,5 +177,27 @@ describe("withoutEmptySorts", () => {
     const kept = withoutEmptySorts(notes);
 
     expect(kept.map((row) => row.node.id)).toEqual([CHARACTERS_ID, "arvid"]);
+  });
+});
+
+describe("isRefusedDrop", () => {
+  const rowOf = (tree: TreeNode[], id: string) => {
+    const row = visibleRows(tree, new Set()).find((candidate) => candidate.node.id === id);
+    if (!row) throw new Error(`no row ${id}`);
+    return row;
+  };
+
+  it("is a scene of the book dropped on a sort, which the tree leaves where it was", () => {
+    const tree = sampleTree();
+
+    expect(isRefusedDrop(tree, "s1", rowOf(tree, PLACES_ID), "inside")).toBe(true);
+    expect(dropMove(tree, "s1", rowOf(tree, PLACES_ID), "inside")).toBe(tree);
+  });
+
+  it("is not a scene moved to another chapter, or thrown in Papperskorg", () => {
+    const tree = sampleTree();
+
+    expect(isRefusedDrop(tree, "s1", rowOf(tree, "kap2"), "inside")).toBe(false);
+    expect(isRefusedDrop(tree, "s1", rowOf(tree, TRASH_ID), "inside")).toBe(false);
   });
 });

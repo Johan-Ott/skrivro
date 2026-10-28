@@ -29,11 +29,3 @@ Byt namn på anteckningen till varelsens namn.
 **Vad det kostar:**
 
 <!-- Vad kostar ett möte med den? -->
-
-**Sägnerna:**
-
-<!-- Vad berättar man om den, och vad stämmer? -->
-
-**Rollen:**
-
-<!-- Är den hot, hjälp, symbol eller en spegel? -->

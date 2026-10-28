@@ -18,8 +18,10 @@ const FIELDS: [GoalKey, string, string][] = [
   ["deadline", t("Deadline"), t("Lämna tom om det inte finns någon.")],
 ];
 
-const wholeNumber = (text: string) => {
-  const value = Math.round(Number(text.replace(/\s/g, "")));
+// Only digits, so 2,5 and 2.5 are slips and not rounded; "80 000" is a number.
+export const wholeNumber = (text: string) => {
+  const digits = text.replace(/\s/g, "");
+  const value = /^\d+$/.test(digits) ? Number(digits) : 0;
   return value > 0 ? value : undefined;
 };
 
@@ -48,8 +50,9 @@ function GoalFields({ form, onChange }: { form: GoalForm; onChange: (form: GoalF
     <label key={key} className="onboarding-field">
       <span className="field-label">{label}</span>
       <input
-        type={key === "deadline" ? "date" : "number"}
-        min={key === "deadline" ? undefined : 1}
+        // Text, so what shows is what is read, whatever the browser's language.
+        type={key === "deadline" ? "date" : "text"}
+        inputMode={key === "deadline" ? undefined : "numeric"}
         aria-invalid={isWrong(key, form[key])}
         value={form[key]}
         onChange={(event) => onChange({ ...form, [key]: event.target.value })}

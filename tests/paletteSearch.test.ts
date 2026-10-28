@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { inGroups, searchPalette, type PaletteEntry } from "../src/app/palette/paletteSearch";
+import {
+  inGroups,
+  inResultGroups,
+  searchPalette,
+  type PaletteEntry,
+} from "../src/app/palette/paletteSearch";
 
 const entry = (label: string, group: PaletteEntry["group"] = "Kommandon"): PaletteEntry => ({
   id: label,
@@ -88,5 +93,32 @@ describe("a name met in the book", () => {
     const found = searchPalette(entries, "Kikaren").map((each) => each.label);
 
     expect(found).toEqual(["Kikaren"]);
+  });
+});
+
+describe("the results' groups", () => {
+  it("come where their best match is, so a scene named Isen beats a lapp that holds the word", () => {
+    const entries = [entry("Vem tände ljusen på isen?", "Lappar"), entry("Isen", "Scener")];
+
+    const found = inResultGroups(searchPalette(entries, "Isen")).map((each) => each.label);
+
+    expect(found).toEqual(["Isen", "Vem tände ljusen på isen?"]);
+  });
+
+  it("keep notes before scenes when they match as well", () => {
+    const entries = [entry("Elins dröm", "Scener"), entry("Elin", "Personer")];
+
+    const found = inResultGroups(searchPalette(entries, "Elin")).map((each) => each.label);
+
+    expect(found).toEqual(["Elin", "Elins dröm"]);
+  });
+
+  it("put a scene before a lapp with the same name", () => {
+    const lapp = { ...entry("Isen", "Lappar"), id: "lapp", kind: "lapp" as const };
+    const entries = [lapp, entry("Isen", "Scener")];
+
+    const found = inResultGroups(searchPalette(entries, "Isen")).map((each) => each.group);
+
+    expect(found).toEqual(["Scener", "Lappar"]);
   });
 });

@@ -1,6 +1,7 @@
 import { SCENE_STATUSES, type SceneStatus } from "../manuscript/sceneFile.js";
 import type { SceneSummary } from "./sceneSummaries.js";
 import { findNode, moveNode, numberNodes, TRASH_ID, type TreeNode } from "./tree.js";
+import { withNodeFields } from "./nodeFields.js";
 
 type Summaries = Record<string, SceneSummary>;
 
@@ -122,23 +123,6 @@ export function inTimeOrder(rows: ContentsRow[], order: string[]): ContentsRow[]
 export function movedInTime(shown: ContentsRow[], id: string, index: number): string[] {
   const ids = shown.map((row) => row.id).filter((rowId) => rowId !== id);
   return [...ids.slice(0, index), id, ...ids.slice(index)];
-}
-
-type NodeFields = {
-  [Key in Exclude<keyof TreeNode, "id" | "kind" | "children">]?: TreeNode[Key] | undefined;
-};
-
-const withFields = (node: TreeNode, fields: NodeFields) =>
-  Object.fromEntries(
-    Object.entries({ ...node, ...fields }).filter(([, value]) => value !== undefined),
-  ) as unknown as TreeNode;
-
-/** An undefined field is removed from the node. */
-export function withNodeFields(tree: TreeNode[], id: string, fields: NodeFields): TreeNode[] {
-  return tree.map((node) => {
-    if (node.id === id) return withFields(node, fields);
-    return node.children ? { ...node, children: withNodeFields(node.children, id, fields) } : node;
-  });
 }
 
 export const withNodeText = (

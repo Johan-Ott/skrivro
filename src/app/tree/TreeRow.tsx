@@ -4,6 +4,8 @@ import type { DropPosition, TreeRow as Row } from "../../project/treeRows.js";
 import type { Label } from "../../project/labels.js";
 import type { SceneStatus } from "../../manuscript/sceneFile.js";
 import { Chevron } from "./Chevron.js";
+import { NoteKindIcon } from "../notes/NoteKindIcon.js";
+import type { NoteKind } from "../../project/noteKinds.js";
 import type { StatusStep } from "../../project/statusSteps.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -13,11 +15,15 @@ export interface TreeRowProps {
   /** Without numbering. */
   title: string;
   meta: string;
+  /** A sign for a file, a lapp or a guide; null for a plain note or scene. */
+  kind: NoteKind | null;
   /** The row's labels, shown as dots in their colours. */
   dots: Label[];
   /** A scene's step, as a dot before its labels; null for anything else. */
   status: (StatusStep & { id: SceneStatus }) | null;
   isActive: boolean;
+  /** Just moved here from the manuscript, marked like the open row though it is not open. */
+  isMoved: boolean;
   /** In a table of contents, the printed page it starts on; undefined when the sidebar is not one. */
   page?: number | null | undefined;
   isExpanded: boolean | null;
@@ -70,11 +76,13 @@ function RenameInput({
   );
 }
 
+const isMarked = (props: TreeRowProps) => props.isActive || props.isMoved;
+
 const rowClass = (props: TreeRowProps) =>
   [
     "tree-row",
     props.row.depth === 0 ? "top-level" : "",
-    props.isActive ? "active" : "",
+    isMarked(props) ? "active" : "",
     props.status?.id === "idé" ? "planned" : "",
     props.isMissing ? "missing" : "",
     props.page !== undefined ? "toc" : "",
@@ -85,6 +93,7 @@ const rowClass = (props: TreeRowProps) =>
 
 const treeItemAttributes = (props: TreeRowProps) => ({
   role: "treeitem",
+  "data-node-id": props.row.node.id,
   tabIndex: 0,
   "aria-level": props.row.depth + 1,
   "aria-expanded": props.isExpanded ?? undefined,
@@ -182,6 +191,18 @@ const rowStyle = (props: TreeRowProps & { offset?: number }) => ({
   ...(props.offset ? { transform: `translateX(${props.offset}px)` } : {}),
 });
 
+// The name, after the sign of a file, a lapp or a guide; a field while it is renamed.
+const RowName = (props: TreeRowProps) => (
+  <>
+    <NoteKindIcon kind={props.kind} />
+    {props.isRenaming ? (
+      <RenameInput initial={props.title} onRename={props.onRename} />
+    ) : (
+      <span className="tree-label">{props.label}</span>
+    )}
+  </>
+);
+
 function RowItself(props: TreeRowProps & { offset?: number }) {
   return (
     <div
@@ -201,11 +222,7 @@ function RowItself(props: TreeRowProps & { offset?: number }) {
         {props.isExpanded !== null && <Chevron isOpen={props.isExpanded} />}
       </span>
       <StatusDot status={props.status} />
-      {props.isRenaming ? (
-        <RenameInput initial={props.title} onRename={props.onRename} />
-      ) : (
-        <span className="tree-label">{props.label}</span>
-      )}
+      <RowName {...props} />
       {props.row.node.pov && <PovTag pov={props.row.node.pov} />}
       <LabelDots dots={props.dots} />
       <RowEnd {...props} />

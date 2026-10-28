@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { withNodeFields } from "../../project/contents.js";
+import { withNodeFields } from "../../project/nodeFields.js";
 import {
   findNode,
   HEADING_FIELDS,

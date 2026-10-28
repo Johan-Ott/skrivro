@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { isPictureFile } from "../../project/researchFiles.js";
 import { browserStorage } from "@llkit/storage/browserStorage.js";
-import { usePictureUrl } from "../notes/ResearchFile.js";
+import { useResearchPicture } from "../notes/ResearchFile.js";
 import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -19,7 +19,7 @@ function readChoice(dir: string) {
 }
 
 function Picture({ dir, name }: { dir: string; name: string }) {
-  const url = usePictureUrl(dir, name);
+  const url = useResearchPicture(dir, name);
   return url ? <img className="reference-picture" src={url} alt={name} /> : null;
 }
 

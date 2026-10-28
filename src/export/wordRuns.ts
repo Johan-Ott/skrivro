@@ -1,6 +1,7 @@
 import { FootnoteReferenceRun, Paragraph, TextRun, type ParagraphChild } from "docx";
 import type { Node } from "prosemirror-model";
 import { quoteConverter, type Typography } from "./book.js";
+import { footnoteParagraph } from "./footnoteText.js";
 
 // The standard manuscript's text, run by run: its marks as Word has them, and its footnotes.
 
@@ -10,9 +11,12 @@ export interface WordNotes {
   count: number;
 }
 
-function noteReference(notes: WordNotes, text: string) {
+// The note's text keeps its italics and bold, as the text around it does.
+function noteReference(settings: TextSettings, text: string) {
+  const { notes } = settings;
   notes.count += 1;
-  notes.entries[notes.count] = { children: [new Paragraph({ children: [new TextRun(text)] })] };
+  const children = runs(footnoteParagraph(text), settings);
+  notes.entries[notes.count] = { children: [new Paragraph({ children, style: "FootnoteText" })] };
   return new FootnoteReferenceRun(notes.count);
 }
 
@@ -27,9 +31,7 @@ export function runs(paragraph: Node, settings: TextSettings): ParagraphChild[] 
   paragraph.forEach((child) => {
     if (child.type.name === "lineBreak") return void children.push(new TextRun({ break: 1 }));
     if (child.type.name === "footnote") {
-      return void children.push(
-        noteReference(settings.notes, convert(String(child.attrs["text"]))),
-      );
+      return void children.push(noteReference(settings, String(child.attrs["text"])));
     }
     const marks = new Set(child.marks.map((mark) => mark.type.name));
     children.push(

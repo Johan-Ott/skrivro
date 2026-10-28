@@ -26,14 +26,6 @@ Byt namn på anteckningen till religionens, kultens eller mytens namn. Tron är 
 
 <!-- Kättare, rebeller, de som sviker i smyg. Vad händer dem? -->
 
-**Myten om hur det började:**
-
-<!-- Berätta den som ett folk skulle berätta den, med fel och förskönat. -->
-
-**Hur den möter magin:**
-
-<!-- Är magin helig, förbjuden eller en fråga om pris? -->
-
 **Hur den möter huvudpersonen:**
 
 <!-- Vad tror hen, och håller det boken ut? -->

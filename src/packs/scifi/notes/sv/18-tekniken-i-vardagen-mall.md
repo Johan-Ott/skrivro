@@ -29,7 +29,3 @@ Byt namn på anteckningen till prylens eller systemets namn. Fyll i den för det
 **Hur den låter, luktar och känns:**
 
 <!-- En sinnesdetalj som en vardaglig användare inte lägger märke till längre. -->
-
-**Hur den syns i en scen:**
-
-<!-- Vilken scen visar den utan att förklara? -->

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { findCover, saveCover, type CoverPicture } from "../../project/cover.js";
 import { platform } from "../platform.js";
+import { usePictureUrl } from "../usePictureUrl.js";
 import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -15,7 +16,7 @@ export function useCover(project: Project) {
     [dir],
   );
   useEffect(() => void reload(), [reload]);
-  const url = usePictureUrl(picture);
+  const url = useCoverUrl(picture);
   const choose = async () => {
     const picked = await platform.pickFile(PICTURE);
     if (!picked) return;
@@ -30,15 +31,6 @@ export function useCover(project: Project) {
   return { picture, url, problem, choose: () => void choose() };
 }
 
-// An object URL lives until it is revoked.
-export function usePictureUrl(picture: CoverPicture | null) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    if (!picture) return setUrl(null);
-    const blob = new Blob([picture.bytes.slice()], { type: `image/${picture.size.type}` });
-    const objectUrl = URL.createObjectURL(blob);
-    setUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [picture]);
-  return url;
-}
+/** The cover as an address for an <img>; a new cover read is a new picture. */
+export const useCoverUrl = (picture: CoverPicture | null) =>
+  usePictureUrl(picture, async () => picture?.bytes ?? null);

@@ -1,17 +1,15 @@
 import { BackButton } from "@llkit/controls.js";
 import type { Node } from "prosemirror-model";
-import { useEffect, useRef, type ReactNode, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { readingScenes, type ReadingScene } from "../../project/reading.js";
 import { usePhone } from "../phone/usePhone.js";
 import type { Project } from "../useProject.js";
 import { useEscape } from "@llkit/keys.js";
 import { useBookPages, type PageLayout } from "./bookPages.js";
 import { ReadSelection, type ReadSaving } from "./ReadSelection.js";
-import { ShareSpreadButton } from "./ShareSpreadButton.js";
 import { SceneText, useSceneDocs, type Docs } from "./sceneDocs.js";
 import { chapterLabel } from "../bookLook.js";
 import { FRONT_PAGES, ReadFront } from "./ReadFront.js";
-import { earnBadge } from "../journey/journeyEvents.js";
 import { t } from "../../i18n/i18n.js";
 
 interface ReadViewProps {
@@ -141,7 +139,7 @@ function ReadFoot(props: {
   );
 }
 
-function ReadHead(props: ReadViewProps & { place: string; share: ReactNode }) {
+function ReadHead(props: ReadViewProps & { place: string }) {
   return (
     <header className="read-head">
       <BackButton label={t("Tillbaka till texten")} hint="Esc" onBack={props.onBack} />
@@ -150,7 +148,6 @@ function ReadHead(props: ReadViewProps & { place: string; share: ReactNode }) {
         <button className="link-button quiet" onClick={props.onDesign}>
           {t("Ändra utseende")}
         </button>
-        {props.share}
       </span>
     </header>
   );
@@ -194,13 +191,11 @@ export function ReadView(props: ReadViewProps) {
   const perSpread = usePhone() ? 1 : 2;
   const { layout, first, goTo, turn } = useBookPages(flow, perSpread, docs, props.startScene);
   const pages = Array.from({ length: perSpread }, (_unused, index) => first + index);
-  const share = <ShareSpreadButton {...{ flow, project, first, perSpread, count: layout.count }} />;
   useEscape(props.onBack);
   useTurnKeys(turn);
-  useEffect(() => earnBadge("som-en-bok"), []);
   return (
     <main className="read-view">
-      <ReadHead {...props} place={placeText(scenes, layout, pages)} share={share} />
+      <ReadHead {...props} place={placeText(scenes, layout, pages)} />
       <div className="read-stage">
         <TurnButton step={-1} onTurn={turn} />
         <div className={perSpread === 1 ? "read-spread single" : "read-spread"}>

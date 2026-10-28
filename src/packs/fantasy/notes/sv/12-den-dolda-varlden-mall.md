@@ -33,7 +33,3 @@ Byt namn på anteckningen till det de invigda kallar den dolda världen.
 **Det andra livet:**
 
 <!-- Jobbet, familjen eller hyran som det dolda hotar. Vem ljuger hen för? -->
-
-**Om hemligheten läcker:**
-
-<!-- Vad händer med staden om alla får veta? -->

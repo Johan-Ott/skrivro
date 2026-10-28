@@ -14,7 +14,6 @@ import { recordFailure } from "@llkit/errorLog.js";
 import { platform } from "./platform.js";
 import { snapshotOnSave } from "../project/snapshots.js";
 import { placeOf, rememberPlace } from "./resume/lastPlace.js";
-import { recordText } from "./journey/todayTexts.js";
 import type { useSceneSession } from "./useSceneSession.js";
 import type { Project } from "./useProject.js";
 
@@ -34,7 +33,7 @@ function todayOf(stats: Stats, project: Project | null): Today {
 }
 
 // Made once at random and kept in localStorage.
-export function thisDevice() {
+function thisDevice() {
   const key = "skrivro.device";
   try {
     const known = localStorage.getItem(key);
@@ -55,20 +54,8 @@ async function addToThisDevice(dir: string, added: number) {
   return readStats(fileSystem, dir);
 }
 
-function crossesGoal(stats: Stats, added: number, goal: number | null) {
-  const after = stats[dayKey(Date.now())] ?? 0;
-  return goal !== null && after - added < goal && after >= goal;
-}
-
-/** `onWritten` hears every save that added words, and whether it reached the daily goal. */
-export function useWritingStats(
-  project: Project | null,
-  onWritten: (words: number, isGoalReached: boolean) => void,
-) {
+export function useWritingStats(project: Project | null) {
   const dir = project?.dir ?? null;
-  const goal = project ? dailyGoalOf(project.fields) : null;
-  const heard = useRef(onWritten);
-  heard.current = onWritten;
   const [stats, setStats] = useState<Stats>({});
   const queue = useRef(Promise.resolve());
   useEffect(() => {
@@ -84,11 +71,10 @@ export function useWritingStats(
         .then(async () => {
           const stats = await addToThisDevice(sceneDir, added);
           if (sceneDir === dir) setStats(stats);
-          heard.current(added, crossesGoal(stats, added, goal));
         })
         .catch(recordFailure("Ord per dag kunde inte sparas"));
     },
-    [dir, goal],
+    [dir],
   );
   return { stats, today: todayOf(stats, project), recordSave };
 }
@@ -107,7 +93,6 @@ export function listenToSaves(
     // Only the manuscript is counted: what is written in a note is not the book growing.
     if (!session.isNote(scene.dir, scene.id)) {
       recordSave(scene.dir, before, after);
-      recordText(`${scene.dir}/${scene.id}`, after, wordsAdded(before, after));
     }
     const state = editor.viewRef.current?.state;
     if (state) rememberPlace(scene.dir, placeOf(scene.id, state));

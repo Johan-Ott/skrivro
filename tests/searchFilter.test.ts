@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { isKept, notesLeftOut } from "../src/app/searchFilter";
+import { SearchQuery } from "prosemirror-search";
+import { isKept, replaceIds, searchChips, searchIds } from "../src/app/searchFilter";
+import { sceneHits } from "../src/app/searchHits";
 import type { Project } from "../src/app/useProject";
+import { searchableScene } from "../src/editor/manuscriptSearch";
 
 const project = {
   tree: [
@@ -22,21 +25,61 @@ describe("search chips", () => {
   });
 });
 
-describe("the notes left out of a search", () => {
-  const book = {
-    tree: [
-      { id: "S1", kind: "scene" },
-      { id: "anteckningar", kind: "sort", children: [{ id: "N1", kind: "scene" }] },
-      { id: "lappar", kind: "sort", children: [{ id: "L1", kind: "scene" }] },
-    ],
-    scenes: ["S1", "N1", "L1"],
-  } as unknown as Project;
+const book = {
+  fields: {},
+  tree: [
+    {
+      id: "K1",
+      kind: "chapter",
+      title: "Fyren",
+      children: [
+        { id: "S1", kind: "scene" },
+        { id: "S2", kind: "scene" },
+      ],
+    },
+    {
+      id: "platser",
+      kind: "sort",
+      children: [{ id: "N1", kind: "scene", labels: ["elin"] }],
+    },
+    { id: "lappar", kind: "sort", children: [{ id: "L1", kind: "scene" }] },
+  ],
+  scenes: ["S1", "S2", "N1", "L1"],
+  summaries: {
+    ["S1"]: { title: "Natten", status: "utkast" },
+    ["S2"]: { title: "Morgonen", status: "klar" },
+    ["N1"]: { title: "Udden", status: "idé" },
+    ["L1"]: { title: "Kikaren?", status: "idé" },
+  },
+} as unknown as Project;
 
-  it("hold the lappar too, so Med anteckningar finds what is written on them", () => {
-    expect(notesLeftOut(book, [])).toEqual(["N1", "L1"]);
+describe("what a search goes through", () => {
+  it("is the manuscript and then every note and lapp, with no chip for the notes", () => {
+    expect(searchIds(book)).toEqual(["S1", "S2", "N1", "L1"]);
+    expect(searchChips(book).map((chip) => chip.id)).not.toContain("anteckningar");
   });
 
-  it("are none once the notes are in the search", () => {
-    expect(notesLeftOut(book, ["anteckningar"])).toEqual([]);
+  it("is only scenes in a step chosen, and what has a label chosen, notes too", () => {
+    expect(searchIds(book, ["status:klar"])).toEqual(["S2"]);
+    expect(searchIds(book, ["label:elin"])).toEqual(["N1"]);
+  });
+
+  it("leaves a scene still in the cloud out", () => {
+    expect(searchIds({ ...book, scenes: ["S1", "L1"] })).toEqual(["S1", "L1"]);
+  });
+
+  it("is only the manuscript when replacing all, as before", () => {
+    expect(replaceIds(book)).toEqual(["S1", "S2"]);
+  });
+});
+
+describe("a hit in the list", () => {
+  it("says where it is: the chapter and scene, or the note's sort", () => {
+    const query = new SearchQuery({ search: "kikaren" });
+    const state = searchableScene("---\nid: X\n---\nKikaren låg i lådan.\n", query);
+
+    const places = sceneHits(book, ["S1", "N1"], () => state, query).map((hit) => hit.place);
+
+    expect(places).toEqual(["1. Fyren · Natten", "Platser · Udden"]);
   });
 });

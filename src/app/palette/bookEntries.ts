@@ -20,13 +20,16 @@ export function sceneEntries(context: PaletteContext): PaletteEntry[] {
 
 export function cardEntries({ cards, describe, openCard, project }: PaletteContext) {
   return cards.map((card): PaletteEntry => {
-    const hint = describe(card.id);
+    // A file is told by its whole name, so rapport.pdf and rapport.txt can be told apart.
+    const hint = card.file ?? describe(card.id);
+    const { kind } = card;
     return {
       id: `kort:${card.id}`,
       label: card.name,
       group: card.sortLabel,
       run: () => openCard(card.id),
       ...(hint ? { hint } : {}),
+      ...(kind ? { kind } : {}),
       ...labelled(project.tree, card.id),
     };
   });

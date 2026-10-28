@@ -882,62 +882,9 @@ body .phone-app .text-when input {
   min-height: 0;
 }
 
-/* Studio on a phone: the cards as a row to swipe, the picture and its choices under each other. */
-.phone-app .studio {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 0;
-  overflow-y: auto;
-}
-
-/* All the cards show at once, wrapping onto more rows instead of running off the screen. */
-/* Studio's cards in one row that slides sideways, instead of three wrapped rows of buttons. */
-.phone-app .studio-nav {
-  flex-flow: row nowrap;
-  flex-shrink: 0;
-  gap: 4px;
-  padding: 8px 12px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.phone-app .studio-group {
-  display: contents;
-}
-
-.phone-app .studio-item {
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.phone-app .studio-item .insight-muted {
-  display: none;
-}
-
-.phone-app .studio-main {
-  flex-direction: column;
-  flex-shrink: 0;
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-}
-
-.phone-app .studio-stage {
-  padding: 12px;
-}
-
-.phone-app .studio-panel {
-  width: auto;
-}
-
 /* Du slutade här covers the screen, so it keeps clear of the status bar. */
 .phone-app .resume-screen {
   padding-top: max(16px, var(--safe-top));
-}
-
-.phone-app .studio-group .sidebar-heading {
-  display: none;
 }
 
 /* Till förlag on a phone: the publisher on its own line, the date and the answer under it. */
@@ -966,18 +913,6 @@ body .phone-app .text-when input {
   .dialog-backdrop .dialog .settings-text,
   .dialog-backdrop .dialog textarea {
     width: 100%;
-  }
-
-  /* The last twelve weeks fill the card, each day a square. */
-  .phone-app .heatmap {
-    grid-template-rows: repeat(7, auto);
-    grid-auto-columns: minmax(0, 1fr);
-  }
-
-  .phone-app .heat {
-    width: auto;
-    height: auto;
-    aspect-ratio: 1;
   }
 
   .profile-head .button {
@@ -1033,32 +968,6 @@ body .phone-app .text-when input {
   top: calc(max(28px, var(--safe-top)) + 52px);
 }
 
-/* Above the tools over the keyboard. A running sprint shows in the phone's bar instead. */
-.phone-text .sprint-bar {
-  bottom: 64px;
-}
-
-.phone-text .sprint-bar[role="timer"] {
-  display: none;
-}
-
-.phone-bar .sprint-clock {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--primary);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Celebrations under the status bar, clear of the tabs and the tools at the foot. */
-@media (max-width: 600px) {
-  .celebrations {
-    top: calc(var(--safe-top) + 12px);
-    right: 12px;
-    width: calc(100vw - 24px);
-  }
-}
-
 /* The day's words open Insikter, so they show that they lead somewhere. */
 .phone-today-more {
   margin-left: 6px;
@@ -1080,12 +989,6 @@ body .phone-app .text-when input {
 
 .phone-app .insight-day-bar .bar-room {
   height: 36px;
-}
-
-.phone-app .heatmap {
-  width: 100%;
-  max-width: 240px;
-  margin: 0 auto;
 }
 
 /* Skriv with the keyboard down and the text not in use shows only the tabs; the tools come
@@ -1112,7 +1015,6 @@ body .phone-app .text-when input {
   body .phone-continue-where,
   body .text-place,
   body .read-link,
-  body .badge-name,
   body .theme-card {
     font-size: 14px;
   }
@@ -1120,8 +1022,7 @@ body .phone-app .text-when input {
   body .field-label,
   body .insight-title,
   body .insight-muted,
-  body .progress-title,
-  body .studio-item-name {
+  body .progress-title {
     font-size: 15px;
   }
 
@@ -1134,8 +1035,7 @@ body .phone-app .text-when input {
 
   body .sidebar-heading,
   body .design-section,
-  body .contents-part-title,
-  body .badge-when {
+  body .contents-part-title {
     font-size: 12px;
   }
 
@@ -1150,8 +1050,7 @@ body .phone-app .text-when input {
 
   body .button.small,
   body .segmented button,
-  body .setting-value,
-  body .studio-item {
+  body .setting-value {
     min-height: 40px;
     font-size: 15px;
   }
@@ -1208,33 +1107,6 @@ body .phone-app .text-when input {
   --safe-top: 32px;
 }
 
-/* The sprint's settings fill the screen's width, with arrows a finger can hit. */
-.phone-app .sprint-settings {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.phone-app .sprint-setting {
-  border: 1px solid var(--border-card);
-}
-
-.phone-app .sprint-setting button {
-  padding: 10px 0;
-  font-size: 14px;
-}
-
-.phone-app .sprint-setting-label {
-  font-size: 12px;
-}
-
-.phone-app .sprint-setting-value {
-  font-size: 28px;
-}
-
-.phone-app .sprint-setting-unit {
-  font-size: 12px;
-}
-
 /* A new connection on a phone: which note, then what they are to each other, each on its own
    line, and the buttons under them. */
 .phone-app .connection-form {
@@ -1259,15 +1131,6 @@ body .phone-app .text-when input {
 /* The picture beside the menu, with room for its frame; the worn title has no room on a phone. */
 .phone-bar-start .profile-button {
   margin-left: 10px;
-}
-
-.phone-bar-start .profile-button.with-title {
-  width: 44px;
-  padding: 0;
-}
-
-.phone-bar-start .profile-button-title {
-  display: none;
 }
 
 /* Who and what is named in the scene, and what Granska has to look at, atop the text. */
@@ -1324,4 +1187,13 @@ body .phone-app .text-when input {
   .snapshot-view .review-actions .restore {
     align-self: stretch;
   }
+}
+
+/* The tree's notices stand one above the other over the tabs, so the lower one can be pressed. */
+.with-phone-tabs .tree-undo {
+  bottom: calc(56px + env(safe-area-inset-bottom) + 16px + 80px);
+}
+
+.with-phone-tabs .tree-undo + .tree-undo {
+  bottom: calc(56px + env(safe-area-inset-bottom) + 16px + 168px);
 }

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { cursorAfterFirstParagraph, editor, openExample, runCommand } from "./helpers";
+import { cursorAfterFirstParagraph, editor, openExample } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 820 });
@@ -35,31 +35,6 @@ test("Sök efter uppdateringar says so when this is the newest Skrivro", async (
   await page.getByRole("menuitem", { name: "Sök efter uppdateringar…" }).click();
 
   await expect(page.getByText("Du har den senaste versionen av Skrivro.")).toBeVisible();
-});
-
-test("a writing sprint counts the words written and can be ended", async ({ page }) => {
-  await runCommand(page, "Skrivsprint");
-  await cursorAfterFirstParagraph(page);
-  await page.keyboard.type(" Hon log och gick.");
-  const sprint = page.getByRole("timer");
-  await expect(sprint).toContainText("4 ord", { timeout: 5000 });
-
-  await sprint.getByRole("button", { name: "Avsluta" }).click();
-  await expect(page.getByText("Sprinten är klar: 4 ord på 1 pass.")).toBeVisible();
-});
-
-test("the sprint's block sets its passes and breaks, and shows the pass running", async ({
-  page,
-}) => {
-  await page.getByRole("button", { name: "Skrivsprint" }).first().click();
-  const block = page.getByRole("region", { name: "Skrivsprint" });
-  await block.getByRole("button", { name: "Mer Varv" }).click();
-  await expect(block.locator(".sprint-setting").nth(3)).toContainText("03");
-
-  await block.getByRole("button", { name: "▶ Starta" }).click();
-
-  await expect(block).toContainText("Pass · 1 av 3");
-  await expect(page.getByRole("timer")).toBeVisible();
 });
 
 test("a name from the notes is offered while typing, and Tab fills it in", async ({ page }) => {
@@ -105,16 +80,4 @@ test("an Upprepning card in Granska selects the word in the text", async ({ page
 
   const selected = await page.evaluate(() => window.getSelection()?.toString() ?? "");
   expect(selected.length).toBeGreaterThan(1);
-});
-
-test("words typed just before Avsluta count in the sprint's result", async ({ page }) => {
-  await runCommand(page, "Skrivsprint");
-  await cursorAfterFirstParagraph(page);
-  const sprint = page.getByRole("timer");
-  await expect(sprint).toContainText("0 ord");
-
-  await page.keyboard.type(" Hon log och gick.");
-  await sprint.getByRole("button", { name: "Avsluta" }).click();
-
-  await expect(page.getByText("Sprinten är klar: 4 ord på 1 pass.")).toBeVisible();
 });

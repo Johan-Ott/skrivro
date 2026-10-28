@@ -11,7 +11,7 @@ import { findNode, type TreeNode } from "../../project/tree.js";
 import { chapterOf, manuscriptWords, nodeWords } from "../../project/treeLabels.js";
 import type { AppState } from "../App.js";
 import { BlockPanel } from "../blocks/BlockPanel.js";
-import { withField } from "../sync/takeBack.js";
+import { withNodeFields } from "../../project/nodeFields.js";
 import type { Project } from "../useProject.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
 
@@ -123,7 +123,7 @@ export function GoalPanel(props: {
 }) {
   const { app, project } = props;
   const setGoal = (nodeId: string, goal: number | null) =>
-    void app.updateTree(withField(project.tree, nodeId, "goal", goal ?? undefined));
+    void app.updateTree(withNodeFields(project.tree, nodeId, { goal: goal ?? undefined }));
   return (
     <BlockPanel id="mal" title={t("Mål")} className="goal-panel" onClose={props.onClose}>
       {rowsOf(app, project).map((row) => (

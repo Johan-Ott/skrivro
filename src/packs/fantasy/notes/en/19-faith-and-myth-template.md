@@ -1,5 +1,5 @@
 ---
-sort: Världen
+sort: The world
 ---
 
 # Faith and myth (template)
@@ -25,14 +25,6 @@ Rename the note to the religion's, cult's or myth's name. Faith often gives a wo
 **Who doubts or breaks it:**
 
 <!-- Heretics, rebels, those who betray in secret. What happens to them? -->
-
-**The myth of how it began:**
-
-<!-- Tell it as a people would tell it, with errors and embellishments. -->
-
-**How it meets magic:**
-
-<!-- Is magic holy, forbidden or a question of price? -->
 
 **How it meets the protagonist:**
 

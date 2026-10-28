@@ -12,8 +12,6 @@ import {
   type Comment,
 } from "../../project/comments.js";
 import { recordFailure } from "@llkit/errorLog.js";
-import { earnBadge, earnInk } from "../journey/journeyEvents.js";
-import { INK } from "../../project/journey.js";
 import { platform } from "../platform.js";
 import type { OpenScene } from "../sceneSession.js";
 import { useCommandKey } from "../shortcuts.js";
@@ -82,12 +80,7 @@ function useCommentMarks(editor: Editor, comments: Comment[], onComment: (id: st
   useEffect(() => run(refreshComments, false), [comments, run]);
 }
 
-// A comment ticked off as done gives a little ink.
 function withResolved(comments: Comment[], id: string, resolved: boolean) {
-  if (resolved) {
-    earnInk(INK.commentDone);
-    earnBadge("rott-black");
-  }
   return comments.map((comment) => (comment.id === id ? { ...comment, resolved } : comment));
 }
 

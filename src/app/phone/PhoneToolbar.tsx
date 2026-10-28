@@ -8,7 +8,6 @@ import type { AppState } from "../App.js";
 import { insertChosenPicture } from "../palette/sceneContext.js";
 import { StylePicker } from "../StylePicker.js";
 import { CorrectionsBar, useCaretCorrections } from "../spelling/Corrections.js";
-import { RepeatNote, repeatedAtCaret } from "../spelling/ClickCorrections.js";
 import type { Project } from "../useProject.js";
 import { WritingSettingsPanel } from "../WritingSettingsPanel.js";
 import { t } from "../../i18n/i18n.js";
@@ -67,7 +66,6 @@ export function PhoneToolbar({ app, project }: { app: AppState; project: Project
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const { editor, writingMode } = app;
   const corrections = useCaretCorrections(editor);
-  const repeated = corrections ? null : repeatedAtCaret(editor);
   if (!app.scene) return null;
   const toggleSettings = () => setSettingsOpen(!isSettingsOpen);
   return (
@@ -82,12 +80,7 @@ export function PhoneToolbar({ app, project }: { app: AppState; project: Project
         onMouseDown={(event) => event.preventDefault()}
       >
         {corrections && <CorrectionsBar editor={editor} corrections={corrections} />}
-        {repeated && (
-          <RepeatNote word={repeated} onReview={() => writingMode.setReviewOpen(true)} />
-        )}
-        {!corrections && !repeated && (
-          <Tools app={app} project={project} onSettings={toggleSettings} />
-        )}
+        {!corrections && <Tools app={app} project={project} onSettings={toggleSettings} />}
       </div>
     </>
   );

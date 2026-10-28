@@ -10,11 +10,17 @@ export interface PictureAttrs {
   size: PictureSize;
 }
 
+// A plain file name in bilder/, so a text can never point outside the book's folder.
+function nameIn(url: string) {
+  if (!url.startsWith(FOLDER)) return null;
+  const name = decodeURIComponent(url.slice(FOLDER.length));
+  return /^[\w.-]+\.(png|jpe?g)$/i.test(name) ? name : null;
+}
+
 /** A paragraph that is a single image from bilder/ is a picture; any other image stays text. */
 export function pictureOf(image: Image): PictureAttrs | null {
-  if (!image.url.startsWith(FOLDER)) return null;
-  const name = decodeURIComponent(image.url.slice(FOLDER.length));
-  if (!/^[\w.-]+\.(png|jpe?g)$/i.test(name)) return null;
+  const name = nameIn(image.url);
+  if (!name) return null;
   const size = (PICTURE_SIZES as readonly string[]).includes(image.title ?? "")
     ? (image.title as PictureSize)
     : "bred";
@@ -40,4 +46,14 @@ export function picturesInDocs(docs: Iterable<Node>): string[] {
     });
   }
   return names;
+}
+
+/** The name of the first picture from bilder/ in a text as it is saved, such as a note's picture of
+ * its place, for the card over the name. */
+export function firstPictureIn(markdown: string): string | null {
+  for (const [, url = ""] of markdown.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) {
+    const name = nameIn(url);
+    if (name) return name;
+  }
+  return null;
 }

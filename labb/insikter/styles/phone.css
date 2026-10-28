@@ -1,0 +1,19 @@
+  /* The last twelve weeks fill the card, each day a square. */
+  .phone-app .heatmap {
+    grid-template-rows: repeat(7, auto);
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .phone-app .heat {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+
+.phone-app .heatmap {
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
+}
+

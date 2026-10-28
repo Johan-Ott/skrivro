@@ -77,6 +77,16 @@ export function bookOutline(tree: TreeNode[]): OutlineItem[] {
   return walk(tree);
 }
 
+// A text that cannot be read says which scene, not that the file could not be saved.
+function parsedScene(title: string, text: string) {
+  try {
+    return parseMarkdown(splitSceneFile(text).body);
+  } catch (error) {
+    const problem = error instanceof Error ? error.message : String(error);
+    throw new ExportError(title, t("Texten går inte att läsa: {problem}", { problem }));
+  }
+}
+
 /** Read before anything is written. `titles` names the scenes in errors. */
 export async function readBookScenes(
   fileSystem: FileSystem,
@@ -90,7 +100,7 @@ export async function readBookScenes(
     if (text === null) {
       throw new ExportError(titles[id] ?? id, t("Scenen finns inte på den här enheten än."));
     }
-    scenes.set(id, parseMarkdown(splitSceneFile(text).body));
+    scenes.set(id, parsedScene(titles[id] ?? id, text));
   }
   return scenes;
 }

@@ -1,4 +1,3 @@
-import { ConfirmLayer } from "./ConfirmLayer.js";
 import { PacksLayer } from "./packs/PackList.js";
 import type { AppState } from "./App.js";
 import { signInToAccount } from "./googleAccount.js";
@@ -30,7 +29,7 @@ import { shelfHandlers } from "./shelf/shelfHandlers.js";
 // Skrivro starts at the welcome the first time, and at the shelf after: every book is begun,
 // fetched or opened from there.
 
-type App = Pick<AppState, "profile" | "journey" | "updateFields" | "startup"> & {
+type App = Pick<AppState, "profile" | "updateFields" | "startup"> & {
   open: (dir: string) => Promise<void>;
   choose: () => Promise<void>;
   writingMode: ReturnType<typeof useWritingMode>;
@@ -80,7 +79,6 @@ function ShelfFrame(
     <>
       {menu.layers}
       <ProfileLayer app={app} project={null} />
-      <ConfirmLayer />
     </>
   );
   const profile = <ProfileButton app={app} />;

@@ -178,7 +178,8 @@ export function joinSorts(sorts: TreeNode[]): TreeNode[] {
   return [...joined.values()];
 }
 
-const GUIDE = "Guide";
+/** The sort a pack writes its guides into. */
+export const GUIDE = "Guide";
 
 /** A pack's notes as guides, and as templates for characters and the world. */
 export const guidesOf = (pack: Pack) => pack.notes.filter((note) => note.sort === GUIDE);

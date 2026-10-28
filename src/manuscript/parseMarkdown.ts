@@ -127,6 +127,36 @@ function listFrom(list: List, chunk: string, notes: FootnoteTexts, source: strin
   return schema.node("styleBlock", { ...attrs, source, canonical: listContent(shown) }, items);
 }
 
+// What a style block can hold; any other block inside a fence keeps the whole fence as it was.
+const isFenceContent = ({ node }: PlacedBlock) =>
+  ["paragraph", "sceneBreak", "rawBlock"].includes(node.type.name);
+
+// A list in a list style's fence, `::: punktlista` over `- ett`, shows as that style's items and
+// is written back as it was until they change.
+function listInFence(text: string, fence: StyleFence, inner: PlacedBlock[]): Node | null {
+  if (fence.style !== "punktlista" && fence.style !== "numrerad") return null;
+  const [only] = inner;
+  if (inner.length !== 1 || only?.node.type.name !== "styleBlock") return null;
+  if (only.node.attrs["source"] === null) return null; // a fence in a fence, not a list
+  const attrs = {
+    style: fence.style,
+    start: only.node.attrs["start"],
+    isSpread: only.node.attrs["isSpread"],
+  };
+  const shown = schema.node("styleBlock", attrs, only.node.content);
+  const source = text.slice(fence.start, fence.end);
+  const fenceLines = {
+    openFence: fence.openFence,
+    innerTrailing: text.slice(only.end, fence.innerEnd),
+    closeFence: fence.closeFence,
+  };
+  return schema.node(
+    "styleBlock",
+    { ...attrs, ...fenceLines, source, canonical: listContent(shown) },
+    only.node.content,
+  );
+}
+
 function styleBlock(
   text: string,
   fence: StyleFence,
@@ -139,6 +169,9 @@ function styleBlock(
   const range = { from: fence.innerStart, to: fence.innerEnd };
   const inner = markdownBlocks(text, range, notes, isNote);
   if (!isKnownStyle || inner.length === 0) return { ...placement, node: rawFence() };
+  const list = listInFence(text, fence, inner);
+  if (list) return { ...placement, node: list };
+  if (!inner.every(isFenceContent)) return { ...placement, node: rawFence() };
   const { blocks, trailing } = withGaps(text.slice(0, fence.innerEnd), inner, fence.innerStart);
   const attrs = {
     style: fence.style,

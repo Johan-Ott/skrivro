@@ -6,7 +6,9 @@ import {
   everyName,
   mentionPattern,
   namesOf,
+  notesOf,
 } from "../src/project/cards";
+import type { SceneSummary } from "../src/project/sceneSummaries";
 import {
   CHARACTERS_ID,
   NOTES_ID,
@@ -164,5 +166,30 @@ describe("the names a note is linked by", () => {
     const place = { id: "udden", sortId: "platser", name: "Holm", aliases: ["Erik"] };
 
     expect(everyName([erik, place])).toEqual(["Erik Holm", "Holm", "Erik", "Eken"]);
+  });
+});
+
+describe("notesOf, what Ctrl+K finds", () => {
+  it("is every note in every sort, linked or not, lappar and files too, but nothing thrown away", () => {
+    const book: TreeNode[] = withSpecialFolders([]).map((node) => {
+      const children = { anteckningar: ["filen"], lappar: ["lappen"], karaktarer: ["elin"] }[
+        node.id as "anteckningar" | "lappar" | "karaktarer"
+      ];
+      if (node.id === "trash") return { ...node, children: [{ id: "slängd", kind: "scene" }] };
+      return children ? { ...node, children: children.map((id) => ({ id, kind: "scene" })) } : node;
+    });
+    const summaries: Record<string, SceneSummary> = {
+      filen: { title: "mini", words: 0, status: "idé", file: "mini.pdf" },
+      lappen: { title: "Tom lapp", words: 0, status: "idé" },
+      elin: { title: "Elin", words: 3, status: "idé" },
+      slängd: { title: "Slängd", words: 1, status: "idé" },
+    };
+
+    expect(
+      notesOf(book, summaries)
+        .map((note) => note.id)
+        .sort(),
+    ).toEqual(["elin", "filen", "lappen"]);
+    expect(cardsOf(book, summaries).map((card) => card.id)).toEqual(["elin"]);
   });
 });

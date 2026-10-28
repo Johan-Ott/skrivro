@@ -37,7 +37,7 @@ for (const size of SIZES) {
   });
 }
 
-test("a narrow window folds alignment into the format row's ⋯ instead of cutting it off", async ({
+test("the format row keeps alignment in its ⋯, and a narrow window does not cut it off", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 720, height: 500 });

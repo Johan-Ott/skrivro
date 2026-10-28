@@ -2,7 +2,8 @@ import { readSceneBodies } from "../../project/sceneSummaries.js";
 import { spaceAfterColon } from "../../manuscript/colonSpace.js";
 import { useEffect, useMemo, useState } from "react";
 import { plainText } from "../../manuscript/compare.js";
-import { cardsOf, countMentions, type Card } from "../../project/cards.js";
+import { cardsOf, notesOf, countMentions, type Card } from "../../project/cards.js";
+import { noteKind, type NoteKind } from "../../project/noteKinds.js";
 import { findNode, manuscriptSceneIds } from "../../project/tree.js";
 import { nodeLabel } from "../../project/treeLabels.js";
 import { platform } from "../platform.js";
@@ -44,14 +45,19 @@ function useTexts(refs: TextRef[], version: unknown, isWanted: boolean) {
 export interface NoteCard extends Card {
   dir: string;
   sortLabel: string;
+  /** A file, a lapp or a guide, read in the home the note is in, the book's or the series'. */
+  kind: NoteKind | null;
+  file?: string;
 }
 
-function noteCards(homes: Project[]): NoteCard[] {
+export function noteCards(homes: Project[], pick: typeof notesOf): NoteCard[] {
   return homes.flatMap((home) =>
-    cardsOf(home.tree, home.summaries).map((card) => {
+    pick(home.tree, home.summaries).map((card) => {
       const sort = findNode(home.tree, card.sortId)?.node;
       const sortLabel = sort ? nodeLabel(sort, home.tree, home.summaries) : "";
-      return { ...card, dir: home.dir, sortLabel };
+      const kind = noteKind(home.tree, home.summaries, card.id);
+      const file = home.summaries[card.id]?.file;
+      return { ...card, dir: home.dir, sortLabel, kind, ...(file ? { file } : {}) };
     }),
   );
 }
@@ -65,7 +71,8 @@ const firstSentence = (text: string) => {
 /** `homes` must keep its identity between renders (useMemo), or the texts are read every time. */
 /** Mentions are counted for an open note, Innehåll's filter and Granska's people in the book. */
 export function useNotes(homes: Project[], book: Project | null, areMentionsWanted: boolean) {
-  const cards = useMemo(() => noteCards(homes), [homes]);
+  const cards = useMemo(() => noteCards(homes, cardsOf), [homes]);
+  const allNotes = useMemo(() => noteCards(homes, notesOf), [homes]);
   const [mention, setMention] = useState<ShownMention | null>(null);
   const isWanted = areMentionsWanted || mention !== null;
   const manuscriptRefs = useMemo(
@@ -77,6 +84,8 @@ export function useNotes(homes: Project[], book: Project | null, areMentionsWant
   const mentions = useMemo(() => countMentions(cards, manuscript), [cards, manuscript]);
   return {
     cards,
+    /** Every note, linked or not, for Ctrl+K. */
+    allNotes,
     mentions,
     /** The book's scenes as text, keyed by scene id, read while mentions are wanted. */
     manuscript,

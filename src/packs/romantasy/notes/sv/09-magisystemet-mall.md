@@ -1,5 +1,6 @@
 ---
 sort: Världen
+standard: true
 ---
 
 # Magisystemet (mall)
@@ -33,7 +34,3 @@ Byt namn på anteckningen till magins namn i din värld.
 **Bandet:**
 
 <!-- Hur knyter magin an till kärleken? -->
-
-**I slutet:**
-
-<!-- Vilket pris betalas i det avgörande slaget? -->

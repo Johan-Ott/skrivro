@@ -27,6 +27,7 @@ export function ConflictLayer(props: {
     <ConflictDialog
       sceneTitle={scene.title}
       conflict={conflict}
+      isNote={session.isNote(scene.dir, scene.id)}
       onChoose={(choice) => void choose(choice)}
     />
   );

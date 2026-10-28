@@ -1,5 +1,6 @@
 ---
 sort: The world
+standard: true
 ---
 
 # The magic system (template)
@@ -29,10 +30,6 @@ Rename the note to the magic's name in the world.
 **The world around the magic:**
 
 <!-- Who controls it, and who fears it? -->
-
-**What the reader never learns:**
-
-<!-- What is the magic really, beneath what everyone believes? -->
 
 **Where the reader learns it:**
 

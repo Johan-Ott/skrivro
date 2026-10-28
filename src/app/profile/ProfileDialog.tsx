@@ -1,12 +1,6 @@
-import { Choice } from "@llkit/controls.js";
 import { useState } from "react";
-import { earnedOf } from "../../project/flair.js";
-import type { Journey } from "../../project/journey.js";
-import { dayKey } from "../../project/stats.js";
 import { Dialog } from "@llkit/controls.js";
 import { ProfileHead } from "./ProfileHead.js";
-import { Badges } from "./Badges.js";
-import { FlairPicker } from "./FlairPicker.js";
 import type { Profile } from "./useProfile.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -98,46 +92,21 @@ function ProfileFoot({ onDone }: { onDone: () => void }) {
   );
 }
 
-type Part = "om" | "stil" | "utmarkelser";
-const PARTS: [Part, string][] = [
-  ["om", t("Om dig")],
-  ["stil", t("Stil")],
-  ["utmarkelser", t("Utmärkelser")],
-];
-
-function ProfilePart(props: {
-  part: Part;
-  form: Form;
-  set: (change: Partial<Form>) => void;
-  journey: Journey;
-  book: { name: string; held: Record<string, string> } | null;
-}) {
-  const { form, set } = props;
-  if (props.part === "om")
-    return <ProfileFields form={form} bookName={props.book?.name ?? null} set={set} />;
-  if (props.part === "utmarkelser") return <Badges journey={props.journey} book={props.book} />;
-  const earned = earnedOf(props.journey, dayKey(Date.now()));
-  return <FlairPicker earned={earned} frame={form.frame} title={form.title} onChange={set} />;
-}
-
 /** Författarprofil: who writes, kept in the Skrivro folder; no account, no sign-in. */
 export function ProfileDialog(props: {
   initial: Form;
-  journey: Journey;
-  /** The open book, with its badges by the day each was reached; none on the shelf. */
-  book: { name: string; held: Record<string, string> } | null;
+  /** The name of the open book; none on the shelf. */
+  bookName: string | null;
   onSave: (form: Form) => void;
   onClose: () => void;
 }) {
   const [form, setForm] = useState(props.initial);
   const set = (change: Partial<Form>) => setForm((current) => ({ ...current, ...change }));
-  const [part, setPart] = useState<Part>("om");
   const done = () => (props.onSave(form), props.onClose());
   return (
     <Dialog label={t("Författarprofil")} className="profile-dialog" onClose={done}>
-      <ProfileHead form={form} journey={props.journey} onPicture={(picture) => set({ picture })} />
-      <Choice label={t("Visa")} value={part} options={PARTS} onSelect={setPart} />
-      <ProfilePart part={part} form={form} set={set} journey={props.journey} book={props.book} />
+      <ProfileHead form={form} onPicture={(picture) => set({ picture })} />
+      <ProfileFields form={form} bookName={props.bookName} set={set} />
       <ProfileFoot onDone={done} />
     </Dialog>
   );

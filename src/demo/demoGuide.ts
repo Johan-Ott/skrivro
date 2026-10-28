@@ -55,7 +55,7 @@ export const COMMENT = [
 /** A note to write and draw on beside the text. */
 export const STICKY: StickyNote[] = [
   {
-    id: "01J9Z4K2QX00000000000000L1",
+    id: "01J9Z4K2QX00000000000000A1",
     color: "gul" as const,
     text: "Vem tände ljusen på isen?\n\nRita och sudda med pennan och sudden här ovanför.",
     strokes: [],

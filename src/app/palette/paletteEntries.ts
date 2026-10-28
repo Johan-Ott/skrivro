@@ -1,3 +1,4 @@
+import type { NoteCard } from "../notes/useNotes.js";
 import type { Command } from "prosemirror-state";
 import {
   changeSize,
@@ -17,9 +18,7 @@ import type { SettingsChange } from "../useWritingSettings.js";
 import type { PaletteEntry } from "./paletteSearch.js";
 import { cardEntries, labelled, sceneEntries } from "./bookEntries.js";
 import { VIEWS, type View } from "../useWritingMode.js";
-import type { Card } from "../../project/cards.js";
 import { formatEntries } from "./formatEntries.js";
-import { startSprint } from "../sprint/sprint.js";
 import { shortcutOf, shortcutText } from "../shortcuts.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -42,7 +41,7 @@ export interface PaletteContext {
   openSettings: () => void;
   /** Null on a phone, which has its own screens instead of the views. */
   showView: ((view: View) => void) | null;
-  cards: (Card & { sortLabel: string })[];
+  cards: NoteCard[];
   /** The first sentence of a note, shown beside its name. */
   describe: (id: string) => string;
   openCard: (id: string) => void;
@@ -116,7 +115,6 @@ function writingEntries(context: PaletteContext): PaletteEntry[] {
     command(t("Visa som ark eller löptext"), () =>
       context.changeSettings((now) => ({ ...now, paper: !now.paper })),
     ),
-    command(t("Starta skrivsprint"), startSprint),
     ...(context.showSnapshots
       ? [command(t("Versioner av den här texten"), context.showSnapshots)]
       : []),

@@ -1,9 +1,9 @@
 import { SCENE_STATUSES } from "../manuscript/sceneFile.js";
 import { labelsOf } from "../project/labels.js";
 import { statusSteps } from "../project/statusSteps.js";
-import { findNode, sceneIdsIn, sortsOf } from "../project/tree.js";
+import { noteIdsOf } from "../project/cards.js";
+import { findNode, manuscriptSceneIds } from "../project/tree.js";
 import type { Project } from "./useProject.js";
-import { t } from "../i18n/i18n.js";
 
 /** A chip under the search: a status step or one of the book's labels. */
 export interface SearchChip {
@@ -12,13 +12,9 @@ export interface SearchChip {
   color: string;
 }
 
-/** Not a narrowing like the others: the notes' text is searched too. */
-export const WITH_NOTES = "anteckningar";
-
 export function searchChips(project: Project): SearchChip[] {
   const steps = statusSteps(project.fields);
   return [
-    { id: WITH_NOTES, label: t("Med anteckningar"), color: "" },
     ...SCENE_STATUSES.map((status) => ({
       id: `status:${status}`,
       label: steps[status].name,
@@ -43,9 +39,17 @@ export function isKept(project: Project, sceneId: string, only: string[]) {
   return isStatusKept && isLabelKept;
 }
 
-export const noteIds = (project: Project) =>
-  sortsOf(project.tree).flatMap((sort) => sceneIdsIn(project.tree, sort.id));
+const keptIds = (project: Project, ids: string[], only: string[]) =>
+  ids.filter((id) => project.scenes.includes(id) && isKept(project, id, only));
 
-/** The notes on this device, while the search leaves them out. */
-export const notesLeftOut = (project: Project, only: string[] = []) =>
-  only.includes(WITH_NOTES) ? [] : noteIds(project).filter((id) => project.scenes.includes(id));
+/** The manuscript in its order, then every note and lapp. A step chosen keeps only scenes; a label
+ * keeps what has it, notes too. Scenes still in the cloud have no text here and are left out. */
+export function searchIds(project: Project, only: string[] = []) {
+  const hasStep = only.some((id) => id.startsWith("status:"));
+  const notes = hasStep ? [] : [...noteIdsOf(project.tree)];
+  return keptIds(project, [...manuscriptSceneIds(project.tree), ...notes], only);
+}
+
+/** Ersätt alla changes the manuscript only; a note is changed by hand. */
+export const replaceIds = (project: Project, only: string[] = []) =>
+  keptIds(project, manuscriptSceneIds(project.tree), only);

@@ -11,7 +11,6 @@ import {
   putBack,
   rebuildTree,
   reconcileScenes,
-  renameNode,
   withSpecialFolders,
   CHARACTERS_ID,
   NOTES_ID,
@@ -21,6 +20,7 @@ import {
   TRASH_ID,
   type TreeNode,
 } from "../src/project/tree";
+import { renameNode } from "../src/project/nodeFields";
 
 const FIXED = [CHARACTERS_ID, PLACES_ID, THINGS_ID, NOTES_ID, STICKY_ID, SECRETS_ID, TRASH_ID];
 

@@ -10,6 +10,7 @@ import { chapterOf, manuscriptWords } from "../../project/treeLabels.js";
 import type { AppState } from "../App.js";
 import { sidebarProps } from "../paneProps.js";
 import { ContentsIcon } from "../shell/icons.js";
+import { reviewAsk } from "../../askOnce.js";
 import { PhoneBarStart, SearchButton } from "./PhoneBarStart.js";
 import { SyncNotices } from "../SyncLayer.js";
 import { startLapp } from "../createLapp.js";
@@ -93,10 +94,13 @@ function ContinueButton({ project, continueId, onContinue }: PhoneBookProps) {
   );
 }
 
-function PhoneBookHeader({ app, project, onContents }: HeaderProps) {
+// Granska opens over the text, so from Boken it shows the chosen text and asks for Granska there.
+function PhoneBookHeader({ app, project, onContents, onOpenText }: HeaderProps) {
+  const sceneId = app.scene?.id;
+  const review = () => sceneId && (reviewAsk.ask(), onOpenText(sceneId));
   return (
     <header className="phone-bar">
-      <PhoneBarStart app={app} project={project} />
+      <PhoneBarStart app={app} project={project} onReview={review} />
       <span className="phone-bar-title prose">{project.name}</span>
       <span className="phone-bar-end">
         <button className="topbar-button" aria-label={t("Innehåll")} onClick={onContents}>
@@ -108,13 +112,13 @@ function PhoneBookHeader({ app, project, onContents }: HeaderProps) {
   );
 }
 
-type HeaderProps = Pick<PhoneBookProps, "app" | "project" | "onContents">;
+type HeaderProps = Pick<PhoneBookProps, "app" | "project" | "onContents" | "onOpenText">;
 
 export function PhoneBook(props: PhoneBookProps) {
   const { app, project } = props;
   return (
     <div className="phone-screen">
-      <PhoneBookHeader app={app} project={project} onContents={props.onContents} />
+      <PhoneBookHeader {...props} />
       <main className="phone-card">
         <SyncNotices
           project={project}

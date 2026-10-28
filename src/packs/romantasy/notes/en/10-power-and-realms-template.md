@@ -22,14 +22,6 @@ Rename the note to the name of the realm, court or land.
 
 <!-- Two or three places where much happens. -->
 
-**Who pays:**
-
-<!-- How do those without power and magic show? -->
-
 **Who profits from the war:**
 
 <!-- Who wants the war to go on? -->
-
-**What changes:**
-
-<!-- What does power look like when the book ends? -->

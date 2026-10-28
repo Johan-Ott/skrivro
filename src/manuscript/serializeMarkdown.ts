@@ -18,9 +18,15 @@ const LINE_BREAK = /\n/;
 function gapBefore(block: Node, previous: Node | null): string {
   const before = block.attrs["before"] as string | null;
   if (!previous) return before ?? "";
-  const needsBlankLine = previous.type.name === "paragraph" || previous.type.name === "styleBlock";
-  const isValid = before !== null && (needsBlankLine ? BLANK_LINE : LINE_BREAK).test(before);
+  const isValid =
+    before !== null && (needsBlankLine(previous) ? BLANK_LINE : LINE_BREAK).test(before);
   return isValid ? before : "\n\n";
+}
+
+// A fence's closing line ends it, so the next block needs none; a paragraph or a list takes it in.
+function needsBlankLine(previous: Node): boolean {
+  if (previous.type.name === "paragraph") return true;
+  return previous.type.name === "styleBlock" && previous.attrs["openFence"] === null;
 }
 
 function serializeBlocks(parent: Node, isNote: boolean): string {
@@ -100,15 +106,18 @@ function isReadBackAsList(list: string, style: string, texts: string[]) {
 function serializeStyleBlock(block: Node, isNote: boolean): string {
   const source = block.attrs["source"] as string | null;
   if (source !== null && listContent(block) === block.attrs["canonical"]) return source;
-  return (isNote ? markdownList(block) : null) ?? serializeFence(block, isNote);
+  const list = markdownList(block);
+  const isHandWrittenInFence = source !== null && block.attrs["openFence"] !== null;
+  if (list !== null && isHandWrittenInFence) return fenceAround(block, list); // keeps its dashes
+  return (isNote ? list : null) ?? fenceAround(block, serializeBlocks(block, isNote));
 }
 
-function serializeFence(block: Node, isNote: boolean): string {
+function fenceAround(block: Node, inner: string): string {
   const style = String(block.attrs["style"]);
   const openFence = block.attrs["openFence"] as string | null;
   const fenceStyle = openFence?.replace(/^:::/, "").trim();
   const open = openFence !== null && fenceStyle === style ? openFence : `::: ${style}\n`;
   const innerTrailing = (block.attrs["innerTrailing"] as string | null) ?? "\n";
   const close = (block.attrs["closeFence"] as string | null) ?? ":::";
-  return open + serializeBlocks(block, isNote) + innerTrailing + close;
+  return open + inner + innerTrailing + close;
 }

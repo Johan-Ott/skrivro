@@ -1,16 +1,21 @@
 import { useCallback } from "react";
-import { askForFirstAnswer, takeAskForFirstAnswer } from "../../editor/firstAnswerAsk.js";
+import { firstAnswerAsk, newNoteAsk } from "../../askOnce.js";
 import { standardNoteBody } from "../../project/packs.js";
 import { isLinkedByDefault } from "../../project/cards.js";
 import { sortKey } from "../../project/sorts.js";
-import { findNode, insertNode, NOTES_ID, type TreeNode } from "../../project/tree.js";
-import { createFileNote, saveResearchFile } from "../../project/researchFiles.js";
+import { findNode, insertNode, type TreeNode } from "../../project/tree.js";
+import {
+  createFileNote,
+  placeForFile,
+  sameFileNote,
+  saveResearchFile,
+} from "../../project/researchFiles.js";
+import { confirmInApp } from "../ConfirmLayer.js";
 import { newSceneId } from "../../storage/sceneId.js";
 import { t } from "../../i18n/i18n.js";
 import { platform } from "../platform.js";
 import { createScene, openScene, setNoteLink, type SceneSession } from "../sceneSession.js";
 import type { Project } from "../useProject.js";
-import { earnBadge } from "../journey/journeyEvents.js";
 
 export interface NewNote {
   name: string;
@@ -35,18 +40,38 @@ function withSort(tree: TreeNode[], note: NewNote) {
   return { tree: insertNode(tree, sort, null, 0), sortId: sort.id };
 }
 
-// A PDF, a photo or any other file the writer gathered, copied into the book as a note.
+// The very same file added again is not made "Sjökort 2": the writer is asked to open the one there.
+async function isAlreadyThere(
+  project: Project,
+  session: NoteActionsInput["session"],
+  picked: { path: string; bytes: Uint8Array },
+) {
+  const id = await sameFileNote(platform.fileSystem, project, picked);
+  if (!id) return false;
+  const title = project.summaries[id]?.title ?? "";
+  const isOpened = await confirmInApp({
+    title: t("Filen finns redan"),
+    message: t("”{title}” finns redan i boken. Vill du öppna den?", { title }),
+    okLabel: t("Öppna"),
+  });
+  if (isOpened) await openScene(session, project.dir, id);
+  return true;
+}
+
+// A PDF, a photo or any other file the writer gathered, copied into the book as a note, in the sort
+// asked for or, from a scene, linked to it (placeForFile).
 function useAddFile({ project, session, updateTree, refresh }: NoteActionsInput) {
   return useCallback(
-    async (sortId: string = NOTES_ID) => {
+    async (sortId?: string, openSceneId?: string) => {
       if (!project || project.isReadOnly) return;
       const picked = await platform.pickFile({ name: t("Alla filer"), extensions: [] });
-      if (!picked) return;
+      if (!picked || (await isAlreadyThere(project, session, picked))) return;
       const { fileSystem } = platform;
       const name = await saveResearchFile(fileSystem, project.dir, picked.path, picked.bytes);
       const id = await createFileNote(fileSystem, project.dir, name);
-      const note = { id, kind: "scene" as const };
-      await updateTree(insertNode(project.tree, note, sortId, Number.MAX_SAFE_INTEGER));
+      const { sortId: home, addedIn } = placeForFile(project.tree, sortId, openSceneId);
+      const note = { id, kind: "scene" as const, ...(addedIn ? { addedIn } : {}) };
+      await updateTree(insertNode(project.tree, note, home, Number.MAX_SAFE_INTEGER));
       await refresh();
       await openScene(session, project.dir, id);
     },
@@ -67,10 +92,10 @@ async function createNote(input: NoteActionsInput, project: Project, note: NewNo
   }
   await updateTree(insertNode(tree, { id, kind: "scene" }, sortId, Number.MAX_SAFE_INTEGER));
   await refresh();
-  askForFirstAnswer();
+  firstAnswerAsk.ask();
+  newNoteAsk.ask();
   if (await openScene(session, project.dir, id)) focusEditor?.();
-  else takeAskForFirstAnswer();
-  earnBadge("rollistan");
+  else firstAnswerAsk.take();
 }
 
 /** Only a link choice that differs from the sort's is written to the note. */

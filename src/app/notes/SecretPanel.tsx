@@ -1,4 +1,4 @@
-import { withNodeFields } from "../../project/contents.js";
+import { withNodeFields } from "../../project/nodeFields.js";
 import { earlyMentions, secretsKnownBy, secretsOf, type Secret } from "../../project/secrets.js";
 import type { TreeNode } from "../../project/tree.js";
 import type { Project } from "../useProject.js";

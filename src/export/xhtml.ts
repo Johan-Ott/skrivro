@@ -1,5 +1,6 @@
 import type { Node } from "prosemirror-model";
 import { quoteConverter, type Typography } from "./book.js";
+import { footnoteParagraph } from "./footnoteText.js";
 
 export const escapeXml = (text: string) =>
   text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -46,7 +47,8 @@ function inline(paragraph: Node, convert: (text: string) => string, notes: Scene
   paragraph.forEach((child) => {
     if (child.type.name === "lineBreak") return void (html += "<br />");
     if (child.type.name === "footnote") {
-      return void (html += noteReference(notes, escapeXml(convert(String(child.attrs["text"])))));
+      const note = footnoteParagraph(String(child.attrs["text"]));
+      return void (html += noteReference(notes, inline(note, convert, notes)));
     }
     let text = escapeXml(convert(child.text ?? ""));
     const marks = new Set(child.marks.map((mark) => mark.type.name));

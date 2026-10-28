@@ -1,8 +1,9 @@
 import { NO_WORDS, type CompletionWords } from "./vocabulary.js";
-import { takeAskForFirstAnswer } from "./firstAnswerAsk.js";
+import { firstAnswerAsk } from "../askOnce.js";
+import { caretFor, rememberCaret } from "./sceneCarets.js";
 import { firstAnswer } from "./promptHints.js";
 import type { Node } from "prosemirror-model";
-import type { Command, EditorState } from "prosemirror-state";
+import { TextSelection, type Command, type EditorState } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { useCallback, useRef, useState } from "react";
 import { manuscriptSchema as schema } from "../manuscript/schema.js";
@@ -23,7 +24,7 @@ function createView(
   const view: EditorView = new EditorView(element, {
     state,
     editable: switches.isEditable,
-    // The line being written stays clear of what floats at the foot, such as the sprint's pill.
+    // The line being written stays clear of what floats at the foot, such as the tools.
     scrollMargin: { top: 5, right: 5, bottom: 96, left: 5 },
     // Skrivro's own check, where there is one, instead of the browser's.
     attributes: () => ({
@@ -171,6 +172,22 @@ function useMount(
   }, []);
 }
 
+// A new note starts in its first answer; a scene gone back to, where its caret was left.
+function placedCaret(state: EditorState, caret: number | null) {
+  const { doc } = state;
+  const answer = firstAnswerAsk.take() ? firstAnswer(doc) : null;
+  const near =
+    caret === null ? null : TextSelection.near(doc.resolve(Math.min(caret, doc.content.size)));
+  const chosen = answer ?? near;
+  return chosen ? state.apply(state.tr.setSelection(chosen)) : state;
+}
+
+// A new state is not scrolled to its caret; only a dispatched transaction is.
+function showWithCaret(view: EditorView, state: EditorState) {
+  view.updateState(state);
+  view.dispatch(view.state.tr.scrollIntoView());
+}
+
 /** Components that show the text read it with useEditorState(editor); the rest is not redrawn. */
 export function useEditorView(onDocChange: (doc: Node) => void) {
   const viewRef = useRef<EditorView | null>(null);
@@ -180,11 +197,14 @@ export function useEditorView(onDocChange: (doc: Node) => void) {
   const [store] = useState(createEditorStore);
 
   const mount = useMount(viewRef, switches, store, onDocChangeRef);
-  const load = useCallback((doc: Node) => {
-    const state = createEditorState(doc, switches);
-    const answer = takeAskForFirstAnswer() ? firstAnswer(doc) : null;
-    viewRef.current?.updateState(answer ? state.apply(state.tr.setSelection(answer)) : state);
-    store.set(viewRef.current?.state ?? null);
+  const loadedKey = useRef<string | null>(null);
+  const load = useCallback((doc: Node, key?: string) => {
+    const view = viewRef.current;
+    if (view && loadedKey.current) rememberCaret(loadedKey.current, view.state);
+    loadedKey.current = key ?? null;
+    const caret = key ? caretFor(key, doc) : null;
+    if (view) showWithCaret(view, placedCaret(createEditorState(doc, switches), caret));
+    store.set(view?.state ?? null);
   }, []);
 
   const run = useCallback((command: Command, shouldFocus = true) => {

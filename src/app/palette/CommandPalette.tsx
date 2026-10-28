@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import {
-  inGroups,
+  inResultGroups,
   readUses,
   recordUse,
   searchPalette,
@@ -10,6 +10,7 @@ import { usePhone } from "../phone/usePhone.js";
 import type { Label } from "../../project/labels.js";
 import { PaletteFilters, usePaletteFilter } from "./PaletteFilters.js";
 import { shortcutOf } from "../shortcuts.js";
+import { NoteKindIcon } from "../notes/NoteKindIcon.js";
 import { t } from "../../i18n/i18n.js";
 
 // A command's group is a search key; a note's group is its sort's name, already translated.
@@ -80,7 +81,10 @@ function ResultRow({ index, ...props }: ResultProps & { index: number }) {
         onMouseMove={() => props.onHover(index)}
         onClick={() => props.onChoose(entry)}
       >
-        <span>{entry.label}</span>
+        <span className="palette-name">
+          <NoteKindIcon kind={entry.kind} />
+          <span className="palette-label">{entry.label}</span>
+        </span>
         <span className="palette-hint">
           {isPhone ? entry.hint : (entry.shortcut ?? entry.hint)}
         </span>
@@ -145,7 +149,7 @@ function PaletteInput(props: {
 function searchEntry(query: string, onSearch: (text: string) => void): PaletteEntry[] {
   const text = query.trim();
   if (!text) return [];
-  const label = t("Sök ”{text}” i hela manuset", { text });
+  const label = t("Sök ”{text}” i hela boken", { text });
   return [
     {
       id: "kommando:sök",
@@ -161,7 +165,7 @@ export function CommandPalette({ entries, labels, onClose, onSearch }: CommandPa
   const [query, setQuery] = useState("");
   const filter = usePaletteFilter(entries, labels);
   const matches = useMatches(filter, query);
-  const found = inGroups([...matches, ...searchEntry(query, onSearch)]);
+  const found = inResultGroups([...matches, ...searchEntry(query, onSearch)]);
   const selection = usePaletteSelection(found, onClose);
   return (
     <div className="palette-backdrop" onPointerDown={onClose}>

@@ -25,6 +25,8 @@ export interface TreeNode {
   labels?: string[];
   /** A secret: the scene where the reader learns it. */
   reveal?: string;
+  /** A file: the scene it was added from, so it shows in I scenen there. */
+  addedIn?: string;
   /** A secret: who learns it, by their note's id, and in which scene. */
   knownBy?: Record<string, string>;
   /** A chapter's or scene's own goal in words. */
@@ -163,13 +165,6 @@ export function putBack(tree: TreeNode[], id: string) {
   const { parentId, index } = placeBefore(tree, node);
   if (!canMoveInto(tree, back, parentId)) return tree;
   return insertNode(removeNode(tree, id), back, parentId, index);
-}
-
-export function renameNode(tree: TreeNode[], id: string, title: string): TreeNode[] {
-  return tree.map((node) => {
-    if (node.id === id) return { ...node, title };
-    return node.children ? { ...node, children: renameNode(node.children, id, title) } : node;
-  });
 }
 
 function collect(nodes: TreeNode[], wanted: NodeKind): TreeNode[] {

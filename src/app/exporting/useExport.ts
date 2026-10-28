@@ -3,7 +3,6 @@ import { ExportError, type Typography } from "../../export/book.js";
 import { TypstError } from "../../export/typstError.js";
 import { typstFiles, typstSource } from "../../export/typstBook.js";
 import { seriesDirOf } from "../../project/series.js";
-import { manuscriptWords } from "../../project/treeLabels.js";
 import { bookLanguage, quoteStyleFor } from "../../project/bookLanguage.js";
 import { recordFailure } from "@llkit/errorLog.js";
 import { ebookFile, isPlain, plainFile } from "./exportFiles.js";
@@ -19,7 +18,6 @@ import {
   type ExportProgress,
 } from "./bookMaterial.js";
 import { t } from "../../i18n/i18n.js";
-import { earnBadge } from "../journey/journeyEvents.js";
 
 export type ExportState =
   | { kind: "idle" }
@@ -114,9 +112,7 @@ function fileNameFor({ project, choices }: ExportJob) {
   return `${name}.${FILE_KINDS[choices.format].extension}`;
 }
 
-// A saved book also unlocks Till tryck, once there is something in it to print.
-function saved(path: string, project: Project): ExportState {
-  if (manuscriptWords(project.tree, project.summaries) > 0) earnBadge("till-tryck");
+function saved(path: string): ExportState {
   return { kind: "saved", fileName: fileNameOf(path), path };
 }
 
@@ -126,7 +122,7 @@ async function exportBook(job: ExportJob, isCancelled: () => boolean): Promise<E
     if (isCancelled()) return { kind: "idle" };
     const kind = FILE_KINDS[job.choices.format];
     const path = await platform.saveFile(fileNameFor(job), bytes, kind);
-    return path ? saved(path, job.project) : { kind: "idle" };
+    return path ? saved(path) : { kind: "idle" };
   } catch (error) {
     recordFailure("Export")(error);
     const known = error instanceof ExportError;

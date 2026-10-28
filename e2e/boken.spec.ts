@@ -51,6 +51,7 @@ test("the tree folds and unfolds all, and unfolds to a scene opened from the pal
   await page.keyboard.press("ControlOrMeta+k");
   await page.keyboard.type("Isen");
   await page.keyboard.press("Enter");
+  await expect(editor(page)).toContainText("Isen bar.");
   await expect(treeRow(page, "Isen")).toBeVisible();
 
   await sidebar(page)
@@ -189,4 +190,36 @@ test("a fixed sort is renamed and thrown away, and a note moves to another sort"
   await treeRow(page, "Gåtor").click({ button: "right" });
   await page.getByRole("menuitem", { name: "Flytta till papperskorg" }).click();
   await expect(treeRow(page, "Gåtor")).toBeHidden();
+});
+
+test("going back to a scene puts the caret where it was left", async ({ page }) => {
+  await cursorAfterFirstParagraph(page);
+  await treeRow(page, "Isen").click();
+  await expect(editor(page)).toContainText("Isen bar.");
+
+  await treeRow(page, "Köket").click();
+  await expect(editor(page)).toContainText("vantarna.");
+  // Typed at the caret the text holds, as a click would move the caret itself.
+  await page.evaluate(() =>
+    (window as unknown as { skrivro: { type: (text: string) => void } }).skrivro.type(" Hon log."),
+  );
+
+  await expect(editor(page)).toContainText("vantarna. Hon log.");
+});
+
+test("going back to a long scene scrolls to where the caret was left", async ({ page }) => {
+  await cursorAfterFirstParagraph(page);
+  for (let line = 1; line <= 40; line += 1) await page.keyboard.type(`\nRad ${line}`);
+  const row = editor(page).getByText("Rad 30", { exact: true });
+  await row.click();
+  await treeRow(page, "Isen").click();
+  await expect(editor(page)).toContainText("Isen bar.");
+
+  await treeRow(page, "Köket").click();
+  await expect(row).toBeInViewport();
+
+  await treeRow(page, "Isen").click();
+  await expect(editor(page)).toContainText("Isen bar.");
+  await page.getByRole("button", { name: "Bakåt" }).click();
+  await expect(row).toBeInViewport();
 });

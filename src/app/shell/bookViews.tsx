@@ -1,12 +1,10 @@
 import type { AppState } from "../App.js";
-import { askForReviewOnNextScreen } from "../review/reviewWanted.js";
+import { reviewAsk } from "../../askOnce.js";
 import { ContentsView } from "../contents/ContentsView.js";
 import { ReadView } from "../contents/ReadView.js";
 import { cursorAtBlock } from "../../editor/commands.js";
 import { sidebarProps } from "../paneProps.js";
 import { PublishView } from "../publish/PublishView.js";
-import { StudioView } from "../studio/StudioView.js";
-import { useState } from "react";
 import { openScene, writeOverScene } from "../sceneSession.js";
 import { SyncView } from "../sync/SyncReview.js";
 import { openIfOnDisk } from "../useSceneSession.js";
@@ -92,46 +90,22 @@ export function ReadScreen({ app, project, onBack }: ViewProps) {
   );
 }
 
-// The writer for the Studio's cards: the name from the settings, the rest from the profile.
-const authorOf = (app: AppState) => ({
-  name: app.startup.preferences.authorName,
-  picture: app.profile.profile.picture,
-  frame: app.profile.profile.frame,
-  title: app.profile.profile.title,
-});
-
 // Back to the text with Granska open, where the placeholders are listed.
 function showToCheck(app: AppState, onBack: () => void) {
-  askForReviewOnNextScreen();
+  reviewAsk.ask();
   onBack();
   app.writingMode.setReviewOpen(true);
 }
 
 export function PublishScreen({ app, project, onBack }: ViewProps) {
-  const [isStudio, setStudio] = useState(false);
-  const saveFields = (fields: Record<string, unknown>) => void app.updateFields(fields);
-  if (isStudio)
-    return (
-      <StudioView
-        project={project}
-        stats={app.stats}
-        journey={app.journey.journey}
-        link={app.profile.profile.link}
-        about={app.profile.profile.about}
-        author={authorOf(app)}
-        onSaveFields={saveFields}
-        onBack={() => setStudio(false)}
-      />
-    );
   return (
     <PublishView
       project={project}
       generalAuthor={app.startup.preferences.authorName}
-      onSaveFields={saveFields}
+      onSaveFields={(fields) => void app.updateFields(fields)}
       onOpenScene={(title) => openSceneTitled(app, project, title)}
       onBack={onBack}
       onShowToCheck={() => showToCheck(app, onBack)}
-      onStudio={() => setStudio(true)}
     />
   );
 }

@@ -11,11 +11,9 @@ import { IconButton, PaletteButton } from "./IconButton.js";
 import { t } from "../../i18n/i18n.js";
 import {
   BackIcon,
-  BookIcon,
   FocusIcon,
   ForwardIcon,
   MenuIcon,
-  PenIcon,
   ReadIcon,
   ReviewIcon,
   SidebarIcon,
@@ -49,22 +47,20 @@ const BrandMenu = ({ onOpen }: { onOpen: (event: MouseEvent<HTMLElement>) => voi
 
 function ModeSwitch({ view, onView }: Pick<TopbarProps, "view" | "onView">) {
   const isPublishing = view === "publicera";
-  const mode = (label: string, isOn: boolean, next: View, icon: ReactNode) => (
+  const mode = (label: string, isOn: boolean, next: View) => (
     <button
       role="tab"
       aria-selected={isOn}
-      aria-label={label}
-      title={label}
       className={isOn ? "mode chosen" : "mode"}
       onClick={() => onView(next)}
     >
-      {icon}
+      {label}
     </button>
   );
   return (
     <div className="mode-switch" role="tablist" aria-label={t("Läge")}>
-      {mode(t("Skriv"), !isPublishing, "skriv", <PenIcon />)}
-      {mode(t("Publicera"), isPublishing, "publicera", <BookIcon />)}
+      {mode(t("Skriv"), !isPublishing, "skriv")}
+      {mode(t("Publicera"), isPublishing, "publicera")}
     </div>
   );
 }

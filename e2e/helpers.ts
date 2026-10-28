@@ -1,10 +1,15 @@
 import { expect, type Page } from "@playwright/test";
 
-/** Opens the example book "Vintervägen" with its first scene in the editor. */
+/** Opens the example book "Vintervägen" with its first scene in the editor, and its notes
+ * unfolded in the sidebar so the tests reach them. */
 export async function openExample(page: Page) {
   await page.addInitScript(() => {
     if (!localStorage.getItem("skrivro.app")) {
       localStorage.setItem("skrivro.app", JSON.stringify({ isOnboardingDone: true }));
+    }
+    const folded = "skrivro.folded./Användare/Elin/Dokument/Skrivro/Vintervägen.skrivro";
+    if (!localStorage.getItem(folded)) {
+      localStorage.setItem(folded, JSON.stringify({ book: false, notes: false }));
     }
   });
   await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -57,4 +62,16 @@ export async function runCommand(page: Page, name: string) {
   await page.keyboard.press("ControlOrMeta+k");
   await page.keyboard.type(name);
   await page.keyboard.press("Enter");
+}
+
+/** Opens or closes a panel from the dock's Paneler menu. */
+export async function togglePanel(page: Page, name: string) {
+  await page.getByRole("button", { name: /^Paneler/ }).click();
+  // A panel that is open has a check mark before its name.
+  await page.getByRole("menuitemradio", { name: new RegExp(`${name}$`) }).click();
+}
+
+/** Opens the dock's Layouter menu; the caller chooses the row. */
+export async function openLayouts(page: Page) {
+  await page.getByRole("button", { name: /^Layouter/ }).click();
 }

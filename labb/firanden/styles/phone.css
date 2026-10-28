@@ -1,0 +1,9 @@
+/* Celebrations under the status bar, clear of the tabs and the tools at the foot. */
+@media (max-width: 600px) {
+  .celebrations {
+    top: calc(var(--safe-top) + 12px);
+    right: 12px;
+    width: calc(100vw - 24px);
+  }
+}
+

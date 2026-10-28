@@ -6,7 +6,7 @@ import type { Typography } from "../../export/book.js";
 import { DesignControls } from "../bookdesign/DesignControls.js";
 import { PrintPreview } from "../bookdesign/PrintPreview.js";
 import { BookFields } from "../exporting/BookFields.js";
-import { ExportStatus, Preview } from "../exporting/ExportPanels.js";
+import { AuthorWarning, ExportStatus, Preview } from "../exporting/ExportPanels.js";
 import { useCover } from "../exporting/useCover.js";
 import {
   startChoices,
@@ -29,7 +29,6 @@ interface PublishProps {
   onBack: () => void;
   /** Back to the text with Granska open, where the placeholders are listed. */
   onShowToCheck: () => void;
-  onStudio: () => void;
 }
 
 const FORMATS: [ExportFormat, string, string, string][] = [
@@ -142,11 +141,23 @@ function OpenStep({ props, publishing }: { props: PublishProps; publishing: Publ
   return <ExportStep {...props} choices={choices} setChoices={setChoices} />;
 }
 
+// What the export will carry as it stands: placeholders, and a manuscript without a writer.
+const ExportWarnings = ({ props, publishing }: { props: PublishProps; publishing: Publishing }) => (
+  <>
+    <PlaceholderWarning project={props.project} onShow={props.onShowToCheck} />
+    <AuthorWarning
+      {...props}
+      format={publishing.choices.format}
+      onShow={() => publishing.setStep("details")}
+    />
+  </>
+);
+
 // The tabs, and the part that is open under them.
 function StepsOrTiles({ props, publishing }: { props: PublishProps; publishing: Publishing }) {
   return (
     <>
-      <PublishTabs step={publishing.step} onStep={publishing.setStep} onStudio={props.onStudio} />
+      <PublishTabs step={publishing.step} onStep={publishing.setStep} />
       <OpenStep props={props} publishing={publishing} />
     </>
   );
@@ -174,7 +185,7 @@ export function PublishView(props: PublishProps) {
           onBack={props.onBack}
         />
         <StepsOrTiles props={props} publishing={publishing} />
-        <PlaceholderWarning project={props.project} onShow={props.onShowToCheck} />
+        <ExportWarnings props={props} publishing={publishing} />
         <button
           className="button primary publish-button"
           disabled={exporter.state.kind === "running"}

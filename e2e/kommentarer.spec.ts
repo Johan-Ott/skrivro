@@ -50,7 +50,7 @@ test("a comment can be removed, and its mark in the text goes with it", async ({
 });
 
 test("Förslagsläge shows what is typed and what is cut while it is written", async ({ page }) => {
-  await runCommand(page, "Förslagsläge");
+  await runCommand(page, "Skriv förslag");
   await cursorAfterFirstParagraph(page);
 
   await page.keyboard.type(" Hon log.");

@@ -1,5 +1,5 @@
 ---
-sort: Relationen
+sort: The relationship
 ---
 
 # The pact (template)

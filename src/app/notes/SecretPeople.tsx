@@ -1,4 +1,4 @@
-import { withNodeFields } from "../../project/contents.js";
+import { withNodeFields } from "../../project/nodeFields.js";
 import type { Secret } from "../../project/secrets.js";
 import { CHARACTERS_ID, manuscriptSceneIds, sceneIdsIn } from "../../project/tree.js";
 import { chapterOf } from "../../project/treeLabels.js";

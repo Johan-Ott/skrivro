@@ -4,20 +4,19 @@ import { undo as undoCommand } from "prosemirror-history";
 import type { EditorState } from "prosemirror-state";
 import { useEffect, useState } from "react";
 import type { useEditorView } from "../editor/useEditorView.js";
+import { cursorAt } from "../editor/commands.js";
 import {
   applyQuery,
   countMatches,
-  countMatchesIn,
   nextSceneWith,
   builtScene,
   type ManuscriptScope,
 } from "../editor/manuscriptSearch.js";
-import { manuscriptSceneIds } from "../project/tree.js";
 import { scenePath } from "../storage/sceneId.js";
 import { replaceInScenes, undoReplace, type SceneChange } from "./manuscriptReplace.js";
 import { platform } from "./platform.js";
 import { sceneHits } from "./searchHits.js";
-import { isKept, noteIds, notesLeftOut, WITH_NOTES } from "./searchFilter.js";
+import { replaceIds, searchIds } from "./searchFilter.js";
 import { useChips } from "./useSearchChips.js";
 import { openScene, type SceneSession } from "./sceneSession.js";
 import type { Project } from "./useProject.js";
@@ -39,18 +38,9 @@ interface SearchParts {
   only?: string[];
 }
 
-// Scenes still in the cloud have no text here; the notes come after the book when asked for.
-function manuscriptIds(project: Project, only: string[] = []) {
-  const notes = only.includes(WITH_NOTES) ? noteIds(project) : [];
-  return [...manuscriptSceneIds(project.tree), ...notes].filter(
-    (id) => project.scenes.includes(id) && isKept(project, id, only),
-  );
-}
-
-// Searching the open scene only needs the notes, for the hint that they hold the words; the whole
-// manuscript is read once it is searched too.
-async function loadScenes(project: Project, isWholeManuscript: boolean) {
-  const ids = isWholeManuscript ? manuscriptIds(project, [WITH_NOTES]) : notesLeftOut(project);
+// Every text but the open one is read from disk when the search goes past the open scene.
+async function loadScenes(project: Project) {
+  const ids = searchIds(project);
   const texts = await Promise.all(
     ids.map((id) => platform.fileSystem.readText(scenePath(project.dir, id)).catch(() => null)),
   );
@@ -68,9 +58,9 @@ function useSceneStates(parts: SearchParts, isWholeManuscript: boolean) {
   const { project, isSearchOpen } = parts;
   const openId = parts.session.scene?.id;
   useEffect(() => {
-    if (!project || !isSearchOpen) return;
+    if (!project || !isSearchOpen || !isWholeManuscript) return;
     let isCurrent = true;
-    void loadScenes(project, isWholeManuscript).then((loaded) => isCurrent && setScenes(loaded));
+    void loadScenes(project).then((loaded) => isCurrent && setScenes(loaded));
     return () => void (isCurrent = false);
     // Read again when the open scene changes, so what was written in the scene left is found.
   }, [project?.dir, project?.tree, project?.scenes, isSearchOpen, isWholeManuscript, openId]);
@@ -93,7 +83,7 @@ function positionAcross(parts: StepParts, query: SearchQuery, open: EditorState 
   if (!project) return { current: 0, total: 0 };
   let total = 0;
   let current = 0;
-  for (const id of manuscriptIds(project, parts.only)) {
+  for (const id of searchIds(project, parts.only)) {
     const state = parts.stateOf(id, open);
     if (!state) continue;
     const index = id === session.scene?.id && open ? matchIndex(open, query) : 0;
@@ -111,24 +101,16 @@ function findingActions(parts: StepParts) {
     step: (query: SearchQuery, isBackwards: boolean) => void stepAcross(parts, query, isBackwards),
     hits: (query: SearchQuery, open: EditorState | null) =>
       project
-        ? sceneHits(
-            project,
-            manuscriptIds(project, parts.only),
-            (id) => parts.stateOf(id, open),
-            query,
-          )
+        ? sceneHits(project, searchIds(project, parts.only), (id) => parts.stateOf(id, open), query)
         : [],
-    inNotes: (query: SearchQuery, open: EditorState | null) =>
-      project
-        ? countMatchesIn(notesLeftOut(project, parts.only), (id) => parts.stateOf(id, open), query)
-        : 0,
     openHit: (id: string, query: SearchQuery) => void showMatchIn(parts, id, query, false),
   };
 }
 
 export function useManuscriptSearch(searchParts: SearchParts) {
-  const [isOn, setOn] = useState(false);
-  const { only, chips, toggleChip, showNotes } = useChips(searchParts.project, setOn);
+  // The whole book, notes too, unless the writer narrows it to the open text.
+  const [isOn, setOn] = useState(true);
+  const { only, chips, toggleChip } = useChips(searchParts.project);
   const parts = { ...searchParts, only };
   const [replaceDone, setReplaceDone] = useState<ReplaceDone | null>(null);
   const stateOf = useSceneStates(parts, isOn);
@@ -138,7 +120,7 @@ export function useManuscriptSearch(searchParts: SearchParts) {
     count > 0 && setReplaceDone({ count, search, changes: null });
   const finding = findingActions({ ...parts, stateOf });
   const scope: ManuscriptScope = {
-    ...{ isOn, setOn, ...finding, replaceAll, replacedInScene, chips, toggleChip, showNotes },
+    ...{ isOn, setOn, ...finding, replaceAll, replacedInScene, chips, toggleChip },
   };
   const undo = () => {
     if (replaceDone?.changes) void undoEverywhere(parts, replaceDone.changes);
@@ -161,7 +143,7 @@ function sceneToStepTo(
   const { project, session } = parts;
   if (!project) return null;
   return nextSceneWith(
-    manuscriptIds(project, parts.only),
+    searchIds(project, parts.only),
     session.scene?.id ?? null,
     isBackwards,
     (id) => {
@@ -184,7 +166,11 @@ async function stepAcross(parts: StepParts, query: SearchQuery, isBackwards: boo
 async function showMatchIn(parts: StepParts, id: string, query: SearchQuery, isBackwards: boolean) {
   const { project, session, editor } = parts;
   if (!project) return;
-  if (id !== session.scene?.id && !(await openScene(session, project.dir, id))) return;
+  if (id !== session.scene?.id) {
+    if (!(await openScene(session, project.dir, id))) return;
+    // From the scene's start, not where its caret was left, so no match in it is passed by.
+    editor.run(cursorAt(0), false);
+  }
   // A newly opened scene has a fresh editor state without the query.
   editor.run(applyQuery(query), false);
   editor.run(isBackwards ? findPrev : findNext, false);
@@ -196,7 +182,7 @@ async function replaceEverywhere(parts: SearchParts, query: SearchQuery) {
   const { changes, count } = await replaceInScenes(
     platform.fileSystem,
     project.dir,
-    manuscriptIds(project, parts.only),
+    replaceIds(project, parts.only),
     query,
   );
   await reloadOpenScene(parts, changes);

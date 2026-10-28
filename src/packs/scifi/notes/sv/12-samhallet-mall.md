@@ -22,10 +22,6 @@ Byt namn på anteckningen till samhällets, statens eller gruppens namn.
 
 <!-- Vilken regel styr vardagen, och vad händer den som bryter mot den? -->
 
-**Värderingarna och språket:**
-
-<!-- Vilka ord har bytt betydelse? -->
-
 **Motståndet:**
 
 <!-- Vem kämpar emot, och hur? -->
@@ -33,7 +29,3 @@ Byt namn på anteckningen till samhällets, statens eller gruppens namn.
 **Historien:**
 
 <!-- Vilken händelse ledde hit, och hur berättar olika grupper om den? -->
-
-**Det läsaren känner igen:**
-
-<!-- Vad påminner om vår egen tid? -->

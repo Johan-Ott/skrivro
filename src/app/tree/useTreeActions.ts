@@ -6,10 +6,10 @@ import {
   moveNode,
   moveToTrash,
   putBack,
-  renameNode,
   sceneIdsIn,
   type TreeNode,
 } from "../../project/tree.js";
+import { renameNode } from "../../project/nodeFields.js";
 import type { TreeRow } from "../../project/treeRows.js";
 
 export interface TreeActionHandlers {

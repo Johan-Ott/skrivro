@@ -1,0 +1,43 @@
+/* Above the tools over the keyboard. A running sprint shows in the phone's bar instead. */
+.phone-text .sprint-bar {
+  bottom: 64px;
+}
+
+.phone-text .sprint-bar[role="timer"] {
+  display: none;
+}
+
+.phone-bar .sprint-clock {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The sprint's settings fill the screen's width, with arrows a finger can hit. */
+.phone-app .sprint-settings {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.phone-app .sprint-setting {
+  border: 1px solid var(--border-card);
+}
+
+.phone-app .sprint-setting button {
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.phone-app .sprint-setting-label {
+  font-size: 12px;
+}
+
+.phone-app .sprint-setting-value {
+  font-size: 28px;
+}
+
+.phone-app .sprint-setting-unit {
+  font-size: 12px;
+}

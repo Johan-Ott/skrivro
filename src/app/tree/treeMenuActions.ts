@@ -5,11 +5,12 @@ import { statusSteps } from "../../project/statusSteps.js";
 import { labelMenu } from "../labels/LabelsInTree.js";
 import type { Project } from "../useProject.js";
 import type { TreeMenuActions } from "./treeMenus.js";
-import type { Actions, TreeViewProps, View } from "./useTreeView.js";
+import { showMovedRow } from "./treeEffects.js";
+import type { Tree, TreeViewProps } from "./useTreeView.js";
 
 /** What each row's menu does, from the tree's own actions and the app's handlers. */
-export function menuActions(actions: Actions, props: TreeViewProps, view: View): TreeMenuActions {
-  const { summaries } = props.project;
+export function menuActions(tree: Tree, props: TreeViewProps): TreeMenuActions {
+  const { actions, view } = tree;
   return {
     open: (node) => actions.activate(node),
     add: props.onAdd,
@@ -17,7 +18,7 @@ export function menuActions(actions: Actions, props: TreeViewProps, view: View):
     trash: (node) => actions.trash(node),
     restore: (node) => actions.restore(node),
     setStatus: (node, status) => props.onSetSceneStatus(node.id, status),
-    statusOf: (node) => summaries[node.id]?.status ?? null,
+    statusOf: (node) => props.project.summaries[node.id]?.status ?? null,
     statusName: (status) => statusSteps(props.project.fields)[status].name,
     showSnapshots: (node) => props.onShowSnapshots(node.id),
     openBeside: (node) => props.onOpenBeside(node.id),
@@ -35,13 +36,14 @@ export function menuActions(actions: Actions, props: TreeViewProps, view: View):
     showDrafts: props.onShowDrafts ? (node) => props.onShowDrafts?.(node.id) : null,
     editLabels: props.onUpdateProject ? (node) => view.setLabelsFor(node.id) : null,
     focus: (node) => view.setFocusId(node.id),
-    ...sortActions(props),
+    ...sortActions(props, tree),
   };
 }
 
 // A note moves between sorts from its menu, as dragging does on the computer, or is kept as a
-// template.
-function sortActions({ project, onChangeTree, onSaveAsTemplate, onNewLapp }: TreeViewProps) {
+// template. What moves into a sort shows there, as a note just made does.
+function sortActions(props: TreeViewProps, { view, folded }: Tree) {
+  const { project, onChangeTree, onSaveAsTemplate, onNewLapp } = props;
   return {
     newLapp: onNewLapp ?? null,
     saveAsTemplate: onSaveAsTemplate ? (node: TreeNode) => onSaveAsTemplate(node.id) : null,
@@ -51,8 +53,12 @@ function sortActions({ project, onChangeTree, onSaveAsTemplate, onNewLapp }: Tre
         .filter((sort) => sort.id !== parentId)
         .map((sort) => ({ id: sort.id, name: nodeLabel(sort, project.tree, project.summaries) }));
     },
-    moveInto: (node: TreeNode, parentId: string) =>
-      onChangeTree(moveNode(project.tree, node.id, parentId, Number.MAX_SAFE_INTEGER)),
+    moveInto: (node: TreeNode, sortId: string) => {
+      folded.unfold("notes");
+      view.expand([sortId]);
+      onChangeTree(moveNode(project.tree, node.id, sortId, Number.MAX_SAFE_INTEGER));
+      showMovedRow(node.id, view.setMovedId);
+    },
     wasNote: (node: TreeNode) => sortsOf(project.tree).some((sort) => sort.id === node.trashedFrom),
     isFile: (node: TreeNode) => Boolean(project.summaries[node.id]?.file),
     makeScene: project.dir.endsWith(".serie")

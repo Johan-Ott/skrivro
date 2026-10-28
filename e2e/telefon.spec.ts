@@ -40,10 +40,13 @@ test("a person opens from Personer in the tree, and back returns to Boken", asyn
   await expect(page.getByRole("treeitem").filter({ hasText: "Arvid" })).toBeVisible();
 });
 
-test("Granska opens over the whole text and closes again", async ({ page }) => {
+// The text's own menu opens Granska in "Android's back closes Granska" below.
+test("Granska opens from Boken's menu over the chosen text, and closes", async ({ page }) => {
   await page.getByRole("button", { name: /Fortsätt skriva/ }).click();
+  await page.getByRole("button", { name: "Boken" }).click();
 
-  await page.getByRole("button", { name: /att se över/ }).click();
+  await page.getByRole("button", { name: "Meny", exact: true }).click();
+  await page.getByRole("menuitem", { name: /^Granska/ }).click();
   await expect(page.getByRole("complementary", { name: "Granskning" })).toBeVisible();
   await page.getByRole("button", { name: "Stäng granskning" }).click();
 
@@ -72,24 +75,19 @@ test("the tabs go to Innehåll and Publicera, and back to Boken", async ({ page 
   await expect(page.getByRole("button", { name: /Fortsätt skriva/ })).toBeVisible();
 });
 
-test("Android's back leaves Studio, then goes from Publicera to Innehåll", async ({ page }) => {
-  const back = () =>
-    page.evaluate(() => (window as { skrivroBack?: () => boolean }).skrivroBack?.());
+test("Android's back goes from Publicera to Innehåll", async ({ page }) => {
   await page.getByRole("button", { name: "Innehåll" }).click();
   await page.getByRole("button", { name: "Publicera" }).click();
-  await page.getByRole("button", { name: /Studio/ }).click();
-  await expect(page.locator(".studio")).toBeVisible();
 
-  await back();
-  await expect(page.locator(".studio")).toHaveCount(0);
-  await back();
+  await page.evaluate(() => (window as { skrivroBack?: () => boolean }).skrivroBack?.());
 
   await expect(page.locator(".contents-view")).toBeVisible();
 });
 
 test("Android's back closes Granska and stays in the text", async ({ page }) => {
   await page.getByRole("button", { name: /Fortsätt skriva/ }).click();
-  await page.getByRole("button", { name: /att se över/ }).click();
+  await page.getByRole("button", { name: "Meny", exact: true }).click();
+  await page.getByRole("menuitem", { name: /^Granska/ }).click();
   await expect(page.locator(".review-panel.open")).toBeVisible();
 
   await page.evaluate(() => (window as { skrivroBack?: () => boolean }).skrivroBack?.());
@@ -103,6 +101,15 @@ test("the palette on the phone has no folder to pick", async ({ page }) => {
   await page.keyboard.type("mapp");
 
   await expect(page.getByText("Öppna projektmapp…")).toBeHidden();
+});
+
+test("the phone's search shows a lapp with its name and its sign", async ({ page }) => {
+  await page.getByRole("button", { name: "Sök" }).first().click();
+  await page.keyboard.type("Vem tände");
+
+  const option = page.getByRole("option", { name: /Vem tände ljusen/ });
+  await expect(option.getByText(/Vem tände ljusen/)).toBeVisible();
+  await expect(option.getByRole("img", { name: "Lapp" })).toBeVisible();
 });
 
 test("the shelf on the phone has a menu with Inställningar, and no folder to pick", async ({
@@ -157,7 +164,8 @@ test("a scene in Boken has its menu behind ⋯", async ({ page }) => {
 
 test("Läs kapitlet reads the chapter on the phone", async ({ page }) => {
   await page.getByRole("button", { name: /Fortsätt skriva/ }).click();
-  await page.getByRole("button", { name: "Läs kapitlet" }).click();
+  await page.getByRole("button", { name: "Meny för kapitlet" }).click();
+  await page.getByRole("menuitem", { name: "Läs kapitlet" }).click();
 
   await expect(page.locator(".read-view")).toContainText("Brevet låg på köksbordet");
 });

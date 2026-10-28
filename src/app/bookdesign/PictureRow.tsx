@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
-import { choosePicture, pictureUrlIn } from "../pictureFiles.js";
+import { useState } from "react";
+import { choosePicture, readBookPicture } from "../pictureFiles.js";
+import { usePictureUrl } from "../usePictureUrl.js";
 import { t } from "../../i18n/i18n.js";
 
-// A thumbnail of a picture in the book's bilder/ folder.
-export function usePictureUrl(dir: string, name: string) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    if (!name) return setUrl(null);
-    let isCurrent = true;
-    void pictureUrlIn(dir, name).then((found) => isCurrent && setUrl(found));
-    return () => {
-      isCurrent = false;
-    };
-  }, [dir, name]);
-  return url;
-}
+/** A thumbnail of a picture in the book's bilder/ folder; "" is none. */
+export const useBookPicture = (dir: string, name: string) =>
+  usePictureUrl(name ? `${dir}/${name}` : null, () => readBookPicture(dir, name));
 
 function usePickPicture(dir: string, onChange: (name: string) => void) {
   const [problem, setProblem] = useState<string | null>(null);
@@ -39,7 +30,7 @@ export function PictureRow(props: {
   removeLabel?: string | null;
   onChange: (name: string) => void;
 }) {
-  const url = usePictureUrl(props.dir, props.name);
+  const url = useBookPicture(props.dir, props.name);
   const removeLabel = props.removeLabel === undefined ? t("Ta bort") : props.removeLabel;
   const { problem, choose } = usePickPicture(props.dir, props.onChange);
   return (

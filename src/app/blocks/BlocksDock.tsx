@@ -1,69 +1,79 @@
 import type { ReactNode } from "react";
+import { useMenuButton, type MenuItem } from "@llkit/Menu.js";
 import type { AppState } from "../App.js";
-import { ChartIcon, ImageIcon, NoteIcon, PeopleIcon } from "../shell/icons.js";
-import { SprintButton } from "../sprint/SprintBar.js";
 import type { Project } from "../useProject.js";
 import { BlockPanel } from "./BlockPanel.js";
-import { openBlocks, toggleBlock } from "./layout.js";
-import { LayoutButton } from "./LayoutButton.js";
+import { activeLayout, layouts, openBlocks, toggleBlock } from "./layout.js";
+import { layoutItems } from "./layoutItems.js";
 import { InSceneBlock } from "./InSceneBlock.js";
 import { ReferenceBlock } from "./ReferenceBlock.js";
 import { StickyNotesLayer } from "./StickyNotes.js";
 import { useStickyNotes } from "./useStickyNotes.js";
 import { t } from "../../i18n/i18n.js";
 
-// The blocks as icons at the text's foot on the right, before Granska; each opens as a panel
-// that can be moved, and closing it makes it an icon again.
+// One button at the text's foot on the right, before Granska, with the panels in words; each
+// opens as a panel that can be moved, and choosing it again closes it.
 
 type Props = { app: AppState; project: Project; review: ReactNode };
-type Block = { id: string; title: string; icon: ReactNode; body: (props: Props) => ReactNode };
+type Block = { id: string; title: string; body: (props: Props) => ReactNode };
 
 const BLOCKS: Block[] = [
   {
     id: "iscenen",
     title: t("I scenen"),
-    icon: <PeopleIcon />,
     body: (props) => <InSceneBlock app={props.app} />,
   },
   {
     id: "referens",
     title: t("Referensbild"),
-    icon: <ImageIcon />,
     body: (props) => <ReferenceBlock project={props.project} />,
   },
 ];
 
-// Lappar are not a panel but notes of their own over the text; the dock shows and hides them.
+// Lappar are not a panel but notes of their own over the text; the menu shows and hides them.
 const NOTES = "lappar";
-const NOTES_BUTTON = { id: NOTES, title: t("Lappar"), icon: <NoteIcon />, body: () => null };
+const NOTES_BLOCK = { id: NOTES, title: t("Lappar"), body: () => null };
 
-// Insikter keeps its own open state, as Granska does; here it is one more icon.
-function InsightsButton({ app }: { app: AppState }) {
-  const { isProgressOpen, setProgressOpen } = app.writingMode;
-  return (
-    <button
-      className={isProgressOpen ? "dock-button chosen" : "dock-button"}
-      aria-label={t("Insikter")}
-      aria-pressed={isProgressOpen}
-      title={t("Insikter")}
-      onClick={() => setProgressOpen(!isProgressOpen)}
-    >
-      <ChartIcon />
-    </button>
-  );
+// Insikter keeps its own open state, as Granska does; in the menu it is one more panel.
+function panelItems(props: Props, open: string[]): MenuItem[] {
+  const { isProgressOpen, setProgressOpen } = props.app.writingMode;
+  const item = (block: Block): MenuItem => ({
+    label: block.title,
+    isChecked: open.includes(block.id),
+    onSelect: () => toggleBlock(block.id),
+  });
+  return [
+    item(NOTES_BLOCK),
+    ...BLOCKS.map(item),
+    {
+      label: t("Insikter"),
+      isChecked: isProgressOpen,
+      onSelect: () => setProgressOpen(!isProgressOpen),
+    },
+  ];
 }
 
-function DockButton(props: { block: Block; isOpen: boolean; onToggle: () => void }) {
+function PanelsButton(props: Props & { open: string[] }) {
+  const menu = useMenuButton(t("Paneler"), panelItems(props, props.open));
+  return <DockMenuButton label={t("Paneler")} menu={menu} />;
+}
+
+function LayoutsButton({ app }: { app: AppState }) {
+  const active = activeLayout.use();
+  const menu = useMenuButton(t("Layouter"), layoutItems(app, layouts.use()));
+  const name = t("Layout {slot}", { slot: active ?? 0 });
+  const label = active ? t("Layouter · {name}", { name }) : t("Layouter");
+  return <DockMenuButton label={label} menu={menu} />;
+}
+
+function DockMenuButton(props: { label: string; menu: ReturnType<typeof useMenuButton> }) {
   return (
-    <button
-      className={props.isOpen ? "dock-button chosen" : "dock-button"}
-      aria-label={props.block.title}
-      aria-pressed={props.isOpen}
-      title={props.block.title}
-      onClick={props.onToggle}
-    >
-      {props.block.icon}
-    </button>
+    <>
+      <button className="dock-button" aria-haspopup="menu" onClick={props.menu.open}>
+        {props.label} ▾
+      </button>
+      {props.menu.menu}
+    </>
   );
 }
 
@@ -82,24 +92,13 @@ function OpenPanels(props: Props & { open: string[] }) {
 export function BlocksDock(props: Props) {
   const open = openBlocks.use();
   const notes = useStickyNotes(props.project, props.app);
-  const button = (block: Block) => (
-    <DockButton
-      key={block.id}
-      block={block}
-      isOpen={open.includes(block.id)}
-      onToggle={() => toggleBlock(block.id)}
-    />
-  );
   return (
     <>
       {open.includes(NOTES) && <StickyNotesLayer key={props.project.dir} state={notes} />}
       <OpenPanels {...props} open={open} />
       <div className="blocks-dock">
-        {button(NOTES_BUTTON)}
-        {BLOCKS.map(button)}
-        <SprintButton look="dock-button" />
-        <InsightsButton app={props.app} />
-        <LayoutButton app={props.app} />
+        <PanelsButton {...props} open={open} />
+        <LayoutsButton app={props.app} />
         {props.review}
       </div>
     </>

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { searchChips, WITH_NOTES } from "./searchFilter.js";
+import { searchChips } from "./searchFilter.js";
 import type { Project } from "./useProject.js";
 
-// The chips under the search; Med anteckningar can also be turned on by the hint that the notes hold
-// the words, which then searches the whole manuscript too.
-export function useChips(project: Project | null, setOn: (isOn: boolean) => void) {
+/** The chips under the search: status steps and labels that narrow it. */
+export function useChips(project: Project | null) {
   const [only, setOnly] = useState<string[]>([]);
   const chips = (project ? searchChips(project) : []).map((chip) => ({
     ...chip,
@@ -12,9 +11,5 @@ export function useChips(project: Project | null, setOn: (isOn: boolean) => void
   }));
   const toggleChip = (id: string) =>
     setOnly(only.includes(id) ? only.filter((each) => each !== id) : [...only, id]);
-  const showNotes = () => {
-    setOn(true);
-    setOnly(only.includes(WITH_NOTES) ? only : [...only, WITH_NOTES]);
-  };
-  return { only, chips, toggleChip, showNotes };
+  return { only, chips, toggleChip };
 }

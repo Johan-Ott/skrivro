@@ -1,5 +1,5 @@
 ---
-sort: Världen
+sort: The world
 ---
 
 # Everyday technology (template)
@@ -29,7 +29,3 @@ Rename the note to the gadget's or system's name. Fill it in for what people in 
 **How it sounds, smells and feels:**
 
 <!-- A sensory detail an everyday user no longer notices. -->
-
-**How it shows in a scene:**
-
-<!-- Which scene shows it without explaining? -->

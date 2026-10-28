@@ -8,11 +8,10 @@ import type { SaveStatus } from "@llkit/storage/autosave.js";
 import { errorLog } from "@llkit/errorLog.js";
 import { platform } from "./platform.js";
 import { useSavedOnLeaving } from "./useSavedOnLeaving.js";
-import { greetBack, placeIn, showResume, useRememberPlace } from "./resume/lastPlace.js";
+import { placeIn, showResume, useRememberPlace } from "./resume/lastPlace.js";
 import {
   closeScene,
   createSceneSession,
-  flushOrKeep,
   openScene,
   sceneEdited,
   type DiskConflict,
@@ -20,6 +19,7 @@ import {
   type SceneSession,
   type SceneSessionHooks,
 } from "./sceneSession.js";
+import { flushOrKeep } from "./keepText.js";
 
 const logged = (status: SaveStatus) => {
   if (status.kind === "failed") errorLog.record(`Scenen kunde inte sparas: ${status.reason}`);
@@ -113,9 +113,7 @@ export function useOpenFirstScene(
     const shown = setTimeout(() => arrivingText.set(false), 3000);
     // Du slutade här needs a sentence to show; a place without one just opens there.
     void openScene(session, project.dir, firstScene)
-      .then(() =>
-        place?.before?.trim() ? (showResume(place), greetBack(project, place)) : focusEditor(),
-      )
+      .then(() => (place?.before?.trim() ? showResume(place) : focusEditor()))
       .finally(() => (clearTimeout(shown), arrivingText.set(false)));
   }, [project, session, focusEditor, seriesDir]);
 }

@@ -1,11 +1,7 @@
-import { earnedOf, wornFlair } from "../../project/flair.js";
-import { journeySummary } from "../../project/inkwell.js";
-import type { Journey } from "../../project/journey.js";
-import { dayKey } from "../../project/stats.js";
 import { platform } from "../platform.js";
 import { Avatar } from "./Avatar.js";
 import type { Profile } from "./useProfile.js";
-import { t, formatNumber } from "../../i18n/i18n.js";
+import { t } from "../../i18n/i18n.js";
 
 const PICTURE = { name: t("Bild"), extensions: ["jpg", "jpeg", "png"] };
 const SIDE = 192;
@@ -22,36 +18,19 @@ async function smallPicture(bytes: Uint8Array) {
   return canvas.toDataURL("image/jpeg", 0.85);
 }
 
-function factsOf(journey: Journey) {
-  const summary = journeySummary(journey, dayKey(Date.now()));
-  const days = Object.values(journey.words).filter((words) => words > 0).length;
-  return [
-    summary.level.name,
-    summary.rank.name,
-    t("{count} ord", { count: formatNumber(summary.words) }),
-    days === 1 ? t("1 skrivdag") : t("{count} skrivdagar", { count: days }),
-  ].join(" · ");
-}
-
 export function ProfileHead(props: {
-  form: Pick<Profile, "picture" | "frame" | "title"> & { name: string };
-  journey: Journey;
+  form: Pick<Profile, "picture"> & { name: string };
   onPicture: (picture: string) => void;
 }) {
   const pick = async () => {
     const picked = await platform.pickFile(PICTURE);
     if (picked) props.onPicture(await smallPicture(picked.bytes));
   };
-  const earned = earnedOf(props.journey, dayKey(Date.now()));
-  const frame = wornFlair(props.form.frame, earned)?.id ?? "";
-  const title = wornFlair(props.form.title, earned)?.name;
   return (
     <div className="profile-head">
-      <Avatar name={props.form.name} picture={props.form.picture} size={64} frame={frame} />
+      <Avatar name={props.form.name} picture={props.form.picture} size={64} />
       <span className="profile-who">
         <span className="profile-name">{props.form.name || t("Ditt namn")}</span>
-        {title && <span className="profile-title">{title}</span>}
-        <span className="insight-muted">{factsOf(props.journey)}</span>
       </span>
       <button className="button secondary small" onClick={() => void pick()}>
         {t("Byt bild")}

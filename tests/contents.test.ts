@@ -6,11 +6,11 @@ import {
   leastFinished,
   movedInTime,
   sceneRows,
-  withNodeFields,
   withNodeText,
   withSceneMoved,
 } from "../src/project/contents";
 import { CHARACTERS_ID, findNode, withSpecialFolders, type TreeNode } from "../src/project/tree";
+import { withNodeFields } from "../src/project/nodeFields";
 
 const scene = (id: string): TreeNode => ({ id, kind: "scene" });
 const tree: TreeNode[] = withSpecialFolders([
@@ -149,5 +149,17 @@ describe("contentsGroups", () => {
       ["Hemkomsten", ["kap1", "kap2"]],
       [null, ["lös"]],
     ]);
+  });
+});
+
+describe("a field set by its key, as the sync and the goal do", () => {
+  it("is set as any other field, and removed again when it is undefined", () => {
+    const tree: TreeNode[] = [{ id: "kap1", kind: "chapter", children: [] }];
+
+    const withGoal = withNodeFields(tree, "kap1", { ["goal"]: 3000 });
+    const without = withNodeFields(withGoal, "kap1", { ["goal"]: undefined });
+
+    expect(findNode(withGoal, "kap1")?.node.goal).toBe(3000);
+    expect(findNode(without, "kap1")?.node).not.toHaveProperty("goal");
   });
 });

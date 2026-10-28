@@ -3,7 +3,7 @@ import { STICKY_ID } from "../../project/sorts.js";
 import { TRASH_ID, type NodeKind, type TreeNode } from "../../project/tree.js";
 import { SCENE_STATUSES, type SceneStatus } from "../../manuscript/sceneFile.js";
 import type { MenuItem } from "@llkit/Menu.js";
-import { noteItems } from "./noteMenus.js";
+import { noteItems, noteMoves } from "./noteMenus.js";
 import { shortcutOf } from "../shortcuts.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -131,7 +131,8 @@ function statusItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] {
   const edit = editLabels
     ? [{ label: t("Ändra stegen…"), separatorBefore: true, onSelect: () => editLabels(node) }]
     : [];
-  return [{ label: t("Status"), separatorBefore: true, submenu: [...steps, ...edit] }];
+  const status = { label: t("Status"), separatorBefore: true, submenu: [...steps, ...edit] };
+  return [status, ...noteMoves(node, actions)];
 }
 
 // Up and down among its siblings, where dragging is no way to move it, as on a phone.

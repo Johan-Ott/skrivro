@@ -5,6 +5,7 @@ import {
   openExample,
   runCommand,
   selectFirstWord,
+  togglePanel,
 } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
@@ -95,16 +96,14 @@ test("the palette's chips narrow the search to the kinds chosen", async ({ page 
   await expect(palette.locator(".palette-group")).toHaveText(["Kapitel", "Kommandon"]);
 });
 
-test("Insikter shows today's page, the week and the book's words per step", async ({ page }) => {
+test("Insikter shows today's page and the week", async ({ page }) => {
   await cursorAfterFirstParagraph(page);
   await page.keyboard.type(" Hon log.");
   await expect(page.getByText(/^2 \/ 500 ord$/).first()).toBeVisible();
-  await page.getByRole("button", { name: "Insikter", exact: true }).click();
+  await togglePanel(page, "Insikter");
 
   const progress = page.getByRole("complementary", { name: "Insikter" });
   await expect(progress.getByText("Den här veckan")).toBeVisible();
-  await expect(progress.getByText("Ord per steg")).toBeVisible();
-  await expect(progress.getByText("Utkast 145")).toBeVisible();
 });
 
 test("a chapter's point of view is written in Innehåll and kept", async ({ page }) => {
@@ -181,8 +180,9 @@ test("versions of the open scene can be opened", async ({ page }) => {
   await expect(page.getByRole("dialog")).toBeVisible();
 });
 
-test("the text's own header opens its versions, beside Läs kapitlet", async ({ page }) => {
-  await page.locator(".text-header").getByRole("button", { name: "Versioner" }).click();
+test("the text's own header opens its versions from the chapter menu", async ({ page }) => {
+  await page.locator(".text-header").getByRole("button", { name: "Meny för kapitlet" }).click();
+  await page.getByRole("menuitem", { name: "Versioner" }).click();
 
   await expect(page.getByRole("dialog")).toBeVisible();
 });
@@ -227,7 +227,7 @@ test("the focus mode button keeps the cursor in the text, so nothing typed is lo
 test("Förslagsläge keeps the text as it was, and what was typed comes back to accept", async ({
   page,
 }) => {
-  await runCommand(page, "Förslagsläge");
+  await runCommand(page, "Skriv förslag");
   await cursorAfterFirstParagraph(page);
   await page.keyboard.type(" Hon log.");
   await expect(page.getByRole("status").filter({ hasText: "Förslagsläge" })).toBeVisible();

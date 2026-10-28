@@ -1,5 +1,6 @@
 ---
 sort: The world
+standard: true
 ---
 
 # The magic system (template)
@@ -33,7 +34,3 @@ Rename the note to what the magic is called in your world.
 **The bond:**
 
 <!-- How does the magic tie to the love story? -->
-
-**At the end:**
-
-<!-- Which price is paid in the deciding battle? -->

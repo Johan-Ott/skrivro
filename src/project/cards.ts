@@ -18,18 +18,24 @@ export const isLinkedByDefault = (sortId: string) => sortId !== NOTES_ID && sort
 export const noteIdsOf = (tree: TreeNode[]) =>
   new Set(sortsOf(tree).flatMap((sort) => sceneIdsIn(tree, sort.id)));
 
-// A scene whose file has not arrived yet has no summary, and so no name.
-export function cardsOf(tree: TreeNode[], summaries: Record<string, SceneSummary>): Card[] {
+/** Every note in the sorts, linked or not: lappar and files too. A scene whose file has not
+ * arrived yet has no summary, and so no name. */
+export function notesOf(tree: TreeNode[], summaries: Record<string, SceneSummary>): Card[] {
   return sortsOf(tree).flatMap((sort) =>
     sceneIdsIn(tree, sort.id).flatMap((id) => {
       const summary = summaries[id];
-      const isLinked = summary?.link ?? isLinkedByDefault(sort.id);
-      if (!summary || !isLinked) return [];
+      if (!summary) return [];
       const aliases = summary.aliases ? { aliases: summary.aliases } : {};
       return [{ id, sortId: sort.id, name: summary.title, ...aliases }];
     }),
   );
 }
+
+/** The notes whose names are linked in the text. */
+export const cardsOf = (tree: TreeNode[], summaries: Record<string, SceneSummary>) =>
+  notesOf(tree, summaries).filter(
+    (card) => summaries[card.id]?.link ?? isLinkedByDefault(card.sortId),
+  );
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 

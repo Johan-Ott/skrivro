@@ -56,13 +56,3 @@ test("a comment made in the page marks the words in Skriv", async ({ page }) => 
   await page.keyboard.press("Escape");
   await expect(editor(page).locator(".commented")).toHaveText("handstilen");
 });
-
-test("Dela uppslag shows the spread on show as a picture to save", async ({ page }) => {
-  await page.keyboard.press("ControlOrMeta+r");
-  await page.getByRole("button", { name: "Dela uppslag" }).click();
-
-  const share = page.getByRole("dialog", { name: "Dela" });
-  await expect(share.locator("canvas")).toBeVisible();
-  await share.getByRole("radio", { name: "Hela boken" }).click();
-  await expect(share.getByRole("button", { name: "Spara bild" })).toBeEnabled();
-});

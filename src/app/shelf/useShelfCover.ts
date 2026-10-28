@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { findCover, saveCover, type CoverPicture } from "../../project/cover.js";
 import { recordFailure } from "@llkit/errorLog.js";
-import { usePictureUrl } from "../exporting/useCover.js";
+import { useCoverUrl } from "../exporting/useCover.js";
 import { platform } from "../platform.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -28,5 +28,5 @@ export function useShelfCover(dir: string) {
     await saveCover(platform.fileSystem, dir, picked.bytes).catch(recordFailure(t("Omslaget")));
     setPicture(await reload());
   };
-  return { url: usePictureUrl(picture), choose: () => void choose() };
+  return { url: useCoverUrl(picture), choose: () => void choose() };
 }

@@ -5,7 +5,7 @@ import {
   type ProjectDetails,
 } from "../../project/newProject.js";
 import { structures, suggestedStructure } from "../../project/templates.js";
-import { libraryOf as journeyLibrary } from "../journey/journeyFile.js";
+import { libraryOf as journeyLibrary } from "../libraryFolder.js";
 import { platform } from "../platform.js";
 
 // How a book comes to the shelf: made new from a title and its kind, read in from a manuscript,

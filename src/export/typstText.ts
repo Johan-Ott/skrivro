@@ -1,5 +1,6 @@
 import type { Node } from "prosemirror-model";
 import { quoteConverter, type Typography } from "./book.js";
+import { footnoteParagraph } from "./footnoteText.js";
 
 /** Prose as Typst markup: every character Typst could read as code is escaped. */
 export const escapeTypst = (text: string) => text.replace(/[\\#*_`$<>@[\]~=\-+/"':({]/g, "\\$&");
@@ -23,10 +24,11 @@ function marked(text: string, child: Node) {
   return markup;
 }
 
-const footnote = (child: Node, convert: (text: string) => string) =>
-  `#footnote[${escapeTypst(convert(String(child.attrs["text"])))}]`;
+// The note's text keeps its italics and bold, as the text around it does.
+const footnote = (child: Node, convert: (text: string) => string): string =>
+  `#footnote[${inline(childrenOf(footnoteParagraph(String(child.attrs["text"]))), convert)}]`;
 
-function inline(children: Node[], convert: (text: string) => string) {
+function inline(children: Node[], convert: (text: string) => string): string {
   return children
     .map((child) => {
       if (child.type.name === "lineBreak") return " \\\n";

@@ -6,6 +6,7 @@ import { Choice, Dropdown, Row } from "@llkit/controls.js";
 import { UiLanguageChoice } from "./UiLanguageChoice.js";
 import { REMINDER_HOURS } from "../reminder.js";
 import type { TabProps } from "./settingsTabs.js";
+import { wholeNumber } from "../progress/GoalsDialog.js";
 import { t } from "../../i18n/i18n.js";
 
 function BookLanguage({ book }: Pick<TabProps, "book">) {
@@ -41,8 +42,8 @@ function GoalInput({ preferences, updatePreferences }: TabProps) {
       aria-label={t("Dagligt ordmål")}
       value={preferences.defaultDailyGoal}
       onChange={(event) => {
-        const goal = Math.round(Number(event.target.value));
-        if (goal > 0) updatePreferences((current) => ({ ...current, defaultDailyGoal: goal }));
+        const goal = wholeNumber(event.target.value);
+        if (goal) updatePreferences((current) => ({ ...current, defaultDailyGoal: goal }));
       }}
     />
   );

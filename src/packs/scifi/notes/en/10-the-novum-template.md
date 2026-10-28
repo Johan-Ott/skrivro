@@ -1,5 +1,6 @@
 ---
 sort: The world
+standard: true
 ---
 
 # The novum (template)
@@ -29,11 +30,3 @@ Rename the note to what the people of the world call the new thing.
 **The consequences:**
 
 <!-- Which consequence for society did nobody plan for? -->
-
-**In everyday life:**
-
-<!-- Which word or habit exists because of the new thing? -->
-
-**When it goes wrong:**
-
-<!-- What does an accident look like, and who is hit? -->

@@ -6,7 +6,7 @@ import {
   OWN_PREFIX,
 } from "../../project/ownTemplates.js";
 import type { BookTemplate } from "../../project/templates.js";
-import { libraryOf } from "../journey/journeyFile.js";
+import { libraryOf } from "../libraryFolder.js";
 import { platform } from "../platform.js";
 import { t } from "../../i18n/i18n.js";
 

@@ -23,11 +23,10 @@ import { BookToasts, useRenameOffer } from "./renameOffer.js";
 import { useDrafts, type Drafts } from "./drafts/useDrafts.js";
 import { openIfOnDisk, useOpenFirstScene, useSceneSession } from "./useSceneSession.js";
 import { useWritingMode } from "./useWritingMode.js";
-import { useJourney } from "./journey/useJourney.js";
 import { useSyncedProfile } from "./useAccountSync.js";
-import { useBookBadges, useMilestone } from "./journey/useMilestone.js";
 import { listenToSaves, useWritingStats } from "./useWritingStats.js";
 import { useManuscriptSearch } from "./useManuscriptSearch.js";
+import { ConfirmLayer } from "./ConfirmLayer.js";
 import { StartScreen } from "./StartScreen.js";
 import { useSyncReview } from "./sync/useSyncReview.js";
 import { useStartup, type PreferenceChange } from "./useStartup.js";
@@ -101,8 +100,6 @@ function useCoreState() {
 function useNotesParts(core: ReturnType<typeof useCoreState>) {
   const { projectState, sceneState, writingMode } = core;
   const { project } = projectState;
-  useMilestone(project, projectState.updateFields);
-  useBookBadges(project, projectState.updateFields);
   const { series } = core.seriesState;
   const homes = useMemo(() => (project ? homesOf(project, series) : []), [project, series]);
   const isNoteOpen = homes.some((home) => noteSortOf(home, sceneState.scene?.id ?? "") !== null);
@@ -156,10 +153,10 @@ function paletteContextOf(app: PaletteParts): PaletteContext | null {
     showShelf: () => void app.showShelf(),
     openSettings: () => writingMode.settingsDialog.open(),
     showView: writingMode.setView,
-    ...{ cards: app.notes.cards, describe: app.notes.descriptionOf },
+    ...{ cards: app.notes.allNotes, describe: app.notes.descriptionOf },
     openCard: app.cards.open,
     newNote: () => app.setNewNoteSort(null),
-    addFile: () => void app.actions.notes.addFile(),
+    addFile: () => void app.actions.notes.addFile(undefined, app.scene?.id),
     ...sceneContext({ ...app, project }),
   };
 }
@@ -174,8 +171,7 @@ function useAppState() {
   const snapshots = useSnapshots(project, session);
   const drafts = useDrafts(project, session, refresh);
   const syncReview = useSyncReview({ project, session, updateTree, refresh });
-  const journey = useJourney(startup.preferences.libraryDir);
-  const { stats, today, recordSave } = useWritingStats(project, journey.record);
+  const { stats, today, recordSave } = useWritingStats(project);
   useReminder(startup.preferences.reminderHour, today.words);
   const search = useManuscriptSearch({ ...sceneState, project, refresh, ...writingMode });
   const renameOffer = useRenameOffer(search.scope, project);
@@ -188,7 +184,7 @@ function useAppState() {
   const app = {
     ...parts,
     ...{ treeHandlers, seriesTreeHandlers, showShelf, snapshots, syncReview, stats, today },
-    ...{ search, renameOffer, zip, newProjectAsked, sceneSplit, drafts, journey },
+    ...{ search, renameOffer, zip, newProjectAsked, sceneSplit, drafts },
   };
   return { ...app, palette: usePalette(paletteContextOf(app)) };
 }
@@ -208,6 +204,7 @@ export function App() {
       {project && <BookToasts app={app} />}
       {!project && <StartScreen app={app} />}
       <UpdateNotice session={app.session} />
+      <ConfirmLayer />
     </>
   );
 }

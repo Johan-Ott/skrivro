@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { editor, openExample } from "./helpers";
 
-// Sök: in the scene, across the manuscript with its hit list, narrowed by steps, and in the notes.
+// Sök: through the whole book, notes too, with its hit list, narrowed by steps, or in the scene.
 
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 820 });
@@ -12,24 +12,24 @@ test("search finds a name across the scene", async ({ page }) => {
   await editor(page).click();
 
   await page.keyboard.press("ControlOrMeta+f");
-  await page.keyboard.type("Elin");
+  await page.getByRole("button", { name: "Sök i hela boken" }).click();
+  await page.getByRole("textbox", { name: "Sök" }).fill("Elin");
 
   await expect(page.getByText(/^\d+ träffar$/)).toBeVisible();
-  await page.keyboard.press("Enter");
+  await page.getByRole("textbox", { name: "Sök" }).press("Enter");
   await expect(page.getByText(/^1 av \d+$/)).toBeVisible();
   await page.getByRole("button", { name: "Stäng sökning" }).click();
   await expect(page.getByRole("search")).toBeHidden();
 });
 
-test("across the manuscript the matches are listed by scene, and one opens its scene", async ({
+test("across the book the matches are listed by scene, and one opens its scene", async ({
   page,
 }) => {
   await editor(page).click();
   await page.keyboard.press("ControlOrMeta+f");
   await page.keyboard.type("Elin");
-  await page.getByRole("button", { name: "Hela manuset" }).click();
 
-  const hits = page.getByRole("list", { name: "Träffar i manuset" }).getByRole("listitem");
+  const hits = page.getByRole("list", { name: "Träffar i boken" }).getByRole("listitem");
   await expect(hits).not.toHaveCount(0);
   await hits.filter({ hasText: "· Isen" }).click();
 
@@ -40,33 +40,27 @@ test("a status chip narrows the manuscript's matches to scenes in that step", as
   await editor(page).click();
   await page.keyboard.press("ControlOrMeta+f");
   await page.keyboard.type("Elin");
-  await page.getByRole("button", { name: "Hela manuset" }).click();
 
   await page
     .getByRole("group", { name: "Bara scener med" })
     .getByRole("button", { name: "Redigering" })
     .click();
 
-  const hits = page.getByRole("list", { name: "Träffar i manuset" }).getByRole("listitem");
+  const hits = page.getByRole("list", { name: "Träffar i boken" }).getByRole("listitem");
   await expect(hits).toHaveCount(1);
   await expect(hits).toContainText("Köket");
 });
 
-test("Med anteckningar searches the notes' text too", async ({ page }) => {
+test("the notes' text is searched from the start, and the hit says the note's sort", async ({
+  page,
+}) => {
   await editor(page).click();
   await page.keyboard.press("ControlOrMeta+f");
   await page.keyboard.type("Trettioåtta");
-  await page.getByRole("button", { name: "Hela manuset" }).click();
-  await expect(page.getByText("Inga träffar")).toBeVisible();
 
-  await page
-    .getByRole("group", { name: "Bara scener med" })
-    .getByRole("button", { name: "Med anteckningar" })
-    .click();
-
-  const hits = page.getByRole("list", { name: "Träffar i manuset" }).getByRole("listitem");
+  const hits = page.getByRole("list", { name: "Träffar i boken" }).getByRole("listitem");
   await expect(hits).toHaveCount(1);
-  await expect(hits).toContainText("Elin");
+  await expect(hits).toContainText("Personer · Elin");
 });
 
 test("Ersätt replaces the next match at the first click", async ({ page }) => {
@@ -75,8 +69,56 @@ test("Ersätt replaces the next match at the first click", async ({ page }) => {
   await page.keyboard.press("ControlOrMeta+f");
   await page.getByRole("textbox", { name: "Sök" }).fill("Elin");
   await page.getByRole("textbox", { name: "Ersätt med" }).fill("Elina");
+  await expect(page.getByText(/^\d+ träffar$/)).toBeVisible();
 
   await page.getByRole("button", { name: "Ersätt", exact: true }).click();
 
   await expect(editor(page)).toContainText("Elina");
 });
+
+test("Ersätt says it changes the manuscript only, while the notes are searched too", async ({
+  page,
+}) => {
+  await editor(page).click();
+  await page.keyboard.press("ControlOrMeta+f");
+  await page.getByRole("textbox", { name: "Ersätt med" }).fill("Elina");
+
+  await expect(page.getByText("Ersätter i manuset, inte i anteckningar")).toBeVisible();
+  await page.getByRole("button", { name: "Sök i hela boken" }).click();
+  await expect(page.getByText("Ersätter i manuset, inte i anteckningar")).toBeHidden();
+});
+
+test("Ctrl+K finds a lapp too, under its sort", async ({ page }) => {
+  await editor(page).click();
+  await page.keyboard.press("ControlOrMeta+k");
+  await page.keyboard.type("Vem tände");
+
+  const option = page.getByRole("option", { name: /Vem tände ljusen/ });
+  await expect(option).toBeVisible();
+  await expect(page.locator(".palette-group", { hasText: "Lappar" })).toBeVisible();
+});
+
+const LONG_NAME =
+  "Den mycket långa anteckningen om vad som hände vid fyren den vintern då isen låg "
+    .repeat(3)
+    .trim();
+
+for (const width of [1280]) {
+  test(`a long name in Ctrl+K stays on one line, ${width} px wide`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 820 });
+    await page.getByRole("button", { name: "+ Ny anteckning" }).click();
+    const dialog = page.getByRole("dialog", { name: "Ny anteckning" });
+    await dialog.getByRole("textbox", { name: "Namn" }).fill(LONG_NAME);
+    await dialog.getByRole("button", { name: "Skapa" }).click();
+    await page.keyboard.press("ControlOrMeta+k");
+    await page.keyboard.type("Den mycket långa");
+
+    const name = page
+      .getByRole("option", { name: /Den mycket långa/ })
+      .first()
+      .locator(".palette-name");
+    const box = await name.boundingBox();
+    expect(box?.height ?? Infinity).toBeLessThan(40);
+    expect(box?.width ?? 0).toBeGreaterThan(100);
+  });
+}

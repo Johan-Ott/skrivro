@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
-import { isPictureFile, researchPath } from "../../project/researchFiles.js";
+import { usePictureUrl } from "../usePictureUrl.js";
+import {
+  isDocxFile,
+  isPdfFile,
+  isPictureFile,
+  isTextFile,
+  researchPath,
+} from "../../project/researchFiles.js";
+import { DocxText } from "./DocxText.js";
+import { PdfPages } from "./PdfPages.js";
 import { recordFailure } from "@llkit/errorLog.js";
 import { platform } from "../platform.js";
 import { t } from "../../i18n/i18n.js";
@@ -22,35 +31,47 @@ async function openResearchFile(dir: string, name: string) {
   await platform.shareFile?.(name, bytes, mimeOf(name));
 }
 
-export function usePictureUrl(dir: string, name: string) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    // The picture of the file before is not this file's.
-    setUrl(null);
-    if (!isPictureFile(name)) return;
-    let made: string | null = null;
-    const show = (bytes: Uint8Array) => {
-      made = URL.createObjectURL(new Blob([bytes.slice()]));
-      setUrl(made);
-    };
-    platform.fileSystem
-      .readBytes(researchPath(dir, name))
-      .then(show)
-      .catch(() => setUrl(null));
-    return () => {
-      if (made) URL.revokeObjectURL(made);
-    };
-  }, [dir, name]);
-  return url;
+/** The picture a research note holds; null for a PDF or any other file. */
+export function useResearchPicture(dir: string, name: string) {
+  const path = researchPath(dir, name);
+  return usePictureUrl(isPictureFile(name) ? path : null, () =>
+    platform.fileSystem.readBytes(path),
+  );
 }
 
-/** The file a research note holds, above the writer's own words about it. */
+function useFileText(path: string, isText: boolean) {
+  const [text, setText] = useState<string | null>(null);
+  useEffect(() => {
+    setText(null);
+    if (!isText) return;
+    let isCurrent = true;
+    platform.fileSystem.readText(path).then(
+      (read) => isCurrent && setText(read),
+      () => undefined,
+    );
+    return () => void (isCurrent = false);
+  }, [path, isText]);
+  return text;
+}
+
+/** The file itself, read in the book: the picture, the PDF page by page, or the text. */
+export function FileContent({ dir, name }: { dir: string; name: string }) {
+  const path = researchPath(dir, name);
+  const url = useResearchPicture(dir, name);
+  const text = useFileText(path, isTextFile(name));
+  if (isPdfFile(name))
+    return <PdfPages path={path} read={() => platform.fileSystem.readBytes(path)} />;
+  if (isDocxFile(name)) return <DocxText path={path} />;
+  if (text !== null) return <pre className="research-text">{text}</pre>;
+  return url ? <img className="research-picture" src={url} alt={name} /> : null;
+}
+
+/** The file a research note holds, above the writer's own words about it. Its whole name, with
+ * the ending, comes right under the title, so mini.pdf and mini.txt can be told apart. */
 export function ResearchFile({ dir, name }: { dir: string; name: string }) {
-  const url = usePictureUrl(dir, name);
   const canOpen = Boolean(platform.openFile ?? platform.shareFile);
   return (
     <div className="research-file">
-      {url && <img className="research-picture" src={url} alt={name} />}
       <div className="research-file-row">
         <span className="research-file-name">{name}</span>
         {canOpen && (
@@ -64,6 +85,7 @@ export function ResearchFile({ dir, name }: { dir: string; name: string }) {
           </button>
         )}
       </div>
+      <FileContent dir={dir} name={name} />
     </div>
   );
 }

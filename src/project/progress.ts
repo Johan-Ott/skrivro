@@ -3,11 +3,10 @@ import { dailyGoalOf, type Stats, DAY } from "./stats.js";
 import { manuscriptNodes, type TreeNode } from "./tree.js";
 
 const AVERAGE_DAYS = 30;
-const HEATMAP_WEEKS = 12;
 
 // Day keys are counted in UTC, so a summer time change never adds or loses a day.
 const utcOf = (day: string) => Date.parse(`${day}T00:00:00Z`);
-export const dayAfter = (day: string, days: number) =>
+const dayAfter = (day: string, days: number) =>
   new Date(utcOf(day) + days * DAY).toISOString().slice(0, 10);
 
 export const daysBetween = (from: string, to: string) =>
@@ -58,30 +57,7 @@ export function averagePerDay(stats: Stats, today: string): number {
   return Math.round(sum / days);
 }
 
-export interface HeatmapCell {
-  day: string;
-  words: number;
-  /** 0 to 4 by share of the daily goal; null for days still to come. */
-  level: number | null;
-}
-
-function levelOf(words: number, goal: number): number {
-  if (words <= 0) return 0;
-  return Math.min(4, 1 + Math.floor((2 * words) / goal));
-}
-
 const mondayOf = (day: string) => dayAfter(day, -((new Date(utcOf(day)).getUTCDay() + 6) % 7));
-
-/** A column per week, starting on Monday. */
-export function heatmap(stats: Stats, today: string, dailyGoal: number | null): HeatmapCell[] {
-  const start = dayAfter(mondayOf(today), -7 * (HEATMAP_WEEKS - 1));
-  const goal = dailyGoal ?? Math.max(1, ...Object.values(stats));
-  return Array.from({ length: HEATMAP_WEEKS * 7 }, (_unused, index) => {
-    const day = dayAfter(start, index);
-    const words = stats[day] ?? 0;
-    return { day, words, level: day > today ? null : levelOf(words, goal) };
-  });
-}
 
 /** Monday to Sunday of the week `today` is in, with the words written each day. */
 export const weekOf = (stats: Stats, today: string) =>

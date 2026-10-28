@@ -3,7 +3,7 @@ import { useState } from "react";
 import { errorLog } from "@llkit/errorLog.js";
 import { feedbackReport } from "@llkit/feedback/sendFeedback.js";
 import { Row } from "@llkit/controls.js";
-import { CopyButton } from "../share/ImageActions.js";
+import { CopyButton } from "../CopyButton.js";
 import { checkForUpdates } from "@llkit/updates.js";
 import { isSwedish, numberLocale, t } from "../../i18n/i18n.js";
 

@@ -39,7 +39,6 @@ import type { useStartup } from "./useStartup.js";
 import type { SettingsChange } from "./useWritingSettings.js";
 import { useDriveSync, type DriveSync } from "./useDriveSync.js";
 import type { TreeNode } from "../project/tree.js";
-import { Celebrations } from "./journey/Celebrations.js";
 
 interface OverlayParts {
   project: Project | null;
@@ -181,7 +180,6 @@ export function Overlays({ app }: { app: OverlayParts }) {
       <MentionLayer app={app} />
       <PaletteLayer app={app} />
       <ExportStatus exporter={app.zip} onOpenScene={() => undefined} />
-      <Celebrations />
     </>
   );
 }

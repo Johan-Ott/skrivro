@@ -2,7 +2,6 @@ import { SearchQuery } from "prosemirror-search";
 import { describe, expect, it } from "vitest";
 import {
   countMatches,
-  countMatchesIn,
   nextSceneWith,
   replaceAllInText,
   searchableScene,
@@ -81,23 +80,5 @@ describe("nextSceneWith", () => {
     ];
 
     expect(found).toEqual(["c", null]);
-  });
-});
-
-describe("countMatchesIn", () => {
-  it("adds the matches of the scenes it is given, skipping scenes it has no text for", () => {
-    const states = new Map([
-      ["kikaren", searchableScene(scene("Kikaren låg i lådan. Kikaren var tung.\n"))],
-      ["elin", searchableScene(scene("Elin tog kikaren.\n"))],
-    ]);
-    const query = new SearchQuery({ search: "kikaren" });
-
-    const count = countMatchesIn(
-      ["kikaren", "elin", "saknas"],
-      (id) => states.get(id) ?? null,
-      query,
-    );
-
-    expect(count).toBe(3);
   });
 });

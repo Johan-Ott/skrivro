@@ -1,0 +1,107 @@
+/* The sprint's block: four numbers to step, as a pomodoro timer has them, and Starta. */
+
+.sprint-settings {
+  display: grid;
+  grid-template-columns: repeat(4, 52px);
+  gap: 4px;
+}
+
+.sprint-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  border-radius: var(--radius-button);
+  background: var(--bg);
+}
+
+.sprint-setting button {
+  width: 100%;
+  padding: 1px 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-label);
+  font-size: 8px;
+}
+
+.sprint-setting button:hover {
+  color: var(--text);
+}
+
+.sprint-setting-label {
+  color: var(--text-label);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.sprint-setting-value {
+  font: 600 17px/1.1 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.sprint-setting-unit {
+  color: var(--text-label);
+  font-size: 9px;
+}
+
+.sprint-start {
+  margin-top: 6px;
+}
+
+.sprint-running {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  min-width: 200px;
+}
+
+.sprint-phase,
+.sprint-words {
+  color: var(--text-label);
+  font-size: 12px;
+}
+
+.sprint-big-clock {
+  font: 600 26px/1.2 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.sprint-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.sprint-bar .sprint-clock {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.sprint-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  z-index: var(--layer-float);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  height: 34px;
+  padding: 0 8px 0 14px;
+  border: 1px solid var(--border-control);
+  border-radius: 17px;
+  background: var(--bg);
+  box-shadow: var(--shadow-low);
+  color: var(--text);
+  font: 500 14px var(--font-ui);
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.sprint-clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}

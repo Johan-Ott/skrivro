@@ -77,7 +77,10 @@ describe("paletteEntries", () => {
 
   it("finds a note by name under its sort, with who it is, and opens it", () => {
     const shown: string[] = [];
-    const arvid = { id: "01ARVID", sortId: CHARACTERS_ID, name: "Arvid", sortLabel: "Personer" };
+    const arvid = {
+      ...{ id: "01ARVID", sortId: CHARACTERS_ID, name: "Arvid", sortLabel: "Personer" },
+      ...{ dir: "/bok", kind: null },
+    };
     const value = {
       ...context().value,
       cards: [arvid],

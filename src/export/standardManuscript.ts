@@ -3,6 +3,7 @@ import {
   Bookmark,
   Document,
   Header,
+  HeadingLevel,
   Packer,
   PageNumber,
   Paragraph,
@@ -15,6 +16,7 @@ import type { BookDetails, OutlineItem, Typography } from "./book.js";
 import { runs, type TextSettings, type WordNotes } from "./wordRuns.js";
 import { bookWords, headingLabel, roundedWords, titleBesideLabel } from "./bookWords.js";
 import { sceneEndMark, sceneStartMark } from "./sceneMarks.js";
+import { listItem, listNumbering, LIST_STYLES, type WordLists } from "./wordLists.js";
 
 interface ManuscriptInput {
   book: BookDetails;
@@ -34,6 +36,7 @@ const INDENT = 720;
 // Parts and chapters start a third of the way down a new page.
 const HEADING_DROP = 3600;
 const SCENE_BREAK = "* * *";
+const HEADING_RUN = { font: FONT, size: HALF_POINTS, bold: false, italics: false, color: "000000" };
 
 // Paragraphs are kept as options until the scene is done, so its marks can go inside them.
 type ParagraphOptions = { children: ParagraphChild[] } & Omit<IParagraphOptions, "children">;
@@ -46,18 +49,11 @@ const centeredOptions = (text: string): ParagraphOptions => ({
 const centered = (text: string, extra: object = {}) =>
   new Paragraph({ ...centeredOptions(text), ...extra });
 
-const LISTS = new Set(["punktlista", "numrerad"]);
-
-// A list's paragraph starts with its bullet or number, as typed, with a tab to the hanging edge.
-const listMark = (style: string, index: number) =>
-  LISTS.has(style) ? [new TextRun(style === "punktlista" ? "•\t" : `${index + 1}.\t`)] : [];
-
 const RIGHT = { alignment: AlignmentType.RIGHT };
 const UNINDENTED = { indent: { firstLine: 0 } };
-const HANGING = { indent: { left: INDENT, hanging: INDENT / 2 } };
 
-// Centrerat, the right-hand styles, Utan indrag and Kapitäler only set the line; a list hangs;
-// the others are inset. A manuscript for agents keeps no small capitals.
+// Centrerat, the right-hand styles, Utan indrag and Kapitäler only set the line; the others are
+// inset. A manuscript for agents keeps no small capitals.
 const LAYOUTS: Record<string, object> = {
   centrerat: { alignment: AlignmentType.CENTER },
   hoger: RIGHT,
@@ -65,8 +61,6 @@ const LAYOUTS: Record<string, object> = {
   motto: RIGHT,
   "utan-indrag": UNINDENTED,
   kapitaler: UNINDENTED,
-  punktlista: HANGING,
-  numrerad: HANGING,
 };
 
 function paragraphLayout(isFirst: boolean, style: string | null) {
@@ -74,10 +68,28 @@ function paragraphLayout(isFirst: boolean, style: string | null) {
   return LAYOUTS[style] ?? { indent: { left: INDENT } };
 }
 
+type BlockSettings = TextSettings & { lists: WordLists };
+
+// A list is Word's own: its items carry the list, not an indent or a typed mark of their own.
+function styledParagraphs(block: Node, settings: BlockSettings): ParagraphOptions[] {
+  const style = String(block.attrs["style"]);
+  const isList = LIST_STYLES.has(style);
+  if (isList) settings.lists.count += 1;
+  const inner: ParagraphOptions[] = [];
+  block.forEach((child) =>
+    inner.push(
+      ...(isList
+        ? [{ children: runs(child, settings), ...listItem(settings.lists, style) }]
+        : blockParagraphs(child, { isFirst: true, style }, settings)),
+    ),
+  );
+  return inner;
+}
+
 function blockParagraphs(
   block: Node,
   place: { isFirst: boolean; style: string | null },
-  settings: TextSettings,
+  settings: BlockSettings,
 ): ParagraphOptions[] {
   const name = block.type.name;
   if (name === "sceneBreak") return [centeredOptions(SCENE_BREAK)];
@@ -86,19 +98,7 @@ function blockParagraphs(
   if (name === "picture") {
     return [centeredOptions(`[${block.attrs["caption"] || block.attrs["name"]}]`)];
   }
-  if (name === "styleBlock") {
-    const inner: ParagraphOptions[] = [];
-    const style = String(block.attrs["style"]);
-    block.forEach((child, _offset, index) =>
-      inner.push(
-        ...blockParagraphs(child, { isFirst: true, style }, settings).map((options) => ({
-          ...options,
-          children: [...listMark(style, index), ...(options.children ?? [])],
-        })),
-      ),
-    );
-    return inner;
-  }
+  if (name === "styleBlock") return styledParagraphs(block, settings);
   const children = runs(block, settings);
   return [{ children, ...paragraphLayout(place.isFirst, place.style) }];
 }
@@ -114,7 +114,7 @@ function withSceneMarks(paragraphs: ParagraphOptions[], sceneId: string): Paragr
 }
 
 /** The first paragraph, and the one after a scene break, are not indented. */
-function sceneParagraphs(doc: Node, settings: TextSettings): ParagraphOptions[] {
+function sceneParagraphs(doc: Node, settings: BlockSettings): ParagraphOptions[] {
   const paragraphs: ParagraphOptions[] = [];
   let isFirst = true;
   doc.forEach((block) => {
@@ -124,29 +124,42 @@ function sceneParagraphs(doc: Node, settings: TextSettings): ParagraphOptions[] 
   return paragraphs;
 }
 
+// A chapter is Heading 1, as Word's navigation and Docs' outline expect; under parts, Heading 2.
+function headingLevel(item: OutlineItem, hasParts: boolean) {
+  return item.kind === "chapter" && hasParts ? HeadingLevel.HEADING_2 : HeadingLevel.HEADING_1;
+}
+
 function headingParagraphs(
   item: Extract<OutlineItem, { kind: "part" | "chapter" }>,
   language: string,
+  hasParts: boolean,
 ) {
   const label = headingLabel(item, language);
   const title = titleBesideLabel(item.title, label);
+  // One heading in Word's own style, label and title on two lines, so its navigation lists it.
   return [
-    centered(label, { pageBreakBefore: true, spacing: { before: HEADING_DROP } }),
-    ...(title ? [centered(title)] : []),
+    new Paragraph({
+      heading: headingLevel(item, hasParts),
+      alignment: AlignmentType.CENTER,
+      pageBreakBefore: true,
+      spacing: { before: HEADING_DROP },
+      children: [new TextRun(label), ...(title ? [new TextRun({ text: title, break: 1 })] : [])],
+    }),
   ];
 }
 
 function bodyParagraphs(input: ManuscriptInput, notes: WordNotes): Paragraph[] {
   const { outline, scenes, typography, language } = input;
+  const settings = { typography, notes, lists: { count: 0 } };
+  const hasParts = outline.some((item) => item.kind === "part");
   const paragraphs: Paragraph[] = [];
   let previous: OutlineItem["kind"] | null = null;
   for (const item of outline) {
-    if (item.kind !== "scene") paragraphs.push(...headingParagraphs(item, language));
+    if (item.kind !== "scene") paragraphs.push(...headingParagraphs(item, language, hasParts));
     else {
       const doc = scenes.get(item.id);
       if (previous === "scene") paragraphs.push(centered(SCENE_BREAK));
-      if (doc)
-        paragraphs.push(...withSceneMarks(sceneParagraphs(doc, { typography, notes }), item.id));
+      if (doc) paragraphs.push(...withSceneMarks(sceneParagraphs(doc, settings), item.id));
     }
     previous = item.kind;
   }
@@ -179,6 +192,19 @@ function pageHeader(book: BookDetails) {
   });
 }
 
+const manuscriptStyles = (language: string) => ({
+  default: {
+    document: {
+      // Word spellchecks the manuscript in the book's language.
+      run: { font: FONT, size: HALF_POINTS, language: { value: language } },
+      paragraph: { spacing: { line: DOUBLE_SPACING } },
+    },
+    // Headings look as the text does; Word's own blue and large type is not a manuscript's.
+    heading1: { run: HEADING_RUN },
+    heading2: { run: HEADING_RUN },
+  },
+});
+
 /** Built whole in memory before anything is saved. */
 export async function standardManuscript(input: ManuscriptInput): Promise<Uint8Array> {
   const page = { margin: { top: MARGIN, right: MARGIN, bottom: MARGIN, left: MARGIN } };
@@ -186,17 +212,10 @@ export async function standardManuscript(input: ManuscriptInput): Promise<Uint8A
   const body = bodyParagraphs(input, notes);
   const document = new Document({
     footnotes: notes.entries,
+    numbering: listNumbering,
     creator: input.book.author,
     title: input.book.title,
-    styles: {
-      default: {
-        document: {
-          // Word spellchecks the manuscript in the book's language.
-          run: { font: FONT, size: HALF_POINTS, language: { value: input.language } },
-          paragraph: { spacing: { line: DOUBLE_SPACING } },
-        },
-      },
-    },
+    styles: manuscriptStyles(input.language),
     sections: [
       ...(input.hasTitlePage
         ? [{ properties: { page }, children: titlePage(input.book, input.language) }]

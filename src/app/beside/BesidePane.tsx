@@ -9,6 +9,7 @@ import { snapshotWhen, type Snapshot } from "../../project/snapshots.js";
 import { scenePath } from "../../storage/sceneId.js";
 import type { AppState } from "../App.js";
 import { SceneText } from "../contents/sceneDocs.js";
+import { FileContent } from "../notes/ResearchFile.js";
 import { platform } from "../platform.js";
 import { DiffText } from "../snapshots/SnapshotsDialog.js";
 import type { Project } from "../useProject.js";
@@ -63,13 +64,17 @@ export function BesidePane({ app, project }: { app: AppState; project: Project }
   const doc = useBesideDoc(beside, project);
   const open = useEditorState(app.editor)?.doc;
   if (!beside) return null;
+  const file = beside.kind === "text" ? project.summaries[beside.sceneId]?.file : undefined;
   return (
     <aside className="beside-pane" aria-label={t("Bredvid")}>
       <div className="beside-header">
         <span className="beside-title">{titleOf(app, beside)}</span>
         <CloseButton onClose={() => setBeside(null)} />
       </div>
-      <div className="beside-body manuscript">{besideBody(app, beside, doc, open)}</div>
+      <div className="beside-body manuscript">
+        {file && <FileContent dir={project.dir} name={file} />}
+        {besideBody(app, beside, doc, open)}
+      </div>
     </aside>
   );
 }

@@ -31,9 +31,16 @@ const isOptionalTextRecord = (value: unknown) => value === undefined || isTextRe
 // The node's own values, not its children's.
 function isNodeItself(node: Record<string, unknown>) {
   const hasIdAndKind = typeof node["id"] === "string" && KINDS.includes(node["kind"] as NodeKind);
-  const texts = ["title", "summary", "when", "pov", "opening", "reveal", ...HEADING_FIELDS].every(
-    (key) => isOptionalString(node[key]),
-  );
+  const texts = [
+    "title",
+    "summary",
+    "when",
+    "pov",
+    "opening",
+    "reveal",
+    "addedIn",
+    ...HEADING_FIELDS,
+  ].every((key) => isOptionalString(node[key]));
   const records = ["pictures", "labels", "knownBy"].every((key) => isOptionalTextRecord(node[key]));
   return hasIdAndKind && texts && records;
 }

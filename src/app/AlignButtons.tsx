@@ -68,26 +68,6 @@ const BLOCK_STYLES: ["punktlista" | "numrerad" | "indrag", string, ReactNode][] 
   ["indrag", t("Indrag"), <IndentIcon key="i" />],
 ];
 
-export function ListButtons({ editorState, run }: { editorState: EditorState | null; run: Run }) {
-  const current = editorState ? currentStyle(editorState) : "brodtext";
-  return (
-    <span className="bar-group" role="group" aria-label={t("Listor")}>
-      {BLOCK_STYLES.map(([choice, label, icon]) => (
-        <button
-          key={choice}
-          className="icon-button"
-          aria-label={label}
-          title={label}
-          aria-pressed={current === choice}
-          onClick={() => run(setStyle(current === choice ? "brodtext" : choice))}
-        >
-          {icon}
-        </button>
-      ))}
-    </span>
-  );
-}
-
 // Vänster, centrerat and höger are the styles of those names; vänster leaves any other style be.
 const ALIGNMENTS: ["vanster" | "centrerat" | "hoger", string, ReactNode][] = [
   ["vanster", t("Vänsterställt"), <AlignLeftIcon key="v" />],
@@ -122,26 +102,4 @@ export function blockMenuItems(editorState: EditorState | null, run: Run) {
       onSelect: () => run(setStyle(current === choice ? "brodtext" : choice)),
     })),
   ];
-}
-
-export function AlignButtons({ editorState, run }: { editorState: EditorState | null; run: Run }) {
-  const current = currentOf(editorState);
-  const isSet = (choice: string) => isAligned(current, choice);
-  const choose = (choice: string) => align(current, choice, run);
-  return (
-    <span className="bar-group" role="group" aria-label={t("Justering")}>
-      {ALIGNMENTS.map(([choice, label, icon]) => (
-        <button
-          key={choice}
-          className="icon-button"
-          aria-label={label}
-          title={label}
-          aria-pressed={isSet(choice)}
-          onClick={() => choose(choice)}
-        >
-          {icon}
-        </button>
-      ))}
-    </span>
-  );
 }

@@ -2,7 +2,7 @@ import { useRef, type CSSProperties, type PointerEvent as ReactPointerEvent } fr
 import { trimSize, type BookDesign } from "../../export/bookDesign.js";
 import type { OpeningTemplate, PictureArea } from "../../export/openings.js";
 import { marginsOf } from "../../export/bookDesign.js";
-import { usePictureUrl } from "./PictureRow.js";
+import { useBookPicture } from "./PictureRow.js";
 import { t } from "../../i18n/i18n.js";
 
 /** Moves by shares of the page: (0.1, 0) is a tenth of the page's width to the right. */
@@ -60,7 +60,7 @@ const placeOf = (area: PictureArea): CSSProperties => ({
 });
 
 function AreaPicture({ dir, area }: { dir: string; area: PictureArea }) {
-  const url = usePictureUrl(dir, area.picture);
+  const url = useBookPicture(dir, area.picture);
   if (!url) return <span>{t("Bildyta")}</span>;
   return <img src={url} alt="" style={{ objectFit: area.fit === "fyll" ? "cover" : "contain" }} />;
 }

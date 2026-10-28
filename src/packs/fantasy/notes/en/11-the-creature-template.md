@@ -29,11 +29,3 @@ Rename the note to the creature's name.
 **What it costs:**
 
 <!-- What does an encounter with it cost? -->
-
-**The legends:**
-
-<!-- What is told about it, and what is true? -->
-
-**Its role:**
-
-<!-- Is it a threat, a help, a symbol or a mirror? -->

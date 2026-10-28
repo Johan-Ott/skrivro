@@ -52,3 +52,32 @@ describe("the menu of the sort Lappar", () => {
     expect(menuOf("platser")).toContain("Ny anteckning");
   });
 });
+
+describe("the menu of a scene in the manuscript", () => {
+  const moved: string[] = [];
+  const sceneActions = {
+    ...actions,
+    linkOf: () => null,
+    statusOf: () => null,
+    statusName: () => "",
+    canMerge: () => false,
+    editLabels: null,
+    labelItems: null,
+    showDrafts: null,
+    otherSorts: () => [
+      { id: "platser", name: "Platser" },
+      { id: "lappar", name: "Lappar" },
+    ],
+    moveInto: (_node: unknown, sortId: string) => void moved.push(sortId),
+  } as unknown as TreeMenuActions;
+
+  it("makes it a note in a sort, the way back from Gör till scen, but not a lapp", () => {
+    const item = rowMenu({ id: "s", kind: "scene" }, false, sceneActions).find(
+      (each) => each.label === "Gör till anteckning i",
+    );
+
+    expect(item?.submenu?.map((each) => each.label)).toEqual(["Platser"]);
+    item?.submenu?.[0]?.onSelect?.();
+    expect(moved).toEqual(["platser"]);
+  });
+});

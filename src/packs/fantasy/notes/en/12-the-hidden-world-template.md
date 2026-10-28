@@ -33,7 +33,3 @@ Rename the note to what those in the know call the hidden world.
 **The other life:**
 
 <!-- The job, the family or the rent the hidden world threatens. Who do they lie to? -->
-
-**If the secret leaks:**
-
-<!-- What happens to the city if everyone finds out? -->

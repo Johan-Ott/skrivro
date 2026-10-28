@@ -10,6 +10,10 @@ export async function choosePicture(dir: string): Promise<string | null> {
   return picked ? savePicture(platform.fileSystem, dir, picked.bytes) : null;
 }
 
+/** The bytes of one of the book's pictures, or null when it cannot be read. */
+export const readBookPicture = async (dir: string, name: string) =>
+  (await readPictures(platform.fileSystem, dir, [name])).get(name) ?? null;
+
 // A picture's file never changes once saved, so its address is made once per session.
 const urls = new Map<string, Promise<string | null>>();
 

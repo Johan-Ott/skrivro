@@ -4,7 +4,6 @@ import { collaborationItems } from "../exporting/collaboration.js";
 import { HELP_TAB } from "../settings/SettingsDialog.js";
 import { group, helpItems } from "../shell/appMenu.js";
 import { openPacks } from "../packs/PackList.js";
-import { setPanelOpen } from "../sprint/sprint.js";
 import type { useMenuDialogs } from "../shell/useAppMenu.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -30,17 +29,27 @@ const sharingAndCopies = (app: AppState, dialogs: ReturnType<typeof useMenuDialo
   ]),
 ];
 
+// Granska is here, not over the text, so the text and the people come first while writing. The
+// count is null while Granska is not mounted, and then there is nothing to open.
+const reviewItem = (app: AppState, onReview?: () => void): MenuItem[] => {
+  const { count } = app.writingMode.review;
+  if (!onReview || count === null) return [];
+  const label = count ? `${t("Granska")} (${count})` : t("Granska");
+  return [{ label, onSelect: onReview }];
+};
+
 type BookDialogs = Record<"theme" | "templates", { open: () => void }>;
 
 export function phoneMenu(
   app: AppState,
   dialogs: ReturnType<typeof useMenuDialogs>,
   book: BookDialogs,
+  onReview?: () => void,
 ): MenuItem[] {
   const help = { label: t("Hjälp"), onSelect: () => app.writingMode.settingsDialog.open(HELP_TAB) };
   return [
     { label: t("Bokhylla"), onSelect: () => void app.showShelf() },
-    { label: t("Skrivsprint"), onSelect: () => setPanelOpen(true) },
+    ...reviewItem(app, onReview),
     ...group(
       t("Boken"),
       [

@@ -142,3 +142,56 @@ describe("a list in a note whose item looks like Markdown", () => {
     expect(serializeMarkdown(listOf("Kaffe", "Te"), NOTE)).toBe("- Kaffe\n- Te\n");
   });
 });
+
+describe("a list written inside a style fence", () => {
+  const FENCED = "::: punktlista\n- Mjöl\n- Ägg\n:::\n";
+
+  it("opens as that style with the list's items, and is saved as it was", () => {
+    const doc = parseMarkdown(FENCED, NOTE);
+
+    expect(doc.child(0).attrs["style"]).toBe("punktlista");
+    expect(doc.child(0).childCount).toBe(2);
+    expect(serializeMarkdown(doc, NOTE)).toBe(FENCED);
+  });
+
+  it("keeps a list in a fence of another style as it was, also when an item is changed", () => {
+    const text = "::: citat\n- ett\n- två\n:::\n";
+    const doc = parseMarkdown(text, NOTE);
+
+    expect(doc.child(0).type.name).toBe("rawBlock");
+    expect(serializeMarkdown(doc, NOTE)).toBe(text);
+  });
+
+  it("keeps a fence in a fence, with a list innermost, as it was", () => {
+    const text = "::: citat\n::: punktlista\n- ett\n:::\n:::\n";
+
+    expect(serializeMarkdown(parseMarkdown(text, NOTE), NOTE)).toBe(text);
+  });
+
+  it("keeps the fence and the dashes when an item changes", () => {
+    const changed = withSecondItem(parseMarkdown(FENCED, NOTE), "Ägggula");
+
+    expect(serializeMarkdown(changed, NOTE)).toBe("::: punktlista\n- Mjöl\n- Ägggula\n:::\n");
+    expect(serializeMarkdown(changed)).toBe("::: punktlista\n- Mjöl\n- Ägggula\n:::\n");
+  });
+
+  it("keeps any other block inside a fence as it was, so the file still opens", () => {
+    const text = "::: citat\n# Rubrik\n\nBrödtext\n:::\n";
+
+    expect(serializeMarkdown(parseMarkdown(text, NOTE), NOTE)).toBe(text);
+  });
+});
+
+describe("a fence in a fence", () => {
+  it("is saved as it was, with no blank line before the outer close", () => {
+    const text = "Före.\n\n::: citat\n::: citat\nInne\n:::\n:::\n\nEfter.\n";
+
+    expect(serializeMarkdown(parseMarkdown(text))).toBe(text);
+  });
+
+  it("is saved as it was around a list fence", () => {
+    const text = "::: citat\n::: punktlista\n- ett\n:::\n:::\n";
+
+    expect(serializeMarkdown(parseMarkdown(text))).toBe(text);
+  });
+});

@@ -22,8 +22,9 @@ test("the selected words are read aloud, and the pill stops the reading", async 
   await selectFirstWord(page);
   await page
     .getByRole("toolbar", { name: "Formatering" })
-    .getByRole("button", { name: "Läs upp" })
+    .getByRole("button", { name: "Mer" })
     .click();
+  await page.getByRole("menuitem", { name: "Läs upp" }).click();
 
   const pill = page.getByRole("button", { name: "Läser upp · Stoppa" });
   await expect(pill).toBeVisible();

@@ -3,7 +3,7 @@ import { saveOwnTemplate, templateFromBook } from "../../project/ownTemplates.js
 import type { BookTemplate } from "../../project/templates.js";
 import { Dialog } from "@llkit/controls.js";
 import { recordFailure } from "@llkit/errorLog.js";
-import { libraryOf } from "../journey/journeyFile.js";
+import { libraryOf } from "../libraryFolder.js";
 import { platform } from "../platform.js";
 import type { Project } from "../useProject.js";
 import type { ProjectChange } from "../labels/LabelsDialog.js";

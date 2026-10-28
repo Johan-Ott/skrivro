@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { insertAfter, type TreeNode } from "../../project/tree.js";
+import type { TreeNode } from "../../project/tree.js";
+import { placeCopyAfter } from "../conflictCopy.js";
 import type { SceneFileRef } from "../../storage/syncFiles.js";
 import {
   emptyLog,
@@ -13,7 +14,8 @@ import {
 import { platform } from "../platform.js";
 import type { ConflictChoice, SceneSession } from "../sceneSession.js";
 import { keepVersion } from "../syncRepairs.js";
-import { takeBack, withField } from "./takeBack.js";
+import { takeBack } from "./takeBack.js";
+import { withNodeFields, type NodeFields } from "../../project/nodeFields.js";
 import type { Project } from "../useProject.js";
 
 /** One row in the list: something to choose first, then what came from Drive. */
@@ -77,14 +79,18 @@ export function useSyncReview({ project, session, updateTree, refresh }: ReviewP
   const chooseNode = async (conflict: NodeConflict, isDrives: boolean) => {
     if (!project) return;
     if (isDrives)
-      await updateTree(withField(project.tree, conflict.id, conflict.field, conflict.drive));
+      await updateTree(
+        withNodeFields(project.tree, conflict.id, {
+          [conflict.field]: conflict.drive,
+        } as NodeFields),
+      );
     await save({ ...log, conflicts: log.conflicts.filter((other) => other !== conflict) });
   };
   const chooseCopy = async (copy: SceneFileRef, choice: ConflictChoice) => {
     if (!project) return;
     const newId = await keepVersion(session, project.dir, copy, choice);
-    if (newId)
-      await updateTree(insertAfter(project.tree, { id: newId, kind: "scene" }, copy.sceneId));
+    // The same place as a "Behåll båda" in the open scene: after it, or unplaced when it is thrown.
+    if (newId) await updateTree(placeCopyAfter(project.tree, copy.sceneId, newId));
     await refresh();
   };
   // Accepted or taken back, the change leaves the list.

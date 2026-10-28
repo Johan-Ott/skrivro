@@ -19,11 +19,11 @@ import {
   insertNode,
   moveToTrash,
   removeNode,
-  renameNode,
   sortsOf,
   type NodeKind,
   type TreeNode,
 } from "./tree.js";
+import { renameNode } from "./nodeFields.js";
 import { nodeLabel } from "./treeLabels.js";
 
 export type { BookFolder } from "./bookFolder.js";

@@ -1,4 +1,5 @@
 import type { MenuItem } from "@llkit/Menu.js";
+import { STICKY_ID } from "../../project/sorts.js";
 import type { TreeNode } from "../../project/tree.js";
 import { t } from "../../i18n/i18n.js";
 import type { TreeMenuActions } from "./treeMenus.js";
@@ -23,6 +24,18 @@ function sceneMoves(node: TreeNode, { makeScene, chapters }: TreeMenuActions): M
     onSelect: () => makeScene(node, id),
   }));
   return [{ label: t("Gör till scen i"), submenu: [last, ...inChapters] }];
+}
+
+/** A scene in the manuscript becomes a note, the way back from Gör till scen. The same file moves,
+ * so its comments and versions go with it. Not to Lappar, which hold only what is written on them. */
+export function noteMoves(node: TreeNode, actions: TreeMenuActions): MenuItem[] {
+  const sorts = actions.otherSorts(node).filter((sort) => sort.id !== STICKY_ID);
+  if (sorts.length === 0) return [];
+  const submenu = sorts.map(({ id, name }) => ({
+    label: name,
+    onSelect: () => actions.moveInto(node, id),
+  }));
+  return [{ label: t("Gör till anteckning i"), submenu }];
 }
 
 // A note has no status; its menu chooses whether its name is linked instead.

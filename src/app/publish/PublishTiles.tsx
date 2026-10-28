@@ -1,7 +1,7 @@
 import { t } from "../../i18n/i18n.js";
 
 // Publicera's parts as tabs along its top: one click changes part, and there is no way back to
-// find, since every part is always one click away. Studio opens a screen of its own.
+// find, since every part is always one click away.
 
 export type Step = "design" | "details" | "export" | "forlag";
 
@@ -12,11 +12,7 @@ const STEPS: [Step, string][] = [
   ["forlag", t("Till förlag")],
 ];
 
-export function PublishTabs(props: {
-  step: Step;
-  onStep: (step: Step) => void;
-  onStudio: () => void;
-}) {
+export function PublishTabs(props: { step: Step; onStep: (step: Step) => void }) {
   return (
     <nav className="publish-tabs" aria-label={t("Delar")}>
       {STEPS.map(([step, label]) => (
@@ -29,9 +25,6 @@ export function PublishTabs(props: {
           {label}
         </button>
       ))}
-      <button className="publish-tile" onClick={props.onStudio}>
-        {t("Studio")}
-      </button>
     </nav>
   );
 }

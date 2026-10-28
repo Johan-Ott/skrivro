@@ -30,10 +30,6 @@ Rename the note to the name of the realm or people.
 
 <!-- Which event do different groups remember differently? -->
 
-**The view of magic:**
-
-<!-- Is magic revered, forbidden or ordinary? -->
-
 **What the main character takes for granted:**
 
 <!-- What do they not even see, because they grew up with it? -->

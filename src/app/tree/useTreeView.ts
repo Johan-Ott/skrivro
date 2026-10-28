@@ -11,11 +11,13 @@ import { chapterIds, foldableIds, sidebarSections, visibleRows } from "../../pro
 import type { TreeRow as Row } from "../../project/treeRows.js";
 import type { SceneStatus } from "../../manuscript/sceneFile.js";
 import { nodeLabel, nodeMeta } from "../../project/treeLabels.js";
+import { noteKind, type NoteKind } from "../../project/noteKinds.js";
 import type { MenuItem } from "@llkit/Menu.js";
 import type { Project } from "../useProject.js";
 import type { Placement } from "./treeMenus.js";
 import { useTreeActions } from "./useTreeActions.js";
 import { useTreeDrag } from "./useTreeDrag.js";
+import { useFoldedSections } from "./foldedSections.js";
 import { noteLinkOf } from "./treeMenuActions.js";
 import { useFollowOpenScene, useRenameRequest } from "./treeEffects.js";
 import type { ProjectChange } from "../labels/LabelsDialog.js";
@@ -85,8 +87,19 @@ function useTreeViewState(tree: TreeNode[]) {
   const [labelsFor, setLabelsFor] = useState<string | null>(null);
   const [filter, setFilter] = useState<string[]>([]);
   const [focusId, setFocusId] = useState<string | null>(null);
+  // The row just moved from the manuscript: marked until the next click, though not opened.
+  const [movedId, setMovedId] = useState<string | null>(null);
   const editing = { renamingId, setRenamingId, menu, setMenu, labelsFor, setLabelsFor };
-  return { ...useCollapsed(tree), ...editing, filter, setFilter, focusId, setFocusId };
+  return {
+    ...useCollapsed(tree),
+    ...editing,
+    filter,
+    setFilter,
+    focusId,
+    setFocusId,
+    movedId,
+    setMovedId,
+  };
 }
 
 // A filter shows every match unfolded; chapter focus shows only the chapter's scenes under Boken.
@@ -121,8 +134,9 @@ export function useTreeView(props: TreeViewProps) {
   const { project } = props;
   const view = useTreeViewState(project.tree);
   useUnfilteredOnAdd(project.tree, view);
-  useRenameRequest(props, view);
-  useFollowOpenScene(props, view);
+  const folded = useFoldedSections(project.dir);
+  useRenameRequest(props, view, folded);
+  useFollowOpenScene(props, view, folded);
   const actions = useTreeActions({
     ...props,
     tree: project.tree,
@@ -141,7 +155,7 @@ export function useTreeView(props: TreeViewProps) {
   };
   const isFiltered = view.filter.length > 0;
   const { sections, focused } = sectionsOf(project.tree, view);
-  return { view, actions, drag, sections, dropAtBookEnd, openMenu, isFiltered, focused };
+  return { view, actions, drag, sections, folded, dropAtBookEnd, openMenu, isFiltered, focused };
 }
 
 export type Tree = ReturnType<typeof useTreeView>;
@@ -151,7 +165,10 @@ export const isEmptySort = (node: TreeNode) => node.kind === "sort" && !node.chi
 
 export function rowHandlers(row: Row, actions: Actions, view: View) {
   return {
-    onActivate: () => actions.activate(row.node),
+    onActivate: () => {
+      view.setMovedId(null);
+      actions.activate(row.node);
+    },
     onToggle: () => view.toggle(row.node.id),
     onKeyDown: (event: Parameters<Actions["onKeyDown"]>[1]) => actions.onKeyDown(row, event),
     onStartRename: () => actions.startRename(row.node),
@@ -164,16 +181,18 @@ export function rowHandlers(row: Row, actions: Actions, view: View) {
 
 // Labels and word counts change with the book, not with each key typed, so they are kept per
 // version of the project; a long book has hundreds of rows to name.
-const labelCache = new WeakMap<Project, Map<string, { label: string; meta: string }>>();
+type RowLabels = { label: string; meta: string; kind: NoteKind | null };
+const labelCache = new WeakMap<Project, Map<string, RowLabels>>();
 
 function labelsOf(project: Project, node: TreeNode) {
-  const labels = labelCache.get(project) ?? new Map<string, { label: string; meta: string }>();
+  const labels = labelCache.get(project) ?? new Map<string, RowLabels>();
   labelCache.set(project, labels);
   const known = labels.get(node.id);
   if (known) return known;
   const made = {
     label: nodeLabel(node, project.tree, project.summaries),
     meta: nodeMeta(node, project.summaries),
+    kind: node.kind === "scene" ? noteKind(project.tree, project.summaries, node.id) : null,
   };
   labels.set(node.id, made);
   return made;
@@ -192,12 +211,13 @@ export function rowView(row: Row, props: TreeViewProps, collapsed: ReadonlySet<s
   const { node } = row;
   const summary = props.project.summaries[node.id];
   const isInCloud = props.project.notDownloaded.some((file) => file.sceneId === node.id);
-  const { label, meta } = labelsOf(props.project, node);
+  const { label, meta, kind } = labelsOf(props.project, node);
   return {
     row,
     label: isInCloud ? t("Hämtar från molnet…") : label,
     title: node.kind === "scene" ? (summary?.title ?? "") : (node.title ?? ""),
     meta,
+    kind,
     dots: labelsOn(props.project.fields, node),
     status: sceneStatusOf(props.project, node),
     isActive: node.id === props.openSceneId,

@@ -40,12 +40,26 @@ function sideOf(tree: TreeNode[], id: string | null) {
   return top.id === TRASH_ID ? "trash" : "notes";
 }
 
-// A scene of the book does not turn into a note by a drag, and one dropped in Papperskorg
-// remembers where it was. Null for an ordinary move.
+const sidesOf = (tree: TreeNode[], draggedId: string, row: TreeRow, position: DropPosition) => ({
+  from: sideOf(tree, draggedId),
+  into: sideOf(tree, position === "inside" ? row.node.id : row.parentId),
+});
+
+/** A scene of the book does not turn into a note by a drag: the tree says so, and moves nothing. */
+export function isRefusedDrop(
+  tree: TreeNode[],
+  draggedId: string,
+  row: TreeRow,
+  position: DropPosition,
+) {
+  const { from, into } = sidesOf(tree, draggedId, row, position);
+  return from === "book" && into === "notes";
+}
+
+// One dropped in Papperskorg remembers where it was. Null for an ordinary move.
 function acrossSides(tree: TreeNode[], draggedId: string, row: TreeRow, position: DropPosition) {
-  const from = sideOf(tree, draggedId);
-  const into = sideOf(tree, position === "inside" ? row.node.id : row.parentId);
-  if (from === "book" && into === "notes") return tree;
+  if (isRefusedDrop(tree, draggedId, row, position)) return tree;
+  const { from, into } = sidesOf(tree, draggedId, row, position);
   return from !== "trash" && into === "trash" ? moveToTrash(tree, draggedId) : null;
 }
 

@@ -31,6 +31,31 @@ function TitlePage({ book, note }: { book: BookDetails; note: string }) {
   );
 }
 
+/** A standard manuscript without the writer's name would reach a publisher without one. */
+export function authorWarning(book: BookDetails, format: ExportFormat) {
+  return format === "manus" && !book.author.trim() ? t("Författarnamnet saknas.") : null;
+}
+
+/** Before the export, as the placeholders are told: it is still made, with the way to the name. */
+export function AuthorWarning(props: {
+  project: Project;
+  generalAuthor: string;
+  format: ExportFormat;
+  onShow: () => void;
+}) {
+  const book = bookDetails(props.project.fields, props.generalAuthor, 0);
+  const warning = authorWarning(book, props.format);
+  if (!warning) return null;
+  return (
+    <p className="setting-hint" role="status">
+      {warning}{" "}
+      <button className="link-button" onClick={props.onShow}>
+        {t("Fyll i under Bokuppgifter")}
+      </button>
+    </p>
+  );
+}
+
 function PagePreview(props: { book: BookDetails; isPlain: boolean; words: number; pages: number }) {
   const { isPlain, words, pages } = props;
   return (

@@ -19,7 +19,7 @@ function toTop() {
 const LAYERS = "[role=menu], [role=dialog]";
 const openLayers = () => document.querySelectorAll(LAYERS).length;
 
-// A panel, or a screen within a screen such as Studio, marks its way out for back to take; the
+// A panel, or a screen within a screen, marks its way out for back to take; the
 // last one in sight is the one on top.
 const innerBack = () =>
   Array.from(document.querySelectorAll<HTMLElement>("[data-phone-back]"))

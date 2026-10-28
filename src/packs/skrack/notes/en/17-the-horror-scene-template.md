@@ -1,5 +1,5 @@
 ---
-sort: Det som skrämmer
+sort: What frightens
 ---
 
 # The horror scene (template)

@@ -1,30 +1,7 @@
 import { expect, test } from "@playwright/test";
-import { editor, openExample } from "./helpers";
+import { editor, openExample, togglePanel } from "./helpers";
 
 test.beforeEach(async ({ page }) => openExample(page));
-
-test("reaching the daily goal is celebrated, and the ink shows in the journey", async ({
-  page,
-}) => {
-  await editor(page).locator("p").last().click();
-  await page.keyboard.press("End");
-  await page.keyboard.insertText(` ${Array.from({ length: 520 }, () => "ord").join(" ")}`);
-
-  await expect(page.getByRole("status").getByText("Dagens sida är skriven.")).toBeVisible();
-  await page.getByRole("button", { name: "Insikter", exact: true }).click();
-  await page.locator(".insight-journey").click();
-  const journey = page.getByRole("dialog", { name: "Skrivarresan" });
-  await expect(journey.getByText("520 ord sedan du började.", { exact: false })).toBeVisible();
-  await expect(page.locator(".insight-journey")).toContainText("75 bläck");
-});
-
-test("holiday mode is turned on from the inkwell", async ({ page }) => {
-  await page.getByRole("button", { name: "Insikter", exact: true }).click();
-  await page.locator(".insight-journey").click();
-  await page.getByRole("button", { name: "Slå på semesterläge" }).click();
-
-  await expect(page.getByRole("button", { name: /Semesterläge på/ })).toBeVisible();
-});
 
 test("a book opens where the writer left off, and a key goes on from there", async ({ page }) => {
   await editor(page).locator("p").first().click();
@@ -71,23 +48,16 @@ test("a chapter is shown alone in the sidebar, and Hela boken brings the book ba
   await expect(tree).toContainText("1. Brevet");
 });
 
-test("today's card opens Dagens mål, and Ändra mål goes on to the goals", async ({ page }) => {
-  await page.getByRole("button", { name: "Insikter", exact: true }).click();
+test("today's card in Insikter opens the goals", async ({ page }) => {
+  await togglePanel(page, "Insikter");
   await page.locator(".insight-day").click();
 
-  const day = page.getByRole("dialog", { name: "Dagens mål" });
-  await expect(day).toContainText("0 ord skrivna");
-  await day.getByRole("button", { name: "Ändra mål" }).click();
   await expect(page.getByRole("dialog", { name: "Mål för projektet" })).toBeVisible();
 });
 
 test("a daily goal below zero is not saved, and the field says why", async ({ page }) => {
-  await page.getByRole("button", { name: "Insikter", exact: true }).click();
+  await togglePanel(page, "Insikter");
   await page.locator(".insight-day").click();
-  await page
-    .getByRole("dialog", { name: "Dagens mål" })
-    .getByRole("button", { name: "Ändra mål" })
-    .click();
   const goals = page.getByRole("dialog", { name: "Mål för projektet" });
 
   await goals.getByLabel("Dagligt ordmål").fill("-5");

@@ -1,0 +1,12 @@
+/* selector only: body .badge-name */
+
+/* selector only: body .badge-when */
+
+.phone-bar-start .profile-button.with-title {
+  width: 44px;
+  padding: 0;
+}
+
+.phone-bar-start .profile-button-title {
+  display: none;
+}

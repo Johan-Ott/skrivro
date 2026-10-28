@@ -22,14 +22,6 @@ Byt namn på anteckningen till rikets, hovets eller landets namn.
 
 <!-- Två eller tre platser där mycket händer. -->
 
-**Vem som betalar:**
-
-<!-- Hur syns de utan makt och magi? -->
-
 **Den som tjänar på kriget:**
 
 <!-- Vem vill att kriget fortsätter? -->
-
-**Vad som ändras:**
-
-<!-- Hur ser makten ut när boken är slut? -->

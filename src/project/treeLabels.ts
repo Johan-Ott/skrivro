@@ -1,3 +1,4 @@
+import { fileType } from "./noteKinds.js";
 import type { SceneSummary } from "./sceneSummaries.js";
 import { STICKY_ID } from "./sorts.js";
 import {
@@ -76,9 +77,13 @@ export function shortWordCount(words: number): string {
   return `${Math.round(words / 1000)}k`;
 }
 
-/** Words, or how many notes a sort holds. */
+// A file has no words of its own worth counting, so it says what it is: "PDF".
+const sceneMeta = (summary: SceneSummary | undefined) =>
+  summary?.file ? fileType(summary.file) : formatNumber(summary?.words ?? 0);
+
+/** Words, a file's type, or how many notes a sort holds. */
 export function nodeMeta(node: TreeNode, summaries: Summaries): string {
-  if (node.kind === "scene") return formatNumber(summaries[node.id]?.words ?? 0);
+  if (node.kind === "scene") return sceneMeta(summaries[node.id]);
   if (node.kind === "sort") return String(sceneIdsIn([node], node.id).length);
   if (node.kind === "part") return "";
   const words = nodeWords(node, summaries);

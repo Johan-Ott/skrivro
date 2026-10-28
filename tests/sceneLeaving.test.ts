@@ -1,7 +1,8 @@
 import type { Node } from "prosemirror-model";
 import { createMemoryFileSystem } from "@llkit/storage/memoryFileSystem.js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createSceneSession, flushOrKeep, openScene, sceneEdited } from "../src/app/sceneSession";
+import { createSceneSession, openScene, sceneEdited } from "../src/app/sceneSession";
+import { flushOrKeep } from "../src/app/keepText";
 import { parseMarkdown } from "../src/manuscript/parseMarkdown";
 import { listSnapshots } from "../src/project/snapshots";
 

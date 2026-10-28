@@ -1,5 +1,6 @@
 ---
 sort: Världen
+standard: true
 ---
 
 # Magisystemet (mall)
@@ -29,10 +30,6 @@ Byt namn på anteckningen till magins namn i världen.
 **Världen runt magin:**
 
 <!-- Vem styr den, och vem fruktar den? -->
-
-**Det läsaren aldrig får veta:**
-
-<!-- Vad är magin egentligen, under det alla tror? -->
 
 **Där läsaren lär sig den:**
 

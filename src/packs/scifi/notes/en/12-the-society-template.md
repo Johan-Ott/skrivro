@@ -22,10 +22,6 @@ Rename the note to the name of the society, state or group.
 
 <!-- Which rule shapes everyday life, and what happens to someone who breaks it? -->
 
-**Values and language:**
-
-<!-- Which words have changed meaning? -->
-
 **The resistance:**
 
 <!-- Who fights back, and how? -->
@@ -33,7 +29,3 @@ Rename the note to the name of the society, state or group.
 **History:**
 
 <!-- Which event led here, and how do different groups tell it? -->
-
-**What the reader recognizes:**
-
-<!-- What reminds us of our own time? -->

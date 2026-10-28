@@ -30,10 +30,6 @@ Byt namn på anteckningen till rikets eller folkets namn.
 
 <!-- Vilken händelse minns olika grupper på olika sätt? -->
 
-**Synen på magin:**
-
-<!-- Är magin vördad, förbjuden eller vardaglig? -->
-
 **Det huvudpersonen tar för givet:**
 
 <!-- Vad ser hen inte ens, eftersom hen vuxit upp med det? -->

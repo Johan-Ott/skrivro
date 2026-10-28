@@ -4,12 +4,17 @@ import {
   getMatchHighlights,
   getSearchState,
   replaceAll,
-  replaceCurrent,
   SearchQuery,
 } from "prosemirror-search";
 import type { Command, EditorState } from "prosemirror-state";
 import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
-import { applyQuery, replaceOneAndMove, type ManuscriptScope } from "./manuscriptSearch.js";
+import {
+  applyQuery,
+  replaceChosenOrNext,
+  replaceOneAndMove,
+  type ManuscriptScope,
+} from "./manuscriptSearch.js";
+import { ReplaceRow } from "./ReplaceRow.js";
 import { SearchCount, SearchFilters, SearchResults } from "./SearchResults.js";
 import { t } from "../i18n/i18n.js";
 
@@ -48,7 +53,7 @@ function useSearchQuery(props: SearchPanelProps) {
   return { query, search, setSearch, replace, setReplace, ...options };
 }
 
-type SearchQueryState = ReturnType<typeof useSearchQuery>;
+export type SearchQueryState = ReturnType<typeof useSearchQuery>;
 
 // The rows below need not know whether one scene or the whole manuscript is searched.
 function searchActions(props: SearchPanelProps, query: SearchQuery) {
@@ -57,9 +62,6 @@ function searchActions(props: SearchPanelProps, query: SearchQuery) {
   if (!scope) {
     return {
       position: () => matchPosition(editorState),
-      // Searching the open scene only still says when the notes hold the words.
-      inNotes: () => props.manuscript?.inNotes(query, editorState) ?? 0,
-      showNotes: () => props.manuscript?.showNotes(),
       step: (isBackwards: boolean) => run(isBackwards ? findPrev : findNext, false),
       replaceOne: () => run(replaceOneAndMove, false),
       replaceEvery: () => {
@@ -71,18 +73,16 @@ function searchActions(props: SearchPanelProps, query: SearchQuery) {
   }
   return {
     position: () => scope.position(query, editorState),
-    inNotes: () => scope.inNotes(query, editorState),
-    showNotes: scope.showNotes,
     step: (isBackwards: boolean) => scope.step(query, isBackwards),
     replaceOne: () => {
-      run(replaceCurrent, false);
+      run(replaceChosenOrNext, false);
       scope.step(query, false);
     },
     replaceEvery: () => scope.replaceAll(query),
   };
 }
 
-type SearchActions = ReturnType<typeof searchActions>;
+export type SearchActions = ReturnType<typeof searchActions>;
 
 // Enter and Shift+Enter step too; a phone's keyboard has no Shift+Enter.
 function StepButtons({ actions }: { actions: SearchActions }) {
@@ -131,30 +131,6 @@ function FindRow(props: {
   );
 }
 
-function ReplaceRow(props: {
-  query: SearchQueryState;
-  actions: SearchActions;
-  onClose: () => void;
-}) {
-  return (
-    <div className="search-row">
-      <input
-        aria-label={t("Ersätt med")}
-        placeholder={t("Ersätt med")}
-        value={props.query.replace}
-        onChange={(event) => props.query.setReplace(event.target.value)}
-        onKeyDown={(event) => event.key === "Escape" && (event.preventDefault(), props.onClose())}
-      />
-      <button className="button secondary small" onClick={props.actions.replaceOne}>
-        {t("Ersätt")}
-      </button>
-      <button className="button primary small" onClick={props.actions.replaceEvery}>
-        {t("Alla")}
-      </button>
-    </div>
-  );
-}
-
 function Chip(props: { isOn: boolean; onToggle: () => void; label?: string; children: string }) {
   return (
     <button
@@ -176,8 +152,12 @@ function SearchOptions(props: {
   return (
     <div className="search-options">
       {manuscript && (
-        <Chip isOn={manuscript.isOn} onToggle={() => manuscript.setOn(!manuscript.isOn)}>
-          {t("Hela manuset")}
+        <Chip
+          isOn={manuscript.isOn}
+          onToggle={() => manuscript.setOn(!manuscript.isOn)}
+          label={t("Sök i hela boken")}
+        >
+          {t("Hela boken")}
         </Chip>
       )}
       <Chip isOn={query.wholeWord} onToggle={() => query.setWholeWord(!query.wholeWord)}>
@@ -207,7 +187,12 @@ export function SearchPanel(props: SearchPanelProps) {
   return (
     <div className="search-panel" role="search">
       <FindRow query={query} actions={actions} onKey={onSearchKey} onClose={props.onClose} />
-      <ReplaceRow query={query} actions={actions} onClose={props.onClose} />
+      <ReplaceRow
+        query={query}
+        actions={actions}
+        isWholeBook={props.manuscript?.isOn ?? false}
+        onClose={props.onClose}
+      />
       <SearchOptions query={query} manuscript={props.manuscript} />
       <SearchFilters scope={props.manuscript} />
       <SearchResults scope={props.manuscript} query={query.query} editorState={props.editorState} />

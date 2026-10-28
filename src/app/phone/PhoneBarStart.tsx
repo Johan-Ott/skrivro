@@ -14,12 +14,12 @@ import { t } from "../../i18n/i18n.js";
 
 type Props = { app: AppState; project: Project };
 
-export function PhoneBarStart({ app, project }: Props) {
+export function PhoneBarStart({ app, project, onReview }: Props & { onReview?: () => void }) {
   const dialogs = useMenuDialogs({ app, project });
   const bookProps = sidebarProps(app, project);
   const theme = useThemeDialog(bookProps);
   const templates = useTemplatesDialog(bookProps);
-  const menu = useMenuButton(t("Meny"), phoneMenu(app, dialogs, { theme, templates }));
+  const menu = useMenuButton(t("Meny"), phoneMenu(app, dialogs, { theme, templates }, onReview));
   return (
     <span className="phone-bar-start">
       <button className="topbar-button" aria-label={t("Meny")} onClick={menu.open}>

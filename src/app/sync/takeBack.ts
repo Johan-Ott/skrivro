@@ -1,5 +1,6 @@
 import { takeSnapshot } from "../../project/snapshots.js";
 import { moveToTrash, type TreeNode } from "../../project/tree.js";
+import { withNodeFields, type NodeFields } from "../../project/nodeFields.js";
 import { writeAtomic } from "@llkit/storage/atomicWrite.js";
 import { joinPath, readIfThere } from "@llkit/storage/fileSystem.js";
 import type { FileChange, NodeChange } from "../../sync/syncLog.js";
@@ -14,13 +15,6 @@ export interface TakeBackParts {
   project: Project;
   session: SceneSession;
   updateTree: (tree: TreeNode[]) => Promise<void>;
-}
-
-export function withField(tree: TreeNode[], id: string, field: string, value: unknown): TreeNode[] {
-  return tree.map((node) => {
-    if (node.id === id) return { ...node, [field]: value } as TreeNode;
-    return node.children ? { ...node, children: withField(node.children, id, field, value) } : node;
-  });
 }
 
 const sceneIdOf = (path: string) => /^scenes\/([^/]+)\.md$/.exec(path)?.[1] ?? null;
@@ -68,5 +62,8 @@ async function takeBackFile(parts: TakeBackParts, change: FileChange) {
 export async function takeBack(parts: TakeBackParts, change: FileChange | NodeChange) {
   if ("path" in change) return takeBackFile(parts, change);
   const { node, field, before } = change;
-  if (field) await parts.updateTree(withField(parts.project.tree, node.id, field, before));
+  if (field)
+    await parts.updateTree(
+      withNodeFields(parts.project.tree, node.id, { [field]: before } as NodeFields),
+    );
 }

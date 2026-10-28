@@ -5,11 +5,11 @@ import {
   insertAfter,
   moveToTrash,
   removeNode,
-  renameNode,
   sortsOf,
   type NodeKind,
   type TreeNode,
 } from "../project/tree.js";
+import { renameNode } from "../project/nodeFields.js";
 import { nodeLabel } from "../project/treeLabels.js";
 import { SCENE_STATUSES, type SceneStatus } from "../manuscript/sceneFile.js";
 import { scenePath } from "../storage/sceneId.js";

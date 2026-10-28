@@ -1,0 +1,53 @@
+/* Studio on a phone: the cards as a row to swipe, the picture and its choices under each other. */
+.phone-app .studio {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  overflow-y: auto;
+}
+
+/* All the cards show at once, wrapping onto more rows instead of running off the screen. */
+/* Studio's cards in one row that slides sideways, instead of three wrapped rows of buttons. */
+.phone-app .studio-nav {
+  flex-flow: row nowrap;
+  flex-shrink: 0;
+  gap: 4px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.phone-app .studio-group {
+  display: contents;
+}
+
+.phone-app .studio-item {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.phone-app .studio-item .insight-muted {
+  display: none;
+}
+
+.phone-app .studio-main {
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+}
+
+.phone-app .studio-stage {
+  padding: 12px;
+}
+
+.phone-app .studio-panel {
+  width: auto;
+}
+
+.phone-app .studio-group .sidebar-heading {
+  display: none;
+}
+

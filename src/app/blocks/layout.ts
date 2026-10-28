@@ -23,7 +23,7 @@ function read<T>(key: string, empty: T): T {
 const write = (key: string, value: unknown) => browserStorage().setItem(key, JSON.stringify(value));
 
 export const places = createStore<Record<string, Place>>(read(PLACES_KEY, {}));
-/** The blocks of the dock that are open; Granska, Insikter and the sprint keep their own. */
+/** The blocks of the dock that are open; Granska and Insikter keep their own. */
 export const openBlocks = createStore<string[]>([]);
 export const layouts = createStore<Record<number, Layout>>(read(LAYOUTS_KEY, {}));
 /** The layout last chosen or saved, shown on the dock's icon. */

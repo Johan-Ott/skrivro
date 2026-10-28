@@ -367,6 +367,13 @@ select:focus-visible {
   content: attr(data-pov);
 }
 
+/* A file, a lapp or a guide among the notes, so a picture and a place do not look the same. */
+.note-kind {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--text-label);
+}
+
 .tree-meta {
   color: var(--text-label);
   font-size: 12px;
@@ -661,6 +668,22 @@ html.look-shown .selection-bar {
   cursor: default;
 }
 
+.palette-name {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* The name stays on one line and is cut with an ellipsis; the hint gives way to it first. */
+.palette-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .palette-row[aria-selected="true"] {
   background: var(--surface-hover);
 }
@@ -669,6 +692,12 @@ html.look-shown .selection-bar {
 .palette-empty {
   color: var(--text-muted);
   white-space: nowrap;
+}
+
+.palette-hint {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .palette-empty {
@@ -1607,44 +1636,6 @@ button.book-cover:hover {
   border-radius: 3px;
 }
 
-.heatmap {
-  display: grid;
-  grid-template-rows: repeat(7, 16px);
-  grid-auto-columns: 16px;
-  grid-auto-flow: column;
-  gap: 5px;
-}
-
-.heat {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-}
-
-.heat.future {
-  background: transparent;
-}
-
-.heat.level-0 {
-  background: var(--heat-0);
-}
-
-.heat.level-1 {
-  background: var(--heat-1);
-}
-
-.heat.level-2 {
-  background: var(--heat-2);
-}
-
-.heat.level-3 {
-  background: var(--heat-3);
-}
-
-.heat.level-4 {
-  background: var(--heat-4);
-}
-
 .chapter-bar {
   display: grid;
   grid-template-columns: 130px 1fr 52px;
@@ -2064,7 +2055,7 @@ button.book-cover:hover {
   box-sizing: border-box;
   height: 46px;
   z-index: var(--layer-float);
-  /* Centred while it fits; what does not fit folds into ⋯ (RowOverflow), and only a row too
+  /* Centred while it fits; the rest is in ⋯ (RowOverflow), and only a row too
      narrow even then scrolls sideways from its start. */
   justify-content: safe center;
   overflow-x: auto;
@@ -2826,22 +2817,6 @@ button.book-cover:hover {
   align-items: center;
 }
 
-.status-split {
-  display: flex;
-  gap: 2px;
-  height: 8px;
-  overflow: hidden;
-  border-radius: 4px;
-}
-
-.status-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 12px;
-  color: var(--text-muted);
-  font-size: 13px;
-}
-
 .error-list {
   display: flex;
   flex-direction: column;
@@ -2979,72 +2954,6 @@ button.book-cover:hover {
   flex-wrap: wrap;
   gap: 4px 10px;
   color: var(--danger);
-}
-
-/* Celebrations: dark cards up in the right corner, clear of the tools at the foot, gone after
-   four seconds. */
-
-.celebrations {
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  z-index: var(--layer-toast);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: min(380px, calc(100vw - 40px));
-  pointer-events: none;
-}
-
-.celebration {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: #161616;
-  color: #f2f2f2;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
-  animation: rise var(--calm) var(--ease-out);
-}
-
-.celebration-badge {
-  width: 38px;
-  height: 38px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 19px;
-  background: #3a3a3a;
-  color: #ffffff;
-  font: 600 17px var(--font-prose);
-}
-
-.celebration-badge.green {
-  background: #0e6b4f;
-}
-
-.celebration-words {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.celebration-title {
-  font: 15px var(--font-prose);
-}
-
-.celebration-text {
-  color: #a3a3a3;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-@media (max-width: 600px) {
-  .celebrations {
-    bottom: calc(84px + var(--safe-bottom));
-  }
 }
 
 /* Skriv på ett ark: the text, its header and footer on one sheet, with its pages at the foot. */
@@ -3651,18 +3560,6 @@ html.welcome-shown body {
   font-size: 13px;
 }
 
-/* Kolofonen, Insikter's numbers as the book's last page, folded under the rest. */
-
-.insights-colophon summary {
-  color: var(--text-muted);
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.insights-colophon[open] summary {
-  margin-bottom: 12px;
-}
-
 /* A part of a long settings tab: a small heading over its rows. */
 
 .settings-group-title {
@@ -3809,7 +3706,13 @@ html.welcome-shown body {
 
 .tree-undo {
   position: fixed;
+  bottom: 100px;
   z-index: 60;
+}
+
+/* The box for a refused drag lies over the Ångra box, so neither hides the other. */
+.tree-undo + .tree-undo {
+  bottom: 164px;
 }
 
 /* Held down for its menu, a row or a cover does not start selecting its text. */
