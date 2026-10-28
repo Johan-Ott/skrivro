@@ -678,7 +678,7 @@ html.look-shown .selection-bar {
 }
 
 /* The name stays on one line and is cut with an ellipsis; the hint gives way to it first. */
-.palette-label {
+.palette-entry-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

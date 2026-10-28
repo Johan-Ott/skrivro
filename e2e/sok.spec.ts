@@ -103,7 +103,7 @@ const LONG_NAME =
     .repeat(3)
     .trim();
 
-for (const width of [1280]) {
+for (const width of [1280, 390]) {
   test(`a long name in Ctrl+K stays on one line, ${width} px wide`, async ({ page }) => {
     await page.setViewportSize({ width, height: 820 });
     await page.getByRole("button", { name: "+ Ny anteckning" }).click();
@@ -116,7 +116,7 @@ for (const width of [1280]) {
     const name = page
       .getByRole("option", { name: /Den mycket långa/ })
       .first()
-      .locator(".palette-name");
+      .locator(".palette-entry-name");
     const box = await name.boundingBox();
     expect(box?.height ?? Infinity).toBeLessThan(40);
     expect(box?.width ?? 0).toBeGreaterThan(100);

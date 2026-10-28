@@ -83,7 +83,7 @@ function ResultRow({ index, ...props }: ResultProps & { index: number }) {
       >
         <span className="palette-name">
           <NoteKindIcon kind={entry.kind} />
-          <span className="palette-label">{entry.label}</span>
+          <span className="palette-entry-name">{entry.label}</span>
         </span>
         <span className="palette-hint">
           {isPhone ? entry.hint : (entry.shortcut ?? entry.hint)}
