@@ -137,6 +137,8 @@ Play räknar allt som lämnar telefonen som insamlat, även till användarens eg
 - Bygg sedan: `npm run build:store` → `out/Skrivro.msix` att ladda upp. Store signerar den, så
   SmartScreen-varningen försvinner. Det bygget letar inte efter uppdateringar och visar inga
   knappar för det; Store uppdaterar appen.
+- Store-bygget har Typsts kompilator med i paketet (28 MB), eftersom Store inte tillåter kod som
+  hämtas efter installationen (regel 10.2.2). Ordlistorna hämtas som förut; de är data, inte kod.
 - Varje uppladdning behöver ett högre versionsnummer än förra: `npm run version -- 0.4.14`
   först.
 

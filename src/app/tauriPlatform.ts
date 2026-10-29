@@ -53,6 +53,19 @@ const spelling: Spelling = {
   prepare: (language) => invoke("prepare_dictionary", { language }),
 };
 
+// The Store build carries Typst's compiler, so it has nothing to fetch and the compiler is here.
+const typstFetching: Pick<Platform, "typstCompiler" | "prepareTypst"> = __TYPST_BUNDLED__
+  ? {}
+  : {
+      typstCompiler: () => invoke<ArrayBuffer>("typst_compiler"),
+      prepareTypst: () => invoke("prepare_typst"),
+    };
+
+async function fetchedParts() {
+  const parts = await invoke<{ dictionaries: string[]; hasTypst: boolean }>("fetched_parts");
+  return { ...parts, hasTypst: parts.hasTypst || __TYPST_BUNDLED__ };
+}
+
 const remoteControl = (turnOn?: boolean) => invoke<RemoteState>("remote_control", { turnOn });
 
 export const tauriPlatform: Platform = {
@@ -61,9 +74,8 @@ export const tauriPlatform: Platform = {
   removeBook,
   backups,
   spelling,
-  typstCompiler: () => invoke<ArrayBuffer>("typst_compiler"),
-  prepareTypst: () => invoke("prepare_typst"),
-  fetchedParts: () => invoke("fetched_parts"),
+  ...typstFetching,
+  fetchedParts,
   ...(isPhone ? {} : { remoteControl }),
   ...googleSignInHere(),
 };

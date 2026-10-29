@@ -21,9 +21,13 @@ const typstLeftOut = (isBundled: boolean): Plugin => ({
 // Tauri expects the dev server on a fixed port and prints its own output. A Tauri build leaves
 // Typst's compiler out of the app, which fetches it once; the browser and the dev server keep it.
 export default defineConfig(({ command }) => {
+  // The Store build keeps it too, as the Store allows no code fetched after installing.
+  const isStore = process.env["PENNA_STORE"] === "1";
   // The dev server keeps it, unless PENNA_TYPST_FETCH=1 tries the apps' way in Skrivro Test.
   const isTypstBundled =
-    command === "serve" ? !process.env["PENNA_TYPST_FETCH"] : !process.env["TAURI_ENV_PLATFORM"];
+    command === "serve"
+      ? !process.env["PENNA_TYPST_FETCH"]
+      : isStore || !process.env["TAURI_ENV_PLATFORM"];
   return {
     plugins: [react()],
     // llkit: what any llstudios app is built on, kept apart from what is Skrivro's own.
@@ -35,7 +39,7 @@ export default defineConfig(({ command }) => {
     define: {
       __APP_VERSION__: JSON.stringify(tauriConfig.version),
       __TYPST_BUNDLED__: JSON.stringify(isTypstBundled),
-      __STORE__: JSON.stringify(process.env["PENNA_STORE"] === "1"),
+      __STORE__: JSON.stringify(isStore),
     },
   };
 });

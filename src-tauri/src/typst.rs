@@ -1,5 +1,6 @@
 //! Typst's compiler, which sets the book as printed: 28 MB that the app does not carry. It is
-//! fetched once, at the version Skrivro is built with, and kept in Skrivro's own folder.
+//! fetched once, at the version Skrivro is built with, and kept in Skrivro's own folder. The
+//! Store build carries it instead and never asks for it here.
 
 use crate::spelling::fetch_bytes;
 use tauri::{ipc::Response, AppHandle, Manager};
