@@ -2501,10 +2501,11 @@ body:has(.new-book-dialog) .new-book {
   max-width: 680px;
 }
 
-.print-pages svg {
+.print-pages svg,
+.print-spread {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(var(--shadow-low)) drop-shadow(var(--shadow-dialog));
 }
 
 /* The printed page is white in both themes, as paper is. */
@@ -2513,6 +2514,52 @@ body:has(.new-book-dialog) .new-book {
   fill: #ffffff;
   stroke: var(--border-soft);
   stroke-width: 0.5;
+}
+
+/* Until the pages are set: a blank spread, its lines breathing, the spine shaded as on paper. */
+
+.print-waiting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 680px;
+}
+
+.print-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  aspect-ratio: 26 / 20;
+}
+
+.print-spread > span {
+  padding: 22% 16%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.12), transparent 12%) #ffffff;
+}
+
+.print-spread > span + span {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.12), transparent 12%) #ffffff;
+}
+
+.print-spread > span::before {
+  content: "";
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(#ebe8e1 0 5px, transparent 5px 14px);
+  animation: print-breathe 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes print-breathe {
+  to {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .print-spread > span::before {
+    animation: none;
+  }
 }
 
 .no-stats {

@@ -13,6 +13,17 @@ function usePageFrames(svg: string | null) {
   return pages;
 }
 
+// A blank spread where the pages will come, until Typst has set them.
+const Waiting = () => (
+  <div className="print-waiting" role="status">
+    <div className="print-spread">
+      <span />
+      <span />
+    </div>
+    <p className="kpi-sub">{t("Sätter boken…")}</p>
+  </div>
+);
+
 /** The SVG comes from Typst and the writer's own text, never from outside, so it is set as HTML. */
 export function PrintPreview({
   project,
@@ -26,7 +37,7 @@ export function PrintPreview({
   return (
     <div className="print-preview">
       <span className="setting-hint">{t("Förhandsvisning · första kapitlet")}</span>
-      {preview.kind === "working" && <p className="kpi-sub">{t("Sätter boken…")}</p>}
+      {preview.kind === "working" && <Waiting />}
       {preview.kind === "failed" && (
         <p className="kpi-sub" role="alert">
           {preview.reason}
