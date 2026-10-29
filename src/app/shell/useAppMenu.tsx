@@ -7,10 +7,9 @@ import { SeriesDialog } from "../notes/SeriesDialog.js";
 import { useBackupsDialog } from "../backups/BackupsDialog.js";
 import { useFeedbackDialog } from "@llkit/feedback/FeedbackDialog.js";
 import { useMenuButton } from "@llkit/Menu.js";
-import { useRevisionImport } from "../review/RevisionImport.js";
+import { useEditorsFile } from "../review/RevisionImport.js";
 import { ABOUT_TAB, HELP_TAB } from "../settings/SettingsDialog.js";
 import type { Project } from "../useProject.js";
-import { openIfOnDisk } from "../useSceneSession.js";
 import { useCommandKey } from "../shortcuts.js";
 import { appMenu, programMenu } from "./appMenu.js";
 import { t } from "../../i18n/i18n.js";
@@ -31,21 +30,12 @@ function useSeriesChoice(app: AppState, project: Project) {
   return { open: () => setOpen(true), layer };
 }
 
-// Read anew after the file, so the new comments show in Granska at once, in Redigera.
-const afterReadOf = (app: AppState) => () => {
-  app.revision.reload();
-  void app.refresh();
-  app.writingMode.goTo("redigera");
-};
-
 // The dialogs the menu opens come with it.
 export function useMenuDialogs({ app, project }: { app: AppState; project: Project }) {
   const dirs = [project.dir, app.series?.dir].filter((dir) => dir !== undefined);
   const backups = useBackupsDialog(app, dirs);
   const feedback = useFeedbackDialog();
-  const revision = useRevisionImport(project, afterReadOf(app), (id) =>
-    openIfOnDisk(app.session, project, id),
-  );
+  const revision = useEditorsFile(app, project);
   const series = useSeriesChoice(app, project);
   const { libraryDir } = app.startup.preferences;
   const bookProps = {

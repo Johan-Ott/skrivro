@@ -98,6 +98,8 @@ const wantedPosition = (editor: Editor, isWanted: boolean, isPhone: boolean) =>
 
 interface BarProps extends FormatActions, Omit<SelectionActionProps, "editorState"> {
   editor: Editor;
+  // Redigera has its walk where the format row stands; the row stays, hidden, to keep its folding.
+  hidesFormatRow?: boolean;
 }
 
 // The phone's own menu over a selection is turned off (MainActivity.kt), so copying is here, after
@@ -173,6 +175,21 @@ const Bar = (props: {
   </div>
 );
 
+function FixedBar(row: RowProps) {
+  const fixed = useRef<HTMLDivElement>(null);
+  const folded = useFolding(fixed);
+  return (
+    <Bar
+      className="selection-bar fixed"
+      label={t("Formatering")}
+      style={row.hidesFormatRow ? { display: "none" } : {}}
+      barRef={fixed}
+    >
+      <FixedRow {...row} folded={folded} />
+    </Bar>
+  );
+}
+
 /** The format row fixed over the text, and the row over a selection. */
 export function SelectionBar(props: BarProps) {
   const { editor } = props;
@@ -181,15 +198,9 @@ export function SelectionBar(props: BarProps) {
   const isPhone = usePhone();
   const floating = wantedPosition(editor, isWanted, isPhone);
   const row = { ...props, editorState, run: editor.run, isPhone };
-  const fixed = useRef<HTMLDivElement>(null);
-  const folded = useFolding(fixed);
   return (
     <>
-      {!isPhone && (
-        <Bar className="selection-bar fixed" label={t("Formatering")} style={{}} barRef={fixed}>
-          <FixedRow {...row} folded={folded} />
-        </Bar>
-      )}
+      {!isPhone && <FixedBar {...row} />}
       {floating && (
         <Bar
           className={isPhone ? "selection-bar phone" : "selection-bar"}

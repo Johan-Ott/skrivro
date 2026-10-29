@@ -92,6 +92,32 @@ test("with the margin on, the editor's changes stand in it beside their words, a
   await expect(editor(page)).not.toContainText("Med posten");
 });
 
+test("in Redigera the walk stands where the format row was, reads the editor's file in and steps through it", async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await page.addInitScript(() =>
+    localStorage.setItem("skrivro.writing", JSON.stringify({ commentsInMargin: true })),
+  );
+  await openExample(page);
+  await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
+  const walk = page.getByRole("toolbar", { name: "Genomgång" });
+  await expect(walk).toContainText("Inget kvar att gå igenom");
+  await expect(page.getByRole("toolbar", { name: "Formatering" })).toBeHidden();
+
+  const chooser = page.waitForEvent("filechooser");
+  await walk.getByRole("button", { name: "Läs in redaktörens fil…" }).click();
+  await (await chooser).setFiles(await editorsFile(testInfo.outputDir));
+  await page.getByRole("button", { name: "Stäng", exact: true }).click();
+  await expect(walk).toContainText(/\d+ att gå igenom/);
+
+  await walk.getByRole("button", { name: "Nästa" }).click();
+  await expect(walk).toContainText(/1 av \d+/);
+  await expect(page.locator(".margin-note.current")).toHaveCount(1);
+  await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Skriv" }).click();
+  await expect(page.getByRole("toolbar", { name: "Formatering" })).toBeVisible();
+});
+
 // The first scene as a test reader sends it back: unchanged, with a comment on one word.
 async function readersFile(folder: string) {
   const { CommentRangeEnd, CommentRangeStart, CommentReference } = await import("docx");

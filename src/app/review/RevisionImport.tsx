@@ -12,6 +12,8 @@ import type { WordComment } from "../../import/docxComments.js";
 import { Dialog } from "@llkit/controls.js";
 import { recordFailure } from "@llkit/errorLog.js";
 import { platform } from "../platform.js";
+import type { AppState } from "../App.js";
+import { openIfOnDisk } from "../useSceneSession.js";
 import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -147,3 +149,15 @@ export function useRevisionImport(
   );
   return { open, layer };
 }
+
+// Read anew after the file, so the new comments show at once, in Redigera.
+export const useEditorsFile = (app: AppState, project: Project) =>
+  useRevisionImport(
+    project,
+    () => {
+      app.revision.reload();
+      void app.refresh();
+      app.writingMode.goTo("redigera");
+    },
+    (id) => openIfOnDisk(app.session, project, id),
+  );

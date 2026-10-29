@@ -2317,6 +2317,29 @@ body:has(.new-book-dialog) .new-book {
   flex-shrink: 0;
 }
 
+/* Redigera's row in the format row's place: the walk first, sending and reading in last. */
+.selection-bar.fixed.walk-bar {
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 14px;
+  font: 13px var(--font-ui);
+}
+
+.walk-bar-walk,
+.walk-bar-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.walk-bar-place {
+  font-variant-numeric: tabular-nums;
+}
+
+.walk-bar-counts {
+  color: var(--text-label);
+}
+
 .focus-mode .selection-bar.fixed {
   display: none;
 }
@@ -3459,6 +3482,12 @@ body:has(.new-book-dialog) .new-book {
 
 .margin-note.new {
   border-left-color: var(--text);
+}
+
+/* Where the walk through Redigera stands. */
+.margin-note.current {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
 }
 
 .margin-note-who {
