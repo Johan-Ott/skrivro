@@ -7,8 +7,6 @@ import { activeLayout, layouts, openBlocks, toggleBlock } from "./layout.js";
 import { layoutItems } from "./layoutItems.js";
 import { InSceneBlock } from "./InSceneBlock.js";
 import { ReferenceBlock } from "./ReferenceBlock.js";
-import { StickyNotesLayer } from "./StickyNotes.js";
-import { useStickyNotes } from "./useStickyNotes.js";
 import { t } from "../../i18n/i18n.js";
 
 // One button at the text's foot on the right, before Granska, with the panels in words; each
@@ -30,10 +28,6 @@ const BLOCKS: Block[] = [
   },
 ];
 
-// Lappar are not a panel but notes of their own over the text; the menu shows and hides them.
-const NOTES = "lappar";
-const NOTES_BLOCK = { id: NOTES, title: t("Lappar"), body: () => null };
-
 // Insikter keeps its own open state, as Granska does; in the menu it is one more panel.
 function panelItems(props: Props, open: string[]): MenuItem[] {
   const { isProgressOpen, setProgressOpen } = props.app.writingMode;
@@ -43,7 +37,6 @@ function panelItems(props: Props, open: string[]): MenuItem[] {
     onSelect: () => toggleBlock(block.id),
   });
   return [
-    item(NOTES_BLOCK),
     ...BLOCKS.map(item),
     {
       label: t("Insikter"),
@@ -92,10 +85,8 @@ function OpenPanels(props: Props & { open: string[] }) {
 
 export function BlocksDock(props: Props) {
   const open = openBlocks.use();
-  const notes = useStickyNotes(props.project, props.app);
   return (
     <>
-      {open.includes(NOTES) && <StickyNotesLayer key={props.project.dir} state={notes} />}
       <OpenPanels {...props} open={open} />
       <div className="blocks-dock">
         <PanelsButton {...props} open={open} />

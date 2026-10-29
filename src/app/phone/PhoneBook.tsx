@@ -13,7 +13,7 @@ import { ContentsIcon } from "../shell/icons.js";
 import { reviewAsk } from "../../askOnce.js";
 import { PhoneBarStart, SearchButton } from "./PhoneBarStart.js";
 import { SyncNotices } from "../SyncLayer.js";
-import { startLapp } from "../createLapp.js";
+import { startQuickNote } from "../quickNote.js";
 import { TreeView } from "../tree/TreeView.js";
 import type { Project } from "../useProject.js";
 import { t, formatNumber } from "../../i18n/i18n.js";
@@ -130,15 +130,10 @@ export function PhoneBook(props: PhoneBookProps) {
         />
         <TodayCard app={app} project={project} />
         <ContinueButton {...props} />
-        <button className="phone-new-lapp" onClick={() => void startLapp(app, project)}>
-          {t("Ny lapp")}
+        <button className="phone-new-note" onClick={() => void startQuickNote(app, project)}>
+          {t("Anteckna")}
         </button>
-        <TreeView
-          {...sidebarProps(app, project)}
-          onOpenScene={props.onOpenText}
-          hasAddButton
-          onNewLapp={() => void startLapp(app, project)}
-        />
+        <TreeView {...sidebarProps(app, project)} onOpenScene={props.onOpenText} hasAddButton />
       </main>
     </div>
   );

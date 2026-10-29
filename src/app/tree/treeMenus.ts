@@ -1,5 +1,4 @@
 import { platform } from "../platform.js";
-import { STICKY_ID } from "../../project/sorts.js";
 import { TRASH_ID, type NodeKind, type TreeNode } from "../../project/tree.js";
 import { SCENE_STATUSES, type SceneStatus } from "../../manuscript/sceneFile.js";
 import type { MenuItem } from "@llkit/Menu.js";
@@ -52,8 +51,6 @@ export interface TreeMenuActions {
   wasNote: (node: TreeNode) => boolean;
   /** A note that holds an attached file: no text to make a scene or a template of. */
   isFile: (node: TreeNode) => boolean;
-  /** Starts an empty lapp, for the menu of the sort Lappar; null where there is none to start. */
-  newLapp: (() => void) | null;
 }
 
 export function foldMenu(view: { foldAll: () => void; unfoldAll: () => void }): MenuItem[] {
@@ -107,14 +104,10 @@ function newItemsFor(node: TreeNode, actions: TreeMenuActions): MenuItem[] {
   return byKind[node.kind];
 }
 
-// What is written on a lapp is all it holds, so Lappar takes no attached file and starts a lapp.
-const sortItems = (node: TreeNode, actions: TreeMenuActions): MenuItem[] => {
-  const newNote = { label: t("Ny anteckning"), onSelect: () => actions.newNote(node.id) };
-  if (node.id !== STICKY_ID) {
-    return [newNote, { label: t("Lägg till fil…"), onSelect: () => actions.addFile(node.id) }];
-  }
-  return actions.newLapp ? [{ label: t("Ny lapp"), onSelect: actions.newLapp }] : [newNote];
-};
+const sortItems = (node: TreeNode, actions: TreeMenuActions): MenuItem[] => [
+  { label: t("Ny anteckning"), onSelect: () => actions.newNote(node.id) },
+  { label: t("Lägg till fil…"), onSelect: () => actions.addFile(node.id) },
+];
 
 // The status is written to the scene file and drives the progress on the shelf.
 function statusItems(node: TreeNode, actions: TreeMenuActions): MenuItem[] {

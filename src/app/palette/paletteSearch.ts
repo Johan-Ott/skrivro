@@ -9,7 +9,7 @@ export interface PaletteEntry {
   hint?: string;
   /** The ids of the book's labels on the scene, chapter or note. */
   labels?: string[];
-  /** A note that is a file, a lapp or a guide, shown with its sign. */
+  /** A note that is a file or a guide, shown with its sign. */
   kind?: NoteKind;
   run: () => void;
 }
@@ -56,18 +56,17 @@ function startEntries(entries: PaletteEntry[], uses: Uses) {
   return [...top.map((entry) => ({ ...entry, group: "Mest använda" })), ...rest];
 }
 
-// The most used come first, then notes, scenes, chapters and commands. A lapp is a scrap, so a
-// scene with the same name comes before it.
+// The most used come first, then notes, scenes, chapters and commands.
 const GROUP_ORDER: Record<string, number> = {
   "Mest använda": -1,
   Scener: 1,
   Kapitel: 2,
   Kommandon: 3,
 };
-const rank = (entry: PaletteEntry) => GROUP_ORDER[entry.group] ?? (entry.kind === "lapp" ? 1.5 : 0);
+const rank = (entry: PaletteEntry) => GROUP_ORDER[entry.group] ?? 0;
 
-/** Best first, and among equals the most used, then notes before scenes, but a lapp after them;
- * what is used the most when nothing is typed. */
+/** Best first, and among equals the most used, then notes before scenes; what is used the most
+ * when nothing is typed. */
 export function searchPalette(entries: PaletteEntry[], query: string, uses: Uses = {}) {
   const folded = fold(query.trim());
   if (folded === "") return startEntries(entries, uses);
@@ -112,7 +111,7 @@ export const inGroups = (found: PaletteEntry[]) =>
   [...found].sort((first, second) => rank(first) - rank(second));
 
 /** The results in groups, each group where its best match is: a scene named "Isen" comes before a
- * lapp that only holds the word. */
+ * note that only holds the word. */
 export function inResultGroups(found: PaletteEntry[]) {
   const groups = [...new Set(found.map((entry) => entry.group))];
   return groups.flatMap((group) => found.filter((entry) => entry.group === group));

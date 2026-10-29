@@ -1,5 +1,4 @@
 import { saveNoteAsTemplate } from "./notes/TemplateChips.js";
-import { startLapp } from "./createLapp.js";
 import { selectionBarOf } from "./selectionBarOf.js";
 import { PersonSecrets, SecretPanel } from "./notes/SecretPanel.js";
 import type { ProjectChange } from "./labels/LabelsDialog.js";
@@ -131,7 +130,6 @@ export function sidebarProps(app: AppState, project: Project) {
     ...{ isFollowingOpenScene: writingMode.settings.followOpenText, onOpenScene: openText(app) },
     isContentsShown: writingMode.view === "innehall",
     onShowContents: () => writingMode.setView("innehall"),
-    onNewLapp: () => void startLapp(app, project),
     syncReviewCount: app.syncReview.toChoose,
     onShowSyncReview: () => writingMode.setView("synk"),
     ...{ onShowSnapshots: app.snapshots.show, onShowDrafts: app.drafts.show },

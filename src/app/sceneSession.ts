@@ -108,7 +108,7 @@ export function showScene(session: SceneSession, dir: string, id: string, text: 
 // Leaving a scene whose text is not on disk would lose it, so the switch waits for the save,
 // and saves again after the read for what was typed meanwhile.
 export async function openScene(session: SceneSession, dir: string, id: string) {
-  // A lapp written in its box may be the one opened here, so what waits for the disk goes first.
+  // What is written a moment after it changed may be the text opened here, so it goes first.
   await flushAllSaves();
   if (!(await session.autosave.flush())) return false;
   const text = await session.fileSystem.readText(scenePath(dir, id));

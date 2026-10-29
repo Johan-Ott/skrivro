@@ -104,13 +104,10 @@ function NotesAndTrash({ props, tree }: { props: TreeViewProps & BookExtras; tre
 
 function AddButton({ props, tree }: { props: TreeViewProps; tree: Tree }) {
   const menuFor = menuActions(tree, props);
-  const newLapp = props.onNewLapp ? [{ label: t("Ny lapp"), onSelect: props.onNewLapp }] : [];
   return (
     <button
       className="tree-add"
-      onClick={(event) =>
-        tree.openMenu(event, [...addMenu(menuFor), ...newLapp, ...foldMenu(tree.view)])
-      }
+      onClick={(event) => tree.openMenu(event, [...addMenu(menuFor), ...foldMenu(tree.view)])}
     >
       {t("+ Lägg till")}
     </button>

@@ -69,11 +69,11 @@ describe("createCloseGuard's flushAll", () => {
     const register = createCloseGuard(fakeWindow().guardClose);
     const log: string[] = [];
     register(slowFlush(log, "scene"));
-    register(slowFlush(log, "lapp"));
+    register(slowFlush(log, "note"));
 
     const isSafe = await register.flushAll();
 
-    expect(log.sort()).toEqual(["lapp", "scene"]);
+    expect(log.sort()).toEqual(["note", "scene"]);
     expect(isSafe).toBe(true);
   });
 });

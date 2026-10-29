@@ -14,7 +14,6 @@ const actions = {
   makeScene: noop,
   chapters: () => [{ id: "k1", name: "Kapitel 1" }],
   isFile: () => false,
-  newLapp: noop,
 } as unknown as TreeMenuActions;
 
 const labelsOf = (menu: TreeMenuActions) =>
@@ -35,21 +34,14 @@ describe("the menu of a note", () => {
   });
 });
 
-describe("the menu of the sort Lappar", () => {
+describe("the menu of a sort", () => {
   const menuOf = (id: string) =>
     rowMenu({ id, kind: "sort" }, false, { ...actions, linkOf: () => null }).map(
       (item) => item.label,
     );
 
-  it("has Lägg till fil for an ordinary sort but not for Lappar, which hold what is written on them", () => {
-    expect(menuOf("platser")).toContain("Lägg till fil…");
-    expect(menuOf("lappar")).not.toContain("Lägg till fil…");
-  });
-
-  it("starts a lapp, not a note with a name, from the sort Lappar", () => {
-    expect(menuOf("lappar")).toContain("Ny lapp");
-    expect(menuOf("lappar")).not.toContain("Ny anteckning");
-    expect(menuOf("platser")).toContain("Ny anteckning");
+  it("starts a note or adds a file", () => {
+    expect(menuOf("platser")).toEqual(expect.arrayContaining(["Ny anteckning", "Lägg till fil…"]));
   });
 });
 
@@ -64,14 +56,11 @@ describe("the menu of a scene in the manuscript", () => {
     editLabels: null,
     labelItems: null,
     showDrafts: null,
-    otherSorts: () => [
-      { id: "platser", name: "Platser" },
-      { id: "lappar", name: "Lappar" },
-    ],
+    otherSorts: () => [{ id: "platser", name: "Platser" }],
     moveInto: (_node: unknown, sortId: string) => void moved.push(sortId),
   } as unknown as TreeMenuActions;
 
-  it("makes it a note in a sort, the way back from Gör till scen, but not a lapp", () => {
+  it("makes it a note in a sort, the way back from Gör till scen", () => {
     const item = rowMenu({ id: "s", kind: "scene" }, false, sceneActions).find(
       (each) => each.label === "Gör till anteckning i",
     );

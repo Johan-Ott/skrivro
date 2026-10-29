@@ -42,7 +42,7 @@ const book = {
       kind: "sort",
       children: [{ id: "N1", kind: "scene", labels: ["elin"] }],
     },
-    { id: "lappar", kind: "sort", children: [{ id: "L1", kind: "scene" }] },
+    { id: "anteckningar", kind: "sort", children: [{ id: "L1", kind: "scene" }] },
   ],
   scenes: ["S1", "S2", "N1", "L1"],
   summaries: {
@@ -54,7 +54,7 @@ const book = {
 } as unknown as Project;
 
 describe("what a search goes through", () => {
-  it("is the manuscript and then every note and lapp, with no chip for the notes", () => {
+  it("is the manuscript and then every note, with no chip for the notes", () => {
     expect(searchIds(book)).toEqual(["S1", "S2", "N1", "L1"]);
     expect(searchChips(book).map((chip) => chip.id)).not.toContain("anteckningar");
   });

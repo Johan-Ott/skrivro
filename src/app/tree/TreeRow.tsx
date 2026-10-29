@@ -15,7 +15,7 @@ export interface TreeRowProps {
   /** Without numbering. */
   title: string;
   meta: string;
-  /** A sign for a file, a lapp or a guide; null for a plain note or scene. */
+  /** A sign for a file or a guide; null for a plain note or scene. */
   kind: NoteKind | null;
   /** The row's labels, shown as dots in their colours. */
   dots: Label[];
@@ -191,7 +191,7 @@ const rowStyle = (props: TreeRowProps & { offset?: number }) => ({
   ...(props.offset ? { transform: `translateX(${props.offset}px)` } : {}),
 });
 
-// The name, after the sign of a file, a lapp or a guide; a field while it is renamed.
+// The name, after the sign of a file or a guide; a field while it is renamed.
 const RowName = (props: TreeRowProps) => (
   <>
     <NoteKindIcon kind={props.kind} />

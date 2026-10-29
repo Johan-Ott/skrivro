@@ -88,16 +88,6 @@ test("Ersätt says it changes the manuscript only, while the notes are searched 
   await expect(page.getByText("Ersätter i manuset, inte i anteckningar")).toBeHidden();
 });
 
-test("Ctrl+K finds a lapp too, under its sort", async ({ page }) => {
-  await editor(page).click();
-  await page.keyboard.press("ControlOrMeta+k");
-  await page.keyboard.type("Vem tände");
-
-  const option = page.getByRole("option", { name: /Vem tände ljusen/ });
-  await expect(option).toBeVisible();
-  await expect(page.locator(".palette-group", { hasText: "Lappar" })).toBeVisible();
-});
-
 const LONG_NAME =
   "Den mycket långa anteckningen om vad som hände vid fyren den vintern då isen låg "
     .repeat(3)

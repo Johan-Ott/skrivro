@@ -10,8 +10,6 @@ export const PLACES_ID = "platser";
 export const THINGS_ID = "saker";
 /** Övrigt: notes whose names are not linked in the text unless the writer asks. */
 export const NOTES_ID = "anteckningar";
-/** Lappar: each a note, drawn on or written in, shown over the text on a computer. */
-export const STICKY_ID = "lappar";
 /** Hemligheter: what the reader and the people learn, and when. */
 export const SECRETS_ID = "hemligheter";
 export const TRASH_ID = "trash";
@@ -22,7 +20,6 @@ const FIXED_SORTS: { id: string; kind: "sort"; title: string }[] = [
   { id: PLACES_ID, kind: "sort", title: "Platser" },
   { id: THINGS_ID, kind: "sort", title: "Saker" },
   { id: NOTES_ID, kind: "sort", title: "Övrigt" },
-  { id: STICKY_ID, kind: "sort", title: "Lappar" },
   { id: SECRETS_ID, kind: "sort", title: "Hemligheter" },
 ];
 const TRASH: TreeNode = { id: TRASH_ID, kind: "folder", title: "Papperskorg" };
@@ -78,5 +75,28 @@ export function withSpecialFolders(tree: TreeNode[]): TreeNode[] {
   const missing = FIXED_SORTS.filter(
     (sort) => !contains(tree, sort.id) && !contains(trash.children ?? [], sort.id),
   ).map((sort) => asSort({ ...sort, children: [] }));
-  return [...ordinary, ...withMissing(sorts, missing), trash];
+  return withLapparInOvrigt([...ordinary, ...withMissing(sorts, missing), trash]);
+}
+
+// Lappar was a fixed sort until the margin took its place. Its notes go last in Övrigt and what was
+// thrown away from it goes back there; without Övrigt, or thrown away, it is a sort named Lappar.
+const OLD_STICKY_ID = "lappar";
+
+const asOwnSort = (node: TreeNode) => ({ ...node, title: node.title ?? "Lappar" });
+
+const fromLappar = (node: TreeNode) => {
+  if (node.id === OLD_STICKY_ID) return asOwnSort(node);
+  return node.trashedFrom === OLD_STICKY_ID ? { ...node, trashedFrom: NOTES_ID } : node;
+};
+
+function withLapparInOvrigt(tree: TreeNode[]): TreeNode[] {
+  const lappar = tree.find((node) => node.id === OLD_STICKY_ID);
+  const hasOvrigt = tree.some((node) => node.id === NOTES_ID);
+  const moved = lappar?.children ?? [];
+  return tree.flatMap((node) => {
+    if (node === lappar) return hasOvrigt ? [] : [asOwnSort(node)];
+    if (node.id === NOTES_ID) return [{ ...node, children: [...(node.children ?? []), ...moved] }];
+    if (node.id === TRASH_ID) return [{ ...node, children: (node.children ?? []).map(fromLappar) }];
+    return [node];
+  });
 }

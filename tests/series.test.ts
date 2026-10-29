@@ -20,7 +20,7 @@ describe("series", () => {
     const series = await readProjectFile(files, `/Skrivro/${folder}`, []);
     expect(folder).toBe("Vintervägen.serie");
     expect(series.fields).toMatchObject({ title: "Vintervägen", type: "serie" });
-    expect(sortsOf(series.tree)).toHaveLength(6);
+    expect(sortsOf(series.tree)).toHaveLength(5);
     expect(series.tree.filter((node) => node.kind !== "sort").map((node) => node.id)).toEqual([
       "trash",
     ]);

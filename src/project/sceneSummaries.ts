@@ -26,7 +26,7 @@ export interface SceneSummary {
 
 const MOST_TITLE = 40;
 
-// A note without a title, a sticky note, is named by its first line.
+// A note without a title is named by its first line.
 const firstLine = (body: string) =>
   body
     .split("\n")
@@ -37,7 +37,7 @@ const firstLine = (body: string) =>
 function summarize(text: string, isNote: boolean): SceneSummary {
   const { frontMatter, body } = splitSceneFile(text);
   const named = sceneTitle(frontMatter) ?? (isNote ? firstLine(body) : undefined);
-  const title = named ?? (readField(frontMatter, "color") ? t("Tom lapp") : t("Namnlös scen"));
+  const title = named ?? (isNote ? t("Tom anteckning") : t("Namnlös scen"));
   const link = noteLink(frontMatter);
   const aliases = aliasesOf(frontMatter);
   const file = readField(frontMatter, "file");

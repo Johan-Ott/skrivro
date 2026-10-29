@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { STICKY_ID } from "../src/project/sorts";
 import {
   findNode,
   insertNode,
@@ -22,7 +21,7 @@ import {
 } from "../src/project/tree";
 import { renameNode } from "../src/project/nodeFields";
 
-const FIXED = [CHARACTERS_ID, PLACES_ID, THINGS_ID, NOTES_ID, STICKY_ID, SECRETS_ID, TRASH_ID];
+const FIXED = [CHARACTERS_ID, PLACES_ID, THINGS_ID, NOTES_ID, SECRETS_ID, TRASH_ID];
 
 const scene = (id: string): TreeNode => ({ id, kind: "scene" });
 
@@ -44,11 +43,11 @@ const childIds = (tree: TreeNode[], id: string) =>
   findNode(tree, id)?.node.children?.map((child) => child.id);
 
 describe("special folders", () => {
-  it("always ends the tree with the six note sorts and Papperskorg", () => {
+  it("always ends the tree with the five note sorts and Papperskorg", () => {
     const tree = withSpecialFolders([scene("s1")]);
 
     expect(tree.map((node) => node.id)).toEqual(["s1", ...FIXED]);
-    expect(tree.filter((node) => node.kind === "sort")).toHaveLength(6);
+    expect(tree.filter((node) => node.kind === "sort")).toHaveLength(5);
     expect(tree.at(-1)?.title).toBe("Papperskorg");
   });
 
@@ -58,7 +57,7 @@ describe("special folders", () => {
 
     const twice = withSpecialFolders(withNote);
 
-    expect(twice.length).toBe(8);
+    expect(twice.length).toBe(7);
     expect(childIds(twice, THINGS_ID)).toEqual(["s9"]);
   });
 
@@ -74,7 +73,7 @@ describe("special folders", () => {
 
     expect(tree.map((node) => node.id)).toEqual([
       "s1",
-      ...FIXED.slice(0, 6),
+      ...FIXED.slice(0, 5),
       "tidslinje",
       TRASH_ID,
     ]);
@@ -101,7 +100,29 @@ describe("special folders", () => {
 
     const tree = insertNode(withSpecialFolders([scene("s1")]), own, null, 0);
 
-    expect(tree.map((node) => node.id)).toEqual(["s1", ...FIXED.slice(0, 6), "egen", TRASH_ID]);
+    expect(tree.map((node) => node.id)).toEqual(["s1", ...FIXED.slice(0, 5), "egen", TRASH_ID]);
+  });
+
+  it("puts the old sort Lappar's notes last in Övrigt, and what was thrown from it goes back there", () => {
+    const tree = withSpecialFolders([
+      { id: NOTES_ID, kind: "sort", children: [scene("n1")] },
+      { id: "lappar", kind: "sort", children: [scene("l1")] },
+      { id: TRASH_ID, kind: "folder", children: [{ ...scene("l2"), trashedFrom: "lappar" }] },
+    ]);
+
+    expect(findNode(tree, "lappar")).toBeNull();
+    expect(childIds(tree, NOTES_ID)).toEqual(["n1", "l1"]);
+    expect(findNode(tree, "l2")?.node.trashedFrom).toBe(NOTES_ID);
+  });
+
+  it("keeps the old sort Lappar as the writer's own when Övrigt is in Papperskorg", () => {
+    const tree = withSpecialFolders([
+      { id: "lappar", kind: "sort", children: [scene("l1")] },
+      { id: TRASH_ID, kind: "folder", children: [{ id: NOTES_ID, kind: "sort", children: [] }] },
+    ]);
+
+    expect(findNode(tree, "lappar")?.node).toMatchObject({ kind: "sort", title: "Lappar" });
+    expect(childIds(tree, "lappar")).toEqual(["l1"]);
   });
 });
 

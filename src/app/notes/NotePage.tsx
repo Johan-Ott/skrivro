@@ -1,5 +1,4 @@
 import { chapterRuns } from "../../project/cards.js";
-import { STICKY_ID } from "../../project/sorts.js";
 import { GuideTip } from "../guide/GuideTip.js";
 import {
   CHARACTERS_ID,
@@ -39,7 +38,6 @@ function kindLabel(project: Project, sortId: string) {
     [THINGS_ID]: t("Sak"),
     [SECRETS_ID]: t("Hemlighet"),
     [NOTES_ID]: t("Övrigt"),
-    [STICKY_ID]: t("Lapp"),
   };
   return fixed[sortId] ?? findNode(project.tree, sortId)?.node.title ?? "";
 }
@@ -49,20 +47,8 @@ export function noteSortOf(project: Project, id: string) {
   return parent?.kind === "sort" ? parent.id : null;
 }
 
-// A lapp has no title and no other names: it is what was written on it.
-function LappHeader({ project, sortId }: { project: Project; sortId: string }) {
-  return (
-    <header className="note-header">
-      <div className="text-eyebrow">
-        <span>{kindLabel(project, sortId)}</span>
-      </div>
-    </header>
-  );
-}
-
 export function NoteHeader(props: NotePageProps & { sortId: string }) {
   const { project, noteId } = props;
-  if (props.sortId === STICKY_ID) return <LappHeader project={project} sortId={props.sortId} />;
   const chapters = mentionedChapters(props.book, props.notes.mentions.get(noteId));
   const file = project.summaries[noteId]?.file;
   return (

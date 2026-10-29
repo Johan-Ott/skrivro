@@ -107,8 +107,8 @@
   height: 4px;
 }
 
-/* Ny lapp: the quick catch, under Fortsätt skriva. */
-.phone-new-lapp {
+/* Anteckna: the quick catch, under Fortsätt skriva. */
+.phone-new-note {
   align-self: flex-start;
   min-height: 44px;
   padding: 0 16px;

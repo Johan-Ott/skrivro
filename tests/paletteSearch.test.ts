@@ -97,8 +97,8 @@ describe("a name met in the book", () => {
 });
 
 describe("the results' groups", () => {
-  it("come where their best match is, so a scene named Isen beats a lapp that holds the word", () => {
-    const entries = [entry("Vem tände ljusen på isen?", "Lappar"), entry("Isen", "Scener")];
+  it("come where their best match is, so a scene named Isen beats a note that holds the word", () => {
+    const entries = [entry("Vem tände ljusen på isen?", "Övrigt"), entry("Isen", "Scener")];
 
     const found = inResultGroups(searchPalette(entries, "Isen")).map((each) => each.label);
 
@@ -111,14 +111,5 @@ describe("the results' groups", () => {
     const found = inResultGroups(searchPalette(entries, "Elin")).map((each) => each.label);
 
     expect(found).toEqual(["Elin", "Elins dröm"]);
-  });
-
-  it("put a scene before a lapp with the same name", () => {
-    const lapp = { ...entry("Isen", "Lappar"), id: "lapp", kind: "lapp" as const };
-    const entries = [lapp, entry("Isen", "Scener")];
-
-    const found = inResultGroups(searchPalette(entries, "Isen")).map((each) => each.group);
-
-    expect(found).toEqual(["Scener", "Lappar"]);
   });
 });

@@ -11,8 +11,4 @@ describe("freshlyTrashed", () => {
 
     expect(found?.id).toBe("ny");
   });
-
-  it("leaves out a lapp, which has its own Ångra over the text", () => {
-    expect(freshlyTrashed(new Set(), [scene("lapp", "lappar")])).toBeUndefined();
-  });
 });

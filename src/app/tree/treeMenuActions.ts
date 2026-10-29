@@ -43,9 +43,8 @@ export function menuActions(tree: Tree, props: TreeViewProps): TreeMenuActions {
 // A note moves between sorts from its menu, as dragging does on the computer, or is kept as a
 // template. What moves into a sort shows there, as a note just made does.
 function sortActions(props: TreeViewProps, { view, folded }: Tree) {
-  const { project, onChangeTree, onSaveAsTemplate, onNewLapp } = props;
+  const { project, onChangeTree, onSaveAsTemplate } = props;
   return {
-    newLapp: onNewLapp ?? null,
     saveAsTemplate: onSaveAsTemplate ? (node: TreeNode) => onSaveAsTemplate(node.id) : null,
     otherSorts: (node: TreeNode) => {
       const parentId = findNode(project.tree, node.id)?.parent?.id;

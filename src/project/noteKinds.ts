@@ -1,13 +1,12 @@
 import { isPictureFile } from "./researchFiles.js";
 import type { SceneSummary } from "./sceneSummaries.js";
 import { GUIDE } from "./packs.js";
-import { STICKY_ID } from "./sorts.js";
 import { findNode, type TreeNode } from "./tree.js";
 
-// What a row among the notes is, when it is not a plain note: a file, a lapp or a pack's guide.
+// What a row among the notes is, when it is not a plain note: a file or a pack's guide.
 // It gets a small icon, so a picture, a PDF and a place do not look the same.
 
-export type NoteKind = "picture" | "pdf" | "text" | "file" | "lapp" | "guide";
+export type NoteKind = "picture" | "pdf" | "text" | "file" | "guide";
 
 /** A file's ending in capitals, "PDF" for "mini.pdf"; nothing when the name has none. */
 export function fileType(name: string) {
@@ -22,7 +21,6 @@ function fileKind(name: string): NoteKind {
 }
 
 function kindBySort(sort: TreeNode | null): NoteKind | null {
-  if (sort?.id === STICKY_ID) return "lapp";
   return sort?.kind === "sort" && sort.title === GUIDE ? "guide" : null;
 }
 

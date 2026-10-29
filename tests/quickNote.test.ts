@@ -1,12 +1,11 @@
 import { createMemoryFileSystem } from "@llkit/storage/memoryFileSystem.js";
 import { describe, expect, it } from "vitest";
-import { createLapp } from "../src/app/createLapp";
-import { STICKY_ID } from "../src/project/sorts";
-import { readStickyNote } from "../src/project/stickyNotes";
+import { createQuickNote } from "../src/app/quickNote";
+import { NOTES_ID } from "../src/project/sorts";
 import { sceneIdsIn, withSpecialFolders, type TreeNode } from "../src/project/tree";
 
-describe("createLapp", () => {
-  it("writes an empty lapp as a note file and puts it in the sort Lappar", async () => {
+describe("createQuickNote", () => {
+  it("writes an empty note file and puts it last in Övrigt", async () => {
     const files = createMemoryFileSystem({});
     let saved: TreeNode[] = [];
     const tree = withSpecialFolders([{ id: "s1", kind: "scene" }]);
@@ -17,17 +16,14 @@ describe("createLapp", () => {
       updateTree: async (change: (tree: TreeNode[]) => TreeNode[]) => void (saved = change(tree)),
     };
 
-    const note = await createLapp(book, { left: 24, top: 24 });
+    const id = await createQuickNote(book);
 
-    expect(readStickyNote(note.id, await files.readText(`/bok/scenes/${note.id}.md`))).toEqual(
-      note,
-    );
-    expect(note.text).toBe("");
-    expect(sceneIdsIn(saved, STICKY_ID)).toEqual([note.id]);
+    expect(await files.readText(`/bok/scenes/${id}.md`)).toBe(`---\nid: ${id}\n---\n`);
+    expect(sceneIdsIn(saved, NOTES_ID)).toEqual([id]);
   });
 });
 
-describe("two Ny lapp in a row", () => {
+describe("two quick notes in a row", () => {
   it("both end up in the tree, as each change is made on the tree as it then is", async () => {
     const files = createMemoryFileSystem({});
     let current = withSpecialFolders([{ id: "s1", kind: "scene" }]);
@@ -38,11 +34,8 @@ describe("two Ny lapp in a row", () => {
         void (current = change(current)),
     };
 
-    const [first, second] = await Promise.all([
-      createLapp(book, { left: 24, top: 24 }),
-      createLapp(book, { left: 48, top: 48 }),
-    ]);
+    const ids = await Promise.all([createQuickNote(book), createQuickNote(book)]);
 
-    expect(sceneIdsIn(current, STICKY_ID).sort()).toEqual([first.id, second.id].sort());
+    expect(sceneIdsIn(current, NOTES_ID).sort()).toEqual(ids.sort());
   });
 });

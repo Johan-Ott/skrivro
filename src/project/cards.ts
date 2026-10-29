@@ -1,5 +1,4 @@
 import type { SceneSummary } from "./sceneSummaries.js";
-import { STICKY_ID } from "./sorts.js";
 import { NOTES_ID, sceneIdsIn, sortsOf, type TreeNode } from "./tree.js";
 
 /** A note whose name is linked in the text: an ordinary scene file in a sort. Its title is the name. */
@@ -11,14 +10,14 @@ export interface Card {
   aliases?: string[];
 }
 
-/** Linked unless they say otherwise; in Övrigt and Lappar only when they say so. */
-export const isLinkedByDefault = (sortId: string) => sortId !== NOTES_ID && sortId !== STICKY_ID;
+/** Linked unless they say otherwise; in Övrigt only when they say so. */
+export const isLinkedByDefault = (sortId: string) => sortId !== NOTES_ID;
 
 /** The ids of the notes: the scene files in sorts. */
 export const noteIdsOf = (tree: TreeNode[]) =>
   new Set(sortsOf(tree).flatMap((sort) => sceneIdsIn(tree, sort.id)));
 
-/** Every note in the sorts, linked or not: lappar and files too. A scene whose file has not
+/** Every note in the sorts, linked or not: files too. A scene whose file has not
  * arrived yet has no summary, and so no name. */
 export function notesOf(tree: TreeNode[], summaries: Record<string, SceneSummary>): Card[] {
   return sortsOf(tree).flatMap((sort) =>

@@ -3,42 +3,38 @@ import { joinPath, readIfThere, type FileSystem } from "@llkit/storage/fileSyste
 import { setAside } from "../storage/setAside.js";
 import { scenePath } from "../storage/sceneId.js";
 import { writeProjectFile } from "./projectFile.js";
-import { STICKY_ID } from "./sorts.js";
-import { newStickyNote, stickyNoteFileText, type StickyNote } from "./stickyNotes.js";
+import { NOTES_ID } from "./sorts.js";
 import { findNode, insertNode, withSpecialFolders, type TreeNode } from "./tree.js";
 
 // Older books kept their lappar in lappar.json and kladdlapp.md. The first time such a book is
-// opened each becomes a note in the sort Lappar, and the old files are set aside, not deleted.
+// opened each becomes a note in Övrigt, and the old files are set aside, not deleted.
 
 const OLD_NOTES = "lappar.json";
 const OLD_SCRATCH = "kladdlapp.md";
 /** The same id every time, so a move that was stopped and is run again makes no second copy. */
 const SCRATCH_ID = `01SCRATCH${"0".repeat(17)}`;
 
-const isOldNote = (value: unknown): value is StickyNote =>
-  typeof value === "object" && value !== null && typeof (value as StickyNote).id === "string";
+interface OldNote {
+  id: string;
+  text: string;
+}
 
-// A field an old lapp lacks is filled in as a new lapp has it.
-const completed = (note: StickyNote): StickyNote => ({
-  ...newStickyNote({ left: note.left ?? 24, top: note.top ?? 24 }),
-  ...note,
-  text: typeof note.text === "string" ? note.text : "",
-  strokes: Array.isArray(note.strokes) ? note.strokes : [],
-});
+const noteFile = (note: OldNote) => `---\nid: ${note.id}\n---\n${note.text}`;
 
-async function oldNotes(fileSystem: FileSystem, dir: string) {
+const isOldNote = (value: unknown): value is { id: string; text?: unknown } =>
+  typeof value === "object" && value !== null && typeof (value as OldNote).id === "string";
+
+async function oldNotes(fileSystem: FileSystem, dir: string): Promise<OldNote[] | null> {
   const json = await readIfThere(fileSystem, joinPath(dir, OLD_NOTES));
   const scratch = await readIfThere(fileSystem, joinPath(dir, OLD_SCRATCH));
   if (json === null && scratch === null) return null;
   const parsed: unknown = json === null ? [] : JSON.parse(json);
-  const notes = (Array.isArray(parsed) ? parsed.filter(isOldNote) : []).map(completed);
+  const notes = (Array.isArray(parsed) ? parsed.filter(isOldNote) : []).map((note) => ({
+    id: note.id,
+    text: typeof note.text === "string" ? note.text : "",
+  }));
   const hasScratch = scratch !== null && scratch.trim() !== "";
-  const scratchNote = {
-    ...newStickyNote({ left: 24, top: 24 }),
-    id: SCRATCH_ID,
-    text: scratch ?? "",
-  };
-  return hasScratch ? [...notes, scratchNote] : notes;
+  return hasScratch ? [...notes, { id: SCRATCH_ID, text: scratch }] : notes;
 }
 
 /** Moves the old lappar into notes and returns the new tree; null when the book has none.
@@ -49,9 +45,7 @@ export async function moveOldStickyNotes(
   file: { fields: Record<string, unknown>; tree: TreeNode[] },
   sceneIds: string[],
 ): Promise<TreeNode[] | null> {
-  const { fields } = file;
-  // The sort Lappar may not be in an older project file yet; without it a lapp would land among the
-  // scenes of the manuscript.
+  // Övrigt may be missing from an older project file, and the notes would land in the manuscript.
   const tree = withSpecialFolders(file.tree);
   const notes = await oldNotes(fileSystem, dir);
   if (notes === null) return null;
@@ -59,13 +53,13 @@ export async function moveOldStickyNotes(
   const inTree = notes.filter((note) => findNode(tree, note.id) === null);
   const moved = inTree.reduce(
     (current, note) =>
-      insertNode(current, { id: note.id, kind: "scene" }, STICKY_ID, Number.MAX_SAFE_INTEGER),
+      insertNode(current, { id: note.id, kind: "scene" }, NOTES_ID, Number.MAX_SAFE_INTEGER),
     tree,
   );
-  if (inTree.length > 0) await writeProjectFile(fileSystem, dir, fields, moved);
+  if (inTree.length > 0) await writeProjectFile(fileSystem, dir, file.fields, moved);
   await fileSystem.makeDir(joinPath(dir, "scenes"));
   for (const note of notes.filter((each) => !sceneIds.includes(each.id))) {
-    await writeAtomic(fileSystem, scenePath(dir, note.id), stickyNoteFileText(note));
+    await writeAtomic(fileSystem, scenePath(dir, note.id), noteFile(note));
   }
   for (const name of [OLD_NOTES, OLD_SCRATCH]) {
     if ((await readIfThere(fileSystem, joinPath(dir, name))) !== null) {

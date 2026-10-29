@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { STICKY_ID } from "../src/project/sorts";
 import { readProjectFile, UnreadableProject, writeProjectFile } from "../src/project/projectFile";
 import {
   CHARACTERS_ID,
@@ -54,7 +53,6 @@ describe("readProjectFile", () => {
       PLACES_ID,
       THINGS_ID,
       NOTES_ID,
-      STICKY_ID,
       SECRETS_ID,
       TRASH_ID,
     ]);
@@ -71,13 +69,12 @@ describe("readProjectFile", () => {
       PLACES_ID,
       THINGS_ID,
       NOTES_ID,
-      STICKY_ID,
       SECRETS_ID,
       TRASH_ID,
     ]);
     expect(project.repairCopy).toMatch(/^project\.json\.trasig-/);
     expect(await files.readText(`/bok/${project.repairCopy ?? ""}`)).toBe('{ "tree": [ trasig');
-    expect(JSON.parse(await files.readText(PROJECT_PATH)).tree).toHaveLength(8);
+    expect(JSON.parse(await files.readText(PROJECT_PATH)).tree).toHaveLength(7);
   });
 
   it("repairs an invalid node by keeping every valid node and every field", async () => {

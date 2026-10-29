@@ -45,7 +45,7 @@ function useTexts(refs: TextRef[], version: unknown, isWanted: boolean) {
 export interface NoteCard extends Card {
   dir: string;
   sortLabel: string;
-  /** A file, a lapp or a guide, read in the home the note is in, the book's or the series'. */
+  /** A file or a guide, read in the home the note is in, the book's or the series'. */
   kind: NoteKind | null;
   file?: string;
 }

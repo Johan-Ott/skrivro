@@ -32,12 +32,6 @@ const DRAWINGS: Record<NoteKind, ReactNode> = {
     </Sheet>
   ),
   file: <Sheet />,
-  lapp: (
-    <Icon size={13}>
-      <path d="M4 4h16v10l-6 6H4z" />
-      <path d="M14 20v-6h6" />
-    </Icon>
-  ),
   guide: (
     <Icon size={13}>
       <path d="M12 3v18" />
@@ -51,11 +45,10 @@ const names = (): Record<NoteKind, string> => ({
   pdf: t("PDF"),
   text: t("Textfil"),
   file: t("Fil"),
-  lapp: t("Lapp"),
   guide: t("Guide"),
 });
 
-/** A small sign before a row that is not a plain note: a picture, a PDF, a lapp. */
+/** A small sign before a row that is not a plain note: a picture, a PDF, a guide. */
 export function NoteKindIcon({ kind }: { kind: NoteKind | null | undefined }) {
   if (!kind) return null;
   return (

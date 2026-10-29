@@ -42,7 +42,7 @@ export function isKept(project: Project, sceneId: string, only: string[]) {
 const keptIds = (project: Project, ids: string[], only: string[]) =>
   ids.filter((id) => project.scenes.includes(id) && isKept(project, id, only));
 
-/** The manuscript in its order, then every note and lapp. A step chosen keeps only scenes; a label
+/** The manuscript in its order, then every note. A step chosen keeps only scenes; a label
  * keeps what has it, notes too. Scenes still in the cloud have no text here and are left out. */
 export function searchIds(project: Project, only: string[] = []) {
   const hasStep = only.some((id) => id.startsWith("status:"));

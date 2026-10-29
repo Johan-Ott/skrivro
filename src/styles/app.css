@@ -367,7 +367,7 @@ select:focus-visible {
   content: attr(data-pov);
 }
 
-/* A file, a lapp or a guide among the notes, so a picture and a place do not look the same. */
+/* A file or a guide among the notes, so a picture and a place do not look the same. */
 .note-kind {
   display: inline-flex;
   flex-shrink: 0;

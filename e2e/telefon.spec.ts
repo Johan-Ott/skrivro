@@ -103,13 +103,14 @@ test("the palette on the phone has no folder to pick", async ({ page }) => {
   await expect(page.getByText("Öppna projektmapp…")).toBeHidden();
 });
 
-test("the phone's search shows a lapp with its name and its sign", async ({ page }) => {
-  await page.getByRole("button", { name: "Sök" }).first().click();
-  await page.keyboard.type("Vem tände");
+test("Anteckna opens an empty note in Övrigt, ready to write in", async ({ page }) => {
+  await page.getByRole("button", { name: "Anteckna" }).click();
+  await expect(editor(page)).toBeFocused();
+  await page.keyboard.type("Kolla årtalet på fyren.");
 
-  const option = page.getByRole("option", { name: /Vem tände ljusen/ });
-  await expect(option.getByText(/Vem tände ljusen/)).toBeVisible();
-  await expect(option.getByRole("img", { name: "Lapp" })).toBeVisible();
+  await page.evaluate(() => history.back());
+
+  await expect(page.getByRole("treeitem").filter({ hasText: "Kolla årtalet" })).toBeVisible();
 });
 
 test("the shelf on the phone has a menu with Inställningar, and no folder to pick", async ({
