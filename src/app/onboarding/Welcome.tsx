@@ -4,7 +4,8 @@ import { platform } from "../platform.js";
 import { useRootClass } from "@llkit/useRootClass.js";
 import type { Theme } from "../../editor/writingSettings.js";
 import { UiLanguageChoice } from "../settings/UiLanguageChoice.js";
-import { FirstChoices, type Choices } from "./FirstChoices.js";
+import { FirstChoices, freshDraft, type Choices, type Draft } from "./FirstChoices.js";
+import { IntroBook, reveal } from "./IntroBook.js";
 import { WindowBar } from "@llkit/shell/WindowControls.js";
 import { t } from "../../i18n/i18n.js";
 import { recordFailure } from "@llkit/errorLog.js";
@@ -65,8 +66,7 @@ const Problem = ({ text }: { text: string | null }) =>
 function Greeting(props: { onWay: Start; problem: string | null; isSigningIn: boolean }) {
   const canSignIn = platform.googleSignIn !== undefined;
   return (
-    <main className="welcome" data-tauri-drag-region>
-      <WindowBar />
+    <>
       <div className="welcome-language">
         <UiLanguageChoice />
       </div>
@@ -81,7 +81,7 @@ function Greeting(props: { onWay: Start; problem: string | null; isSigningIn: bo
       <span className="spacer" />
       <WayIn onStart={props.onWay} canSignIn={canSignIn} isSigningIn={props.isSigningIn} />
       <p className="welcome-promise">{t("Dina texter är dina. Aldrig AI-träning.")}</p>
-    </main>
+    </>
   );
 }
 
@@ -106,20 +106,45 @@ function useWayIn(onSignIn: () => Promise<boolean>) {
   return { problem, isChoosing, setChoosing, isSigningIn, onWay };
 }
 
+// Klar: the card goes, and the book shows what was chosen before the shelf comes.
+function useReveal(onStart: WelcomeProps["onStart"]) {
+  const [isLeaving, setLeaving] = useState(false);
+  const onDone = (choices: Choices) => {
+    setLeaving(true);
+    void reveal(() => onStart(choices)).catch((error: unknown) => {
+      setLeaving(false);
+      recordFailure("Första starten")(error);
+    });
+  };
+  return { isLeaving, onDone };
+}
+
 // Signed in on another device already, the writer has made their choices there.
 export function Welcome(props: WelcomeProps) {
   const { problem, isChoosing, setChoosing, isSigningIn, onWay } = useWayIn(props.onSignIn);
+  const [draft, setDraft] = useState(freshDraft);
+  const { isLeaving, onDone } = useReveal(props.onStart);
+  const onDraft = (change: Partial<Draft>) => setDraft((now) => ({ ...now, ...change }));
   useRootClass("welcome-shown");
-  if (!isChoosing) return <Greeting onWay={onWay} problem={problem} isSigningIn={isSigningIn} />;
   return (
-    <main className="welcome" data-tauri-drag-region>
+    <main className="welcome-room" data-tauri-drag-region>
       <WindowBar />
-      <FirstChoices
-        theme={props.theme}
-        onTheme={props.onTheme}
-        onDone={(choices) => void props.onStart(choices).catch(recordFailure("Första starten"))}
-        onBack={() => setChoosing(false)}
-      />
+      <div className="welcome" data-tauri-drag-region>
+        {isChoosing ? (
+          <FirstChoices
+            draft={draft}
+            onDraft={onDraft}
+            isLeaving={isLeaving}
+            onDone={onDone}
+            theme={props.theme}
+            onTheme={props.onTheme}
+            onBack={() => setChoosing(false)}
+          />
+        ) : (
+          <Greeting onWay={onWay} problem={problem} isSigningIn={isSigningIn} />
+        )}
+      </div>
+      <IntroBook draft={draft} isAsking={isChoosing} />
     </main>
   );
 }

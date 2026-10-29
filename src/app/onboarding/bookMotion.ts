@@ -3,7 +3,7 @@ import { EASE, canMove, flipTo } from "../motion.js";
 // Ny bok is the open book: it grows out of the blank book on the shelf, turns a page for each
 // question, and shrinks back into the blank book when the writer cancels.
 
-const TURN_EASE = "cubic-bezier(.45,.05,.25,1)";
+export const TURN_EASE = "cubic-bezier(.45,.05,.25,1)";
 
 // The blank book at the end of the shelf, where Ny bok comes from and goes back to.
 const tome = () => document.querySelector(".new-book .cover-blank")?.getBoundingClientRect();

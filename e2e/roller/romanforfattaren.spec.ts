@@ -13,6 +13,7 @@ test("a novelist starts a book on her phone and writes the first chapter", async
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: "Kom igång" }).click({ timeout: 50_000 });
+  await page.getByRole("button", { name: "Fortsätt" }).click();
   await page.getByRole("button", { name: "Klar" }).click();
   await page.getByRole("button", { name: "+ Ny bok" }).click();
   for (let step = 0; step < 2; step++) await page.getByRole("button", { name: "Fortsätt" }).click();

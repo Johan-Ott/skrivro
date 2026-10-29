@@ -3528,7 +3528,6 @@ body:has(.new-book-dialog) .new-book {
   gap: 16px;
   width: min(420px, 100%);
   min-height: 100dvh;
-  margin: 0 auto;
   padding: max(96px, calc(var(--safe-top) + 64px)) 24px max(32px, var(--safe-bottom));
   background: var(--bg);
   user-select: none;
@@ -4156,7 +4155,7 @@ html.welcome-shown body {
   display: none;
 }
 
-/* The first start's choices, in the welcome's column. */
+/* The first start's choices, in the welcome's column: on a wide screen a card beside the book. */
 
 .first-choices {
   display: flex;
@@ -4166,13 +4165,54 @@ html.welcome-shown body {
   margin: auto 0;
 }
 
+.first-choices.leaving {
+  animation: fade 250ms ease-in reverse forwards;
+  pointer-events: none;
+}
+
 .first-choices h2 {
-  margin: 0 0 8px;
+  margin: 0;
   font: 600 28px/1.2 var(--font-prose);
 }
 
-.first-choices .button {
-  margin-top: 12px;
+.first-choices-why {
+  margin: 0 0 4px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+.first-choices-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fade var(--calm) ease-out;
+}
+
+.first-choices-forecast {
+  margin: 0;
+  color: var(--text-muted);
+  font: italic 13.5px/1.45 var(--font-prose);
+}
+
+@media (min-width: 1040px) {
+  .welcome-room .welcome {
+    width: 448px;
+  }
+
+  .first-choices {
+    padding: 26px 28px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    box-shadow: var(--shadow-high);
+  }
+}
+
+@media (max-width: 1039px) {
+  .intro-book,
+  .first-choices-why {
+    display: none;
+  }
 }
 
 .onboarding-goal {
@@ -4191,6 +4231,232 @@ html.welcome-shown body {
 
 .first-choices .segmented {
   display: flex;
+}
+
+/* Skrivro's own book beside the first start, shut, the welcome's size and only to look at. */
+
+.welcome-room {
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.intro-book {
+  --bw: min(400px, calc((100dvh - 240px) * 0.7));
+  position: relative;
+  flex: none;
+  align-self: center;
+  width: var(--bw);
+  height: calc(var(--bw) * 1.425);
+  perspective: 2400px;
+  perspective-origin: 0 50%;
+  transition: transform 900ms var(--ease);
+  pointer-events: none;
+}
+
+.intro-edge {
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  bottom: 10px;
+  border-radius: 0 3px 3px 0;
+  background: repeating-linear-gradient(90deg, var(--leaf) 0 2px, var(--leaf-line) 2px 3px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  transition:
+    width 500ms var(--ease),
+    right 500ms var(--ease);
+}
+
+/* One silk ribbon per language, hanging out of the foot of the book. */
+.intro-ribbons {
+  position: absolute;
+  z-index: -1;
+  top: calc(100% - 44px);
+  left: calc(var(--bw) * 0.2);
+  display: flex;
+  align-items: flex-start;
+}
+
+.intro-ribbon {
+  position: relative;
+  flex: none;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2), transparent 40%, rgba(0, 0, 0, 0.25)),
+    var(--silk);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 9px), 0 100%);
+  transition:
+    width 300ms var(--ease),
+    margin 300ms var(--ease),
+    height 600ms cubic-bezier(0.34, 1.45, 0.6, 1);
+}
+
+.intro-ribbon.in {
+  width: 16px;
+  height: var(--hang);
+  margin-right: 8px;
+}
+
+.intro-ribbon span {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  width: 16px;
+  color: rgba(251, 244, 230, 0.85);
+  font: 600 8px/1 var(--font-ui);
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.intro-case {
+  position: absolute;
+  inset: 0;
+  padding: 12px 12px 12px 0;
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(165deg, #154a3b, #103f32 55%, #06382b);
+  box-shadow: var(--shadow-high);
+}
+
+.intro-page {
+  height: 100%;
+  border-radius: 0 6px 6px 0;
+  background: var(--page);
+  color: var(--page-ink);
+}
+
+.intro-page img {
+  width: 46px;
+  border-radius: 22%;
+}
+
+.intro-name {
+  font: italic 500 calc(var(--bw) * 0.09) / 1.1 var(--font-prose);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.intro-name.untitled {
+  color: var(--text-dim);
+}
+
+.intro-languages {
+  color: var(--text-muted);
+  font: 15px/1.4 var(--font-prose);
+}
+
+.intro-forecast {
+  max-width: 32ch;
+  margin-bottom: 10px;
+  color: var(--page-ink);
+  font: italic 14px/1.4 var(--font-prose);
+}
+
+.intro-cover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.intro-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--bw) * 0.06);
+  border-radius: 3px 12px 12px 3px;
+  background: linear-gradient(165deg, #154a3b, #103f32 55%, #06382b);
+  box-shadow:
+    inset calc(var(--bw) * 0.025) 0 0 rgba(0, 0, 0, 0.14),
+    var(--shadow-high);
+  color: #fbf4e6;
+  text-align: center;
+  backface-visibility: hidden;
+}
+
+.intro-front::before {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border: 1px solid rgba(251, 244, 230, 0.22);
+  border-radius: 2px 6px 6px 2px;
+}
+
+.intro-front img {
+  width: calc(var(--bw) * 0.34);
+  border-radius: 18%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.intro-title {
+  font: 600 calc(var(--bw) * 0.12) / 1.12 var(--font-prose);
+}
+
+/* The name stamped in gold; a sweep of light goes over it when the writer stops typing. */
+.intro-by {
+  min-height: 1.15em;
+  padding: 0 8%;
+  background: linear-gradient(
+      100deg,
+      #c99a45 0%,
+      #e9c873 40%,
+      #fff6d6 50%,
+      #e2bd62 60%,
+      #b8893a 100%
+    )
+    0 0 / 250% 100%;
+  background-clip: text;
+  color: transparent;
+  font: italic 500 calc(var(--bw) * 0.07) / 1.15 var(--font-prose);
+  overflow-wrap: anywhere;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.35));
+}
+
+.intro-by.untitled {
+  background: none;
+  color: rgba(251, 244, 230, 0.4);
+  filter: none;
+}
+
+/* The cover's inside: green board and a dotted endpaper, the open book's left page. */
+.intro-back {
+  position: absolute;
+  inset: 0;
+  padding: 12px 0 12px 12px;
+  border-radius: 6px 0 0 6px;
+  background: #103f32;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+.intro-back span {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  background:
+    radial-gradient(rgba(16, 63, 50, 0.14) 1.2px, transparent 1.7px) 0 0 / 16px 16px,
+    var(--page);
+  color: var(--text-muted);
+  font: italic 16px/1.4 var(--font-prose);
+}
+
+/* The shut cover on its way to the shelf, above everything while the shelf comes. */
+.intro-ghost {
+  position: fixed;
+  inset: auto;
+  z-index: var(--layer-dialog);
+  transform-origin: 0 0;
+  pointer-events: none;
 }
 
 /* An update's changes, before it is installed and the first time it opens. */

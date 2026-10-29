@@ -37,6 +37,7 @@ test("a novel in Word moves into Skrivro on the first start, chapter by chapter"
   const file = await manuscript(testInfo.outputDir);
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: "Kom igång" }).click({ timeout: 50_000 });
+  await page.getByRole("button", { name: "Fortsätt" }).click();
   await page.getByRole("button", { name: "Klar" }).click();
 
   const chooser = page.waitForEvent("filechooser");
