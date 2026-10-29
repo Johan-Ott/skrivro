@@ -17,6 +17,7 @@ import { WritingArea } from "../WritingArea.js";
 import { sidebarProps, writingAreaProps } from "../paneProps.js";
 import { ContentsScreen, PublishScreen, ReadScreen, SyncScreen } from "./bookViews.js";
 import { ReviewPill, Topbar } from "./Topbar.js";
+import { openComments } from "../review/ReviewLayer.js";
 import { BlocksDock } from "../blocks/BlocksDock.js";
 import { DayGoalLayer, showDayGoal } from "../progress/DayGoalLayer.js";
 import { useAppMenu } from "./useAppMenu.js";
@@ -56,7 +57,9 @@ function ScreenTopbar(props: ScreenProps & { onMenu: MenuOpen; onProgramMenu: Me
       onMenu={props.onMenu}
       onProgramMenu={props.onProgramMenu}
       onToggleSidebar={writingMode.toggleSidebar}
-      onView={writingMode.setView}
+      step={writingMode.step}
+      onStep={writingMode.goTo}
+      waiting={openComments(app.comments.comments) + app.revision.changes.length}
       onProgress={showDayGoal}
       onSearch={app.palette.open}
       // The button took the cursor from the text; it goes back there, where the writer was.
@@ -67,7 +70,8 @@ function ScreenTopbar(props: ScreenProps & { onMenu: MenuOpen; onProgramMenu: Me
   );
 }
 
-// In Skriv: the Granska pill, and the opening picture when a book opens where you left off.
+// Over the text: the Granska pill in Redigera, and the opening picture when a book opens where you
+// left off.
 function OverTheText({ app, project }: ScreenProps) {
   const { writingMode } = app;
   return (
@@ -76,10 +80,12 @@ function OverTheText({ app, project }: ScreenProps) {
         app={app}
         project={project}
         review={
-          <ReviewPill
-            review={writingMode.review}
-            onReview={() => writingMode.setReviewOpen(!writingMode.isReviewOpen)}
-          />
+          writingMode.showsFindings && (
+            <ReviewPill
+              review={writingMode.review}
+              onReview={() => writingMode.setReviewOpen(!writingMode.isReviewOpen)}
+            />
+          )
         }
       />
       <DayGoalLayer app={app} project={project} />
@@ -126,7 +132,7 @@ function MainCard({ app, project, pageMap }: ScreenProps & { pageMap: PageMap | 
   const { writingMode } = app;
   const views = { app, project, onBack: () => writingMode.setView("skriv") };
   return (
-    <div className={writingMode.view === "publicera" ? "main-card hidden" : "main-card"}>
+    <div className={`main-card step-${writingMode.step}`}>
       <WritingArea {...writingAreaProps(app, project)} {...pageParts(app, project, pageMap)} />
       {writingMode.view === "skriv" && <OverTheText app={app} project={project} />}
       {writingMode.view === "innehall" && (

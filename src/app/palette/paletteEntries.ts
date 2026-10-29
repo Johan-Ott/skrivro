@@ -17,7 +17,7 @@ import type { Project } from "../useProject.js";
 import type { SettingsChange } from "../useWritingSettings.js";
 import type { PaletteEntry } from "./paletteSearch.js";
 import { cardEntries, labelled, sceneEntries } from "./bookEntries.js";
-import { VIEWS, type View } from "../useWritingMode.js";
+import { VIEWS, type Step, type View } from "../useWritingMode.js";
 import { formatEntries } from "./formatEntries.js";
 import { shortcutOf, shortcutText } from "../shortcuts.js";
 import { t } from "../../i18n/i18n.js";
@@ -40,7 +40,7 @@ export interface PaletteContext {
   showDrafts: () => void;
   openSettings: () => void;
   /** Null on a phone, which has its own screens instead of the views. */
-  showView: ((view: View) => void) | null;
+  showView: ((to: View | Step) => void) | null;
   cards: NoteCard[];
   /** The first sentence of a note, shown beside its name. */
   describe: (id: string) => string;

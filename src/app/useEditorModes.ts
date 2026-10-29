@@ -9,6 +9,7 @@ interface EditorModesProps {
   editor: ReturnType<typeof useEditorView>;
   settings: WritingSettings;
   isFocusMode: boolean;
+  showsFindings: boolean;
   isLocked: boolean;
   hasScene: boolean;
   scenePages?: (number | undefined)[] | null;
@@ -18,6 +19,12 @@ interface EditorModesProps {
 const isAutocorrectOn = (settings: WritingSettings) => settings.autocorrect && !platform.isPhone;
 const isCompletionOn = (settings: WritingSettings) => settings.completion && !platform.isPhone;
 
+// Redigera's red markings: misspelled words, and words used again too soon.
+const findingsOf = (settings: WritingSettings, showsFindings: boolean) => ({
+  isSpellcheckOn: settings.spellcheck && showsFindings,
+  repeatWindow: settings.review && showsFindings ? settings.repeatWindow : null,
+});
+
 // ProseMirror reads the modes on every update, so no new editor state is needed.
 export function useEditorModes(props: EditorModesProps) {
   const { editor, settings } = props;
@@ -26,17 +33,16 @@ export function useEditorModes(props: EditorModesProps) {
   modes.isTypographyOn = settings.typography;
   modes.isAutocorrectOn = isAutocorrectOn(settings);
   modes.isCompletionOn = isCompletionOn(settings);
-  modes.isSpellcheckOn = settings.spellcheck;
+  Object.assign(modes, findingsOf(settings, props.showsFindings));
   modes.isEditable = props.hasScene && !props.isLocked;
-  modes.repeatWindow = settings.review ? settings.repeatWindow : null;
   const showsMarks = settings.showPages || (settings.paper && !props.isFocusMode);
   modes.pageMarks = showsMarks ? (props.scenePages ?? null) : null;
   const { run } = editor;
-  useEffect(() => run(refreshRepetitions, false), [settings.review, settings.repeatWindow, run]);
+  useEffect(() => run(refreshRepetitions, false), [modes.repeatWindow, run]);
   useEffect(() => run(refreshPageMarks, false), [props.scenePages, showsMarks, run]);
   // ProseMirror reads the spellcheck attribute only when the view updates.
   useEffect(
     () => editor.viewRef.current?.setProps({}),
-    [settings.spellcheck, props.isLocked, props.hasScene, editor.viewRef],
+    [modes.isSpellcheckOn, props.isLocked, props.hasScene, editor.viewRef],
   );
 }

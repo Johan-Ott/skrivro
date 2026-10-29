@@ -4,13 +4,21 @@ import { useSettingsDialog } from "./settings/SettingsDialog.js";
 import { useGoKeys, useShortcut } from "@llkit/keys.js";
 import { useCommandKey } from "./shortcuts.js";
 import { useWritingSettings } from "./useWritingSettings.js";
+import { usePhone } from "./phone/usePhone.js";
 import { t } from "../i18n/i18n.js";
 
-/** Skriv: the open text. Innehåll: the book. Läs: a chapter or the whole book. Publicera: the export.
- * Synk: what the sync brought, side by side. */
+/** Skriv: the open text, in the step Skriv or Redigera. Innehåll: the book. Läs: a chapter or the
+ * whole book. Publicera: the export. Synk: what the sync brought, side by side. */
 export type View = "skriv" | "innehall" | "las" | "publicera" | "synk";
-export const VIEWS: [View, string, string][] = [
+
+/** The three steps at the top, in the order a book is made. Skriv and Redigera show the same text;
+ * Redigera adds the red markings, the comments and Granska. */
+export type Step = "skriv" | "redigera" | "publicera";
+
+/** Where Gå till goes: a view, or Redigera. */
+export const VIEWS: [View | Step, string, string][] = [
   ["skriv", t("Skriv"), "G S"],
+  ["redigera", t("Redigera"), "G R"],
   ["innehall", t("Innehåll"), "G I"],
   ["publicera", t("Publicera"), "G P"],
 ];
@@ -45,6 +53,30 @@ function useReading(setView: (view: View) => void) {
   return { readChapterId, read };
 }
 
+// The view and the step. The text keeps its step while the writer looks at the book or reads, and
+// comes back in it.
+function useSteps(openReview: (isOpen: boolean) => void) {
+  const [view, setView] = useState<View>("skriv");
+  const [textStep, setTextStep] = useState<"skriv" | "redigera">("skriv");
+  const isPhone = usePhone();
+  const goTo = useCallback(
+    (to: View | Step) => {
+      if (to === "skriv" || to === "redigera") setTextStep(to);
+      if (to === "redigera") openReview(true);
+      setView(to === "redigera" ? "skriv" : to);
+    },
+    [openReview],
+  );
+  useGoKeys((letter) => {
+    const match = VIEWS.find(([, , keys]) => keys.toLowerCase().endsWith(letter));
+    if (match) goTo(match[0]);
+    return match !== undefined;
+  });
+  const step: Step = view === "publicera" ? "publicera" : textStep;
+  // A phone has no Redigera yet, so its text shows everything, as before.
+  return { view, setView, step, goTo, showsFindings: textStep === "redigera" || isPhone };
+}
+
 // Under this width the sidebar floats over the card.
 const NARROW = 960;
 
@@ -62,16 +94,10 @@ export function useWritingMode() {
   const [isFocusMode, setFocusMode] = useState(false);
   const onToggleFocus = useCallback(() => setFocusMode((current) => !current), []);
   const settingsDialog = useSettingsDialog();
-  const [view, setView] = useState<View>("skriv");
   const [isProgressOpen, setProgressOpen] = useState(false);
-  useGoKeys((letter) => {
-    const match = VIEWS.find(([, , keys]) => keys.toLowerCase().endsWith(letter));
-    if (match) setView(match[0]);
-    return match !== undefined;
-  });
+  const reviewState = useReviewState();
+  const steps = useSteps(reviewState.setReviewOpen);
   return {
-    view,
-    setView,
     settingsDialog,
     settings,
     onChangeSettings: update,
@@ -79,8 +105,9 @@ export function useWritingMode() {
     onToggleFocus,
     isProgressOpen,
     setProgressOpen,
-    ...useReading(setView),
-    ...useReviewState(),
+    ...steps,
+    ...useReading(steps.setView),
+    ...reviewState,
     ...useSearchMode(),
     ...useSidebar(),
     ...useBeside(),

@@ -64,7 +64,7 @@ test("Förslagsläge shows what is typed and what is cut while it is written", a
 });
 
 test("Escape within Granska closes it", async ({ page }) => {
-  await reviewButton(page).click();
+  await page.getByRole("tab", { name: "Redigera" }).click();
   const panel = page.locator(".review-panel.open");
   await expect(panel).toBeVisible();
 

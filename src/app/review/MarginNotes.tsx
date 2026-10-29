@@ -172,8 +172,8 @@ export function MarginNotes({ app }: { app: AppState }) {
   const { comments: all, draft } = app.comments;
   const ids = [...wanted, ...named].map((each) => each.id);
   const box = usePlacement([shown, replyingTo, draft !== null, all.length, ...ids].join(), doc);
-  const { settings, isFocusMode } = app.writingMode;
-  if (!settings.commentsInMargin || isFocusMode) return null;
+  const { settings, isFocusMode, showsFindings } = app.writingMode;
+  if (!settings.commentsInMargin || isFocusMode || !showsFindings) return null;
   const hasCards = open.length + named.length > 0 || draft !== null;
   return (
     <div className="margin-notes" ref={box}>

@@ -62,6 +62,8 @@ interface WritingAreaProps {
   treeFailure: SaveFailure | null;
   settings: WritingSettings;
   isFocusMode: boolean;
+  /** Redigera: the red markings for spelling and repeated words. */
+  showsFindings: boolean;
   isSearchOpen: boolean;
   setSearchOpen: (isOpen: boolean) => void;
   searchSeed: string;

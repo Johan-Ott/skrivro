@@ -4,10 +4,7 @@ import { openExample } from "./helpers";
 test("Granska is drawn down to its head with Minimera, and stays so", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 820 });
   await openExample(page);
-  await page
-    .getByRole("button", { name: /^Granska · / })
-    .first()
-    .click();
+  await page.getByRole("tab", { name: "Redigera" }).click();
   const panel = page.locator(".review-panel.open");
   await expect(panel.getByText("Granska", { exact: true })).toBeVisible();
 

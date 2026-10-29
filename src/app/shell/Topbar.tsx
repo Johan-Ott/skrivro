@@ -6,7 +6,7 @@ import { DayProgress } from "./DayProgress.js";
 import { TopbarMore } from "./TopbarMore.js";
 import type { MouseEvent, ReactNode } from "react";
 import type { Today } from "../useWritingStats.js";
-import type { View } from "../useWritingMode.js";
+import type { Step, View } from "../useWritingMode.js";
 import { IconButton, PaletteButton } from "./IconButton.js";
 import { t } from "../../i18n/i18n.js";
 import {
@@ -29,7 +29,10 @@ export interface TopbarProps {
   /** The logo's menu: Skrivro itself, its settings and help. */
   onProgramMenu: (event: MouseEvent<HTMLElement>) => void;
   onToggleSidebar: () => void;
-  onView: (view: View) => void;
+  step: Step;
+  onStep: (step: Step) => void;
+  /** Comments and an editor's changes that wait in Redigera. */
+  waiting: number;
   onProgress: () => void;
   onSearch: () => void;
   onFocus: () => void;
@@ -45,22 +48,34 @@ const BrandMenu = ({ onOpen }: { onOpen: (event: MouseEvent<HTMLElement>) => voi
   </button>
 );
 
-function ModeSwitch({ view, onView }: Pick<TopbarProps, "view" | "onView">) {
-  const isPublishing = view === "publicera";
-  const mode = (label: string, isOn: boolean, next: View) => (
-    <button
-      role="tab"
-      aria-selected={isOn}
-      className={isOn ? "mode chosen" : "mode"}
-      onClick={() => onView(next)}
-    >
-      {label}
-    </button>
-  );
+const STEPS: [Step, string, string][] = [
+  ["skriv", t("Skriv"), t("Få ner texten, utan röda streck och kommentarer.")],
+  ["redigera", t("Redigera"), t("Läs, rätta och svara på kommentarer, med Granska bredvid.")],
+  ["publicera", t("Publicera"), t("Gör boken: hur den ser ut, e-bok och tryck.")],
+];
+
+// The writing's three steps, numbered and in order, so the way from text to book is seen.
+function ModeSwitch({ step, onStep, waiting }: Pick<TopbarProps, "step" | "onStep" | "waiting">) {
   return (
-    <div className="mode-switch" role="tablist" aria-label={t("Läge")}>
-      {mode(t("Skriv"), !isPublishing, "skriv")}
-      {mode(t("Publicera"), isPublishing, "publicera")}
+    <div className="mode-switch" role="tablist" aria-label={t("Steg")}>
+      {STEPS.map(([each, label, hint], index) => (
+        <button
+          key={each}
+          role="tab"
+          aria-selected={each === step}
+          className={each === step ? "mode chosen" : "mode"}
+          title={hint}
+          onClick={() => onStep(each)}
+        >
+          <span className="mode-number" aria-hidden="true">
+            {index + 1}
+          </span>
+          {label}
+          {each === "redigera" && step !== "redigera" && waiting > 0 && (
+            <span className="mode-badge">{waiting}</span>
+          )}
+        </button>
+      ))}
     </div>
   );
 }
@@ -118,29 +133,13 @@ function TopbarStart(props: TopbarProps) {
         <SidebarIcon />
       </IconButton>
       <History navigation={navigation} />
-      <ModeSwitch view={props.view} onView={props.onView} />
+      <ModeSwitch step={props.step} onStep={props.onStep} waiting={props.waiting} />
       {props.profile}
     </div>
   );
 }
 
 type ReviewProps = { review: { count: number | null; isOpen: boolean }; onReview: () => void };
-
-export function ReviewButton({ review, onReview }: ReviewProps) {
-  if (review.count === null) return null;
-  return (
-    <button
-      className={review.isOpen ? "topbar-button chosen" : "topbar-button"}
-      aria-label={t("Granska · {count}", { count: review.count })}
-      aria-pressed={review.isOpen}
-      title={t("Granska")}
-      onClick={onReview}
-    >
-      <ReviewIcon />
-      {review.count > 0 && <span className="topbar-badge">{review.count}</span>}
-    </button>
-  );
-}
 
 function TopbarEnd(props: TopbarProps) {
   return (

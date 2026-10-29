@@ -31,9 +31,12 @@ test("a layout keeps which panels are open, and brings them back", async ({ page
   await expect(page.getByRole("region", { name: "I scenen" })).toBeVisible();
 });
 
-test("the mode tabs and the dock have words, not only pictures", async ({ page }) => {
-  await expect(page.getByRole("tab", { name: "Skriv" })).toHaveText("Skriv");
-  await expect(page.getByRole("tab", { name: "Publicera" })).toHaveText("Publicera");
+test("the steps and the dock have words, not only pictures", async ({ page }) => {
+  await expect(page.getByRole("tablist", { name: "Steg" }).getByRole("tab")).toHaveText([
+    "1Skriv",
+    "2Redigera",
+    "3Publicera",
+  ]);
   await expect(page.getByRole("button", { name: /^Paneler/ })).toContainText("Paneler");
   await expect(page.getByRole("button", { name: /^Layouter/ })).toContainText("Layouter");
 });

@@ -32,7 +32,7 @@ const selectRange =
   };
 
 // Only what still waits: a reply belongs to its comment, and a resolved one is done.
-const openComments = (comments: Comment[]) =>
+export const openComments = (comments: Comment[]) =>
   comments.filter((comment) => !comment.replyTo && !comment.resolved).length;
 import { t } from "../../i18n/i18n.js";
 
@@ -163,14 +163,29 @@ function ShownReview(props: ShownProps) {
   );
 }
 
-// Shown with Granskning on, or whenever there is something from someone else to read.
+// Shown in Redigera with Granskning on, or whenever there is something from someone else to read.
 function isWanted({ writingMode, comments, revision }: AppState) {
   const hasComments = comments.comments.length > 0 || comments.draft !== null;
-  return writingMode.settings.review || hasComments || revision.isOpen;
+  const hasAny = writingMode.settings.review || hasComments || revision.isOpen;
+  return writingMode.showsFindings && hasAny;
+}
+
+// A comment begun, or changes to accept, take the writer to Redigera. Only when they begin: a
+// half-written comment waits there while the writer goes back to Skriv.
+function useToRedigera({ comments, revision, writingMode }: AppState) {
+  const { draft } = comments;
+  const { goTo } = writingMode;
+  useEffect(() => {
+    if (draft !== null) goTo("redigera");
+  }, [draft, goTo]);
+  useEffect(() => {
+    if (revision.isOpen) goTo("redigera");
+  }, [revision.isOpen, goTo]);
 }
 
 export function ReviewLayer({ app, project }: { app: AppState; project: Project }) {
   const { scene, writingMode, comments } = app;
+  useToRedigera(app);
   const doc = useSettledDoc(app.editor, PAUSE_MS);
   if (!isWanted(app) || writingMode.isFocusMode || !scene || !doc) return null;
   return <ShownReview app={app} project={project} scene={scene} doc={doc} comments={comments} />;

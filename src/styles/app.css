@@ -2227,6 +2227,13 @@ body:has(.new-book-dialog) .new-book {
   background: color-mix(in srgb, var(--primary) 14%, transparent);
 }
 
+/* Skriv keeps the page clean: comments are read and answered in Redigera. */
+
+.step-skriv .manuscript .commented {
+  background: none;
+  cursor: text;
+}
+
 /* A placeholder [?]: grey with a dotted underline, as a prompt's hint is. */
 
 .manuscript .placeholder-note {

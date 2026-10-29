@@ -61,6 +61,7 @@ test("a name comes after two letters, and the book's own words after three", asy
 });
 
 test("a click on a repeated word says so and leads to Granska", async ({ page }) => {
+  await page.getByRole("tab", { name: "Redigera" }).click();
   await page.locator(".ProseMirror .repeat").first().click();
 
   const help = page.locator(".click-corrections");
@@ -70,6 +71,7 @@ test("a click on a repeated word says so and leads to Granska", async ({ page })
 });
 
 test("an Upprepning card in Granska selects the word in the text", async ({ page }) => {
+  await page.getByRole("tab", { name: "Redigera" }).click();
   await page.locator(".ProseMirror .repeat").first().click();
   await page.locator(".click-corrections").getByRole("button", { name: "Granska" }).click();
 

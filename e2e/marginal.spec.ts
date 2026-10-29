@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test";
 import { openExample, selectFirstWord } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 820 });
+  // Wide enough for a margin beside the sheet, with the sidebar open.
+  await page.setViewportSize({ width: 1600, height: 820 });
   await page.addInitScript(() =>
     localStorage.setItem("skrivro.writing", JSON.stringify({ commentsInMargin: true })),
   );
@@ -14,9 +15,12 @@ test("a comment stands in the margin beside its words, and Klar ticks it off", a
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await page.keyboard.type("Gulnat?");
   await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
+  // Redigera opens Granska, which takes the margin's room.
+  await page.getByRole("button", { name: "Stäng granskning" }).click();
 
-  const note = page.locator(".margin-note");
+  const note = page.locator(".margin-note[data-comment]");
   await expect(note).toContainText("Gulnat?");
+  await expect(note).toBeVisible();
   const offCentre = await page.evaluate(() => {
     const middle = (box: DOMRect) => (box.left + box.right) / 2;
     const text = document.querySelector(".ProseMirror")?.getBoundingClientRect() ?? new DOMRect();

@@ -108,7 +108,7 @@ function useNotesParts(core: ReturnType<typeof useCoreState>) {
   const notes = useNotes(homes, project, isWanted);
   useMentionLinks(sceneState.editor, notes, project);
   useSpelling(sceneState.editor, project, notes, {
-    isOn: settings.spellcheck,
+    isOn: settings.spellcheck && writingMode.showsFindings,
     updateFields: (fields) => void projectState.updateFields(fields),
   });
   const [newNoteSort, setNewNoteSort] = useState<string | null | false>(false);
@@ -153,7 +153,7 @@ function paletteContextOf(app: PaletteParts): PaletteContext | null {
     chooseFolder: () => void app.choose(),
     showShelf: () => void app.showShelf(),
     openSettings: () => writingMode.settingsDialog.open(),
-    showView: writingMode.setView,
+    showView: writingMode.goTo,
     ...{ cards: app.notes.allNotes, describe: app.notes.descriptionOf },
     openCard: app.cards.open,
     newNote: () => app.setNewNoteSort(null),

@@ -58,7 +58,7 @@ export function ContentsScreen(
       }
       onReadBook={() => app.writingMode.read(null)}
       onShowDrafts={() => app.drafts.show(null)}
-      onShowTasks={() => (app.writingMode.setView("skriv"), app.writingMode.setReviewOpen(true))}
+      onShowTasks={() => app.writingMode.goTo("redigera")}
     />
   );
 }
@@ -90,11 +90,11 @@ export function ReadScreen({ app, project, onBack }: ViewProps) {
   );
 }
 
-// Back to the text with Granska open, where the placeholders are listed.
+// Back to the text in Redigera, where Granska lists the placeholders.
 function showToCheck(app: AppState, onBack: () => void) {
   reviewAsk.ask();
   onBack();
-  app.writingMode.setReviewOpen(true);
+  app.writingMode.goTo("redigera");
 }
 
 export function PublishScreen({ app, project, onBack }: ViewProps) {
