@@ -1,114 +1,196 @@
-import { useLayoutEffect, useRef } from "react";
+import { useState } from "react";
+import { documentText } from "../../editor/documentText.js";
 import { useSettledDoc } from "../../editor/editorStore.js";
 import { PAUSE_MS } from "../../editor/repetitionMarks.js";
+import { cardsNamedIn } from "../../project/cards.js";
 import type { Comment } from "../../project/comments.js";
 import { snapshotWhen } from "../../project/snapshots.js";
+import { CHARACTERS_ID, PLACES_ID, THINGS_ID } from "../../project/sorts.js";
 import type { AppState } from "../App.js";
+import { Writer } from "./CommentsSection.js";
+import { usePlacement } from "./marginPlacement.js";
+import { DRAFT_ID } from "./useComments.js";
 import { t } from "../../i18n/i18n.js";
 
-const GAP = 16;
-// The room each side of the text while the notes are out: a note and the space before it.
-const MARGIN = 232;
-const PAGE_EDGES = 96;
-// The text gives up some width for the notes, never more than down to this.
-const NARROWEST_TEXT = 440;
+const initial = (name: string) => name.trim().charAt(0).toUpperCase() || "?";
 
-// A page too narrow for the text at that width and a margin on both sides keeps its whole width
-// for the text, and the notes stay in Granska.
-function hasRoom(page: HTMLElement) {
-  const sheetMargins = page.classList.contains("paper") ? 176 : 0;
+const Who = (props: { name: string; detail: string }) => (
+  <span className="margin-note-who">
+    <span className="margin-note-face">{initial(props.name)}</span>
+    <b>{props.name}</b>
+    <span>{props.detail}</span>
+  </span>
+);
+
+type ReplyProps = {
+  app: AppState;
+  comment: Comment;
+  isReplying: boolean;
+  onReplying: (isReplying: boolean) => void;
+};
+
+// Svara writes the reply in the card; Klar puts the comment or the note away, as in Granska.
+function CommentActions({ app, comment, isReplying, onReplying }: ReplyProps) {
+  const reply = (body: string) => {
+    app.comments.reply(comment, body);
+    onReplying(false);
+  };
+  if (isReplying)
+    return <Writer label={t("Svara")} onSend={reply} onCancel={() => onReplying(false)} />;
   return (
-    page.getBoundingClientRect().width >= NARROWEST_TEXT + sheetMargins + 2 * MARGIN + PAGE_EDGES
+    <span className="margin-note-actions">
+      {!comment.isNote && (
+        <button className="link-button" onClick={() => onReplying(true)}>
+          {t("Svara")}
+        </button>
+      )}
+      <button
+        className="link-button quiet"
+        onClick={() => app.comments.setResolved(comment.id, true)}
+      >
+        {t("Klar")}
+      </button>
+    </span>
   );
 }
 
-// Each note sits level with its quote, pushed down below the note above so none overlap.
-// On paper the notes lie on the desk beside the sheet, otherwise beside the text.
-function placeNotes(box: HTMLElement) {
-  const page = box.parentElement;
-  const beside = page?.querySelector(page.classList.contains("paper") ? ".sheet" : ".ProseMirror");
-  if (!page || !beside) return;
-  const isRoomy = hasRoom(page);
-  page.classList.toggle("with-margin-notes", isRoomy);
-  box.hidden = !isRoomy;
-  if (!isRoomy) return;
-  const origin = page.getBoundingClientRect();
-  const left = beside.getBoundingClientRect().right - origin.left + 32;
-  box.style.left = `${left}px`;
-  const markTop = (note: HTMLElement) =>
-    page
-      .querySelector(`.commented[data-comment="${note.dataset["comment"]}"]`)
-      ?.getBoundingClientRect().top ?? null;
-  const notes = Array.from(box.querySelectorAll<HTMLElement>(".margin-note"));
-  let below = 0;
-  notes
-    .map((note) => ({ note, top: markTop(note) }))
-    .sort((one, two) => (one.top ?? 0) - (two.top ?? 0))
-    .forEach(({ note, top }) => {
-      note.hidden = top === null;
-      if (top === null) return;
-      const noteTop = Math.max(top - origin.top + page.scrollTop, below);
-      note.style.top = `${noteTop}px`;
-      below = noteTop + note.offsetHeight + GAP;
-    });
-}
-
-function usePlacement(shown: unknown, doc: unknown) {
-  const box = useRef<HTMLDivElement>(null);
-  useLayoutEffect(() => {
-    const element = box.current;
-    const page = element?.parentElement;
-    if (!element || !page) return;
-    const place = () => placeNotes(element);
-    place();
-    const observer = new ResizeObserver(place);
-    observer.observe(page);
-    return () => {
-      observer.disconnect();
-      page.classList.remove("with-margin-notes");
-    };
-  }, [shown, doc]);
-  return box;
-}
-
-function Note({ app, comment, replies }: { app: AppState; comment: Comment; replies: number }) {
-  const reply = () => {
-    app.comments.focus(comment.id);
-    app.writingMode.setReviewOpen(true);
-  };
+function CommentNote(props: ReplyProps & { replies: Comment[] }) {
+  const { comment } = props;
+  const when = snapshotWhen(comment.createdAt, Date.now()).toLowerCase();
   return (
-    <div className="margin-note" data-comment={comment.id}>
+    <div className={comment.isNote ? "margin-note noted" : "margin-note"} data-comment={comment.id}>
+      {comment.isNote ? (
+        <span className="margin-note-kind">{t("Anteckning")}</span>
+      ) : (
+        <Who name={comment.author} detail={when} />
+      )}
       <span className="margin-note-body">{comment.body}</span>
-      <span className="margin-note-by">
-        {comment.author} · {snapshotWhen(comment.createdAt, Date.now()).toLowerCase()}
-        {replies > 0 && ` · ${t("{count} svar", { count: replies })}`}
-        <button className="link-button" onClick={() => app.comments.setResolved(comment.id, true)}>
-          {t("Klar")}
-        </button>
-        <button className="link-button" onClick={reply}>
-          {t("Svara")}
+      {props.replies.map((each) => (
+        <span key={each.id} className="margin-note-reply">
+          <b>{each.author}:</b> {each.body}
+        </span>
+      ))}
+      <CommentActions {...props} />
+    </div>
+  );
+}
+
+// Written at the line: the writer's own note, or a comment for the one who reads.
+function DraftNote({ app }: { app: AppState }) {
+  const [isNote, setNote] = useState(true);
+  const kind = (label: string, isOn: boolean) => (
+    <button role="radio" aria-checked={isNote === isOn} onClick={() => setNote(isOn)}>
+      {label}
+    </button>
+  );
+  return (
+    <div className="margin-note new" data-comment={DRAFT_ID}>
+      <Writer
+        label={t("Skriv vid raden")}
+        sendLabel={t("Spara")}
+        onSend={(body) => app.comments.add(body, isNote)}
+        onCancel={app.comments.cancel}
+      >
+        <div className="segmented small" role="radiogroup" aria-label={t("Sort")}>
+          {kind(t("Anteckning"), true)}
+          {kind(t("Kommentar"), false)}
+        </div>
+      </Writer>
+    </div>
+  );
+}
+
+const KIND_WORDS: Record<string, string> = {
+  [CHARACTERS_ID]: t("person"),
+  [PLACES_ID]: t("plats"),
+  [THINGS_ID]: t("sak"),
+};
+
+type NamedCard = AppState["notes"]["cards"][number];
+
+function MentionNote({ app, card }: { app: AppState; card: NamedCard }) {
+  const description = app.notes.descriptionOf(card.id);
+  return (
+    <div className="margin-note named" data-entity={card.id}>
+      <Who name={card.name} detail={KIND_WORDS[card.sortId] ?? card.sortLabel} />
+      {description && <span className="margin-note-body">{description}</span>}
+      <span className="margin-note-actions">
+        <button className="link-button" onClick={() => app.cards.open(card.id)}>
+          {t("Öppna {name}", { name: card.name })}
         </button>
       </span>
     </div>
   );
 }
 
-/** Kommentarer i marginalen: the open comments beside the text, level with what they are about. */
+type Shown = "allt" | "kommentarer" | "anteckningar";
+
+function MarginHead(props: { app: AppState; shown: Shown; onShown: (shown: Shown) => void }) {
+  const { onChangeSettings } = props.app.writingMode;
+  const hide = () => onChangeSettings((current) => ({ ...current, commentsInMargin: false }));
+  const option = (label: string, shown: Shown) => (
+    <button role="radio" aria-checked={props.shown === shown} onClick={() => props.onShown(shown)}>
+      {label}
+    </button>
+  );
+  return (
+    <div className="margin-head">
+      <div className="segmented small" role="radiogroup" aria-label={t("Visa i marginalen")}>
+        {option(t("Allt"), "allt")}
+        {option(t("Kommentarer"), "kommentarer")}
+        {option(t("Anteckningar"), "anteckningar")}
+      </div>
+      <button className="link-button quiet" onClick={hide}>
+        {t("Dölj marginalen")}
+      </button>
+    </div>
+  );
+}
+
+const isShown = (comment: Comment, shown: Shown) =>
+  shown === "allt" || (shown === "anteckningar") === (comment.isNote === true);
+
+// What the margin holds for the open scene; the people and places named only under Allt.
+function useMarginCards(app: AppState, shown: Shown) {
+  const doc = useSettledDoc(app.editor, PAUSE_MS);
+  const open = app.comments.comments.filter((comment) => !comment.replyTo && !comment.resolved);
+  const text = shown === "allt" && doc ? documentText(doc).text : "";
+  return {
+    doc,
+    open,
+    wanted: open.filter((comment) => isShown(comment, shown)),
+    named: text ? cardsNamedIn(app.notes.cards, text) : [],
+  };
+}
+
+/** Marginalen: beside the text, level with what they are about, the open comments, the writer's
+ * own notes at the line, and the people and places the scene names. */
 export function MarginNotes({ app }: { app: AppState }) {
-  const all = app.comments.comments;
-  const shown = all.filter((comment) => !comment.replyTo && !comment.resolved);
-  const box = usePlacement(shown, useSettledDoc(app.editor, PAUSE_MS) ?? undefined);
+  const [shown, setShown] = useState<Shown>("allt");
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const { doc, open, wanted, named } = useMarginCards(app, shown);
+  const { comments: all, draft } = app.comments;
+  const ids = [...wanted, ...named].map((each) => each.id);
+  const box = usePlacement([shown, replyingTo, draft !== null, all.length, ...ids].join(), doc);
   const { settings, isFocusMode } = app.writingMode;
-  if (!settings.commentsInMargin || isFocusMode || shown.length === 0) return null;
+  if (!settings.commentsInMargin || isFocusMode) return null;
+  const hasCards = open.length + named.length > 0 || draft !== null;
   return (
     <div className="margin-notes" ref={box}>
-      {shown.map((comment) => (
-        <Note
+      {hasCards && <MarginHead app={app} shown={shown} onShown={setShown} />}
+      {wanted.map((comment) => (
+        <CommentNote
           key={comment.id}
           app={app}
           comment={comment}
-          replies={all.filter((reply) => reply.replyTo === comment.id).length}
+          replies={all.filter((reply) => reply.replyTo === comment.id)}
+          isReplying={replyingTo === comment.id}
+          onReplying={(isReplying) => setReplyingTo(isReplying ? comment.id : null)}
         />
+      ))}
+      {draft && <DraftNote app={app} />}
+      {named.map((card) => (
+        <MentionNote key={card.id} app={app} card={card} />
       ))}
     </div>
   );

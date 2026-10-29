@@ -1,6 +1,6 @@
 import { TextSelection, type Command } from "prosemirror-state";
 import type { Comment } from "../../project/comments.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useEditorState, useSettledDoc } from "../../editor/editorStore.js";
 import { misspelledAtCaret } from "../spelling/Corrections.js";
 import { PAUSE_MS } from "../../editor/repetitionMarks.js";
@@ -22,7 +22,7 @@ import { RevisionSection } from "./RevisionSection.js";
 import { usePhone } from "../phone/usePhone.js";
 import { PhoneCommentBox } from "./PhoneCommentBox.js";
 import { suggestMenuItems } from "./Suggesting.js";
-import type { useComments } from "./useComments.js";
+import { marginOut, type useComments } from "./useComments.js";
 
 const selectRange =
   ({ from, to }: { from: number; to: number }): Command =>
@@ -55,26 +55,22 @@ type ShownProps = {
   comments: Comments;
 };
 
-// Opened while a comment is written, and closed once it is sent if it then stands in the margin.
-// Opened by itself for an editor's changes, too, so they are seen.
+// Opened while a comment is written in Granska, and by itself for an editor's changes, so they
+// are seen.
 function useOpening(app: AppState, isWriting: boolean, focused: string | null) {
   useOpenedByClick(app, focused);
-  const { setReviewOpen, settings } = app.writingMode;
+  const { setReviewOpen } = app.writingMode;
   const hasRevision = app.revision.isOpen;
-  const wasWriting = useRef(false);
   useEffect(() => {
     if (isWriting || hasRevision) setReviewOpen(true);
-    else if (wasWriting.current && settings.commentsInMargin) setReviewOpen(false);
-    wasWriting.current = isWriting;
-  }, [isWriting, hasRevision, setReviewOpen, settings.commentsInMargin]);
+  }, [isWriting, hasRevision, setReviewOpen]);
 }
 
 // A click on commented words shows the comment: in the margin when it stands there, else in Granska.
 // A misspelled word among them shows its corrections instead, so only one thing opens at a time.
 function useOpenedByClick(app: AppState, focused: string | null) {
-  const { setReviewOpen, settings } = app.writingMode;
-  const isPhone = usePhone();
-  const isInMargin = settings.commentsInMargin && !isPhone;
+  const { setReviewOpen } = app.writingMode;
+  const isInMargin = marginOut.use();
   const isMisspelled = misspelledAtCaret(app.editor, useEditorState(app.editor)) !== null;
   useEffect(() => {
     if (focused && !isInMargin && !isMisspelled) setReviewOpen(true);
@@ -127,10 +123,11 @@ const Narration = ({ app, project }: Pick<ShownProps, "app" | "project">) => (
   <NarrationSection app={app} fields={project.fields} />
 );
 
-// A comment is written in Granska; on a phone, in a box over the text instead.
+// A comment is written in Granska; on a phone in a box over the text, beside it in the margin.
 function useWritingInPanel(app: AppState, comments: Comments) {
   const isPhone = usePhone();
-  const isWriting = comments.draft !== null && !isPhone;
+  const isInMargin = marginOut.use();
+  const isWriting = comments.draft !== null && !isPhone && !isInMargin;
   useOpening(app, isWriting, comments.focused);
   return isWriting;
 }

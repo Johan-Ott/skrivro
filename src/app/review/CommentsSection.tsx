@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { usePhone } from "../phone/usePhone.js";
 import { locate, type Comment } from "../../project/comments.js";
 import { snapshotWhen } from "../../project/snapshots.js";
-import type { useComments } from "./useComments.js";
+import { marginOut, type useComments } from "./useComments.js";
 import { t } from "../../i18n/i18n.js";
 
 type Comments = ReturnType<typeof useComments>;
@@ -13,6 +13,8 @@ interface WriterProps {
   sendLabel?: string;
   onSend: (body: string) => void;
   onCancel: () => void;
+  /** More choices before the buttons, such as note or comment. */
+  children?: ReactNode;
 }
 
 export function Writer(props: WriterProps) {
@@ -23,10 +25,12 @@ export function Writer(props: WriterProps) {
         autoFocus
         rows={3}
         aria-label={props.label}
+        placeholder={`${props.label}…`}
         value={body}
         onChange={(event) => setBody(event.target.value)}
       />
       <div className="review-actions">
+        {props.children}
         <button
           className="button primary small"
           disabled={body.trim() === ""}
@@ -80,10 +84,11 @@ function CommentActions({ comment, comments }: { comment: Comment; comments: Com
   );
 }
 
-// On a phone the comment is written in a box over the text, not here.
+// On a phone the comment is written in a box over the text, and beside a roomy page in the margin.
 function Draft({ comments }: { comments: Comments }) {
   const isPhone = usePhone();
-  if (!comments.draft || isPhone) return null;
+  const isInMargin = marginOut.use();
+  if (!comments.draft || isPhone || isInMargin) return null;
   return (
     <div className="review-item focused">
       <span className="comment-quote">”{comments.draft.quote}”</span>
@@ -116,7 +121,7 @@ function CommentCard(props: {
         <span className="kpi-sub">{t("Citatet finns inte längre i texten.")}</span>
       )}
       <span>{comment.body}</span>
-      <span className="kpi-sub">{byline(comment)}</span>
+      <span className="kpi-sub">{comment.isNote ? t("Anteckning") : byline(comment)}</span>
       <Replies replies={props.replies} />
       <CommentActions comment={comment} comments={comments} />
     </div>

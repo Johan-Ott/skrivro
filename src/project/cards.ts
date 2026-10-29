@@ -57,7 +57,7 @@ export function mentionPattern(names: string | string[]): RegExp | null {
 }
 
 /** The cards whose names the text holds. */
-export const cardsNamedIn = (cards: Card[], text: string) =>
+export const cardsNamedIn = <C extends Card>(cards: C[], text: string) =>
   cards.filter((card) => mentionPattern(namesOf(card))?.test(text));
 
 export interface Mentions {

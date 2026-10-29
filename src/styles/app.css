@@ -2221,6 +2221,12 @@ body:has(.new-book-dialog) .new-book {
   cursor: pointer;
 }
 
+/* The writer's own note at the line, green as Anteckning is in the margin. */
+
+.manuscript .commented.noted {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
 /* A placeholder [?]: grey with a dotted underline, as a prompt's hint is. */
 
 .manuscript .placeholder-note {
@@ -3346,7 +3352,8 @@ body:has(.new-book-dialog) .new-book {
   display: none;
 }
 
-/* Kommentarer i marginalen: pencilled notes beside the text, placed by MarginNotes. */
+/* Marginalen: comments, the writer's notes and the named people as cards beside the text, placed
+   by MarginNotes level with their words. */
 
 .page:has(> .margin-notes) {
   position: relative;
@@ -3356,7 +3363,7 @@ body:has(.new-book-dialog) .new-book {
    the page is wide enough, and a phone keeps its comments in Granska. */
 
 .page.with-margin-notes {
-  padding-inline: 232px;
+  padding-inline: 280px;
 }
 
 @media (max-width: 600px) {
@@ -3368,7 +3375,35 @@ body:has(.new-book-dialog) .new-book {
 .margin-notes {
   position: absolute;
   top: 0;
-  width: 200px;
+  width: 248px;
+}
+
+.margin-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font: 12px var(--font-ui);
+}
+
+.margin-head .link-button {
+  font-size: 12px;
+}
+
+/* The choices fill the margin's width instead of reaching past it; in a card they get a row. */
+
+.margin-notes .segmented {
+  width: 100%;
+}
+
+.margin-notes .segmented.small button {
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.margin-note .review-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .margin-note {
@@ -3377,26 +3412,82 @@ body:has(.new-book-dialog) .new-book {
   left: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-left: 12px;
-  border-left: 1px solid var(--border-card);
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-card);
+  border-left: 3px solid var(--copper);
+  border-radius: 10px;
+  background: var(--bg-panel);
+  font: 13px/1.45 var(--font-ui);
+}
+
+.margin-note.noted {
+  border-left-color: var(--primary);
+}
+
+.margin-note.named {
+  border-left-color: var(--text-label);
+}
+
+.margin-note.new {
+  border-left-color: var(--text);
+}
+
+.margin-note-who {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-label);
+  font-size: 12px;
+}
+
+.margin-note-who b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.margin-note-face {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--match);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.margin-note-kind {
+  color: var(--primary);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .margin-note-body {
+  color: var(--text);
+}
+
+.margin-note-reply {
+  padding-top: 6px;
+  border-top: 1px solid var(--border-card);
   color: var(--text-muted);
-  font: italic 14px/1.5 var(--font-prose);
 }
 
-.margin-note-by {
+.margin-note-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  color: var(--text-label);
-  font: 12px var(--font-ui);
+  gap: 12px;
 }
 
-.margin-note-by .link-button {
+.margin-note .link-button {
   font-size: 12px;
+}
+
+.margin-note textarea {
+  width: 100%;
 }
 
 .chapter-number,

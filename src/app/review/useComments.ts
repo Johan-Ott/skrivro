@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { refreshComments } from "../../editor/commentMarks.js";
 import { documentText } from "../../editor/documentText.js";
 import type { useEditorView } from "../../editor/useEditorView.js";
@@ -12,6 +12,7 @@ import {
   type Comment,
 } from "../../project/comments.js";
 import { recordFailure } from "@llkit/errorLog.js";
+import { createStore } from "@llkit/store.js";
 import { platform } from "../platform.js";
 import type { OpenScene } from "../sceneSession.js";
 import { useCommandKey } from "../shortcuts.js";
@@ -20,12 +21,23 @@ import { t } from "../../i18n/i18n.js";
 
 type Editor = ReturnType<typeof useEditorView>;
 
-// Null when nothing is selected.
+/** The draft's own mark in the text, so the margin can set its card beside the line. */
+export const DRAFT_ID = "draft";
+
+/** True while MarginNotes stands beside the text: comments are then written and read there. */
+export const marginOut = createStore(false);
+
+// What is selected, or with nothing selected the paragraph the caret stands in; null in an empty one.
 function selectedAnchor(editor: Editor): Anchor | null {
   const state = editor.viewRef.current?.state;
-  if (!state || state.selection.empty) return null;
+  if (!state) return null;
+  const { selection } = state;
+  const { $from } = selection;
+  const isLine = selection.empty && $from.parent.textContent.trim() !== "";
+  if (selection.empty && !isLine) return null;
   const { text, fromDoc } = documentText(state.doc);
-  return anchorAt(text, fromDoc(state.selection.from), fromDoc(state.selection.to));
+  const [from, to] = isLine ? [$from.start(), $from.end()] : [selection.from, selection.to];
+  return anchorAt(text, fromDoc(from), fromDoc(to));
 }
 
 // A file that could not be read is never written, since the list in hand would replace it.
@@ -71,13 +83,20 @@ function useCommentFile(project: Project | null, scene: OpenScene | null) {
   return { comments, save };
 }
 
-function useCommentMarks(editor: Editor, comments: Comment[], onComment: (id: string) => void) {
-  editor.modes.current.commentAnchors = comments
+function useCommentMarks(
+  editor: Editor,
+  comments: Comment[],
+  draft: Anchor | null,
+  onComment: (id: string) => void,
+) {
+  const open = comments
     .filter((comment) => !comment.replyTo && !comment.resolved)
-    .map((comment) => ({ id: comment.id, anchor: comment }));
-  editor.modes.current.onComment = onComment;
+    .map((comment) => ({ id: comment.id, anchor: comment, isNote: comment.isNote === true }));
+  editor.modes.current.commentAnchors = draft ? [...open, { id: DRAFT_ID, anchor: draft }] : open;
+  editor.modes.current.onComment = (id) => id !== DRAFT_ID && onComment(id);
   const { run } = editor;
-  useEffect(() => run(refreshComments, false), [comments, run]);
+  // Before paint, so the margin finds the marks when it places its cards.
+  useLayoutEffect(() => run(refreshComments, false), [comments, draft, run]);
 }
 
 function withResolved(comments: Comment[], id: string, resolved: boolean) {
@@ -105,7 +124,7 @@ export function useComments(parts: {
   const [draft, setDraft] = useDraft(parts.scene?.id);
   const [focused, setFocused] = useState<string | null>(null);
   const { editor } = parts;
-  useCommentMarks(editor, comments, setFocused);
+  useCommentMarks(editor, comments, draft, setFocused);
   const start = useCallback(() => setDraft(selectedAnchor(editor)), [editor]);
   useCommandKey("comment", start);
   const author = parts.author || t("Du");
@@ -116,8 +135,8 @@ export function useComments(parts: {
     focus: setFocused,
     start,
     cancel: () => setDraft(null),
-    add: (body: string) => {
-      if (draft) save([...comments, newComment(draft, body, author)]);
+    add: (body: string, isNote = false) => {
+      if (draft) save([...comments, newComment(draft, body, author, isNote)]);
       setDraft(null);
     },
     reply: (to: Comment, body: string) => save([...comments, newReply(to, body, author)]),

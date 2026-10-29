@@ -33,7 +33,9 @@ const EDITOR_SWITCHES: [EditorSwitch, string, string][] = [
   [
     "commentsInMargin",
     t("Kommentarer i marginalen"),
-    t("Kommentarerna står bredvid texten, som blyerts i en bok. Korten i Granska finns kvar."),
+    t(
+      "Kommentarer, anteckningar och scenens namn står bredvid texten, som blyerts i en bok. Korten i Granska finns kvar.",
+    ),
   ],
   [
     "typewriter",

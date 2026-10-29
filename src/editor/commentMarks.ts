@@ -7,17 +7,18 @@ import { documentText } from "./documentText.js";
 export interface CommentAnchor {
   id: string;
   anchor: Anchor;
+  isNote?: boolean;
 }
 
 /** A quote is found again by its words, so it survives edits around it. */
 export function commentDecorations(doc: Node, comments: CommentAnchor[]): DecorationSet {
   const { text, toDoc } = documentText(doc);
-  const decorations = comments.flatMap(({ id, anchor }) => {
+  const decorations = comments.flatMap(({ id, anchor, isNote }) => {
     const place = locate(text, anchor);
     if (!place) return [];
     return [
       Decoration.inline(toDoc(place.from), toDoc(place.to), {
-        class: "commented",
+        class: isNote ? "commented noted" : "commented",
         "data-comment": id,
       }),
     ];
