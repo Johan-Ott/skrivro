@@ -33,6 +33,9 @@
           "url": "https://oauth2.googleapis.com/*"
         },
         {
+          "url": "https://api.github.com/repos/Johan-Ott/skrivro/releases"
+        },
+        {
           "url": "https://api.github.com/repos/Johan-Ott/skrivro/releases/latest"
         },
         {
