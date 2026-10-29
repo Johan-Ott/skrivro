@@ -24,6 +24,9 @@ const STYLE_ORDER: StyleChoice[] = [
   "punktlista",
   "numrerad",
   "indrag",
+  "underrubrik",
+  "ruta",
+  "hangande-indrag",
 ];
 
 function ChevronDown() {

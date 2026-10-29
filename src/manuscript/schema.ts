@@ -14,6 +14,9 @@ export const STYLE_NAMES = [
   "punktlista",
   "numrerad",
   "indrag",
+  "underrubrik",
+  "ruta",
+  "hangande-indrag",
 ] as const;
 export type StyleName = (typeof STYLE_NAMES)[number];
 
@@ -29,6 +32,11 @@ const isStyleName = (value: string | null): value is StyleName =>
 
 // ProseMirror reads null as "matches, no attributes" and false as "does not match".
 const isBoldWeight = (value: string) => /^(bold|[6-9]00)$/.test(value);
+
+const linkAttrs = (element: HTMLElement, href: string, title: string) => ({
+  href: element.getAttribute(href) ?? "",
+  title: element.getAttribute(title),
+});
 
 // Pasting keeps paragraphs, italic and bold; headings and list items become paragraphs.
 export const manuscriptSchema = new Schema({
@@ -174,6 +182,36 @@ export const manuscriptSchema = new Schema({
     strike: {
       parseDOM: [{ tag: "s" }, { tag: "del" }, { tag: "strike" }],
       toDOM: () => ["s", 0],
+    },
+    // Upphöjd and nedsänkt are kept as HTML's <sup> and <sub>; a footnote's number is not one.
+    superscript: {
+      excludes: "superscript subscript",
+      parseDOM: [{ tag: "sup:not(.footnote)" }],
+      toDOM: () => ["sup", 0],
+    },
+    subscript: {
+      excludes: "superscript subscript",
+      parseDOM: [{ tag: "sub" }],
+      toDOM: () => ["sub", 0],
+    },
+    // A link for the e-book, shown as a span so a click in the text never leaves the app.
+    link: {
+      attrs: { href: {}, title: { default: null } },
+      inclusive: false,
+      parseDOM: [
+        { tag: "a[href]", getAttrs: (element) => linkAttrs(element, "href", "title") },
+        { tag: "span.link", getAttrs: (element) => linkAttrs(element, "data-href", "data-title") },
+      ],
+      toDOM: (mark) => [
+        "span",
+        {
+          class: "link",
+          "data-href": String(mark.attrs["href"]),
+          "data-title": mark.attrs["title"] as string | null,
+          title: String(mark.attrs["href"]),
+        },
+        0,
+      ],
     },
     raw: { inclusive: false, toDOM: () => ["span", { class: "raw-inline" }, 0] },
   },

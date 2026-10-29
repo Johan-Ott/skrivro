@@ -32,10 +32,11 @@ export function countDocumentWords(doc: Node): number {
 export const countWordsBetween = (doc: Node, from: number, to: number) =>
   words(doc.textBetween(from, to, "\n", leafText));
 
-// What Markdown writes around the words: a picture on a line of its own, underline and strike,
-// and characters written as entities, such as &amp;.
+// What Markdown writes around the words: a picture on a line of its own, a link's address, the
+// tags of underline, strike, raised and lowered text, and characters written as entities.
 const PICTURE = /^!\[[^\]]*\]\([^)]*\)[ \t]*$/gm;
-const TAG = /<\/?(?:u|s|del|strike)>/g;
+const LINK = /(?<!!)\[([^\]]*)\]\([^)]*\)/g;
+const TAG = /<\/?(?:u|s|del|strike|sup|sub)>/g;
 const ENTITY = /&(?:[a-z]+|#\d+);/gi;
 const FOOTNOTE = /\[\^([^\]\s]+)\]/g;
 
@@ -58,6 +59,7 @@ export function countMarkdownWords(markdown: string, isNote = false): number {
     .replace(COMMENT, " ")
     .replace(PLACEHOLDER, " ")
     .replace(PICTURE, "")
+    .replace(LINK, "$1")
     .replace(TAG, "")
     .replace(ENTITY, "")
     .replace(FOOTNOTE, (marker, label: string) => (notes.has(label) ? " " : marker));

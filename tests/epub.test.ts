@@ -23,7 +23,10 @@ const scene = (id: string, body: string) => `---\nid: ${id}\ntitle: ${id}\n---\n
 const FILES = {
   "/bok/scenes/01INLEDNING.md": scene("01INLEDNING", "Det var vinter.\n"),
   "/bok/scenes/01KOKET.md": scene("01KOKET", "Brevet låg på *bordet* <& så>.\n\n– Vet du?\n"),
-  "/bok/scenes/01ISEN.md": scene("01ISEN", ":::brev\nKära Elin.\n:::\n\nHon sa ”nej”.\n"),
+  "/bok/scenes/01ISEN.md": scene(
+    "01ISEN",
+    ":::brev\nKära Elin.\n:::\n\nHon sa ”nej”.\n\nSe [Skrivro](https://skrivro.se) och H<sub>2</sub>O.\n",
+  ),
 };
 const BOOK = { title: "Vintervägen", subtitle: "Roman", author: "Elin Berg", words: 1200 };
 
@@ -144,6 +147,7 @@ describe("buildEpub", () => {
     expect(chapter).toContain('<hr class="scene-break"');
     expect(chapter).toContain('<div class="brev">');
     expect(chapter).toContain("Hon sa ”nej”.");
+    expect(chapter).toContain('Se <a href="https://skrivro.se">Skrivro</a> och H<sub>2</sub>O.');
   });
 
   it("has a cover and a copyright page with the author", async () => {

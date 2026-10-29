@@ -16,6 +16,8 @@ const TEXT = [
   "::: punktlista\nMjöl\n\nÄgg\n:::",
   "::: numrerad\nFörst\n\nSedan\n:::",
   "::: numrerad\nIgen\n:::",
+  "Se [Skrivro](https://skrivro.se) och 10<sup>3</sup>.",
+  "::: hangande-indrag\nBerg, E. (2026).\n:::",
   "[^1]: Se *Isen bär*.",
 ].join("\n\n");
 
@@ -39,6 +41,7 @@ async function parts() {
     styles: await read("word/styles.xml"),
     notes: await read("word/footnotes.xml"),
     numbering: await read("word/numbering.xml"),
+    links: await read("word/_rels/document.xml.rels"),
   };
 }
 
@@ -68,6 +71,15 @@ describe("the standard manuscript in Word", () => {
 
     expect(styles).toMatch(/w:styleId="FootnoteText"[\s\S]*?w:line="240"[\s\S]*?w:val="20"/);
     expect(notes).toMatch(/<w:i\/>[\s\S]*Isen bär/);
+  });
+
+  it("makes links Word's own, raises text and hangs the indent of sources", async () => {
+    const { document, links } = await parts();
+
+    expect(document).toMatch(/<w:hyperlink [^>]*r:id="[^"]+"[\s\S]*?Skrivro/);
+    expect(links).toContain('Target="https://skrivro.se"');
+    expect(document).toContain('<w:vertAlign w:val="superscript"/>');
+    expect(document).toMatch(/w:hanging="\d+"/);
   });
 });
 

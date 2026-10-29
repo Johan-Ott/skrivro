@@ -42,6 +42,20 @@ const noteAsides = (notes: SceneNotes) =>
     return `<aside epub:type="footnote" id="note-${id}"><p>${back} ${text}</p></aside>`;
   });
 
+function marked(text: string, child: Node) {
+  let html = text;
+  const marks = new Set(child.marks.map((mark) => mark.type.name));
+  if (marks.has("italic")) html = `<em>${html}</em>`;
+  if (marks.has("bold")) html = `<strong>${html}</strong>`;
+  if (marks.has("underline")) html = `<u>${html}</u>`;
+  if (marks.has("strike")) html = `<s>${html}</s>`;
+  if (marks.has("superscript")) html = `<sup>${html}</sup>`;
+  if (marks.has("subscript")) html = `<sub>${html}</sub>`;
+  const link = child.marks.find((mark) => mark.type.name === "link");
+  if (link) html = `<a href="${escapeXml(String(link.attrs["href"]))}">${html}</a>`;
+  return html;
+}
+
 function inline(paragraph: Node, convert: (text: string) => string, notes: SceneNotes) {
   let html = "";
   paragraph.forEach((child) => {
@@ -50,13 +64,7 @@ function inline(paragraph: Node, convert: (text: string) => string, notes: Scene
       const note = footnoteParagraph(String(child.attrs["text"]));
       return void (html += noteReference(notes, inline(note, convert, notes)));
     }
-    let text = escapeXml(convert(child.text ?? ""));
-    const marks = new Set(child.marks.map((mark) => mark.type.name));
-    if (marks.has("italic")) text = `<em>${text}</em>`;
-    if (marks.has("bold")) text = `<strong>${text}</strong>`;
-    if (marks.has("underline")) text = `<u>${text}</u>`;
-    if (marks.has("strike")) text = `<s>${text}</s>`;
-    html += text;
+    html += marked(escapeXml(convert(child.text ?? "")), child);
   });
   return html;
 }

@@ -53,7 +53,7 @@ const RIGHT = { alignment: AlignmentType.RIGHT };
 const UNINDENTED = { indent: { firstLine: 0 } };
 
 // Centrerat, the right-hand styles, Utan indrag and Kapitäler only set the line; the others are
-// inset. A manuscript for agents keeps no small capitals.
+// inset. Agents get no small capitals, and an Underrubrik is plain text as the headings are.
 const LAYOUTS: Record<string, object> = {
   centrerat: { alignment: AlignmentType.CENTER },
   hoger: RIGHT,
@@ -61,6 +61,8 @@ const LAYOUTS: Record<string, object> = {
   motto: RIGHT,
   "utan-indrag": UNINDENTED,
   kapitaler: UNINDENTED,
+  underrubrik: { ...UNINDENTED, spacing: { before: DOUBLE_SPACING / 2 }, keepNext: true },
+  "hangande-indrag": { indent: { left: INDENT, hanging: INDENT } },
 };
 
 function paragraphLayout(isFirst: boolean, style: string | null) {

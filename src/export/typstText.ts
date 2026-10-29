@@ -21,6 +21,10 @@ function marked(text: string, child: Node) {
   if (marks.has("bold")) markup = `#strong[${markup}]`;
   if (marks.has("underline")) markup = `#underline[${markup}]`;
   if (marks.has("strike")) markup = `#strike[${markup}]`;
+  if (marks.has("superscript")) markup = `#super[${markup}]`;
+  if (marks.has("subscript")) markup = `#sub[${markup}]`;
+  const link = child.marks.find((mark) => mark.type.name === "link");
+  if (link) markup = `#link(${typstString(String(link.attrs["href"]))})[${markup}]`;
   return markup;
 }
 

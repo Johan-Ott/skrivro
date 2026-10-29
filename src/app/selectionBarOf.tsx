@@ -1,5 +1,6 @@
 import type { AppState } from "./App.js";
 import { FootnotePopover } from "./FootnotePopover.js";
+import { LinkPopover } from "./LinkPopover.js";
 import { offerNoteName } from "./notes/NewNoteDialog.js";
 import { canMoveToCuts, moveToCuts } from "./cuts.js";
 import { insertChosenPicture } from "./palette/sceneContext.js";
@@ -8,7 +9,8 @@ import { SelectionBar } from "./SelectionBar.js";
 import { ClickCorrections } from "./spelling/ClickCorrections.js";
 import type { Project } from "./useProject.js";
 
-// What stands over the text while writing: the format row, a footnote's text and a click's help.
+// What stands over the text while writing: the format row, a footnote's text, a link's address
+// and a click's help.
 export const selectionBarOf = (app: AppState, project: Project) => (
   <>
     <SelectionBar
@@ -27,6 +29,7 @@ export const selectionBarOf = (app: AppState, project: Project) => (
       }}
     />
     <FootnotePopover editor={app.editor} />
+    <LinkPopover editor={app.editor} />
     <ClickCorrections editor={app.editor} onReview={() => app.writingMode.setReviewOpen(true)} />
   </>
 );

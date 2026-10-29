@@ -3,22 +3,44 @@ import { toMarkdown } from "mdast-util-to-markdown";
 import type { Mark, Node } from "prosemirror-model";
 import { PLACEHOLDER } from "./placeholders.js";
 
-type Wrapper = "italic" | "bold" | "underline" | "strike";
-const WRAPPERS: Wrapper[] = ["italic", "bold", "underline", "strike"];
-const TAGS: Partial<Record<Wrapper, string>> = { underline: "u", strike: "s" };
+type Wrapper = "link" | "italic" | "bold" | "underline" | "strike" | "superscript" | "subscript";
+const WRAPPERS: Wrapper[] = [
+  "link",
+  "italic",
+  "bold",
+  "underline",
+  "strike",
+  "superscript",
+  "subscript",
+];
+const TAGS: Partial<Record<Wrapper, string>> = {
+  underline: "u",
+  strike: "s",
+  superscript: "sup",
+  subscript: "sub",
+};
 
-// Italic and bold are Markdown's own; underline and strikethrough are written as HTML around them.
-function wrapped(wrapper: Wrapper, children: PhrasingContent[]): PhrasingContent[] {
-  const tag = TAGS[wrapper];
-  if (!tag) return [{ type: wrapper === "italic" ? "emphasis" : "strong", children }];
+// Links, italic and bold are Markdown's own; the other marks are written as HTML around the text.
+function wrapped(mark: Mark, children: PhrasingContent[]): PhrasingContent[] {
+  const name = mark.type.name as Wrapper;
+  if (name === "link") {
+    const title = mark.attrs["title"] as string | null;
+    return [{ type: "link", url: String(mark.attrs["href"]), title, children }];
+  }
+  const tag = TAGS[name];
+  if (!tag) return [{ type: name === "italic" ? "emphasis" : "strong", children }];
   return [{ type: "html", value: `<${tag}>` }, ...children, { type: "html", value: `</${tag}>` }];
 }
 
-const hasMark = (node: Node, name: string) => node.marks.some((mark) => mark.type.name === name);
+const markOf = (node: Node | undefined, name: string) =>
+  node?.marks.find((mark) => mark.type.name === name);
+const hasMark = (node: Node, name: string) => markOf(node, name) !== undefined;
 
+// A run is one and the same mark, so two links side by side stay two.
 function runEnd(nodes: Node[], start: number, wrapper: Wrapper): number {
+  const first = markOf(nodes[start], wrapper);
   let end = start;
-  while (end < nodes.length && hasMark(nodes[end] as Node, wrapper)) end++;
+  while (first && markOf(nodes[end], wrapper)?.eq(first)) end++;
   return end;
 }
 
@@ -90,7 +112,7 @@ function toPhrasing(nodes: Node[], done: Wrapper[]): PhrasingContent[] {
     const end = runEnd(nodes, index, wrapper);
     const children = toPhrasing(nodes.slice(index, end), [...done, wrapper]);
     result.push(...leaves(nodes.slice(leafStart, index)));
-    result.push(...wrapped(wrapper, children));
+    result.push(...wrapped(markOf(nodes[index], wrapper) as Mark, children));
     index = leafStart = end;
   }
   return [...result, ...leaves(nodes.slice(leafStart))];

@@ -38,6 +38,7 @@ describe("countMarkdownWords", () => {
     "# Rubrik med ord\n\nText.\n\n- punkt ett\n- punkt två",
     "Fisk &amp; chips och &nbsp; mer.",
     "<u>understruken</u> och <s>struken</s>.\n\n* * *\n\nEfter brytningen.",
+    "Se [Skrivro](https://skrivro.se), H<sub>2</sub>O och 10<sup>3</sup> liter.",
   ];
 
   it.each(SCENES)("counts %j as its document does", (markdown) => {

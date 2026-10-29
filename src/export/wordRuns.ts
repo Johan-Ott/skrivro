@@ -1,4 +1,10 @@
-import { FootnoteReferenceRun, Paragraph, TextRun, type ParagraphChild } from "docx";
+import {
+  ExternalHyperlink,
+  FootnoteReferenceRun,
+  Paragraph,
+  TextRun,
+  type ParagraphChild,
+} from "docx";
 import type { Node } from "prosemirror-model";
 import { quoteConverter, type Typography } from "./book.js";
 import { footnoteParagraph } from "./footnoteText.js";
@@ -25,6 +31,23 @@ export interface TextSettings {
   notes: WordNotes;
 }
 
+// A link is Word's own, in Word's link style.
+function textRun(text: string, child: Node): ParagraphChild {
+  const marks = new Set(child.marks.map((mark) => mark.type.name));
+  const link = child.marks.find((mark) => mark.type.name === "link");
+  const run = new TextRun({
+    text,
+    italics: marks.has("italic"),
+    bold: marks.has("bold"),
+    ...(marks.has("underline") && { underline: {} }),
+    strike: marks.has("strike"),
+    superScript: marks.has("superscript"),
+    subScript: marks.has("subscript"),
+    ...(link && { style: "Hyperlink" }),
+  });
+  return link ? new ExternalHyperlink({ link: String(link.attrs["href"]), children: [run] }) : run;
+}
+
 export function runs(paragraph: Node, settings: TextSettings): ParagraphChild[] {
   const convert = quoteConverter(settings.typography);
   const children: ParagraphChild[] = [];
@@ -33,16 +56,7 @@ export function runs(paragraph: Node, settings: TextSettings): ParagraphChild[] 
     if (child.type.name === "footnote") {
       return void children.push(noteReference(settings, String(child.attrs["text"])));
     }
-    const marks = new Set(child.marks.map((mark) => mark.type.name));
-    children.push(
-      new TextRun({
-        text: convert(child.text ?? ""),
-        italics: marks.has("italic"),
-        bold: marks.has("bold"),
-        ...(marks.has("underline") && { underline: {} }),
-        strike: marks.has("strike"),
-      }),
-    );
+    children.push(textRun(convert(child.text ?? ""), child));
   });
   return children;
 }

@@ -2610,9 +2610,10 @@ body:has(.new-book-dialog) .new-book {
   align-self: flex-start;
 }
 
-/* The box where a footnote's text is written, under its number */
+/* The box where a footnote's text is written, under its number, and a link's address */
 
-.footnote-popover {
+.footnote-popover,
+.link-popover {
   position: fixed;
   left: 50%;
   z-index: calc(var(--layer-popover) + 1);
@@ -2628,21 +2629,35 @@ body:has(.new-book-dialog) .new-book {
   transform: translateX(-50%);
 }
 
-.footnote-popover textarea {
-  min-height: 72px;
+.footnote-popover textarea,
+.link-popover input {
   padding: 8px;
   border: 1px solid var(--border-control);
   border-radius: var(--radius-button);
   background: var(--bg);
   color: var(--text);
   font: inherit;
+}
+
+.footnote-popover textarea {
+  min-height: 72px;
   resize: vertical;
+}
+
+.link-popover form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .footnote-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.link-popover .button.primary {
+  margin-left: auto;
 }
 
 .design-size {

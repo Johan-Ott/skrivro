@@ -22,12 +22,17 @@ export const STYLE_LABELS: Record<StyleChoice, string> = {
   punktlista: t("Punktlista"),
   numrerad: t("Numrerad lista"),
   indrag: t("Indrag"),
+  underrubrik: t("Underrubrik"),
+  ruta: t("Ruta"),
+  "hangande-indrag": t("Hängande indrag"),
 };
 
 export const toggleBold = toggleMark(schema.marks.bold);
 export const toggleItalic = toggleMark(schema.marks.italic);
 export const toggleUnderline = toggleMark(schema.marks.underline);
 export const toggleStrike = toggleMark(schema.marks.strike);
+export const toggleSuperscript = toggleMark(schema.marks.superscript);
+export const toggleSubscript = toggleMark(schema.marks.subscript);
 
 /** The marks the format row turns on and off. */
 export type TextMark = "bold" | "italic" | "underline" | "strike";
@@ -115,7 +120,7 @@ export function isMarkActive(state: EditorState, markName: TextMark): boolean {
   return state.doc.rangeHasMark(from, to, markType);
 }
 
-/** Styles say what the text is, so they stay. */
+/** Styles and links say what the text is, so they stay. */
 export const clearFormatting: Command = (state, dispatch) => {
   const { from, to } = state.selection;
   const transaction = state.tr
@@ -123,6 +128,8 @@ export const clearFormatting: Command = (state, dispatch) => {
     .removeMark(from, to, schema.marks.italic)
     .removeMark(from, to, schema.marks.underline)
     .removeMark(from, to, schema.marks.strike)
+    .removeMark(from, to, schema.marks.superscript)
+    .removeMark(from, to, schema.marks.subscript)
     .setStoredMarks([]);
   dispatch?.(transaction);
   return true;

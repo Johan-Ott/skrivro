@@ -62,6 +62,9 @@ const CLASSIC_PARTS = `#let scenbrytning(mark) = align(center, block(above: 1.4e
     block(above: 1.2em, below: 1.2em, body)
   }
   else if name == "indrag" { block(inset: (left: 2em), body) }
+  else if name == "underrubrik" { block(above: 1.6em, below: 0.8em, sticky: true, strong(body)) }
+  else if name == "ruta" { block(stroke: 0.5pt + luma(120), inset: 0.9em, radius: 2pt, width: 100%, above: 1.2em, below: 1.2em, body) }
+  else if name == "hangande-indrag" { set par(hanging-indent: 2em); block(above: 1.2em, below: 1.2em, body) }
   else { block(inset: sides, above: 1.2em, below: 1.2em, body) }
 }
 // Small capitals drawn the same in every typeface: lower-case letters as smaller capitals.
