@@ -2,7 +2,7 @@ import { useEffect, useRef, type RefObject } from "react";
 import logo from "../../assets/skrivro-logo.png";
 import { BOOK_LANGUAGES } from "../../project/bookLanguage.js";
 import { goalOf, type Draft } from "./FirstChoices.js";
-import { EASE, canMove, flipTo } from "../motion.js";
+import { EASE, canMove, flipTo, ghostOf } from "../motion.js";
 import { t } from "../../i18n/i18n.js";
 
 // Skrivro's own green book beside the first start. It wears the answers: the name in gold, a
@@ -82,22 +82,6 @@ export function IntroBook({ draft, isAsking }: { draft: Draft; isAsking: boolean
 
 const wait = (delay: number) => new Promise((done) => window.setTimeout(done, delay));
 
-// The book's cover, lifted out of the page so it outlives the first start.
-function ghostOf(front: HTMLElement) {
-  const { left, top, width, height } = front.getBoundingClientRect();
-  const ghost = front.cloneNode(true) as HTMLElement;
-  ghost.classList.add("intro-ghost");
-  Object.assign(ghost.style, {
-    left: `${left}px`,
-    top: `${top}px`,
-    width: `${width}px`,
-    height: `${height}px`,
-  });
-  ghost.style.setProperty("--bw", `${width}px`);
-  document.body.append(ghost);
-  return ghost;
-}
-
 // The cover flies in an arc onto the blank book on the shelf, turns into it, and it glows.
 function land(ghost: HTMLElement, cover: HTMLElement) {
   const from = ghost.getBoundingClientRect();
@@ -138,7 +122,9 @@ export async function reveal(start: () => Promise<void>) {
   const front = document.querySelector<HTMLElement>(".intro-front");
   if (!front?.checkVisibility() || !canMove()) return start();
   await wait(250);
-  const ghost = ghostOf(front);
+  // Lifted out of the page, so it outlives the first start.
+  const ghost = ghostOf(front, "intro-ghost");
+  ghost.style.setProperty("--bw", ghost.style.width);
   try {
     await start();
   } catch (error) {

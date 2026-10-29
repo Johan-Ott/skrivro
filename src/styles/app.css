@@ -4374,9 +4374,9 @@ html.welcome-shown body {
   filter: none;
 }
 
-/* The shut cover on its way to the shelf, above everything while the shelf comes. */
-.intro-ghost {
-  position: fixed;
+/* A cover on its way, above everything while the screen under it changes. */
+.intro-ghost,
+.cover-ghost {
   inset: auto;
   z-index: var(--layer-dialog);
   transform-origin: 0 0;

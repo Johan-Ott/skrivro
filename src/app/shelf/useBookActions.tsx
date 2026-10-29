@@ -4,6 +4,7 @@ import type { ProjectDetails } from "../../project/newProject.js";
 import { exampleBook, importedBook, libraryOf, newBook } from "../onboarding/books.js";
 import type { AppState } from "../App.js";
 import { t } from "../../i18n/i18n.js";
+import { openGrowing } from "./openMotion.js";
 
 type App = Pick<AppState, "startup" | "open">;
 
@@ -33,7 +34,8 @@ export function useBookActions(app: App) {
   const goal = preferences.defaultDailyGoal;
   return {
     busy,
-    open: (dir: string) => void opened(async () => dir, "Boken", t("Öppnar boken…")),
+    open: (dir: string) =>
+      void openGrowing(dir, () => opened(async () => dir, "Boken", t("Öppnar boken…"))),
     create: (details: ProjectDetails) =>
       library()
         .then((dir) => newBook(dir, details))

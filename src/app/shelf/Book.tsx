@@ -45,6 +45,7 @@ function Cover({ book, author, pictureUrl, onOpen }: CoverProps) {
     return (
       <button
         className={`book-cover with-picture ${stageClass(book)}`}
+        data-dir={book.dir}
         aria-label={book.title}
         onClick={() => onOpen(book.dir)}
       >
@@ -55,6 +56,7 @@ function Cover({ book, author, pictureUrl, onOpen }: CoverProps) {
   return (
     <button
       className={`book-cover ${coverLookOf(book.dir, book.genre ?? null, book.coverLook ?? null)} ${stageClass(book)}`}
+      data-dir={book.dir}
       onClick={() => onOpen(book.dir)}
     >
       <span className="book-kind">{seriesLine(book) ?? genreName(book) ?? book.kind}</span>
