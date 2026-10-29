@@ -1,6 +1,6 @@
 [package]
 name = "skrivro"
-version = "0.4.13"
+version = "0.4.14"
 edition = "2021"
 
 # Android and iOS start Skrivro from the library; the desktop starts it from main.rs.
