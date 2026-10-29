@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useSettledDoc } from "../../editor/editorStore.js";
 import { documentText } from "../../editor/documentText.js";
 import { acceptChange, refreshRevision } from "../../editor/revisionMarks.js";
@@ -49,9 +49,10 @@ function useChanges(editor: Editor, revised: string | null) {
       revised === null || !settled ? [] : revisionChanges(documentText(settled).text, revised),
     [revised, settled],
   );
-  // Only the stable parts of the editor, so marking the changes does not start another round.
+  // Only the stable parts of the editor, so marking the changes does not start another round. Marked
+  // before the margin places its cards a second time, so each card finds its words.
   const { modes, run } = editor;
-  useEffect(() => {
+  useLayoutEffect(() => {
     modes.current.revisionChanges = changes;
     run(refreshRevision, false);
   }, [changes, modes, run]);

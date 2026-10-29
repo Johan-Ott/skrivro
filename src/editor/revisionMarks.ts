@@ -7,22 +7,26 @@ import { documentText, LEAF } from "./documentText.js";
 /** How documentText ends each paragraph. */
 const PARAGRAPH = "\n";
 
-const addedText = (text: string) => {
+const addedText = (text: string, index: number) => {
   const shown = document.createElement("span");
   shown.className = "revision-added";
+  shown.dataset.change = String(index);
   shown.textContent = text.replace(/\n+/g, " ¶ ");
   return shown;
 };
 
-/** What the editor struck through, and beside it in green what they wrote instead. */
+/** What the editor struck through, and beside it in green what they wrote instead. Each mark
+ * carries its change's place in the list, so the margin can set its card beside it. */
 function revisionDecorations(doc: Node, changes: RevisionChange[]): DecorationSet {
   const { toDoc } = documentText(doc);
-  const decorations = changes.flatMap((change) => {
+  const decorations = changes.flatMap((change, index) => {
     const from = toDoc(change.from);
     const to = toDoc(change.to);
+    const removed = { class: "revision-removed", "data-change": String(index) };
+    const added = () => addedText(change.added, index);
     return [
-      ...(to > from ? [Decoration.inline(from, to, { class: "revision-removed" })] : []),
-      ...(change.added ? [Decoration.widget(to, () => addedText(change.added), { side: 1 })] : []),
+      ...(to > from ? [Decoration.inline(from, to, removed)] : []),
+      ...(change.added ? [Decoration.widget(to, added, { side: 1 })] : []),
     ];
   });
   return DecorationSet.create(doc, decorations);

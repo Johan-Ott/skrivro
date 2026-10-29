@@ -9,6 +9,7 @@ import { CHARACTERS_ID, PLACES_ID, THINGS_ID } from "../../project/sorts.js";
 import type { AppState } from "../App.js";
 import { Writer } from "./CommentsSection.js";
 import { usePlacement } from "./marginPlacement.js";
+import { ChangeNotes } from "./RevisionSection.js";
 import { DRAFT_ID } from "./useComments.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -150,16 +151,26 @@ function MarginHead(props: { app: AppState; shown: Shown; onShown: (shown: Shown
 const isShown = (comment: Comment, shown: Shown) =>
   shown === "allt" || (shown === "anteckningar") === (comment.isNote === true);
 
-// What the margin holds for the open scene; the people and places named only under Allt.
+// What the margin holds for the open scene; the people and places named only under Allt, the
+// editor's changes under all but Anteckningar.
 function useMarginCards(app: AppState, shown: Shown) {
   const doc = useSettledDoc(app.editor, PAUSE_MS);
   const open = app.comments.comments.filter((comment) => !comment.replyTo && !comment.resolved);
   const text = shown === "allt" && doc ? documentText(doc).text : "";
+  const named = text ? cardsNamedIn(app.notes.cards, text) : [];
+  const wanted = open.filter((comment) => isShown(comment, shown));
+  const { changes } = app.revision;
+  const shownChanges = shown === "anteckningar" ? [] : changes;
   return {
     doc,
-    open,
-    wanted: open.filter((comment) => isShown(comment, shown)),
-    named: text ? cardsNamedIn(app.notes.cards, text) : [],
+    wanted,
+    named,
+    changes: shownChanges,
+    ids: [
+      ...[...wanted, ...named].map((each) => each.id),
+      ...shownChanges.map((each) => each.from),
+    ],
+    hasCards: open.length + named.length + changes.length > 0 || app.comments.draft !== null,
   };
 }
 
@@ -168,13 +179,11 @@ function useMarginCards(app: AppState, shown: Shown) {
 export function MarginNotes({ app }: { app: AppState }) {
   const [shown, setShown] = useState<Shown>("allt");
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
-  const { doc, open, wanted, named } = useMarginCards(app, shown);
+  const { doc, wanted, named, changes, ids, hasCards } = useMarginCards(app, shown);
   const { comments: all, draft } = app.comments;
-  const ids = [...wanted, ...named].map((each) => each.id);
   const box = usePlacement([shown, replyingTo, draft !== null, all.length, ...ids].join(), doc);
   const { settings, isFocusMode, showsFindings } = app.writingMode;
   if (!settings.commentsInMargin || isFocusMode || !showsFindings) return null;
-  const hasCards = open.length + named.length > 0 || draft !== null;
   return (
     <div className="margin-notes" ref={box}>
       {hasCards && <MarginHead app={app} shown={shown} onShown={setShown} />}
@@ -189,6 +198,7 @@ export function MarginNotes({ app }: { app: AppState }) {
         />
       ))}
       {draft && <DraftNote app={app} />}
+      {changes.length > 0 && <ChangeNotes revision={app.revision} />}
       {named.map((card) => (
         <MentionNote key={card.id} app={app} card={card} />
       ))}

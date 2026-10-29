@@ -15,8 +15,6 @@ test("a comment stands in the margin beside its words, and Klar ticks it off", a
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await page.keyboard.type("Gulnat?");
   await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
-  // Redigera opens Granska, which takes the margin's room.
-  await page.getByRole("button", { name: "Stäng granskning" }).click();
 
   const note = page.locator(".margin-note[data-comment]");
   await expect(note).toContainText("Gulnat?");

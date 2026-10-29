@@ -59,6 +59,39 @@ test("an editor's Word file is read back, and their changes are accepted or reje
   await expect(editor(page)).not.toContainText("Med posten");
 });
 
+test("with the margin on, the editor's changes stand in it beside their words, and the text moves left to make room", async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await page.addInitScript(() =>
+    localStorage.setItem("skrivro.writing", JSON.stringify({ commentsInMargin: true })),
+  );
+  await openExample(page);
+  const file = await editorsFile(testInfo.outputDir);
+
+  const chooser = page.waitForEvent("filechooser");
+  await page.getByRole("button", { name: "Meny" }).first().click();
+  await page.getByRole("menuitem", { name: "Dela och samarbeta" }).click();
+  await page.getByRole("menuitem", { name: "Läs in kommenterad Word-fil…" }).click();
+  await (await chooser).setFiles(file);
+  await page.getByRole("button", { name: "Stäng", exact: true }).click();
+
+  const card = page.locator(".margin-note[data-change]");
+  await expect(card).toContainText("Med posten");
+  await expect(page.getByRole("complementary", { name: "Granskning" })).toHaveCount(0);
+  const leftOfCentre = await page.evaluate(() => {
+    const middle = (box: DOMRect) => (box.left + box.right) / 2;
+    const text = document.querySelector(".ProseMirror")?.getBoundingClientRect() ?? new DOMRect();
+    const card = document.querySelector(".page")?.getBoundingClientRect() ?? new DOMRect();
+    return middle(card) - middle(text);
+  });
+  expect(leftOfCentre).toBeGreaterThan(100);
+  await card.getByRole("button", { name: "Godta" }).click();
+
+  await expect(card).toHaveCount(0);
+  await expect(editor(page)).not.toContainText("Med posten");
+});
+
 // The first scene as a test reader sends it back: unchanged, with a comment on one word.
 async function readersFile(folder: string) {
   const { CommentRangeEnd, CommentRangeStart, CommentReference } = await import("docx");

@@ -54,18 +54,18 @@ function useReading(setView: (view: View) => void) {
 }
 
 // The view and the step. The text keeps its step while the writer looks at the book or reads, and
-// comes back in it.
-function useSteps(openReview: (isOpen: boolean) => void) {
+// comes back in it. Redigera opens Granska, unless the margin is on and holds what waits.
+function useSteps(openReview: (isOpen: boolean) => void, isMarginOn: boolean) {
   const [view, setView] = useState<View>("skriv");
   const [textStep, setTextStep] = useState<"skriv" | "redigera">("skriv");
   const isPhone = usePhone();
   const goTo = useCallback(
     (to: View | Step) => {
       if (to === "skriv" || to === "redigera") setTextStep(to);
-      if (to === "redigera") openReview(true);
+      if (to === "redigera" && !isMarginOn) openReview(true);
       setView(to === "redigera" ? "skriv" : to);
     },
-    [openReview],
+    [openReview, isMarginOn],
   );
   useGoKeys((letter) => {
     const match = VIEWS.find(([, , keys]) => keys.toLowerCase().endsWith(letter));
@@ -96,7 +96,7 @@ export function useWritingMode() {
   const settingsDialog = useSettingsDialog();
   const [isProgressOpen, setProgressOpen] = useState(false);
   const reviewState = useReviewState();
-  const steps = useSteps(reviewState.setReviewOpen);
+  const steps = useSteps(reviewState.setReviewOpen, settings.commentsInMargin);
   return {
     settingsDialog,
     settings,

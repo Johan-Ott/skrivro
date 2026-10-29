@@ -3388,6 +3388,12 @@ body:has(.new-book-dialog) .new-book {
   padding-inline: 280px;
 }
 
+/* With room for only one margin, the text moves left and the notes take the right, as in Word. */
+
+.page.with-margin-notes.margin-on-right {
+  padding-inline: 24px 280px;
+}
+
 @media (max-width: 600px) {
   .margin-notes {
     display: none;
@@ -3491,6 +3497,15 @@ body:has(.new-book-dialog) .new-book {
 
 .margin-note-body {
   color: var(--text);
+}
+
+/* A long cut is struck through in the text itself; the card shows its start. */
+
+.margin-note[data-change] .margin-note-body {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 .margin-note-reply {

@@ -56,11 +56,11 @@ type ShownProps = {
 };
 
 // Opened while a comment is written in Granska, and by itself for an editor's changes, so they
-// are seen.
+// are seen. With the margin on they stand there instead, beside their words.
 function useOpening(app: AppState, isWriting: boolean, focused: string | null) {
   useOpenedByClick(app, focused);
-  const { setReviewOpen } = app.writingMode;
-  const hasRevision = app.revision.isOpen;
+  const { setReviewOpen, settings } = app.writingMode;
+  const hasRevision = app.revision.isOpen && !settings.commentsInMargin;
   useEffect(() => {
     if (isWriting || hasRevision) setReviewOpen(true);
   }, [isWriting, hasRevision, setReviewOpen]);

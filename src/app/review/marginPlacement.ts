@@ -8,23 +8,28 @@ const PAGE_EDGES = 96;
 // The text gives up some width for the notes, never more than down to this.
 const NARROWEST_TEXT = 440;
 
-// A page too narrow for the text at that width and a margin on both sides keeps its whole width
-// for the text, and the notes stay in Granska.
-function hasRoom(page: HTMLElement) {
+type Room = "both sides" | "right" | null;
+
+// Room for a margin on both sides keeps the text in the middle. Room for one moves the text left,
+// as Word does, and a page narrower than that keeps the notes in Granska.
+function roomOf(page: HTMLElement): Room {
   const sheetMargins = page.classList.contains("paper") ? 176 : 0;
-  return (
-    page.getBoundingClientRect().width >= NARROWEST_TEXT + sheetMargins + 2 * MARGIN + PAGE_EDGES
-  );
+  const left = page.getBoundingClientRect().width - NARROWEST_TEXT - sheetMargins - PAGE_EDGES;
+  if (left >= 2 * MARGIN) return "both sides";
+  return left >= MARGIN ? "right" : null;
 }
 
-// The words a card is about: a comment's or a note's mark, or the first time a name is used.
-function markTop(page: HTMLElement, card: HTMLElement) {
-  const { comment, entity } = card.dataset;
-  const selector = comment
-    ? `.commented[data-comment="${comment}"]`
-    : `.mention[data-entity="${entity}"]`;
-  return page.querySelector(selector)?.getBoundingClientRect().top ?? null;
+// The words a card is about: a comment's or a note's mark, an editor's change, or the first time
+// a name is used.
+function markOf(card: HTMLElement) {
+  const { comment, change, entity } = card.dataset;
+  if (comment) return `.commented[data-comment="${comment}"]`;
+  if (change) return `.ProseMirror [data-change="${change}"]`;
+  return `.mention[data-entity="${entity}"]`;
 }
+
+const markTop = (page: HTMLElement, card: HTMLElement) =>
+  page.querySelector(markOf(card))?.getBoundingClientRect().top ?? null;
 
 // Each card sits level with its words, pushed down below the card above so none overlap.
 function stackCards(box: HTMLElement, page: HTMLElement) {
@@ -43,14 +48,20 @@ function stackCards(box: HTMLElement, page: HTMLElement) {
     });
 }
 
+function markRoom(page: HTMLElement, room: Room) {
+  page.classList.toggle("with-margin-notes", room !== null);
+  page.classList.toggle("margin-on-right", room === "right");
+}
+
 // On paper the cards lie on the desk beside the sheet, otherwise beside the text.
 function placeNotes(box: HTMLElement) {
   const page = box.parentElement;
   const beside = page?.querySelector(page.classList.contains("paper") ? ".sheet" : ".ProseMirror");
   if (!page || !beside) return;
-  const isRoomy = hasRoom(page);
+  const room = roomOf(page);
+  const isRoomy = room !== null;
   if (marginOut.get() !== isRoomy) marginOut.set(isRoomy);
-  page.classList.toggle("with-margin-notes", isRoomy && box.firstElementChild !== null);
+  markRoom(page, box.firstElementChild !== null ? room : null);
   box.hidden = !isRoomy;
   if (!isRoomy) return;
   const left = beside.getBoundingClientRect().right - page.getBoundingClientRect().left;
@@ -72,7 +83,7 @@ export function usePlacement(change: string, doc: unknown) {
     observer.observe(page);
     return () => {
       observer.disconnect();
-      page.classList.remove("with-margin-notes");
+      markRoom(page, null);
     };
   }, [change, doc]);
   // The text's marks for new comments are drawn in the app's own layout effect, after this one,
