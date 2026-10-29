@@ -21,6 +21,7 @@ export function ghostOf(element: HTMLElement, className: string) {
   const ghost = element.cloneNode(true) as HTMLElement;
   ghost.classList.add(className);
   ghost.inert = true;
+  ghost.setAttribute("aria-hidden", "true");
   // Inline, as a cover's own position would win over a class.
   Object.assign(ghost.style, {
     position: "fixed",

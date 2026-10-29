@@ -98,9 +98,12 @@ export function AboutTab() {
   return (
     <>
       <Row label={t("Version")} hint={__APP_VERSION__}>
-        <button className="button secondary small" onClick={() => void checkForUpdates(true)}>
-          {t("Sök efter uppdateringar")}
-        </button>
+        {/* The Store updates its own build. */}
+        {!__STORE__ && (
+          <button className="button secondary small" onClick={() => void checkForUpdates(true)}>
+            {t("Sök efter uppdateringar")}
+          </button>
+        )}
       </Row>
       <Row
         label={t("Felrapport")}

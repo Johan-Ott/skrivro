@@ -23,7 +23,8 @@
    `tauri.conf.json` under `plugins.updater.endpoints`.
 3. **Kodsignering**
    - Windows: Microsoft Store (sköter signeringen) eller ett eget certifikat. Utan det visar
-     Windows "okänd utgivare" vid installation.
+     Windows "okänd utgivare" vid installation. Stegen för Store står i `docs/butiker.md`
+     under Microsoft Store.
    - macOS: Apple Developer-konto (cirka 99 USD per år) för signering och notarisering. Lägg
      certifikatet som hemligheter i GitHub enligt tauri-action.
 4. **Butiker:** pris och engångsköp, skärmdumpar, butikstext på svenska och engelska,

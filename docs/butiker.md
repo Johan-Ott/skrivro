@@ -134,8 +134,24 @@ Play räknar allt som lämnar telefonen som insamlat, även till användarens eg
   värdena som ska in i `src-tauri/store.json`: Package/Identity/Name → `identityName`,
   Package/Identity/Publisher → `publisher`, Package/Properties/PublisherDisplayName →
   `publisherDisplayName`, och appens namn → `displayName`.
-- Bygg sedan: `npm run build:store` → MSIX-filen att ladda upp. Store signerar den, så
-  SmartScreen-varningen försvinner.
+- Bygg sedan: `npm run build:store` → `out/Skrivro.msix` att ladda upp. Store signerar den, så
+  SmartScreen-varningen försvinner. Det bygget letar inte efter uppdateringar och visar inga
+  knappar för det; Store uppdaterar appen.
+- Varje uppladdning behöver ett högre versionsnummer än förra: `npm run version -- 0.4.14`
+  först.
+
+### Johan gör i Partner Center
+
+1. **Namnet Skrivro.** Identiteten reserverades när appen hette Penna (`LoneLodge.PennaWriter`
+   står kvar och behöver inte ändras). Reservera namnet Skrivro för samma app under Product
+   management, annars stoppas paketet: dess DisplayName måste vara ett reserverat namn.
+2. **Ny inlämning → Packages:** ladda upp `out/Skrivro.msix`.
+3. **Submission options → Restricted capabilities:** paketet kräver `runFullTrust`. Motivering:
+   "Skrivro is a desktop app (Tauri and WebView2) and runs as a full trust Win32 app."
+4. **Store listings:** svenska och engelska, eftersom paketet anger båda språken. Bilderna finns
+   i `out/store` och `out/store/en` (`node scripts/store/storeImages.mjs`).
+5. **Pricing, Properties, Age ratings** enligt punkterna nedan, sedan Submit to the Store.
+
 - **Pris:** Gratis. **Kategori:** Produktivitet.
 - **Integritetspolicy:** https://johan-ott.github.io/skrivro/integritet.html
 - **Ålder:** IARC-frågorna besvaras som för Play → 3+.

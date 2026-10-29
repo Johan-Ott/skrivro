@@ -58,11 +58,16 @@ function accountItems(app: ProfileButtonApp): MenuItem[] {
   return [
     { label: t("Din profil…"), onSelect: app.profile.open },
     ...google.map((item, index) => ({ ...item, separatorBefore: index === 0 })),
-    {
-      label: t("Sök efter uppdateringar…"),
-      separatorBefore: true,
-      onSelect: () => void checkForUpdates(true),
-    },
+    // The Store updates its own build.
+    ...(__STORE__
+      ? []
+      : [
+          {
+            label: t("Sök efter uppdateringar…"),
+            separatorBefore: true,
+            onSelect: () => void checkForUpdates(true),
+          },
+        ]),
   ];
 }
 
