@@ -9,7 +9,7 @@ import { countDocumentWords } from "../manuscript/wordCount.js";
 import type { SaveStatus } from "@llkit/storage/autosave.js";
 import type { SaveFailure } from "@llkit/storage/saveError.js";
 import { FocusHeader } from "./FocusHeader.js";
-import { usePanels } from "./settingsPanel.js";
+import { closeSettings, usePanels } from "./settingsPanel.js";
 import type { Today } from "./useWritingStats.js";
 import {
   ReadOnlyNotice,
@@ -138,6 +138,7 @@ function Floating(props: WritingAreaProps & { isSettingsOpen: boolean }) {
           settings={props.settings}
           onChange={props.onChangeSettings}
           showsFocusOptions={props.isFocusMode}
+          onClose={closeSettings}
         />
       )}
       {props.isSearchOpen && <OpenSearch {...props} />}

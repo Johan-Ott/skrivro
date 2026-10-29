@@ -4,6 +4,7 @@ import { createStore } from "@llkit/store.js";
 // Whether the text's look (Aa) is open: the top bar opens it, the writing area shows it.
 const isOpen = createStore(false);
 export const setSettingsOpen = isOpen.set;
+export const closeSettings = () => isOpen.set(false);
 
 export function usePanels() {
   return { isSettingsOpen: isOpen.use(), setSettingsOpen };
@@ -18,6 +19,7 @@ export function LookButton() {
       aria-label={t("Skrivinställningar")}
       title={t("Skrivinställningar")}
       aria-expanded={isSettingsOpen}
+      data-look-button
       onClick={() => setSettingsOpen(!isSettingsOpen)}
     >
       Aa

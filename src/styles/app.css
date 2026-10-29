@@ -494,6 +494,14 @@ html.look-shown .selection-bar {
   box-shadow: var(--shadow-dialog);
 }
 
+.settings-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
 .setting-column {
   display: flex;
   flex-direction: column;
@@ -2966,7 +2974,7 @@ body:has(.new-book-dialog) .new-book {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 0 12px 10px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-soft);
 }
 
@@ -3020,16 +3028,18 @@ body:has(.new-book-dialog) .new-book {
   align-items: center;
 }
 
-/* The filters keep to one row that swipes sideways and leave the room to what was found; with
-   a phone's keyboard up there is little room to spare. */
-.palette-filters {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
+/* On a phone the filters keep to one row that swipes sideways and leave the room to what was
+   found; with the keyboard up there is little room to spare. A computer shows them all. */
+@media (max-width: 600px) {
+  .palette-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 
-.palette-filters .chip {
-  flex-shrink: 0;
+  .palette-filters .chip {
+    flex-shrink: 0;
+  }
 }
 
 .label-color.outlined {
@@ -4065,9 +4075,11 @@ html.welcome-shown body {
   color: var(--danger);
 }
 
-.welcome-remove {
-  align-self: flex-start;
-  margin: 8px 0 80px;
+/* Under the welcome's last line, at the text's left edge. */
+.welcome-foot {
+  width: var(--prose-width, 600px);
+  max-width: 100%;
+  margin: 8px auto 80px;
 }
 
 /* Fortsätt skriva: the last book, large, with the words it was left at. */

@@ -22,6 +22,7 @@ function SettingsButton({ isOpen, onToggle }: { isOpen: boolean; onToggle: () =>
       className="icon-button settings-button"
       aria-label={t("Skrivinställningar")}
       aria-expanded={isOpen}
+      data-look-button
       onClick={onToggle}
     >
       Aa

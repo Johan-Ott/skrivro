@@ -76,9 +76,11 @@ function WelcomeFoot(props: { app: AppState; project: Project; id: string }) {
     if (first) openText(props.app)(first);
   };
   return (
-    <button className="button secondary welcome-remove" onClick={() => void remove()}>
-      {t("Ta bort välkomsten")}
-    </button>
+    <div className="welcome-foot">
+      <button className="button secondary" onClick={() => void remove()}>
+        {t("Ta bort välkomsten")}
+      </button>
+    </div>
   );
 }
 

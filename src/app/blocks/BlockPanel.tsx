@@ -1,4 +1,11 @@
-import { useLayoutEffect, useRef, type PointerEvent, type ReactNode, type RefObject } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type PointerEvent,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { CloseButton } from "@llkit/controls.js";
 import { createStore } from "@llkit/store.js";
 import { usePhone } from "../phone/usePhone.js";
@@ -17,8 +24,8 @@ function clamped(panel: HTMLElement, wanted: Place): Place {
     height: window.innerHeight,
   };
   return {
-    left: Math.min(Math.max(0, wanted.left), room.width - panel.offsetWidth),
-    top: Math.min(Math.max(0, wanted.top), room.height - panel.offsetHeight),
+    left: Math.max(0, Math.min(wanted.left, room.width - panel.offsetWidth)),
+    top: Math.max(0, Math.min(wanted.top, room.height - panel.offsetHeight)),
   };
 }
 
@@ -46,22 +53,31 @@ function useDrag(id: string) {
   return { place, onPointerDown };
 }
 
-// A place kept from a larger window is moved inside this one, on opening and when it resizes.
-function useKeptInside(
-  panel: RefObject<HTMLElement | null>,
-  place: Place | null,
-  set: (place: Place) => void,
-) {
+// A place kept from a larger room is shown inside this one, but stays kept: when the room grows
+// again the panel goes back to where the writer left it.
+function useKeptInside(panel: RefObject<HTMLElement | null>, place: Place | null) {
+  const [inside, setInside] = useState<Place | null>(null);
   useLayoutEffect(() => {
+    const element = panel.current;
+    if (!element || !place) {
+      setInside(null);
+      return;
+    }
     const fit = () => {
-      if (!panel.current || !place) return;
-      const inside = clamped(panel.current, place);
-      if (inside.left !== place.left || inside.top !== place.top) set(inside);
+      const fitted = clamped(element, place);
+      const isMoved = fitted.left !== place.left || fitted.top !== place.top;
+      setInside(isMoved ? fitted : null);
     };
     fit();
+    const room = new ResizeObserver(fit);
+    if (element.offsetParent) room.observe(element.offsetParent);
     window.addEventListener("resize", fit);
-    return () => window.removeEventListener("resize", fit);
-  }, [panel, place, set]);
+    return () => {
+      room.disconnect();
+      window.removeEventListener("resize", fit);
+    };
+  }, [panel, place]);
+  return inside ?? place;
 }
 
 // The panels drawn down to their head, by id; kept per device, as their places are.
@@ -95,10 +111,10 @@ export function useFloating(id: string, isOn = true) {
   const { place, onPointerDown } = useDrag(id);
   const ref = useRef<HTMLElement>(null);
   const isMinimized = minimized.use().includes(id) && isOn;
-  useKeptInside(ref, isOn ? place : null, (inside) => setPlace(id, inside));
+  const shown = useKeptInside(ref, isOn ? place : null);
   return {
     ref,
-    style: isOn && place ? place : undefined,
+    style: shown ?? undefined,
     onPointerDown: isOn ? onPointerDown : undefined,
     minimized: isMinimized ? " minimized" : "",
   };

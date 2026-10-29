@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { useEscape } from "@llkit/keys.js";
 import { useRootClass } from "@llkit/useRootClass.js";
 import {
@@ -178,12 +179,55 @@ function FocusSwitch({ focusMode }: { focusMode: PanelProps["focusMode"] | undef
   return <Toggle label={t("Fokusläge")} hint={hint} {...focusMode} />;
 }
 
+// On a computer the panel hangs under the Aa that opened it, and a click outside closes it.
+// A phone marks no Aa, so there the panel keeps its place above the toolbar.
+function useUnderLookButton(panel: RefObject<HTMLElement | null>, onClose?: () => void) {
+  const [place, setPlace] = useState<CSSProperties>();
+  useLayoutEffect(() => {
+    const buttons = document.querySelectorAll<HTMLElement>("[data-look-button]");
+    const button = Array.from(buttons).find((candidate) => candidate.offsetWidth > 0);
+    if (!button) return;
+    const fit = () => {
+      const box = button.getBoundingClientRect();
+      const right = Math.max(8, window.innerWidth - box.right);
+      setPlace({ position: "fixed", top: box.bottom + 8, right });
+    };
+    const closeOutside = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (!panel.current?.contains(target) && !button.contains(target)) onClose?.();
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    window.addEventListener("pointerdown", closeOutside);
+    return () => {
+      window.removeEventListener("resize", fit);
+      window.removeEventListener("pointerdown", closeOutside);
+    };
+  }, [panel, onClose]);
+  return place;
+}
+
 export function WritingSettingsPanel(props: PanelProps) {
   const { settings, onChange } = props;
+  const ref = useRef<HTMLDivElement>(null);
+  const place = useUnderLookButton(ref, props.onClose);
   useRootClass("look-shown");
   useEscape(() => props.onClose?.());
   return (
-    <div className="settings-panel" role="dialog" aria-label={t("Skrivinställningar")}>
+    <div
+      ref={ref}
+      className="settings-panel"
+      style={place}
+      role="dialog"
+      aria-label={t("Skrivinställningar")}
+    >
+      <button
+        className="icon-button settings-close"
+        aria-label={t("Stäng")}
+        onClick={props.onClose}
+      >
+        ×
+      </button>
       <TypographySettings {...props} />
       <div className="settings-divider" />
       <FocusSwitch focusMode={props.focusMode} />
