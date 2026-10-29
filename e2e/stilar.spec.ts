@@ -16,19 +16,27 @@ test("the selected paragraph is centred from the style menu, and back to body te
   await expect(editor(page).locator(".style-centrerat")).toHaveCount(1);
 });
 
-test("the row's ⋯ makes the paragraph a list, and a second choice takes it back", async ({
+test("the row's list button makes the paragraph a list, and a second click takes it back", async ({
   page,
 }) => {
   await selectFirstWord(page);
-  const more = page
+  const numbered = page
     .getByRole("toolbar", { name: "Formatering" })
-    .getByRole("button", { name: "Mer" });
-  await more.click();
-  await page.getByRole("menuitemradio", { name: "Numrerad lista" }).click();
+    .getByRole("button", { name: "Numrerad lista", exact: true });
+  await numbered.click();
 
   await expect(editor(page).locator(".style-numrerad")).toHaveCount(1);
-  await more.click();
-  await expect(page.getByRole("menuitemradio", { name: "Numrerad lista" })).toBeChecked();
-  await page.getByRole("menuitemradio", { name: "Numrerad lista" }).click();
+  await expect(numbered).toHaveAttribute("aria-pressed", "true");
+  await numbered.click();
   await expect(editor(page).locator(".style-numrerad")).toHaveCount(0);
+});
+
+test("the row's x² raises the selected word", async ({ page }) => {
+  await selectFirstWord(page);
+  await page
+    .getByRole("toolbar", { name: "Formatering" })
+    .getByRole("button", { name: "Upphöjd" })
+    .click();
+
+  await expect(editor(page).locator("sup", { hasText: "Brevet" })).toHaveCount(1);
 });

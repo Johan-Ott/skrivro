@@ -6,13 +6,21 @@ import {
   type Selection,
 } from "prosemirror-state";
 import { useEditorState } from "../editor/editorStore.js";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import type { useEditorView } from "../editor/useEditorView.js";
 import { SelectionActions, type SelectionActionProps } from "./SelectionActions.js";
-import { CommentButton, HistoryButtons, MarkButtons, type FormatActions } from "./FormatButtons.js";
+import {
+  HistoryButtons,
+  InsertButtons,
+  MarkButtons,
+  RaiseButtons,
+  TextActions,
+  type FormatActions,
+} from "./FormatButtons.js";
+import { AlignButtons, ListButtons } from "./AlignButtons.js";
 import { StylePicker } from "./StylePicker.js";
 import { misspelledAtCaret } from "./spelling/Corrections.js";
-import { RowOverflow } from "./RowOverflow.js";
+import { RowOverflow, useFolding } from "./RowOverflow.js";
 import { usePhone } from "./phone/usePhone.js";
 import { countWordsBetween } from "../manuscript/wordCount.js";
 import { t, formatNumber } from "../i18n/i18n.js";
@@ -116,15 +124,28 @@ const PhoneRow = ({ onComment, onMoveToCuts, editorState, run }: RowProps) => (
 
 type RowProps = BarProps & { editorState: EditorState | null; run: (command: Command) => void };
 
-// Fixed over the text: what a manuscript needs each day, and ⋯ for the rest, also in Ctrl+K.
-const FixedRow = (props: RowProps) => (
+// Fixed over the text, everything, as a word processor's row; a narrow one folds the words'
+// count away first, then raised text, alignment and lists, then insert and the text's actions.
+const FixedRow = (props: RowProps & { folded: number }) => (
   <>
     <HistoryButtons run={props.run} />
     <StylePicker {...props} />
     <MarkButtons {...props} />
-    <CommentButton onComment={props.onComment} />
-    <RowOverflow {...props} />
-    <SelectedWords editorState={props.editorState} />
+    {props.folded < 2 && (
+      <>
+        <RaiseButtons {...props} />
+        <AlignButtons {...props} />
+        <ListButtons {...props} />
+      </>
+    )}
+    {props.folded < 3 && (
+      <>
+        <InsertButtons {...props} />
+        <TextActions {...props} />
+      </>
+    )}
+    {props.folded >= 2 && <RowOverflow {...props} hasTextActions={props.folded >= 3} />}
+    {props.folded < 1 && <SelectedWords editorState={props.editorState} />}
   </>
 );
 
@@ -133,8 +154,15 @@ const FixedRow = (props: RowProps) => (
 const FloatingContent = (props: RowProps & { isPhone: boolean }) =>
   props.isPhone ? <PhoneRow {...props} /> : <SelectionActions {...props} />;
 
-const Bar = (props: { className: string; label: string; style: object; children: ReactNode }) => (
+const Bar = (props: {
+  className: string;
+  label: string;
+  style: object;
+  barRef?: RefObject<HTMLDivElement | null>;
+  children: ReactNode;
+}) => (
   <div
+    ref={props.barRef}
     className={props.className}
     role="toolbar"
     aria-label={props.label}
@@ -153,11 +181,13 @@ export function SelectionBar(props: BarProps) {
   const isPhone = usePhone();
   const floating = wantedPosition(editor, isWanted, isPhone);
   const row = { ...props, editorState, run: editor.run, isPhone };
+  const fixed = useRef<HTMLDivElement>(null);
+  const folded = useFolding(fixed);
   return (
     <>
       {!isPhone && (
-        <Bar className="selection-bar fixed" label={t("Formatering")} style={{}}>
-          <FixedRow {...row} />
+        <Bar className="selection-bar fixed" label={t("Formatering")} style={{}} barRef={fixed}>
+          <FixedRow {...row} folded={folded} />
         </Bar>
       )}
       {floating && (

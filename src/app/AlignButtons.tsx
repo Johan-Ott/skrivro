@@ -103,3 +103,43 @@ export function blockMenuItems(editorState: EditorState | null, run: Run) {
     })),
   ];
 }
+
+export function AlignButtons({ editorState, run }: { editorState: EditorState | null; run: Run }) {
+  const current = currentOf(editorState);
+  return (
+    <span className="bar-group" role="group" aria-label={t("Justering")}>
+      {ALIGNMENTS.map(([choice, label, icon]) => (
+        <button
+          key={choice}
+          className="icon-button"
+          aria-label={label}
+          title={label}
+          aria-pressed={isAligned(current, choice)}
+          onClick={() => align(current, choice, run)}
+        >
+          {icon}
+        </button>
+      ))}
+    </span>
+  );
+}
+
+export function ListButtons({ editorState, run }: { editorState: EditorState | null; run: Run }) {
+  const current = currentOf(editorState);
+  return (
+    <span className="bar-group" role="group" aria-label={t("Listor")}>
+      {BLOCK_STYLES.map(([choice, label, icon]) => (
+        <button
+          key={choice}
+          className="icon-button"
+          aria-label={label}
+          title={label}
+          aria-pressed={current === choice}
+          onClick={() => run(setStyle(current === choice ? "brodtext" : choice))}
+        >
+          {icon}
+        </button>
+      ))}
+    </span>
+  );
+}

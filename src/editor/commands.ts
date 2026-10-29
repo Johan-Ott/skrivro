@@ -35,7 +35,7 @@ export const toggleSuperscript = toggleMark(schema.marks.superscript);
 export const toggleSubscript = toggleMark(schema.marks.subscript);
 
 /** The marks the format row turns on and off. */
-export type TextMark = "bold" | "italic" | "underline" | "strike";
+export type TextMark = "bold" | "italic" | "underline" | "strike" | "superscript" | "subscript";
 
 export const insertLineBreak: Command = (state, dispatch) => {
   dispatch?.(state.tr.replaceSelectionWith(schema.nodes.lineBreak.create()).scrollIntoView());
