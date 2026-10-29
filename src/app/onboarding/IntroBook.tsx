@@ -1,13 +1,12 @@
 import { useEffect, useRef, type RefObject } from "react";
 import logo from "../../assets/skrivro-logo.png";
 import { BOOK_LANGUAGES } from "../../project/bookLanguage.js";
-import { goalForecast, goalOf, type Draft } from "./FirstChoices.js";
+import { goalOf, type Draft } from "./FirstChoices.js";
 import { EASE, canMove, flipTo } from "../motion.js";
-import { TURN_EASE } from "./bookMotion.js";
-import { numberLocale, t } from "../../i18n/i18n.js";
+import { t } from "../../i18n/i18n.js";
 
-// Skrivro's own green book beside the first start. It stays shut and wears the answers: the name
-// in gold, a ribbon per language, more pages for a bigger goal. Klar opens it, then it flies home.
+// Skrivro's own green book beside the first start. It wears the answers: the name in gold, a
+// ribbon per language, more pages for a bigger goal. On Klar its cover flies to the shelf.
 
 // Each language's silk, and how far its ribbon hangs out of the book.
 const RIBBONS: Record<string, [string, number]> = {
@@ -20,8 +19,6 @@ const RIBBONS: Record<string, [string, number]> = {
 };
 
 const thickness = (goal: number) => (goal > 0 ? Math.min(26, Math.round((goal / 1000) * 14)) : 0);
-const thisMonth = () =>
-  new Date().toLocaleDateString(numberLocale(), { month: "long", year: "numeric" });
 
 const Ribbons = ({ chosen }: { chosen: string[] }) => (
   <div className="intro-ribbons">
@@ -40,35 +37,6 @@ const Ribbons = ({ chosen }: { chosen: string[] }) => (
   </div>
 );
 
-// Under the cover: the ex libris that Klar opens the book on.
-function ExLibris({ draft }: { draft: Draft }) {
-  const name = draft.authorName.trim();
-  const chosen = BOOK_LANGUAGES.filter(([tag]) => draft.languages.includes(tag));
-  return (
-    <div className="nb-title-page intro-page">
-      <div className="nb-tp-middle">
-        <img src={logo} alt="" />
-        <span className="nb-tp-kind">Ex libris</span>
-      </div>
-      <div className="nb-tp-middle">
-        <span className={name ? "intro-name" : "intro-name untitled"}>
-          {name || t("Ditt namn")}
-        </span>
-        <span className="nb-tp-rule" />
-        <span className="intro-languages">
-          {chosen.length
-            ? chosen.map(([, native]) => native).join(" · ")
-            : t("Inget språk valt än")}
-        </span>
-      </div>
-      <div className="nb-tp-foot">
-        <span className="intro-forecast">{goalForecast(goalOf(draft))}</span>
-        <span>{t("Skrivro · sedan {date}", { date: thisMonth() })}</span>
-      </div>
-    </div>
-  );
-}
-
 const SWEEP = [
   { backgroundPosition: "100% 0", transform: "scale(1.06)" },
   { backgroundPosition: "0% 0", transform: "scale(1)" },
@@ -86,23 +54,17 @@ function useStamp(byline: RefObject<HTMLSpanElement | null>, name: string) {
   }, [byline, name]);
 }
 
-// The cover turns open over the spine, and its inside is the open book's left page.
 function Cover({ name, isAsking }: { name: string; isAsking: boolean }) {
   const byline = useRef<HTMLSpanElement>(null);
   useStamp(byline, name);
   return (
-    <div className="intro-cover">
-      <span className="intro-front">
-        <img src={logo} alt="" />
-        <span className="intro-title">Skrivro</span>
-        <span ref={byline} className={name ? "intro-by" : "intro-by untitled"}>
-          {name || (isAsking ? t("Ditt namn") : "")}
-        </span>
+    <span className="intro-front">
+      <img src={logo} alt="" />
+      <span className="intro-title">Skrivro</span>
+      <span ref={byline} className={name ? "intro-by" : "intro-by untitled"}>
+        {name || (isAsking ? t("Ditt namn") : "")}
       </span>
-      <span className="intro-back">
-        <span>{t("Kapitel 1 väntar.")}</span>
-      </span>
-    </div>
+    </span>
   );
 }
 
@@ -113,9 +75,6 @@ export function IntroBook({ draft, isAsking }: { draft: Draft; isAsking: boolean
     <div className="intro-book" aria-hidden="true">
       <span className="intro-edge" style={{ width: `${12 + thick}px`, right: `${-7 - thick}px` }} />
       <Ribbons chosen={isAsking ? draft.languages : []} />
-      <div className="intro-case">
-        <ExLibris draft={draft} />
-      </div>
       <Cover name={draft.authorName.trim()} isAsking={isAsking} />
     </div>
   );
@@ -123,18 +82,7 @@ export function IntroBook({ draft, isAsking }: { draft: Draft; isAsking: boolean
 
 const wait = (delay: number) => new Promise((done) => window.setTimeout(done, delay));
 
-function turn(book: HTMLElement, isOpening: boolean) {
-  const [shut, open] = ["rotateY(0deg)", "rotateY(-180deg)"];
-  return book
-    .querySelector(".intro-cover")
-    ?.animate([{ transform: isOpening ? shut : open }, { transform: isOpening ? open : shut }], {
-      duration: 900,
-      easing: TURN_EASE,
-      fill: "forwards",
-    }).finished;
-}
-
-// The closed book's cover, lifted out of the page so it outlives the first start.
+// The book's cover, lifted out of the page so it outlives the first start.
 function ghostOf(front: HTMLElement) {
   const { left, top, width, height } = front.getBoundingClientRect();
   const ghost = front.cloneNode(true) as HTMLElement;
@@ -185,23 +133,16 @@ function flyHome(ghost: HTMLElement, frames = 180) {
   requestAnimationFrame(() => flyHome(ghost, frames - 1));
 }
 
-/** Klar: the card goes, the book slides to the middle and opens on its ex libris, shuts again,
- * and flies to the shelf that `start` puts up. */
+/** Klar: the card goes, and the book's cover flies to the shelf that `start` puts up. */
 export async function reveal(start: () => Promise<void>) {
-  const book = document.querySelector<HTMLElement>(".intro-book");
-  const front = book?.querySelector<HTMLElement>(".intro-front");
-  if (!book || !front?.checkVisibility() || !canMove()) return start();
+  const front = document.querySelector<HTMLElement>(".intro-front");
+  if (!front?.checkVisibility() || !canMove()) return start();
   await wait(250);
-  book.style.transform = `translateX(${window.innerWidth / 2 - book.getBoundingClientRect().left}px)`;
-  await turn(book, true);
-  await wait(1500);
-  await turn(book, false);
   const ghost = ghostOf(front);
   try {
     await start();
   } catch (error) {
     ghost.remove();
-    book.style.transform = "";
     throw error;
   }
   flyHome(ghost);

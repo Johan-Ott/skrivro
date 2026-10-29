@@ -34,7 +34,7 @@ const DAY = 86_400_000;
 const NOVEL = 80_000;
 
 /** When a novel is done at the day's goal, or that there is no goal. */
-export function goalForecast(goal: number) {
+function goalForecast(goal: number) {
   if (!goal) return t("Inget mål. Du skriver när det passar.");
   const end = new Date(Date.now() + Math.ceil(NOVEL / goal) * DAY);
   return t("Med {words} ord om dagen är en roman på {novel} ord klar i {month}.", {

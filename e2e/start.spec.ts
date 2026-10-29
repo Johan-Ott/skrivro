@@ -79,7 +79,7 @@ test("the first start asks the writer's languages, and a new book takes the firs
   await page.getByRole("radio", { name: "500" }).click();
   await page.getByRole("button", { name: "Klar" }).click();
 
-  // The choices are kept once the book has shown them, as it flies to the shelf.
+  // The choices are kept as the book's cover flies to the shelf.
   const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem("skrivro.app") ?? "{}"));
   await expect.poll(stored).toMatchObject({ bookLanguage: "en-GB", defaultDailyGoal: 500 });
 });

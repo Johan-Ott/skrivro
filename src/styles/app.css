@@ -4250,9 +4250,7 @@ html.welcome-shown body {
   align-self: center;
   width: var(--bw);
   height: calc(var(--bw) * 1.425);
-  perspective: 2400px;
-  perspective-origin: 0 50%;
-  transition: transform 900ms var(--ease);
+  isolation: isolate;
   pointer-events: none;
 }
 
@@ -4315,56 +4313,6 @@ html.welcome-shown body {
   transform: rotate(180deg);
 }
 
-.intro-case {
-  position: absolute;
-  inset: 0;
-  padding: 12px 12px 12px 0;
-  border-radius: 0 12px 12px 0;
-  background: linear-gradient(165deg, #154a3b, #103f32 55%, #06382b);
-  box-shadow: var(--shadow-high);
-}
-
-.intro-page {
-  height: 100%;
-  border-radius: 0 6px 6px 0;
-  background: var(--page);
-  color: var(--page-ink);
-}
-
-.intro-page img {
-  width: 46px;
-  border-radius: 22%;
-}
-
-.intro-name {
-  font: italic 500 calc(var(--bw) * 0.09) / 1.1 var(--font-prose);
-  overflow-wrap: anywhere;
-  text-wrap: balance;
-}
-
-.intro-name.untitled {
-  color: var(--text-dim);
-}
-
-.intro-languages {
-  color: var(--text-muted);
-  font: 15px/1.4 var(--font-prose);
-}
-
-.intro-forecast {
-  max-width: 32ch;
-  margin-bottom: 10px;
-  color: var(--page-ink);
-  font: italic 14px/1.4 var(--font-prose);
-}
-
-.intro-cover {
-  position: absolute;
-  inset: 0;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-}
-
 .intro-front {
   position: absolute;
   inset: 0;
@@ -4380,7 +4328,6 @@ html.welcome-shown body {
     var(--shadow-high);
   color: #fbf4e6;
   text-align: center;
-  backface-visibility: hidden;
 }
 
 .intro-front::before {
@@ -4425,29 +4372,6 @@ html.welcome-shown body {
   background: none;
   color: rgba(251, 244, 230, 0.4);
   filter: none;
-}
-
-/* The cover's inside: green board and a dotted endpaper, the open book's left page. */
-.intro-back {
-  position: absolute;
-  inset: 0;
-  padding: 12px 0 12px 12px;
-  border-radius: 6px 0 0 6px;
-  background: #103f32;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-}
-
-.intro-back span {
-  display: grid;
-  place-items: center;
-  height: 100%;
-  border-radius: 3px 0 0 3px;
-  background:
-    radial-gradient(rgba(16, 63, 50, 0.14) 1.2px, transparent 1.7px) 0 0 / 16px 16px,
-    var(--page);
-  color: var(--text-muted);
-  font: italic 16px/1.4 var(--font-prose);
 }
 
 /* The shut cover on its way to the shelf, above everything while the shelf comes. */

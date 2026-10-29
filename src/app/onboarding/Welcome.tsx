@@ -106,7 +106,7 @@ function useWayIn(onSignIn: () => Promise<boolean>) {
   return { problem, isChoosing, setChoosing, isSigningIn, onWay };
 }
 
-// Klar: the card goes, and the book shows what was chosen before the shelf comes.
+// Klar: the card goes, and the book's cover flies to the shelf.
 function useReveal(onStart: WelcomeProps["onStart"]) {
   const [isLeaving, setLeaving] = useState(false);
   const onDone = (choices: Choices) => {
