@@ -1,9 +1,9 @@
-import type { PointerEvent } from "react";
 import { GuideTip } from "../guide/GuideTip.js";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
+import { inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
 import { GripIcon } from "../shell/icons.js";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, type PointerEvent, type ReactNode } from "react";
 import type { NameSuspect } from "../../manuscript/review.js";
 import type { ProseNote } from "../../manuscript/prose.js";
 import type { Card } from "../../project/cards.js";
@@ -193,7 +193,9 @@ export function ReviewPanel(props: ReviewPanelProps) {
   useCountInTopbar(countOf(props), props.onCount);
   const isShown = props.isOpen || props.isPinnedOpen;
   const floating = useFloating("granska", !usePhone());
-  return (
+  // Closed, it stays where it stands, hidden, so the column is empty without it.
+  return inDock(
+    isShown ? floating.dock : null,
     <aside
       ref={floating.ref}
       className={(isShown ? "review-panel open" : "review-panel") + floating.minimized}
@@ -215,6 +217,6 @@ export function ReviewPanel(props: ReviewPanelProps) {
       {review && <InChapter cards={review.inChapter} onOpenCard={props.onOpenCard} />}
       {review && props.narrationSection}
       <GuideTip step="granska" isHere={isShown} />
-    </aside>
+    </aside>,
   );
 }

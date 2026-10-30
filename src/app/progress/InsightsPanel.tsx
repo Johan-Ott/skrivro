@@ -1,5 +1,6 @@
 import type { PointerEvent } from "react";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
+import { inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
 import { GripIcon } from "../shell/icons.js";
 import { useState } from "react";
@@ -108,9 +109,9 @@ function InsightsFoot({ onGoals }: { onGoals: () => void }) {
 export function InsightsPanel(props: PanelProps) {
   const [isGoalsOpen, setGoalsOpen] = useState(false);
   useEscape(() => !isGoalsOpen && props.onClose());
-  const hasStats = Object.keys(props.stats).length > 0;
   const floating = useFloating("insikter", !usePhone());
-  return (
+  return inDock(
+    floating.dock,
     <aside
       ref={floating.ref}
       className={"insights-panel" + floating.minimized}
@@ -119,7 +120,7 @@ export function InsightsPanel(props: PanelProps) {
     >
       <InsightsHead onClose={props.onClose} onGrab={floating.onPointerDown} />
       <div className="insights-body">
-        {!hasStats && <NoStats onWrite={props.onClose} />}
+        {Object.keys(props.stats).length === 0 && <NoStats onWrite={props.onClose} />}
         <InsightsBody
           project={props.project}
           stats={props.stats}
@@ -132,7 +133,7 @@ export function InsightsPanel(props: PanelProps) {
         isGoalsOpen={isGoalsOpen}
         onCloseGoals={() => setGoalsOpen(false)}
       />
-    </aside>
+    </aside>,
   );
 }
 

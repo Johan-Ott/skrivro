@@ -19,6 +19,7 @@ import { ContentsScreen, PublishScreen, ReadScreen, SyncScreen } from "./bookVie
 import { ReviewPill, Topbar } from "./Topbar.js";
 import { openComments } from "../review/ReviewLayer.js";
 import { BlocksDock } from "../blocks/BlocksDock.js";
+import { dockColumn } from "../blocks/layout.js";
 import { DayGoalLayer, showDayGoal } from "../progress/DayGoalLayer.js";
 import { useAppMenu } from "./useAppMenu.js";
 import { useNavigation, type Place } from "./useNavigation.js";
@@ -141,6 +142,7 @@ function MainCard({ app, project, pageMap }: ScreenProps & { pageMap: PageMap | 
       )}
       {writingMode.view === "synk" && <SyncScreen {...views} />}
       {writingMode.view === "las" && <ReadScreen {...views} />}
+      <aside className="panel-dock" aria-label={t("Dockade paneler")} ref={dockColumn.set} />
     </div>
   );
 }

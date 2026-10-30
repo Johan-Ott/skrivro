@@ -2077,6 +2077,72 @@
   bottom: auto;
 }
 
+/* Docked, as they open: the panels lie in a column at the card's right and take room from the
+   text instead of covering it. Lossa lets one float as above. */
+
+.panel-dock {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  overflow-y: auto;
+  border-left: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.panel-dock:empty {
+  display: none;
+}
+
+.main-card:has(> .panel-dock:not(:empty)) > .blocks-dock {
+  right: 316px;
+}
+
+.panel-dock > .review-panel,
+.panel-dock > .insights-panel,
+.panel-dock > .block-panel {
+  position: static;
+  flex-shrink: 0;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  max-height: none;
+  padding: 0 6px 10px;
+  overflow: visible;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  resize: none;
+}
+
+/* Granska first, then Insikter, then the blocks as they were opened. */
+
+.panel-dock > .review-panel {
+  order: 1;
+}
+
+.panel-dock > .insights-panel {
+  order: 2;
+}
+
+.panel-dock > .block-panel {
+  order: 3;
+}
+
+/* A docked panel is not dragged, so its head has no grip. */
+
+.panel-dock .block-head {
+  cursor: default;
+}
+
+.panel-dock .block-title svg {
+  display: none;
+}
+
 /* The head stays at the top while the panel scrolls, so its × is always within reach; the
    panel's top room is the head's own, so nothing shows above it. */
 
