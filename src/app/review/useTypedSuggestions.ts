@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import type { Suggesting } from "../../editor/suggestTyping.js";
 import type { useEditorView } from "../../editor/useEditorView.js";
+import { tool } from "./Tools.js";
 
 type Editor = ReturnType<typeof useEditorView>;
 
@@ -37,17 +38,16 @@ function undone(history: History, typed: Typed) {
   typed.write(history.before.pop() ?? null);
 }
 
-/** In Redigera what is typed becomes suggestions, unless the writer turns that off to edit the
- * text itself. */
+/** In Redigera the text itself is never typed into: with Föreslå what is typed becomes
+ * suggestions, and with the other tools nothing. */
 export function useTypedSuggestions(editor: Editor, typed: Typed, isRedigera: boolean) {
-  const [isOn, setOn] = useState(true);
   const history = useRef<History>({ sceneId: null, before: [], last: 0 });
   const suggesting: Suggesting = {
     revised: typed.revised,
     write: (next) => written(history.current, typed, next),
     undo: () => undone(history.current, typed),
+    isOn: () => tool.get() === "foresla",
   };
   // In the render, not an effect: the next key reads it.
-  editor.modes.current.suggesting = isRedigera && isOn && typed.sceneId ? suggesting : null;
-  return { isOn, toggle: () => setOn((value) => !value) };
+  editor.modes.current.suggesting = isRedigera && typed.sceneId ? suggesting : null;
 }

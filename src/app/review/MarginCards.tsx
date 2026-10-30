@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { sceneRepetitions } from "../../editor/repetitionMarks.js";
 import type { Comment } from "../../project/comments.js";
 import { snapshotWhen } from "../../project/snapshots.js";
@@ -102,30 +102,20 @@ export function CommentNote(props: ReplyProps & { replies: Comment[] }) {
   );
 }
 
-// Written at the line: the writer's own note, or a comment for the one who reads.
-export function DraftNote({ app }: { app: AppState }) {
-  const [isNote, setNote] = useState(true);
-  const kind = (label: string, isOn: boolean) => (
-    <button role="radio" aria-checked={isNote === isOn} onClick={() => setNote(isOn)}>
-      {label}
-    </button>
-  );
-  return (
-    <div className="margin-note new" data-comment={DRAFT_ID}>
-      <Writer
-        label={t("Skriv vid raden")}
-        sendLabel={t("Spara")}
-        onSend={(body) => app.comments.add(body, isNote)}
-        onCancel={app.comments.cancel}
-      >
-        <div className="segmented small" role="radiogroup" aria-label={t("Sort")}>
-          {kind(t("Anteckning"), true)}
-          {kind(t("Kommentar"), false)}
-        </div>
-      </Writer>
-    </div>
-  );
-}
+// Written at the line: the writer's own note, or a comment for the one who reads, as the tool chose.
+export const DraftNote = ({ app }: { app: AppState }) => (
+  <div className="margin-note new" data-comment={DRAFT_ID}>
+    <span className="margin-note-kind">
+      {app.comments.draftIsNote ? t("Anteckning · bara du") : t("Kommentar")}
+    </span>
+    <Writer
+      label={t("Skriv vid raden")}
+      sendLabel={t("Spara")}
+      onSend={app.comments.add}
+      onCancel={app.comments.cancel}
+    />
+  </div>
+);
 
 export type Repeat = ReturnType<typeof sceneRepetitions>[number];
 

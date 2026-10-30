@@ -53,6 +53,7 @@ test("in Redigera what is typed and what is deleted are suggestions, and Ctrl+Z 
 }) => {
   await page.getByRole("tab", { name: "Redigera" }).click();
   await cursorAfterFirstParagraph(page);
+  await page.keyboard.press("f");
 
   await page.keyboard.type(" Hon log.");
   await expect(editor(page).locator(".revision-added")).toHaveText("Hon log.");

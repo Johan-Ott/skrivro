@@ -92,7 +92,11 @@ function Draft({ comments }: { comments: Comments }) {
   return (
     <div className="review-item focused">
       <span className="comment-quote">”{comments.draft.quote}”</span>
-      <Writer label={t("Kommentera")} onSend={comments.add} onCancel={comments.cancel} />
+      <Writer
+        label={comments.draftIsNote ? t("Anteckna") : t("Kommentera")}
+        onSend={comments.add}
+        onCancel={comments.cancel}
+      />
     </div>
   );
 }

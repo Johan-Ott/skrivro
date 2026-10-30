@@ -2306,6 +2306,35 @@ body:has(.new-book-dialog) .new-book {
   display: none;
 }
 
+/* Redigera's tools, as Figma's: a pill at the foot of the text, the chosen one pressed. */
+.tool-pill {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  z-index: var(--layer-float);
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  transform: translateX(-50%);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  box-shadow: var(--shadow-dialog);
+}
+
+.tool-pill .icon-button {
+  width: 34px;
+  height: 34px;
+}
+
+.tool-pill .icon-button[aria-pressed="true"] {
+  background: var(--surface-selected);
+}
+
+.focus-mode .tool-pill {
+  display: none;
+}
+
 /* Its own band at the top of the text, so the row never covers the words. */
 /* A book just opened shows its text whole, once it is read, rather than filling in before you. */
 .app.arriving .main-card > * {

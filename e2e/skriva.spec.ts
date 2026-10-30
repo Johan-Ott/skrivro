@@ -224,6 +224,7 @@ test("Redigera keeps the text as it was, and what was typed waits there to accep
 }) => {
   await page.getByRole("tab", { name: "Redigera" }).click();
   await cursorAfterFirstParagraph(page);
+  await page.keyboard.press("f");
   await page.keyboard.type(" Hon log.");
 
   // The suggestion shows in the text as an insertion to accept, not as the text itself.
@@ -231,17 +232,6 @@ test("Redigera keeps the text as it was, and what was typed waits there to accep
   const card = page.locator(".margin-note[data-change]", { hasText: "Hon log." });
   await card.click();
   await card.getByRole("button", { name: "Godta" }).click();
-  await expect(editor(page)).toContainText("vantarna. Hon log.");
-  await expect(editor(page).locator(".revision-added")).toHaveCount(0);
-});
-
-test("with Det du skriver blir förslag off, Redigera writes in the text", async ({ page }) => {
-  await page.getByRole("tab", { name: "Redigera" }).click();
-  await page.getByRole("button", { name: "Det du skriver blir förslag" }).click();
-  await cursorAfterFirstParagraph(page);
-
-  await page.keyboard.type(" Hon log.");
-
   await expect(editor(page)).toContainText("vantarna. Hon log.");
   await expect(editor(page).locator(".revision-added")).toHaveCount(0);
 });

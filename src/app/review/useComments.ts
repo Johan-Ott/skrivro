@@ -107,11 +107,22 @@ function withResolved(comments: Comment[], id: string, resolved: boolean) {
 const withoutComment = (comments: Comment[], id: string) =>
   comments.filter((comment) => comment.id !== id && comment.replyTo !== id);
 
-// A comment begun in one scene is not left waiting in the next.
-function useDraft(sceneId: string | undefined) {
+// A comment begun in one scene is not left waiting in the next. Its kind is set as it begins:
+// a comment for the one who reads, or a note only the writer sees.
+function useDraft(editor: Editor, sceneId: string | undefined) {
   const [draft, setDraft] = useState<Anchor | null>(null);
+  const [draftIsNote, setNote] = useState(false);
   useEffect(() => setDraft(null), [sceneId]);
-  return [draft, setDraft] as const;
+  const begin = useCallback(
+    (isNote: boolean) => {
+      setNote(isNote);
+      setDraft(selectedAnchor(editor));
+    },
+    [editor],
+  );
+  const start = useCallback(() => begin(false), [begin]);
+  useCommandKey("comment", start);
+  return { draft, draftIsNote, start, startNote: () => begin(true), cancel: () => setDraft(null) };
 }
 
 export function useComments(parts: {
@@ -121,23 +132,19 @@ export function useComments(parts: {
   author: string;
 }) {
   const { comments, save } = useCommentFile(parts.project, parts.scene);
-  const [draft, setDraft] = useDraft(parts.scene?.id);
+  const drafting = useDraft(parts.editor, parts.scene?.id);
+  const { draft, draftIsNote, cancel } = drafting;
   const [focused, setFocused] = useState<string | null>(null);
-  const { editor } = parts;
-  useCommentMarks(editor, comments, draft, setFocused);
-  const start = useCallback(() => setDraft(selectedAnchor(editor)), [editor]);
-  useCommandKey("comment", start);
+  useCommentMarks(parts.editor, comments, draft, setFocused);
   const author = parts.author || t("Du");
   return {
+    ...drafting,
     comments,
-    draft,
     focused,
     focus: setFocused,
-    start,
-    cancel: () => setDraft(null),
-    add: (body: string, isNote = false) => {
-      if (draft) save([...comments, newComment(draft, body, author, isNote)]);
-      setDraft(null);
+    add: (body: string) => {
+      if (draft) save([...comments, newComment(draft, body, author, draftIsNote)]);
+      cancel();
     },
     reply: (to: Comment, body: string) => save([...comments, newReply(to, body, author)]),
     setResolved: (id: string, resolved: boolean) => save(withResolved(comments, id, resolved)),

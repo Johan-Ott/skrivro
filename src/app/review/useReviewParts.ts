@@ -52,8 +52,7 @@ function useSuggesting(session: SceneSession, editor: Editor, onDone: () => void
 export function useReviewParts(parts: Parts) {
   const revision = useRevision(parts);
   const suggesting = useSuggesting(parts.session, parts.editor, revision.reload);
-  const isRedigera = parts.step === "redigera";
-  const typedSuggestions = useTypedSuggestions(parts.editor, revision.typed, isRedigera);
+  useTypedSuggestions(parts.editor, revision.typed, parts.step === "redigera");
   const rounds = useRounds(parts.project);
-  return { comments: useComments(parts), revision, suggesting, typedSuggestions, rounds };
+  return { comments: useComments(parts), revision, suggesting, rounds };
 }

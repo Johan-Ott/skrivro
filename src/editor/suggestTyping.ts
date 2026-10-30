@@ -10,6 +10,8 @@ export interface Suggesting {
   revised: () => string | null;
   write: (revised: string) => void;
   undo: () => void;
+  /** False with another tool than Föreslå: the text is read and selected, and keys write nothing. */
+  isOn: () => boolean;
 }
 
 type Range = { from: number; to: number };
@@ -45,6 +47,7 @@ function revisedRange(view: EditorView, typing: Typing, revised: string, range: 
 function put(view: EditorView, typing: Typing, range: Range, text: string) {
   const target = typing.suggesting();
   if (!target) return false;
+  if (!target.isOn()) return true;
   const revised = revisedNow(view, target);
   const next = revised.slice(0, range.from) + text + revised.slice(range.to);
   target.write(next);
