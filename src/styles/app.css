@@ -2188,12 +2188,6 @@ body:has(.new-book-dialog) .new-book {
   cursor: pointer;
 }
 
-/* The writer's own note at the line, green as Anteckning is in the margin. */
-
-.manuscript .commented.noted {
-  background: color-mix(in srgb, var(--primary) 14%, transparent);
-}
-
 /* Skriv keeps the page clean: comments are read and answered in Redigera. */
 
 .step-skriv .manuscript .commented {
@@ -3497,10 +3491,6 @@ body:has(.new-book-dialog) .new-book {
   border-radius: 10px;
   background: var(--bg-panel);
   font: 13px/1.45 var(--font-ui);
-}
-
-.margin-note.noted {
-  border-left-color: var(--primary);
 }
 
 .margin-note.named {

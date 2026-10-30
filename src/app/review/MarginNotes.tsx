@@ -8,13 +8,12 @@ import { currentCard, usePlacement } from "./marginPlacement.js";
 import { ChangeNotes } from "./RevisionSection.js";
 import { formatNumber, t } from "../../i18n/i18n.js";
 
-type Shown = "allt" | "forslag" | "kommentarer" | "anteckningar" | "granska";
+type Shown = "allt" | "forslag" | "kommentarer" | "granska";
 
 const chipsOf = (): [Shown, string][] => [
   ["allt", t("Allt")],
   ["forslag", t("Förslag")],
   ["kommentarer", t("Kommentarer")],
-  ["anteckningar", t("Anteckningar")],
   ["granska", t("Granska")],
 ];
 
@@ -38,12 +37,10 @@ const MarginHead = ({ counts, shown, onShown }: HeadProps) => (
 type Cards = { comments: Comment[]; changes: AppState["revision"]["changes"]; repeats: Repeat[] };
 
 function countsOf({ comments, changes, repeats }: Cards): Record<Shown, number> {
-  const notes = comments.filter((comment) => comment.isNote === true).length;
   return {
     allt: comments.length + changes.length + repeats.length,
     forslag: changes.length,
-    kommentarer: comments.length - notes,
-    anteckningar: notes,
+    kommentarer: comments.length,
     granska: repeats.length,
   };
 }
@@ -55,8 +52,8 @@ function useClickedComment(focused: string | null) {
   }, [focused]);
 }
 
-// What waits in the open scene: the editor's and the writer's suggestions, the comments and
-// notes, and the words Granska finds used again too soon.
+// What waits in the open scene: the editor's and the writer's suggestions, the comments, and
+// the words Granska finds used again too soon.
 function useMarginCards(app: AppState, shown: Shown) {
   const doc = useSettledDoc(app.editor, PAUSE_MS);
   const { review, repeatWindow } = app.writingMode.settings;
@@ -71,7 +68,7 @@ function useMarginCards(app: AppState, shown: Shown) {
   return {
     doc,
     counts: countsOf(all),
-    comments: comments.filter((comment) => isOn(comment.isNote ? "anteckningar" : "kommentarer")),
+    comments: isOn("kommentarer") ? comments : [],
     changes: isOn("forslag") ? all.changes : [],
     repeats: isOn("granska") ? repeats : [],
   };

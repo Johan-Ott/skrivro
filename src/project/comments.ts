@@ -17,8 +17,6 @@ export interface Comment extends Anchor {
   createdAt: number;
   resolved: boolean;
   replyTo?: string;
-  /** The writer's own note at the line, not a word to or from a reader. */
-  isNote?: boolean;
 }
 
 const CONTEXT = 32;
@@ -31,19 +29,13 @@ export function anchorAt(text: string, from: number, to: number): Anchor {
   };
 }
 
-export const newComment = (
-  anchor: Anchor,
-  body: string,
-  author: string,
-  isNote = false,
-): Comment => ({
+export const newComment = (anchor: Anchor, body: string, author: string): Comment => ({
   id: newSceneId(),
   ...anchor,
   body,
   author,
   createdAt: Date.now(),
   resolved: false,
-  ...(isNote ? { isNote } : {}),
 });
 
 export const newReply = (to: Comment, body: string, author: string): Comment => ({
@@ -105,7 +97,6 @@ function commentOf(value: unknown): Comment | null {
     createdAt: typeof item["createdAt"] === "number" ? item["createdAt"] : 0,
     resolved: item["resolved"] === true,
     ...(replyTo ? { replyTo } : {}),
-    ...(item["isNote"] === true ? { isNote: true } : {}),
   };
 }
 

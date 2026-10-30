@@ -37,7 +37,7 @@ test("a comment stands in the margin beside its words, opens on a click, and Kla
   await expect(note).toHaveCount(0);
 });
 
-test("Redigera's tools: Läs types nothing, F suggests until Escape, and A notes the words selected", async ({
+test("Redigera's tools: Läs types nothing, F suggests until Escape, and K comments on the words selected", async ({
   page,
 }) => {
   const tools = page.getByRole("toolbar", { name: "Verktyg" });
@@ -55,14 +55,14 @@ test("Redigera's tools: Läs types nothing, F suggests until Escape, and A notes
   await page.keyboard.press("Escape");
   await isOn("Läs (V)");
 
-  await page.keyboard.press("a");
+  await page.keyboard.press("k");
   await editor(page)
     .locator("p")
     .first()
     .dblclick({ position: { x: 4, y: 10 } });
   const draft = page.locator(".margin-note.new");
-  await expect(draft).toContainText("Anteckning · bara du");
+  await expect(draft).toContainText("Kommentar");
   await page.keyboard.type("Gulnat?");
   await draft.getByRole("button", { name: "Spara" }).click();
-  await expect(page.locator(".margin-note.noted")).toContainText("Gulnat?");
+  await expect(page.locator(".margin-note", { hasText: "Gulnat?" })).toBeVisible();
 });

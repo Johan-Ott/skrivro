@@ -13,7 +13,7 @@ import type { ShownRound } from "./useRounds.js";
 import { DRAFT_ID } from "./useComments.js";
 import { formatNumber, t } from "../../i18n/i18n.js";
 
-const MARKS = `.commented:not(.noted):not([data-comment="${DRAFT_ID}"]), [data-change]`;
+const MARKS = `.commented:not([data-comment="${DRAFT_ID}"]), [data-change]`;
 
 type Mark = { isChange: boolean; card: string; element: HTMLElement; place: number };
 

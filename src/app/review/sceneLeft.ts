@@ -13,7 +13,7 @@ import { openTasks } from "./BookTasks.js";
 
 type Left = Record<string, number>;
 
-const isWaiting = (comment: Comment) => !comment.replyTo && !comment.resolved && !comment.isNote;
+const isWaiting = (comment: Comment) => !comment.replyTo && !comment.resolved;
 
 // Only the scenes with an editor's version waiting are read.
 async function changesLeft({ dir }: Project): Promise<Left> {

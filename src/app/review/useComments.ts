@@ -91,7 +91,7 @@ function useCommentMarks(
 ) {
   const open = comments
     .filter((comment) => !comment.replyTo && !comment.resolved)
-    .map((comment) => ({ id: comment.id, anchor: comment, isNote: comment.isNote === true }));
+    .map((comment) => ({ id: comment.id, anchor: comment }));
   editor.modes.current.commentAnchors = draft ? [...open, { id: DRAFT_ID, anchor: draft }] : open;
   editor.modes.current.onComment = (id) => id !== DRAFT_ID && onComment(id);
   const { run } = editor;
@@ -107,22 +107,13 @@ function withResolved(comments: Comment[], id: string, resolved: boolean) {
 const withoutComment = (comments: Comment[], id: string) =>
   comments.filter((comment) => comment.id !== id && comment.replyTo !== id);
 
-// A comment begun in one scene is not left waiting in the next. Its kind is set as it begins:
-// a comment for the one who reads, or a note only the writer sees.
+// A comment begun in one scene is not left waiting in the next.
 function useDraft(editor: Editor, sceneId: string | undefined) {
   const [draft, setDraft] = useState<Anchor | null>(null);
-  const [draftIsNote, setNote] = useState(false);
   useEffect(() => setDraft(null), [sceneId]);
-  const begin = useCallback(
-    (isNote: boolean) => {
-      setNote(isNote);
-      setDraft(selectedAnchor(editor));
-    },
-    [editor],
-  );
-  const start = useCallback(() => begin(false), [begin]);
+  const start = useCallback(() => setDraft(selectedAnchor(editor)), [editor]);
   useCommandKey("comment", start);
-  return { draft, draftIsNote, start, startNote: () => begin(true), cancel: () => setDraft(null) };
+  return { draft, start, cancel: () => setDraft(null) };
 }
 
 export function useComments(parts: {
@@ -133,7 +124,7 @@ export function useComments(parts: {
 }) {
   const { comments, save } = useCommentFile(parts.project, parts.scene);
   const drafting = useDraft(parts.editor, parts.scene?.id);
-  const { draft, draftIsNote, cancel } = drafting;
+  const { draft, cancel } = drafting;
   const [focused, setFocused] = useState<string | null>(null);
   useCommentMarks(parts.editor, comments, draft, setFocused);
   const author = parts.author || t("Du");
@@ -143,7 +134,7 @@ export function useComments(parts: {
     focused,
     focus: setFocused,
     add: (body: string) => {
-      if (draft) save([...comments, newComment(draft, body, author, draftIsNote)]);
+      if (draft) save([...comments, newComment(draft, body, author)]);
       cancel();
     },
     reply: (to: Comment, body: string) => save([...comments, newReply(to, body, author)]),

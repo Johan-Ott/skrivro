@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { usePhone } from "../phone/usePhone.js";
 import { locate, type Comment } from "../../project/comments.js";
 import { snapshotWhen } from "../../project/snapshots.js";
@@ -13,8 +13,6 @@ interface WriterProps {
   sendLabel?: string;
   onSend: (body: string) => void;
   onCancel: () => void;
-  /** More choices before the buttons, such as note or comment. */
-  children?: ReactNode;
 }
 
 export function Writer(props: WriterProps) {
@@ -30,7 +28,6 @@ export function Writer(props: WriterProps) {
         onChange={(event) => setBody(event.target.value)}
       />
       <div className="review-actions">
-        {props.children}
         <button
           className="button primary small"
           disabled={body.trim() === ""}
@@ -92,11 +89,7 @@ function Draft({ comments }: { comments: Comments }) {
   return (
     <div className="review-item focused">
       <span className="comment-quote">”{comments.draft.quote}”</span>
-      <Writer
-        label={comments.draftIsNote ? t("Anteckna") : t("Kommentera")}
-        onSend={comments.add}
-        onCancel={comments.cancel}
-      />
+      <Writer label={t("Kommentera")} onSend={comments.add} onCancel={comments.cancel} />
     </div>
   );
 }
@@ -125,7 +118,7 @@ function CommentCard(props: {
         <span className="kpi-sub">{t("Citatet finns inte längre i texten.")}</span>
       )}
       <span>{comment.body}</span>
-      <span className="kpi-sub">{comment.isNote ? t("Anteckning") : byline(comment)}</span>
+      <span className="kpi-sub">{byline(comment)}</span>
       <Replies replies={props.replies} />
       <CommentActions comment={comment} comments={comments} />
     </div>

@@ -49,7 +49,7 @@ type ReplyProps = {
   onReplying: (isReplying: boolean) => void;
 };
 
-// Svara writes the reply in the card; Klar puts the comment or the note away, as in Granska.
+// Svara writes the reply in the card; Klar puts the comment away, as in Granska.
 function CommentActions({ app, comment, isReplying, onReplying }: ReplyProps) {
   const reply = (body: string) => {
     app.comments.reply(comment, body);
@@ -59,11 +59,9 @@ function CommentActions({ app, comment, isReplying, onReplying }: ReplyProps) {
     return <Writer label={t("Svara")} onSend={reply} onCancel={() => onReplying(false)} />;
   return (
     <span className="margin-note-actions">
-      {!comment.isNote && (
-        <button className="link-button" onClick={() => onReplying(true)}>
-          {t("Svara")}
-        </button>
-      )}
+      <button className="link-button" onClick={() => onReplying(true)}>
+        {t("Svara")}
+      </button>
       <button
         className="link-button quiet"
         onClick={() => app.comments.setResolved(comment.id, true)}
@@ -85,12 +83,8 @@ function detailOf(comment: Comment, replies: number) {
 export function CommentNote(props: ReplyProps & { replies: Comment[] }) {
   const { comment } = props;
   return (
-    <MarginCard kind="comment" id={comment.id} className={comment.isNote ? "noted" : ""}>
-      {comment.isNote ? (
-        <span className="margin-note-kind">{t("Anteckning · bara du")}</span>
-      ) : (
-        <Who name={comment.author} detail={detailOf(comment, props.replies.length)} />
-      )}
+    <MarginCard kind="comment" id={comment.id}>
+      <Who name={comment.author} detail={detailOf(comment, props.replies.length)} />
       <span className="margin-note-body">{comment.body}</span>
       {props.replies.map((each) => (
         <span key={each.id} className="margin-note-reply">
@@ -102,12 +96,10 @@ export function CommentNote(props: ReplyProps & { replies: Comment[] }) {
   );
 }
 
-// Written at the line: the writer's own note, or a comment for the one who reads, as the tool chose.
+// A new comment, written at its line.
 export const DraftNote = ({ app }: { app: AppState }) => (
   <div className="margin-note new" data-comment={DRAFT_ID}>
-    <span className="margin-note-kind">
-      {app.comments.draftIsNote ? t("Anteckning · bara du") : t("Kommentar")}
-    </span>
+    <span className="margin-note-kind">{t("Kommentar")}</span>
     <Writer
       label={t("Skriv vid raden")}
       sendLabel={t("Spara")}

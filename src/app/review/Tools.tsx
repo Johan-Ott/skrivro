@@ -4,10 +4,10 @@ import type { AppState } from "../App.js";
 import { usePhone } from "../phone/usePhone.js";
 import { t } from "../../i18n/i18n.js";
 
-export type Tool = "las" | "foresla" | "kommentera" | "anteckna";
+export type Tool = "las" | "foresla" | "kommentera";
 
-/** Redigera's tool, as Figma's: Läs reads and selects, Föreslå types suggestions, Kommentera and
- *  Anteckna open a comment or a note on what is selected. */
+/** Redigera's tool, as Figma's: Läs reads and selects, Föreslå types suggestions, Kommentera opens
+ *  a comment on what is selected. */
 export const tool = createStore<Tool>("las");
 
 type ToolButton = { id: Tool; label: string; letter: string; paths: string[] };
@@ -25,12 +25,6 @@ const TOOLS: ToolButton[] = [
     label: t("Kommentera"),
     letter: "K",
     paths: ["M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"],
-  },
-  {
-    id: "anteckna",
-    label: t("Anteckna"),
-    letter: "A",
-    paths: ["M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8z", "M15 3v5h6"],
   },
 ];
 
@@ -59,19 +53,16 @@ function onToolKey(event: KeyboardEvent) {
   tool.set(chosen);
 }
 
-// With Kommentera or Anteckna, words selected with the mouse open their draft at once.
+// With Kommentera, words selected with the mouse open a comment at once.
 function useDraftOnSelect(app: AppState) {
   const { comments, editor } = app;
   useEffect(() => {
     const onMouseUp = (event: MouseEvent) => {
-      const chosen = tool.get();
       const dom = editor.viewRef.current?.dom;
-      if (chosen === "las" || chosen === "foresla" || !dom?.contains(event.target as Node)) return;
+      if (tool.get() !== "kommentera" || !dom?.contains(event.target as Node)) return;
       // ProseMirror reads the new selection after this event.
       setTimeout(() => {
-        if (editor.viewRef.current?.state.selection.empty !== false) return;
-        if (chosen === "anteckna") comments.startNote();
-        else comments.start();
+        if (editor.viewRef.current?.state.selection.empty === false) comments.start();
       });
     };
     window.addEventListener("mouseup", onMouseUp);
