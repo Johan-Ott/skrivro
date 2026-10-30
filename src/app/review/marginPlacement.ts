@@ -1,5 +1,10 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
+import { createStore } from "@llkit/store.js";
 import { marginOut } from "./useComments.js";
+
+/** The card shown whole, as `comment:<id>`, `change:<index>` or `repeat:<word>`: the one the walk
+ * stands on or the one last clicked. The rest show a line each. */
+export const currentCard = createStore<string | null>(null);
 
 const GAP = 12;
 // The room each side of the text while the notes are out: a note and the space before it.
@@ -19,13 +24,12 @@ function roomOf(page: HTMLElement): Room {
   return left >= MARGIN ? "right" : null;
 }
 
-// The words a card is about: a comment's or a note's mark, an editor's change, or the first time
-// a name is used.
+// The words a card is about: a comment's or a note's mark, a change, or a word used again.
 function markOf(card: HTMLElement) {
-  const { comment, change, entity } = card.dataset;
+  const { comment, change, repeat = "" } = card.dataset;
   if (comment) return `.commented[data-comment="${comment}"]`;
   if (change) return `.ProseMirror [data-change="${change}"]`;
-  return `.mention[data-entity="${entity}"]`;
+  return `.ProseMirror .repeat[data-repeat="${CSS.escape(repeat)}"]`;
 }
 
 const markTop = (page: HTMLElement, card: HTMLElement) =>
@@ -40,8 +44,11 @@ function stackCards(box: HTMLElement, page: HTMLElement) {
     .map((card) => ({ card, top: markTop(page, card) }))
     .sort((one, two) => (one.top ?? 0) - (two.top ?? 0))
     .forEach(({ card, top }) => {
+      const wasHidden = card.hidden;
       card.hidden = top === null;
       if (top === null) return;
+      // A new card waits hidden for its words to be drawn, and so loses the focus it was given.
+      if (wasHidden) card.querySelector("textarea")?.focus();
       const cardTop = Math.max(top - origin.top + page.scrollTop, below);
       card.style.top = `${cardTop}px`;
       below = cardTop + card.offsetHeight + GAP;

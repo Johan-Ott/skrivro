@@ -228,9 +228,9 @@ test("Redigera keeps the text as it was, and what was typed waits there to accep
 
   // The suggestion shows in the text as an insertion to accept, not as the text itself.
   await expect(editor(page).locator(".revision-added")).toContainText("Hon log.");
-  const review = page.getByRole("complementary", { name: "Granskning" });
-  await expect(review).toContainText("Ändringar att gå igenom (1)");
-  await review.getByRole("button", { name: "Godta" }).click();
+  const card = page.locator(".margin-note[data-change]", { hasText: "Hon log." });
+  await card.click();
+  await card.getByRole("button", { name: "Godta" }).click();
   await expect(editor(page)).toContainText("vantarna. Hon log.");
   await expect(editor(page).locator(".revision-added")).toHaveCount(0);
 });

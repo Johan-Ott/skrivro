@@ -6,6 +6,7 @@ import { sendToEditor } from "../exporting/collaboration.js";
 import { usePhone } from "../phone/usePhone.js";
 import type { Project } from "../useProject.js";
 import { startWalk } from "./Letter.js";
+import { currentCard } from "./marginPlacement.js";
 import { useEditorsFile } from "./RevisionImport.js";
 import { countParts, firstName, totalOf } from "./roundWords.js";
 import type { ShownRound } from "./useRounds.js";
@@ -23,16 +24,14 @@ function marksOf(view: EditorView | null): Mark[] {
   for (const element of Array.from(view?.dom.querySelectorAll<HTMLElement>(MARKS) ?? [])) {
     const { comment, change } = element.dataset;
     const isChange = change !== undefined;
-    const card = isChange
-      ? `.margin-note[data-change="${change}"]`
-      : `.margin-note[data-comment="${comment}"]`;
+    const card = isChange ? `change:${change}` : `comment:${comment}`;
     const place = view?.posAtDOM(element, 0) ?? 0;
     if (!marks.has(card)) marks.set(card, { isChange, card, element, place });
   }
   return [...marks.values()];
 }
 
-// The mark in the middle of the view with the caret on it, and its card in the margin outlined.
+// The mark in the middle of the view with the caret on it, and its card in the margin open.
 function showMark(app: AppState, mark: Mark) {
   mark.element.scrollIntoView({ block: "center" });
   app.editor.run((state, dispatch) => {
@@ -40,8 +39,7 @@ function showMark(app: AppState, mark: Mark) {
     return true;
   });
   app.editor.viewRef.current?.focus();
-  document.querySelector(".margin-note.current")?.classList.remove("current");
-  document.querySelector(mark.card)?.classList.add("current");
+  currentCard.set(mark.card);
 }
 
 // From the caret, as Word's Nästa: what was accepted or answered is gone, and the next one is next.

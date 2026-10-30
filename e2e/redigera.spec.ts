@@ -7,9 +7,6 @@ test("in Redigera the walk stands where the format row was, reads the editor's f
   page,
 }, testInfo) => {
   await page.setViewportSize({ width: 1400, height: 900 });
-  await page.addInitScript(() =>
-    localStorage.setItem("skrivro.writing", JSON.stringify({ commentsInMargin: true })),
-  );
   await openExample(page);
   await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
   const walk = page.getByRole("toolbar", { name: "Genomgång" });

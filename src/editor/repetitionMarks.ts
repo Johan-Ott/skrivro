@@ -23,7 +23,9 @@ export const sceneRepetitions = (doc: Node, window: number) =>
 
 export function repetitionDecorations(doc: Node, window: number): DecorationSet {
   const decorations = found(doc, window).flatMap((repetition) =>
-    repetition.ranges.map((range) => Decoration.inline(range.from, range.to, { class: "repeat" })),
+    repetition.ranges.map((range) =>
+      Decoration.inline(range.from, range.to, { class: "repeat", "data-repeat": repetition.word }),
+    ),
   );
   return DecorationSet.create(doc, decorations);
 }

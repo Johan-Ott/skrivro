@@ -1,206 +1,143 @@
-import { useState } from "react";
-import { documentText } from "../../editor/documentText.js";
+import { useEffect, useMemo, useState } from "react";
 import { useSettledDoc } from "../../editor/editorStore.js";
-import { PAUSE_MS } from "../../editor/repetitionMarks.js";
-import { cardsNamedIn } from "../../project/cards.js";
+import { PAUSE_MS, sceneRepetitions } from "../../editor/repetitionMarks.js";
 import type { Comment } from "../../project/comments.js";
-import { snapshotWhen } from "../../project/snapshots.js";
-import { CHARACTERS_ID, PLACES_ID, THINGS_ID } from "../../project/sorts.js";
 import type { AppState } from "../App.js";
-import { Writer } from "./CommentsSection.js";
-import { usePlacement } from "./marginPlacement.js";
+import { CommentNote, DraftNote, RepeatNote, type Repeat } from "./MarginCards.js";
+import { currentCard, usePlacement } from "./marginPlacement.js";
 import { ChangeNotes } from "./RevisionSection.js";
-import { DRAFT_ID } from "./useComments.js";
-import { t } from "../../i18n/i18n.js";
+import { formatNumber, t } from "../../i18n/i18n.js";
 
-const initial = (name: string) => name.trim().charAt(0).toUpperCase() || "?";
+type Shown = "allt" | "forslag" | "kommentarer" | "anteckningar" | "granska";
 
-const Who = (props: { name: string; detail: string }) => (
-  <span className="margin-note-who">
-    <span className="margin-note-face">{initial(props.name)}</span>
-    <b>{props.name}</b>
-    <span>{props.detail}</span>
-  </span>
+const chipsOf = (): [Shown, string][] => [
+  ["allt", t("Allt")],
+  ["forslag", t("Förslag")],
+  ["kommentarer", t("Kommentarer")],
+  ["anteckningar", t("Anteckningar")],
+  ["granska", t("Granska")],
+];
+
+type HeadProps = { counts: Record<Shown, number>; shown: Shown; onShown: (shown: Shown) => void };
+
+const MarginHead = ({ counts, shown, onShown }: HeadProps) => (
+  <div className="margin-head" role="group" aria-label={t("Visa i marginalen")}>
+    {chipsOf().map(([each, label]) => (
+      <button
+        key={each}
+        className="chip"
+        aria-pressed={shown === each}
+        onClick={() => onShown(each)}
+      >
+        {label} <span className="margin-chip-count">{formatNumber(counts[each])}</span>
+      </button>
+    ))}
+  </div>
 );
 
-type ReplyProps = {
-  app: AppState;
-  comment: Comment;
-  isReplying: boolean;
-  onReplying: (isReplying: boolean) => void;
-};
+type Cards = { comments: Comment[]; changes: AppState["revision"]["changes"]; repeats: Repeat[] };
 
-// Svara writes the reply in the card; Klar puts the comment or the note away, as in Granska.
-function CommentActions({ app, comment, isReplying, onReplying }: ReplyProps) {
-  const reply = (body: string) => {
-    app.comments.reply(comment, body);
-    onReplying(false);
+function countsOf({ comments, changes, repeats }: Cards): Record<Shown, number> {
+  const notes = comments.filter((comment) => comment.isNote === true).length;
+  return {
+    allt: comments.length + changes.length + repeats.length,
+    forslag: changes.length,
+    kommentarer: comments.length - notes,
+    anteckningar: notes,
+    granska: repeats.length,
   };
-  if (isReplying)
-    return <Writer label={t("Svara")} onSend={reply} onCancel={() => onReplying(false)} />;
-  return (
-    <span className="margin-note-actions">
-      {!comment.isNote && (
-        <button className="link-button" onClick={() => onReplying(true)}>
-          {t("Svara")}
-        </button>
-      )}
-      <button
-        className="link-button quiet"
-        onClick={() => app.comments.setResolved(comment.id, true)}
-      >
-        {t("Klar")}
-      </button>
-    </span>
-  );
 }
 
-function CommentNote(props: ReplyProps & { replies: Comment[] }) {
-  const { comment } = props;
-  const when = snapshotWhen(comment.createdAt, Date.now()).toLowerCase();
-  return (
-    <div className={comment.isNote ? "margin-note noted" : "margin-note"} data-comment={comment.id}>
-      {comment.isNote ? (
-        <span className="margin-note-kind">{t("Anteckning")}</span>
-      ) : (
-        <Who name={comment.author} detail={when} />
-      )}
-      <span className="margin-note-body">{comment.body}</span>
-      {props.replies.map((each) => (
-        <span key={each.id} className="margin-note-reply">
-          <b>{each.author}:</b> {each.body}
-        </span>
-      ))}
-      <CommentActions {...props} />
-    </div>
-  );
+// Words clicked in the text open their comment's card.
+function useClickedComment(focused: string | null) {
+  useEffect(() => {
+    if (focused) currentCard.set(`comment:${focused}`);
+  }, [focused]);
 }
 
-// Written at the line: the writer's own note, or a comment for the one who reads.
-function DraftNote({ app }: { app: AppState }) {
-  const [isNote, setNote] = useState(true);
-  const kind = (label: string, isOn: boolean) => (
-    <button role="radio" aria-checked={isNote === isOn} onClick={() => setNote(isOn)}>
-      {label}
-    </button>
-  );
-  return (
-    <div className="margin-note new" data-comment={DRAFT_ID}>
-      <Writer
-        label={t("Skriv vid raden")}
-        sendLabel={t("Spara")}
-        onSend={(body) => app.comments.add(body, isNote)}
-        onCancel={app.comments.cancel}
-      >
-        <div className="segmented small" role="radiogroup" aria-label={t("Sort")}>
-          {kind(t("Anteckning"), true)}
-          {kind(t("Kommentar"), false)}
-        </div>
-      </Writer>
-    </div>
-  );
-}
-
-const KIND_WORDS: Record<string, string> = {
-  [CHARACTERS_ID]: t("person"),
-  [PLACES_ID]: t("plats"),
-  [THINGS_ID]: t("sak"),
-};
-
-type NamedCard = AppState["notes"]["cards"][number];
-
-function MentionNote({ app, card }: { app: AppState; card: NamedCard }) {
-  const description = app.notes.descriptionOf(card.id);
-  return (
-    <div className="margin-note named" data-entity={card.id}>
-      <Who name={card.name} detail={KIND_WORDS[card.sortId] ?? card.sortLabel} />
-      {description && <span className="margin-note-body">{description}</span>}
-      <span className="margin-note-actions">
-        <button className="link-button" onClick={() => app.cards.open(card.id)}>
-          {t("Öppna {name}", { name: card.name })}
-        </button>
-      </span>
-    </div>
-  );
-}
-
-type Shown = "allt" | "kommentarer" | "anteckningar";
-
-function MarginHead(props: { app: AppState; shown: Shown; onShown: (shown: Shown) => void }) {
-  const { onChangeSettings } = props.app.writingMode;
-  const hide = () => onChangeSettings((current) => ({ ...current, commentsInMargin: false }));
-  const option = (label: string, shown: Shown) => (
-    <button role="radio" aria-checked={props.shown === shown} onClick={() => props.onShown(shown)}>
-      {label}
-    </button>
-  );
-  return (
-    <div className="margin-head">
-      <div className="segmented small" role="radiogroup" aria-label={t("Visa i marginalen")}>
-        {option(t("Allt"), "allt")}
-        {option(t("Kommentarer"), "kommentarer")}
-        {option(t("Anteckningar"), "anteckningar")}
-      </div>
-      <button className="link-button quiet" onClick={hide}>
-        {t("Dölj marginalen")}
-      </button>
-    </div>
-  );
-}
-
-const isShown = (comment: Comment, shown: Shown) =>
-  shown === "allt" || (shown === "anteckningar") === (comment.isNote === true);
-
-// What the margin holds for the open scene; the people and places named only under Allt, the
-// editor's changes under all but Anteckningar.
+// What waits in the open scene: the editor's and the writer's suggestions, the comments and
+// notes, and the words Granska finds used again too soon.
 function useMarginCards(app: AppState, shown: Shown) {
   const doc = useSettledDoc(app.editor, PAUSE_MS);
-  const open = app.comments.comments.filter((comment) => !comment.replyTo && !comment.resolved);
-  const text = shown === "allt" && doc ? documentText(doc).text : "";
-  const named = text ? cardsNamedIn(app.notes.cards, text) : [];
-  const wanted = open.filter((comment) => isShown(comment, shown));
-  const { changes } = app.revision;
-  const shownChanges = shown === "anteckningar" ? [] : changes;
+  const { review, repeatWindow } = app.writingMode.settings;
+  const repeats = useMemo(
+    () => (doc && review ? sceneRepetitions(doc, repeatWindow) : []),
+    [doc, review, repeatWindow],
+  );
+  const comments = app.comments.comments.filter((comment) => !comment.replyTo && !comment.resolved);
+  const all = { comments, changes: app.revision.changes, repeats };
+  const isOn = (kind: Shown) => shown === "allt" || shown === kind;
+  useClickedComment(app.comments.focused);
   return {
     doc,
-    wanted,
-    named,
-    changes: shownChanges,
-    ids: [
-      ...[...wanted, ...named].map((each) => each.id),
-      ...shownChanges.map((each) => each.from),
-    ],
-    hasCards: open.length + named.length + changes.length > 0 || app.comments.draft !== null,
+    counts: countsOf(all),
+    comments: comments.filter((comment) => isOn(comment.isNote ? "anteckningar" : "kommentarer")),
+    changes: isOn("forslag") ? all.changes : [],
+    repeats: isOn("granska") ? repeats : [],
   };
 }
 
-/** Marginalen: beside the text, level with what they are about, the open comments, the writer's
- * own notes at the line, and the people and places the scene names. */
+type Shows = ReturnType<typeof useMarginCards> & { shown: Shown; replyingTo: string | null };
+
+// Placed again whenever a card comes, goes, opens or grows.
+function usePlacedCards(app: AppState, { doc, shown, replyingTo, ...cards }: Shows) {
+  const { comments, draft } = app.comments;
+  const ids = [
+    ...cards.comments.map((each) => each.id),
+    ...cards.changes.map((each) => each.from),
+    ...cards.repeats.map((each) => each.word),
+  ];
+  const isOpen = currentCard.use();
+  const { step, isFocusMode } = app.writingMode;
+  // The box itself comes with Redigera, so it is placed when it comes, not only when cards change.
+  const key = [step, isFocusMode, shown, isOpen, replyingTo, draft !== null, comments.length];
+  return usePlacement([...key, ...ids].join(), doc);
+}
+
+type CommentsProps = {
+  app: AppState;
+  comments: Comment[];
+  replyingTo: string | null;
+  onReplying: (id: string | null) => void;
+};
+
+const CommentNotes = ({ app, comments, replyingTo, onReplying }: CommentsProps) =>
+  comments.map((comment) => (
+    <CommentNote
+      key={comment.id}
+      app={app}
+      comment={comment}
+      replies={app.comments.comments.filter((reply) => reply.replyTo === comment.id)}
+      isReplying={replyingTo === comment.id}
+      onReplying={(isReplying) => onReplying(isReplying ? comment.id : null)}
+    />
+  ));
+
+/** Marginalen in Redigera: what waits stands beside its words, one line each but the current one. */
 export function MarginNotes({ app }: { app: AppState }) {
   const [shown, setShown] = useState<Shown>("allt");
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
-  const { doc, wanted, named, changes, ids, hasCards } = useMarginCards(app, shown);
-  const { comments: all, draft } = app.comments;
-  const box = usePlacement([shown, replyingTo, draft !== null, all.length, ...ids].join(), doc);
-  const { settings, isFocusMode, showsFindings } = app.writingMode;
-  if (!settings.commentsInMargin || isFocusMode || !showsFindings) return null;
+  const cards = useMarginCards(app, shown);
+  const { counts, comments, changes, repeats } = cards;
+  const { draft } = app.comments;
+  const box = usePlacedCards(app, { ...cards, shown, replyingTo });
+  const { step, isFocusMode, settings } = app.writingMode;
+  if (step !== "redigera" || isFocusMode) return null;
   return (
     <div className="margin-notes" ref={box}>
-      {hasCards && <MarginHead app={app} shown={shown} onShown={setShown} />}
-      {wanted.map((comment) => (
-        <CommentNote
-          key={comment.id}
-          app={app}
-          comment={comment}
-          replies={all.filter((reply) => reply.replyTo === comment.id)}
-          isReplying={replyingTo === comment.id}
-          onReplying={(isReplying) => setReplyingTo(isReplying ? comment.id : null)}
-        />
-      ))}
+      {(counts.allt > 0 || draft) && (
+        <MarginHead counts={counts} shown={shown} onShown={setShown} />
+      )}
+      <CommentNotes
+        app={app}
+        comments={comments}
+        replyingTo={replyingTo}
+        onReplying={setReplyingTo}
+      />
       {draft && <DraftNote app={app} />}
       {changes.length > 0 && <ChangeNotes revision={app.revision} />}
-      {named.map((card) => (
-        <MentionNote key={card.id} app={app} card={card} />
+      {repeats.map((repeat) => (
+        <RepeatNote key={repeat.word} repeat={repeat} window={settings.repeatWindow} />
       ))}
     </div>
   );

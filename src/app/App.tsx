@@ -104,7 +104,7 @@ function useNotesParts(core: ReturnType<typeof useCoreState>) {
   const homes = useMemo(() => (project ? homesOf(project, series) : []), [project, series]);
   const isNoteOpen = homes.some((home) => noteSortOf(home, sceneState.scene?.id ?? "") !== null);
   const { view, isReviewOpen, settings } = writingMode;
-  const isWanted = isNoteOpen || view === "innehall" || isReviewOpen || settings.commentsInMargin;
+  const isWanted = isNoteOpen || view === "innehall" || isReviewOpen;
   const notes = useNotes(homes, project, isWanted);
   useMentionLinks(sceneState.editor, notes, project);
   useSpelling(sceneState.editor, project, notes, {

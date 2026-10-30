@@ -105,7 +105,7 @@ export function EditorTab(props: TabProps) {
       <GroupTitle title={t("Medan du skriver")} />
       <SwitchRows {...props} keys={["typewriter", "typography", "autocorrect", "completion"]} />
       <GroupTitle title={t("Granskning")} />
-      <SwitchRows {...props} keys={["spellcheck", "review", "commentsInMargin"]} />
+      <SwitchRows {...props} keys={["spellcheck", "review"]} />
       <RepeatWindowRow {...props} />
       <GroupTitle title={t("Sidomenyn")} />
       <SwitchRows {...props} keys={["tableOfContents", "followOpenText"]} />

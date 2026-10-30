@@ -51,7 +51,7 @@ const BrandMenu = ({ onOpen }: { onOpen: (event: MouseEvent<HTMLElement>) => voi
 
 const STEPS: [Step, string, string][] = [
   ["skriv", t("Skriv"), t("Få ner texten, utan röda streck och kommentarer.")],
-  ["redigera", t("Redigera"), t("Läs, rätta och svara på kommentarer, med Granska bredvid.")],
+  ["redigera", t("Redigera"), t("Läs, föreslå och svara på kommentarer, med allt i marginalen.")],
   ["publicera", t("Publicera"), t("Gör boken: hur den ser ut, e-bok och tryck.")],
 ];
 

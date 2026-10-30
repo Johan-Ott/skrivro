@@ -5,6 +5,7 @@ test("Granska is drawn down to its head with Minimera, and stays so", async ({ p
   await page.setViewportSize({ width: 1280, height: 820 });
   await openExample(page);
   await page.getByRole("tab", { name: "Redigera" }).click();
+  await page.getByRole("button", { name: /^Granska · / }).click();
   const panel = page.locator(".review-panel.open");
   await expect(panel.getByText("Granska", { exact: true })).toBeVisible();
 
@@ -48,6 +49,7 @@ test("Granska and Insikter docked together share a tab row, and opening the one 
   await openExample(page);
   await togglePanel(page, "Insikter");
   await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
+  await page.getByRole("button", { name: /^Granska · / }).click();
   const tabs = page.getByRole("tablist", { name: "Paneler" });
   const review = page.getByRole("complementary", { name: "Granskning" });
   const insights = page.getByRole("complementary", { name: "Insikter" });

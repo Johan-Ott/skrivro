@@ -10,7 +10,6 @@ export type EditorSwitch =
   | "bookType"
   | "tableOfContents"
   | "followOpenText"
-  | "commentsInMargin"
   | "typewriter"
   | "spellcheck"
   | "typography"
@@ -30,13 +29,6 @@ const EDITOR_SWITCHES: [EditorSwitch, string, string][] = [
     t("Punktlinjer fram till sidnumret vid varje kapitel, som i en tryckt bok."),
   ],
   ["followOpenText", t("Sidomenyn följer texten"), t("Den fälls ut till texten du öppnar.")],
-  [
-    "commentsInMargin",
-    t("Kommentarer i marginalen"),
-    t(
-      "Kommentarer, anteckningar och scenens namn står bredvid texten, som blyerts i en bok. Korten i Granska finns kvar.",
-    ),
-  ],
   [
     "typewriter",
     t("Skrivraden mitt på skärmen"),
@@ -67,8 +59,8 @@ const EDITOR_SWITCHES: [EditorSwitch, string, string][] = [
   ["review", t("Granskning"), t("Namnstavning och upprepningar, i texten och i en panel bredvid.")],
 ];
 
-// A phone shows the text without the sheet and keeps comments in Granska, so those switch nothing.
-const COMPUTER_ONLY: EditorSwitch[] = ["paper", "commentsInMargin", "autocorrect", "completion"];
+// A phone shows the text without the sheet and corrects its own words, so those switch nothing.
+const COMPUTER_ONLY: EditorSwitch[] = ["paper", "autocorrect", "completion"];
 
 export function SwitchRows({
   settings,

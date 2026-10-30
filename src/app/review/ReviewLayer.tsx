@@ -56,13 +56,15 @@ type ShownProps = {
 };
 
 // Opened while a comment is written in Granska, and by itself for an editor's changes, so they
-// are seen. With the margin on they stand there instead, beside their words.
+// are seen. With room for the margin they stand there instead, beside their words.
 function useOpening(app: AppState, isWriting: boolean, focused: string | null) {
   useOpenedByClick(app, focused);
-  const { setReviewOpen, settings } = app.writingMode;
-  const hasRevision = app.revision.isOpen && !settings.commentsInMargin;
+  const { setReviewOpen } = app.writingMode;
+  const isInMargin = marginOut.use();
+  const hasRevision = app.revision.isOpen && !isInMargin;
+  // The margin is placed before this runs, so get() knows if it came out in this very render.
   useEffect(() => {
-    if (isWriting || hasRevision) setReviewOpen(true);
+    if ((isWriting || hasRevision) && !marginOut.get()) setReviewOpen(true);
   }, [isWriting, hasRevision, setReviewOpen]);
 }
 

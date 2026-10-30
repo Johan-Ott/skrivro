@@ -1,4 +1,5 @@
 import type { RevisionChange } from "../../manuscript/revision.js";
+import { MarginCard } from "./MarginCards.js";
 import type { useRevision } from "./useRevision.js";
 import { t } from "../../i18n/i18n.js";
 
@@ -9,7 +10,7 @@ const shown = (text: string) => text.replace(/\n+/g, " ¶ ").trim();
 const ChangeText = ({ change, className }: { change: RevisionChange; className: string }) => (
   <span className={className}>
     {change.removed && <del className="revision-removed">{shown(change.removed)}</del>}
-    {change.removed && change.added && " "}
+    {change.removed && change.added && " → "}
     {change.added && <ins className="revision-added">{shown(change.added)}</ins>}
   </span>
 );
@@ -71,8 +72,8 @@ export function RevisionSection({ revision }: { revision: Revision }) {
 /** The same changes as cards in the margin, each beside its words through `data-change`. */
 export function ChangeNotes({ revision }: { revision: Revision }) {
   return revision.changes.map((change, index) => (
-    <div key={changeKey(change)} className="margin-note" data-change={index}>
-      <span className="margin-note-kind">{t("Ändring")}</span>
+    <MarginCard key={changeKey(change)} kind="change" id={String(index)}>
+      <span className="margin-note-kind">{t("Förslag")}</span>
       <ChangeText change={change} className="margin-note-body" />
       <span className="margin-note-actions">
         <button className="link-button" onClick={() => revision.accept(change)}>
@@ -82,6 +83,6 @@ export function ChangeNotes({ revision }: { revision: Revision }) {
           {t("Avvisa")}
         </button>
       </span>
-    </div>
+    </MarginCard>
   ));
 }

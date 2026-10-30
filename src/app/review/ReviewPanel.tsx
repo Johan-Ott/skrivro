@@ -42,6 +42,14 @@ const inWords = (count: number) => NUMBER_WORDS[count] ?? String(count);
 const times = (count: number) =>
   count === 1 ? t("en gång") : t("{count} gånger", { count: inWords(count) });
 
+/** "”kom” två gånger inom tre meningar.", in Granska and in the margin. */
+export const repeatText = ({ word, count }: { word: string; count: number }, window: number) =>
+  t("”{word}” {times} inom {window} meningar.", {
+    word,
+    times: times(count),
+    window: inWords(window),
+  });
+
 function InChapter({ cards, onOpenCard }: { cards: Card[]; onOpenCard: (id: string) => void }) {
   if (cards.length === 0) return null;
   return (
@@ -102,13 +110,7 @@ function RepeatItem(props: ReviewPanelProps & { repeat: Repeat }) {
       onClick={() => repeat.first && props.onShowRange(repeat.first)}
     >
       <span className="review-title">{t("Upprepning")}</span>
-      <span className="review-text">
-        {t("”{word}” {times} inom {window} meningar.", {
-          word: repeat.word,
-          times: times(repeat.count),
-          window: inWords(props.repeatWindow),
-        })}
-      </span>
+      <span className="review-text">{repeatText(repeat, props.repeatWindow)}</span>
     </button>
   );
 }

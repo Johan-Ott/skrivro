@@ -1,16 +1,21 @@
 import { expect, test, type Page } from "@playwright/test";
 import { cursorAfterFirstParagraph, editor, openExample, selectFirstWord } from "./helpers";
 
+// Too narrow for a margin beside the text, so the comments are written and read in Granska.
 test.beforeEach(async ({ page }) => {
+  await page.setViewportSize({ width: 1000, height: 800 });
   await openExample(page);
 });
+
+// The margin's cards stay in the page while it has no room, hidden, so the text is looked for here.
+const granska = (page: Page) => page.getByRole("complementary", { name: "Granskning" });
 
 async function comment(page: Page, body: string) {
   await selectFirstWord(page);
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await page.keyboard.type(body);
   await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
-  await expect(page.getByText(body)).toBeVisible();
+  await expect(granska(page).getByText(body)).toBeVisible();
 }
 
 const reviewButton = (page: Page) => page.getByRole("button", { name: /^Granska · / }).first();
@@ -27,7 +32,7 @@ test("Granska counts what still waits: not a reply, and not a resolved comment",
   await page.getByRole("button", { name: "Svara" }).first().click();
   await page.keyboard.type("Ja, gulnat.");
   await page.getByRole("button", { name: "Svara" }).last().click();
-  await expect(page.getByText("Ja, gulnat.")).toBeVisible();
+  await expect(granska(page).getByText("Ja, gulnat.")).toBeVisible();
   expect(await count()).toBe(withComment);
 
   await page.getByRole("button", { name: "Lös" }).first().click();
@@ -39,7 +44,7 @@ test("a comment can be removed, and its mark in the text goes with it", async ({
 
   await page.getByRole("button", { name: "Ta bort" }).first().click();
 
-  await expect(page.getByText("Stryk detta?")).toBeHidden();
+  await expect(granska(page).getByText("Stryk detta?")).toBeHidden();
   await expect(editor(page).locator(".commented")).toHaveCount(0);
 });
 
@@ -64,6 +69,7 @@ test("in Redigera what is typed and what is deleted are suggestions, and Ctrl+Z 
 
 test("Escape within Granska closes it", async ({ page }) => {
   await page.getByRole("tab", { name: "Redigera" }).click();
+  await reviewButton(page).click();
   const panel = page.locator(".review-panel.open");
   await expect(panel).toBeVisible();
 

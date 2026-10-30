@@ -8,7 +8,8 @@ import { cursorAfterFirstParagraph, editor, openExample } from "./helpers";
 test("an editor's Word file is read back, and their changes are accepted or rejected one by one", async ({
   page,
 }, testInfo) => {
-  await page.setViewportSize({ width: 1400, height: 900 });
+  // Too narrow for a margin, so the changes are gone through in Granska.
+  await page.setViewportSize({ width: 1000, height: 900 });
   await openExample(page);
   const file = await editorsFile(testInfo.outputDir);
 
@@ -29,13 +30,10 @@ test("an editor's Word file is read back, and their changes are accepted or reje
   await expect(editor(page)).not.toContainText("Med posten");
 });
 
-test("with the margin on, the editor's changes stand in it beside their words, and the text moves left to make room", async ({
+test("in Redigera the editor's changes stand in the margin beside their words, and the text moves left to make room", async ({
   page,
 }, testInfo) => {
   await page.setViewportSize({ width: 1400, height: 900 });
-  await page.addInitScript(() =>
-    localStorage.setItem("skrivro.writing", JSON.stringify({ commentsInMargin: true })),
-  );
   await openExample(page);
   const file = await editorsFile(testInfo.outputDir);
 
@@ -45,8 +43,9 @@ test("with the margin on, the editor's changes stand in it beside their words, a
   await page.getByRole("menuitem", { name: "Läs in kommenterad Word-fil…" }).click();
   await (await chooser).setFiles(file);
   await page.getByRole("button", { name: "Stäng", exact: true }).click();
+  await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
 
-  const card = page.locator(".margin-note[data-change]");
+  const card = page.locator(".margin-note[data-change]").first();
   await expect(card).toContainText("Med posten");
   await expect(page.getByRole("complementary", { name: "Granskning" })).toHaveCount(0);
   const leftOfCentre = await page.evaluate(() => {
@@ -56,9 +55,10 @@ test("with the margin on, the editor's changes stand in it beside their words, a
     return middle(card) - middle(text);
   });
   expect(leftOfCentre).toBeGreaterThan(100);
+  await card.click();
   await card.getByRole("button", { name: "Godta" }).click();
 
-  await expect(card).toHaveCount(0);
+  await expect(page.locator(".margin-note[data-change]")).toHaveCount(0);
   await expect(editor(page)).not.toContainText("Med posten");
 });
 
