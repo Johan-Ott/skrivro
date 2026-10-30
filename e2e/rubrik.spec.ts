@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { openExample, runCommand } from "./helpers";
+import { openExample, openLook, runCommand } from "./helpers";
 
 test("a chapter gets a subtitle and an epigraph, and the design sets its title in small caps", async ({
   page,
@@ -15,13 +15,10 @@ test("a chapter gets a subtitle and an epigraph, and the design sets its title i
   await expect(page.getByRole("button", { name: "Elin, vintern 1952" })).toBeVisible();
 
   await runCommand(page, "Gå till Publicera");
-  await page
-    .locator(".publish-tile")
-    .filter({ hasText: /^Design/ })
-    .click();
-  await page.getByRole("button", { name: "Titel" }).click();
+  await openLook(page, "Kapitelrubrik");
+  await page.getByRole("button", { name: "Titel", exact: true }).click();
   await page.getByRole("menuitemradio", { name: "Kapitäler" }).click();
-  await expect(page.getByRole("button", { name: "Titel" })).toHaveText("Kapitäler");
+  await expect(page.getByRole("button", { name: "Titel", exact: true })).toHaveText("Kapitäler");
 });
 
 test("a new chapter opening template is drawn, made the standard, and picked by a chapter", async ({
@@ -29,10 +26,7 @@ test("a new chapter opening template is drawn, made the standard, and picked by 
 }) => {
   await openExample(page);
   await runCommand(page, "Gå till Publicera");
-  await page
-    .locator(".publish-tile")
-    .filter({ hasText: /^Design/ })
-    .click();
+  await openLook(page, "Kapitelöppningar");
 
   await page.getByRole("button", { name: "+ Ny mall" }).click();
   await page.getByRole("menuitem", { name: "Bild överst" }).click();
@@ -55,10 +49,7 @@ test("a template is duplicated and removed from its menu, but the last one stays
 }) => {
   await openExample(page);
   await runCommand(page, "Gå till Publicera");
-  await page
-    .locator(".publish-tile")
-    .filter({ hasText: /^Design/ })
-    .click();
+  await openLook(page, "Kapitelöppningar");
 
   await page.getByRole("button", { name: "Mallens meny" }).click();
   await page.getByRole("menuitem", { name: "Duplicera" }).click();

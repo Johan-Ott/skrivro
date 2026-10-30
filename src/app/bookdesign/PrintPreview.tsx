@@ -1,15 +1,14 @@
 import { useEffect, useRef } from "react";
-import type { Project } from "../useProject.js";
 import { framePages } from "./framePages.js";
-import { usePrintPreview } from "./usePrintPreview.js";
+import { type BookPages, useSpread } from "./usePrintPreview.js";
 import { t } from "../../i18n/i18n.js";
 
-function usePageFrames(svg: string | null) {
+function usePageFrames(spread: { svg: string; row: number } | null) {
   const pages = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const drawn = pages.current?.querySelector("svg");
-    if (svg && drawn) framePages(drawn);
-  }, [svg]);
+    if (spread && drawn) framePages(drawn, spread.row);
+  }, [spread]);
   return pages;
 }
 
@@ -24,31 +23,29 @@ const Waiting = () => (
   </div>
 );
 
-/** The SVG comes from Typst and the writer's own text, never from outside, so it is set as HTML. */
-export function PrintPreview({
-  project,
-  generalAuthor,
-}: {
-  project: Project;
-  generalAuthor: string;
-}) {
-  const preview = usePrintPreview(project, generalAuthor);
-  const pages = usePageFrames(preview.kind === "ready" ? preview.svg : null);
+/** One spread of the book. The SVG comes from Typst and the writer's own text, never from
+ * outside, so it is set as HTML. */
+export function PrintPreview({ pages, row }: { pages: BookPages; row: number }) {
+  const spread = useSpread(pages.kind === "ready" ? pages.book : null, row);
+  const frames = usePageFrames(spread);
+  if (pages.kind === "failed")
+    return (
+      <div className="print-preview">
+        <p className="kpi-sub" role="alert">
+          {pages.reason}
+        </p>
+      </div>
+    );
   return (
     <div className="print-preview">
-      <span className="setting-hint">{t("Förhandsvisning · första kapitlet")}</span>
-      {preview.kind === "working" && <Waiting />}
-      {preview.kind === "failed" && (
-        <p className="kpi-sub" role="alert">
-          {preview.reason}
-        </p>
-      )}
-      {preview.kind === "ready" && (
+      {spread ? (
         <div
-          ref={pages}
+          ref={frames}
           className="print-pages"
-          dangerouslySetInnerHTML={{ __html: preview.svg }}
+          dangerouslySetInnerHTML={{ __html: spread.svg }}
         />
+      ) : (
+        <Waiting />
       )}
     </div>
   );

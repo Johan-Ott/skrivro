@@ -1,12 +1,6 @@
 import JSZip from "jszip";
 import { describe, expect, it } from "vitest";
-import {
-  bookDetails,
-  bookOutline,
-  estimatedPages,
-  ExportError,
-  readBookScenes,
-} from "../src/export/book";
+import { bookDetails, bookOutline, ExportError, readBookScenes } from "../src/export/book";
 import { standardManuscript } from "../src/export/standardManuscript";
 import { withSpecialFolders, type TreeNode } from "../src/project/tree";
 import { createMemoryFileSystem } from "@llkit/storage/memoryFileSystem.js";
@@ -159,11 +153,5 @@ describe("book details", () => {
       words: 1000,
     });
     expect(general.author).toBe("Elin Berg");
-  });
-
-  it("estimate the pages: a title page, 250 words a page, and a new page per part and chapter", () => {
-    const pages = estimatedPages(48_210, bookOutline(tree));
-
-    expect(pages).toBe(1 + 193 + 2);
   });
 });

@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import JSZip from "jszip";
-import { openExample } from "../helpers";
+import { exportAs, openExample } from "../helpers";
 
 // A writer sends her manuscript to an editor in Word and reads the editor's file back: the
 // file Skrivro made, changed in Word as an editor would, and each change taken or left.
@@ -25,13 +25,8 @@ test("a manuscript goes to the editor in Word and comes back with changes to tak
   await openExample(page);
 
   await page.getByRole("tab", { name: "Publicera" }).click();
-  await page
-    .locator(".publish-tile")
-    .filter({ hasText: /^Exportera/ })
-    .click();
-  await page.getByText("Standardmanus", { exact: true }).click();
   const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Exportera manus" }).click();
+  await exportAs(page, "Standardmanus");
   const manuscript = join(testInfo.outputDir, (await download).suggestedFilename());
   await (await download).saveAs(manuscript);
 
@@ -40,7 +35,7 @@ test("a manuscript goes to the editor in Word and comes back with changes to tak
     ["utan att se upp från spisen", "vid spisen"],
   ]);
 
-  await page.getByRole("button", { name: /Tillbaka till texten/ }).click();
+  await page.getByRole("tab", { name: "Skriv" }).click();
   const chooser = page.waitForEvent("filechooser");
   await page.getByRole("button", { name: "Meny" }).first().click();
   await page.getByRole("menuitem", { name: "Dela och samarbeta" }).click();

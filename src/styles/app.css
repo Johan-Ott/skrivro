@@ -1965,47 +1965,6 @@ body:has(.new-book-dialog) .new-book {
   align-self: flex-start;
 }
 
-.export-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 340px;
-  max-width: 100%;
-  height: 500px;
-  padding: 56px 44px;
-  border: 1px solid var(--border);
-  background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  color: #1a1a1a;
-  font-family: var(--font-prose);
-  text-align: center;
-}
-
-.export-page-title {
-  margin-top: 110px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.export-page-subtitle {
-  margin-top: 6px;
-  font-size: 13px;
-  font-style: italic;
-}
-
-.export-page-author {
-  margin-top: 48px;
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.export-page-note {
-  margin-top: auto;
-  color: #6b6b6b;
-  font-size: 9px;
-}
-
 .export-error {
   position: absolute;
   bottom: 24px;
@@ -2388,6 +2347,7 @@ body:has(.new-book-dialog) .new-book {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  padding-top: 12px;
 }
 
 .design-block {
@@ -2445,6 +2405,20 @@ body:has(.new-book-dialog) .new-book {
 
 .design-details:not([open]) > summary::after {
   transform: none;
+}
+
+/* A folded section shows its value beside its name, so it can be read without opening it. */
+.design-folded {
+  margin: 0 8px 0 auto;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.design-details[open] > summary .design-folded {
+  display: none;
 }
 
 .design-section {
@@ -2572,6 +2546,16 @@ body:has(.new-book-dialog) .new-book {
   fill: #ffffff;
   stroke: var(--border-soft);
   stroke-width: 0.5;
+}
+
+/* Typst lays its links and its selectable text over the page; neither is drawn. */
+
+.print-pages .pseudo-link {
+  fill: transparent;
+}
+
+.print-pages .tsel {
+  color: transparent;
 }
 
 /* Until the pages are set: a blank spread, its lines breathing, the spine shaded as on paper. */

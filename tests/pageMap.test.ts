@@ -86,6 +86,7 @@ describe("pageMap", () => {
       ],
       pages: 10,
       lastPage: 8,
+      openings: [],
     };
 
     const map = pageMap(marks, [

@@ -30,7 +30,10 @@ export default tseslint.config(
       "max-params": ["error", 4],
       "max-depth": ["error", 3],
       complexity: ["error", 8],
-      "id-length": ["error", { min: 3, exceptions: ["id", "to", "x", "y", "i", "j", "t"] }],
+      "id-length": [
+        "error",
+        { min: 3, exceptions: ["id", "to", "x", "y", "i", "j", "t", "lo", "hi"] },
+      ],
       "no-console": "error",
       "no-warning-comments": ["error", { terms: ["todo", "fixme", "hack", "xxx"] }],
       "no-else-return": "error",

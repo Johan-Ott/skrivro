@@ -1,4 +1,3 @@
-import type { OutlineItem } from "./book.js";
 import { isPictureName, openingsOf, type OpeningTemplate } from "./openings.js";
 
 /** Kept in project.json under `design`. */
@@ -196,11 +195,4 @@ export function marginsOf(design: BookDesign): Margins {
 export function trimSize(trim: string) {
   const [width = 130, height = 200] = trim.split("x").map(Number);
   return { width, height };
-}
-
-/** Up to the end of the first chapter: enough to judge the design, quick to set. */
-export function previewOutline(outline: OutlineItem[]): OutlineItem[] {
-  const firstChapter = outline.findIndex((item) => item.kind === "chapter");
-  const next = outline.findIndex((item, index) => index > firstChapter && item.kind !== "scene");
-  return firstChapter === -1 || next === -1 ? outline : outline.slice(0, next);
 }

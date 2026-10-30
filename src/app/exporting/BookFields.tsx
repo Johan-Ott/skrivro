@@ -1,20 +1,11 @@
 import { useState } from "react";
-import { Parts } from "./PartFields.js";
 import { bookDetails } from "../../export/book.js";
 import type { Project } from "../useProject.js";
 import { COVER_MINIMUM, isCoverTooSmall } from "../../project/cover.js";
 import type { useCover } from "./useCover.js";
-import type { ExportChoices } from "./useExport.js";
 import { t } from "../../i18n/i18n.js";
 
-export interface BookFieldsProps {
-  cover: ReturnType<typeof useCover>;
-  project: Project;
-  generalAuthor: string;
-  choices: ExportChoices;
-  setChoices: (choices: ExportChoices) => void;
-  onSaveFields: (fields: Record<string, unknown>) => void;
-}
+type Cover = ReturnType<typeof useCover>;
 
 // Empty is fine, as the ISBN is optional; the hyphens are only for reading.
 const isIsbn = (value: string) => {
@@ -50,13 +41,17 @@ function DetailField(props: {
   );
 }
 
-function Details({ project, generalAuthor, choices, onSaveFields }: BookFieldsProps) {
+/** The name, subtitle and ISBN the book is made with. */
+export function Details(props: {
+  project: Project;
+  generalAuthor: string;
+  onSaveFields: (fields: Record<string, unknown>) => void;
+}) {
+  const { project, generalAuthor, onSaveFields } = props;
   const details: [string, string, string][] = [
     ["author", t("Författarnamn"), generalAuthor || t("Namn eller pseudonym")],
     ["subtitle", t("Undertitel (valfritt)"), bookDetails(project.fields, "", 0).subtitle],
-    ...(choices.format !== "manus"
-      ? [["isbn", t("ISBN (valfritt)"), "978-91-…"] as [string, string, string]]
-      : []),
+    ["isbn", t("ISBN (valfritt)"), "978-91-…"],
   ];
   return details.map(([key, label, placeholder]) => (
     <DetailField
@@ -70,7 +65,7 @@ function Details({ project, generalAuthor, choices, onSaveFields }: BookFieldsPr
   ));
 }
 
-function coverHint({ picture, problem }: BookFieldsProps["cover"]) {
+function coverHint({ picture, problem }: Cover) {
   const minimum = `${COVER_MINIMUM.width} × ${COVER_MINIMUM.height} px`;
   if (problem) return problem;
   if (picture && isCoverTooSmall(picture.size)) {
@@ -82,7 +77,7 @@ function coverHint({ picture, problem }: BookFieldsProps["cover"]) {
   return picture ? t("Din bild används som omslag.") : `JPG eller PNG, minst ${minimum}.`;
 }
 
-function CoverRow({ cover }: Pick<BookFieldsProps, "cover">) {
+export function CoverRow({ cover }: { cover: Cover }) {
   return (
     <div className="cover-row">
       <div className="cover-thumb">
@@ -95,17 +90,6 @@ function CoverRow({ cover }: Pick<BookFieldsProps, "cover">) {
           {t("Byt bild…")}
         </button>
       </div>
-    </div>
-  );
-}
-
-export function BookFields(props: BookFieldsProps) {
-  return (
-    <div className="export-column">
-      <Details {...props} />
-      {props.choices.format === "ebok" && <CoverRow cover={props.cover} />}
-      <span className="export-heading spaced">{t("Bokens delar")}</span>
-      <Parts {...props} />
     </div>
   );
 }

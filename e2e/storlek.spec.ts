@@ -26,7 +26,7 @@ for (const size of SIZES) {
     expect(await pastTheEdge(page)).toEqual([]);
 
     await page.getByRole("tab", { name: "Publicera" }).click();
-    await expect(page.locator(".publish-button")).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Exportera/ })).toBeVisible();
     expect(await pastTheEdge(page)).toEqual([]);
 
     await page.getByRole("tab", { name: "Skriv" }).click();

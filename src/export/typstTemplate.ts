@@ -103,7 +103,8 @@ const CLASSIC_PARTS = `#let scenbrytning(mark) = align(center, block(above: 1.4e
 #let opening(label, title, toc, layout, extra) = {
   [#metadata(none) <chapter-end>]
   pagebreak(weak: true, to: chapter-start)
-  [#metadata(none) <opening>]
+  // Its sheet from 0 and its printed number, so Publicera can turn to it and name its page.
+  context [#metadata((sheet: here().page() - 1, folio: counter(page).get().first())) <opening>]
   chapter-title.update(if title == none { toc } else { title })
   heading(level: 1, toc)
   for shown in layout.pictures { picture-at(shown) }

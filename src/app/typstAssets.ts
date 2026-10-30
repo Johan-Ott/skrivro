@@ -1,4 +1,4 @@
-import type { PageMarks, TypstFiles } from "../export/typstCompile.js";
+import type { PageMarks, Sheets, TypstFiles } from "../export/typstCompile.js";
 import { TypstError } from "../export/typstError.js";
 import type { TypstRequest } from "./typstWorker.js";
 import { platform } from "./platform.js";
@@ -42,16 +42,22 @@ function started() {
   return worker;
 }
 
-function ask<T>(method: TypstRequest["method"], source: string, files: TypstFiles = new Map()) {
+function ask<T>(
+  method: TypstRequest["method"],
+  source: string,
+  files: TypstFiles = new Map(),
+  sheets?: Sheets,
+) {
   const id = ++nextId;
   return new Promise<T>((resolve, reject) => {
     waiting.set(id, { resolve: (result) => resolve(result as T), reject });
-    started().postMessage({ id, method, source, files } satisfies TypstRequest);
+    started().postMessage({ id, method, source, files, sheets } satisfies TypstRequest);
   });
 }
 
 export const appTypst = {
   pdf: (source: string, files?: TypstFiles) => ask<Uint8Array>("pdf", source, files),
-  svg: (source: string, files?: TypstFiles) => ask<string>("svg", source, files),
+  svg: (source: string, files?: TypstFiles, sheets?: Sheets) =>
+    ask<string>("svg", source, files, sheets),
   pageMarks: (source: string, files?: TypstFiles) => ask<PageMarks>("pageMarks", source, files),
 };

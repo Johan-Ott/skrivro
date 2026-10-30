@@ -35,13 +35,13 @@ test("a comment begun in Skriv is written in Redigera, and waits there", async (
   await expect(step(page, "Redigera")).toContainText(/\d/);
 });
 
-test("Publicera shows the book, and Tillbaka goes back to the text in its step", async ({
+test("Publicera shows the book in place of the text, and a step goes back to it", async ({
   page,
 }) => {
-  await step(page, "Redigera").click();
   await step(page, "Publicera").click();
   await expect(editor(page)).toBeHidden();
+  await expect(page.getByRole("navigation", { name: "Bokens delar" })).toBeVisible();
 
-  await page.getByRole("button", { name: "Tillbaka till texten" }).click();
-  await expect(step(page, "Redigera")).toHaveAttribute("aria-selected", "true");
+  await step(page, "Redigera").click();
+  await expect(editor(page)).toBeVisible();
 });

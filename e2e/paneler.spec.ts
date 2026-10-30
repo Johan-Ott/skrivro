@@ -41,7 +41,7 @@ test("a panel opens docked beside the text, Lossa lets it float and Docka lays i
   await expect(dock.getByRole("region", { name: "I scenen" })).toBeVisible();
 });
 
-test("Granska and Insikter docked together share a tab row, the one opened last in front", async ({
+test("Granska and Insikter docked together share a tab row, and opening the one behind brings it to the front", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 820 });
@@ -58,6 +58,11 @@ test("Granska and Insikter docked together share a tab row, the one opened last 
   await tabs.getByRole("tab", { name: "Insikter" }).click();
   await expect(insights).toBeVisible();
   await expect(review).toHaveCount(0);
+
+  await page.getByRole("button", { name: /^Granska · / }).click();
+  await expect(review).toBeVisible();
+  await togglePanel(page, "Insikter");
+  await expect(insights).toBeVisible();
 
   await insights.getByRole("button", { name: "Lossa panelen" }).click();
   await expect(tabs).toHaveCount(0);

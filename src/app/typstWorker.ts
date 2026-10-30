@@ -1,6 +1,6 @@
 // Typst sets the book here, away from the window, so writing never waits for a long book.
 import rendererWasmUrl from "@myriaddreamin/typst-ts-renderer/pkg/typst_ts_renderer_bg.wasm?url";
-import { createTypst, type TypstFiles } from "../export/typstCompile.js";
+import { createTypst, type Sheets, type TypstFiles } from "../export/typstCompile.js";
 import { TypstError } from "../export/typstError.js";
 
 // Each font in public/fonts has its OFL licence beside it.
@@ -54,6 +54,8 @@ export interface TypstRequest {
   method: "pdf" | "svg" | "pageMarks";
   source: string;
   files: TypstFiles;
+  /** For svg: only these sheets drawn. */
+  sheets?: Sheets | undefined;
 }
 
 // One book at a time: the compiler holds one source, so requests wait their turn.
@@ -61,10 +63,12 @@ let queue: Promise<unknown> = Promise.resolve();
 
 self.onmessage = (event: MessageEvent<TypstRequest | { compiler: ArrayBuffer }>) => {
   if ("compiler" in event.data) return giveCompiler(new Uint8Array(event.data.compiler));
-  const { id, method, source, files } = event.data;
+  const { id, method, source, files, sheets } = event.data;
   queue = queue.then(async () => {
     try {
-      postMessage({ id, result: await typst[method](source, files) });
+      const result =
+        method === "svg" ? typst.svg(source, files, sheets) : typst[method](source, files);
+      postMessage({ id, result: await result });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       postMessage({ id, error: message, isTypst: error instanceof TypstError });

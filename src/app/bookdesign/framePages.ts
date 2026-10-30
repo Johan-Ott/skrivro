@@ -45,22 +45,24 @@ function frame(page: SVGGElement, isRight: boolean, width: number, height: numbe
   );
 }
 
-// Typst draws the pages in one column; this lays them out as an open book, page 1 alone on the
-// right, then 2 and 3, 4 and 5. Once only, as React may run it twice on the same pages.
-export function framePages(svg: SVGSVGElement) {
-  if (svg.querySelector(".print-sheet")) return;
+// Lays Typst's column of pages out as an open book, page 1 alone on the right, and shows the
+// spread `row`. Framed once only, as React may run it twice on the same pages.
+export function framePages(svg: SVGSVGElement, row: number) {
   const pages = Array.from(svg.querySelectorAll<SVGGElement>(".typst-page"));
   const width = Math.max(0, ...pages.map((page) => Number(page.dataset["pageWidth"])));
   const height = Math.max(0, ...pages.map((page) => Number(page.dataset["pageHeight"])));
-  spineShades(svg);
-  pages.forEach((page, index) => {
-    const column = (index + 1) % 2;
-    const row = Math.floor((index + 1) / 2);
-    frame(page, column === 1, width, height);
-    page.setAttribute("transform", `translate(${column * width}, ${row * (height + GAP)})`);
-  });
-  const rows = Math.ceil((pages.length + 1) / 2);
-  svg.setAttribute("viewBox", `0 0 ${width * 2} ${Math.max(0, rows * (height + GAP) - GAP)}`);
+  if (!svg.querySelector(".print-sheet")) {
+    spineShades(svg);
+    pages.forEach((page, index) => {
+      const column = (index + 1) % 2;
+      const top = Math.floor((index + 1) / 2) * (height + GAP);
+      frame(page, column === 1, width, height);
+      page.setAttribute("transform", `translate(${column * width}, ${top})`);
+    });
+  }
+  svg.setAttribute("viewBox", `0 ${row * (height + GAP)} ${width * 2} ${height}`);
+  // Typst leaves its overflow visible, which would show the other spreads' empty paper.
+  svg.style.overflow = "hidden";
   svg.removeAttribute("width");
   svg.removeAttribute("height");
 }

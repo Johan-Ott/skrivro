@@ -3,6 +3,7 @@ import {
   createTypstRenderer,
   initOptions,
   loadFonts,
+  type RenderSession,
   type TypstCompiler,
   type TypstRenderer,
 } from "@myriaddreamin/typst.ts";
@@ -68,7 +69,11 @@ export interface PageMarks {
   pages: number;
   /** The number printed on the last page. */
   lastPage: number;
+  /** Each part's and chapter's opening, then each text after the story, in the book's order. */
+  openings: { sheet: number; folio: number }[];
 }
+
+type Openings = PageMarks["openings"];
 
 async function queryPages(compiler: TypstCompiler, source: string, files: TypstFiles) {
   load(compiler, source, files);
@@ -77,9 +82,26 @@ async function queryPages(compiler: TypstCompiler, source: string, files: TypstF
     if (compiled.hasError) throw failureOf(compiled.diagnostics);
     const marks = (await world.query({ selector: "<pm>", field: "value" })) as PageMarks["marks"];
     const sheets = (await world.query({ selector: "<sheet>", field: "value" })) as number[];
-    const found: PageMarks = { marks, pages: sheets.length, lastPage: sheets.at(-1) ?? 0 };
+    const openings = (await world.query({ selector: "<opening>", field: "value" })) as Openings;
+    const found: PageMarks = {
+      marks,
+      pages: sheets.length,
+      lastPage: sheets.at(-1) ?? 0,
+      openings,
+    };
     return found;
   });
+}
+
+/** The first and last sheet to draw, counted from 0. */
+export type Sheets = [from: number, to: number];
+
+// Typst stacks the pages in one column; the window over the sheets wanted leaves the others empty,
+// so a spread of a long book is drawn as fast as one of a short.
+function drawSheets(drawer: TypstRenderer, session: RenderSession, [from, to]: Sheets) {
+  const { width, height } = session.retrievePagesInfo()[0] ?? { width: 0, height: 0 };
+  const window = { lo: { x: 0, y: from * height }, hi: { x: width, y: (to + 1) * height } };
+  return drawer.renderSvgDiff({ renderSession: session, window });
 }
 
 /** Started on first use, then kept, since starting takes a moment. */
@@ -93,12 +115,14 @@ export function createTypst(assets: TypstAssets) {
       compile(await compilerOnce(), source, files, PDF),
     pageMarks: async (source: string, files: TypstFiles = new Map()) =>
       queryPages(await compilerOnce(), source, files),
-    /** Drawn from the same compilation as the PDF. */
-    svg: async (source: string, files: TypstFiles = new Map()) => {
+    /** Drawn from the same compilation as the PDF; with sheets, only those are drawn. */
+    svg: async (source: string, files: TypstFiles = new Map(), sheets?: Sheets) => {
       const vector = await compile(await compilerOnce(), source, files, VECTOR);
       const drawer = await rendererOnce();
       return drawer.runWithSession({ format: "vector", artifactContent: vector }, (session) =>
-        drawer.renderSvg({ renderSession: session }),
+        sheets
+          ? Promise.resolve(drawSheets(drawer, session, sheets))
+          : drawer.renderSvg({ renderSession: session }),
       );
     },
   };

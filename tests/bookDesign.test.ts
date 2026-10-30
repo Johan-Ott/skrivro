@@ -1,11 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  DEFAULT_DESIGN,
-  designOf,
-  marginsOf,
-  previewOutline,
-  trimSize,
-} from "../src/export/bookDesign";
+import { DEFAULT_DESIGN, designOf, marginsOf, trimSize } from "../src/export/bookDesign";
 
 describe("designOf", () => {
   it("reads the book design from project.json", () => {
@@ -78,28 +72,6 @@ describe("designOf with the print options", () => {
 describe("trimSize", () => {
   it("turns a trim into the page size in millimetres", () => {
     expect(trimSize("130x200")).toEqual({ width: 130, height: 200 });
-  });
-});
-
-describe("previewOutline", () => {
-  it("keeps the book up to the end of its first chapter", () => {
-    const outline = [
-      { kind: "part" as const, number: 1, title: "Vintern" },
-      { kind: "chapter" as const, number: 1, title: "Brevet" },
-      { kind: "scene" as const, id: "koket" },
-      { kind: "scene" as const, id: "isen" },
-      { kind: "chapter" as const, number: 2, title: "Fyren" },
-      { kind: "scene" as const, id: "fyren" },
-    ];
-
-    const preview = previewOutline(outline);
-
-    expect(preview.map((item) => (item.kind === "scene" ? item.id : item.title))).toEqual([
-      "Vintern",
-      "Brevet",
-      "koket",
-      "isen",
-    ]);
   });
 });
 

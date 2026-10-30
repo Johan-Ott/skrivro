@@ -1,11 +1,11 @@
 import { expect, test } from "@playwright/test";
-import { editor, openExample, runCommand } from "./helpers";
+import { editor, exportAs, openExample, runCommand } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
   await openExample(page);
   await editor(page).click();
   await runCommand(page, "Publicera");
-  await page.getByRole("button", { name: /Till förlag/ }).click();
+  await exportAs(page, "Till förlag…");
 });
 
 test("the synopsis is kept, and a submission is added and answered", async ({ page }) => {

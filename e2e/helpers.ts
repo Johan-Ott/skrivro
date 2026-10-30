@@ -75,3 +75,19 @@ export async function togglePanel(page: Page, name: string) {
 export async function openLayouts(page: Page) {
   await page.getByRole("button", { name: /^Layouter/ }).click();
 }
+
+/** Picks one way out of the book from Publicera's Exportera menu. */
+export async function exportAs(page: Page, name: string) {
+  await page.getByRole("button", { name: /^Exportera/ }).click();
+  await page.getByRole("menuitem", { name }).click();
+}
+
+/** Unfolds a section of Publicera's Utseende panel. */
+export const openLook = (page: Page, section: string) =>
+  page.locator("summary", { hasText: section }).click();
+
+/** A part of the book in Publicera's sidebar, by the name it starts with. */
+export const bookPart = (page: Page, name: string) =>
+  page
+    .getByRole("navigation", { name: "Bokens delar" })
+    .getByRole("button", { name: new RegExp(`^${name}`) });

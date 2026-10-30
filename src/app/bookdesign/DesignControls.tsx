@@ -11,7 +11,6 @@ import {
   type HeaderContent,
 } from "../../export/bookDesign.js";
 import type { ReactNode } from "react";
-import { usePhone } from "../phone/usePhone.js";
 import { ChoiceRow } from "./ChoiceRow.js";
 import { HeadingControls, type ControlProps } from "./HeadingControls.js";
 import { OpeningList } from "./OpeningList.js";
@@ -147,30 +146,40 @@ function SceneBreaks({ design, save, dir }: ControlProps) {
   );
 }
 
-// Each part folds; on a phone they start folded, so the whole design is not one long scroll.
-function Section({ label, children }: { label: string; children: ReactNode }) {
+// Each part folds to one line that says what it is set to, so the panel beside the book is short.
+function Section(props: { label: string; value: string; children: ReactNode }) {
   return (
-    <details className="design-details" open={!usePhone()}>
-      <summary className="design-section">{label}</summary>
-      {children}
+    <details className="design-details">
+      <summary className="design-section">
+        {props.label}
+        <span className="design-folded">{props.value}</span>
+      </summary>
+      {props.children}
     </details>
   );
 }
 
+// "13 × 20 cm" without the inches; an own size in millimetres.
+const trimName = (trim: string) =>
+  TRIMS.find(([id]) => id === trim)?.[1].replace(/ \(.*\)$/, "") ??
+  trim.replace("x", " × ") + " mm";
+
 export function DesignControls(props: ControlProps) {
+  const { design } = props;
+  const opening = design.openings.find((template) => template.id === design.opening);
   return (
     <div className="design-controls">
       <ThemeCards {...props} />
-      <Section label={t("Sidan")}>
+      <Section label={t("Sidan")} value={trimName(design.trim)}>
         <PageRows {...props} />
       </Section>
-      <Section label={t("Kapitelrubrik")}>
+      <Section label={t("Kapitelrubrik")} value={design.headingFont}>
         <HeadingControls {...props} />
       </Section>
-      <Section label={t("Kapitelöppningar")}>
+      <Section label={t("Kapitelöppningar")} value={opening?.name ?? ""}>
         <OpeningList {...props} />
       </Section>
-      <Section label={t("Brödtext")}>
+      <Section label={t("Brödtext")} value={`${design.bodyFont} · ${design.bodySize} pt`}>
         <BodyRows {...props} />
         <SceneBreaks {...props} />
       </Section>

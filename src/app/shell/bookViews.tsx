@@ -104,7 +104,6 @@ export function PublishScreen({ app, project, onBack }: ViewProps) {
       generalAuthor={app.startup.preferences.authorName}
       onSaveFields={(fields) => void app.updateFields(fields)}
       onOpenScene={(title) => openSceneTitled(app, project, title)}
-      onBack={onBack}
       onShowToCheck={() => showToCheck(app, onBack)}
     />
   );

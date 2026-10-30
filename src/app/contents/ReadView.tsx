@@ -89,7 +89,7 @@ function PageChrome(props: {
   ));
 }
 
-function useTurnKeys(turn: (step: number) => void) {
+export function useTurnKeys(turn: (step: number) => void) {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLInputElement)

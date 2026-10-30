@@ -120,11 +120,3 @@ export function bookDetails(
     words,
   };
 }
-
-// A standard manuscript page holds about 250 words.
-const WORDS_PER_PAGE = 250;
-
-export function estimatedPages(words: number, outline: OutlineItem[]): number {
-  const newPages = outline.filter((item) => item.kind !== "scene").length;
-  return 1 + Math.ceil(words / WORDS_PER_PAGE) + newPages;
-}

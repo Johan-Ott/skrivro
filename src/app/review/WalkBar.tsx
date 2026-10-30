@@ -69,9 +69,9 @@ function countsText(marks: Mark[]) {
   return countParts({ changes, comments: marks.length - changes }).join(" · ");
 }
 
-const ARROWS = { previous: "m15 6-6 6 6 6", next: "m9 6 6 6-6 6" };
+export const ARROWS = { previous: "m15 6-6 6 6 6", next: "m9 6 6 6-6 6" };
 
-const Arrow = (props: { path: string; label: string; onClick: () => void }) => (
+export const Arrow = (props: { path: string; label: string; onClick: () => void }) => (
   <button className="icon-button" aria-label={props.label} onClick={props.onClick}>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
       <path d={props.path} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

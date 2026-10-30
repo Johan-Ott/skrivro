@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import {
   cursorAfterFirstParagraph,
   editor,
+  exportAs,
   openExample,
   runCommand,
   selectFirstWord,
@@ -190,15 +191,9 @@ test("the text's own header opens its versions from the chapter menu", async ({ 
 test("the standard manuscript is exported as a Word file", async ({ page }) => {
   await editor(page).click();
   await runCommand(page, "Gå till Publicera");
-  await page
-    .locator(".publish-tile")
-    .filter({ hasText: /^Exportera/ })
-    .click();
-
-  await page.getByText("Standardmanus", { exact: true }).click();
 
   const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Exportera manus" }).click();
+  await exportAs(page, "Standardmanus");
 
   expect((await download).suggestedFilename()).toMatch(/\.docx$/);
 });

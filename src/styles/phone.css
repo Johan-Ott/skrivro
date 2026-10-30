@@ -529,45 +529,46 @@ body .selection-bar.phone .icon-button {
   grid-column: 2;
 }
 
-/* Publicera on a phone: the choices first, the preview under them, all in one scroll. */
-.phone-view .publish {
+/* Publicera on a phone: the book's parts on top, then the book, its look under it. */
+.phone-view > .sidebar {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 0;
+  flex-grow: 0;
+  gap: 8px;
+  max-height: 35%;
+  padding: 8px;
   overflow-y: auto;
 }
 
-.phone-view .publish-steps {
+.phone-view .publish {
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.phone-view .publish-center {
   flex-shrink: 0;
-  padding: 12px 8px 0;
+}
+
+.phone-view .publish-bar {
+  flex-wrap: wrap;
+  height: auto;
+  padding: 8px;
+}
+
+.phone-view .publish-preview {
+  min-height: 420px;
+}
+
+.phone-view .publish > .panel-dock {
+  width: auto;
   overflow: visible;
+  border-top: 1px solid var(--border);
+  border-left: 0;
 }
 
-/* The tabs below lead back to the text, so Publicera has no way back of its own on a phone; its
-   parts are one row to swipe. */
-.phone-view .publish-steps > .publish-back {
-  display: none;
-}
-
-/* The row fades out at its right edge, so it shows there is more to swipe to; the padding lets the
-   last tab come out of the fade. */
-.phone-view .publish-tabs {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-right: 32px;
-  scrollbar-width: none;
-  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
-}
-
-.phone-view .publish-tile {
-  flex-shrink: 0;
-}
-
-.phone-view .publish.step-forlag .publish-preview {
-  min-height: 0;
-  margin: 0;
-  border: 0;
+/* The look is part of the page here, not a panel over the whole screen as elsewhere on a phone. */
+.phone-view .publish > .panel-dock > .block-panel {
+  position: static;
 }
 
 .phone-view .submit-step {
@@ -576,19 +577,6 @@ body .selection-bar.phone .icon-button {
 
 body .phone-view .submit-text {
   min-height: 50dvh;
-}
-
-/* The preview only with Design, and Exportera's button only where exporting is chosen. */
-.phone-view .publish:not(.step-design, .step-forlag) .publish-preview,
-.phone-view .publish.step-design .publish-button,
-.phone-view .publish.step-details .publish-button {
-  display: none;
-}
-
-.phone-view .publish-preview {
-  flex-shrink: 0;
-  min-height: 480px;
-  margin: 16px 8px;
 }
 
 /* The tools over the keyboard while writing. */

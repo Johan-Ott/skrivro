@@ -189,7 +189,7 @@ function screenClasses(
     "app",
     isArriving && "arriving",
     writingMode.isFocusMode && "focus-mode",
-    writingMode.isSidebarOpen && !isPublishing ? "sidebar-open" : "sidebar-closed",
+    writingMode.isSidebarOpen ? "sidebar-open" : "sidebar-closed",
     !isPublishing && "format-bar-on",
   ];
 }
