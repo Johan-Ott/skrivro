@@ -3490,6 +3490,36 @@ body:has(.new-book-dialog) .new-book {
   outline-offset: 2px;
 }
 
+/* Redigera reads on into the next scenes, so the open scene ends where its text does. */
+.sheet:has(> .read-on) .manuscript .ProseMirror {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.read-on {
+  padding-bottom: 40vh;
+}
+
+.read-on-scene {
+  cursor: pointer;
+}
+
+.read-on-seam {
+  display: block;
+  width: 100%;
+  margin: 28px 0 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-label);
+  font: 12px var(--font-ui);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+
 .margin-note-who {
   display: flex;
   align-items: center;
@@ -3621,7 +3651,8 @@ body:has(.new-book-dialog) .new-book {
 
 /* Boktypografi: justified with hyphens, and the rest as the book's design in Publicera sets it. */
 
-.page.book-type .ProseMirror {
+.page.book-type .ProseMirror,
+.page.book-type .read-on {
   text-align: justify;
   hyphens: auto;
 }

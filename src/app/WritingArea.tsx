@@ -45,6 +45,8 @@ interface WritingAreaProps {
   selectionBar: ReactNode;
   header: ReactNode;
   footer: ReactNode;
+  /** Redigera: the rest of the book after the open scene, on the same sheet. */
+  readOn?: ReactNode;
   /** Saved by a newer Skrivro: shown, never written to. */
   isReadOnly: boolean;
   /** The open scene lies in Papperskorgen: shown, never written to, until it is put back. */
@@ -123,7 +125,12 @@ function Page(props: WritingAreaProps) {
           ref={editor.mount}
           onContextMenu={textMenu.onContextMenu}
         />
-        {hasScene && !isFocusMode && props.footer}
+        {hasScene && !isFocusMode && (
+          <>
+            {props.footer}
+            {props.readOn}
+          </>
+        )}
         <SheetEdges {...props} isShown={isOnPaper(props)} />
       </div>
       {props.margin}

@@ -18,6 +18,7 @@ import { NoteHeader, NoteMentions, noteSortOf, type NotePageProps } from "./note
 import { NoteVoice } from "./notes/NoteVoice.js";
 import { MarginNotes } from "./review/MarginNotes.js";
 import { ReviewLayer } from "./review/ReviewLayer.js";
+import { ReadOn } from "./review/ReadOn.js";
 import { TextHeader } from "./TextHeader.js";
 import { SceneStrip } from "./phone/SceneStrip.js";
 import { openInHome } from "./notes/noteHomes.js";
@@ -194,6 +195,7 @@ export function writingAreaProps(app: AppState, project: Project) {
     hasScene: app.scene !== null,
     focusLocation: focusLocation(project, app.scene),
     ...textParts(app, project),
+    readOn: <ReadOn app={app} project={project} onOpen={openText(app)} />,
     ...app.writingMode,
     saveStatus: app.saveStatus,
     today: app.today,

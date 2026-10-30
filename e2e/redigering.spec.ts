@@ -156,6 +156,21 @@ async function readersFile(folder: string) {
   return path;
 }
 
+test("in Redigera the rest of the book follows the open scene, and a click opens the one read", async ({
+  page,
+}) => {
+  await openExample(page);
+  await expect(page.locator(".read-on")).toHaveCount(0);
+  await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
+  const next = page.locator(".read-on-scene").first();
+  await expect(next).toContainText("Isen bar.");
+
+  await next.getByRole("button", { name: /Isen/ }).click();
+
+  await expect(editor(page)).toContainText("Isen bar.");
+  await expect(page.locator(".read-on-scene").first()).not.toContainText("Isen bar.");
+});
+
 test("a test reader's comments in Word come into Granska, on the words they are on", async ({
   page,
 }, testInfo) => {
