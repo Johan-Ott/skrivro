@@ -16,8 +16,8 @@ export function askOnce(keptMs = Infinity) {
 // The one who makes the note asks, and the next text loaded into the editor takes the request.
 export const firstAnswerAsk = askOnce();
 
-// "Platshållare kvar" in Publicera on a phone goes back to the text and asks for Granska in the same breath; the
-// phone closes Granska whenever a screen changes, so the request is kept for the screen that comes.
+// "Platshållare kvar" in Publicera on a phone goes back to the text and asks for Granska at once;
+// the phone closes Granska whenever a screen changes, so the request waits for the next screen.
 export const reviewAsk = askOnce(3000);
 
 // A note just made unfolds its section in the tree, so the writer sees where it went; a note opened
