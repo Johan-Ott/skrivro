@@ -7,7 +7,13 @@ import { acceptChange } from "../src/editor/revisionMarks";
 import { standardManuscript } from "../src/export/standardManuscript";
 import { editorsFile } from "../src/import/revisionImport";
 import { parseMarkdown } from "../src/manuscript/parseMarkdown";
-import { revisionChanges, sameChange, withoutChange } from "../src/manuscript/revision";
+import {
+  revisedPlace,
+  revisionChanges,
+  sameChange,
+  withoutChange,
+  writerPlace,
+} from "../src/manuscript/revision";
 import { serializeMarkdown } from "../src/manuscript/serializeMarkdown";
 
 const MINE = "Isen låg tjock över viken.\nElin gick ut ändå.\n";
@@ -131,5 +137,43 @@ describe("a Word manuscript coming back", () => {
     expect(file.editor).toBe("Lena Ek");
     expect(file.sentAt).toBeGreaterThan(0);
     expect(file.texts.size).toBe(0);
+  });
+});
+
+describe("what is typed in Redigera", () => {
+  const MINE_CAT = "En katt sov.\n";
+  const THEIRS_CAT = "En katten sov.\n";
+
+  it("is the letters put in or taken out, not the whole word", () => {
+    expect(revisionChanges(MINE_CAT, THEIRS_CAT)).toEqual([
+      { from: 7, to: 7, removed: "", added: "en", revisedFrom: 7, revisedTo: 9 },
+    ]);
+    expect(revisionChanges(THEIRS_CAT, MINE_CAT)).toEqual([
+      { from: 7, to: 9, removed: "en", added: "", revisedFrom: 7, revisedTo: 7 },
+    ]);
+  });
+
+  it("stays a word replaced when it changes in the middle", () => {
+    expect(firstChange("En kast.\n", "En katt.\n")).toMatchObject({
+      removed: "kast.",
+      added: "katt.",
+    });
+  });
+
+  it("goes on after the letters added, where the caret shows", () => {
+    const changes = revisionChanges(MINE_CAT, THEIRS_CAT);
+
+    expect(revisedPlace(changes, 3)).toBe(3);
+    expect(revisedPlace(changes, 7)).toBe(9);
+    expect(revisedPlace(changes, 10)).toBe(12);
+    expect(writerPlace(changes, 9)).toBe(7);
+    expect(writerPlace(changes, 12)).toBe(10);
+  });
+
+  it("goes before a word replaced when the caret is at its start, and after it inside it", () => {
+    const changes = revisionChanges(MINE, THEIRS);
+
+    expect(revisedPlace(changes, 9)).toBe(9);
+    expect(revisedPlace(changes, 11)).toBe(13);
   });
 });

@@ -26,7 +26,7 @@ function revisionDecorations(doc: Node, changes: RevisionChange[]): DecorationSe
     const added = () => addedText(change.added, index);
     return [
       ...(to > from ? [Decoration.inline(from, to, removed)] : []),
-      ...(change.added ? [Decoration.widget(to, added, { side: 1 })] : []),
+      ...(change.added ? [Decoration.widget(to, added, { side: -1 })] : []),
     ];
   });
   return DecorationSet.create(doc, decorations);

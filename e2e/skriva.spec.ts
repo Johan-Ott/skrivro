@@ -219,15 +219,12 @@ test("the focus mode button keeps the cursor in the text, so nothing typed is lo
   await expect(editor(page).locator("p").nth(1)).toHaveText("Vädret håller.");
 });
 
-test("Förslagsläge keeps the text as it was, and what was typed comes back to accept", async ({
+test("Redigera keeps the text as it was, and what was typed waits there to accept", async ({
   page,
 }) => {
-  await runCommand(page, "Skriv förslag");
+  await page.getByRole("tab", { name: "Redigera" }).click();
   await cursorAfterFirstParagraph(page);
   await page.keyboard.type(" Hon log.");
-  await expect(page.getByRole("status").filter({ hasText: "Förslagsläge" })).toBeVisible();
-
-  await page.getByRole("status").getByRole("button", { name: "Klar" }).click();
 
   // The suggestion shows in the text as an insertion to accept, not as the text itself.
   await expect(editor(page).locator(".revision-added")).toContainText("Hon log.");
@@ -235,6 +232,18 @@ test("Förslagsläge keeps the text as it was, and what was typed comes back to 
   await expect(review).toContainText("Ändringar att gå igenom (1)");
   await review.getByRole("button", { name: "Godta" }).click();
   await expect(editor(page)).toContainText("vantarna. Hon log.");
+  await expect(editor(page).locator(".revision-added")).toHaveCount(0);
+});
+
+test("with Det du skriver blir förslag off, Redigera writes in the text", async ({ page }) => {
+  await page.getByRole("tab", { name: "Redigera" }).click();
+  await page.getByRole("button", { name: "Det du skriver blir förslag" }).click();
+  await cursorAfterFirstParagraph(page);
+
+  await page.keyboard.type(" Hon log.");
+
+  await expect(editor(page)).toContainText("vantarna. Hon log.");
+  await expect(editor(page).locator(".revision-added")).toHaveCount(0);
 });
 
 test("the folded sidebar floats out while the pointer rests on its button", async ({ page }) => {

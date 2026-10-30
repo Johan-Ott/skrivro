@@ -14,19 +14,30 @@ const revisionPath = (dir: string, sceneId: string) =>
 export const readRevision = (fileSystem: FileSystem, dir: string, sceneId: string) =>
   fileSystem.readText(revisionPath(dir, sceneId)).catch(() => null);
 
-export async function writeRevision(
-  fileSystem: FileSystem,
-  dir: string,
-  sceneId: string,
-  text: string,
-) {
-  await fileSystem.makeDir(joinPath(dir, REVISIONS_DIR));
-  await writeAtomic(fileSystem, revisionPath(dir, sceneId), text);
+// Each scene's version is written in the order asked, so a quick key never lands before the last.
+const inTurn = new Map<string, Promise<void>>();
+
+function inOrder(path: string, work: () => Promise<void>) {
+  const next = (inTurn.get(path) ?? Promise.resolve()).then(work, work);
+  inTurn.set(path, next);
+  return next;
+}
+
+export function writeRevision(fileSystem: FileSystem, dir: string, sceneId: string, text: string) {
+  const path = revisionPath(dir, sceneId);
+  return inOrder(path, async () => {
+    await fileSystem.makeDir(joinPath(dir, REVISIONS_DIR));
+    await writeAtomic(fileSystem, path, text);
+  });
 }
 
 /** Done with: moved to trash/ like everything Skrivro stops using, never deleted. */
-export const finishRevision = (fileSystem: FileSystem, dir: string, sceneId: string) =>
-  setAside(fileSystem, dir, revisionPath(dir, sceneId), `redigering-${sceneId}.txt`);
+export function finishRevision(fileSystem: FileSystem, dir: string, sceneId: string) {
+  const path = revisionPath(dir, sceneId);
+  return inOrder(path, async () => {
+    await setAside(fileSystem, dir, path, `redigering-${sceneId}.txt`);
+  });
+}
 
 /** Förslagsläge's text, kept as an editor's version so Granska shows it the same way. */
 export const writeSuggestion = (

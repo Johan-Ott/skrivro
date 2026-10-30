@@ -1,11 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import {
-  cursorAfterFirstParagraph,
-  editor,
-  openExample,
-  runCommand,
-  selectFirstWord,
-} from "./helpers";
+import { cursorAfterFirstParagraph, editor, openExample, selectFirstWord } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
   await openExample(page);
@@ -49,18 +43,23 @@ test("a comment can be removed, and its mark in the text goes with it", async ({
   await expect(editor(page).locator(".commented")).toHaveCount(0);
 });
 
-test("Förslagsläge shows what is typed and what is cut while it is written", async ({ page }) => {
-  await runCommand(page, "Skriv förslag");
+test("in Redigera what is typed and what is deleted are suggestions, and Ctrl+Z takes them back", async ({
+  page,
+}) => {
+  await page.getByRole("tab", { name: "Redigera" }).click();
   await cursorAfterFirstParagraph(page);
 
   await page.keyboard.type(" Hon log.");
-  const added = editor(page).locator(".suggestion-added");
-  await expect.poll(async () => (await added.allInnerTexts()).join("")).toContain("Hon log.");
+  await expect(editor(page).locator(".revision-added")).toHaveText("Hon log.");
 
   await selectFirstWord(page);
   await page.keyboard.press("Backspace");
+  await expect(editor(page).locator(".revision-removed")).toHaveText("Brevet");
 
-  await expect(editor(page).locator(".suggestion-removed")).toBeVisible();
+  await page.keyboard.press("ControlOrMeta+z");
+  await expect(editor(page).locator(".revision-removed")).toHaveCount(0);
+  await page.keyboard.press("ControlOrMeta+z");
+  await expect(editor(page).locator(".revision-added")).toHaveCount(0);
 });
 
 test("Escape within Granska closes it", async ({ page }) => {

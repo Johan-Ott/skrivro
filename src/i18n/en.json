@@ -1364,5 +1364,6 @@
   "Fler format": "More formats",
   "Visa som": "Show as",
   "Ta bort ur boken": "Remove from the book",
-  "uppslag {row} av {count}": "spread {row} of {count}"
+  "uppslag {row} av {count}": "spread {row} of {count}",
+  "Det du skriver blir förslag": "What you type becomes suggestions"
 }

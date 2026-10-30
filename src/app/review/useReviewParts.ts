@@ -3,10 +3,12 @@ import { documentText } from "../../editor/documentText.js";
 import type { useEditorView } from "../../editor/useEditorView.js";
 import { recordFailure } from "@llkit/errorLog.js";
 import { openScene, type OpenScene, type SceneSession } from "../sceneSession.js";
+import type { Step } from "../useWritingMode.js";
 import type { Project } from "../useProject.js";
 import { useComments } from "./useComments.js";
 import { useRevision } from "./useRevision.js";
 import { useRounds } from "./useRounds.js";
+import { useTypedSuggestions } from "./useTypedSuggestions.js";
 
 type Parts = {
   project: Project | null;
@@ -14,6 +16,7 @@ type Parts = {
   session: SceneSession;
   editor: Editor;
   author: string;
+  step: Step;
 };
 
 type Editor = ReturnType<typeof useEditorView>;
@@ -49,5 +52,8 @@ function useSuggesting(session: SceneSession, editor: Editor, onDone: () => void
 export function useReviewParts(parts: Parts) {
   const revision = useRevision(parts);
   const suggesting = useSuggesting(parts.session, parts.editor, revision.reload);
-  return { comments: useComments(parts), revision, suggesting, rounds: useRounds(parts.project) };
+  const isRedigera = parts.step === "redigera";
+  const typedSuggestions = useTypedSuggestions(parts.editor, revision.typed, isRedigera);
+  const rounds = useRounds(parts.project);
+  return { comments: useComments(parts), revision, suggesting, typedSuggestions, rounds };
 }

@@ -149,9 +149,21 @@ function ReadAs({ app }: { app: AppState }) {
   );
 }
 
+// On, what is typed waits beside the text as suggestions; off, it edits the text as in Skriv.
+const TypedAs = ({ app }: { app: AppState }) => (
+  <button
+    className="chip"
+    aria-pressed={app.typedSuggestions.isOn}
+    onClick={app.typedSuggestions.toggle}
+  >
+    {t("Det du skriver blir förslag")}
+  </button>
+);
+
 function ShownWalkBar({ app, project }: { app: AppState; project: Project }) {
   const editorsFile = useEditorsFile(app, project);
   const { shown } = app.rounds;
+  const send = () => sendToEditor(project, app.zip.run);
   return (
     <>
       <div
@@ -162,15 +174,13 @@ function ShownWalkBar({ app, project }: { app: AppState; project: Project }) {
       >
         {shown ? <RoundStart app={app} project={project} shown={shown} /> : <Walk app={app} />}
         <span className="walk-bar-end">
+          <TypedAs app={app} />
           <ReadAs app={app} />
           <LetterAgain app={app} />
           <button className="link-button" onClick={editorsFile.open}>
             {t("Läs in redaktörens fil…")}
           </button>
-          <button
-            className="button small secondary"
-            onClick={() => sendToEditor(project, app.zip.run)}
-          >
+          <button className="button small secondary" onClick={send}>
             {t("Skicka till redaktör…")}
           </button>
         </span>

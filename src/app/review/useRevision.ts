@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useSettledDoc } from "../../editor/editorStore.js";
 import { documentText } from "../../editor/documentText.js";
 import { acceptChange, refreshRevision } from "../../editor/revisionMarks.js";
@@ -26,18 +26,39 @@ const currentText = (editor: Editor) => {
   return doc ? documentText(doc).text : "";
 };
 
+// Saved at once; null puts the version aside, as when the writer is done with it.
+function save(dir: string, sceneId: string, next: string | null) {
+  const { fileSystem } = platform;
+  const saving =
+    next === null
+      ? finishRevision(fileSystem, dir, sceneId)
+      : writeRevision(fileSystem, dir, sceneId, next);
+  void saving.catch(recordFailure("Redigering"));
+}
+
 // The open scene's editor's version, read when the scene opens or a new one is read in.
 function useRevisedText({ project, scene }: Parts) {
-  const [revised, setRevised] = useState<string | null>(null);
+  const [revised, setShown] = useState<string | null>(null);
+  // Known at once, before React shows it, so each key builds on the one before.
+  const latest = useRef<string | null>(null);
+  const setRevised = useCallback((next: string | null) => {
+    latest.current = next;
+    setShown(next);
+  }, []);
   const [round, setRound] = useState(0);
   const dir = project?.dir ?? null;
   const sceneId = scene?.id ?? null;
   useEffect(() => {
     setRevised(null);
     if (dir && sceneId) void readRevision(platform.fileSystem, dir, sceneId).then(setRevised);
-  }, [dir, sceneId, round]);
+  }, [dir, sceneId, round, setRevised]);
   const reload = useCallback(() => setRound((value) => value + 1), []);
-  return { revised, setRevised, dir, sceneId, reload };
+  const write = (next: string | null) => {
+    if (!dir || !sceneId) return;
+    setRevised(next);
+    save(dir, sceneId, next);
+  };
+  return { revised, write, reload, typed: { revised: () => latest.current, write, sceneId } };
 }
 
 function useChanges(editor: Editor, revised: string | null) {
@@ -73,7 +94,7 @@ function acceptEvery(editor: Editor, revised: string) {
 /** The editor's changes to the open scene, to accept or reject one at a time or all at once. */
 export function useRevision(parts: Parts) {
   const { editor } = parts;
-  const { revised, setRevised, dir, sceneId, reload } = useRevisedText(parts);
+  const { revised, write, reload, typed } = useRevisedText(parts);
   const { changes, settleNow } = useChanges(editor, revised);
   // Found again in the text as it is now, since the writer may have typed since it was shown.
   const fresh = (change: RevisionChange) =>
@@ -85,16 +106,9 @@ export function useRevision(parts: Parts) {
   };
   const reject = (change: RevisionChange) => {
     const found = fresh(change);
-    if (!found || revised === null || !dir || !sceneId) return;
-    const next = withoutChange(revised, found);
-    setRevised(next);
-    void writeRevision(platform.fileSystem, dir, sceneId, next).catch(recordFailure("Redigering"));
+    if (found && revised !== null) write(withoutChange(revised, found));
   };
   const acceptAll = () => (acceptEvery(editor, revised ?? ""), settleNow());
-  const finish = () => {
-    if (!dir || !sceneId) return;
-    setRevised(null);
-    void finishRevision(platform.fileSystem, dir, sceneId).catch(recordFailure("Redigering"));
-  };
-  return { isOpen: revised !== null, changes, accept, reject, acceptAll, finish, reload };
+  const finish = () => write(null);
+  return { isOpen: revised !== null, changes, accept, reject, acceptAll, finish, reload, typed };
 }

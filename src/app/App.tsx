@@ -74,16 +74,16 @@ function useCoreState() {
   setNoteLookup(session, projectState.projectRef);
   const startup = useStartup(open, project?.dir ?? null);
   const { seriesState, seriesActions } = useSeriesParts(project, session, onFolderChange);
-  const seriesDir = seriesState.series?.dir ?? null;
-  useOpenFirstScene(project, session, editor.requestFocus, seriesDir);
+  useOpenFirstScene(project, session, editor.requestFocus, seriesState.series?.dir ?? null);
   const input = { project, session, updateTree, refresh, focusEditor: editor.requestFocus };
   const actions = {
     ...useProjectActions(input),
     notes: useNoteActions(input),
     series: seriesActions,
   };
-  const review = useReviewParts({ ...sceneState, project, author: startup.preferences.authorName });
   const writingMode = useWritingMode();
+  const author = startup.preferences.authorName;
+  const review = useReviewParts({ ...sceneState, project, author, step: writingMode.step });
   return {
     sceneState,
     projectState,

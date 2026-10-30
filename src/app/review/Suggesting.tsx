@@ -17,8 +17,12 @@ export function SuggestingBar({ app }: { app: Pick<AppState, "suggesting"> }) {
   );
 }
 
-/** In Granskas menu: changes typed as suggestions, gone through later as an editor's would be. */
-export function suggestMenuItems(app: Pick<AppState, "suggesting" | "revision">): MenuItem[] {
-  if (app.suggesting.isSuggesting || app.revision.isOpen) return [];
+/** In Granskas menu on a phone: changes typed as suggestions, gone through later as an editor's
+ * would be. The desktop has Redigera for that. */
+export function suggestMenuItems(
+  app: Pick<AppState, "suggesting" | "revision">,
+  isPhone: boolean,
+): MenuItem[] {
+  if (!isPhone || app.suggesting.isSuggesting || app.revision.isOpen) return [];
   return [{ label: t("Skriv förslag"), onSelect: app.suggesting.start }];
 }

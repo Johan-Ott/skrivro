@@ -14,6 +14,7 @@ import type { CommentAnchor } from "./commentMarks.js";
 import { pictureNodeView, type PictureUrl } from "./pictureView.js";
 import type { RevisionChange } from "../manuscript/revision.js";
 import type { SpellingSwitch } from "./spellingMarks.js";
+import type { Suggesting } from "./suggestTyping.js";
 
 function createView(
   element: HTMLElement,
@@ -67,6 +68,7 @@ interface EditorModes {
   pictureUrl: PictureUrl;
   revisionChanges: RevisionChange[];
   suggestedFrom: string | null;
+  suggesting: Suggesting | null;
   spelling: SpellingSwitch | null;
 }
 
@@ -88,6 +90,7 @@ const START_MODES: EditorModes = {
   pictureUrl: async () => null,
   revisionChanges: [],
   suggestedFrom: null,
+  suggesting: null,
   spelling: null,
 };
 
@@ -112,6 +115,7 @@ function useModeSwitches() {
     pictureUrl: (name) => modes.current.pictureUrl(name),
     revisionChanges: () => modes.current.revisionChanges,
     suggestedFrom: () => modes.current.suggestedFrom,
+    suggesting: () => modes.current.suggesting,
     spelling: () => modes.current.spelling,
   }));
   return { switches, modes };

@@ -144,7 +144,7 @@ function ShownReview(props: ShownProps) {
         review={isReviewOn ? review : null}
         commentsSection={<CommentsAndTasks {...props} />}
         narrationSection={<Narration app={app} project={props.project} />}
-        menuItems={suggestMenuItems(app)}
+        menuItems={suggestMenuItems(app, usePhone())}
         bookNotes={bookNotesOf(app, props.project)}
         revisionSection={<RevisionSection revision={app.revision} />}
         revisionCount={app.revision.changes.length}

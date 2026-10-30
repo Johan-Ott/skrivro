@@ -5,11 +5,16 @@ import { paletteEntries, type PaletteContext } from "./paletteEntries.js";
 
 export function usePalette(context: PaletteContext | null) {
   const [isOpen, setOpen] = useState(false);
-  // A phone has no folders to pick, so that entry is left out there.
+  // A phone has no folders to pick, and the desktop suggests in Redigera, not in Förslagsläge.
   const isPhone = usePhone();
   useCommandKey("palette", () => setOpen((current) => !current));
   const entriesNow = () =>
-    context ? paletteEntries(isPhone ? { ...context, chooseFolder: null } : context) : [];
+    context
+      ? paletteEntries({
+          ...context,
+          ...(isPhone ? { chooseFolder: null } : { toggleSuggesting: null }),
+        })
+      : [];
   return {
     isOpen: isOpen && context !== null,
     // Made only while open: a long book has hundreds of entries, and the app draws on every key.

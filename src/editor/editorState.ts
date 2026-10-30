@@ -31,6 +31,7 @@ import { pageMarksPlugin } from "./pageMarks.js";
 import { placeholderPlugin } from "./placeholderMarks.js";
 import { revisionPlugin } from "./revisionMarks.js";
 import { suggestionPlugin } from "./suggestionMarks.js";
+import { suggestTyping, type Suggesting } from "./suggestTyping.js";
 import type { RevisionChange } from "../manuscript/revision.js";
 import { t } from "../i18n/i18n.js";
 
@@ -74,6 +75,8 @@ export interface EditorSwitches {
   revisionChanges: () => RevisionChange[];
   /** In Förslagsläge, the scene's text as it was when it began; otherwise null. */
   suggestedFrom: () => string | null;
+  /** In Redigera, where what is typed goes instead of into the text; otherwise null. */
+  suggesting: () => Suggesting | null;
   /** Null where Skrivro does not check the spelling itself. */
   spelling: () => SpellingSwitch | null;
 }
@@ -93,6 +96,7 @@ export const DEFAULT_SWITCHES: EditorSwitches = {
   pageMarks: () => null,
   revisionChanges: () => [],
   suggestedFrom: () => null,
+  suggesting: () => null,
   spelling: () => null,
 };
 
@@ -135,12 +139,15 @@ const writingRules = (switches: EditorSwitches) =>
     ],
   });
 
+// An empty text gets a paragraph, so there is somewhere to type.
+const writable = (doc: Node) =>
+  doc.childCount > 0 ? doc : doc.copy(Fragment.from(schema.nodes.paragraph.create()));
+
 export function createEditorState(doc: Node, switches = DEFAULT_SWITCHES): EditorState {
-  const writableDoc =
-    doc.childCount > 0 ? doc : doc.copy(Fragment.from(schema.nodes.paragraph.create()));
   return EditorState.create({
-    doc: writableDoc,
+    doc: writable(doc),
     plugins: [
+      suggestTyping(switches.suggesting),
       history(),
       search(),
       completionPlugin(switches.isCompletionOn, switches.completion),
