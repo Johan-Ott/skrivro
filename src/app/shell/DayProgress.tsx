@@ -7,7 +7,7 @@ export function dayText({ words, goal }: Today) {
   return t("{words} / {goal} ord", { words: formatNumber(words), goal: formatNumber(goal) });
 }
 
-// The day's words; a click opens Insikter, with the goals, the week and the writing journey.
+// The day's words; a click opens Mål, with the book's goals, the week and the chapters.
 export function DayProgress({ today, onProgress }: { today: Today; onProgress: () => void }) {
   const share = today.goal ? Math.min(100, (100 * today.words) / today.goal) : null;
   return (

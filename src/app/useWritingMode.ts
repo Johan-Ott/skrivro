@@ -5,7 +5,7 @@ import { useGoKeys, useShortcut } from "@llkit/keys.js";
 import { useCommandKey } from "./shortcuts.js";
 import { useWritingSettings } from "./useWritingSettings.js";
 import { usePhone } from "./phone/usePhone.js";
-import { useShown } from "./blocks/dock.js";
+import { useShown } from "./blocks/column.js";
 import { showPanel } from "./blocks/layout.js";
 import { t } from "../i18n/i18n.js";
 
@@ -103,7 +103,6 @@ export function useWritingMode() {
   const [isFocusMode, setFocusMode] = useState(false);
   const onToggleFocus = useCallback(() => setFocusMode((current) => !current), []);
   const settingsDialog = useSettingsDialog();
-  const [isProgressOpen, setProgressOpen] = useState(false);
   const reviewState = useReviewState();
   const steps = useSteps();
   return {
@@ -112,8 +111,6 @@ export function useWritingMode() {
     onChangeSettings: update,
     isFocusMode,
     onToggleFocus,
-    isProgressOpen,
-    setProgressOpen,
     ...steps,
     ...useReading(steps.setView),
     ...reviewState,

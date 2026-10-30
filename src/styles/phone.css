@@ -300,7 +300,7 @@ body .selection-bar.phone .icon-button {
 /* On a phone every panel is a screen of its own: the bar at the top under the phone's status
    bar, its title in the middle and × to the right, and what it holds scrolling under it. */
 .phone-app .block-panel,
-.phone-app .insights-panel,
+.phone-app .goal-panel,
 .phone-app .review-panel {
   position: fixed;
   inset: 0;
@@ -321,15 +321,13 @@ body .selection-bar.phone .icon-button {
 
 /* What a panel holds keeps its height and the panel scrolls, instead of squeezing its parts. */
 .phone-app .block-panel > *,
-.phone-app .insights-panel > *,
-.phone-app .insights-body > *,
+.phone-app .goal-panel > *,
 .phone-app .review-panel > * {
   flex-shrink: 0;
 }
 
 /* Over the panel's own rows as they scroll past, and nothing outside it. */
-.phone-app .block-head,
-.phone-app .insights-head {
+.phone-app .block-head {
   position: sticky;
   top: 0;
   z-index: 2;
@@ -355,22 +353,16 @@ body .selection-bar.phone .icon-button {
   display: none;
 }
 
-.phone-app .block-head .close-button,
-.phone-app .insights-head .close-button {
+.phone-app .block-head .close-button {
   width: 44px;
   height: 44px;
   font-size: 22px;
 }
 
-/* The close button has the grid's last column to itself, wholly on the screen; a panel here is a
-   screen of its own, so there is nothing to minimise. */
+/* The close button has the grid's last column to itself, wholly on the screen. */
 .phone-app .block-head-buttons {
   grid-column: 3;
   justify-self: end;
-}
-
-.phone-app .block-minimize:not(.review-menu) {
-  display: none;
 }
 
 /* Granska has ⋯ as well as ×, so its bar has room for two buttons at each end. */
@@ -938,27 +930,10 @@ body .phone-app .text-when input {
   top: calc(max(28px, var(--safe-top)) + 52px);
 }
 
-/* The day's words open Insikter, so they show that they lead somewhere. */
+/* The day's words open Mål, so they show that they lead somewhere. */
 .phone-today-more {
   margin-left: 6px;
   color: var(--text-label);
-}
-
-/* Insikter on a phone: the same cards with less room around them, so more of it fits at once. */
-.phone-app .insight-card,
-.phone-app .insights-panel .progress-section,
-.phone-app .insights-panel .progress-card {
-  gap: 8px;
-  padding: 12px;
-}
-
-.phone-app .insight-day svg {
-  width: 44px;
-  height: 44px;
-}
-
-.phone-app .insight-day-bar .bar-room {
-  height: 36px;
 }
 
 /* Skriv with the keyboard down and the text not in use shows only the tabs; the tools come

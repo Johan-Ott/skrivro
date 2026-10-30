@@ -8,6 +8,7 @@ import {
 import { dayKey } from "../../project/stats.js";
 import { chapterOf, manuscriptWords } from "../../project/treeLabels.js";
 import type { AppState } from "../App.js";
+import { showDayGoal } from "../progress/DayGoalLayer.js";
 import { sidebarProps } from "../paneProps.js";
 import { ContentsIcon } from "../shell/icons.js";
 import { reviewAsk } from "../../askOnce.js";
@@ -54,14 +55,14 @@ const dayWords = (today: AppState["today"]) =>
       })
     : t("{count} ord idag", { count: formatNumber(today.words) });
 
-// The day's words open Insikter.
+// The day's words open Mål.
 function TodayCard({ app, project }: Pick<PhoneBookProps, "app" | "project">) {
   const { today } = app;
   const share = today.goal ? Math.min(100, (100 * today.words) / today.goal) : 0;
   return (
     <div className="phone-today">
       <span className="phone-today-head">
-        <button className="phone-today-words" onClick={() => app.writingMode.setProgressOpen(true)}>
+        <button className="phone-today-words" onClick={showDayGoal}>
           {dayWords(today)}
           <span className="phone-today-more" aria-hidden="true">
             ›

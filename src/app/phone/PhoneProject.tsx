@@ -9,7 +9,7 @@ import { Overlays } from "../Overlays.js";
 import { PacksLayer } from "../packs/PackList.js";
 import { packsOfBook } from "../templates/addPieces.js";
 import { writingAreaProps } from "../paneProps.js";
-import { InsightsLayer } from "../progress/InsightsPanel.js";
+import { DayGoalLayer } from "../progress/DayGoalLayer.js";
 import { ProfileLayer } from "../profile/ProfileLayer.js";
 import { TextBands } from "../TextBands.js";
 import { ResumeScreen } from "../resume/ResumeScreen.js";
@@ -32,7 +32,7 @@ function Floating({ app, project }: Props) {
   const notes = (isInSeries: boolean) => (isInSeries ? app.actions.series : app.actions).notes;
   return (
     <>
-      <InsightsLayer app={app} project={project} />
+      <DayGoalLayer app={app} project={project} />
       <ProfileLayer app={app} project={project} />
       {app.newNoteSort !== false && (
         <NewNoteDialog

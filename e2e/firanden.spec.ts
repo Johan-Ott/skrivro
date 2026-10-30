@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { editor, openExample, showPanel } from "./helpers";
+import { editor, openExample } from "./helpers";
 
 test.beforeEach(async ({ page }) => openExample(page));
 
@@ -48,16 +48,16 @@ test("a chapter is shown alone in the sidebar, and Hela boken brings the book ba
   await expect(tree).toContainText("1. Brevet");
 });
 
-test("today's card in Insikter opens the goals", async ({ page }) => {
-  await showPanel(page, "Insikter");
-  await page.locator(".insight-day").click();
+test("Mål under the day's words opens the goals", async ({ page }) => {
+  await page.locator(".day-progress").click();
+  await page.getByRole("button", { name: "Ändra mål och deadline" }).click();
 
   await expect(page.getByRole("dialog", { name: "Mål för projektet" })).toBeVisible();
 });
 
 test("a daily goal below zero is not saved, and the field says why", async ({ page }) => {
-  await showPanel(page, "Insikter");
-  await page.locator(".insight-day").click();
+  await page.locator(".day-progress").click();
+  await page.getByRole("button", { name: "Ändra mål och deadline" }).click();
   const goals = page.getByRole("dialog", { name: "Mål för projektet" });
 
   await goals.getByLabel("Dagligt ordmål").fill("-5");

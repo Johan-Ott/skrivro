@@ -6,7 +6,6 @@ import {
   openExample,
   runCommand,
   selectFirstWord,
-  showPanel,
 } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
@@ -97,14 +96,15 @@ test("the palette's chips narrow the search to the kinds chosen", async ({ page 
   await expect(palette.locator(".palette-group")).toHaveText(["Kapitel", "Kommandon"]);
 });
 
-test("Insikter shows today's page and the week", async ({ page }) => {
+test("Mål shows today's page and the week", async ({ page }) => {
   await cursorAfterFirstParagraph(page);
   await page.keyboard.type(" Hon log.");
   await expect(page.getByText(/^2 \/ 500 ord$/).first()).toBeVisible();
-  await showPanel(page, "Insikter");
+  await page.getByRole("button", { name: "Insikter och mål" }).click();
 
-  const progress = page.getByRole("complementary", { name: "Insikter" });
-  await expect(progress.getByText("Den här veckan")).toBeVisible();
+  const goals = page.getByRole("region", { name: "Mål" });
+  await expect(goals.getByText("Den här veckan")).toBeVisible();
+  await expect(goals).not.toContainText("Scenen");
 });
 
 test("a chapter's point of view is written in Innehåll and kept", async ({ page }) => {

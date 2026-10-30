@@ -18,7 +18,7 @@ import { ContentsScreen, PublishScreen, ReadScreen, SyncScreen } from "./bookVie
 import { Topbar } from "./Topbar.js";
 import { openComments } from "../review/ReviewLayer.js";
 import { Blocks } from "../blocks/Blocks.js";
-import { PanelColumn } from "../blocks/dock.js";
+import { PanelColumn } from "../blocks/column.js";
 import { DayGoalLayer, showDayGoal } from "../progress/DayGoalLayer.js";
 import { useAppMenu } from "./useAppMenu.js";
 import { useNavigation, type Place } from "./useNavigation.js";

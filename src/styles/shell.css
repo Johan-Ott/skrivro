@@ -1003,102 +1003,10 @@
   text-align: right;
 }
 
-/* Framsteg, opened from the day's words */
-
-/* Insikter: a card of cards floating over the text, moved by its head like the blocks. */
-
-.insights-panel {
-  position: fixed;
-  top: 52px;
-  right: 16px;
-  z-index: var(--layer-float);
-  max-height: calc(100vh - 116px);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 340px;
-  box-sizing: border-box;
-  padding: 0 16px 16px;
-  overflow-y: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--bg-panel);
-  box-shadow: var(--shadow-dialog);
-}
-
-.insights-panel[style] {
-  right: auto;
-}
-
-/* On a phone the body is a card of its own, under the head as under a bar. */
-
-.insights-body {
-  display: contents;
-}
-
-.insights-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 2px 4px;
-}
-
-.insight-card,
-.insights-panel .progress-section,
-.insights-panel .progress-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--bg);
-  color: var(--text);
-  font: 14px var(--font-ui);
-  text-align: left;
-}
-
-.insight-day {
-  align-items: center;
-  gap: 8px;
-  padding: 18px 16px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.insight-day:hover {
-  border-color: var(--border-control);
-}
-
-.insight-day .ring-track,
-.insight-day .ring-done {
-  fill: none;
-  stroke-width: 6;
-}
-
-.insight-day .ring-track {
-  stroke: var(--surface-hover);
-}
-
-.insight-day .ring-done {
-  stroke: var(--accent);
-  stroke-linecap: round;
-}
-
-.insight-day .ring-drop {
-  fill: var(--text);
-}
-
-.insight-heading {
-  font: 600 17px var(--font-prose);
-}
+/* Mål's numbers: a bar for each day of the week, the best in green, and one per chapter. */
 
 .insight-title {
   font-weight: 600;
-}
-
-.insight-text {
-  color: var(--text-tree);
 }
 
 .insight-muted {
@@ -1109,23 +1017,6 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
-}
-
-.insight-card .progress-bar,
-.insight-card .progress-bar > div {
-  height: 8px;
-  border-radius: 4px;
-}
-
-.insight-card .progress-bar > div {
-  background: var(--accent);
-}
-
-.insight-ticks {
-  display: flex;
-  justify-content: space-between;
-  color: var(--text-label);
-  font-size: 12px;
 }
 
 .insight-week {
@@ -1146,7 +1037,7 @@
 .insight-day-bar .bar-room {
   display: flex;
   align-items: flex-end;
-  height: 56px;
+  height: 32px;
 }
 
 .insight-day-bar .bar {
@@ -1163,18 +1054,6 @@
   background: var(--border-control);
 }
 
-.insights-panel .chapter-bar {
-  display: grid;
-  grid-template-columns: 110px 1fr 44px;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-}
-
-.insights-panel .chapter-bar .progress-label {
-  text-align: right;
-}
-
 .progress-section {
   display: flex;
   flex-direction: column;
@@ -1189,10 +1068,6 @@
 .progress-bar.thin,
 .progress-bar.thin > div {
   height: 4px;
-}
-
-.insights-panel > .link-button {
-  align-self: flex-start;
 }
 
 .level {
@@ -1957,41 +1832,8 @@ div.publish-part {
   align-items: center;
 }
 
-/* A panel loosened from the right column, over the text until it is docked again or moved. */
-
-.block-panel {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: calc(var(--layer-raised) + 1);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 10px 10px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--bg-panel);
-  box-shadow: var(--shadow-dialog);
-}
-
-/* Every floating panel can be made larger or smaller from its lower right corner. */
-
-.block-panel,
-.review-panel,
-.insights-panel {
-  min-width: 200px;
-  min-height: 80px;
-  overflow: auto;
-  resize: both;
-}
-
-.block-panel[style] {
-  right: auto;
-  bottom: auto;
-}
-
-/* The right column beside the text: the docked panels as sections, one under the other, taking
-   room from the text instead of covering it. Publicera's look panel lies in one of its own. */
+/* The right column beside the text: the panels as sections, one under the other, taking room
+   from the text instead of covering it. Publicera's look panel lies in one of its own. */
 
 .panel-dock {
   display: flex;
@@ -2005,21 +1847,15 @@ div.publish-part {
   background: var(--bg-panel);
 }
 
+.block-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .panel-dock .review-panel,
-.panel-dock .insights-panel,
 .panel-dock .block-panel {
-  position: static;
-  width: auto;
-  min-width: 0;
-  min-height: 0;
-  max-height: none;
   padding: 0 6px 10px;
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  resize: none;
 }
 
 /* A line between the sections. */
@@ -2028,15 +1864,22 @@ div.publish-part {
   border-bottom: 1px solid var(--border);
 }
 
-/* Docked, a panel is not dragged: its head is the section's title, which folds it. */
+/* A section's head is its title, which folds it; folded, the title is all of it. */
 
 .panel-dock .block-head {
   padding: 12px 0 0;
-  cursor: default;
 }
 
-.panel-dock .minimized .block-head {
+.panel-dock .folded {
+  padding-bottom: 4px;
+}
+
+.panel-dock .folded .block-head {
   padding-bottom: 8px;
+}
+
+.folded > :not(.block-head) {
+  display: none !important;
 }
 
 .block-fold {
@@ -2098,13 +1941,6 @@ div.publish-part {
   text-align: center;
 }
 
-/* The head stays at the top while the panel scrolls, so its × is always within reach; the
-   panel's top room is the head's own, so nothing shows above it. */
-
-.block-panel > .block-head {
-  padding-top: 4px;
-}
-
 /* Over the panel's own rows as they scroll past, and nothing outside it. */
 
 .block-head {
@@ -2115,13 +1951,6 @@ div.publish-part {
   align-items: center;
   justify-content: space-between;
   background: var(--bg-panel);
-  cursor: grab;
-  touch-action: none;
-  user-select: none;
-}
-
-.block-head:active {
-  cursor: grabbing;
 }
 
 .block-head-buttons {
@@ -2130,7 +1959,7 @@ div.publish-part {
   gap: 2px;
 }
 
-.block-minimize {
+.review-menu {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2142,21 +1971,9 @@ div.publish-part {
   color: var(--text-muted);
 }
 
-.block-minimize:hover {
+.review-menu:hover {
   background: var(--surface-hover);
   color: var(--text);
-}
-
-/* Minimerad: only the head is left, to be dragged aside or opened again. */
-.minimized > :not(.block-head) {
-  display: none !important;
-}
-
-.minimized {
-  height: auto !important;
-  min-height: 0 !important;
-  padding-bottom: 4px !important;
-  resize: none !important;
 }
 
 .block-title {
@@ -3380,21 +3197,38 @@ div.publish-part {
   gap: 2px;
 }
 
-/* Mål: just under the day's words in the top bar, a row for each goal. */
-
-.block-panel.goal-panel:not([style]) {
-  top: 48px;
-  right: auto;
-  bottom: auto;
-  left: calc(50vw - 160px);
-}
-
-/* Fixed to the window, as the day's words it opens under belong to the top bar. */
+/* Mål: just under the day's words, fixed to the window as the top bar they are in. */
 
 .goal-panel {
   position: fixed;
+  top: 48px;
+  left: calc(50vw - 170px);
   z-index: var(--layer-float);
-  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 340px;
+  max-height: calc(100vh - 64px);
+  box-sizing: border-box;
+  padding: 0 16px 16px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow-dialog);
+}
+
+.goal-panel > .block-head {
+  padding-top: 12px;
+}
+
+.goal-panel > .link-button {
+  align-self: flex-start;
+}
+
+.open-goals {
+  display: flex;
+  flex-direction: column;
 }
 
 .goal-row {

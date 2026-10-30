@@ -1843,17 +1843,6 @@ body:has(.new-book-dialog) .new-book {
   display: none;
 }
 
-/* A card in Framsteg, such as the one shown before any writing. */
-
-.progress-card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
 .kpi-sub {
   color: var(--text-muted);
 }
@@ -1874,12 +1863,13 @@ body:has(.new-book-dialog) .new-book {
 
 .chapter-bar {
   display: grid;
-  grid-template-columns: 130px 1fr 52px;
+  grid-template-columns: 110px 1fr 44px;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  font-size: 13px;
 }
 
-.chapter-bar .kpi-sub {
+.chapter-bar .progress-label {
   text-align: right;
 }
 
@@ -2067,37 +2057,15 @@ body:has(.new-book-dialog) .new-book {
   text-underline-offset: 3px;
 }
 
-/* Granska floats over the text as a card, moved by its head like the blocks, instead of a
-   solid column beside it. */
-
 .review-panel {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: var(--layer-float);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 320px;
-  max-height: calc(100% - 76px);
-  padding: 0 18px 18px;
-  overflow-y: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--bg-panel);
-  box-shadow: var(--shadow-dialog);
 }
 
-.review-panel[style] {
-  right: auto;
-}
+/* Focus mode is only the text: the right column waits outside it. */
 
-/* Focus mode is only the text: the right column and loose panels wait outside it. */
-
-.focus-mode .review-panel,
-.focus-mode .panel-dock,
-.focus-mode .block-panel,
-.focus-mode .insights-panel {
+.focus-mode .panel-dock {
   display: none;
 }
 
@@ -2619,13 +2587,6 @@ body:has(.new-book-dialog) .new-book {
   .print-spread > span::before {
     animation: none;
   }
-}
-
-.no-stats {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
 }
 
 /* Exportera while it runs: the chapter being read, a bar and Avbryt. */
