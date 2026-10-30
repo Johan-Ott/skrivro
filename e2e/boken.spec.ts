@@ -4,6 +4,7 @@ import {
   editor,
   openExample,
   selectFirstWord,
+  showPanel,
   sidebar,
   treeRow,
 } from "./helpers";
@@ -18,7 +19,7 @@ test("a comment is written on the selected words and shown in Granska", async ({
 
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await page.keyboard.type("Ska brevet vara gult?");
-  await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
+  await page.locator(".margin-note.new").getByRole("button", { name: "Spara" }).click();
 
   await expect(page.getByText("Ska brevet vara gult?")).toBeVisible();
   await expect(editor(page).locator(".commented")).toHaveCount(1);
@@ -98,11 +99,12 @@ test("an open comment is listed as a task in Granska from another scene", async 
   await selectFirstWord(page);
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await page.keyboard.type("Förstärk motivet");
-  await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
+  await page.locator(".margin-note.new").getByRole("button", { name: "Spara" }).click();
   await expect(page.getByText("Förstärk motivet")).toBeVisible();
 
   await treeRow(page, "Isen").click();
   await expect(editor(page)).toContainText("Isen bar.");
+  await showPanel(page, "Granska");
   const tasks = page.getByRole("region", { name: "Öppna uppgifter i boken" });
   await tasks.getByRole("button", { name: /Förstärk motivet/ }).click();
 
@@ -113,9 +115,8 @@ test("Innehåll counts the open tasks and leads to Granska", async ({ page }) =>
   await selectFirstWord(page);
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await page.keyboard.type("Kolla tidslinjen");
-  await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
+  await page.locator(".margin-note.new").getByRole("button", { name: "Spara" }).click();
   await expect(page.getByText("Kolla tidslinjen")).toBeVisible();
-  await page.getByRole("button", { name: "Stäng granskning" }).click();
 
   await page.getByRole("button", { name: "Vintervägen" }).first().click();
   await page.getByRole("button", { name: /^Att göra · \d/ }).click();

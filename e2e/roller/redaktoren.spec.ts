@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import JSZip from "jszip";
-import { exportAs, openExample } from "../helpers";
+import { exportAs, openExample, showPanel } from "../helpers";
 
 // A writer sends her manuscript to an editor in Word and reads the editor's file back: the
 // file Skrivro made, changed in Word as an editor would, and each change taken or left.
@@ -44,6 +44,7 @@ test("a manuscript goes to the editor in Word and comes back with changes to tak
   await expect(page.getByText(/Redaktören har ändrat i \d+ scener/)).toBeVisible();
   await page.getByRole("button", { name: "Stäng", exact: true }).click();
 
+  await showPanel(page, "Granska");
   const panel = page.getByRole("complementary", { name: "Granskning" });
   await expect(panel.getByText("Ändringar att gå igenom")).toBeVisible();
   await panel.getByRole("button", { name: "Godta", exact: true }).first().click();

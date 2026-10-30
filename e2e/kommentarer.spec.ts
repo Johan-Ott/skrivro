@@ -18,7 +18,7 @@ async function comment(page: Page, body: string) {
   await expect(granska(page).getByText(body)).toBeVisible();
 }
 
-const reviewButton = (page: Page) => page.getByRole("button", { name: /^Granska · / }).first();
+const reviewButton = (page: Page) => page.getByRole("tab", { name: /^Granska · / });
 
 test("Granska counts what still waits: not a reply, and not a resolved comment", async ({
   page,
@@ -66,18 +66,6 @@ test("in Redigera what is typed and what is deleted are suggestions, and Ctrl+Z 
   await expect(editor(page).locator(".revision-removed")).toHaveCount(0);
   await page.keyboard.press("ControlOrMeta+z");
   await expect(editor(page).locator(".revision-added")).toHaveCount(0);
-});
-
-test("Escape within Granska closes it", async ({ page }) => {
-  await page.getByRole("tab", { name: "Redigera" }).click();
-  await reviewButton(page).click();
-  const panel = page.locator(".review-panel.open");
-  await expect(panel).toBeVisible();
-
-  await panel.getByRole("button").first().focus();
-  await page.keyboard.press("Escape");
-
-  await expect(panel).toBeHidden();
 });
 
 test("on a phone Granska opens with nothing to look at too", async ({ page }) => {

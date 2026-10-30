@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { editor, openExample, selectFirstWord } from "./helpers";
+import { editor, openExample, selectFirstWord, showPanel } from "./helpers";
 
 // Skriv, Redigera and Publicera: the writing's three steps at the top.
 
@@ -20,6 +20,7 @@ test("Skriv is clean, and Redigera shows the repeated words beside Granska", asy
 
   await step(page, "Redigera").click();
   await expect(editor(page).locator(".repeat").first()).toBeVisible();
+  await showPanel(page, "Granska");
   await expect(review(page)).toHaveClass(/open/);
 });
 
@@ -28,7 +29,7 @@ test("a comment begun in Skriv is written in Redigera, and waits there", async (
   await page.keyboard.press("ControlOrMeta+Shift+m");
   await expect(step(page, "Redigera")).toHaveAttribute("aria-selected", "true");
   await page.keyboard.type("Ska brevet vara gult?");
-  await page.getByRole("button", { name: "Kommentera", exact: true }).last().click();
+  await page.locator(".margin-note.new").getByRole("button", { name: "Spara" }).click();
 
   await step(page, "Skriv").click();
   await expect(page.getByText("Ska brevet vara gult?")).toBeHidden();

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { Document, Packer, Paragraph, TextRun } from "docx";
-import { editor, openExample, runCommand, togglePanel, treeRow } from "./helpers";
+import { editor, openExample, runCommand, showPanel, treeRow } from "./helpers";
 
 test("a research file becomes a note among the notes, showing its picture", async ({ page }) => {
   await openExample(page);
@@ -43,7 +43,7 @@ test("a file added from a scene is in I scenen there, as no one names it in the 
   await (await chooser).setFiles("package.json");
   await expect(page.locator(".research-file-name")).toHaveText("package.json");
   await treeRow(page, "Köket").click();
-  await togglePanel(page, "I scenen");
+  await showPanel(page, "I scenen");
 
   const block = page.getByRole("region", { name: "I scenen" });
   await block.getByRole("button", { name: /package/ }).click();

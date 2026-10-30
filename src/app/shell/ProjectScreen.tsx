@@ -5,7 +5,6 @@ import type { MouseEvent } from "react";
 import type { AppState } from "../App.js";
 import { NewNoteDialog } from "../notes/NewNoteDialog.js";
 import { Overlays } from "../Overlays.js";
-import { InsightsLayer } from "../progress/InsightsPanel.js";
 import { ResumeScreen } from "../resume/ResumeScreen.js";
 import { ProfileLayer } from "../profile/ProfileLayer.js";
 import { useBookTheme } from "../themes/themeStyle.js";
@@ -16,10 +15,10 @@ import { useCommandKey } from "../shortcuts.js";
 import { WritingArea } from "../WritingArea.js";
 import { sidebarProps, writingAreaProps } from "../paneProps.js";
 import { ContentsScreen, PublishScreen, ReadScreen, SyncScreen } from "./bookViews.js";
-import { ReviewPill, Topbar } from "./Topbar.js";
+import { Topbar } from "./Topbar.js";
 import { openComments } from "../review/ReviewLayer.js";
-import { BlocksDock } from "../blocks/BlocksDock.js";
-import { dockColumn } from "../blocks/layout.js";
+import { Blocks } from "../blocks/Blocks.js";
+import { PanelColumn } from "../blocks/dock.js";
 import { DayGoalLayer, showDayGoal } from "../progress/DayGoalLayer.js";
 import { useAppMenu } from "./useAppMenu.js";
 import { useNavigation, type Place } from "./useNavigation.js";
@@ -72,24 +71,12 @@ function ScreenTopbar(props: ScreenProps & { onMenu: MenuOpen; onProgramMenu: Me
   );
 }
 
-// Over the text: the Granska pill in Redigera, and the opening picture when a book opens where you
-// left off.
+// Beside and over the text: the right column's panels, and the opening picture when a book opens
+// where you left off.
 function OverTheText({ app, project }: ScreenProps) {
-  const { writingMode } = app;
   return (
     <>
-      <BlocksDock
-        app={app}
-        project={project}
-        review={
-          writingMode.showsFindings && (
-            <ReviewPill
-              review={writingMode.review}
-              onReview={() => writingMode.setReviewOpen(!writingMode.isReviewOpen)}
-            />
-          )
-        }
-      />
+      <Blocks app={app} project={project} />
       <DayGoalLayer app={app} project={project} />
       <ResumeScreen project={project} stats={app.stats} editor={app.editor} />
       <TextBands app={app} project={project} />
@@ -142,7 +129,7 @@ function MainCard({ app, project, pageMap }: ScreenProps & { pageMap: PageMap | 
       )}
       {writingMode.view === "synk" && <SyncScreen {...views} />}
       {writingMode.view === "las" && <ReadScreen {...views} />}
-      <aside className="panel-dock" aria-label={t("Dockade paneler")} ref={dockColumn.set} />
+      {writingMode.view === "skriv" && <PanelColumn reviewCount={writingMode.review.count} />}
     </div>
   );
 }
@@ -151,7 +138,6 @@ function Floating({ app, project }: ScreenProps) {
   const { writingMode } = app;
   return (
     <>
-      <InsightsLayer app={app} project={project} />
       <ProfileLayer app={app} project={project} />
       {app.newNoteSort !== false && (
         <NewNoteDialog

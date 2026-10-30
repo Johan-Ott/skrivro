@@ -33,6 +33,14 @@ export const SidebarIcon = () => (
   </Icon>
 );
 
+/** The sidebar's mirror, for the right column. */
+export const ColumnIcon = () => (
+  <Icon>
+    <rect x="3" y="4" width="18" height="16" rx="2" />
+    <path d="M15 4v16" />
+  </Icon>
+);
+
 export const BackIcon = () => (
   <Icon>
     <path d="M19 12H5" />
@@ -81,16 +89,6 @@ export const FocusIcon = () => (
     <path d="M16 5h4v4" />
     <path d="M20 15v4h-4" />
     <path d="M8 19H4v-4" />
-  </Icon>
-);
-
-export const ReviewIcon = () => (
-  <Icon>
-    <path d="m3 7 2 2 4-4" />
-    <path d="m3 17 2 2 4-4" />
-    <path d="M13 6h8" />
-    <path d="M13 12h8" />
-    <path d="M13 18h8" />
   </Icon>
 );
 

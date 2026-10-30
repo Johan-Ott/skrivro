@@ -1957,78 +1957,12 @@ div.publish-part {
   align-items: center;
 }
 
-/* One connected bar: the blocks' icons and Granska share its frame. */
-
-.blocks-dock {
-  position: absolute;
-  right: 16px;
-  bottom: 14px;
-  z-index: var(--layer-raised);
-  display: flex;
-  gap: 2px;
-  align-items: center;
-  height: 30px;
-  padding: 0 2px;
-  border: 1px solid var(--border-control);
-  border-radius: 15px;
-  background: var(--bg);
-}
-
-/* Granska's count, small at the icon's top right. */
-
-.review-dock {
-  position: relative;
-}
-
-.dock-badge.quiet {
-  background: var(--border-control);
-  color: var(--text);
-}
-
-.dock-badge {
-  position: absolute;
-  top: -3px;
-  right: -3px;
-  min-width: 14px;
-  height: 14px;
-  padding: 0 3px;
-  border-radius: 7px;
-  background: var(--primary);
-  color: var(--on-primary);
-  font-size: 10px;
-  line-height: 14px;
-}
-
-.dock-button {
-  display: grid;
-  place-items: center;
-  min-width: 26px;
-  height: 24px;
-  padding: 0 8px;
-  font-size: 12px;
-  border: 0;
-  border-radius: 12px;
-  background: transparent;
-  color: var(--text-label);
-}
-
-.dock-button:hover,
-.dock-button[aria-pressed="true"],
-.dock-button.chosen,
-.dock-button.playing {
-  color: var(--text);
-}
-
-.dock-button:hover {
-  background: var(--surface-hover);
-}
-
-/* A block opened from the dock, over the text until it is closed or moved. */
+/* A panel loosened from the right column, over the text until it is docked again or moved. */
 
 .block-panel {
   position: absolute;
   right: 16px;
-  bottom: 52px;
+  bottom: 16px;
   z-index: calc(var(--layer-raised) + 1);
   display: flex;
   flex-direction: column;
@@ -2056,8 +1990,8 @@ div.publish-part {
   bottom: auto;
 }
 
-/* Docked, as they open: the panels lie in a column at the card's right and take room from the
-   text instead of covering it. Lossa lets one float as above. */
+/* The right column beside the text: a tab per docked panel and the one in front below it, taking
+   room from the text instead of covering it. Publicera's look panel lies in one of its own. */
 
 .panel-dock {
   display: flex;
@@ -2071,19 +2005,23 @@ div.publish-part {
   background: var(--bg-panel);
 }
 
-.panel-dock:empty {
-  display: none;
+/* The tabs and Lossa stay at the top while the panel below scrolls. */
+
+.panel-dock-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 6px 6px;
+  background: var(--bg-panel);
 }
 
-.main-card:has(> .panel-dock:not(:empty)) > .blocks-dock {
-  right: 316px;
-}
-
-.panel-dock > .review-panel,
-.panel-dock > .insights-panel,
-.panel-dock > .block-panel {
+.panel-dock .review-panel,
+.panel-dock .insights-panel,
+.panel-dock .block-panel {
   position: static;
-  flex-shrink: 0;
   width: auto;
   min-width: 0;
   min-height: 0;
@@ -2091,29 +2029,19 @@ div.publish-part {
   padding: 0 6px 10px;
   overflow: visible;
   border: 0;
-  border-bottom: 1px solid var(--border);
   border-radius: 0;
   background: transparent;
   box-shadow: none;
   resize: none;
 }
 
-/* Granska first, then Insikter, then the blocks as they were opened. */
+/* Docked, the column's tabs are the panel's head. */
 
-.panel-dock > .review-panel {
-  order: 1;
+.panel-dock-body .block-head {
+  display: none;
 }
 
-.panel-dock > .insights-panel {
-  order: 2;
-}
-
-.panel-dock > .block-panel {
-  order: 3;
-}
-
-/* A docked panel is not dragged, so its head has no grip; every head has the same room, so the
-   tab row stands still between Granska and Insikter. */
+/* Publicera's panel is not dragged, so its head has no grip. */
 
 .panel-dock .block-head {
   padding: 12px 0 0;
@@ -2124,7 +2052,7 @@ div.publish-part {
   display: none;
 }
 
-/* Granska and Insikter docked together: one tab row in the head, the chosen one underlined. */
+/* The tabs, the chosen one underlined; Granska's says how much waits. */
 
 .dock-tabs {
   display: flex;
@@ -2132,6 +2060,9 @@ div.publish-part {
 }
 
 .dock-tab {
+  display: flex;
+  gap: 4px;
+  align-items: center;
   padding: 2px 0;
   border: 0;
   border-bottom: 2px solid transparent;
@@ -2148,6 +2079,19 @@ div.publish-part {
 
 .dock-tab[aria-selected="true"] {
   border-bottom-color: var(--text);
+}
+
+.dock-badge {
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  box-sizing: border-box;
+  border-radius: 7px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
 }
 
 /* The head stays at the top while the panel scrolls, so its × is always within reach; the

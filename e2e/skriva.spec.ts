@@ -6,7 +6,7 @@ import {
   openExample,
   runCommand,
   selectFirstWord,
-  togglePanel,
+  showPanel,
 } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
@@ -101,7 +101,7 @@ test("Insikter shows today's page and the week", async ({ page }) => {
   await cursorAfterFirstParagraph(page);
   await page.keyboard.type(" Hon log.");
   await expect(page.getByText(/^2 \/ 500 ord$/).first()).toBeVisible();
-  await togglePanel(page, "Insikter");
+  await showPanel(page, "Insikter");
 
   const progress = page.getByRole("complementary", { name: "Insikter" });
   await expect(progress.getByText("Den här veckan")).toBeVisible();

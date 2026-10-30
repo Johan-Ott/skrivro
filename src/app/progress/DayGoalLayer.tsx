@@ -5,7 +5,7 @@ import { GoalPanel } from "./GoalPanel.js";
 import { GoalsDialog } from "./GoalsDialog.js";
 
 // The day's words in the top bar open Mål just under them, and from there the book's goals;
-// Insikter, with the week and the book, opens from the blocks' dock.
+// Insikter, with the week and the book, is a tab in the right column.
 
 const shown = createStore<"panel" | "goals" | null>(null);
 

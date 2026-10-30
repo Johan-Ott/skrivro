@@ -12,10 +12,10 @@ import { usePhone } from "../phone/usePhone.js";
 import { GripIcon, Icon } from "../shell/icons.js";
 import { t } from "../../i18n/i18n.js";
 import { DockButton, inDock, useDock } from "./dock.js";
-import { keepPlaces, places, setPlace, type Place } from "./layout.js";
+import { DOCKABLE, keepPlaces, places, setPlace, type Place } from "./layout.js";
 
-// A panel opens docked in the column at the card's right. Loosened, it floats over the text,
-// dragged by its head to where the writer wants it; the place is kept, and in the layouts.
+// A panel lies docked in the column at the card's right. Loosened, it floats over the text,
+// dragged by its head to where the writer wants it; the place is kept.
 
 // Kept inside the card, so a block never ends up where it cannot be reached.
 function clamped(panel: HTMLElement, wanted: Place): Place {
@@ -113,7 +113,7 @@ export function useFloating(id: string, isOn = true) {
   const ref = useRef<HTMLElement>(null);
   const { dock, isBehind } = useDock(id, isOn);
   const isFree = isOn && !dock;
-  const isMinimized = minimized.use().includes(id) && isOn;
+  const isMinimized = minimized.use().includes(id) && isFree;
   const shown = useKeptInside(ref, isFree ? place : null);
   return {
     ref,
@@ -137,42 +137,53 @@ const RestoreIcon = () => (
   </Icon>
 );
 
-/** The head's buttons: Lossa or Docka, Minimera, which leaves only the head, and close. */
+/** Minimera leaves only the head. */
+function MinimizeButton({ id }: { id: string }) {
+  const isMinimized = minimized.use().includes(id);
+  const label = isMinimized ? t("Visa hela panelen") : t("Minimera");
+  return (
+    <button
+      className="block-minimize"
+      aria-label={label}
+      title={label}
+      aria-expanded={!isMinimized}
+      onClick={() => toggleMinimized(id)}
+    >
+      {isMinimized ? <RestoreIcon /> : <MinimizeIcon />}
+    </button>
+  );
+}
+
+/** A loose panel's head: Docka and Minimera. Close only where the panel cannot dock: Mål, and
+ * every panel on a phone. Docked, the column's tabs stand in for the head. */
 export function HeadButtons(props: {
   id: string;
   closeLabel?: string;
   isPhoneBack?: boolean;
-  onClose: () => void;
+  onClose?: (() => void) | undefined;
 }) {
-  const isMinimized = minimized.use().includes(props.id);
-  const label = isMinimized ? t("Visa hela panelen") : t("Minimera");
+  const canDock = !usePhone() && DOCKABLE.includes(props.id);
   return (
     <span className="block-head-buttons">
-      <DockButton id={props.id} />
-      <button
-        className="block-minimize"
-        aria-label={label}
-        title={label}
-        aria-expanded={!isMinimized}
-        onClick={() => toggleMinimized(props.id)}
-      >
-        {isMinimized ? <RestoreIcon /> : <MinimizeIcon />}
-      </button>
-      <CloseButton
-        label={props.closeLabel}
-        isPhoneBack={props.isPhoneBack}
-        onClose={props.onClose}
-      />
+      {canDock && <DockButton id={props.id} />}
+      <MinimizeButton id={props.id} />
+      {!canDock && props.onClose && (
+        <CloseButton
+          label={props.closeLabel}
+          isPhoneBack={props.isPhoneBack}
+          onClose={props.onClose}
+        />
+      )}
     </span>
   );
 }
 
-/** Loose without a kept place, it opens above the dock, at the card's foot on the right. */
+/** Loose without a kept place, it opens at the card's foot on the right. */
 export function BlockPanel(props: {
   id: string;
   title: string;
   className?: string;
-  onClose: () => void;
+  onClose?: () => void;
   children: ReactNode;
 }) {
   const { ref, style, onPointerDown, minimized, dock, isBehind } = useFloating(

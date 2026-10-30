@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { openExample } from "./helpers";
+import { openExample, showPanel } from "./helpers";
 
 // Vem vet vad: a secret, when the reader learns it, who learns it, and where it slips out early.
 
@@ -46,7 +46,7 @@ test("Granska warns in a scene that names a secret before its reveal", async ({ 
 
   await page.locator(".sidebar").getByText("Köket", { exact: true }).click();
   await page.getByRole("tab", { name: "Redigera" }).click();
-  await page.getByRole("button", { name: /^Granska · / }).click();
+  await showPanel(page, "Granska");
 
   await expect(page.getByRole("region", { name: "Hemligheter före avslöjandet" })).toContainText(
     "Henrik",

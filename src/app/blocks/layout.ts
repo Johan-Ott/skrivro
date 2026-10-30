@@ -1,16 +1,14 @@
 import { browserStorage } from "@llkit/storage/browserStorage.js";
 import { createStore } from "@llkit/store.js";
 
-// Where each panel lies and which are open, and up to three layouts of both to go back to:
-// one to write in, one to revise in, as the writer likes.
+// The right column beside the text, folded away or out with one panel in front, and the panels
+// the writer has loosened to float over the text, each where it was left. Kept per device.
 
 export type Place = { left: number; top: number };
-export type Layout = { open: string[]; places: Record<string, Place>; floating?: string[] };
 
 const PLACES_KEY = "skrivro.blocks.places";
-const LAYOUTS_KEY = "skrivro.blocks.layouts";
 const FLOATING_KEY = "skrivro.blocks.floating";
-export const LAYOUT_SLOTS = [1, 2, 3];
+const COLUMN_KEY = "skrivro.column";
 
 function read<T>(key: string, empty: T): T {
   try {
@@ -24,19 +22,19 @@ function read<T>(key: string, empty: T): T {
 const write = (key: string, value: unknown) => browserStorage().setItem(key, JSON.stringify(value));
 
 export const places = createStore<Record<string, Place>>(read(PLACES_KEY, {}));
-/** The blocks of the dock that are open; Granska and Insikter keep their own. */
-export const openBlocks = createStore<string[]>([]);
-export const layouts = createStore<Record<number, Layout>>(read(LAYOUTS_KEY, {}));
-/** The layout last chosen or saved, shown on the dock's icon. */
-export const activeLayout = createStore<number | null>(null);
 
-/** These lie docked in a column at the card's right unless the writer loosens them to float;
- * Mål stays under the day's words. */
+/** The column's panels in the order of its tabs; Granska is there only in Redigera. Mål stays
+ * under the day's words. */
 export const DOCKABLE = ["granska", "insikter", "iscenen", "referens"];
 /** The dockable panels the writer has loosened. */
 export const floating = createStore<string[]>(read(FLOATING_KEY, []));
-/** The column the docked panels are drawn into, there once the card is. */
+/** Where the docked panel in front is drawn, there while the column is out. */
 export const dockColumn = createStore<HTMLElement | null>(null);
+/** The column out or folded away, and the tab chosen last. Folded at first, so Redigera's
+ * margin has room beside the text. */
+export const column = createStore<{ isOpen: boolean; tab: string }>(
+  read(COLUMN_KEY, { isOpen: false, tab: "insikter" }),
+);
 
 function setFloating(ids: string[]) {
   floating.set(ids);
@@ -48,32 +46,21 @@ export function toggleFloating(id: string) {
   setFloating(now.includes(id) ? now.filter((each) => each !== id) : [...now, id]);
 }
 
+function setColumn(next: { isOpen: boolean; tab: string }) {
+  column.set(next);
+  write(COLUMN_KEY, next);
+}
+
+export const toggleColumn = () => setColumn({ ...column.get(), isOpen: !column.get().isOpen });
+
+/** The panel in front, with the column out; a loosened one is already in sight. */
+export function showPanel(id: string) {
+  if (!floating.get().includes(id)) setColumn({ isOpen: true, tab: id });
+}
+
 export function setPlace(id: string, place: Place) {
   places.set({ ...places.get(), [id]: place });
 }
 
 /** Kept once a drag ends, not on every step of it. */
 export const keepPlaces = () => write(PLACES_KEY, places.get());
-
-export function toggleBlock(id: string) {
-  const open = openBlocks.get();
-  openBlocks.set(open.includes(id) ? open.filter((each) => each !== id) : [...open, id]);
-}
-
-export function saveLayout(slot: number, open: string[]) {
-  const next = {
-    ...layouts.get(),
-    [slot]: { open, places: places.get(), floating: floating.get() },
-  };
-  layouts.set(next);
-  write(LAYOUTS_KEY, next);
-  activeLayout.set(slot);
-}
-
-/** The layout's places are set, docked or loosened; the caller opens and closes what it holds.
- * A layout saved before docking leaves the panels docked or loose as they are. */
-export function applyLayoutPlaces(layout: Layout) {
-  places.set({ ...places.get(), ...layout.places });
-  keepPlaces();
-  if (layout.floating) setFloating(layout.floating);
-}

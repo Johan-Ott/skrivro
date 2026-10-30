@@ -64,17 +64,15 @@ export async function runCommand(page: Page, name: string) {
   await page.keyboard.press("Enter");
 }
 
-/** Opens or closes a panel from the dock's Paneler menu. */
-export async function togglePanel(page: Page, name: string) {
-  await page.getByRole("button", { name: /^Paneler/ }).click();
-  // A panel that is open has a check mark before its name.
-  await page.getByRole("menuitemradio", { name: new RegExp(`${name}$`) }).click();
+/** Brings a panel to the front of the right column by its tab, folding the column out first. */
+export async function showPanel(page: Page, name: string) {
+  const tabs = page.getByRole("tablist", { name: "Paneler" });
+  if (!(await tabs.isVisible())) await columnToggle(page).click();
+  await tabs.getByRole("tab", { name }).click();
 }
 
-/** Opens the dock's Layouter menu; the caller chooses the row. */
-export async function openLayouts(page: Page) {
-  await page.getByRole("button", { name: /^Layouter/ }).click();
-}
+export const columnToggle = (page: Page) =>
+  page.getByRole("button", { name: "Visa eller dölj högerspalten" });
 
 /** Picks one way out of the book from Publicera's Exportera menu. */
 export async function exportAs(page: Page, name: string) {

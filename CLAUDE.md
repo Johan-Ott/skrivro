@@ -208,8 +208,11 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   button works. `usePhone` (width at most 600 px) picks it; the desktop window is never that
   narrow. On a phone the books live in Skrivro's own folder (`appDataDir`), and the Rust side
   (`src-tauri/src/lib.rs`) leaves out updates, the spelling language and picked folders.
-- Layout lives in `styles/shell.css`. Granska opens from the chip at the card's corner; under
-  1200 px it covers the text. Under 960 px the sidebar starts hidden and floats over the card when
+- Layout lives in `styles/shell.css`. The right column (`blocks/dock.tsx`, `PanelColumn`) holds
+  Granska (Redigera only), Insikter, I scenen and Referensbild as tabs; it folds from the top
+  bar's right button and remembers that and its tab (`blocks/layout.ts`). It starts folded, so
+  Redigera's margin has room; Granska folds it out when the margin has none. Lossa floats a panel
+  over the text. Under 960 px the sidebar starts hidden and floats over the card when
   shown (Ctrl+. or the sidebar button; `isSidebarOpen` in `useWritingMode`). The smallest window
   is 720 × 500.
 - Läs (view `las`, `contents/ReadView.tsx`) shows a chapter or the whole book in a row, drawn

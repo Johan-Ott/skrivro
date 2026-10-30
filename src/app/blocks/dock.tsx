@@ -1,73 +1,62 @@
 import { useEffect, type ReactElement } from "react";
 import { createPortal } from "react-dom";
 import { createStore } from "@llkit/store.js";
-import { usePhone } from "../phone/usePhone.js";
 import { Icon } from "../shell/icons.js";
 import { t } from "../../i18n/i18n.js";
-import { DOCKABLE, dockColumn, floating, toggleFloating } from "./layout.js";
+import { column, DOCKABLE, dockColumn, floating, showPanel, toggleFloating } from "./layout.js";
 
-// The panels open docked at the card's right; Lossa floats one, Docka lays it back. Granska and
-// Insikter docked together share one tab row, the one opened last in front.
+// The panels lie in the right column, a tab each and one in front; Lossa floats one over the
+// text, Docka lays it back. The column folds away from the top bar.
 
-const TABBED = ["granska", "insikter"];
-/** The tabbed panels lying docked now, the one in front last. */
-const docked = createStore<string[]>([]);
-const toFront = (id: string) => docked.set([...docked.get().filter((each) => each !== id), id]);
+/** The dockable panels there now, docked or loose; Granska only in Redigera. */
+const present = createStore<string[]>([]);
 
-/** Behind the other tab, the panel comes to the front instead of closing; true when it did. */
-export function toFrontIfBehind(id: string) {
-  const tabs = docked.get();
-  if (!tabs.includes(id) || tabs.at(-1) === id) return false;
-  toFront(id);
-  return true;
+const TITLES: Record<string, string> = {
+  granska: t("Granska"),
+  insikter: t("Insikter"),
+  iscenen: t("I scenen"),
+  referens: t("Referensbild"),
+};
+
+/** The column's tabs, and the one in front: the tab chosen last while it is there, else the first. */
+function useColumn() {
+  const loose = floating.use();
+  const here = present.use();
+  const { isOpen, tab } = column.use();
+  const tabs = DOCKABLE.filter((id) => here.includes(id) && !loose.includes(id));
+  return { isOpen, tabs, front: tabs.includes(tab) ? tab : tabs[0], loose, here };
 }
 
-/** The column the panel is drawn into, or null when it floats; never with `isOn` false. Behind
- * the other tab, it is not drawn at all. */
+/** The panel is in sight: loosened, or in front with the column out. */
+export function useShown(id: string) {
+  const { isOpen, front, loose, here } = useColumn();
+  return here.includes(id) && (loose.includes(id) || (isOpen && front === id));
+}
+
+/** Where the panel is drawn: the column, or where it stands when it floats or `isOn` is false, as
+ * on a phone. Docked out of sight, it is behind and not drawn at all. */
 export function useDock(id: string, isOn: boolean) {
-  const isLoose = floating.use().includes(id);
-  const column = dockColumn.use();
-  const dock = isOn && DOCKABLE.includes(id) && !isLoose ? column : null;
-  const isTabbed = dock !== null && TABBED.includes(id);
+  const isHere = isOn && DOCKABLE.includes(id);
   useEffect(() => {
-    if (!isTabbed) return;
-    toFront(id);
-    return () => docked.set(docked.get().filter((each) => each !== id));
-  }, [id, isTabbed]);
-  const front = docked.use().at(-1) ?? id;
-  return { dock, isBehind: isTabbed && front !== id };
+    if (!isHere) return;
+    present.set([...present.get(), id]);
+    return () => present.set(present.get().filter((each) => each !== id));
+  }, [id, isHere]);
+  const isShown = useShown(id);
+  const isLoose = floating.use().includes(id);
+  const element = dockColumn.use();
+  if (!isHere || isLoose) return { dock: null, isBehind: false };
+  return { dock: isShown ? element : null, isBehind: !isShown || !element };
 }
 
-/** Docked, the panel is drawn into the column, or nowhere behind the other tab; otherwise where
- * it stands. */
+/** Docked, the panel is drawn into the column, or nowhere when it is behind; otherwise where it
+ * stands. */
 export function inDock(
   place: { dock: HTMLElement | null; isBehind: boolean },
   panel: ReactElement,
 ) {
   if (place.isBehind) return null;
   return place.dock ? createPortal(panel, place.dock) : panel;
-}
-
-/** The head's title; with Granska and Insikter both docked, the tab row between them instead. */
-export function DockTitle({ title }: { title: string }) {
-  const tabs = docked.use();
-  if (tabs.length < 2) return <>{title}</>;
-  const titles: Record<string, string> = { granska: t("Granska"), insikter: t("Insikter") };
-  return (
-    <span className="dock-tabs" role="tablist" aria-label={t("Paneler")}>
-      {TABBED.map((id) => (
-        <button
-          key={id}
-          role="tab"
-          className="dock-tab"
-          aria-selected={id === tabs.at(-1)}
-          onClick={() => toFront(id)}
-        >
-          {titles[id]}
-        </button>
-      ))}
-    </span>
-  );
 }
 
 const LoosenIcon = () => (
@@ -83,11 +72,9 @@ const DockIcon = () => (
   </Icon>
 );
 
-/** In the head beside Minimera; none on a phone, where a panel is a screen of its own. */
+/** Lossa beside the column's tabs, Docka in a loose panel's head. */
 export function DockButton({ id }: { id: string }) {
   const isLoose = floating.use().includes(id);
-  const isPhone = usePhone();
-  if (isPhone || !DOCKABLE.includes(id)) return null;
   const label = isLoose ? t("Docka panelen") : t("Lossa panelen");
   return (
     <button
@@ -98,5 +85,42 @@ export function DockButton({ id }: { id: string }) {
     >
       {isLoose ? <DockIcon /> : <LoosenIcon />}
     </button>
+  );
+}
+
+/** Granska's tab says how much waits. */
+function ColumnTab(props: { id: string; isFront: boolean; reviewCount: number | null }) {
+  const count = props.id === "granska" ? props.reviewCount : null;
+  return (
+    <button
+      role="tab"
+      className="dock-tab"
+      aria-selected={props.isFront}
+      aria-label={count === null ? undefined : t("Granska · {count}", { count })}
+      onClick={() => showPanel(props.id)}
+    >
+      {TITLES[props.id]}
+      {!!count && <span className="dock-badge">{count}</span>}
+    </button>
+  );
+}
+
+/** The column at the card's right: a tab per docked panel, Lossa for the one in front, and that
+ * panel below. Folded away, or with every panel loose, nothing. */
+export function PanelColumn({ reviewCount }: { reviewCount: number | null }) {
+  const { isOpen, tabs, front } = useColumn();
+  if (!isOpen || front === undefined) return null;
+  return (
+    <aside className="panel-dock" aria-label={t("Högerspalten")}>
+      <div className="panel-dock-head">
+        <span className="dock-tabs" role="tablist" aria-label={t("Paneler")}>
+          {tabs.map((id) => (
+            <ColumnTab key={id} id={id} isFront={id === front} reviewCount={reviewCount} />
+          ))}
+        </span>
+        <DockButton id={front} />
+      </div>
+      <div className="panel-dock-body" ref={dockColumn.set} />
+    </aside>
   );
 }

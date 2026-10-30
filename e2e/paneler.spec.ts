@@ -1,73 +1,62 @@
-import { expect, test } from "@playwright/test";
-import { openExample, togglePanel } from "./helpers";
+import { expect, test, type Page } from "@playwright/test";
+import { columnToggle, openExample, showPanel } from "./helpers";
 
-test("Granska is drawn down to its head with Minimera, and stays so", async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 820 });
   await openExample(page);
-  await page.getByRole("tab", { name: "Redigera" }).click();
-  await page.getByRole("button", { name: /^Granska · / }).click();
-  const panel = page.locator(".review-panel.open");
-  await expect(panel.getByText("Granska", { exact: true })).toBeVisible();
-
-  await panel.getByRole("button", { name: "Minimera" }).click();
-  await expect(panel).toHaveClass(/minimized/);
-  expect((await panel.boundingBox())?.height).toBeLessThan(50);
-  expect(await page.evaluate(() => localStorage.getItem("skrivro.minimized"))).toContain("granska");
-
-  await panel.getByRole("button", { name: "Visa hela panelen" }).click();
-  await expect(panel).not.toHaveClass(/minimized/);
 });
 
-test("a panel opens docked beside the text, Lossa lets it float and Docka lays it back", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 1280, height: 820 });
-  await openExample(page);
-  await togglePanel(page, "I scenen");
-  const dock = page.getByRole("complementary", { name: "Dockade paneler" });
-  const block = page.getByRole("region", { name: "I scenen" });
-  await expect(dock.getByRole("region", { name: "I scenen" })).toBeVisible();
+const column = (page: Page) => page.getByRole("complementary", { name: "Högerspalten" });
+const tabs = (page: Page) => page.getByRole("tablist", { name: "Paneler" });
+
+test("the panels lie as tabs in the column beside the text, one in front", async ({ page }) => {
+  await showPanel(page, "Insikter");
+  await expect(column(page).getByRole("complementary", { name: "Insikter" })).toBeVisible();
   const text = await page.locator(".writing").boundingBox();
-  const docked = await dock.boundingBox();
+  const docked = await column(page).boundingBox();
   expect((text?.x ?? 0) + (text?.width ?? 0)).toBeLessThanOrEqual((docked?.x ?? 0) + 1);
 
-  await block.getByRole("button", { name: "Lossa panelen" }).click();
-  await expect(dock).toBeHidden();
+  await showPanel(page, "I scenen");
+  await expect(tabs(page).getByRole("tab", { name: "I scenen" })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+  await expect(column(page).getByRole("region", { name: "I scenen" })).toBeVisible();
+  await expect(page.getByRole("complementary", { name: "Insikter" })).toHaveCount(0);
+
+  await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
+  await expect(tabs(page).getByRole("tab").first()).toHaveAccessibleName(/^Granska · \d+$/);
+});
+
+test("the column folds out and away from the top bar, and is kept as it was left", async ({
+  page,
+}) => {
+  const kept = () => page.evaluate(() => localStorage.getItem("skrivro.column"));
+  await expect(column(page)).toBeHidden();
+  await columnToggle(page).click();
+  await expect(column(page).getByRole("complementary", { name: "Insikter" })).toBeVisible();
+  expect(await kept()).toContain('"isOpen":true');
+
+  await columnToggle(page).click();
+  await expect(column(page)).toBeHidden();
+  expect(await kept()).toContain('"isOpen":false');
+});
+
+test("Lossa lets a panel float over the text, and Docka lays it back as a tab", async ({ page }) => {
+  await showPanel(page, "I scenen");
+  await column(page).getByRole("button", { name: "Lossa panelen" }).click();
+  const block = page.getByRole("region", { name: "I scenen" });
   await expect(block).toBeVisible();
+  await expect(tabs(page).getByRole("tab", { name: "I scenen" })).toHaveCount(0);
   expect(await page.evaluate(() => localStorage.getItem("skrivro.blocks.floating"))).toContain(
     "iscenen",
   );
 
+  await block.getByRole("button", { name: "Minimera" }).click();
+  await expect(block).toHaveClass(/minimized/);
+  expect((await block.boundingBox())?.height).toBeLessThan(50);
+  await block.getByRole("button", { name: "Visa hela panelen" }).click();
+
   await block.getByRole("button", { name: "Docka panelen" }).click();
-  await expect(dock.getByRole("region", { name: "I scenen" })).toBeVisible();
-});
-
-test("Granska and Insikter docked together share a tab row, and opening the one behind brings it to the front", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 1280, height: 820 });
-  await openExample(page);
-  await togglePanel(page, "Insikter");
-  await page.getByRole("tablist", { name: "Steg" }).getByRole("tab", { name: "Redigera" }).click();
-  await page.getByRole("button", { name: /^Granska · / }).click();
-  const tabs = page.getByRole("tablist", { name: "Paneler" });
-  const review = page.getByRole("complementary", { name: "Granskning" });
-  const insights = page.getByRole("complementary", { name: "Insikter" });
-  await expect(tabs.getByRole("tab", { name: "Granska" })).toHaveAttribute("aria-selected", "true");
-  await expect(review).toBeVisible();
-  await expect(insights).toHaveCount(0);
-
-  await tabs.getByRole("tab", { name: "Insikter" }).click();
-  await expect(insights).toBeVisible();
-  await expect(review).toHaveCount(0);
-
-  await page.getByRole("button", { name: /^Granska · / }).click();
-  await expect(review).toBeVisible();
-  await togglePanel(page, "Insikter");
-  await expect(insights).toBeVisible();
-
-  await insights.getByRole("button", { name: "Lossa panelen" }).click();
-  await expect(tabs).toHaveCount(0);
-  await expect(review).toBeVisible();
-  await expect(insights).toBeVisible();
+  await expect(column(page).getByRole("region", { name: "I scenen" })).toBeVisible();
 });

@@ -1,6 +1,6 @@
 import type { PointerEvent } from "react";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
-import { DockTitle, inDock } from "../blocks/dock.js";
+import { inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
 import { GripIcon } from "../shell/icons.js";
 import { useState } from "react";
@@ -56,6 +56,7 @@ function InsightsBody(props: BodyProps) {
       <TowardsGoal numbers={numbers} />
       {hasWritten && <WeekCard stats={stats} numbers={numbers} />}
       <Chapters project={project} />
+      <InsightsFoot onGoals={props.onGoals} />
     </>
   );
 }
@@ -67,7 +68,7 @@ const InsightsHead = (props: {
   <div className="insights-head block-head" onPointerDown={props.onGrab}>
     <span className="insights-title block-title">
       <GripIcon />
-      <DockTitle title={t("Insikter")} />
+      {t("Insikter")}
     </span>
     <HeadButtons
       id="insikter"
@@ -105,11 +106,13 @@ function InsightsFoot({ onGoals }: { onGoals: () => void }) {
   );
 }
 
-/** Insikter: beside the text, how the day, the week and the book are going. */
+/** Insikter: beside the text, how the day, the week and the book are going. On a phone Escape
+ * closes it; on the computer it lies in the column, and `onClose` puts the cursor in the text. */
 export function InsightsPanel(props: PanelProps) {
   const [isGoalsOpen, setGoalsOpen] = useState(false);
-  const floating = useFloating("insikter", !usePhone());
-  useEscape(() => !isGoalsOpen && !floating.isBehind && props.onClose());
+  const isPhone = usePhone();
+  const floating = useFloating("insikter", !isPhone);
+  useEscape(() => isPhone && !isGoalsOpen && props.onClose());
   return inDock(
     floating,
     <aside
@@ -126,7 +129,6 @@ export function InsightsPanel(props: PanelProps) {
           stats={props.stats}
           onGoals={() => setGoalsOpen(true)}
         />
-        <InsightsFoot onGoals={() => setGoalsOpen(true)} />
       </div>
       <InsightDialogs
         {...props}
@@ -137,7 +139,7 @@ export function InsightsPanel(props: PanelProps) {
   );
 }
 
-/** The panel when it is open, on the computer and on a phone alike. */
+/** On a phone, Insikter as a screen of its own once the day's words open it. */
 export function InsightsLayer({ app, project }: { app: AppState; project: Project }) {
   if (!app.writingMode.isProgressOpen) return null;
   return (

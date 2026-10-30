@@ -58,7 +58,7 @@ export function ContentsScreen(
       }
       onReadBook={() => app.writingMode.read(null)}
       onShowDrafts={() => app.drafts.show(null)}
-      onShowTasks={() => app.writingMode.goTo("redigera")}
+      onShowTasks={() => (app.writingMode.goTo("redigera"), app.writingMode.setReviewOpen(true))}
     />
   );
 }

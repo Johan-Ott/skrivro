@@ -9,14 +9,14 @@ import type { Today } from "../useWritingStats.js";
 import type { Step, View } from "../useWritingMode.js";
 import { IconButton, PaletteButton } from "./IconButton.js";
 import { t } from "../../i18n/i18n.js";
-import { toFrontIfBehind } from "../blocks/dock.js";
+import { toggleColumn } from "../blocks/layout.js";
 import {
   BackIcon,
+  ColumnIcon,
   FocusIcon,
   ForwardIcon,
   MenuIcon,
   ReadIcon,
-  ReviewIcon,
   SidebarIcon,
 } from "./icons.js";
 
@@ -137,7 +137,16 @@ function TopbarStart(props: TopbarProps) {
   );
 }
 
-type ReviewProps = { review: { count: number | null; isOpen: boolean }; onReview: () => void };
+/** The sidebar toggle's mirror, for the right column. */
+const ColumnToggle = () => (
+  <IconButton
+    label={t("Visa eller dölj högerspalten")}
+    className="column-toggle"
+    onClick={toggleColumn}
+  >
+    <ColumnIcon />
+  </IconButton>
+);
 
 function TopbarEnd(props: TopbarProps) {
   return (
@@ -162,6 +171,7 @@ function TopbarEnd(props: TopbarProps) {
         <FocusIcon />
       </IconButton>
       <TopbarMore {...props} />
+      {props.view === "skriv" && <ColumnToggle />}
       <WindowControls />
     </div>
   );
@@ -182,22 +192,5 @@ export function Topbar(props: TopbarProps) {
       )}
       <TopbarEnd {...props} />
     </header>
-  );
-}
-
-/** Granska's icon in the blocks' dock, with how much it has found. */
-export function ReviewPill({ review, onReview }: ReviewProps) {
-  if (review.count === null) return null;
-  return (
-    <button
-      className={review.isOpen ? "dock-button review-dock chosen" : "dock-button review-dock"}
-      aria-label={t("Granska · {count}", { count: review.count })}
-      aria-pressed={review.isOpen}
-      title={t("Granska")}
-      onClick={() => toFrontIfBehind("granska") || onReview()}
-    >
-      <ReviewIcon />
-      {review.count > 0 && <span className="dock-badge">{review.count}</span>}
-    </button>
   );
 }

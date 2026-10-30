@@ -2092,7 +2092,12 @@ body:has(.new-book-dialog) .new-book {
   right: auto;
 }
 
-.focus-mode .review-panel {
+/* Focus mode is only the text: the right column and loose panels wait outside it. */
+
+.focus-mode .review-panel,
+.focus-mode .panel-dock,
+.focus-mode .block-panel,
+.focus-mode .insights-panel {
   display: none;
 }
 
