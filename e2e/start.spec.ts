@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { editor } from "./helpers";
+import { editor, openExample } from "./helpers";
 
 test("the first start goes to the shelf, where a new book opens a scene to write in", async ({
   page,
@@ -97,4 +97,22 @@ test("Tillbaka from the list of structures goes back to the book's summary", asy
 
   await expect(page.getByText("Steg 2 av 3")).toBeVisible();
   await expect(page.getByRole("button", { name: "Byt", exact: true })).toBeVisible();
+});
+
+test("a book opens where the writer left off, and a key goes on from there", async ({ page }) => {
+  await openExample(page);
+  await editor(page).locator("p").first().click();
+  await page.keyboard.press("ControlOrMeta+End");
+  await page.keyboard.press("Enter");
+  await page.keyboard.type("Hon log. Sedan gick hon");
+  await page.waitForTimeout(1500);
+  await page.getByRole("button", { name: "Meny" }).first().click();
+  await page.getByRole("menuitem", { name: "Bokhylla" }).click();
+  await page.getByText("Vintervägen").first().click();
+
+  const resume = page.locator(".resume-screen");
+  await expect(resume).toContainText("Du slutade här · 1. Brevet · Köket");
+  await expect(resume.locator(".resume-sentence")).toHaveText("Sedan gick hon");
+  await page.keyboard.press("Shift");
+  await expect(resume).toBeHidden();
 });

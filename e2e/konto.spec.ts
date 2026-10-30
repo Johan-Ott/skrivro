@@ -52,3 +52,19 @@ test("a book renamed on the shelf shows its new name there at once", async ({ pa
 
   await expect(page.locator(".books")).toContainText("Isvägen");
 });
+
+test("the profile is opened from the top bar and keeps what was written", async ({ page }) => {
+  await openExample(page);
+  await page.getByRole("button", { name: "Din profil" }).click();
+  await page.getByRole("menuitem", { name: "Din profil…" }).click();
+  const profile = page.getByRole("dialog", { name: "Författarprofil" });
+  await profile.getByRole("textbox", { name: "Namn", exact: true }).fill("Elin Berg");
+  await profile.getByRole("textbox", { name: "Om författaren" }).fill("Skriver om is och fyrar.");
+  await profile.getByRole("button", { name: "Klar" }).click();
+
+  await page.getByRole("button", { name: "Din profil" }).click();
+  await page.getByRole("menuitem", { name: "Din profil…" }).click();
+  await expect(profile.getByRole("textbox", { name: "Om författaren" })).toHaveValue(
+    "Skriver om is och fyrar.",
+  );
+});
