@@ -111,7 +111,7 @@ function toggleMinimized(id: string) {
 export function useFloating(id: string, isOn = true) {
   const { place, onPointerDown } = useDrag(id);
   const ref = useRef<HTMLElement>(null);
-  const dock = useDock(id, isOn);
+  const { dock, isBehind } = useDock(id, isOn);
   const isFree = isOn && !dock;
   const isMinimized = minimized.use().includes(id) && isOn;
   const shown = useKeptInside(ref, isFree ? place : null);
@@ -121,6 +121,7 @@ export function useFloating(id: string, isOn = true) {
     onPointerDown: isFree ? onPointerDown : undefined,
     minimized: isMinimized ? " minimized" : "",
     dock,
+    isBehind,
   };
 }
 
@@ -174,9 +175,12 @@ export function BlockPanel(props: {
   onClose: () => void;
   children: ReactNode;
 }) {
-  const { ref, style, onPointerDown, minimized, dock } = useFloating(props.id, !usePhone());
+  const { ref, style, onPointerDown, minimized, dock, isBehind } = useFloating(
+    props.id,
+    !usePhone(),
+  );
   return inDock(
-    dock,
+    { dock, isBehind },
     <section
       ref={ref}
       className={(props.className ? `block-panel ${props.className}` : "block-panel") + minimized}

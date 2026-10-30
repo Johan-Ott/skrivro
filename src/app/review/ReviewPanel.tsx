@@ -1,6 +1,6 @@
 import { GuideTip } from "../guide/GuideTip.js";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
-import { inDock } from "../blocks/dock.js";
+import { DockTitle, inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
 import { GripIcon } from "../shell/icons.js";
 import { useEffect, type PointerEvent, type ReactNode } from "react";
@@ -165,7 +165,7 @@ function ReviewHeader(props: {
     <div className="review-header block-head" onPointerDown={props.onGrab}>
       <span className="progress-title block-title">
         <GripIcon />
-        {t("Granska")}
+        <DockTitle title={t("Granska")} />
       </span>
       <ReviewMenu items={props.items} />
       <HeadButtons
@@ -192,10 +192,10 @@ export function ReviewPanel(props: ReviewPanelProps) {
   const { review } = props;
   useCountInTopbar(countOf(props), props.onCount);
   const isShown = props.isOpen || props.isPinnedOpen;
-  const floating = useFloating("granska", !usePhone());
   // Closed, it stays where it stands, hidden, so the column is empty without it.
+  const floating = useFloating("granska", !usePhone() && isShown);
   return inDock(
-    isShown ? floating.dock : null,
+    floating,
     <aside
       ref={floating.ref}
       className={(isShown ? "review-panel open" : "review-panel") + floating.minimized}

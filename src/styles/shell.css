@@ -2133,14 +2133,42 @@
   order: 3;
 }
 
-/* A docked panel is not dragged, so its head has no grip. */
+/* A docked panel is not dragged, so its head has no grip; every head has the same room, so the
+   tab row stands still between Granska and Insikter. */
 
 .panel-dock .block-head {
+  padding: 12px 0 0;
   cursor: default;
 }
 
 .panel-dock .block-title svg {
   display: none;
+}
+
+/* Granska and Insikter docked together: one tab row in the head, the chosen one underlined. */
+
+.dock-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.dock-tab {
+  padding: 2px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dock-tab:hover,
+.dock-tab[aria-selected="true"] {
+  color: var(--text);
+}
+
+.dock-tab[aria-selected="true"] {
+  border-bottom-color: var(--text);
 }
 
 /* The head stays at the top while the panel scrolls, so its × is always within reach; the

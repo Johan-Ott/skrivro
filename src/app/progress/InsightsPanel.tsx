@@ -1,6 +1,6 @@
 import type { PointerEvent } from "react";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
-import { inDock } from "../blocks/dock.js";
+import { DockTitle, inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
 import { GripIcon } from "../shell/icons.js";
 import { useState } from "react";
@@ -67,7 +67,7 @@ const InsightsHead = (props: {
   <div className="insights-head block-head" onPointerDown={props.onGrab}>
     <span className="insights-title block-title">
       <GripIcon />
-      {t("Insikter")}
+      <DockTitle title={t("Insikter")} />
     </span>
     <HeadButtons
       id="insikter"
@@ -108,10 +108,10 @@ function InsightsFoot({ onGoals }: { onGoals: () => void }) {
 /** Insikter: beside the text, how the day, the week and the book are going. */
 export function InsightsPanel(props: PanelProps) {
   const [isGoalsOpen, setGoalsOpen] = useState(false);
-  useEscape(() => !isGoalsOpen && props.onClose());
   const floating = useFloating("insikter", !usePhone());
+  useEscape(() => !isGoalsOpen && !floating.isBehind && props.onClose());
   return inDock(
-    floating.dock,
+    floating,
     <aside
       ref={floating.ref}
       className={"insights-panel" + floating.minimized}
