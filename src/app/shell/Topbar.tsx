@@ -9,6 +9,7 @@ import type { Today } from "../useWritingStats.js";
 import type { Step, View } from "../useWritingMode.js";
 import { IconButton, PaletteButton } from "./IconButton.js";
 import { t } from "../../i18n/i18n.js";
+import { toFrontIfBehind } from "../blocks/dock.js";
 import {
   BackIcon,
   FocusIcon,
@@ -196,7 +197,7 @@ export function ReviewPill({ review, onReview }: ReviewProps) {
       aria-label={t("Granska · {count}", { count: review.count })}
       aria-pressed={review.isOpen}
       title={t("Granska")}
-      onClick={onReview}
+      onClick={() => toFrontIfBehind("granska") || onReview()}
     >
       <ReviewIcon />
       {review.count > 0 && <span className="dock-badge">{review.count}</span>}

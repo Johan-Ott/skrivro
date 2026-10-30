@@ -3,6 +3,7 @@ import { useMenuButton, type MenuItem } from "@llkit/Menu.js";
 import type { AppState } from "../App.js";
 import type { Project } from "../useProject.js";
 import { BlockPanel } from "./BlockPanel.js";
+import { toFrontIfBehind } from "./dock.js";
 import { activeLayout, layouts, openBlocks, toggleBlock } from "./layout.js";
 import { layoutItems } from "./layoutItems.js";
 import { InSceneBlock } from "./InSceneBlock.js";
@@ -41,7 +42,7 @@ function panelItems(props: Props, open: string[]): MenuItem[] {
     {
       label: t("Insikter"),
       isChecked: isProgressOpen,
-      onSelect: () => setProgressOpen(!isProgressOpen),
+      onSelect: () => toFrontIfBehind("insikter") || setProgressOpen(!isProgressOpen),
     },
   ];
 }

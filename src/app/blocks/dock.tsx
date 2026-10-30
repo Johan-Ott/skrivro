@@ -14,6 +14,14 @@ const TABBED = ["granska", "insikter"];
 const docked = createStore<string[]>([]);
 const toFront = (id: string) => docked.set([...docked.get().filter((each) => each !== id), id]);
 
+/** Behind the other tab, the panel comes to the front instead of closing; true when it did. */
+export function toFrontIfBehind(id: string) {
+  const tabs = docked.get();
+  if (!tabs.includes(id) || tabs.at(-1) === id) return false;
+  toFront(id);
+  return true;
+}
+
 /** The column the panel is drawn into, or null when it floats; never with `isOn` false. Behind
  * the other tab, it is not drawn at all. */
 export function useDock(id: string, isOn: boolean) {
