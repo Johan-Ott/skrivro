@@ -3009,6 +3009,80 @@ body:has(.new-book-dialog) .new-book {
   width: min(420px, calc(100vw - 32px));
 }
 
+/* Stilar: the styles to the left, the chosen one's look to the right; stacked when narrow. */
+.styles-dialog {
+  width: min(640px, calc(100vw - 32px));
+}
+
+.styles-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+}
+
+.style-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.style-list button {
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--radius-button);
+  background: transparent;
+  text-align: left;
+}
+
+.style-list button:hover {
+  background: var(--surface-hover);
+}
+
+.style-list button[aria-checked="true"] {
+  background: var(--surface-selected);
+}
+
+.style-look {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.style-look .settings-row {
+  align-self: stretch;
+  min-height: 48px;
+  padding: 8px 0;
+}
+
+.style-preview {
+  align-self: stretch;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--bg-subtle);
+  color: var(--text);
+}
+
+.style-preview p {
+  margin: 0;
+}
+
+.style-look .button {
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .styles-body {
+    grid-template-columns: 1fr;
+  }
+
+  .style-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: none;
+  }
+}
+
 .label-list {
   display: flex;
   flex-direction: column;

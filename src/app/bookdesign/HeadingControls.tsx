@@ -1,6 +1,6 @@
+import { HEADING_FONTS } from "../../export/fonts.js";
 import {
   CHAPTER_LABELS,
-  HEADING_FONTS,
   type BookDesign,
   type ChapterLabel,
   type TitleCase,

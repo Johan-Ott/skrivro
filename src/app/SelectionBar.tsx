@@ -17,6 +17,7 @@ import {
 } from "./FormatButtons.js";
 import { AlignButtons, ListButtons } from "./AlignButtons.js";
 import { StylePicker } from "./StylePicker.js";
+import type { BookStyles } from "./StylesDialog.js";
 import { misspelledAtCaret } from "./spelling/Corrections.js";
 import { RowOverflow, useFolding } from "./RowOverflow.js";
 import { usePhone } from "./phone/usePhone.js";
@@ -80,6 +81,7 @@ function isPhoneRowWanted(editor: Editor, hasFocus: boolean) {
 
 interface BarProps extends FormatActions {
   editor: Editor;
+  styles: BookStyles;
   /** The words out of the scene and into the note Strukna, to be got back later. */
   onMoveToCuts?: (() => void) | undefined;
   // Redigera has its walk where the format row stands; the row stays, hidden, to keep its folding.

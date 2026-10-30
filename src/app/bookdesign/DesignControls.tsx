@@ -1,5 +1,5 @@
+import { BODY_FONTS } from "../../export/fonts.js";
 import {
-  BODY_FONTS,
   BOOK_THEMES,
   HEADER_CONTENTS,
   BREAK_PICTURE,

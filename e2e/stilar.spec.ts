@@ -41,3 +41,16 @@ test("Upphöjd in the row's ⋯ raises the selected word", async ({ page }) => {
 
   await expect(editor(page).locator("sup", { hasText: "Brevet" })).toHaveCount(1);
 });
+
+test("Ändra stilar in the style menu sets the book's letters in bold", async ({ page }) => {
+  await selectFirstWord(page);
+  await page.getByRole("button", { name: "Stil: Brödtext" }).click();
+  await page.getByRole("menuitem", { name: "Ändra stilar…" }).click();
+
+  const dialog = page.getByRole("dialog", { name: "Stilar" });
+  await expect(dialog.getByRole("radio", { name: "Brev" })).toHaveAttribute("aria-checked", "true");
+  await dialog.getByRole("switch", { name: "Fetstil" }).click();
+
+  await expect(editor(page).locator(".style-brev").first()).toHaveCSS("font-weight", "700");
+  await expect(dialog.locator(".style-preview p")).toHaveCSS("font-weight", "700");
+});

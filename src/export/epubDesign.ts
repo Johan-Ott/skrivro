@@ -2,6 +2,7 @@ import type { OutlineItem } from "./book.js";
 import { BREAK_PICTURE, DEFAULT_DESIGN, type BookDesign } from "./bookDesign.js";
 import { contentsLabel, designedLabel, titleBesideLabel } from "./bookWords.js";
 import { imageSize } from "./imageSize.js";
+import { looksCss } from "./styleLooks.js";
 import { openingOf } from "./typstOpening.js";
 import { escapeXml } from "./xhtml.js";
 
@@ -51,10 +52,10 @@ div.scene-break img { height: 1.5em; max-width: 40%; }
 hr.scene-break { border: 0; text-align: center; margin: 1.5em 0; }
 div.brev, div.citat, div.dikt { margin: 1em 2em; }
 div.brev p, div.citat p, div.dikt p, div.motto p { text-indent: 0; }
-div.meddelande, div.meddelande-ut { margin: 1em 0; font-family: sans-serif; font-size: 0.9em; }
+div.meddelande, div.meddelande-ut { margin: 1em 0; }
 div.meddelande p, div.meddelande-ut p { text-indent: 0; padding: 0.3em 0.8em; border-radius: 0.8em; background: #eee; margin: 0.4em 25% 0.4em 0; }
 div.meddelande-ut p { margin: 0.4em 0 0.4em 25%; background: #ddd; }
-div.motto { margin: 1em 0 2em 30%; text-align: right; font-style: italic; }
+div.motto { margin: 1em 0 2em 30%; text-align: right; }
 div.centrerat p, div.hoger p, div.utan-indrag p, div.kapitaler p { text-indent: 0; }
 div.kapitaler { font-variant: small-caps; letter-spacing: 0.05em; }
 div.punktlista, div.numrerad { margin: 1em 0; counter-reset: punkt; }
@@ -62,7 +63,7 @@ div.punktlista p, div.numrerad p { text-indent: -1.4em; margin-left: 1.4em; coun
 div.punktlista p::before { content: "•"; display: inline-block; width: 1.4em; text-indent: 0; }
 div.numrerad p::before { content: counter(punkt) "."; display: inline-block; width: 1.4em; text-indent: 0; }
 div.indrag { margin-left: 2em; }
-div.underrubrik { margin: 1.4em 0 0.6em; font-weight: bold; page-break-after: avoid; break-after: avoid; }
+div.underrubrik { margin: 1.4em 0 0.6em; page-break-after: avoid; break-after: avoid; }
 div.ruta { margin: 1em 0; padding: 0.6em 0.9em; border: 1px solid #999; }
 div.underrubrik p, div.ruta p { text-indent: 0; }
 div.hangande-indrag p { margin-left: 2em; text-indent: -2em; }
@@ -82,6 +83,7 @@ export function designStyle({ design }: EpubDesign) {
       ? "h1 + p::first-line, .epigraph + p::first-line { font-variant: small-caps; }"
       : "",
     `hr.scene-break::after { content: "${mark.replace(/["\\]/g, "\\$&")}"; }`,
+    looksCss(design.looks, (name) => `div.${name}`),
   ]
     .filter(Boolean)
     .join("\n");

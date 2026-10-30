@@ -1337,5 +1337,11 @@
   "Ta bort ur boken": "Remove from the book",
   "uppslag {row} av {count}": "spread {row} of {count}",
   "Läs": "Read",
-  "Föreslå": "Suggest"
+  "Föreslå": "Suggest",
+  "Stilar": "Styles",
+  "Ändra stilar…": "Edit styles…",
+  "Som brödtexten": "As the body text",
+  "Som från början": "As at first",
+  "Så här står stilens text i boken.": "This is how the style's text stands in the book.",
+  "Brödtextens typsnitt och storlek väljs i Publicera.": "The body text's typeface and size are chosen in Publish."
 }

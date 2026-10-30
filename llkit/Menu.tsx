@@ -10,7 +10,11 @@ import { createPortal } from "react-dom";
 
 export interface MenuItem {
   label: string;
+  /** The label's own class, such as a style showing itself in its own look. */
+  labelClass?: string | undefined;
   shortcut?: string;
+  /** Grey beside the label, as a shortcut is, but on a phone too. */
+  hint?: string;
   separatorBefore?: boolean;
   isChecked?: boolean;
   onSelect?: () => void;
@@ -67,9 +71,10 @@ function moveFocus(event: KeyboardEvent<HTMLDivElement>, onClose: () => void) {
   if (step !== undefined) items[(index + step + items.length) % items.length]?.focus();
 }
 
-// A choice menu opens on the current choice; other menus on their first item.
+// A menu of choices opens on the current one, also with an action after them; others on their
+// first item.
 function focusIndexOf(items: MenuItem[]) {
-  const isChoiceMenu = items.every((item) => item.isChecked !== undefined);
+  const isChoiceMenu = items[0]?.isChecked !== undefined;
   return isChoiceMenu
     ? Math.max(
         0,
@@ -143,14 +148,21 @@ function MenuRow(props: RowProps) {
         onKeyDown={(event) => event.key === "ArrowRight" && choose(event.currentTarget)}
         onClick={(event) => choose(event.currentTarget)}
       >
-        {props.hasChecks && <span className="menu-check">{item.isChecked ? "✓" : ""}</span>}
-        <span className="menu-label">{item.label}</span>
-        {item.shortcut && <kbd>{item.shortcut}</kbd>}
-        {item.submenu && <span className="menu-more">›</span>}
+        <RowContent item={item} hasChecks={props.hasChecks} />
       </button>
     </>
   );
 }
+
+const RowContent = ({ item, hasChecks }: { item: MenuItem; hasChecks: boolean }) => (
+  <>
+    {hasChecks && <span className="menu-check">{item.isChecked ? "✓" : ""}</span>}
+    <span className={`menu-label ${item.labelClass ?? ""}`}>{item.label}</span>
+    {item.shortcut && <kbd>{item.shortcut}</kbd>}
+    {item.hint && <span className="menu-hint">{item.hint}</span>}
+    {item.submenu && <span className="menu-more">›</span>}
+  </>
+);
 
 export function useMenuButton(label: string, items: MenuItem[]) {
   const [place, setPlace] = useState<{ x: number; y: number } | null>(null);

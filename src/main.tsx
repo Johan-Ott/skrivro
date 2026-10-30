@@ -6,6 +6,7 @@ import "@fontsource/geist-mono/400.css";
 import "@fontsource/literata/400.css";
 import "@fontsource/literata/400-italic.css";
 import "@fontsource/literata/600.css";
+import "./styles/bookFonts.css";
 import "@llkit/tokens.css";
 import "@llkit/kit.css";
 import "./styles/app.css";

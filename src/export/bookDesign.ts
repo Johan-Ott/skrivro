@@ -1,4 +1,6 @@
+import { BODY_FONTS, HEADING_FONTS } from "./fonts.js";
 import { isPictureName, openingsOf, type OpeningTemplate } from "./openings.js";
+import { looksOf, type StyleLooks } from "./styleLooks.js";
 
 /** Kept in project.json under `design`. */
 export type BookTheme = "klassisk" | "modern" | "luftig";
@@ -44,6 +46,7 @@ export interface BookDesign {
   openings: OpeningTemplate[];
   /** The template a chapter uses unless it picks another. */
   opening: string;
+  looks: StyleLooks;
 }
 
 export const BOOK_THEMES: BookTheme[] = ["klassisk", "modern", "luftig"];
@@ -64,14 +67,6 @@ export const TRIMS: [string, string][] = [
 
 const TRIM_LIMITS = { smallest: 90, largest: 300 };
 
-export const BODY_FONTS = [
-  "Literata",
-  "EB Garamond",
-  "Crimson Pro",
-  "Libre Baskerville",
-  "Source Serif 4",
-];
-export const HEADING_FONTS = [...BODY_FONTS, "Geist"];
 export const BODY_SIZES = [10, 10.5, 11, 11.5, 12, 13, 14, 16];
 const LEADINGS: Leading[] = ["tatt", "normalt", "luftigt"];
 const FOLIO_PLACES: FolioPlace[] = ["mitten", "ytterhorn", "overst"];
@@ -113,6 +108,7 @@ export const DEFAULT_DESIGN: BookDesign = {
   breakPicture: "",
   openings: openingsOf(undefined),
   opening: "klassisk",
+  looks: looksOf(undefined),
 };
 
 const CHAPTER_STARTS: ChapterStart[] = ["valfri", "hoger"];
@@ -167,6 +163,7 @@ export function designOf(fields: Record<string, unknown>): BookDesign {
     folio: oneOf(stored["folio"], FOLIO_PLACES, DEFAULT_DESIGN.folio),
     openingFolio: isOn(stored["openingFolio"], DEFAULT_DESIGN.openingFolio),
     ...heading,
+    looks: looksOf(stored["looks"]),
   };
 }
 

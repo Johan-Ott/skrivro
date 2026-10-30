@@ -1224,5 +1224,11 @@
   "Felrapporten är kopierad: klistra in den här.": "Der Fehlerbericht ist kopiert: Füg ihn hier ein.",
   "Texten kunde inte kopieras. Skriv den i ett mejl till oss i stället.": "Der Text konnte nicht kopiert werden. Schreib ihn stattdessen in eine E-Mail an uns.",
   "Skicka": "Senden",
-  "{app} stängdes oväntat förra gången. Vill du skicka felrapporten till oss?": "{app} wurde letztes Mal unerwartet beendet. Möchtest du uns den Fehlerbericht senden?"
+  "{app} stängdes oväntat förra gången. Vill du skicka felrapporten till oss?": "{app} wurde letztes Mal unerwartet beendet. Möchtest du uns den Fehlerbericht senden?",
+  "Stilar": "Formatvorlagen",
+  "Ändra stilar…": "Formatvorlagen bearbeiten…",
+  "Som brödtexten": "Wie der Fließtext",
+  "Som från början": "Wie anfangs",
+  "Så här står stilens text i boken.": "So steht der Text dieser Formatvorlage im Buch.",
+  "Brödtextens typsnitt och storlek väljs i Publicera.": "Schrift und Größe des Fließtexts wählst du unter Veröffentlichen."
 }

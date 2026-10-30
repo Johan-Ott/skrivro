@@ -1,4 +1,6 @@
 import { useEffect, type CSSProperties } from "react";
+import { designOf } from "../../export/bookDesign.js";
+import { looksCss } from "../../export/styleLooks.js";
 import { bookTheme, isDarkTheme, themeTokens, type Theme } from "../../project/themes.js";
 
 /** The book's theme as style on the app's outermost element; nothing when it follows the app. */
@@ -11,8 +13,22 @@ export function themeStyle(fields: Record<string, unknown>): CSSProperties | und
   } as CSSProperties;
 }
 
-/** The book's theme on the whole page, so dialogs drawn outside the app get its colours too. */
+// Each style's typeface and size, in the text and wherever a style shows itself by name.
+function useStyleLooks(fields: Record<string, unknown>) {
+  const css = looksCss(
+    designOf(fields).looks,
+    (name) => `.manuscript .style-${name}, .look-${name}`,
+  );
+  useEffect(() => {
+    const style = document.head.appendChild(document.createElement("style"));
+    style.textContent = css;
+    return () => style.remove();
+  }, [css]);
+}
+
+/** The book's theme and styles on the whole page, so dialogs drawn outside the app get them too. */
 export function useBookTheme(fields: Record<string, unknown>) {
+  useStyleLooks(fields);
   const style = themeStyle(fields) as Record<string, string> | undefined;
   const key = JSON.stringify(style ?? null);
   useEffect(() => {

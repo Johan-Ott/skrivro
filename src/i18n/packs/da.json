@@ -1224,5 +1224,11 @@
   "Felrapporten är kopierad: klistra in den här.": "Fejlrapporten er kopieret: indsæt den her.",
   "Texten kunde inte kopieras. Skriv den i ett mejl till oss i stället.": "Teksten kunne ikke kopieres. Skriv den i en e-mail til os i stedet.",
   "Skicka": "Send",
-  "{app} stängdes oväntat förra gången. Vill du skicka felrapporten till oss?": "{app} lukkede uventet sidste gang. Vil du sende fejlrapporten til os?"
+  "{app} stängdes oväntat förra gången. Vill du skicka felrapporten till oss?": "{app} lukkede uventet sidste gang. Vil du sende fejlrapporten til os?",
+  "Stilar": "Typografier",
+  "Ändra stilar…": "Rediger typografier…",
+  "Som brödtexten": "Som brødteksten",
+  "Som från början": "Som fra start",
+  "Så här står stilens text i boken.": "Sådan står typografiens tekst i bogen.",
+  "Brödtextens typsnitt och storlek väljs i Publicera.": "Brødtekstens skrifttype og størrelse vælges i Udgiv."
 }

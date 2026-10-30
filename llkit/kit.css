@@ -138,7 +138,8 @@
   }
 }
 
-.menu kbd {
+.menu kbd,
+.menu-hint {
   color: var(--text-label);
   font: inherit;
   font-size: 12px;

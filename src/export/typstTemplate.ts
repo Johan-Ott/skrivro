@@ -1,4 +1,6 @@
+import { STYLE_NAMES } from "../manuscript/schema.js";
 import { LEADING_EM, type BookDesign, type BookTheme } from "./bookDesign.js";
+import type { StyleLook, StyleLooks } from "./styleLooks.js";
 import { escapeTypst, typstString } from "./typstText.js";
 import { BLEED_MM, CHAPTER_STARTS, PAGE_PARTS, pageSetup } from "./typstPage.js";
 
@@ -35,18 +37,17 @@ const ANFANG = `#let leadin(words) = text(size: 0.8em, tracking: 0.06em, upper(w
 
 // The space under a heading belongs to its own block; a v() would be lost at a page break.
 const CLASSIC_PARTS = `#let scenbrytning(mark) = align(center, block(above: 1.4em, below: 1.4em, mark))
-#let stil(name, body) = {
+#let stil(name, body) = look(name, {
   set par(first-line-indent: 0pt)
   let sides = (left: 1.6em, right: 1.6em)
-  if name == "brev" { block(inset: sides, above: 1.2em, below: 1.2em, emph(body)) }
+  if name == "brev" { block(inset: sides, above: 1.2em, below: 1.2em, body) }
   else if name == "dikt" { set par(justify: false); block(inset: (left: 2.4em), above: 1.2em, below: 1.2em, body) }
   else if name == "meddelande" or name == "meddelande-ut" {
-    set text(font: "Geist", size: 0.85em)
     show par: it => block(fill: if name == "meddelande" { luma(238) } else { luma(222) }, inset: (x: 8pt, y: 5pt), radius: 6pt, above: 0.5em, below: 0.5em, it)
     let inset = if name == "meddelande" { (right: 25%) } else { (left: 25%) }
     block(inset: inset, above: 1.2em, below: 1.2em, body)
   }
-  else if name == "motto" { set par(justify: false); align(right, block(width: 70%, above: 1.2em, below: 2em, align(right, emph(body)))) }
+  else if name == "motto" { set par(justify: false); align(right, block(width: 70%, above: 1.2em, below: 2em, align(right, body))) }
   else if name == "centrerat" { set par(justify: false); align(center, body) }
   else if name == "hoger" { set par(justify: false); align(right, body) }
   else if name == "utan-indrag" { body }
@@ -62,11 +63,11 @@ const CLASSIC_PARTS = `#let scenbrytning(mark) = align(center, block(above: 1.4e
     block(above: 1.2em, below: 1.2em, body)
   }
   else if name == "indrag" { block(inset: (left: 2em), body) }
-  else if name == "underrubrik" { block(above: 1.6em, below: 0.8em, sticky: true, strong(body)) }
+  else if name == "underrubrik" { block(above: 1.6em, below: 0.8em, sticky: true, body) }
   else if name == "ruta" { block(stroke: 0.5pt + luma(120), inset: 0.9em, radius: 2pt, width: 100%, above: 1.2em, below: 1.2em, body) }
   else if name == "hangande-indrag" { set par(hanging-indent: 2em); block(above: 1.2em, below: 1.2em, body) }
   else { block(inset: sides, above: 1.2em, below: 1.2em, body) }
-}
+})
 // Small capitals drawn the same in every typeface: lower-case letters as smaller capitals.
 #let small-caps(words) = words.clusters().map(letter => if lower(letter) == letter and upper(letter) != letter { text(size: 0.78em, upper(letter)) } else { letter }).join()
 #let cased(title) = if heading-style.case == "versaler" { upper(title) } else if heading-style.case == "kapitaler" { small-caps(title) } else { title }
@@ -144,6 +145,26 @@ function headingSetup(design: BookDesign, options: TemplateOptions) {
 
 export const textMark = (mark: string) => `[${escapeTypst(mark)}]`;
 
+function lookArgs(look: StyleLook) {
+  return [
+    look.font && `font: ${typstString(look.font)}`,
+    look.size !== 100 && `size: ${look.size / 100}em`,
+    look.italic && `style: "italic"`,
+    look.bold && `weight: "bold"`,
+  ]
+    .filter(Boolean)
+    .join(", ");
+}
+
+/** Each style's typeface, size, italic and bold, round what its layout in `stil` sets. */
+export function lookSetup(looks: StyleLooks) {
+  const branches = STYLE_NAMES.flatMap((name) => {
+    const args = lookArgs(looks[name]);
+    return args ? [`if name == ${typstString(name)} { text(${args}, body) }`] : [];
+  });
+  return `#let look(name, body) = ${[...branches, "{ body }"].join(" else ")}`;
+}
+
 export function bookTemplate(
   design: BookDesign,
   book: { title: string; author: string },
@@ -166,6 +187,7 @@ ${pageSetup(design, options.hasBleed ? BLEED_MM : 0)}
 #show heading: none
 
 ${ANFANG}
+${lookSetup(design.looks)}
 ${CLASSIC_PARTS}
 #let break-mark = ${options.breakMark}`;
 }

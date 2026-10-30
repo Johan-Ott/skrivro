@@ -27,6 +27,27 @@ export const STYLE_LABELS: Record<StyleChoice, string> = {
   "hangande-indrag": t("Hängande indrag"),
 };
 
+/** The styles in the order the style menu lists them. */
+export const STYLE_ORDER: StyleChoice[] = [
+  "brodtext",
+  "brev",
+  "citat",
+  "motto",
+  "dikt",
+  "meddelande",
+  "meddelande-ut",
+  "centrerat",
+  "hoger",
+  "utan-indrag",
+  "kapitaler",
+  "punktlista",
+  "numrerad",
+  "indrag",
+  "underrubrik",
+  "ruta",
+  "hangande-indrag",
+];
+
 export const toggleBold = toggleMark(schema.marks.bold);
 export const toggleItalic = toggleMark(schema.marks.italic);
 export const toggleUnderline = toggleMark(schema.marks.underline);

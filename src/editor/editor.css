@@ -46,10 +46,6 @@
   margin: 0.6em 0 0.6em 1.5em;
 }
 
-.manuscript .style-brev {
-  font-style: italic;
-}
-
 .manuscript .style-dikt p + p,
 .manuscript .style-brev p + p,
 .manuscript .style-citat p + p,
@@ -105,7 +101,6 @@
 /* Underrubrik heads a part of a chapter; the chapters stay the book's only headings. */
 .manuscript .style-underrubrik {
   margin: 1.4em 0 0.6em;
-  font-weight: 600;
 }
 
 /* Ruta frames facts beside the text. */
@@ -156,8 +151,6 @@
   flex-direction: column;
   gap: 6px;
   margin-left: 0;
-  font-family: var(--font-ui);
-  font-size: 15px;
   line-height: 1.45;
 }
 
@@ -186,7 +179,6 @@
 .manuscript .style-motto {
   width: 70%;
   margin: 1em 0 1.6em auto;
-  font-style: italic;
   text-align: right;
 }
 

@@ -28,11 +28,11 @@ export function MarginRow({ design, save }: RowProps) {
   );
 }
 
+export const points = (size: number) => `${String(size).replace(".", ",")} pt`;
+
 const LARGE_PRINT = 14;
-const sizeLabel = (size: number) => {
-  const points = `${String(size).replace(".", ",")} pt`;
-  return size >= LARGE_PRINT ? t("{size}, storstil", { size: points }) : points;
-};
+const sizeLabel = (size: number) =>
+  size >= LARGE_PRINT ? t("{size}, storstil", { size: points(size) }) : points(size);
 
 /** The body text's size, with large print from 14 points, and the space between its lines. */
 export function SizeRows({ design, save }: RowProps) {
