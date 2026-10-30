@@ -61,17 +61,3 @@ export function PlaceholderTasks(props: {
     </section>
   );
 }
-
-/** Before an export: placeholders are exported as they stand, so the writer sees how many are left. */
-export function PlaceholderWarning(props: { project: Project; onShow: () => void }) {
-  const count = usePlaceholders(props.project, null).length;
-  if (count === 0) return null;
-  return (
-    <p className="setting-hint" role="status">
-      {t("Platshållare kvar: {count}", { count })}{" "}
-      <button className="link-button" onClick={props.onShow}>
-        {t("Visa i Att kolla")}
-      </button>
-    </p>
-  );
-}

@@ -145,8 +145,3 @@ export const THEME_LABELS: Record<Theme, string> = {
   mörkt: t("Mörkt"),
   system: t("System"),
 };
-
-export const toggleDark = (settings: WritingSettings): WritingSettings => ({
-  ...settings,
-  theme: settings.theme === "mörkt" ? "system" : "mörkt",
-});
