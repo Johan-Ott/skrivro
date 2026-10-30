@@ -6,8 +6,8 @@ import { InSceneBlock } from "./InSceneBlock.js";
 import { ReferenceBlock } from "./ReferenceBlock.js";
 import { t } from "../../i18n/i18n.js";
 
-// The panels of the right column beside the text, each a tab there; Granska comes with the review
-// in Redigera.
+// The panels of the right column beside the text, each a section there; Granska comes with the
+// review in Redigera.
 
 export function Blocks({ app, project }: { app: AppState; project: Project }) {
   return (
