@@ -6,6 +6,7 @@ import { openScene, type OpenScene, type SceneSession } from "../sceneSession.js
 import type { Project } from "../useProject.js";
 import { useComments } from "./useComments.js";
 import { useRevision } from "./useRevision.js";
+import { useRounds } from "./useRounds.js";
 
 type Parts = {
   project: Project | null;
@@ -43,9 +44,10 @@ function useSuggesting(session: SceneSession, editor: Editor, onDone: () => void
   return { isSuggesting, start, stop: () => void stop().catch(recordFailure("Förslag")) };
 }
 
-/** What others say about the open scene: comments, and changes suggested or read back from Word. */
+/** What others say about the open scene: comments, and changes suggested or read back from Word;
+ *  and the rounds with the editor the Word files came back in. */
 export function useReviewParts(parts: Parts) {
   const revision = useRevision(parts);
   const suggesting = useSuggesting(parts.session, parts.editor, revision.reload);
-  return { comments: useComments(parts), revision, suggesting };
+  return { comments: useComments(parts), revision, suggesting, rounds: useRounds(parts.project) };
 }

@@ -27,6 +27,7 @@ const choicesFor = (project: Project): ExportChoices => ({
   hasNewsletter: true,
   hasStores: false,
   hasExcerpt: false,
+  hasLetterPage: false,
 });
 
 async function buildPageMap(project: Project, generalAuthor: string): Promise<PageMap> {

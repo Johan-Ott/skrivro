@@ -3,9 +3,10 @@ import type { Project } from "../useProject.js";
 import { startChoices, type ExportChoices } from "./useExport.js";
 import { t } from "../../i18n/i18n.js";
 
-// The Word manuscript, which the editor sends back with changes and comments.
+// The Word manuscript, which the editor sends back with changes, comments and a letter on its
+// first page.
 export const sendToEditor = (project: Project, run: (choices: ExportChoices) => void) =>
-  run({ ...startChoices(project), format: "manus" });
+  run({ ...startChoices(project), format: "manus", hasLetterPage: true });
 
 // By files, with no server: an editor or test reader sends the Word manuscript back with changes
 // and comments for Läs in kommenterad Word-fil; one who only reads gets the e-book.

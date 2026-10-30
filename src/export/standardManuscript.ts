@@ -15,6 +15,7 @@ import type { Node } from "prosemirror-model";
 import type { BookDetails, OutlineItem, Typography } from "./book.js";
 import { runs, type TextSettings, type WordNotes } from "./wordRuns.js";
 import { bookWords, headingLabel, roundedWords, titleBesideLabel } from "./bookWords.js";
+import { letterPage } from "./letterPage.js";
 import { sceneEndMark, sceneStartMark } from "./sceneMarks.js";
 import { listItem, listNumbering, LIST_STYLES, type WordLists } from "./wordLists.js";
 
@@ -25,6 +26,8 @@ interface ManuscriptInput {
   typography: Typography;
   language: string;
   hasTitlePage: boolean;
+  /** To an editor: a first page with the writer's answer and room for the editor's letter. */
+  letter?: string[] | null;
 }
 
 // The standard manuscript: Times New Roman 12 pt, double spacing, 2.5 cm margins, 1.27 cm indent.
@@ -171,10 +174,7 @@ function bodyParagraphs(input: ManuscriptInput, notes: WordNotes): Paragraph[] {
 function titlePage(book: BookDetails, language: string): Paragraph[] {
   return [
     new Paragraph(book.author),
-    new Paragraph({
-      alignment: AlignmentType.RIGHT,
-      children: [new TextRun(roundedWords(book.words, language))],
-    }),
+    new Paragraph({ ...RIGHT, children: [new TextRun(roundedWords(book.words, language))] }),
     centered(book.title.toLocaleUpperCase(language), { spacing: { before: HEADING_DROP } }),
     ...(book.subtitle ? [centered(book.subtitle)] : []),
     ...(book.author ? [centered(bookWords(language).byAuthor(book.author))] : []),
@@ -219,6 +219,7 @@ export async function standardManuscript(input: ManuscriptInput): Promise<Uint8A
     title: input.book.title,
     styles: manuscriptStyles(input.language),
     sections: [
+      ...(input.letter ? [{ properties: { page }, children: letterPage(input.letter) }] : []),
       ...(input.hasTitlePage
         ? [{ properties: { page }, children: titlePage(input.book, input.language) }]
         : []),

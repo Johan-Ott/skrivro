@@ -19,6 +19,7 @@ import { NoteVoice } from "./notes/NoteVoice.js";
 import { MarginNotes } from "./review/MarginNotes.js";
 import { ReviewLayer } from "./review/ReviewLayer.js";
 import { ReadOn } from "./review/ReadOn.js";
+import { Letter } from "./review/Letter.js";
 import { TextHeader } from "./TextHeader.js";
 import { SceneStrip } from "./phone/SceneStrip.js";
 import { openInHome } from "./notes/noteHomes.js";
@@ -41,6 +42,7 @@ function focusLocation(project: Project, scene: OpenScene | null) {
 function sceneHeader(app: AppState, project: Project, sceneId: string) {
   return (
     <>
+      <Letter app={app} project={project} />
       <TextHeader
         project={project}
         sceneId={sceneId}

@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { ExportError, type Typography } from "../../export/book.js";
 import { TypstError } from "../../export/typstError.js";
 import { typstFiles, typstSource } from "../../export/typstBook.js";
+import { latestAnswer } from "../../project/rounds.js";
 import { seriesDirOf } from "../../project/series.js";
 import { bookLanguage, quoteStyleFor } from "../../project/bookLanguage.js";
 import { recordFailure } from "@llkit/errorLog.js";
@@ -41,6 +42,8 @@ export interface ExportChoices {
   hasNewsletter: boolean;
   hasStores: boolean;
   hasExcerpt: boolean;
+  /** Skicka till redaktör: the Word file starts with a page to the editor. */
+  hasLetterPage: boolean;
 }
 
 type SaveFields = (fields: Record<string, unknown>) => void;
@@ -59,6 +62,7 @@ export const startChoices = (project: Project): ExportChoices => ({
   hasNewsletter: false,
   hasStores: false,
   hasExcerpt: false,
+  hasLetterPage: false,
 });
 
 const FILE_KINDS: Record<ExportFormat, FileKind> = {
@@ -92,7 +96,10 @@ async function buildFile({ project, generalAuthor, choices, saveFields, onProgre
   if (isPlain(choices.format)) return plainFile(material, choices, language);
   if (choices.format === "manus") {
     const { standardManuscript } = await import("../../export/standardManuscript.js");
-    return standardManuscript({ ...material, ...choices, language });
+    const letter = choices.hasLetterPage
+      ? await latestAnswer(platform.fileSystem, project.dir)
+      : null;
+    return standardManuscript({ ...material, ...choices, language, letter });
   }
   const extras = await withExcerpt(chosenExtras(project, choices), project, choices);
   if (choices.format === "omslag") {

@@ -17,7 +17,7 @@ const ENTITIES = new Map([
   ["quot", '"'],
   ["apos", "'"],
 ]);
-const decode = (text: string) =>
+export const decode = (text: string) =>
   text.replace(/&(amp|lt|gt|quot|apos);/g, (_all, name: string) => ENTITIES.get(name) ?? "");
 
 const TEXT = /<w:t(?:\s[^>]*)?>([^<]*)<\/w:t>/g;

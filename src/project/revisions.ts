@@ -5,7 +5,7 @@ import { joinPath, type FileSystem } from "@llkit/storage/fileSystem.js";
 import { setAside } from "../storage/setAside.js";
 
 /** An editor's version of a scene waits here, as plain text, until the writer has gone through it. */
-const REVISIONS_DIR = "redigering";
+export const REVISIONS_DIR = "redigering";
 
 const revisionPath = (dir: string, sceneId: string) =>
   joinPath(joinPath(dir, REVISIONS_DIR), `${sceneId}.txt`);

@@ -1,10 +1,11 @@
 import { Document, Packer } from "docx";
+import JSZip from "jszip";
 import { describe, expect, it } from "vitest";
 import { documentText } from "../src/editor/documentText";
 import { createEditorState } from "../src/editor/editorState";
 import { acceptChange } from "../src/editor/revisionMarks";
 import { standardManuscript } from "../src/export/standardManuscript";
-import { revisionTexts } from "../src/import/revisionImport";
+import { editorsFile } from "../src/import/revisionImport";
 import { parseMarkdown } from "../src/manuscript/parseMarkdown";
 import { revisionChanges, sameChange, withoutChange } from "../src/manuscript/revision";
 import { serializeMarkdown } from "../src/manuscript/serializeMarkdown";
@@ -88,7 +89,7 @@ describe("a Word manuscript coming back", () => {
       hasTitlePage: true,
     });
 
-    const texts = await revisionTexts(bytes);
+    const { texts } = await editorsFile(bytes);
 
     expect(texts.get("S1AAAAAAAAAAAAAAAAAAAAAAAA")).toBe("Isen låg tjock.\nElin gick ut.\n");
     expect(texts.get("S2AAAAAAAAAAAAAAAAAAAAAAAA")).toBe("Maja väntade.\n");
@@ -99,6 +100,36 @@ describe("a Word manuscript coming back", () => {
       await Packer.toBuffer(new Document({ sections: [{ children: [] }] })),
     );
 
-    expect((await revisionTexts(bytes)).size).toBe(0);
+    expect((await editorsFile(bytes)).texts.size).toBe(0);
+  });
+
+  it("brings the letter the editor wrote on the first page, and who wrote it", async () => {
+    const bytes = await standardManuscript({
+      book: { title: "Vintervägen", subtitle: "", author: "Elin Berg", words: 10 },
+      outline: [],
+      scenes: new Map(),
+      typography: "svensk",
+      language: "sv-SE",
+      hasTitlePage: true,
+      letter: ["Tack för sist."],
+    });
+    const zip = await JSZip.loadAsync(bytes);
+    const xml = (await zip.file("word/document.xml")?.async("string")) ?? "";
+    const end = xml.lastIndexOf("<w:p>", xml.indexOf('w:name="skrivroend_BREV"'));
+    const written = "<w:p><w:r><w:t>Hej Elin! Isen bär boken.</w:t></w:r></w:p>";
+    zip.file("word/document.xml", xml.slice(0, end) + written + xml.slice(end));
+    const core = (await zip.file("docProps/core.xml")?.async("string")) ?? "";
+    const saver = "<cp:lastModifiedBy>Lena Ek</cp:lastModifiedBy>";
+    zip.file(
+      "docProps/core.xml",
+      core.replace(/<cp:lastModifiedBy>.*?<\/cp:lastModifiedBy>/, saver),
+    );
+
+    const file = await editorsFile(await zip.generateAsync({ type: "uint8array" }));
+
+    expect(file.letter).toBe("Hej Elin! Isen bär boken.");
+    expect(file.editor).toBe("Lena Ek");
+    expect(file.sentAt).toBeGreaterThan(0);
+    expect(file.texts.size).toBe(0);
   });
 });

@@ -5,7 +5,10 @@ import type { AppState } from "../App.js";
 import { sendToEditor } from "../exporting/collaboration.js";
 import { usePhone } from "../phone/usePhone.js";
 import type { Project } from "../useProject.js";
+import { startWalk } from "./Letter.js";
 import { useEditorsFile } from "./RevisionImport.js";
+import { countParts, firstName, totalOf } from "./roundWords.js";
+import type { ShownRound } from "./useRounds.js";
 import { DRAFT_ID } from "./useComments.js";
 import { formatNumber, t } from "../../i18n/i18n.js";
 
@@ -61,19 +64,9 @@ function walkText(total: number, passed: number) {
   return t("{current} av {total}", { current: formatNumber(passed), total: count });
 }
 
-// Only what there is: "2 ändringar", not "2 ändringar · 0 kommentarer".
 function countsText(marks: Mark[]) {
   const changes = marks.filter((mark) => mark.isChange).length;
-  const comments = marks.length - changes;
-  const parts = [
-    changes > 0 &&
-      (changes === 1 ? t("1 ändring") : t("{count} ändringar", { count: formatNumber(changes) })),
-    comments > 0 &&
-      (comments === 1
-        ? t("1 kommentar")
-        : t("{count} kommentarer", { count: formatNumber(comments) })),
-  ];
-  return parts.filter(Boolean).join(" · ");
+  return countParts({ changes, comments: marks.length - changes }).join(" · ");
 }
 
 const ARROWS = { previous: "m15 6-6 6 6 6", next: "m9 6 6 6-6 6" };
@@ -100,6 +93,42 @@ function Walk({ app }: { app: AppState }) {
   );
 }
 
+// While the editor's letter shows, the walk waits for it to be read.
+function RoundStart({
+  app,
+  project,
+  shown,
+}: {
+  app: AppState;
+  project: Project;
+  shown: ShownRound;
+}) {
+  const { round, number } = shown;
+  const total = totalOf(round);
+  return (
+    <span className="walk-bar-walk">
+      <b>{t("Omgång {number} från {name}", { number, name: firstName(round) })}</b>
+      <span className="walk-bar-place">{walkText(total.changes + total.comments, 0)}</span>
+      <span className="walk-bar-counts">{countParts(total).join(" · ")}</span>
+      <button className="button small primary" onClick={() => startWalk(app, project, round)}>
+        {t("Börja genomgången")}
+      </button>
+    </span>
+  );
+}
+
+// Once read, the letter opens again from here.
+function LetterAgain({ app }: { app: AppState }) {
+  const { rounds, shown, open } = app.rounds;
+  const latest = rounds.at(-1);
+  if (shown || !latest) return null;
+  return (
+    <button className="link-button" onClick={() => open(rounds.length - 1)}>
+      {t("Brev från {name}", { name: firstName(latest) })}
+    </button>
+  );
+}
+
 // Manus reads as the writer writes; Bok as the page will look, in the book's type.
 function ReadAs({ app }: { app: AppState }) {
   const { settings, onChangeSettings } = app.writingMode;
@@ -122,6 +151,7 @@ function ReadAs({ app }: { app: AppState }) {
 
 function ShownWalkBar({ app, project }: { app: AppState; project: Project }) {
   const editorsFile = useEditorsFile(app, project);
+  const { shown } = app.rounds;
   return (
     <>
       <div
@@ -130,9 +160,10 @@ function ShownWalkBar({ app, project }: { app: AppState; project: Project }) {
         aria-label={t("Genomgång")}
         onMouseDown={(event) => event.preventDefault()}
       >
-        <Walk app={app} />
+        {shown ? <RoundStart app={app} project={project} shown={shown} /> : <Walk app={app} />}
         <span className="walk-bar-end">
           <ReadAs app={app} />
+          <LetterAgain app={app} />
           <button className="link-button" onClick={editorsFile.open}>
             {t("Läs in redaktörens fil…")}
           </button>
