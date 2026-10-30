@@ -2,6 +2,7 @@ import { useSwipe } from "@llkit/touch.js";
 import { useState, type DragEvent, type KeyboardEvent, type MouseEvent } from "react";
 import type { DropPosition, TreeRow as Row } from "../../project/treeRows.js";
 import type { Label } from "../../project/labels.js";
+import { LabelDots, LeftPill, PovTag, StatusDot } from "./rowSigns.js";
 import type { SceneStatus } from "../../manuscript/sceneFile.js";
 import { Chevron } from "./Chevron.js";
 import { NoteKindIcon } from "../notes/NoteKindIcon.js";
@@ -26,6 +27,8 @@ export interface TreeRowProps {
   isMoved: boolean;
   /** In a table of contents, the printed page it starts on; undefined when the sidebar is not one. */
   page?: number | null | undefined;
+  /** In Redigera, what waits in the scene; nothing shows at 0. */
+  left: number;
   isExpanded: boolean | null;
   isRenaming: boolean;
   isMissing: boolean;
@@ -111,35 +114,6 @@ const MoreButton = (props: { label: string; onOpen: (event: MouseEvent<HTMLEleme
   </button>
 );
 
-// A scene's step stands before its name, as the design draws it; an idea is only an outline.
-function StatusDot({ status }: { status: TreeRowProps["status"] }) {
-  if (!status) return null;
-  return (
-    <span
-      className={`tree-dot tree-status${status.color ? "" : " outlined"}`}
-      title={status.name}
-      aria-label={status.name}
-      style={{ background: status.color }}
-    />
-  );
-}
-
-function LabelDots({ dots }: { dots: Label[] }) {
-  if (dots.length === 0) return null;
-  return (
-    <span className="tree-dots" aria-label={dots.map((dot) => dot.name).join(", ")}>
-      {dots.map((dot) => (
-        <span
-          key={dot.id}
-          className="tree-dot"
-          title={dot.name}
-          style={{ background: dot.color }}
-        />
-      ))}
-    </span>
-  );
-}
-
 // Dots to the page number, as a printed table of contents lines them up.
 const PageLeader = ({ page }: { page: number | null }) => (
   <>
@@ -148,9 +122,10 @@ const PageLeader = ({ page }: { page: number | null }) => (
   </>
 );
 
-// The words, or in a table of contents the page; then the menu for a tap.
+// What waits, the words or in a table of contents the page; then the menu for a tap.
 const RowEnd = (props: TreeRowProps) => (
   <>
+    <LeftPill left={props.left} />
     {props.page === undefined ? (
       <span className="tree-meta">{props.meta}</span>
     ) : (
@@ -158,11 +133,6 @@ const RowEnd = (props: TreeRowProps) => (
     )}
     <MoreButton label={props.label} onOpen={props.onContextMenu} />
   </>
-);
-
-// Drawn from its attribute, so the name is not a second "Elin" among the rows' own text.
-const PovTag = ({ pov }: { pov: string }) => (
-  <span className="tree-pov" data-pov={pov} title={t("Vems ögon: {pov}", { pov })} />
 );
 
 // What a swipe will do, shown under the row as it moves aside.

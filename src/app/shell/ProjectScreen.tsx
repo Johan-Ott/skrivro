@@ -28,6 +28,7 @@ import { chapterOf } from "../../project/treeLabels.js";
 import { bookLook, runningHead } from "../bookLook.js";
 import { t } from "../../i18n/i18n.js";
 import { TextBands } from "../TextBands.js";
+import { useLeftPerScene } from "../review/sceneLeft.js";
 
 type ScreenProps = { app: AppState; project: Project };
 
@@ -201,10 +202,11 @@ export function ProjectScreen({ app, project }: ScreenProps) {
     ? pageFinder(pageMap, project.tree)
     : undefined;
   const classes = screenClasses(writingMode, isPublishing, arrivingText.use());
+  const leftIn = useLeftPerScene(app, project);
   return (
     <div className={classes.filter(Boolean).join(" ")}>
       <ScreenTopbar app={app} project={project} {...menu.openers} />
-      {!isPublishing && <Sidebar {...sidebarProps(app, project)} pageOf={pageOf} />}
+      {!isPublishing && <Sidebar {...sidebarProps(app, project)} pageOf={pageOf} leftIn={leftIn} />}
       <div className="sidebar-backdrop" onClick={() => writingMode.setSidebarOpen(false)} />
       <MainCard app={app} project={project} pageMap={pageMap} />
       {isPublishing && (

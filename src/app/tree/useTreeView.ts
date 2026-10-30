@@ -32,6 +32,8 @@ export interface TreeViewProps {
   isFollowingOpenScene?: boolean;
   /** Set when the sidebar is a table of contents: where each node starts in the printed book. */
   pageOf?: ((id: string) => number | null) | undefined;
+  /** Set in Redigera: what waits in each scene, the editor's changes and open comments. */
+  leftIn?: Record<string, number> | undefined;
   /** A node just created; the tree shows it and starts renaming it. */
   renameRequestId: string | null;
   onOpenScene: (id: string) => void;
@@ -205,6 +207,8 @@ function sceneStatusOf(project: Project, node: TreeNode) {
 // Undefined unless the sidebar is a table of contents.
 const pageIn = ({ pageOf }: TreeViewProps, id: string) => (pageOf ? pageOf(id) : undefined);
 
+const leftIn = ({ leftIn }: TreeViewProps, id: string) => leftIn?.[id] ?? 0;
+
 export function rowView(row: Row, props: TreeViewProps, collapsed: ReadonlySet<string>) {
   const { node } = row;
   const summary = props.project.summaries[node.id];
@@ -222,5 +226,6 @@ export function rowView(row: Row, props: TreeViewProps, collapsed: ReadonlySet<s
     isExpanded: node.kind === "scene" ? null : !collapsed.has(node.id),
     isMissing: node.kind === "scene" && !summary,
     page: pageIn(props, node.id),
+    left: leftIn(props, node.id),
   };
 }

@@ -171,6 +171,30 @@ test("in Redigera the rest of the book follows the open scene, and a click opens
   await expect(page.locator(".read-on-scene").first()).not.toContainText("Isen bar.");
 });
 
+test("in Redigera the tree counts what waits in each scene, and the open one counts from the editor", async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await openExample(page);
+  const steps = page.getByRole("tablist", { name: "Steg" });
+  await steps.getByRole("tab", { name: "Redigera" }).click();
+  const chooser = page.waitForEvent("filechooser");
+  const walk = page.getByRole("toolbar", { name: "Genomgång" });
+  await walk.getByRole("button", { name: "Läs in redaktörens fil…" }).click();
+  await (await chooser).setFiles(await editorsFile(testInfo.outputDir));
+  await page.getByRole("button", { name: "Stäng", exact: true }).click();
+
+  const koket = page.locator(`.tree-row[data-node-id="${KOKET}"] .tree-left`);
+  await expect(koket).toHaveText(/^[1-9]\d*$/);
+  const count = (await koket.textContent()) ?? "";
+  await page.locator(".tree-row", { hasText: "Isen" }).first().click();
+  await expect(editor(page)).toContainText("Isen bar.");
+  await expect(koket).toHaveText(count);
+
+  await steps.getByRole("tab", { name: "Skriv" }).click();
+  await expect(page.locator(".tree-left")).toHaveCount(0);
+});
+
 test("a test reader's comments in Word come into Granska, on the words they are on", async ({
   page,
 }, testInfo) => {
