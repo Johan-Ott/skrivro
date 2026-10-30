@@ -7,18 +7,19 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 
 export interface EditorStore {
   get: () => EditorState | null;
-  set: (state: EditorState | null) => void;
-  subscribe: (listener: () => void) => () => void;
+  /** `isNewText` when another text is opened, not the same one changed. */
+  set: (state: EditorState | null, isNewText?: boolean) => void;
+  subscribe: (listener: (isNewText: boolean) => void) => () => void;
 }
 
 export function createEditorStore(): EditorStore {
   let current: EditorState | null = null;
-  const listeners = new Set<() => void>();
+  const listeners = new Set<(isNewText: boolean) => void>();
   return {
     get: () => current,
-    set: (state) => {
+    set: (state, isNewText = false) => {
       current = state;
-      listeners.forEach((listener) => listener());
+      listeners.forEach((listener) => listener(isNewText));
     },
     subscribe: (listener) => {
       listeners.add(listener);
@@ -31,15 +32,17 @@ export function createEditorStore(): EditorStore {
 export const useEditorState = ({ store }: { store: EditorStore }) =>
   useSyncExternalStore(store.subscribe, store.get);
 
-/** The text as it was at the writer's last pause of `pauseMs`, for what need not follow each key. */
+/** The text as it was at the writer's last pause of `pauseMs`, for what need not follow each key.
+ * A text just opened is read at once, so nothing shows what was found in the last one. */
 export function useSettledDoc({ store }: { store: EditorStore }, pauseMs: number) {
   const [doc, setDoc] = useState<Node | null>(() => store.get()?.doc ?? null);
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
     const settle = () => setDoc(store.get()?.doc ?? null);
-    const unsubscribe = store.subscribe(() => {
+    const unsubscribe = store.subscribe((isNewText) => {
       clearTimeout(timer);
-      timer = setTimeout(settle, pauseMs);
+      if (isNewText) settle();
+      else timer = setTimeout(settle, pauseMs);
     });
     settle();
     return () => (unsubscribe(), clearTimeout(timer));

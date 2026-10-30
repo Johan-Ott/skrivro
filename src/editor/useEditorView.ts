@@ -208,7 +208,7 @@ export function useEditorView(onDocChange: (doc: Node) => void) {
     loadedKey.current = key ?? null;
     const caret = key ? caretFor(key, doc) : null;
     if (view) showWithCaret(view, placedCaret(createEditorState(doc, switches), caret));
-    store.set(view?.state ?? null);
+    store.set(view?.state ?? null, true);
   }, []);
 
   const run = useCallback((command: Command, shouldFocus = true) => {

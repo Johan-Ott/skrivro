@@ -26,8 +26,8 @@ test("Granska counts what still waits: not a reply, and not a resolved comment",
   const count = async () =>
     Number((await reviewButton(page).getAttribute("aria-label"))?.match(/\d+/)?.[0]);
   await comment(page, "Ska brevet vara gult?");
-  // Granska reads the text at the writer's pause, so the new comment's words are found a moment on.
-  await expect(granska(page).getByText("Citatet finns inte längre i texten.")).toBeHidden();
+  // Granska reads a text just opened at once, not at the writer's first pause in it.
+  expect(await granska(page).getByText("Citatet finns inte längre i texten.").count()).toBe(0);
   const withComment = await count();
 
   await page.getByRole("button", { name: "Svara" }).first().click();
