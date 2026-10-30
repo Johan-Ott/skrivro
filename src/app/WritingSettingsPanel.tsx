@@ -9,6 +9,7 @@ import {
   type ProseFont,
   type WritingSettings,
 } from "../editor/writingSettings.js";
+import { Segmented, Toggle, ValueRow } from "./settingControls.js";
 import type { SettingsChange } from "./useWritingSettings.js";
 import { t } from "../i18n/i18n.js";
 
@@ -38,62 +39,6 @@ interface PanelProps {
 }
 
 const WIDTH_LABELS = { smal: t("Smal"), normal: t("Normal"), bred: t("Bred") } as const;
-
-function Segmented<T extends string>(props: {
-  label: string;
-  value: T;
-  options: [T, string][];
-  onSelect: (value: T) => void;
-}) {
-  return (
-    <div className="setting-column">
-      <span className="setting-label">{props.label}</span>
-      <div className="segmented" role="radiogroup" aria-label={props.label}>
-        {props.options.map(([value, text]) => (
-          <button
-            key={value}
-            role="radio"
-            aria-checked={value === props.value}
-            onClick={() => props.onSelect(value)}
-          >
-            {text}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Toggle(props: { label: string; hint: string; isOn: boolean; onFlip: () => void }) {
-  return (
-    <div className="setting-row">
-      <span className="setting-text">
-        <span>{props.label}</span>
-        <span className="setting-hint">{props.hint}</span>
-      </span>
-      <button
-        className="toggle"
-        role="switch"
-        aria-checked={props.isOn}
-        aria-label={props.label}
-        onClick={props.onFlip}
-      >
-        <span />
-      </button>
-    </div>
-  );
-}
-
-function ValueRow(props: { label: string; value: string; onNext: () => void }) {
-  return (
-    <div className="setting-row">
-      <span>{props.label}</span>
-      <button className="setting-value" onClick={props.onNext}>
-        {props.value}
-      </button>
-    </div>
-  );
-}
 
 function SizeStepper({ settings, onChange }: Pick<PanelProps, "settings" | "onChange">) {
   return (
@@ -179,6 +124,25 @@ function FocusSwitch({ focusMode }: { focusMode: PanelProps["focusMode"] | undef
   return <Toggle label={t("Fokusläge")} hint={hint} {...focusMode} />;
 }
 
+function PageSettings({ settings, onChange }: PanelProps) {
+  return (
+    <>
+      <Toggle
+        label={t("Indrag första rad")}
+        hint={t("Bokstil: inget indrag efter rubrik")}
+        isOn={settings.indent}
+        onFlip={() => onChange(toggle("indent"))}
+      />
+      <Toggle
+        label={t("Sidbrytningar")}
+        hint={t("Var den tryckta bokens sidor börjar")}
+        isOn={settings.showPages}
+        onFlip={() => onChange(toggle("showPages"))}
+      />
+    </>
+  );
+}
+
 // On a computer the panel hangs under the Aa that opened it, and a click outside closes it.
 // A phone marks no Aa, so there the panel keeps its place above the toolbar.
 function useUnderLookButton(panel: RefObject<HTMLElement | null>, onClose?: () => void) {
@@ -208,7 +172,6 @@ function useUnderLookButton(panel: RefObject<HTMLElement | null>, onClose?: () =
 }
 
 export function WritingSettingsPanel(props: PanelProps) {
-  const { settings, onChange } = props;
   const ref = useRef<HTMLDivElement>(null);
   const place = useUnderLookButton(ref, props.onClose);
   useRootClass("look-shown");
@@ -232,18 +195,7 @@ export function WritingSettingsPanel(props: PanelProps) {
       <div className="settings-divider" />
       <FocusSwitch focusMode={props.focusMode} />
       {props.showsFocusOptions && <FocusSettings {...props} />}
-      <Toggle
-        label={t("Indrag första rad")}
-        hint={t("Bokstil: inget indrag efter rubrik")}
-        isOn={settings.indent}
-        onFlip={() => onChange(toggle("indent"))}
-      />
-      <Toggle
-        label={t("Sidbrytningar")}
-        hint={t("Var den tryckta bokens sidor börjar")}
-        isOn={settings.showPages}
-        onFlip={() => onChange(toggle("showPages"))}
-      />
+      <PageSettings {...props} />
     </div>
   );
 }
