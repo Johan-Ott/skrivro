@@ -343,8 +343,7 @@ body .selection-bar.phone .icon-button {
   cursor: default;
 }
 
-.phone-app .block-title,
-.phone-app .insights-title {
+.phone-app .block-title {
   grid-column: 2;
   justify-content: center;
   color: var(--text);

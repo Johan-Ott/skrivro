@@ -7,12 +7,19 @@ import {
   type RefObject,
 } from "react";
 import { CloseButton } from "@llkit/controls.js";
-import { createStore } from "@llkit/store.js";
 import { usePhone } from "../phone/usePhone.js";
-import { GripIcon, Icon } from "../shell/icons.js";
+import { Icon } from "../shell/icons.js";
 import { t } from "../../i18n/i18n.js";
-import { DockButton, inDock, useDock } from "./dock.js";
-import { DOCKABLE, keepPlaces, places, setPlace, type Place } from "./layout.js";
+import { BlockTitle, DockButton, inDock, useDock, useDocked } from "./dock.js";
+import {
+  DOCKABLE,
+  keepPlaces,
+  minimized,
+  places,
+  setPlace,
+  toggleMinimized,
+  type Place,
+} from "./layout.js";
 
 // A panel lies docked in the column at the card's right. Loosened, it floats over the text,
 // dragged by its head to where the writer wants it; the place is kept.
@@ -81,31 +88,6 @@ function useKeptInside(panel: RefObject<HTMLElement | null>, place: Place | null
   return inside ?? place;
 }
 
-// The panels drawn down to their head, by id; kept per device, as their places are.
-const MINIMIZED_KEY = "skrivro.minimized";
-
-function storedMinimized(): string[] {
-  try {
-    const stored: unknown = JSON.parse(localStorage.getItem(MINIMIZED_KEY) ?? "[]");
-    return Array.isArray(stored) ? stored.map(String) : [];
-  } catch {
-    return [];
-  }
-}
-
-const minimized = createStore<string[]>(storedMinimized());
-
-function toggleMinimized(id: string) {
-  const now = minimized.get();
-  const next = now.includes(id) ? now.filter((other) => other !== id) : [...now, id];
-  minimized.set(next);
-  try {
-    localStorage.setItem(MINIMIZED_KEY, JSON.stringify(next));
-  } catch {
-    // Without storage the panel stays drawn down until Skrivro closes.
-  }
-}
-
 /** A panel docked, or loosened and moved by its head, and drawn down to its head when the writer
  * wants; `isOn` false leaves it to the CSS, as on a phone, where panels cover the screen. */
 export function useFloating(id: string, isOn = true) {
@@ -113,7 +95,7 @@ export function useFloating(id: string, isOn = true) {
   const ref = useRef<HTMLElement>(null);
   const { dock, isBehind } = useDock(id, isOn);
   const isFree = isOn && !dock;
-  const isMinimized = minimized.use().includes(id) && isFree;
+  const isMinimized = minimized.use().includes(id) && isOn;
   const shown = useKeptInside(ref, isFree ? place : null);
   return {
     ref,
@@ -154,8 +136,8 @@ function MinimizeButton({ id }: { id: string }) {
   );
 }
 
-/** A loose panel's head: Docka and Minimera. Close only where the panel cannot dock: Mål, and
- * every panel on a phone. Docked, the column's tabs stand in for the head. */
+/** Lossa or Docka, and Minimera for a loose panel; docked, its title folds it. Close only where
+ * the panel cannot dock: Mål, and every panel on a phone. */
 export function HeadButtons(props: {
   id: string;
   closeLabel?: string;
@@ -163,10 +145,11 @@ export function HeadButtons(props: {
   onClose?: (() => void) | undefined;
 }) {
   const canDock = !usePhone() && DOCKABLE.includes(props.id);
+  const isDocked = useDocked(props.id);
   return (
     <span className="block-head-buttons">
       {canDock && <DockButton id={props.id} />}
-      <MinimizeButton id={props.id} />
+      {!isDocked && <MinimizeButton id={props.id} />}
       {!canDock && props.onClose && (
         <CloseButton
           label={props.closeLabel}
@@ -199,10 +182,7 @@ export function BlockPanel(props: {
       style={style}
     >
       <header className="block-head" onPointerDown={onPointerDown}>
-        <span className="block-title">
-          <GripIcon />
-          {props.title}
-        </span>
+        <BlockTitle id={props.id} title={props.title} />
         <HeadButtons id={props.id} isPhoneBack onClose={props.onClose} />
       </header>
       {props.children}

@@ -1,40 +1,41 @@
 import { useEffect, type ReactElement } from "react";
 import { createPortal } from "react-dom";
 import { createStore } from "@llkit/store.js";
-import { Icon } from "../shell/icons.js";
+import { usePhone } from "../phone/usePhone.js";
+import { GripIcon, Icon } from "../shell/icons.js";
 import { t } from "../../i18n/i18n.js";
-import { column, DOCKABLE, dockColumn, floating, showPanel, toggleFloating } from "./layout.js";
+import {
+  column,
+  DOCKABLE,
+  dockColumn,
+  floating,
+  minimized,
+  toggleFloating,
+  toggleMinimized,
+} from "./layout.js";
 
-// The panels lie in the right column, a tab each and one in front; Lossa floats one over the
-// text, Docka lays it back. The column folds away from the top bar.
+// The panels lie in the right column as sections, one under the other, each folded from its title.
+// Lossa floats one over the text, Docka lays it back. The column folds away from the top bar.
 
 /** The dockable panels there now, docked or loose; Granska only in Redigera. */
 const present = createStore<string[]>([]);
 
-const TITLES: Record<string, string> = {
-  granska: t("Granska"),
-  insikter: t("Insikter"),
-  iscenen: t("I scenen"),
-  referens: t("Referensbild"),
-};
-
-/** The column's tabs, and the one in front: the tab chosen last while it is there, else the first. */
-function useColumn() {
-  const loose = floating.use();
-  const here = present.use();
-  const { isOpen, tab } = column.use();
-  const tabs = DOCKABLE.filter((id) => here.includes(id) && !loose.includes(id));
-  return { isOpen, tabs, front: tabs.includes(tab) ? tab : tabs[0], loose, here };
-}
-
-/** The panel is in sight: loosened, or in front with the column out. */
+/** The panel is in sight: loosened, or docked with the column out. */
 export function useShown(id: string) {
-  const { isOpen, front, loose, here } = useColumn();
-  return here.includes(id) && (loose.includes(id) || (isOpen && front === id));
+  const isHere = present.use().includes(id);
+  const isLoose = floating.use().includes(id);
+  const { isOpen } = column.use();
+  return isHere && (isLoose || isOpen);
 }
 
-/** Where the panel is drawn: the column, or where it stands when it floats or `isOn` is false, as
- * on a phone. Docked out of sight, it is behind and not drawn at all. */
+/** The panel lies in the column, not loose; on a phone no panel docks. */
+export function useDocked(id: string) {
+  const isLoose = floating.use().includes(id);
+  return !usePhone() && DOCKABLE.includes(id) && !isLoose;
+}
+
+/** Where the panel is drawn: its place in the column, or where it stands when it floats or `isOn`
+ * is false, as on a phone. Docked with the column folded, it is behind and not drawn at all. */
 export function useDock(id: string, isOn: boolean) {
   const isHere = isOn && DOCKABLE.includes(id);
   useEffect(() => {
@@ -44,9 +45,9 @@ export function useDock(id: string, isOn: boolean) {
   }, [id, isHere]);
   const isShown = useShown(id);
   const isLoose = floating.use().includes(id);
-  const element = dockColumn.use();
+  const place = dockColumn.use()?.querySelector<HTMLElement>(`[data-panel="${id}"]`) ?? null;
   if (!isHere || isLoose) return { dock: null, isBehind: false };
-  return { dock: isShown ? element : null, isBehind: !isShown || !element };
+  return { dock: isShown ? place : null, isBehind: !isShown || !place };
 }
 
 /** Docked, the panel is drawn into the column, or nowhere when it is behind; otherwise where it
@@ -72,7 +73,7 @@ const DockIcon = () => (
   </Icon>
 );
 
-/** Lossa beside the column's tabs, Docka in a loose panel's head. */
+/** Lossa in a docked panel's head, Docka in a loose one's. */
 export function DockButton({ id }: { id: string }) {
   const isLoose = floating.use().includes(id);
   const label = isLoose ? t("Docka panelen") : t("Lossa panelen");
@@ -88,39 +89,49 @@ export function DockButton({ id }: { id: string }) {
   );
 }
 
-/** Granska's tab says how much waits. */
-function ColumnTab(props: { id: string; isFront: boolean; reviewCount: number | null }) {
-  const count = props.id === "granska" ? props.reviewCount : null;
+const FoldIcon = () => (
+  <Icon size={14}>
+    <path d="m9 6 6 6-6 6" />
+  </Icon>
+);
+
+/** A panel's title, a grip to drag it by while it is loose. Docked, the title folds the section
+ * shut and open. Granska's count says how much waits. */
+export function BlockTitle(props: { id: string; title: string; count?: number }) {
+  const isDocked = useDocked(props.id);
+  const isFolded = minimized.use().includes(props.id);
+  const inside = (
+    <>
+      {isDocked ? <FoldIcon /> : <GripIcon />}
+      {props.title}
+      {!!props.count && <span className="dock-badge">{props.count}</span>}
+    </>
+  );
+  if (!isDocked) return <span className="block-title">{inside}</span>;
   return (
     <button
-      role="tab"
-      className="dock-tab"
-      aria-selected={props.isFront}
-      aria-label={count === null ? undefined : t("Granska · {count}", { count })}
-      onClick={() => showPanel(props.id)}
+      className="block-title block-fold"
+      aria-expanded={!isFolded}
+      aria-label={props.count ? `${props.title} · ${props.count}` : undefined}
+      onClick={() => toggleMinimized(props.id)}
     >
-      {TITLES[props.id]}
-      {!!count && <span className="dock-badge">{count}</span>}
+      {inside}
     </button>
   );
 }
 
-/** The column at the card's right: a tab per docked panel, Lossa for the one in front, and that
- * panel below. Folded away, or with every panel loose, nothing. */
-export function PanelColumn({ reviewCount }: { reviewCount: number | null }) {
-  const { isOpen, tabs, front } = useColumn();
-  if (!isOpen || front === undefined) return null;
+/** The column at the card's right: a place per panel in DOCKABLE's order, which the docked panels
+ * are drawn into. Folded away, or with every panel loose, nothing. */
+export function PanelColumn() {
+  const here = present.use();
+  const loose = floating.use();
+  const { isOpen } = column.use();
+  if (!isOpen || here.every((id) => loose.includes(id))) return null;
   return (
-    <aside className="panel-dock" aria-label={t("Högerspalten")}>
-      <div className="panel-dock-head">
-        <span className="dock-tabs" role="tablist" aria-label={t("Paneler")}>
-          {tabs.map((id) => (
-            <ColumnTab key={id} id={id} isFront={id === front} reviewCount={reviewCount} />
-          ))}
-        </span>
-        <DockButton id={front} />
-      </div>
-      <div className="panel-dock-body" ref={dockColumn.set} />
+    <aside className="panel-dock" aria-label={t("Högerspalten")} ref={dockColumn.set}>
+      {DOCKABLE.map((id) => (
+        <div key={id} data-panel={id} />
+      ))}
     </aside>
   );
 }

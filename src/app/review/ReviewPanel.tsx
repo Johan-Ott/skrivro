@@ -1,8 +1,7 @@
 import { GuideTip } from "../guide/GuideTip.js";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
-import { inDock } from "../blocks/dock.js";
+import { BlockTitle, inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
-import { GripIcon } from "../shell/icons.js";
 import { useEffect, type PointerEvent, type ReactNode } from "react";
 import type { NameSuspect } from "../../manuscript/review.js";
 import type { ProseNote } from "../../manuscript/prose.js";
@@ -157,24 +156,22 @@ function ReviewMenu({ items }: { items: MenuItem[] }) {
   );
 }
 
-function ReviewHeader(props: {
-  items: MenuItem[];
-  isShown: boolean;
-  onClose: () => void;
-  onGrab: ((event: PointerEvent<HTMLElement>) => void) | undefined;
-}) {
+function ReviewHeader(
+  props: ReviewPanelProps & {
+    count: number;
+    isShown: boolean;
+    onGrab: ((event: PointerEvent<HTMLElement>) => void) | undefined;
+  },
+) {
   return (
     <div className="review-header block-head" onPointerDown={props.onGrab}>
-      <span className="progress-title block-title">
-        <GripIcon />
-        {t("Granska")}
-      </span>
-      <ReviewMenu items={props.items} />
+      <BlockTitle id="granska" title={t("Granska")} count={props.count} />
+      <ReviewMenu items={props.menuItems} />
       <HeadButtons
         id="granska"
         closeLabel={t("Stäng granskning")}
         isPhoneBack={props.isShown}
-        onClose={props.onClose}
+        onClose={() => props.onOpenChange(false)}
       />
     </div>
   );
@@ -192,7 +189,8 @@ function countOf({ review, commentCount, revisionCount }: ReviewPanelProps) {
 
 export function ReviewPanel(props: ReviewPanelProps) {
   const { review } = props;
-  useCountInTopbar(countOf(props), props.onCount);
+  const count = countOf(props);
+  useCountInTopbar(count, props.onCount);
   const isShown = props.isOpen || props.isPinnedOpen;
   // On a phone, closed, it stays where it stands, hidden.
   const floating = useFloating("granska", !usePhone());
@@ -206,12 +204,7 @@ export function ReviewPanel(props: ReviewPanelProps) {
       // From within the panel; in the text, Escape already means other things.
       onKeyDown={(event) => event.key === "Escape" && props.onOpenChange(false)}
     >
-      <ReviewHeader
-        items={props.menuItems}
-        isShown={isShown}
-        onClose={() => props.onOpenChange(false)}
-        onGrab={floating.onPointerDown}
-      />
+      <ReviewHeader {...props} count={count} isShown={isShown} onGrab={floating.onPointerDown} />
       {props.revisionSection}
       {review && <ToLookAt {...props} review={review} />}
       {props.commentsSection}

@@ -209,9 +209,10 @@ Run `npm run check` before saying a task is done. A Stop hook runs it too and bl
   narrow. On a phone the books live in Skrivro's own folder (`appDataDir`), and the Rust side
   (`src-tauri/src/lib.rs`) leaves out updates, the spelling language and picked folders.
 - Layout lives in `styles/shell.css`. The right column (`blocks/dock.tsx`, `PanelColumn`) holds
-  Granska (Redigera only), Insikter, I scenen and Referensbild as tabs; it folds from the top
-  bar's right button and remembers that and its tab (`blocks/layout.ts`). It starts folded, so
-  Redigera's margin has room; Granska folds it out when the margin has none. Lossa floats a panel
+  Granska (Redigera only), Insikter, I scenen and Referensbild as sections, one under the other,
+  each folded from its title (`minimized` in `blocks/layout.ts`). The column folds from the top
+  bar's right button and remembers it. It starts folded, so Redigera's margin has room; when the
+  margin has none, Granska folds the column out and opens its section. Lossa floats a panel
   over the text. Under 960 px the sidebar starts hidden and floats over the card when
   shown (Ctrl+. or the sidebar button; `isSidebarOpen` in `useWritingMode`). The smallest window
   is 720 × 500.

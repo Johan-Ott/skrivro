@@ -35,9 +35,8 @@ function useSearchMode() {
   return { isSearchOpen, setSearchOpen, searchSeed, openSearchWith };
 }
 
-// On the computer Granska is open while it is in sight in the right column or loose; opening it
-// brings its tab to the front. On a phone it is a screen of its own. The count is null when the
-// open text has no review.
+// On the computer Granska is open while it is in sight, docked or loose; opening it unfolds it.
+// On a phone it is a screen of its own. The count is null when the open text has no review.
 function useReviewState() {
   const isPhone = usePhone();
   const [isPhoneOpen, setPhoneOpen] = useState(false);
@@ -68,7 +67,7 @@ function useReading(setView: (view: View) => void) {
 }
 
 // The view and the step. The text keeps its step while the writer looks at the book or reads, and
-// comes back in it. In Redigera what waits stands in the margin, and Granska is a tab in the right column.
+// comes back in it. In Redigera what waits stands in the margin, and Granska in the right column.
 function useSteps() {
   const [view, setView] = useState<View>("skriv");
   const [textStep, setTextStep] = useState<"skriv" | "redigera">("skriv");

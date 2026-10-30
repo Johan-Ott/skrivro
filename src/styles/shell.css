@@ -1990,7 +1990,7 @@ div.publish-part {
   bottom: auto;
 }
 
-/* The right column beside the text: a tab per docked panel and the one in front below it, taking
+/* The right column beside the text: the docked panels as sections, one under the other, taking
    room from the text instead of covering it. Publicera's look panel lies in one of its own. */
 
 .panel-dock {
@@ -2002,19 +2002,6 @@ div.publish-part {
   padding: 0 8px;
   overflow-y: auto;
   border-left: 1px solid var(--border);
-  background: var(--bg-panel);
-}
-
-/* The tabs and Lossa stay at the top while the panel below scrolls. */
-
-.panel-dock-head {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 6px 6px;
   background: var(--bg-panel);
 }
 
@@ -2035,24 +2022,41 @@ div.publish-part {
   resize: none;
 }
 
-/* Docked, the column's tabs are the panel's head. */
+/* A line between the sections. */
 
-.panel-dock-body .block-head {
-  display: none;
+.panel-dock [data-panel] > * {
+  border-bottom: 1px solid var(--border);
 }
 
-/* Publicera's panel is not dragged, so its head has no grip. */
+/* Docked, a panel is not dragged: its head is the section's title, which folds it. */
 
 .panel-dock .block-head {
   padding: 12px 0 0;
   cursor: default;
 }
 
-.panel-dock .block-title svg {
-  display: none;
+.panel-dock .minimized .block-head {
+  padding-bottom: 8px;
 }
 
-/* The tabs, the chosen one underlined; Granska's says how much waits. */
+.block-fold {
+  flex: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.block-fold svg {
+  transition: transform 0.15s;
+}
+
+.block-fold[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+/* Publicera's tabs, the chosen one underlined; Granska's title says how much waits. */
 
 .dock-tabs {
   display: flex;

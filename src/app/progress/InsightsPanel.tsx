@@ -1,8 +1,7 @@
 import type { PointerEvent } from "react";
 import { HeadButtons, useFloating } from "../blocks/BlockPanel.js";
-import { inDock } from "../blocks/dock.js";
+import { BlockTitle, inDock } from "../blocks/dock.js";
 import { usePhone } from "../phone/usePhone.js";
-import { GripIcon } from "../shell/icons.js";
 import { useState } from "react";
 import { dayKey, type Stats } from "../../project/stats.js";
 import { chapterWords } from "../../project/treeLabels.js";
@@ -66,10 +65,7 @@ const InsightsHead = (props: {
   onGrab: ((event: PointerEvent<HTMLElement>) => void) | undefined;
 }) => (
   <div className="insights-head block-head" onPointerDown={props.onGrab}>
-    <span className="insights-title block-title">
-      <GripIcon />
-      {t("Insikter")}
-    </span>
+    <BlockTitle id="insikter" title={t("Insikter")} />
     <HeadButtons
       id="insikter"
       closeLabel={t("Stäng insikter")}

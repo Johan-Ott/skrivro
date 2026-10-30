@@ -18,14 +18,14 @@ test("I scenen lists who is named in the scene, and opens a note beside the text
   await expect(page.locator(".beside-pane")).toContainText("Arvid");
 });
 
-test("the steps and the column's tabs have words, not only pictures", async ({ page }) => {
+test("the steps and the column's sections have words, not only pictures", async ({ page }) => {
   await expect(page.getByRole("tablist", { name: "Steg" }).getByRole("tab")).toHaveText([
     "Skriv",
     "Redigera",
     "Publicera",
   ]);
   await showPanel(page, "Insikter");
-  await expect(page.getByRole("tablist", { name: "Paneler" }).getByRole("tab")).toHaveText([
+  await expect(page.locator(".panel-dock .block-fold")).toHaveText([
     "Insikter",
     "I scenen",
     "Referensbild",

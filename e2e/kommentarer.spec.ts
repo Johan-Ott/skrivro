@@ -18,7 +18,7 @@ async function comment(page: Page, body: string) {
   await expect(granska(page).getByText(body)).toBeVisible();
 }
 
-const reviewButton = (page: Page) => page.getByRole("tab", { name: /^Granska · / });
+const reviewButton = (page: Page) => page.getByRole("button", { name: /^Granska · / });
 
 test("Granska counts what still waits: not a reply, and not a resolved comment", async ({
   page,
@@ -26,7 +26,8 @@ test("Granska counts what still waits: not a reply, and not a resolved comment",
   const count = async () =>
     Number((await reviewButton(page).getAttribute("aria-label"))?.match(/\d+/)?.[0]);
   await comment(page, "Ska brevet vara gult?");
-  await expect(reviewButton(page)).toHaveAttribute("aria-label", /Granska · \d+/);
+  // Granska reads the text at the writer's pause, so the new comment's words are found a moment on.
+  await expect(granska(page).getByText("Citatet finns inte längre i texten.")).toBeHidden();
   const withComment = await count();
 
   await page.getByRole("button", { name: "Svara" }).first().click();

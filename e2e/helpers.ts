@@ -64,11 +64,12 @@ export async function runCommand(page: Page, name: string) {
   await page.keyboard.press("Enter");
 }
 
-/** Brings a panel to the front of the right column by its tab, folding the column out first. */
+/** Opens a panel's section in the right column by its title, folding the column out first. */
 export async function showPanel(page: Page, name: string) {
-  const tabs = page.getByRole("tablist", { name: "Paneler" });
-  if (!(await tabs.isVisible())) await columnToggle(page).click();
-  await tabs.getByRole("tab", { name }).click();
+  const column = page.getByRole("complementary", { name: "Högerspalten" });
+  if (!(await column.isVisible())) await columnToggle(page).click();
+  const title = column.getByRole("button", { name: new RegExp(`^${name}`) });
+  if ((await title.getAttribute("aria-expanded")) === "false") await title.click();
 }
 
 export const columnToggle = (page: Page) =>

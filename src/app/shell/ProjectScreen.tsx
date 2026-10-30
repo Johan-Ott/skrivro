@@ -129,7 +129,7 @@ function MainCard({ app, project, pageMap }: ScreenProps & { pageMap: PageMap | 
       )}
       {writingMode.view === "synk" && <SyncScreen {...views} />}
       {writingMode.view === "las" && <ReadScreen {...views} />}
-      {writingMode.view === "skriv" && <PanelColumn reviewCount={writingMode.review.count} />}
+      {writingMode.view === "skriv" && <PanelColumn />}
     </div>
   );
 }
