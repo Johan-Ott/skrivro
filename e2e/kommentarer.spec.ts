@@ -1,5 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
-import { cursorAfterFirstParagraph, editor, openExample, selectFirstWord } from "./helpers";
+import {
+  cursorAfterFirstParagraph,
+  editor,
+  openExample,
+  selectFirstWord,
+  treeRow,
+} from "./helpers";
 
 // Too narrow for a margin beside the text, so the comments are written and read in Granska.
 test.beforeEach(async ({ page }) => {
@@ -38,6 +44,23 @@ test("Granska counts what still waits: not a reply, and not a resolved comment",
 
   await page.getByRole("button", { name: "Lös" }).first().click();
   await expect(reviewButton(page)).toHaveAttribute("aria-label", `Granska · ${withComment - 1}`);
+});
+
+test("a scene just opened never shows the last scene's comments", async ({ page }) => {
+  await comment(page, "Ska brevet vara gult?");
+  // Watched at every change, since the old comment would stand there only until the new are read.
+  await page.evaluate(() => {
+    const win = window as unknown as { stale: number };
+    win.stale = 0;
+    new MutationObserver(() => {
+      if (document.body.innerText.includes("Citatet finns inte längre i texten.")) win.stale++;
+    }).observe(document.body, { subtree: true, childList: true, characterData: true });
+  });
+
+  await treeRow(page, "Isen").click();
+  await expect(editor(page)).toContainText("Isen bar.");
+
+  expect(await page.evaluate(() => (window as unknown as { stale: number }).stale)).toBe(0);
 });
 
 test("a comment can be removed, and its mark in the text goes with it", async ({ page }) => {

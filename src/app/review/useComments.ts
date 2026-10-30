@@ -55,23 +55,27 @@ async function readInto(
   }
 }
 
-// Written one change at a time, then read again.
+const NONE: Comment[] = [];
+
+// Written one change at a time, then read again. A list is shown only with the scene it is for,
+// so a scene just opened never shows the last one's comments while its own are read.
 function useCommentFile(project: Project | null, scene: OpenScene | null) {
-  const [comments, setComments] = useState<Comment[]>([]);
-  const queue = useRef(Promise.resolve());
-  const isRead = useRef(false);
   const dir = project?.dir ?? null;
   const sceneId = scene?.id ?? null;
+  const key = `${dir}/${sceneId}`;
+  const [file, setFile] = useState({ key: "", comments: NONE });
+  const queue = useRef(Promise.resolve());
+  const isRead = useRef(false);
   useEffect(() => {
-    setComments([]);
     isRead.current = false;
-  }, [dir, sceneId]);
+  }, [key]);
   useEffect(() => {
     if (!dir || !sceneId) return;
+    const setComments = (comments: Comment[]) => setFile({ key, comments });
     queue.current = queue.current.then(() => readInto({ dir, sceneId }, setComments, isRead));
-  }, [project, dir, sceneId]);
+  }, [project, dir, sceneId, key]);
   const save = (next: Comment[]) => {
-    setComments(next);
+    setFile({ key, comments: next });
     if (!dir || !sceneId) return;
     queue.current = queue.current
       .then(() => {
@@ -80,7 +84,7 @@ function useCommentFile(project: Project | null, scene: OpenScene | null) {
       })
       .catch(recordFailure("Kommentaren kunde inte sparas"));
   };
-  return { comments, save };
+  return { comments: file.key === key ? file.comments : NONE, save };
 }
 
 function useCommentMarks(
