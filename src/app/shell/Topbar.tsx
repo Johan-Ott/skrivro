@@ -55,11 +55,11 @@ const STEPS: [Step, string, string][] = [
   ["publicera", t("Publicera"), t("Gör boken: hur den ser ut, e-bok och tryck.")],
 ];
 
-// The writing's three steps, numbered and in order, so the way from text to book is seen.
+// The writing's three steps in order, so the way from text to book is seen.
 function ModeSwitch({ step, onStep, waiting }: Pick<TopbarProps, "step" | "onStep" | "waiting">) {
   return (
     <div className="mode-switch" role="tablist" aria-label={t("Steg")}>
-      {STEPS.map(([each, label, hint], index) => (
+      {STEPS.map(([each, label, hint]) => (
         <button
           key={each}
           role="tab"
@@ -68,9 +68,6 @@ function ModeSwitch({ step, onStep, waiting }: Pick<TopbarProps, "step" | "onSte
           title={hint}
           onClick={() => onStep(each)}
         >
-          <span className="mode-number" aria-hidden="true">
-            {index + 1}
-          </span>
           {label}
           {each === "redigera" && step !== "redigera" && waiting > 0 && (
             <span className="mode-badge">{waiting}</span>

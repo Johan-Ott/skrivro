@@ -211,24 +211,6 @@
   pointer-events: none;
 }
 
-.mode-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  border: 1px solid var(--border-control);
-  border-radius: 50%;
-  font-size: 10px;
-  font-weight: 500;
-}
-
-.mode.chosen .mode-number {
-  border-color: var(--primary);
-  background: var(--primary);
-  color: var(--on-primary);
-}
-
 /* Skrivro can be driven from outside for this start: said in the bar, never hidden. */
 
 .remote-badge {

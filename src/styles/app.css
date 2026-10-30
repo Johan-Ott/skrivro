@@ -1460,17 +1460,6 @@ body:has(.new-book-dialog) .new-book {
   margin-right: auto;
 }
 
-.toast.inverted {
-  border-color: var(--primary);
-  background: var(--primary);
-  color: var(--on-primary);
-}
-
-.toast.inverted .link-button {
-  color: var(--on-primary);
-  opacity: 0.75;
-}
-
 /* Snapshots: the list on the left, the comparison on the right. */
 
 .snapshots-dialog {

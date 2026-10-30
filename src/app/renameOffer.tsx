@@ -46,7 +46,7 @@ export function RenameOfferToast(props: ReturnType<typeof useRenameOffer>) {
   }, [offer, dismiss]);
   if (!offer) return null;
   return (
-    <div className="toast inverted" role="status">
+    <div className="toast" role="status">
       <span>{t("Byta ”{from}” mot ”{to}” i manuset också?", offer)}</span>
       <button className="link-button" onClick={props.accept}>
         {t("Byt")}

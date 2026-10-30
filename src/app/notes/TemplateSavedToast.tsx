@@ -16,7 +16,7 @@ export function TemplateSavedToast() {
   }, [name]);
   if (name === null) return null;
   return (
-    <div className="toast inverted" role="status">
+    <div className="toast" role="status">
       <span>
         {t("Sparad som mall: {name}. Du hittar den under Mall i Ny anteckning.", { name })}
       </span>

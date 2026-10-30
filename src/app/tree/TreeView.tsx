@@ -152,7 +152,7 @@ export function TreeView(props: TreeViewProps & BookExtras) {
       <LabelsLayer props={props} view={view} />
       <TrashUndo props={props} tree={tree} />
       {tree.drag.isRefused && (
-        <div className="toast inverted tree-undo" role="status">
+        <div className="toast tree-undo" role="status">
           {t(
             "Det som står i manuset blir inte en anteckning när det dras. Välj Gör till anteckning i scenens meny.",
           )}

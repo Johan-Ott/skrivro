@@ -56,7 +56,7 @@ type TrashedProps = { label: string; onPutBack: () => void };
 export function TrashedNotice({ trashed }: { trashed: TrashedProps | null }) {
   if (!trashed) return null;
   return (
-    <div className="toast inverted" role="status">
+    <div className="toast" role="status">
       <span>{t("Scenen ligger i Papperskorgen och går bara att läsa.")}</span>
       <button className="link-button" onClick={trashed.onPutBack}>
         {trashed.label}
@@ -81,7 +81,7 @@ export function ReplaceToast(props: {
   if (!done) return null;
   const noun = done.count === 1 ? t("förekomst") : t("förekomster");
   return (
-    <div className="toast inverted" role="status">
+    <div className="toast" role="status">
       <span>
         {t("Ändrade {count} {noun} av ”{search}”", {
           count: formatNumber(done.count),
@@ -109,7 +109,7 @@ export function SavedNowToast({ onSave }: { onSave: () => Promise<boolean> }) {
   }, [isShown]);
   if (!isShown) return null;
   return (
-    <div className="toast inverted" role="status">
+    <div className="toast" role="status">
       <span>{t("Sparat")}</span>
       <span className="toast-meta">{t("Skrivro sparar av sig själv medan du skriver")}</span>
     </div>

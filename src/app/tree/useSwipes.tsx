@@ -55,7 +55,7 @@ export function TrashUndo({ props, tree }: { props: TreeViewProps; tree: Tree })
   const [trashed, setTrashed] = useNewlyTrashed(props.project);
   if (!trashed) return null;
   return (
-    <div className="toast inverted tree-undo" role="status">
+    <div className="toast tree-undo" role="status">
       <span>
         {t("{title} ligger i papperskorgen.", {
           title: nodeLabel(trashed, props.project.tree, props.project.summaries),

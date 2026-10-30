@@ -100,7 +100,7 @@ function ExportSaved(props: {
 }) {
   const { showInFolder } = platform;
   return (
-    <div className="toast inverted" role="status">
+    <div className="toast" role="status">
       <span>
         {/* A phone hands the file to its share sheet, which does not say where it went. */}
         {platform.shareFile
