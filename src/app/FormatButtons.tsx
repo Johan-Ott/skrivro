@@ -7,7 +7,6 @@ import {
   isMarkActive,
   toggleBold,
   toggleItalic,
-  toggleStrike,
   toggleUnderline,
   clearFormatting,
   type TextMark,
@@ -33,7 +32,6 @@ const MARKS: [TextMark, string, Command, string, string][] = [
   ["bold", t("Fetstil"), toggleBold, "Ctrl+B", "B"],
   ["italic", t("Kursiv"), toggleItalic, "Ctrl+I", "I"],
   ["underline", t("Understruken"), toggleUnderline, "Ctrl+U", "U"],
-  ["strike", t("Genomstruken"), toggleStrike, "Ctrl+Shift+X", "S"],
 ];
 
 const ToolButton = (props: { label: string; onClick: () => void; children: ReactNode }) => (
@@ -55,7 +53,7 @@ const ClearIcon = () => (
   </Icon>
 );
 
-/** Fet, kursiv, understruken and genomstruken, with Rensa formatering after them. */
+/** Fet, kursiv and understruken, with Rensa formatering after them. */
 export function MarkButtons(props: {
   editorState: EditorState | null;
   run: Run;

@@ -71,8 +71,7 @@ function moveFocus(event: KeyboardEvent<HTMLDivElement>, onClose: () => void) {
   if (step !== undefined) items[(index + step + items.length) % items.length]?.focus();
 }
 
-// A menu of choices opens on the current one, also with an action after them; others on their
-// first item.
+// A choice menu opens on its current choice, even with an action last; others on their first item.
 function focusIndexOf(items: MenuItem[]) {
   const isChoiceMenu = items[0]?.isChecked !== undefined;
   return isChoiceMenu

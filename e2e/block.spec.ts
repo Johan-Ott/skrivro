@@ -25,9 +25,5 @@ test("the steps and the column's sections have words, not only pictures", async 
     "Publicera",
   ]);
   await showPanel(page, "Insikter");
-  await expect(page.locator(".panel-dock .block-fold")).toHaveText([
-    "Insikter",
-    "I scenen",
-    "Referensbild",
-  ]);
+  await expect(page.locator(".panel-dock .block-fold")).toHaveText(["Insikter", "I scenen"]);
 });

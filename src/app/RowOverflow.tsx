@@ -1,6 +1,11 @@
 import { useLayoutEffect, useState, type RefObject } from "react";
 import type { Command, EditorState } from "prosemirror-state";
-import { insertSceneBreak, toggleSubscript, toggleSuperscript } from "../editor/commands.js";
+import {
+  insertSceneBreak,
+  toggleStrike,
+  toggleSubscript,
+  toggleSuperscript,
+} from "../editor/commands.js";
 import { insertFootnote } from "../editor/footnoteEditing.js";
 import { askForLink } from "../editor/linkEditing.js";
 import { useMenuButton } from "@llkit/Menu.js";
@@ -37,8 +42,14 @@ export function useFolding(row: RefObject<HTMLElement | null>) {
 
 type OverflowProps = FormatActions & { run: (command: Command) => void };
 
-const raisedItems = ({ run }: OverflowProps, isAfterBlocks: boolean) => [
-  { label: t("Upphöjd"), separatorBefore: isAfterBlocks, onSelect: () => run(toggleSuperscript) },
+const seldomItems = ({ run }: OverflowProps, isAfterBlocks: boolean) => [
+  {
+    label: t("Genomstruken"),
+    shortcut: "Ctrl+Shift+X",
+    separatorBefore: isAfterBlocks,
+    onSelect: () => run(toggleStrike),
+  },
+  { label: t("Upphöjd"), onSelect: () => run(toggleSuperscript) },
   { label: t("Nedsänkt"), onSelect: () => run(toggleSubscript) },
   { label: t("Länk…"), onSelect: () => run(askForLink) },
 ];
@@ -51,8 +62,8 @@ const textItems = ({ run, onInsertPicture, onComment, onReadAloud }: OverflowPro
   ...(onReadAloud ? [{ label: t("Läs upp"), onSelect: onReadAloud }] : []),
 ];
 
-/** Upphöjd, nedsänkt and links always; alignment, lists, insert and the text's actions once
- * they are folded away. */
+/** Genomstruken, upphöjd, nedsänkt and links always; alignment, lists, insert and the text's
+ * actions once they are folded away. */
 export function RowOverflow(
   props: OverflowProps & {
     editorState: EditorState | null;
@@ -62,7 +73,7 @@ export function RowOverflow(
 ) {
   const menu = useMenuButton(t("Mer"), [
     ...(props.hasBlockItems ? blockMenuItems(props.editorState, props.run) : []),
-    ...raisedItems(props, props.hasBlockItems),
+    ...seldomItems(props, props.hasBlockItems),
     ...(props.hasTextActions ? textItems(props) : []),
   ]);
   return (

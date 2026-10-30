@@ -42,6 +42,18 @@ test("Upphöjd in the row's ⋯ raises the selected word", async ({ page }) => {
   await expect(editor(page).locator("sup", { hasText: "Brevet" })).toHaveCount(1);
 });
 
+test("Genomstruken has left the row for its ⋯, and strikes the selected word through", async ({
+  page,
+}) => {
+  await selectFirstWord(page);
+  const row = page.getByRole("toolbar", { name: "Formatering" });
+  await expect(row.getByRole("button", { name: "Genomstruken" })).toHaveCount(0);
+  await row.getByRole("button", { name: "Mer" }).click();
+  await page.getByRole("menuitem", { name: "Genomstruken" }).click();
+
+  await expect(editor(page).locator("s", { hasText: "Brevet" })).toHaveCount(1);
+});
+
 test("Ändra stilar in the style menu sets the book's letters in bold", async ({ page }) => {
   await selectFirstWord(page);
   await page.getByRole("button", { name: "Stil: Brödtext" }).click();

@@ -3329,11 +3329,6 @@ div.publish-part {
   border-radius: var(--radius-button);
 }
 
-.reference-empty {
-  max-width: 240px;
-  margin: 0;
-}
-
 /* Innehåll's Tempo: a row per chapter with its length, talk and sentence length as bars. */
 
 .tempo {

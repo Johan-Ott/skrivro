@@ -6,7 +6,7 @@ import type { Project } from "../useProject.js";
 import { t } from "../../i18n/i18n.js";
 
 // Referensbild: one of the book's research pictures, a map or a photo, beside the text while
-// writing. The choice is kept per book.
+// writing. The choice is kept per book; a book with no pictures has no such section.
 
 const choiceKey = (dir: string) => `skrivro.reference.${dir}`;
 
@@ -23,7 +23,7 @@ function Picture({ dir, name }: { dir: string; name: string }) {
   return url ? <img className="reference-picture" src={url} alt={name} /> : null;
 }
 
-const picturesIn = (project: Project) =>
+export const picturesIn = (project: Project) =>
   Object.entries(project.summaries)
     .filter(([, summary]) => summary.file && isPictureFile(summary.file))
     .map(([id, summary]) => ({ id, title: summary.title, file: summary.file ?? "" }));
@@ -54,12 +54,7 @@ export function ReferenceBlock({ project }: { project: Project }) {
   const pictures = picturesIn(project);
   const [chosen, setChosen] = useState(() => readChoice(project.dir));
   const shown = pictures.find((picture) => picture.id === chosen) ?? pictures[0];
-  if (!shown)
-    return (
-      <p className="setting-hint reference-empty">
-        {t("Lägg till en bild bland anteckningarna med Lägg till fil…, så kan den visas här.")}
-      </p>
-    );
+  if (!shown) return null;
   const choose = (id: string) => {
     setChosen(id);
     browserStorage().setItem(choiceKey(project.dir), id);

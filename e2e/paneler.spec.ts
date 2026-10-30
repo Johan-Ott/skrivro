@@ -15,7 +15,7 @@ test("the panels lie as sections in the column beside the text, one under the ot
   await showPanel(page, "Insikter");
   await expect(column(page).getByRole("region", { name: "Insikter" })).toBeVisible();
   await expect(column(page).getByRole("region", { name: "I scenen" })).toBeVisible();
-  await expect(titles(page)).toHaveText(["Insikter", "I scenen", "Referensbild"]);
+  await expect(titles(page)).toHaveText(["Insikter", "I scenen"]);
   const text = await page.locator(".writing").boundingBox();
   const docked = await column(page).boundingBox();
   expect((text?.x ?? 0) + (text?.width ?? 0)).toBeLessThanOrEqual((docked?.x ?? 0) + 1);
