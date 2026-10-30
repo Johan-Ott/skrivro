@@ -2822,8 +2822,7 @@ div.publish-part {
   font-size: 13px;
 }
 
-.pack-holds,
-.pack-contents {
+.pack-holds {
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -2847,12 +2846,6 @@ div.publish-part {
 .pack-holds li.later::before {
   content: "·";
   color: var(--text-muted);
-}
-
-.pack-contents {
-  padding-left: 18px;
-  color: var(--text-muted);
-  font-size: 12px;
 }
 
 .pack-tile-foot {
