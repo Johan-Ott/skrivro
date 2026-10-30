@@ -8,14 +8,11 @@ import {
   toggleBold,
   toggleItalic,
   toggleStrike,
-  toggleSubscript,
-  toggleSuperscript,
   toggleUnderline,
   clearFormatting,
   type TextMark,
 } from "../editor/commands.js";
 import { insertFootnote } from "../editor/footnoteEditing.js";
-import { askForLink } from "../editor/linkEditing.js";
 import { ImageIcon, Icon } from "./shell/icons.js";
 import { t } from "../i18n/i18n.js";
 
@@ -31,28 +28,13 @@ export interface FormatActions {
   onInsertPicture?: (() => void) | undefined;
 }
 
-type MarkChoice = [TextMark, string, Command, string | null];
-
-const MARKS: MarkChoice[] = [
-  ["bold", t("Fetstil"), toggleBold, "Ctrl+B"],
-  ["italic", t("Kursiv"), toggleItalic, "Ctrl+I"],
-  ["underline", t("Understruken"), toggleUnderline, "Ctrl+U"],
-  ["strike", t("Genomstruken"), toggleStrike, "Ctrl+Shift+X"],
+// The mark, its name, its command, its keys and the letter on its button.
+const MARKS: [TextMark, string, Command, string, string][] = [
+  ["bold", t("Fetstil"), toggleBold, "Ctrl+B", "B"],
+  ["italic", t("Kursiv"), toggleItalic, "Ctrl+I", "I"],
+  ["underline", t("Understruken"), toggleUnderline, "Ctrl+U", "U"],
+  ["strike", t("Genomstruken"), toggleStrike, "Ctrl+Shift+X", "S"],
 ];
-
-const RAISED: MarkChoice[] = [
-  ["superscript", t("Upphöjd"), toggleSuperscript, null],
-  ["subscript", t("Nedsänkt"), toggleSubscript, null],
-];
-
-const MARK_FACES: Record<TextMark, string> = {
-  bold: "B",
-  italic: "I",
-  underline: "U",
-  strike: "S",
-  superscript: "x²",
-  subscript: "x₂",
-};
 
 const ToolButton = (props: { label: string; onClick: () => void; children: ReactNode }) => (
   <button
@@ -81,7 +63,7 @@ export function MarkButtons(props: {
 }) {
   return (
     <span className="bar-group" role="group" aria-label={t("Tecken")}>
-      <MarkToggles marks={MARKS} editorState={props.editorState} run={props.run} />
+      <MarkToggles editorState={props.editorState} run={props.run} />
       {props.hasClear !== false && (
         <ToolButton label={t("Rensa formatering")} onClick={() => props.run(clearFormatting)}>
           <ClearIcon />
@@ -91,20 +73,20 @@ export function MarkButtons(props: {
   );
 }
 
-function MarkToggles(props: { marks: MarkChoice[]; editorState: EditorState | null; run: Run }) {
+function MarkToggles(props: { editorState: EditorState | null; run: Run }) {
   const isPhone = usePhone();
   return (
     <>
-      {props.marks.map(([mark, label, command, keys]) => (
+      {MARKS.map(([mark, label, command, keys, face]) => (
         <button
           key={mark}
           className={`icon-button ${mark}`}
           aria-label={label}
-          title={isPhone || keys === null ? label : `${label} (${keys})`}
+          title={isPhone ? label : `${label} (${keys})`}
           aria-pressed={props.editorState !== null && isMarkActive(props.editorState, mark)}
           onClick={() => props.run(command)}
         >
-          {MARK_FACES[mark]}
+          {face}
         </button>
       ))}
     </>
@@ -128,13 +110,6 @@ const RedoIcon = () => (
 const CommentIcon = () => (
   <Icon size={16}>
     <path d="M4 5h16v11H9l-5 4z" />
-  </Icon>
-);
-
-const LinkIcon = () => (
-  <Icon size={16}>
-    <path d="M10 14a3.5 3.5 0 0 0 5 0l3.5-3.5a3.5 3.5 0 0 0-5-5L12 7" />
-    <path d="M14 10a3.5 3.5 0 0 0-5 0l-3.5 3.5a3.5 3.5 0 0 0 5 5L12 17" />
   </Icon>
 );
 
@@ -171,22 +146,6 @@ export const HistoryButtons = ({ run }: { run: Run }) => (
     </ToolButton>
     <ToolButton label={t("Gör om")} onClick={() => run(redo)}>
       <RedoIcon />
-    </ToolButton>
-  </span>
-);
-
-/** Upphöjd, nedsänkt and Länk, after the marks. */
-export const RaiseButtons = ({
-  editorState,
-  run,
-}: {
-  editorState: EditorState | null;
-  run: Run;
-}) => (
-  <span className="bar-group" role="group" aria-label={t("Upphöjt, nedsänkt och länk")}>
-    <MarkToggles marks={RAISED} editorState={editorState} run={run} />
-    <ToolButton label={t("Länk…")} onClick={() => run(askForLink)}>
-      <LinkIcon />
     </ToolButton>
   </span>
 );

@@ -31,12 +31,13 @@ test("the row's list button makes the paragraph a list, and a second click takes
   await expect(editor(page).locator(".style-numrerad")).toHaveCount(0);
 });
 
-test("the row's x² raises the selected word", async ({ page }) => {
+test("Upphöjd in the row's ⋯ raises the selected word", async ({ page }) => {
   await selectFirstWord(page);
   await page
     .getByRole("toolbar", { name: "Formatering" })
-    .getByRole("button", { name: "Upphöjd" })
+    .getByRole("button", { name: "Mer" })
     .click();
+  await page.getByRole("menuitem", { name: "Upphöjd" }).click();
 
   await expect(editor(page).locator("sup", { hasText: "Brevet" })).toHaveCount(1);
 });

@@ -8,7 +8,8 @@ import { blockMenuItems } from "./AlignButtons.js";
 import type { FormatActions } from "./FormatButtons.js";
 import { t } from "../i18n/i18n.js";
 
-// The format row in a narrow window: what does not fit folds into ⋯ instead of being cut off.
+// ⋯ at the format row's end holds what is seldom used, and in a narrow window what does not
+// fit, instead of it being cut off.
 
 const MOST_FOLDED = 3;
 
@@ -36,8 +37,8 @@ export function useFolding(row: RefObject<HTMLElement | null>) {
 
 type OverflowProps = FormatActions & { run: (command: Command) => void };
 
-const raisedItems = ({ run }: OverflowProps) => [
-  { label: t("Upphöjd"), separatorBefore: true, onSelect: () => run(toggleSuperscript) },
+const raisedItems = ({ run }: OverflowProps, isAfterBlocks: boolean) => [
+  { label: t("Upphöjd"), separatorBefore: isAfterBlocks, onSelect: () => run(toggleSuperscript) },
   { label: t("Nedsänkt"), onSelect: () => run(toggleSubscript) },
   { label: t("Länk…"), onSelect: () => run(askForLink) },
 ];
@@ -50,14 +51,18 @@ const textItems = ({ run, onInsertPicture, onComment, onReadAloud }: OverflowPro
   ...(onReadAloud ? [{ label: t("Läs upp"), onSelect: onReadAloud }] : []),
 ];
 
-/** ⋯ at the row's end: alignment, lists, upphöjd, nedsänkt and links, and the insert and text
- * actions once they are folded too. */
+/** Upphöjd, nedsänkt and links always; alignment, lists, insert and the text's actions once
+ * they are folded away. */
 export function RowOverflow(
-  props: OverflowProps & { editorState: EditorState | null; hasTextActions: boolean },
+  props: OverflowProps & {
+    editorState: EditorState | null;
+    hasBlockItems: boolean;
+    hasTextActions: boolean;
+  },
 ) {
   const menu = useMenuButton(t("Mer"), [
-    ...blockMenuItems(props.editorState, props.run),
-    ...raisedItems(props),
+    ...(props.hasBlockItems ? blockMenuItems(props.editorState, props.run) : []),
+    ...raisedItems(props, props.hasBlockItems),
     ...(props.hasTextActions ? textItems(props) : []),
   ]);
   return (

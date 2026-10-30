@@ -12,7 +12,6 @@ import {
   HistoryButtons,
   InsertButtons,
   MarkButtons,
-  RaiseButtons,
   TextActions,
   type FormatActions,
 } from "./FormatButtons.js";
@@ -111,8 +110,8 @@ const PhoneRow = ({ onComment, onMoveToCuts, editorState, run }: RowProps) => (
 
 type RowProps = BarProps & { editorState: EditorState | null; run: (command: Command) => void };
 
-// Fixed over the text, everything, as a word processor's row; a narrow one folds the words'
-// count away first, then raised text, alignment and lists, then insert and the text's actions.
+// Fixed over the text, as a word processor's row, with ⋯ last; a narrow one folds the words'
+// count away first, then alignment and lists, then insert and the text's actions.
 const FixedRow = (props: RowProps & { folded: number }) => (
   <>
     <HistoryButtons run={props.run} />
@@ -120,7 +119,6 @@ const FixedRow = (props: RowProps & { folded: number }) => (
     <MarkButtons {...props} />
     {props.folded < 2 && (
       <>
-        <RaiseButtons {...props} />
         <AlignButtons {...props} />
         <ListButtons {...props} />
       </>
@@ -131,8 +129,8 @@ const FixedRow = (props: RowProps & { folded: number }) => (
         <TextActions {...props} />
       </>
     )}
-    {props.folded >= 2 && <RowOverflow {...props} hasTextActions={props.folded >= 3} />}
     {props.folded < 1 && <SelectedWords editorState={props.editorState} />}
+    <RowOverflow {...props} hasBlockItems={props.folded >= 2} hasTextActions={props.folded >= 3} />
   </>
 );
 
