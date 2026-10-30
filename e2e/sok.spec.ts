@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { editor, openExample } from "./helpers";
+import { editor, openExample, selectFirstWord } from "./helpers";
 
 // Sök: through the whole book, notes too, with its hit list, narrowed by steps, or in the scene.
 
@@ -112,3 +112,21 @@ for (const width of [1280, 390]) {
     expect(box?.width ?? 0).toBeGreaterThan(100);
   });
 }
+
+test("a right-click on chosen words offers what to do with them, and Sök i boken looks for them", async ({
+  page,
+}) => {
+  await selectFirstWord(page);
+  await expect(page.getByRole("toolbar", { name: "Markering" })).toHaveCount(0);
+  const word = await page.evaluate(() => {
+    const box = getSelection()?.getRangeAt(0).getBoundingClientRect() ?? new DOMRect();
+    return { x: box.left + box.width / 2, y: box.top + box.height / 2 };
+  });
+  await page.mouse.click(word.x, word.y, { button: "right" });
+
+  const menu = page.getByRole("menu", { name: "Text" });
+  await expect(menu.getByRole("menuitem", { name: "Gör till anteckning" })).toBeVisible();
+  await menu.getByRole("menuitem", { name: "Sök i boken" }).click();
+
+  await expect(page.getByLabel("Sök", { exact: true })).toHaveValue("Brevet");
+});

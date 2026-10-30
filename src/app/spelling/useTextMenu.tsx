@@ -15,6 +15,16 @@ import { t } from "../../i18n/i18n.js";
 
 type Place = { word: string; from: number; to: number };
 
+/** What can be done with the chosen words, first in the menu over them. */
+export type WordItems = (text: string) => MenuItem[];
+
+// A second group of items under a line, when there is a first.
+function under(first: MenuItem[], second: MenuItem[]) {
+  const [top, ...rest] = second;
+  if (first.length === 0 || !top) return [...first, ...second];
+  return [...first, { ...top, separatorBefore: true }, ...rest];
+}
+
 function selectedText(view: EditorView) {
   const { from, to } = view.state.selection;
   return view.state.doc.textBetween(from, to, "\n");
@@ -73,19 +83,23 @@ function spellingItems(
   ];
 }
 
-async function itemsAt(view: EditorView, spelling: SpellingSwitch | null, position: number) {
+async function itemsAt(
+  view: EditorView,
+  spelling: SpellingSwitch | null,
+  position: number,
+  wordItems: WordItems,
+) {
+  const text = selectedText(view).trim();
+  const edit = under(text ? wordItems(text) : [], editItems(view));
   const place = wordAt(view.state.doc, position);
-  if (!spelling || !place || !isMisspelled(spelling, place.word)) return editItems(view);
+  if (!spelling || !place || !isMisspelled(spelling, place.word)) return edit;
   const suggestions = await spelling.suggestions(spelling.language, place.word).catch(() => []);
-  const [first, ...rest] = editItems(view);
-  return [
-    ...spellingItems(view, spelling, place, suggestions),
-    ...(first ? [{ ...first, separatorBefore: true }, ...rest] : []),
-  ];
+  return under(spellingItems(view, spelling, place, suggestions), edit);
 }
 
-/** The text's own right-click menu: corrections for a misspelled word, then cut, copy and paste. */
-export function useTextMenu(editor: ReturnType<typeof useEditorView>) {
+/** The text's own right-click menu: corrections for a misspelled word, what can be done with the
+ * chosen words, then cut, copy and paste. */
+export function useTextMenu(editor: ReturnType<typeof useEditorView>, wordItems: WordItems) {
   const [menu, setMenu] = useState<{ x: number; y: number; items: MenuItem[] } | null>(null);
   const open = async (event: MouseEvent) => {
     const view = editor.viewRef.current;
@@ -93,7 +107,11 @@ export function useTextMenu(editor: ReturnType<typeof useEditorView>) {
     event.preventDefault();
     const { clientX: x, clientY: y } = event;
     const position = view.posAtCoords({ left: x, top: y })?.pos ?? view.state.selection.from;
-    setMenu({ x, y, items: await itemsAt(view, editor.modes.current.spelling, position) });
+    setMenu({
+      x,
+      y,
+      items: await itemsAt(view, editor.modes.current.spelling, position, wordItems),
+    });
   };
   const layer = menu && <Menu {...menu} label={t("Text")} onClose={() => setMenu(null)} />;
   return { onContextMenu: (event: MouseEvent) => void open(event), layer };

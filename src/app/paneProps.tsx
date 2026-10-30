@@ -1,5 +1,5 @@
 import { saveNoteAsTemplate } from "./notes/TemplateChips.js";
-import { selectionBarOf } from "./selectionBarOf.js";
+import { selectionBarOf, wordItemsOf } from "./selectionBarOf.js";
 import { PersonSecrets, SecretPanel } from "./notes/SecretPanel.js";
 import type { ProjectChange } from "./labels/LabelsDialog.js";
 import { BesidePane } from "./beside/BesidePane.js";
@@ -207,6 +207,7 @@ export function writingAreaProps(app: AppState, project: Project) {
     margin: <MarginNotes app={app} />,
     beside: <BesidePane app={app} project={project} />,
     selectionBar: selectionBarOf(app, project),
+    wordItems: wordItemsOf(app, project),
     onRetrySave: () => void app.session.autosave.flush(),
     onSaveNow: app.session.autosave.flush,
     onNewScene: () => void app.actions.newItem("scene"),

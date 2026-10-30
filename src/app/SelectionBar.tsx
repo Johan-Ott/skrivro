@@ -8,7 +8,6 @@ import {
 import { useEditorState } from "../editor/editorStore.js";
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import type { useEditorView } from "../editor/useEditorView.js";
-import { SelectionActions, type SelectionActionProps } from "./SelectionActions.js";
 import {
   HistoryButtons,
   InsertButtons,
@@ -69,35 +68,21 @@ const phoneBarTop = () =>
   BAR_HEIGHT -
   8;
 
-// Under the top bar at the least: a selection that starts above the screen, as Ctrl+A's does,
-// keeps its bar where it can be seen.
-const TOP_ROOM = 56;
-
 // The words chosen, whether dragged over or all of them with Ctrl+A.
 const isChosenText = (selection: Selection | undefined): selection is Selection =>
   (selection instanceof TextSelection || selection instanceof AllSelection) && !selection.empty;
 
-function barPosition(editor: Editor, isPhone: boolean) {
-  const view = editor.viewRef.current;
-  const selection = view?.state.selection;
-  if (!view || !isChosenText(selection)) return null;
-  if (isPhone) return { top: phoneBarTop() };
-  const start = view.coordsAtPos(selection.from);
-  const left = Math.max(start.left, view.dom.getBoundingClientRect().left);
-  if (start.top > BAR_HEIGHT * 2) return { left, top: start.top - BAR_HEIGHT - 6 };
-  if (start.top < TOP_ROOM) return { left, top: TOP_ROOM };
-  return { left, top: view.coordsAtPos(selection.to).bottom + 6 };
+// A misspelled word clicked or double-clicked has its corrections under it; the phone's row
+// stays away so the two never stack.
+function isPhoneRowWanted(editor: Editor, hasFocus: boolean) {
+  const state = editor.viewRef.current?.state ?? null;
+  return hasFocus && isChosenText(state?.selection) && misspelledAtCaret(editor, state) === null;
 }
 
-// A misspelled word clicked or double-clicked has its corrections under it; the floating row
-// stays away so the two never stack.
-const wantedPosition = (editor: Editor, isWanted: boolean, isPhone: boolean) =>
-  isWanted && misspelledAtCaret(editor, editor.viewRef.current?.state ?? null) === null
-    ? barPosition(editor, isPhone)
-    : null;
-
-interface BarProps extends FormatActions, Omit<SelectionActionProps, "editorState"> {
+interface BarProps extends FormatActions {
   editor: Editor;
+  /** The words out of the scene and into the note Strukna, to be got back later. */
+  onMoveToCuts?: (() => void) | undefined;
   // Redigera has its walk where the format row stands; the row stays, hidden, to keep its folding.
   hidesFormatRow?: boolean;
 }
@@ -151,11 +136,6 @@ const FixedRow = (props: RowProps & { folded: number }) => (
   </>
 );
 
-// A selection's row: what can be done with the words, as the formatting is in the row above; a
-// phone, with no row above, has its own.
-const FloatingContent = (props: RowProps & { isPhone: boolean }) =>
-  props.isPhone ? <PhoneRow {...props} /> : <SelectionActions {...props} />;
-
 const Bar = (props: {
   className: string;
   label: string;
@@ -190,24 +170,20 @@ function FixedBar(row: RowProps) {
   );
 }
 
-/** The format row fixed over the text, and the row over a selection. */
+/** The format row fixed over the text. A phone, with no row above, has one over a selection;
+ * on a computer what can be done with chosen words is in their right-click menu. */
 export function SelectionBar(props: BarProps) {
   const { editor } = props;
   const editorState = useEditorState(editor);
   const isWanted = useIsBarWanted(editor);
   const isPhone = usePhone();
-  const floating = wantedPosition(editor, isWanted, isPhone);
-  const row = { ...props, editorState, run: editor.run, isPhone };
+  const row = { ...props, editorState, run: editor.run };
   return (
     <>
       {!isPhone && <FixedBar {...row} />}
-      {floating && (
-        <Bar
-          className={isPhone ? "selection-bar phone" : "selection-bar"}
-          label={t("Markering")}
-          style={floating}
-        >
-          <FloatingContent {...row} />
+      {isPhone && isPhoneRowWanted(editor, isWanted) && (
+        <Bar className="selection-bar phone" label={t("Markering")} style={{ top: phoneBarTop() }}>
+          <PhoneRow {...row} />
         </Bar>
       )}
     </>

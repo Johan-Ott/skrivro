@@ -26,7 +26,7 @@ import { SheetEdges, type SheetProps } from "./SheetEdges.js";
 import { pageClass, pageStyle, type BookLook } from "./bookLook.js";
 import { useEditorModes } from "./useEditorModes.js";
 import { t } from "../i18n/i18n.js";
-import { useTextMenu } from "./spelling/useTextMenu.js";
+import { useTextMenu, type WordItems } from "./spelling/useTextMenu.js";
 
 interface WritingAreaProps {
   /** The printed page of each block of the open scene, when page breaks are shown. */
@@ -43,6 +43,8 @@ interface WritingAreaProps {
   /** Another text, or a version of this one, read beside it. */
   beside: ReactNode;
   selectionBar: ReactNode;
+  /** Right-click on chosen words: what can be done with them. */
+  wordItems: WordItems;
   header: ReactNode;
   footer: ReactNode;
   /** Redigera: the rest of the book after the open scene, on the same sheet. */
@@ -111,7 +113,7 @@ const isOnPaper = (props: WritingAreaProps) =>
 // On paper the text, its header and its footer lie on one sheet, with its pages at the foot.
 function Page(props: WritingAreaProps) {
   const { editor, settings, isFocusMode, hasScene } = props;
-  const textMenu = useTextMenu(editor);
+  const textMenu = useTextMenu(editor, props.wordItems);
   return (
     <div
       className={pageClass({ ...props, isNote: Boolean(props.footer) })}
